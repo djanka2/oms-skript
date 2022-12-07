@@ -1,0 +1,14 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+defaults:
+  numbered: true
+chapters:
+- file: 01_Einleitung
+- file: 02_Python_Basics
+- file: 03_Beschreibung_von_Daten
+- file: 04_Korrelation
+- file: 05_Wahrscheinlichkeit
+- file: 06_Schaetzung_Stichproben
