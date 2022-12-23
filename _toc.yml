@@ -5,10 +5,15 @@ format: jb-book
 root: intro
 defaults:
   numbered: true
-chapters:
-- file: 01_Einleitung
-- file: 02_Python_Basics
-- file: 03_Beschreibung_von_Daten
-- file: 04_Korrelation
-- file: 05_Wahrscheinlichkeit
-- file: 06_Schaetzung_Stichproben
+parts:
+  - caption: Nichtlineare Optimierung
+    chapters:
+    - file: 01_Einleitung
+    - file: 02_Multivariate_Analysis
+    - file: 03_Gradientenverfahren
+    - file: 04_Verfahren_zweiter_Ordnung
+    - file: 05_Automatische_Differentiation
+    - file: 06_Gradientenverfahren_ML
+  - caption: Lineare Optimierung
+    chapters:
+    - file: 07_Grundlagen_beschraenkte_Optimierung

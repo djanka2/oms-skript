@@ -1,7 +1,7 @@
 # Book settings
 # Learn more at https://jupyterbook.org/customize/config.html
 
-title: Skript Statistik / Business Intelligence
+title: Optimierungsverfahren, Modellierung und Simulation (DSCB410)
 author: Dennis Janka
 logo: HKA_IWI_Bildmarke-h_RGB.svg
 
@@ -35,10 +35,31 @@ sphinx:
   config:
     html_js_files:
     - https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js
+    mathjax_config:
+      tex:
+        macros:
+          "N": "\\mathbb{N}"
+          "R": "\\mathbb{R}"
+          "floor": ["\\lfloor#1\\rfloor", 1]
+          "bmat" : ["\\left[\\begin{array}{}"] #am Ende noch {} sonst wir der erste Eintrag der Matrix verschluckt
+          "emat" : ["\\end{array}\\right]"]
+          "scikit": ["\\texttt{scikit-learn}"]
+          "derv": ["\\frac{\\partial #1}{\\partial #2}", 2]
+          "dervquad": ["\\frac{\\partial^2 #1}{\\partial #2^2}", 2]
+          "dervzwei": ["\\frac{\\partial^2 #1}{\\partial {#2} \\partial {#3}}", 3]
+          "mat": ["\\mathbf{#1}", 1]
+          "v": ["\\mathbf{#1]", 1]
 
-parse:
+parse:   
   myst_enable_extensions:
-    # don't forget to list any other extensions you want enabled,
-    # including those that are enabled by default!
     - amsmath
+    - colon_fence
+    - deflist
     - dollarmath
+    - html_admonition
+    - html_image
+    - linkify
+    - replacements
+    - smartquotes
+    - substitution
+    - tasklist
