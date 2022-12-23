@@ -1,4 +1,4 @@
-# Statistik Skript
+# OMS Skript
 
 
 
