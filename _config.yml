@@ -4,6 +4,7 @@
 title: Optimierungsverfahren, Modellierung und Simulation (DSCB410)
 author: Dennis Janka
 logo: HKA_IWI_Bildmarke-h_RGB.svg
+copyright: "2023"
 
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
@@ -32,7 +33,10 @@ bibtex_bibfiles:
 #  use_repository_button: true
 
 sphinx:
+  extra_extensions:
+    - sphinx_proof
   config:
+    language: de
     html_js_files:
     - https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js
     mathjax_config:
@@ -40,16 +44,23 @@ sphinx:
         macros:
           "N": "\\mathbb{N}"
           "R": "\\mathbb{R}"
+          "B": "\\mathbb{B}"
+          "NN": "\\mathbb{N}"
+          "RR": "\\mathbb{R}"
+          "BB": "\\mathbb{B}"
           "floor": ["\\lfloor#1\\rfloor", 1]
-          "bmat" : ["\\left[\\begin{array}{}"] #am Ende noch {} sonst wir der erste Eintrag der Matrix verschluckt
+          "bmat" : ["\\left[\\begin{array}"]
           "emat" : ["\\end{array}\\right]"]
           "scikit": ["\\texttt{scikit-learn}"]
           "derv": ["\\frac{\\partial #1}{\\partial #2}", 2]
           "dervquad": ["\\frac{\\partial^2 #1}{\\partial #2^2}", 2]
           "dervzwei": ["\\frac{\\partial^2 #1}{\\partial {#2} \\partial {#3}}", 3]
           "mat": ["\\mathbf{#1}", 1]
-          "v": ["\\mathbf{#1]", 1]
-
+          "vec": ["\\mathbf{#1}", 1]
+          "initial": "\\DeclareMathOperator{\\initial}{initial}"
+          "reduced": "\\DeclareMathOperator{\\reduced}{reduced}"
+          "lazy": "\\DeclareMathOperator{\\lazy}{lazy}"
+          "ILP": "\\DeclareMathOperator{\\ILP}{ILP}"
 parse:   
   myst_enable_extensions:
     - amsmath
