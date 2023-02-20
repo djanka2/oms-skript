@@ -52,7 +52,7 @@ Gegeben sei eine $m \times n$-Matrix $A=(a_{ij})$, ein $m$-dimensionaler Vektor 
 \text{s.t. } & &  a_{i1}x_1 + \ldots + a_{in}x_n & = & \ b_i & \quad\quad & & \forall i= 1, \ldots, p \\
 & &  a_{i1}x_1 + \ldots + a_{in}x_n & \leq & \ b_i & \quad\quad & & \forall i= p+1, \ldots, q \\
 & &  a_{i1}x_1 + \ldots + a_{in}x_n & \geq & \ b_i & \quad\quad & & \forall i= q+1, \ldots, m \\
-& & x_j & \geq & \ 0 & && \forall i= 1, \ldots, r.
+& & x_j & \geq & \ 0 & && \forall j= 1, \ldots, n.
 \end{alignat*}
 ````
 
@@ -65,7 +65,7 @@ Gegeben sei eine $m \times n$-Matrix $A$, ein $m$-dimensionaler Vektor $b$, sowi
 \begin{alignat*}{5}
 \min          & \quad  &   c_1x_1 + \ldots + c_nx_n &          & & \\[2mm]
 \text{s.t. } & &  a_{i1}x_1 + \ldots + a_{in}x_n & = & \ b_i & \quad\quad & & \forall i= 1, \ldots, m \\
-& & x_j & \geq & \ 0 & && \forall i= 1, \ldots, m.
+& & x_j & \geq & \ 0 & && \forall j= 1, \ldots, n.
 \end{alignat*}
 In Matrixform
 
@@ -83,7 +83,7 @@ Wie bringt man ein beliebiges Lineares Programm in Standardform? Wir gehen als Z
 \begin{alignat*}{5}
 \min_{x_1, \ldots, x_p} &\quad & \sum_{j=1}^{n}c_j x_j \\[2mm]
 \text{s.t. } & &\sum_{j=1}^{n} a_{ij} x_j &\leq&  \ b_i & \quad\quad & & \forall i=1,\ldots,m \\
-             & & x_j                      &\geq&  0 &  && \forall j =0 ,\ldots ,n
+             & & x_j                      &\geq&  0 &  && \forall j =1 ,\ldots ,n
 \end{alignat*}
 
 Danach bringen wir es in Standardform. Wir starten mit einem beliebigen linearen Problem
@@ -155,7 +155,7 @@ TO DO
 \begin{alignat*}{5}
 \min_{x_1, \ldots, x_p} &\quad & \sum_{j=1}^{n}c_j x_j \\[2mm]
 \text{s.t. } & &\sum_{j=1}^{n} a_{ij} x_j &\leq&  \ b_i & \quad\quad & & \forall i=1,\ldots,m \\
-             & & x_j                      &\geq&  0 &  && \forall j =0 ,\ldots ,n
+             & & x_j                      &\geq&  0 &  && \forall j =1 ,\ldots ,n
 \end{alignat*}
 
 

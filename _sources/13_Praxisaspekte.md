@@ -7,7 +7,7 @@ Leistungsstarke Löser setzen *Presolve-Routinen* ein.
 Diese stellen einen  Vorberechnungsschritt dar, der das Ziel hat, das zu lösende Problem zu verkleinern, sowie zu vereinfachen. 
 Der ursprüngliche zulässige Bereich soll dabei voll rekonstruierbar bleiben.
 
-Eine detaillierte Beschreibung solcher Presolve-Routinen findet sich in \emph{Achterberg, Bixby, Gu, Rothberg, Weninger: Presolve Reductions in Mixed Integer Programming, INFORMS Journal On Computing, 2019}.
+Eine detaillierte Beschreibung solcher Presolve-Routinen findet sich in *Achterberg, Bixby, Gu, Rothberg, Weninger: Presolve Reductions in Mixed Integer Programming, INFORMS Journal On Computing, 2019*.
 
 
 ### Branch and bound
