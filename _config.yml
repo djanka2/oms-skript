@@ -3,7 +3,7 @@
 
 title: Optimierungsverfahren, Modellierung und Simulation (DSCB410)
 author: Dennis Janka
-logo: HKA_IWI_Bildmarke-h_RGB.svg
+logo: bilder/HKA_IWI_Bildmarke-h_RGB.svg
 copyright: "2023"
 
 # Force re-execution of notebooks on each build.
@@ -48,6 +48,7 @@ sphinx:
           "NN": "\\mathbb{N}"
           "RR": "\\mathbb{R}"
           "BB": "\\mathbb{B}"
+          "norm": ["\\left\\lVert#1 \\right\\rVert", 1]
           "floor": ["\\lfloor#1\\rfloor", 1]
           "bmat" : ["\\left[\\begin{array}"]
           "emat" : ["\\end{array}\\right]"]

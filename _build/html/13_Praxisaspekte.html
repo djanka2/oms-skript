@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>13. Praxisaspekte beim Lösen von gemischt-ganzzahligen Programmen &#8212; Optimierungsverfahren, Modellierung und Simulation (DSCB410)</title>
+    <title>14. Praxisaspekte beim Lösen von gemischt-ganzzahligen Programmen &#8212; Optimierungsverfahren, Modellierung und Simulation (DSCB410)</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -53,11 +53,11 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"tex": {"macros": {"N": "\\mathbb{N}", "R": "\\mathbb{R}", "B": "\\mathbb{B}", "NN": "\\mathbb{N}", "RR": "\\mathbb{R}", "BB": "\\mathbb{B}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "scikit": ["\\texttt{scikit-learn}"], "derv": ["\\frac{\\partial #1}{\\partial #2}", 2], "dervquad": ["\\frac{\\partial^2 #1}{\\partial #2^2}", 2], "dervzwei": ["\\frac{\\partial^2 #1}{\\partial {#2} \\partial {#3}}", 3], "mat": ["\\mathbf{#1}", 1], "vec": ["\\mathbf{#1}", 1], "initial": "\\DeclareMathOperator{\\initial}{initial}", "reduced": "\\DeclareMathOperator{\\reduced}{reduced}", "lazy": "\\DeclareMathOperator{\\lazy}{lazy}", "ILP": "\\DeclareMathOperator{\\ILP}{ILP}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script>window.MathJax = {"tex": {"macros": {"N": "\\mathbb{N}", "R": "\\mathbb{R}", "B": "\\mathbb{B}", "NN": "\\mathbb{N}", "RR": "\\mathbb{R}", "BB": "\\mathbb{B}", "norm": ["\\left\\lVert#1 \\right\\rVert", 1], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "scikit": ["\\texttt{scikit-learn}"], "derv": ["\\frac{\\partial #1}{\\partial #2}", 2], "dervquad": ["\\frac{\\partial^2 #1}{\\partial #2^2}", 2], "dervzwei": ["\\frac{\\partial^2 #1}{\\partial {#2} \\partial {#3}}", 3], "mat": ["\\mathbf{#1}", 1], "vec": ["\\mathbf{#1}", 1], "initial": "\\DeclareMathOperator{\\initial}{initial}", "reduced": "\\DeclareMathOperator{\\reduced}{reduced}", "lazy": "\\DeclareMathOperator{\\lazy}{lazy}", "ILP": "\\DeclareMathOperator{\\ILP}{ILP}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Stichwortverzeichnis" href="genindex.html" />
     <link rel="search" title="Suche" href="search.html" />
-    <link rel="prev" title="12. Ablaufplanung" href="12_Ablaufplanung.html" />
+    <link rel="prev" title="13. Ablaufplanung" href="12_Ablaufplanung.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="de">
     
@@ -112,7 +112,7 @@ const thebe_selector_output = ".output, .cell_output"
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
-                <a class="reference internal" href="intro.html">
+                <a class="reference internal" href="00_Ueberblick.html">
                     Überblick
                 </a>
             </li>
@@ -132,32 +132,37 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="02_Multivariate_Analysis.html">
-   2. Theoretische Grundlagen
+   2. Funktionen und Ableitungen
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02a_Theoretische_Grundlagen.html">
+   3. Theoretische Grundlagen der nichtlinearen Optimierung
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="03_Gradientenverfahren.html">
-   3. Gradientenverfahren
+   4. Gradientenverfahren
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="04_Verfahren_zweiter_Ordnung.html">
-   4. Verfahren zweiter Ordnung
+   5. Verfahren zweiter Ordnung
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="05_Automatische_Differentiation.html">
-   5. Automatische Differentiation
+   6. Automatische Differentiation
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="06_Gradientenverfahren_ML.html">
-   6. Gradientenverfahren für Probleme des maschinellen Lernens
+   7. Gradientenverfahren für Probleme des maschinellen Lernens
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="07_Grundlagen_beschraenkte_Optimierung.html">
-   7. Grundlagen der beschränkten Optimierung
+   8. Grundlagen der beschränkten Optimierung
   </a>
  </li>
 </ul>
@@ -169,32 +174,32 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="08_MILP.html">
-   8. Gemischt-ganzzahlige lineare Programmierung
+   9. Gemischt-ganzzahlige lineare Programmierung
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="09_Standardprobleme.html">
-   9. Einige Standardprobleme
+   10. Einige Standardprobleme
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="10_Modellierungstechniken.html">
-   10. Fortgeschrittene Modellierungstechniken
+   11. Fortgeschrittene Modellierungstechniken
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="11_Zeitdiskrete_Modelle.html">
-   11. Zeitdiskrete Modelle
+   12. Zeitdiskrete Modelle
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="12_Ablaufplanung.html">
-   12. Ablaufplanung
+   13. Ablaufplanung
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   13. Praxisaspekte beim Lösen von gemischt-ganzzahligen Programmen
+   14. Praxisaspekte beim Lösen von gemischt-ganzzahligen Programmen
   </a>
  </li>
 </ul>
@@ -331,120 +336,120 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#losungsverfahren">
-   13.1. Lösungsverfahren
+   14.1. Lösungsverfahren
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#preprocessing">
-     13.1.1. Preprocessing
+     14.1.1. Preprocessing
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#branch-and-bound">
-     13.1.2. Branch and bound
+     14.1.2. Branch and bound
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#schnittebenen">
-     13.1.3. Schnittebenen
+     14.1.3. Schnittebenen
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#marktubersicht-milp-solver">
-   13.2. Marktübersicht MILP-Solver
+   14.2. Marktübersicht MILP-Solver
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#ubersicht">
-     13.2.1. Übersicht
+     14.2.1. Übersicht
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#benchmarks">
-     13.2.2. Benchmarks
+     14.2.2. Benchmarks
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#modellierungsumgebungen">
-     13.2.3. Modellierungsumgebungen
+     14.2.3. Modellierungsumgebungen
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#moglichkeiten-zur-beschleunigung-des-losungsverfahrens">
-   13.3. Möglichkeiten zur Beschleunigung des Lösungsverfahrens
+   14.3. Möglichkeiten zur Beschleunigung des Lösungsverfahrens
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#allgemeine-kriterien-fur-die-bewertung-eines-modells">
-     13.3.1. Allgemeine Kriterien für die Bewertung eines Modells
+     14.3.1. Allgemeine Kriterien für die Bewertung eines Modells
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#modellgrosze">
-       13.3.1.1. Modellgröße
+       14.3.1.1. Modellgröße
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#laufzeit-der-modellerzeugung">
-       13.3.1.2. Laufzeit der Modellerzeugung
+       14.3.1.2. Laufzeit der Modellerzeugung
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#numerische-stabilitat">
-       13.3.1.3. Numerische Stabilität
+       14.3.1.3. Numerische Stabilität
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#scharfe-der-lp-relaxierung">
-       13.3.1.4. Schärfe der LP-Relaxierung
+       14.3.1.4. Schärfe der LP-Relaxierung
       </a>
      </li>
     </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#parametereinstellungen-des-losers">
-     13.3.2. Parametereinstellungen des Lösers
+     14.3.2. Parametereinstellungen des Lösers
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#heuristiken-und-dekompositionen">
-     13.3.3. Heuristiken und Dekompositionen
+     14.3.3. Heuristiken und Dekompositionen
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#zeitfenster">
-     13.3.4. Zeitfenster
+     14.3.4. Zeitfenster
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#rollierende-planung">
-       13.3.4.1. Rollierende Planung
+       14.3.4.1. Rollierende Planung
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#partitionierung-der-zeitachse-in-intervalle">
-       13.3.4.2. Partitionierung der Zeitachse in Intervalle
+       14.3.4.2. Partitionierung der Zeitachse in Intervalle
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#angrenzende-intervalle-mit-vorschauperiode">
-       13.3.4.3. Angrenzende Intervalle mit Vorschauperiode
+       14.3.4.3. Angrenzende Intervalle mit Vorschauperiode
       </a>
      </li>
     </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#lazy-constraints">
-     13.3.5. Lazy Constraints
+     14.3.5. Lazy Constraints
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#beispiel-traveling-salesman-problem">
-       13.3.5.1. Beispiel: Traveling Salesman Problem
+       14.3.5.1. Beispiel: Traveling Salesman Problem
       </a>
      </li>
     </ul>
@@ -453,7 +458,7 @@ title="Print to PDF"
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#interpretation-der-solver-ausgaben">
-   13.4. Interpretation der Solver-Ausgaben
+   14.4. Interpretation der Solver-Ausgaben
   </a>
  </li>
 </ul>
@@ -477,120 +482,120 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#losungsverfahren">
-   13.1. Lösungsverfahren
+   14.1. Lösungsverfahren
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#preprocessing">
-     13.1.1. Preprocessing
+     14.1.1. Preprocessing
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#branch-and-bound">
-     13.1.2. Branch and bound
+     14.1.2. Branch and bound
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#schnittebenen">
-     13.1.3. Schnittebenen
+     14.1.3. Schnittebenen
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#marktubersicht-milp-solver">
-   13.2. Marktübersicht MILP-Solver
+   14.2. Marktübersicht MILP-Solver
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#ubersicht">
-     13.2.1. Übersicht
+     14.2.1. Übersicht
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#benchmarks">
-     13.2.2. Benchmarks
+     14.2.2. Benchmarks
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#modellierungsumgebungen">
-     13.2.3. Modellierungsumgebungen
+     14.2.3. Modellierungsumgebungen
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#moglichkeiten-zur-beschleunigung-des-losungsverfahrens">
-   13.3. Möglichkeiten zur Beschleunigung des Lösungsverfahrens
+   14.3. Möglichkeiten zur Beschleunigung des Lösungsverfahrens
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#allgemeine-kriterien-fur-die-bewertung-eines-modells">
-     13.3.1. Allgemeine Kriterien für die Bewertung eines Modells
+     14.3.1. Allgemeine Kriterien für die Bewertung eines Modells
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#modellgrosze">
-       13.3.1.1. Modellgröße
+       14.3.1.1. Modellgröße
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#laufzeit-der-modellerzeugung">
-       13.3.1.2. Laufzeit der Modellerzeugung
+       14.3.1.2. Laufzeit der Modellerzeugung
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#numerische-stabilitat">
-       13.3.1.3. Numerische Stabilität
+       14.3.1.3. Numerische Stabilität
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#scharfe-der-lp-relaxierung">
-       13.3.1.4. Schärfe der LP-Relaxierung
+       14.3.1.4. Schärfe der LP-Relaxierung
       </a>
      </li>
     </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#parametereinstellungen-des-losers">
-     13.3.2. Parametereinstellungen des Lösers
+     14.3.2. Parametereinstellungen des Lösers
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#heuristiken-und-dekompositionen">
-     13.3.3. Heuristiken und Dekompositionen
+     14.3.3. Heuristiken und Dekompositionen
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#zeitfenster">
-     13.3.4. Zeitfenster
+     14.3.4. Zeitfenster
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#rollierende-planung">
-       13.3.4.1. Rollierende Planung
+       14.3.4.1. Rollierende Planung
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#partitionierung-der-zeitachse-in-intervalle">
-       13.3.4.2. Partitionierung der Zeitachse in Intervalle
+       14.3.4.2. Partitionierung der Zeitachse in Intervalle
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#angrenzende-intervalle-mit-vorschauperiode">
-       13.3.4.3. Angrenzende Intervalle mit Vorschauperiode
+       14.3.4.3. Angrenzende Intervalle mit Vorschauperiode
       </a>
      </li>
     </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#lazy-constraints">
-     13.3.5. Lazy Constraints
+     14.3.5. Lazy Constraints
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#beispiel-traveling-salesman-problem">
-       13.3.5.1. Beispiel: Traveling Salesman Problem
+       14.3.5.1. Beispiel: Traveling Salesman Problem
       </a>
      </li>
     </ul>
@@ -599,7 +604,7 @@ title="Print to PDF"
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#interpretation-der-solver-ausgaben">
-   13.4. Interpretation der Solver-Ausgaben
+   14.4. Interpretation der Solver-Ausgaben
   </a>
  </li>
 </ul>
@@ -613,18 +618,18 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="praxisaspekte-beim-losen-von-gemischt-ganzzahligen-programmen">
-<h1><span class="section-number">13. </span>Praxisaspekte beim Lösen von gemischt-ganzzahligen Programmen<a class="headerlink" href="#praxisaspekte-beim-losen-von-gemischt-ganzzahligen-programmen" title="Link zu dieser Überschrift">#</a></h1>
+<h1><span class="section-number">14. </span>Praxisaspekte beim Lösen von gemischt-ganzzahligen Programmen<a class="headerlink" href="#praxisaspekte-beim-losen-von-gemischt-ganzzahligen-programmen" title="Link zu dieser Überschrift">#</a></h1>
 <section id="losungsverfahren">
-<h2><span class="section-number">13.1. </span>Lösungsverfahren<a class="headerlink" href="#losungsverfahren" title="Link zu dieser Überschrift">#</a></h2>
+<h2><span class="section-number">14.1. </span>Lösungsverfahren<a class="headerlink" href="#losungsverfahren" title="Link zu dieser Überschrift">#</a></h2>
 <section id="preprocessing">
-<h3><span class="section-number">13.1.1. </span>Preprocessing<a class="headerlink" href="#preprocessing" title="Link zu dieser Überschrift">#</a></h3>
+<h3><span class="section-number">14.1.1. </span>Preprocessing<a class="headerlink" href="#preprocessing" title="Link zu dieser Überschrift">#</a></h3>
 <p>Leistungsstarke Löser setzen <em>Presolve-Routinen</em> ein.
 Diese stellen einen  Vorberechnungsschritt dar, der das Ziel hat, das zu lösende Problem zu verkleinern, sowie zu vereinfachen.
 Der ursprüngliche zulässige Bereich soll dabei voll rekonstruierbar bleiben.</p>
-<p>Eine detaillierte Beschreibung solcher Presolve-Routinen findet sich in \emph{Achterberg, Bixby, Gu, Rothberg, Weninger: Presolve Reductions in Mixed Integer Programming, INFORMS Journal On Computing, 2019}.</p>
+<p>Eine detaillierte Beschreibung solcher Presolve-Routinen findet sich in <em>Achterberg, Bixby, Gu, Rothberg, Weninger: Presolve Reductions in Mixed Integer Programming, INFORMS Journal On Computing, 2019</em>.</p>
 </section>
 <section id="branch-and-bound">
-<h3><span class="section-number">13.1.2. </span>Branch and bound<a class="headerlink" href="#branch-and-bound" title="Link zu dieser Überschrift">#</a></h3>
+<h3><span class="section-number">14.1.2. </span>Branch and bound<a class="headerlink" href="#branch-and-bound" title="Link zu dieser Überschrift">#</a></h3>
 <p>Es gibt verschiedene Verfahren, um gemischt-ganzzahlige Programme zu lösen.
 Der Kern aktueller Softwaresysteme sind Branch-And-Bound Verfahren.
 Hierbei wird zuerst das relaxierte Problem gelöst (die sogenannte Root-Relaxation).
@@ -636,24 +641,24 @@ Bedingt durch das Branch-And-Bound Verfahren selbst, sowie die Zusatz-heuristike
 Es gibt allerdings Anhaltspunkte, von denen einige in Abschnitt <a class="reference internal" href="#subsubsec-kriterienbewertung"><span class="std std-ref">Allgemeine Kriterien für die Bewertung eines Modells</span></a> geschildert werden.</p>
 </section>
 <section id="schnittebenen">
-<h3><span class="section-number">13.1.3. </span>Schnittebenen<a class="headerlink" href="#schnittebenen" title="Link zu dieser Überschrift">#</a></h3>
+<h3><span class="section-number">14.1.3. </span>Schnittebenen<a class="headerlink" href="#schnittebenen" title="Link zu dieser Überschrift">#</a></h3>
 <p>Eine Möglichkeit, um den Lösungsprozess zu beschleunigen, ist das Zufügen von zusätzlichen Nebenbedingungen, die den zulässigen Lösungsraum nicht verändern, aber in einer schärferen Relaxierung resultieren. Solche Nebenbedinungen heißen <em>Schnittebenen</em> (eng: cutting planes).
 Bei tiefer Problemkenntnis können Schnittebenen manuell zugefügt werden.
 Einige Löser erzeugen und nutzen automatisiert Schnittebenen.</p>
 </section>
 </section>
 <section id="marktubersicht-milp-solver">
-<h2><span class="section-number">13.2. </span>Marktübersicht MILP-Solver<a class="headerlink" href="#marktubersicht-milp-solver" title="Link zu dieser Überschrift">#</a></h2>
+<h2><span class="section-number">14.2. </span>Marktübersicht MILP-Solver<a class="headerlink" href="#marktubersicht-milp-solver" title="Link zu dieser Überschrift">#</a></h2>
 <p>Es gibt eine größere Anzahl an brauchbaren kommerziellen und nichtkommerziellen Softwaretools zum Lösen von gemischt-ganzzahligen Programmen.
 Die kommerziellen Anwendungen weisen hierbei typischerweise deutlich höhere Lösungsgeschwindigkeiten auf. Dem Dozenten ist kein aktueller unabhängiger umfassender wissenschaftlicher Vergleich zwischen den einzelnen Software-lösungen bekannt.</p>
 <section id="ubersicht">
-<h3><span class="section-number">13.2.1. </span>Übersicht<a class="headerlink" href="#ubersicht" title="Link zu dieser Überschrift">#</a></h3>
+<h3><span class="section-number">14.2.1. </span>Übersicht<a class="headerlink" href="#ubersicht" title="Link zu dieser Überschrift">#</a></h3>
 <p>Bekannte kommerzielle Anwendungen sind etwa CLEX, GUROBI und XPRESS, bekannte Open-Source Lösungen sind etwa CBC, LPSolve und SCIP.
 Eine nicht qualitätsgesicherte, aber zum Stand 01.04.2020 brauchbare Auflistung aktueller Softwaretools findet sich in der Wikipedia unter
 <a class="reference external" href="https://en.wikipedia.org/wiki/List_of_optimization_software">List of Optimization Software</a>.</p>
 </section>
 <section id="benchmarks">
-<h3><span class="section-number">13.2.2. </span>Benchmarks<a class="headerlink" href="#benchmarks" title="Link zu dieser Überschrift">#</a></h3>
+<h3><span class="section-number">14.2.2. </span>Benchmarks<a class="headerlink" href="#benchmarks" title="Link zu dieser Überschrift">#</a></h3>
 <p>Zum Stand vom 01.04.2020 erlaubt der
 <a class="reference external" href="https://neos-server.org/neos/">NEOS Server</a>
 Probleme kostenlos durch verschiedenene Solver zu lösen.</p>
@@ -674,7 +679,7 @@ Diese enthalten seit 2018 keine Resultate für CPLEX, Gurobi und XPRESS (siehe \
 </figure>
 </section>
 <section id="modellierungsumgebungen">
-<h3><span class="section-number">13.2.3. </span>Modellierungsumgebungen<a class="headerlink" href="#modellierungsumgebungen" title="Link zu dieser Überschrift">#</a></h3>
+<h3><span class="section-number">14.2.3. </span>Modellierungsumgebungen<a class="headerlink" href="#modellierungsumgebungen" title="Link zu dieser Überschrift">#</a></h3>
 <p>Zusätzlich gibt es Modellierungsumgebungen, die es ermöglichen, Modelle unabhängig von einem konkreten Löser zu erzeugen. Dies erlaubt ein einfaches Austauschen des konkreten Lösers.
 Unter Umständen können diese Umgebungen nicht auf alle Eigenheiten oder Features eines speziellen Lösers zugreifen.
 Je nach Kombination aus Solver und Modellierungsumgebung erlaubt die Umgebung auch eine komfortablere Erstellung des Modells.</p>
@@ -682,7 +687,7 @@ Je nach Kombination aus Solver und Modellierungsumgebung erlaubt die Umgebung au
 </section>
 </section>
 <section id="moglichkeiten-zur-beschleunigung-des-losungsverfahrens">
-<h2><span class="section-number">13.3. </span>Möglichkeiten zur Beschleunigung des Lösungsverfahrens<a class="headerlink" href="#moglichkeiten-zur-beschleunigung-des-losungsverfahrens" title="Link zu dieser Überschrift">#</a></h2>
+<h2><span class="section-number">14.3. </span>Möglichkeiten zur Beschleunigung des Lösungsverfahrens<a class="headerlink" href="#moglichkeiten-zur-beschleunigung-des-losungsverfahrens" title="Link zu dieser Überschrift">#</a></h2>
 <p>Ein kritischer Aspekt bei der Arbeit mit gemischt-ganzzahligen Programmen ist die Rechenzeit die zur Lösung eines Modells benötigt wird.
 Das effiziente Lösen von gemischt-ganzzahligen Programmen ist ein weites Forschungsfeld, das eine reichhaltige und tiefgehende theoretische Basis entwickelt hat.</p>
 <p>Moderne Löser arbeiten typischerweise mit einem Branch-And-Bound Verfahren, dass um eine eine große Anzahl an heuristischen Methoden zur Laufzeitverbesserung erweitert wurde. Zusätzlich ist der Einsatz einer Presolve-Methode Standard.
@@ -690,9 +695,9 @@ Die konkret vorliegende Hardwarekonfiguration hat einen zusätzlichen Einfluss a
 Aus diesem Grund ist das Laufzeitverhalten für ein bestimmtes Modell nicht komplett vorhersagbar.
 Im Folgenden skizzieren wir einige allgemeine Gedanken und Ansatzpunkte, mit denen die Rechenzeit in der Praxis verbessert werden kann.</p>
 <section id="allgemeine-kriterien-fur-die-bewertung-eines-modells">
-<span id="subsubsec-kriterienbewertung"></span><h3><span class="section-number">13.3.1. </span>Allgemeine Kriterien für die Bewertung eines Modells<a class="headerlink" href="#allgemeine-kriterien-fur-die-bewertung-eines-modells" title="Link zu dieser Überschrift">#</a></h3>
+<span id="subsubsec-kriterienbewertung"></span><h3><span class="section-number">14.3.1. </span>Allgemeine Kriterien für die Bewertung eines Modells<a class="headerlink" href="#allgemeine-kriterien-fur-die-bewertung-eines-modells" title="Link zu dieser Überschrift">#</a></h3>
 <section id="modellgrosze">
-<h4><span class="section-number">13.3.1.1. </span>Modellgröße<a class="headerlink" href="#modellgrosze" title="Link zu dieser Überschrift">#</a></h4>
+<h4><span class="section-number">14.3.1.1. </span>Modellgröße<a class="headerlink" href="#modellgrosze" title="Link zu dieser Überschrift">#</a></h4>
 <p>Ein erstes wichtiges Kriterium für die Bewertung eines Modells ist seine Größe.
 Diese kann in der Anzahl der Variablen gemessen werden.</p>
 <p>Wichtig ist eine Unterscheidung in kontinuierliche und ganzzahlige Variablen.
@@ -701,38 +706,38 @@ Diskrete Variablen hingegen verursachen typischerweise den Hauptrechenaufwand, d
 <p>Bei manchen Modellen macht es zusätzlich Sinn, die Anzahl der Nebenbedingungen zu betrachten.</p>
 </section>
 <section id="laufzeit-der-modellerzeugung">
-<h4><span class="section-number">13.3.1.2. </span>Laufzeit der Modellerzeugung<a class="headerlink" href="#laufzeit-der-modellerzeugung" title="Link zu dieser Überschrift">#</a></h4>
+<h4><span class="section-number">14.3.1.2. </span>Laufzeit der Modellerzeugung<a class="headerlink" href="#laufzeit-der-modellerzeugung" title="Link zu dieser Überschrift">#</a></h4>
 <p>Der Grund für einen langsamen Gesamtlösungsprozess muss nicht unbedingt in der Laufzeit des mathematischen Lösers selbst liegen.
 Bei ineffizienter Programmierung oder langsamer Datenbereitstellung kann der Hauptteil der Rechenzeit durch das Erstellen des Modells anstatt durch das Lösen verursacht werden.</p>
 <p>Als professionelle Diagnosetools stehen für die meisten Programmiersprachen sogenannte <em>Profiler</em> bereit, die die Programmlaufzeit nach Einzelroutinen aufschlüsseln können.  Häufig genügt zur Diagnose allerdings auch ein Lauf des Programmcodes, bei dem der finale Aufruf des Lösers auskommentiert ist.</p>
 </section>
 <section id="numerische-stabilitat">
-<h4><span class="section-number">13.3.1.3. </span>Numerische Stabilität<a class="headerlink" href="#numerische-stabilitat" title="Link zu dieser Überschrift">#</a></h4>
+<h4><span class="section-number">14.3.1.3. </span>Numerische Stabilität<a class="headerlink" href="#numerische-stabilitat" title="Link zu dieser Überschrift">#</a></h4>
 <p>Mathematische Löser für gemischt-ganzzahlige Programme arbeiten nicht mit exakten Zahlen, sondern nutzen die in Computern übliche Fließkommaarithmetik mit beschränkter Genauigkeit. Häufig stellt dies kein Problem dar.</p>
 <p>Wenn die Größenordnungen der Eingabewerte stark unterschiedlich sind, kann es zu numerischen Problemen kommen.
 Ein Vergleich von kleinstem und größtem vorkommenden Eingabewert gibt einen erstes Indiz dafür, ob das Problem numerisch schwierig zu lösen ist.</p>
 </section>
 <section id="scharfe-der-lp-relaxierung">
-<h4><span class="section-number">13.3.1.4. </span>Schärfe der LP-Relaxierung<a class="headerlink" href="#scharfe-der-lp-relaxierung" title="Link zu dieser Überschrift">#</a></h4>
+<h4><span class="section-number">14.3.1.4. </span>Schärfe der LP-Relaxierung<a class="headerlink" href="#scharfe-der-lp-relaxierung" title="Link zu dieser Überschrift">#</a></h4>
 <p>Wir haben in Abschnitt <a class="reference internal" href="10_Modellierungstechniken.html#subsec-disjunctiveprogramming"><span class="std std-ref">Disjunktive Programmierung</span></a> gesehen, dass Modelle die den gleichen zulässigen Lösungsraum beschreiben, sich trotzdem durch die Schärfe ihrer LP-Relaxierung unterscheiden können.
 Es gibt tiefgehende Theorie, um den zu einem linearen Programm zugehörigen Lösungspolyeder zu beschreiben.</p>
 <p>Einen guten ersten Eindruck zur Güte der LP-Relaxierung kann man durch die <em>Ganzzahligkeitslücke</em> (engl: integrality gap) gewinnen.</p>
 <div class="proof definition admonition" id="definition-0">
-<p class="admonition-title"><span class="caption-number">Definition 13.1 </span> (Ganzzahligkeitslücke)</p>
+<p class="admonition-title"><span class="caption-number">Definition 14.1 </span> (Ganzzahligkeitslücke)</p>
 <section class="definition-content" id="proof-content">
 <p>Gegeben ist ein gemischt-ganzzahliges Programm MILP mit optimaler Lösung <span class="math notranslate nohighlight">\(f^*\)</span> und das zu MILP relaxierte Problem LP mit optimaler Lösung <span class="math notranslate nohighlight">\(f^*_{rel}\)</span>. Die Ganzzahligkeitslücke von MILP ist
 <span class="math notranslate nohighlight">\({f^*}/{f^*_{rel}}\)</span> falls MILP ein Minimierungsproblem ist und <span class="math notranslate nohighlight">\({f^*_{rel}}/{f^*}\)</span> sonst.</p>
 </section>
 </div><p>Die Ganzzahligkeitslücke ist mindestens <span class="math notranslate nohighlight">\(1\)</span>. Kleinere Werte sind im Allgemeinen besser.</p>
 <div class="proof example admonition" id="example-1">
-<p class="admonition-title"><span class="caption-number">Example 13.1 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 14.1 </span></p>
 <section class="example-content" id="proof-content">
 <p>TO DO</p>
 </section>
 </div></section>
 </section>
 <section id="parametereinstellungen-des-losers">
-<h3><span class="section-number">13.3.2. </span>Parametereinstellungen des Lösers<a class="headerlink" href="#parametereinstellungen-des-losers" title="Link zu dieser Überschrift">#</a></h3>
+<h3><span class="section-number">14.3.2. </span>Parametereinstellungen des Lösers<a class="headerlink" href="#parametereinstellungen-des-losers" title="Link zu dieser Überschrift">#</a></h3>
 <p>Die heuristischen Vorgehen innerhalb moderner Löser arbeiten mit guten Voreinstellungen, die auf konkrete Instanzen ohne Programmierarbeit angepasst werden können. Die Einstellungs-möglichkeiten variieren für verschiedene Löser. Beispielhaft folgt eine Übersicht für den kommerziellen Solver Gurobi (Quelle: <a class="reference external" href="https://www.gurobi.com/documentation/9.0/refman/mip_models.html">www.gurobi.com</a>, abgerufen am  31.03.2020).</p>
 <figure class="align-default" id="gurobi-parameters-chunk1">
 <a class="reference internal image-reference" href="_images/Gurobi_parameters_chunk1.png"><img alt="_images/Gurobi_parameters_chunk1.png" src="_images/Gurobi_parameters_chunk1.png" style="height: 300px;" /></a>
@@ -742,7 +747,7 @@ Es gibt tiefgehende Theorie, um den zu einem linearen Programm zugehörigen Lös
 </figure>
 </section>
 <section id="heuristiken-und-dekompositionen">
-<h3><span class="section-number">13.3.3. </span>Heuristiken und Dekompositionen<a class="headerlink" href="#heuristiken-und-dekompositionen" title="Link zu dieser Überschrift">#</a></h3>
+<h3><span class="section-number">14.3.3. </span>Heuristiken und Dekompositionen<a class="headerlink" href="#heuristiken-und-dekompositionen" title="Link zu dieser Überschrift">#</a></h3>
 <p>Ist es nicht möglich, ein Modell in akzeptabler Zeit optimal zu lösen, liegt eine mögliche Strategie im Einsatz von Heuristiken. Man nimmt dann davon Abstand, beweisbar optimale Lösungen zu finden, sondern hofft auf ausreichend gute Ergebnisse.</p>
 <p>Ein häufiges heuristisches Vorgehen in Zusammenhang mit gemischt-ganzzahligen Programmen ist das der <em>Problemdekomposition</em>.
 Dabei werden nicht mehr alle Entscheidungsvariablen “gleichzeitig” bestimmt.
@@ -752,13 +757,13 @@ Jede Ebene legt eine bestimme Menge an Entscheidungsvariablen fest, die von den 
 Sogenannte Cluster-First Route-Second Ansätze entscheiden zuerst, welche Orte zu Touren zusammengefasst werden (erste Ebene).
 Danach werden die Touren einzeln as Traveling Salesman Instanzen gelöst (zweite Ebene).</p>
 <div class="proof example admonition" id="example-2">
-<p class="admonition-title"><span class="caption-number">Example 13.2 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 14.2 </span></p>
 <section class="example-content" id="proof-content">
 <p>TO DO</p>
 </section>
 </div></section>
 <section id="zeitfenster">
-<h3><span class="section-number">13.3.4. </span>Zeitfenster<a class="headerlink" href="#zeitfenster" title="Link zu dieser Überschrift">#</a></h3>
+<h3><span class="section-number">14.3.4. </span>Zeitfenster<a class="headerlink" href="#zeitfenster" title="Link zu dieser Überschrift">#</a></h3>
 <p>Ein spezielles Dekompositionsverfahren für zeitexpandierte Modelle sind die sogenannten <em>Zeitfenster</em>.
 Diese heißen im Engischen <em>time windows</em>.
 Hierbei wird die Zeitachse in mehrere Intervalle zerlegt, die nacheinander gelöst werden.
@@ -767,19 +772,19 @@ Entscheidungen, die vor Beginn des aktuellen Zeitfensters liegen, sind fest und 
 Die Situation nach dem aktuellen Zeitfenster wird für dieses nicht berücksichtigt, sondern erst in den folgenden Zeitfenstern.</p>
 <p><em>Wichtig:</em> Der Einsatz von Zeitfenstern ist eine Heuristik. Es kann nicht  garantiert werden, dass die optimale Lösung für das ursprüngliche Problem gefunden wird.</p>
 <section id="rollierende-planung">
-<h4><span class="section-number">13.3.4.1. </span>Rollierende Planung<a class="headerlink" href="#rollierende-planung" title="Link zu dieser Überschrift">#</a></h4>
+<h4><span class="section-number">14.3.4.1. </span>Rollierende Planung<a class="headerlink" href="#rollierende-planung" title="Link zu dieser Überschrift">#</a></h4>
 <p>Es gibt verschiedene Möglichkeiten, Zeitfenster zu realisieren. Eine Möglichkeit sind <em>rollierende Fenster</em>, bei denen das Fenster in jedem Schritt nur um wenige Zeitschritte nach vorne bewegt wird.</p>
 <div class="proof example admonition" id="example-3">
-<p class="admonition-title"><span class="caption-number">Example 13.3 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 14.3 </span></p>
 <section class="example-content" id="proof-content">
 <p>TO DO</p>
 </section>
 </div></section>
 <section id="partitionierung-der-zeitachse-in-intervalle">
-<h4><span class="section-number">13.3.4.2. </span>Partitionierung der Zeitachse in Intervalle<a class="headerlink" href="#partitionierung-der-zeitachse-in-intervalle" title="Link zu dieser Überschrift">#</a></h4>
+<h4><span class="section-number">14.3.4.2. </span>Partitionierung der Zeitachse in Intervalle<a class="headerlink" href="#partitionierung-der-zeitachse-in-intervalle" title="Link zu dieser Überschrift">#</a></h4>
 <p>Eine Möglichkeit, um weniger Zeitfenster lösen zu müssen ist, die Zeitachse in disjunkte, aneinander angrenzende Intervalle aufzuteilen.</p>
 <div class="proof example admonition" id="example-4">
-<p class="admonition-title"><span class="caption-number">Example 13.4 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 14.4 </span></p>
 <section class="example-content" id="proof-content">
 <p>TO DO</p>
 </section>
@@ -789,7 +794,7 @@ Dies macht für das konkrete Zeitfenster Sinn, da so Kosten innerhalb des Fenste
 Es führt allerdings typischerweise zu suboptimalen Lösungen für das Gesamtproblem.</p>
 </section>
 <section id="angrenzende-intervalle-mit-vorschauperiode">
-<h4><span class="section-number">13.3.4.3. </span>Angrenzende Intervalle mit Vorschauperiode<a class="headerlink" href="#angrenzende-intervalle-mit-vorschauperiode" title="Link zu dieser Überschrift">#</a></h4>
+<h4><span class="section-number">14.3.4.3. </span>Angrenzende Intervalle mit Vorschauperiode<a class="headerlink" href="#angrenzende-intervalle-mit-vorschauperiode" title="Link zu dieser Überschrift">#</a></h4>
 <p>Eine Lösung für das vorangegangene Problem ist der zusätzliche Einsatz einer Vorschauperiode.
 Hierbei enthält jedes Zeitfenster einen zusätzlichen Zeitraum, der an das Ende des Fensters angehängt wird.
 Das Optimierungsproblem umfasst das eigentliche Intervall, zusammen mit der Vorschauperiode und optimiert beides.
@@ -797,32 +802,32 @@ Es werden nur die Entscheidungen für das eigentliche Intervall festgehalten.
 Die Entscheidungen der Vorschauperiode werden verworfen.
 Die Vorschauperiode ist dann Teil des nächsten Zeitfensters. Ein Beispiel findet sich hier: <a class="reference internal" href="#batteriezeitfenster-ohnelookahead"><span class="std std-ref">Zeitfensteransatz für das Problem aus Kapitel sec:zeitdiskret ohne Vorschauperiode.</span></a>.</p>
 <div class="proof example admonition" id="example-5">
-<p class="admonition-title"><span class="caption-number">Example 13.5 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 14.5 </span></p>
 <section class="example-content" id="proof-content">
 <p>TO DO</p>
 </section>
 </div><figure class="align-default" id="batteriezeitfenster-ohnelookahead">
 <a class="reference internal image-reference" href="_images/BatterieZeitfenster_OhneLookAhead.png"><img alt="_images/BatterieZeitfenster_OhneLookAhead.png" src="_images/BatterieZeitfenster_OhneLookAhead.png" style="height: 300px;" /></a>
 <figcaption>
-<p><span class="caption-number">Abb. 13.1 </span><span class="caption-text">Zeitfensteransatz für das Problem aus Kapitel <a class="reference internal" href="11_Zeitdiskrete_Modelle.html#sec-zeitdiskret"><span class="std std-ref">Zeitdiskrete Modelle</span></a> ohne Vorschauperiode.</span><a class="headerlink" href="#batteriezeitfenster-ohnelookahead" title="Link zu diesem Bild">#</a></p>
+<p><span class="caption-number">Abb. 14.1 </span><span class="caption-text">Zeitfensteransatz für das Problem aus Kapitel <a class="reference internal" href="11_Zeitdiskrete_Modelle.html#sec-zeitdiskret"><span class="std std-ref">Zeitdiskrete Modelle</span></a> ohne Vorschauperiode.</span><a class="headerlink" href="#batteriezeitfenster-ohnelookahead" title="Link zu diesem Bild">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-default" id="batteriezeitfenster-mitlookahead">
 <a class="reference internal image-reference" href="_images/BatterieZeitfenster_MitLookAhead.png"><img alt="_images/BatterieZeitfenster_MitLookAhead.png" src="_images/BatterieZeitfenster_MitLookAhead.png" style="height: 300px;" /></a>
 <figcaption>
-<p><span class="caption-number">Abb. 13.2 </span><span class="caption-text">Zeitfensteransatz für das Problem aus Kapitel <a class="reference internal" href="11_Zeitdiskrete_Modelle.html#sec-zeitdiskret"><span class="std std-ref">Zeitdiskrete Modelle</span></a> mit Vorschauperiode.</span><a class="headerlink" href="#batteriezeitfenster-mitlookahead" title="Link zu diesem Bild">#</a></p>
+<p><span class="caption-number">Abb. 14.2 </span><span class="caption-text">Zeitfensteransatz für das Problem aus Kapitel <a class="reference internal" href="11_Zeitdiskrete_Modelle.html#sec-zeitdiskret"><span class="std std-ref">Zeitdiskrete Modelle</span></a> mit Vorschauperiode.</span><a class="headerlink" href="#batteriezeitfenster-mitlookahead" title="Link zu diesem Bild">#</a></p>
 </figcaption>
 </figure>
 <p>Rollierende Planung für das Beispielmodel aus Kapitel <a class="reference internal" href="11_Zeitdiskrete_Modelle.html#sec-zeitdiskret"><span class="std std-ref">Zeitdiskrete Modelle</span></a>.</p>
 <div class="proof example admonition" id="example-6">
-<p class="admonition-title"><span class="caption-number">Example 13.6 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 14.6 </span></p>
 <section class="example-content" id="proof-content">
 <p>TO DO</p>
 </section>
 </div></section>
 </section>
 <section id="lazy-constraints">
-<span id="subsub-lazyconstraints"></span><h3><span class="section-number">13.3.5. </span>Lazy Constraints<a class="headerlink" href="#lazy-constraints" title="Link zu dieser Überschrift">#</a></h3>
+<span id="subsub-lazyconstraints"></span><h3><span class="section-number">14.3.5. </span>Lazy Constraints<a class="headerlink" href="#lazy-constraints" title="Link zu dieser Überschrift">#</a></h3>
 <p>In Abschnitt <a class="reference internal" href="08_MILP.html#subsec-polyeder"><span class="std std-ref">Der Polyeder der zulässigen Lösungen</span></a> ist beschrieben, dass der Raum der zulässigen Lösungen eines linearen Programms ein Polyeder ist, der in der Form</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
@@ -835,12 +840,12 @@ P=\{x \in \RR^n \mid Ax \leq b\} = \left\{ x \mid \sum_{j=1}^na_{ij}x_j \leq b_i
 \end{align*}\]</div>
 <p>verbietet also einen Halbraum von <span class="math notranslate nohighlight">\(\RR^n\)</span> für die Menge der zulässigen Lösungen. Wir fragen uns, ob immer alle Nebenbedingungen nötig sind, um eine optimale Lösung zu finden.</p>
 <div class="proof example admonition" id="example-7">
-<p class="admonition-title"><span class="caption-number">Example 13.7 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 14.7 </span></p>
 <section class="example-content" id="proof-content">
 <p>TO DO</p>
 </section>
 </div><div class="proof definition admonition" id="definition-8">
-<p class="admonition-title"><span class="caption-number">Definition 13.2 </span> (Bindende Nebenbedingung)</p>
+<p class="admonition-title"><span class="caption-number">Definition 14.2 </span> (Bindende Nebenbedingung)</p>
 <section class="definition-content" id="proof-content">
 <p>Sei <span class="math notranslate nohighlight">\(P=\{x \in \RR^n \mid Ax \leq b\}\)</span> ein Polyeder und <span class="math notranslate nohighlight">\(\overline x=(\overline x_1, \overline x_2, \ldots, \overline x_n)^T \in P\)</span>. Dann heißt die Nebenbedingung
 <span class="math notranslate nohighlight">\(
@@ -854,7 +859,7 @@ P=\{x \in \RR^n \mid Ax \leq b\} = \left\{ x \mid \sum_{j=1}^na_{ij}x_j \leq b_i
 </div><p>Eine Nebenbedingung ist also nur (lokal) einschränkend für einen Punkt <span class="math notranslate nohighlight">\(x\)</span> in Optimierungsrichtung, falls Sie auch bindend ist.</p>
 <p>Gemischt-ganzzahlige Programme werden typischerweise über Branch-And-Bound Verfahren gelöst. Es kann sein, dass viele Nebenbedingungen für keine der zulässigen Lösungen, die während des Branch-And-Bound Verfahrens besucht werden, bindend ist.</p>
 <div class="proof example admonition" id="example-9">
-<p class="admonition-title"><span class="caption-number">Example 13.8 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 14.8 </span></p>
 <section class="example-content" id="proof-content">
 <p>TO DO</p>
 </section>
@@ -863,7 +868,7 @@ Wie können wir trotzdem ausnutzen, wenn viele Nebenbedingungen nicht bindend we
 <p>Wir teilen die Menge <span class="math notranslate nohighlight">\(R\)</span> der Nebenbedingungen auf in eine Menge von <span class="math notranslate nohighlight">\(R_{\initial}\)</span> von “essentiellen” Nebenbedingungen, sowie eine Menge <span class="math notranslate nohighlight">\(R_{\lazy}\)</span> von Nebenbedingungen, bei denen wir davon ausgehen, dass nur ein sehr kleiner Teil tatsächlich im Verlauf des Lösungsverfahrens bindend wird. Wir starten dann ein normales Branch-And-Bound Verfahren auf dem reduzierten Model, das nur die essentiellen Nebenbedingungen enthält. Wann immer eine zulässige Lösung <span class="math notranslate nohighlight">\(x\)</span> gefunden wird, müssen wir überprüfen ob <span class="math notranslate nohighlight">\(x\)</span>  Nebenbedingungen aus <span class="math notranslate nohighlight">\(R_{\lazy}\)</span> verletzt. Falls dies so ist, werden diese zum aktuellen Modell hinzugefügt. Danach wird mit dem  Branch-And-Bound Verfahren fortgefahren.</p>
 <p>Insgesamt ergibt sich folgendes Vorgehen:</p>
 <div class="proof algorithm admonition" id="algorithm-10">
-<p class="admonition-title"><span class="caption-number">Algorithm 13.1 </span> (Branch-And-Bound Verfahren mit Lazy Constraints)</p>
+<p class="admonition-title"><span class="caption-number">Algorithm 14.1 </span> (Branch-And-Bound Verfahren mit Lazy Constraints)</p>
 <section class="algorithm-content" id="proof-content">
 <p><strong>Eingabe:</strong></p>
 <ul class="simple">
@@ -886,7 +891,7 @@ Wie können wir trotzdem ausnutzen, wenn viele Nebenbedingungen nicht bindend we
 </section>
 </div><p>Um das Verfahren praktisch umzusetzen muss nicht unbedingt das Branch-And-Bound Verfahren selbst implementiert werden, sondern nur die Prüfroutine für die Verletzung der Nebenbedingungen. Viele Solver unterstützen dies über sogenannte <em>Callback-Funktionen</em>.</p>
 <section id="beispiel-traveling-salesman-problem">
-<h4><span class="section-number">13.3.5.1. </span>Beispiel: Traveling Salesman Problem<a class="headerlink" href="#beispiel-traveling-salesman-problem" title="Link zu dieser Überschrift">#</a></h4>
+<h4><span class="section-number">14.3.5.1. </span>Beispiel: Traveling Salesman Problem<a class="headerlink" href="#beispiel-traveling-salesman-problem" title="Link zu dieser Überschrift">#</a></h4>
 <p>Wir betrachten das Vorgehen am Beispiel der Formulierung nach Dantzig, Fulkerson und Johnson für das Traveling Salesman Problem (siehe Abschnitt <a class="reference internal" href="09_Standardprobleme.html#subsubsec-tsp"><span class="std std-ref">Das Problem des Handelsreisenden</span></a>).</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{alignat*}{5}
@@ -908,13 +913,13 @@ Wie können wir trotzdem ausnutzen, wenn viele Nebenbedingungen nicht bindend we
 \text{Nachfolger}(k)=l \text{ mit der Eigenschaft } x_{kl}=1
 \end{align*}\]</div>
 <div class="proof example admonition" id="example-11">
-<p class="admonition-title"><span class="caption-number">Example 13.9 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 14.9 </span></p>
 <section class="example-content" id="proof-content">
 <p>TO DO</p>
 </section>
 </div><p>Wir können die Überprüfung effizient mit folgendem Algorithmus vornehmen:</p>
 <div class="proof algorithm admonition" id="algo:findeSubtour">
-<p class="admonition-title"><span class="caption-number">Algorithm 13.2 </span> (Überprüfe auf Subtouren in Lösung <span class="math notranslate nohighlight">\(x\)</span>)</p>
+<p class="admonition-title"><span class="caption-number">Algorithm 14.2 </span> (Überprüfe auf Subtouren in Lösung <span class="math notranslate nohighlight">\(x\)</span>)</p>
 <section class="algorithm-content" id="proof-content">
 <p><strong>Input</strong>: Mögliche Lösung <span class="math notranslate nohighlight">\(x\)</span></p>
 <p><strong>Output</strong>: Subtour falls existent</p>
@@ -929,21 +934,21 @@ Wie können wir trotzdem ausnutzen, wenn viele Nebenbedingungen nicht bindend we
 </section>
 </div><p>Der Algorithmus findet auf jeden Fall eine Subtour falls eine solche in <span class="math notranslate nohighlight">\(x\)</span> existiert. Eine leicht abgewandelte Version des Vorgehens kann auch alle möglichen vorhandenen Subtouren finden.</p>
 <div class="proof example admonition" id="example-13">
-<p class="admonition-title"><span class="caption-number">Example 13.10 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 14.10 </span></p>
 <section class="example-content" id="proof-content">
 <p>TO DO</p>
 </section>
 </div><figure class="align-default" id="tsp-lazy-constraints">
 <a class="reference internal image-reference" href="_images/TSP-lazy-constraints.png"><img alt="_images/TSP-lazy-constraints.png" src="_images/TSP-lazy-constraints.png" style="height: 300px;" /></a>
 <figcaption>
-<p><span class="caption-number">Abb. 13.3 </span><span class="caption-text">Eine TSP-Instanz mit 50 Orten. Die Grafik zeigt alle 36 Zwischenlösungen, die bei einem Branch-And-Bound Verfahren mit Lazy-Constraints gefunden werden.</span><a class="headerlink" href="#tsp-lazy-constraints" title="Link zu diesem Bild">#</a></p>
+<p><span class="caption-number">Abb. 14.3 </span><span class="caption-text">Eine TSP-Instanz mit 50 Orten. Die Grafik zeigt alle 36 Zwischenlösungen, die bei einem Branch-And-Bound Verfahren mit Lazy-Constraints gefunden werden.</span><a class="headerlink" href="#tsp-lazy-constraints" title="Link zu diesem Bild">#</a></p>
 </figcaption>
 </figure>
 </section>
 </section>
 </section>
 <section id="interpretation-der-solver-ausgaben">
-<h2><span class="section-number">13.4. </span>Interpretation der Solver-Ausgaben<a class="headerlink" href="#interpretation-der-solver-ausgaben" title="Link zu dieser Überschrift">#</a></h2>
+<h2><span class="section-number">14.4. </span>Interpretation der Solver-Ausgaben<a class="headerlink" href="#interpretation-der-solver-ausgaben" title="Link zu dieser Überschrift">#</a></h2>
 <p>Die Ausgaben des Lösers liefern wichtige diagnostische Informationen.
 Im Folgenden sehen wir die Ausgaben für das Modell aus Abschnitt <a class="reference internal" href="#subsub-lazyconstraints"><span class="std std-ref">Lazy Constraints</span></a>.</p>
 <figure class="align-default" id="gurobi-solveroutput2-1">
@@ -1067,7 +1072,7 @@ Die beste gefundene untere Schranke für den Zielfunktionswert ist 635.502578758
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">zurück</p>
-            <p class="prev-next-title"><span class="section-number">12. </span>Ablaufplanung</p>
+            <p class="prev-next-title"><span class="section-number">13. </span>Ablaufplanung</p>
         </div>
     </a>
 </div>

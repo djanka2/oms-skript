@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>8. Gemischt-ganzzahlige lineare Programmierung &#8212; Optimierungsverfahren, Modellierung und Simulation (DSCB410)</title>
+    <title>9. Gemischt-ganzzahlige lineare Programmierung &#8212; Optimierungsverfahren, Modellierung und Simulation (DSCB410)</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -53,12 +53,12 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"tex": {"macros": {"N": "\\mathbb{N}", "R": "\\mathbb{R}", "B": "\\mathbb{B}", "NN": "\\mathbb{N}", "RR": "\\mathbb{R}", "BB": "\\mathbb{B}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "scikit": ["\\texttt{scikit-learn}"], "derv": ["\\frac{\\partial #1}{\\partial #2}", 2], "dervquad": ["\\frac{\\partial^2 #1}{\\partial #2^2}", 2], "dervzwei": ["\\frac{\\partial^2 #1}{\\partial {#2} \\partial {#3}}", 3], "mat": ["\\mathbf{#1}", 1], "vec": ["\\mathbf{#1}", 1], "initial": "\\DeclareMathOperator{\\initial}{initial}", "reduced": "\\DeclareMathOperator{\\reduced}{reduced}", "lazy": "\\DeclareMathOperator{\\lazy}{lazy}", "ILP": "\\DeclareMathOperator{\\ILP}{ILP}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script>window.MathJax = {"tex": {"macros": {"N": "\\mathbb{N}", "R": "\\mathbb{R}", "B": "\\mathbb{B}", "NN": "\\mathbb{N}", "RR": "\\mathbb{R}", "BB": "\\mathbb{B}", "norm": ["\\left\\lVert#1 \\right\\rVert", 1], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "scikit": ["\\texttt{scikit-learn}"], "derv": ["\\frac{\\partial #1}{\\partial #2}", 2], "dervquad": ["\\frac{\\partial^2 #1}{\\partial #2^2}", 2], "dervzwei": ["\\frac{\\partial^2 #1}{\\partial {#2} \\partial {#3}}", 3], "mat": ["\\mathbf{#1}", 1], "vec": ["\\mathbf{#1}", 1], "initial": "\\DeclareMathOperator{\\initial}{initial}", "reduced": "\\DeclareMathOperator{\\reduced}{reduced}", "lazy": "\\DeclareMathOperator{\\lazy}{lazy}", "ILP": "\\DeclareMathOperator{\\ILP}{ILP}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Stichwortverzeichnis" href="genindex.html" />
     <link rel="search" title="Suche" href="search.html" />
-    <link rel="next" title="9. Einige Standardprobleme" href="09_Standardprobleme.html" />
-    <link rel="prev" title="7. Grundlagen der beschränkten Optimierung" href="07_Grundlagen_beschraenkte_Optimierung.html" />
+    <link rel="next" title="10. Einige Standardprobleme" href="09_Standardprobleme.html" />
+    <link rel="prev" title="8. Grundlagen der beschränkten Optimierung" href="07_Grundlagen_beschraenkte_Optimierung.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="de">
     
@@ -113,7 +113,7 @@ const thebe_selector_output = ".output, .cell_output"
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
-                <a class="reference internal" href="intro.html">
+                <a class="reference internal" href="00_Ueberblick.html">
                     Überblick
                 </a>
             </li>
@@ -133,32 +133,37 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="02_Multivariate_Analysis.html">
-   2. Theoretische Grundlagen
+   2. Funktionen und Ableitungen
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02a_Theoretische_Grundlagen.html">
+   3. Theoretische Grundlagen der nichtlinearen Optimierung
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="03_Gradientenverfahren.html">
-   3. Gradientenverfahren
+   4. Gradientenverfahren
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="04_Verfahren_zweiter_Ordnung.html">
-   4. Verfahren zweiter Ordnung
+   5. Verfahren zweiter Ordnung
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="05_Automatische_Differentiation.html">
-   5. Automatische Differentiation
+   6. Automatische Differentiation
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="06_Gradientenverfahren_ML.html">
-   6. Gradientenverfahren für Probleme des maschinellen Lernens
+   7. Gradientenverfahren für Probleme des maschinellen Lernens
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="07_Grundlagen_beschraenkte_Optimierung.html">
-   7. Grundlagen der beschränkten Optimierung
+   8. Grundlagen der beschränkten Optimierung
   </a>
  </li>
 </ul>
@@ -170,32 +175,32 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   8. Gemischt-ganzzahlige lineare Programmierung
+   9. Gemischt-ganzzahlige lineare Programmierung
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="09_Standardprobleme.html">
-   9. Einige Standardprobleme
+   10. Einige Standardprobleme
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="10_Modellierungstechniken.html">
-   10. Fortgeschrittene Modellierungstechniken
+   11. Fortgeschrittene Modellierungstechniken
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="11_Zeitdiskrete_Modelle.html">
-   11. Zeitdiskrete Modelle
+   12. Zeitdiskrete Modelle
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="12_Ablaufplanung.html">
-   12. Ablaufplanung
+   13. Ablaufplanung
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="13_Praxisaspekte.html">
-   13. Praxisaspekte beim Lösen von gemischt-ganzzahligen Programmen
+   14. Praxisaspekte beim Lösen von gemischt-ganzzahligen Programmen
   </a>
  </li>
 </ul>
@@ -332,37 +337,37 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#ein-beispiel">
-   8.1. Ein Beispiel
+   9.1. Ein Beispiel
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#definition">
-   8.2. Definition
+   9.2. Definition
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#standardumformungen">
-   8.3. Standardumformungen
+   9.3. Standardumformungen
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#losbarkeit-von-linearen-programmen">
-   8.4. Lösbarkeit von Linearen Programmen
+   9.4. Lösbarkeit von Linearen Programmen
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#der-polyeder-der-zulassigen-losungen">
-   8.5. Der Polyeder der zulässigen Lösungen
+   9.5. Der Polyeder der zulässigen Lösungen
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#ganzzahligkeitsbedingungen-und-weitere-modellarten">
-   8.6. Ganzzahligkeitsbedingungen und weitere Modellarten
+   9.6. Ganzzahligkeitsbedingungen und weitere Modellarten
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#relaxierung-von-problemen-mit-ganzzahligkeitsbedingungen">
-   8.7. Relaxierung von Problemen mit Ganzzahligkeitsbedingungen
+   9.7. Relaxierung von Problemen mit Ganzzahligkeitsbedingungen
   </a>
  </li>
 </ul>
@@ -386,37 +391,37 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#ein-beispiel">
-   8.1. Ein Beispiel
+   9.1. Ein Beispiel
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#definition">
-   8.2. Definition
+   9.2. Definition
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#standardumformungen">
-   8.3. Standardumformungen
+   9.3. Standardumformungen
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#losbarkeit-von-linearen-programmen">
-   8.4. Lösbarkeit von Linearen Programmen
+   9.4. Lösbarkeit von Linearen Programmen
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#der-polyeder-der-zulassigen-losungen">
-   8.5. Der Polyeder der zulässigen Lösungen
+   9.5. Der Polyeder der zulässigen Lösungen
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#ganzzahligkeitsbedingungen-und-weitere-modellarten">
-   8.6. Ganzzahligkeitsbedingungen und weitere Modellarten
+   9.6. Ganzzahligkeitsbedingungen und weitere Modellarten
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#relaxierung-von-problemen-mit-ganzzahligkeitsbedingungen">
-   8.7. Relaxierung von Problemen mit Ganzzahligkeitsbedingungen
+   9.7. Relaxierung von Problemen mit Ganzzahligkeitsbedingungen
   </a>
  </li>
 </ul>
@@ -440,9 +445,9 @@ title="Print to PDF"
 </ul>
 <p>auf denen es teilweise auch basiert.</p>
 <section class="tex2jax_ignore mathjax_ignore" id="gemischt-ganzzahlige-lineare-programmierung">
-<h1><span class="section-number">8. </span>Gemischt-ganzzahlige lineare Programmierung<a class="headerlink" href="#gemischt-ganzzahlige-lineare-programmierung" title="Link zu dieser Überschrift">#</a></h1>
+<h1><span class="section-number">9. </span>Gemischt-ganzzahlige lineare Programmierung<a class="headerlink" href="#gemischt-ganzzahlige-lineare-programmierung" title="Link zu dieser Überschrift">#</a></h1>
 <section id="ein-beispiel">
-<h2><span class="section-number">8.1. </span>Ein Beispiel<a class="headerlink" href="#ein-beispiel" title="Link zu dieser Überschrift">#</a></h2>
+<h2><span class="section-number">9.1. </span>Ein Beispiel<a class="headerlink" href="#ein-beispiel" title="Link zu dieser Überschrift">#</a></h2>
 <p>Ein chemisches Unternehmen handelt mit drei verschiedenen Substanzen, die in verschiedenen Mengen simultan durch den gleichen Produktionsprozess erzeugt werden.
 Das Unternehmen kann pro Monat (maximal) die folgenden Mengen verkaufen:</p>
 <p>Substanz A: 50t, Substanz B: 72t, Substanz C: 20t</p>
@@ -473,22 +478,22 @@ An Tagen an denen die Anlagen nicht produzieren, fällt kein Profit, aber auch k
 </table>
 <p>Die Firma hat keine Lagermöglichkeit und kann pro Monat nicht mehr produzieren, als sie verkaufen kann. Wie viele Tage pro Monat muss die Firma in den jeweiligen Anlagen produzieren, um ihren Profit zu optimieren? Anmerkung: Die Firma kann auch für den Bruchteil eines Tages produzieren (anstatt den ganzen Tag) und erhält dann auch nur den entsprechenden Bruchteil des Profits.</p>
 <div class="proof example admonition" id="example-0">
-<p class="admonition-title"><span class="caption-number">Example 8.1 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 9.1 </span></p>
 <section class="example-content" id="proof-content">
 <p>TO DO</p>
 </section>
 </div></section>
 <section id="definition">
-<h2><span class="section-number">8.2. </span>Definition<a class="headerlink" href="#definition" title="Link zu dieser Überschrift">#</a></h2>
+<h2><span class="section-number">9.2. </span>Definition<a class="headerlink" href="#definition" title="Link zu dieser Überschrift">#</a></h2>
 <p>Ein <em>lineares Programm</em> ist ein Optimierungsproblem, bei dem eine lineare Zielfunktion unter linearen Nebenbedingungen optimiert werden soll.</p>
 <div class="proof example admonition" id="example-1">
-<p class="admonition-title"><span class="caption-number">Example 8.2 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 9.2 </span></p>
 <section class="example-content" id="proof-content">
 <p>TO DO</p>
 </section>
 </div><p>Als Nebenbedingungen sind Ungleichungen und Gleichungen der Art <span class="math notranslate nohighlight">\(\leq, \geq, =\)</span> erlaubt. Nicht erlaubt und typischerweise auch nicht sinnvoll sind Ungleichungen der Art <span class="math notranslate nohighlight">\(&lt;\)</span> bzw <span class="math notranslate nohighlight">\(&gt;\)</span>.</p>
 <div class="proof definition admonition" id="definition-2">
-<p class="admonition-title"><span class="caption-number">Definition 8.1 </span> (Lineares Programm in allgemeiner Form)</p>
+<p class="admonition-title"><span class="caption-number">Definition 9.1 </span> (Lineares Programm in allgemeiner Form)</p>
 <section class="definition-content" id="proof-content">
 <p>Gegeben sei eine <span class="math notranslate nohighlight">\(m \times n\)</span>-Matrix <span class="math notranslate nohighlight">\(A=(a_{ij})\)</span>, ein <span class="math notranslate nohighlight">\(m\)</span>-dimensionaler Vektor <span class="math notranslate nohighlight">\(b\)</span>, sowie ein <span class="math notranslate nohighlight">\(n\)</span>-dimensionaler Vektor <span class="math notranslate nohighlight">\(c\)</span>. Ein <em>lineares Programm</em> ist ein Optimierungsproblem der Form</p>
 <div class="amsmath math notranslate nohighlight">
@@ -497,20 +502,20 @@ An Tagen an denen die Anlagen nicht produzieren, fällt kein Profit, aber auch k
 \text{s.t. } &amp; &amp;  a_{i1}x_1 + \ldots + a_{in}x_n &amp; = &amp; \ b_i &amp; \quad\quad &amp; &amp; \forall i= 1, \ldots, p \\
 &amp; &amp;  a_{i1}x_1 + \ldots + a_{in}x_n &amp; \leq &amp; \ b_i &amp; \quad\quad &amp; &amp; \forall i= p+1, \ldots, q \\
 &amp; &amp;  a_{i1}x_1 + \ldots + a_{in}x_n &amp; \geq &amp; \ b_i &amp; \quad\quad &amp; &amp; \forall i= q+1, \ldots, m \\
-&amp; &amp; x_j &amp; \geq &amp; \ 0 &amp; &amp;&amp; \forall i= 1, \ldots, r.
+&amp; &amp; x_j &amp; \geq &amp; \ 0 &amp; &amp;&amp; \forall j= 1, \ldots, n.
 \end{alignat*}\]</div>
 </section>
 </div><p>Es müssen dabei nicht alle möglichen Arten von Nebenbedingungen (<span class="math notranslate nohighlight">\(\leq, =, \geq, \geq 0\)</span>) vorkommen.
 Um mit einer einheitlichen Darstellung arbeiten zu können, benutzt man gerne lineare Programme in der sogenannten <em>Standardform</em>.</p>
 <div class="proof definition admonition" id="definition-3">
-<p class="admonition-title"><span class="caption-number">Definition 8.2 </span> (Lineares Programm in Standardform)</p>
+<p class="admonition-title"><span class="caption-number">Definition 9.2 </span> (Lineares Programm in Standardform)</p>
 <section class="definition-content" id="proof-content">
 <p>Gegeben sei eine <span class="math notranslate nohighlight">\(m \times n\)</span>-Matrix <span class="math notranslate nohighlight">\(A\)</span>, ein <span class="math notranslate nohighlight">\(m\)</span>-dimensionaler Vektor <span class="math notranslate nohighlight">\(b\)</span>, sowie ein <span class="math notranslate nohighlight">\(n\)</span>-dimensionaler Vektor <span class="math notranslate nohighlight">\(c\)</span>. Ein <em>lineares Programm</em> ist ein Optimierungsproblem der Form</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{alignat*}{5}
 \min          &amp; \quad  &amp;   c_1x_1 + \ldots + c_nx_n &amp;          &amp; &amp; \\[2mm]
 \text{s.t. } &amp; &amp;  a_{i1}x_1 + \ldots + a_{in}x_n &amp; = &amp; \ b_i &amp; \quad\quad &amp; &amp; \forall i= 1, \ldots, m \\
-&amp; &amp; x_j &amp; \geq &amp; \ 0 &amp; &amp;&amp; \forall i= 1, \ldots, m.
+&amp; &amp; x_j &amp; \geq &amp; \ 0 &amp; &amp;&amp; \forall j= 1, \ldots, n.
 \end{alignat*}\]</div>
 <p>In Matrixform</p>
 <div class="amsmath math notranslate nohighlight">
@@ -522,13 +527,13 @@ Um mit einer einheitlichen Darstellung arbeiten zu können, benutzt man gerne li
 </section>
 </div></section>
 <section id="standardumformungen">
-<h2><span class="section-number">8.3. </span>Standardumformungen<a class="headerlink" href="#standardumformungen" title="Link zu dieser Überschrift">#</a></h2>
+<h2><span class="section-number">9.3. </span>Standardumformungen<a class="headerlink" href="#standardumformungen" title="Link zu dieser Überschrift">#</a></h2>
 <p>Wie bringt man ein beliebiges Lineares Programm in Standardform? Wir gehen als Zwischenschritt einen etwas umständlichen Weg, der sich später als praktisch und einfacher zu verstehen erweist. Wir bringen dazu das LP erst in eine Form, bei der ein Minimierungsproblem vorliegt, alle Variablen nicht-negativ sind und nur Nebenbedingungen der Form <span class="math notranslate nohighlight">\(\leq\)</span> vorliegen:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{alignat*}{5}
 \min_{x_1, \ldots, x_p} &amp;\quad &amp; \sum_{j=1}^{n}c_j x_j \\[2mm]
 \text{s.t. } &amp; &amp;\sum_{j=1}^{n} a_{ij} x_j &amp;\leq&amp;  \ b_i &amp; \quad\quad &amp; &amp; \forall i=1,\ldots,m \\
-             &amp; &amp; x_j                      &amp;\geq&amp;  0 &amp;  &amp;&amp; \forall j =0 ,\ldots ,n
+             &amp; &amp; x_j                      &amp;\geq&amp;  0 &amp;  &amp;&amp; \forall j =1 ,\ldots ,n
 \end{alignat*}\]</div>
 <p>Danach bringen wir es in Standardform. Wir starten mit einem beliebigen linearen Problem</p>
 <div class="amsmath math notranslate nohighlight">
@@ -539,7 +544,7 @@ Um mit einer einheitlichen Darstellung arbeiten zu können, benutzt man gerne li
              &amp; &amp;\sum_{j=1}^{n} a_{ij} x_j &amp;=&amp;  \ b_i &amp; \quad\quad &amp; &amp; \forall i=m_2+1,\ldots,m \\
 \end{alignat*}\]</div>
 <div class="proof example admonition" id="example-4">
-<p class="admonition-title"><span class="caption-number">Example 8.3 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 9.3 </span></p>
 <section class="example-content" id="proof-content">
 <p>TO DO</p>
 </section>
@@ -556,7 +561,7 @@ Um mit einer einheitlichen Darstellung arbeiten zu können, benutzt man gerne li
 \end{align*}\]</div>
 <p>ersetzen.</p>
 <div class="proof example admonition" id="example-5">
-<p class="admonition-title"><span class="caption-number">Example 8.4 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 9.4 </span></p>
 <section class="example-content" id="proof-content">
 <p>TO DO</p>
 </section>
@@ -572,7 +577,7 @@ Um mit einer einheitlichen Darstellung arbeiten zu können, benutzt man gerne li
     \sum_{j=1}^{n} a_{ij} x_j &amp; \geq &amp; b_i.
 \end{eqnarray*}\]</div>
 <div class="proof example admonition" id="example-6">
-<p class="admonition-title"><span class="caption-number">Example 8.5 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 9.5 </span></p>
 <section class="example-content" id="proof-content">
 <p>TO DO</p>
 </section>
@@ -587,7 +592,7 @@ Um mit einer einheitlichen Darstellung arbeiten zu können, benutzt man gerne li
 \sum_{j=1}^{n} -a_{ij} x_j \leq -b_i
 \end{align*}\]</div>
 <div class="proof example admonition" id="example-7">
-<p class="admonition-title"><span class="caption-number">Example 8.6 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 9.6 </span></p>
 <section class="example-content" id="proof-content">
 <p>TO DO</p>
 </section>
@@ -604,7 +609,7 @@ x_i^-\geq 0
 \end{align*}\]</div>
 <p>ein. Nun ersetzen wir jedes Vorkommen von <span class="math notranslate nohighlight">\(x_i\)</span> durch <span class="math notranslate nohighlight">\((x_i^+-x_i^-)\)</span></p>
 <div class="proof example admonition" id="example-8">
-<p class="admonition-title"><span class="caption-number">Example 8.7 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 9.7 </span></p>
 <section class="example-content" id="proof-content">
 <p>TO DO</p>
 </section>
@@ -613,7 +618,7 @@ x_i^-\geq 0
 \[\begin{alignat*}{5}
 \min_{x_1, \ldots, x_p} &amp;\quad &amp; \sum_{j=1}^{n}c_j x_j \\[2mm]
 \text{s.t. } &amp; &amp;\sum_{j=1}^{n} a_{ij} x_j &amp;\leq&amp;  \ b_i &amp; \quad\quad &amp; &amp; \forall i=1,\ldots,m \\
-             &amp; &amp; x_j                      &amp;\geq&amp;  0 &amp;  &amp;&amp; \forall j =0 ,\ldots ,n
+             &amp; &amp; x_j                      &amp;\geq&amp;  0 &amp;  &amp;&amp; \forall j =1 ,\ldots ,n
 \end{alignat*}\]</div>
 <p>Um das Problem in Standardform
 zu bringen, müssen wir die Nebenbedingungen von der <span class="math notranslate nohighlight">\(\leq\)</span>-Form in die <span class="math notranslate nohighlight">\(=\)</span>-Form bringen. Dies lässt sich durch das Zufügen von neuen Variablen, sogenannten <em>Schlupfvariablen</em> <span class="math notranslate nohighlight">\(x_{p+1},\ldots,x_n\)</span>  erreichen:</p>
@@ -628,22 +633,22 @@ a_{m1} x_1+\ldots +a_{mp} x_p	&amp;  &amp; &amp;&amp;  +x_{p+m} &amp; =b_m\\
 \end{align*}\]</div>
 <p>Auf unser Beispiel übertragen ergibt dies</p>
 <div class="proof example admonition" id="example-9">
-<p class="admonition-title"><span class="caption-number">Example 8.8 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 9.8 </span></p>
 <section class="example-content" id="proof-content">
 <p>TO DO</p>
 </section>
 </div><p>Damit ist das LP in Standardform. In Matrixform schreiben wir</p>
 <div class="proof example admonition" id="example-10">
-<p class="admonition-title"><span class="caption-number">Example 8.9 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 9.9 </span></p>
 <section class="example-content" id="proof-content">
 <p>TO DO</p>
 </section>
 </div></section>
 <section id="losbarkeit-von-linearen-programmen">
-<h2><span class="section-number">8.4. </span>Lösbarkeit von Linearen Programmen<a class="headerlink" href="#losbarkeit-von-linearen-programmen" title="Link zu dieser Überschrift">#</a></h2>
+<h2><span class="section-number">9.4. </span>Lösbarkeit von Linearen Programmen<a class="headerlink" href="#losbarkeit-von-linearen-programmen" title="Link zu dieser Überschrift">#</a></h2>
 <p>Wir betrachten ein beliebiges lineares Problem LP. Wir haben gesehen, dass wir ohne Beschränkung der Allgemeinheit annehmen können, dass LP in Standardform gegeben ist. Wir nennen jedes <span class="math notranslate nohighlight">\(x\)</span>, das alle Nebenbedingungen erfüllt, eine <em>zulässige Lösung</em> des linearen Problems.</p>
 <div class="proof definition admonition" id="definition-11">
-<p class="admonition-title"><span class="caption-number">Definition 8.3 </span> (Zulässige Lösung)</p>
+<p class="admonition-title"><span class="caption-number">Definition 9.3 </span> (Zulässige Lösung)</p>
 <section class="definition-content" id="proof-content">
 <p>Gegeben ist ein Lineares Programm LP: <span class="math notranslate nohighlight">\(\min  c^Tx\)</span> unter den Nebenbedingungen <span class="math notranslate nohighlight">\(Ax=b\)</span> und <span class="math notranslate nohighlight">\(x\geq 0\)</span>.
 Es heißt</p>
@@ -655,14 +660,14 @@ P=\{x \in \RR^n \mid Ax=b, \ x\geq 0\}
 </section>
 </div><p>Eine zulässige Lösung heißt <em>optimal</em>, wenn es keine andere zulässige Lösung mit einem besseren Zielfunktionswert gibt.</p>
 <div class="proof definition admonition" id="definition-12">
-<p class="admonition-title"><span class="caption-number">Definition 8.4 </span> (Optimale Lösung)</p>
+<p class="admonition-title"><span class="caption-number">Definition 9.4 </span> (Optimale Lösung)</p>
 <section class="definition-content" id="proof-content">
 <p>Gegeben ist ein lineares Programm LP: <span class="math notranslate nohighlight">\(\min  c^Tx\)</span> unter den Nebenbedingungen <span class="math notranslate nohighlight">\(Ax=b\)</span> und <span class="math notranslate nohighlight">\(x\geq 0\)</span>.
 Es sei <span class="math notranslate nohighlight">\(P\)</span> die Menge der zulässigen Lösungen von LP. Es heißt <span class="math notranslate nohighlight">\(x^*\in P\)</span> <em>optimal</em> für LP, wenn für alle <span class="math notranslate nohighlight">\(x' \in P\)</span> gilt, dass <span class="math notranslate nohighlight">\(c^Tx^* \leq c^Tx'\)</span>.</p>
 </section>
 </div><p>Ein lineares Problem heißt <em>unbeschränkt</em>, wenn es für jeden Wert <span class="math notranslate nohighlight">\(k\)</span> eine  zulässige Lösung mit Zielfunktionswert gibt, der besser als <span class="math notranslate nohighlight">\(k\)</span> ist. Man kann also “beliebig gut werden”.</p>
 <div class="proof definition admonition" id="definition-13">
-<p class="admonition-title"><span class="caption-number">Definition 8.5 </span> (Unbeschränktes Lineares Programm)</p>
+<p class="admonition-title"><span class="caption-number">Definition 9.5 </span> (Unbeschränktes Lineares Programm)</p>
 <section class="definition-content" id="proof-content">
 <p>Gegeben ist ein lineares Programm LP: <span class="math notranslate nohighlight">\(\min  c^Tx\)</span> unter den Nebenbedingungen <span class="math notranslate nohighlight">\(Ax=b\)</span> und <span class="math notranslate nohighlight">\(x\geq 0\)</span>.
 Es sei <span class="math notranslate nohighlight">\(P\)</span> die Menge der zulässigen Lösungen von LP. LP heißt <em>unbeschränkt</em>, wenn es für alle <span class="math notranslate nohighlight">\(k \in \RR\)</span> ein <span class="math notranslate nohighlight">\(x \in P\)</span> gibt, so dass <span class="math notranslate nohighlight">\(c^Tx \leq k\)</span>.</p>
@@ -674,13 +679,13 @@ Es sei <span class="math notranslate nohighlight">\(P\)</span> die Menge der zul
 <li><p>LP ist unbeschränkt.</p></li>
 </ol>
 <div class="proof example admonition" id="example-14">
-<p class="admonition-title"><span class="caption-number">Example 8.10 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 9.10 </span></p>
 <section class="example-content" id="proof-content">
 <p>TO DO</p>
 </section>
 </div></section>
 <section id="der-polyeder-der-zulassigen-losungen">
-<span id="subsec-polyeder"></span><h2><span class="section-number">8.5. </span>Der Polyeder der zulässigen Lösungen<a class="headerlink" href="#der-polyeder-der-zulassigen-losungen" title="Link zu dieser Überschrift">#</a></h2>
+<span id="subsec-polyeder"></span><h2><span class="section-number">9.5. </span>Der Polyeder der zulässigen Lösungen<a class="headerlink" href="#der-polyeder-der-zulassigen-losungen" title="Link zu dieser Überschrift">#</a></h2>
 <p>Jede Gleichung der Form</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*} \sum_{j=1}^{n} a_{ij} x_j = b_i \end{align*}\]</div>
@@ -688,14 +693,14 @@ Es sei <span class="math notranslate nohighlight">\(P\)</span> die Menge der zul
 <span class="math notranslate nohighlight">\(\sum_{j=1}^{n} a_{ij} x_j \leq b_i\)</span> und
 <span class="math notranslate nohighlight">\(\sum_{j=1}^{n} a_{ij} x_j \geq  b_i\)</span>.</p>
 <div class="proof example admonition" id="example-15">
-<p class="admonition-title"><span class="caption-number">Example 8.11 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 9.11 </span></p>
 <section class="example-content" id="proof-content">
 <p>TO DO</p>
 </section>
 </div><p>Wir erinnern uns, dass man die Menge <span class="math notranslate nohighlight">\(P\)</span> der zulässigen Lösungen eines linearen Programms auch ausschließlich durch Ungleichungen des Typs <span class="math notranslate nohighlight">\(\sum_{j=1}^{n} a_{ij} x_j  \leq  b_i\)</span> beschreiben kann.
 Es ist <span class="math notranslate nohighlight">\(P\)</span> dann genau die Schnittmenge von den endlich vielen Halbräumen, die durch die Nebenbedingungen definiert sind. Man nennt eine solche Punktmenge einen <em>Polyeder</em>.</p>
 <div class="proof definition admonition" id="definition-16">
-<p class="admonition-title"><span class="caption-number">Definition 8.6 </span> (Polyeder)</p>
+<p class="admonition-title"><span class="caption-number">Definition 9.6 </span> (Polyeder)</p>
 <section class="definition-content" id="proof-content">
 <p>Ein <em>Polyeder</em> <span class="math notranslate nohighlight">\(P \subseteq \RR^n\)</span> ist eine Punktmenge, die eine endliche Zahl an linearen Ungleichungen erfüllt, d.h. die durch die Form</p>
 <div class="amsmath math notranslate nohighlight">
@@ -706,42 +711,42 @@ P=\{x \in \RR^n \mid Ax \leq b\}
 </section>
 </div><p>Ein Punkt <span class="math notranslate nohighlight">\(x \in P\)</span> in einem Polyeder <span class="math notranslate nohighlight">\(P\)</span> heißt <em>Ecke</em>, wenn er nicht in der Mitte von zwei anderen Punkten aus <span class="math notranslate nohighlight">\(P\)</span> liegt.</p>
 <div class="proof example admonition" id="example-17">
-<p class="admonition-title"><span class="caption-number">Example 8.12 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 9.12 </span></p>
 <section class="example-content" id="proof-content">
 <p>TO DO</p>
 </section>
 </div><div class="proof definition admonition" id="definition-18">
-<p class="admonition-title"><span class="caption-number">Definition 8.7 </span> (Ecke)</p>
+<p class="admonition-title"><span class="caption-number">Definition 9.7 </span> (Ecke)</p>
 <section class="definition-content" id="proof-content">
 <p>Ein Punkt <span class="math notranslate nohighlight">\(x \in P\)</span> in einem Polyeder <span class="math notranslate nohighlight">\(P\)</span> heißt <em>Ecke</em> von <span class="math notranslate nohighlight">\(P\)</span>, falls es keine zwei Punkte <span class="math notranslate nohighlight">\(x^1, x^2 \in P\)</span> gibt mit <span class="math notranslate nohighlight">\(x^1\not=x^2\)</span>, so dass <span class="math notranslate nohighlight">\(x=\frac{1}{2}x^1+\frac{1}{2}x^2\)</span> gilt.</p>
 </section>
 </div><p>Eine Menge <span class="math notranslate nohighlight">\(T \subseteq \RR^n\)</span> heißt <em>konvex</em>, wenn für jedes Punktepaar <span class="math notranslate nohighlight">\(x^1, x^2 \in T\)</span> auch die komplette Verbindungslinie zwischen <span class="math notranslate nohighlight">\(x^1\)</span> und <span class="math notranslate nohighlight">\(x^2\)</span> in der Menge <span class="math notranslate nohighlight">\(T\)</span> liegt. Polyeder sind konvexe Mengen.</p>
 <div class="proof example admonition" id="example-19">
-<p class="admonition-title"><span class="caption-number">Example 8.13 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 9.13 </span></p>
 <section class="example-content" id="proof-content">
 <p>TO DO</p>
 </section>
 </div><div class="proof definition admonition" id="definition-20">
-<p class="admonition-title"><span class="caption-number">Definition 8.8 </span> (Konvexität)</p>
+<p class="admonition-title"><span class="caption-number">Definition 9.8 </span> (Konvexität)</p>
 <section class="definition-content" id="proof-content">
 <p>Eine Menge <span class="math notranslate nohighlight">\(T \subseteq \RR^n\)</span> heißt <em>konvex</em>, falls aus <span class="math notranslate nohighlight">\(x^1 \in T\)</span> und <span class="math notranslate nohighlight">\(x^2 \in T\)</span> folgt, dass <span class="math notranslate nohighlight">\(\lambda x^1 + (1-\lambda) x^2 \in T\)</span> gilt.</p>
 </section>
 </div><p>Besitzt ein lineares Programm eine optimale Lösung, so besitzt es auch mindestens eine optimale Lösung, die eine Ecke im zugehörigen Lösungspolyeder ist.</p>
 <div class="proof example admonition" id="example-21">
-<p class="admonition-title"><span class="caption-number">Example 8.14 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 9.14 </span></p>
 <section class="example-content" id="proof-content">
 <p>TO DO</p>
 </section>
 </div></section>
 <section id="ganzzahligkeitsbedingungen-und-weitere-modellarten">
-<h2><span class="section-number">8.6. </span>Ganzzahligkeitsbedingungen und weitere Modellarten<a class="headerlink" href="#ganzzahligkeitsbedingungen-und-weitere-modellarten" title="Link zu dieser Überschrift">#</a></h2>
+<h2><span class="section-number">9.6. </span>Ganzzahligkeitsbedingungen und weitere Modellarten<a class="headerlink" href="#ganzzahligkeitsbedingungen-und-weitere-modellarten" title="Link zu dieser Überschrift">#</a></h2>
 <p>In vielen Problemstellungen dürfen manche oder alle Entscheidungsvariablen nicht beliebige reelle Werte, sondern nur einen eingeschränkten Wertebereich, etwa den der ganzen Zahlen annehmen. Beispiele sind etwa der Kauf eines Investitionsgutes oder das An- und Ausschalten einer Maschine. Man unterscheidet unter anderem die folgende Problemarten, die wir der Einfachheit halber nur in Standardform darstellen.</p>
 <dl class="simple myst">
 <dt>Lineare Programme</dt><dd><p>Die Entscheidungsvariablen dürfen beliebige reelle Werte annehmen.</p>
 </dd>
 </dl>
 <div class="proof example admonition" id="example-22">
-<p class="admonition-title"><span class="caption-number">Example 8.15 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 9.15 </span></p>
 <section class="example-content" id="proof-content">
 <p>TO DO</p>
 </section>
@@ -750,7 +755,7 @@ P=\{x \in \RR^n \mid Ax \leq b\}
 </dd>
 </dl>
 <div class="proof example admonition" id="example-23">
-<p class="admonition-title"><span class="caption-number">Example 8.16 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 9.16 </span></p>
 <section class="example-content" id="proof-content">
 <p>TO DO</p>
 </section>
@@ -759,7 +764,7 @@ P=\{x \in \RR^n \mid Ax \leq b\}
 </dd>
 </dl>
 <div class="proof example admonition" id="example-24">
-<p class="admonition-title"><span class="caption-number">Example 8.17 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 9.17 </span></p>
 <section class="example-content" id="proof-content">
 <p>TO DO</p>
 </section>
@@ -768,22 +773,22 @@ P=\{x \in \RR^n \mid Ax \leq b\}
 </dd>
 </dl>
 <div class="proof example admonition" id="example-25">
-<p class="admonition-title"><span class="caption-number">Example 8.18 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 9.18 </span></p>
 <section class="example-content" id="proof-content">
 <p>TO DO</p>
 </section>
 </div></section>
 <section id="relaxierung-von-problemen-mit-ganzzahligkeitsbedingungen">
-<h2><span class="section-number">8.7. </span>Relaxierung von Problemen mit Ganzzahligkeitsbedingungen<a class="headerlink" href="#relaxierung-von-problemen-mit-ganzzahligkeitsbedingungen" title="Link zu dieser Überschrift">#</a></h2>
+<h2><span class="section-number">9.7. </span>Relaxierung von Problemen mit Ganzzahligkeitsbedingungen<a class="headerlink" href="#relaxierung-von-problemen-mit-ganzzahligkeitsbedingungen" title="Link zu dieser Überschrift">#</a></h2>
 <p>Für alle Problemtypen, die Ganzzahligkeitsbedingungen enthalten, bezeichnet das zugehörige <em>relaxierte Problem</em> das Problem, bei dem die Ganzzahligkeitsbedingungen entfernt wurden. Für jede Binärvariable <span class="math notranslate nohighlight">\(x_i\)</span> fordern wir im zugehörigen relaxierten Problem zusätzlich, dass <span class="math notranslate nohighlight">\(0 \leq x_i \leq 1\)</span> gilt.</p>
 <div class="proof example admonition" id="example-26">
-<p class="admonition-title"><span class="caption-number">Example 8.19 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 9.19 </span></p>
 <section class="example-content" id="proof-content">
 <p>TO DO</p>
 </section>
 </div><p>An folgenden Beispiel sehen wir den Zusammenhang der Lösungsräume zwischen einem ganzzahligen linearen Problem und seiner relaxierten Version:</p>
 <div class="proof example admonition" id="example-27">
-<p class="admonition-title"><span class="caption-number">Example 8.20 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 9.20 </span></p>
 <section class="example-content" id="proof-content">
 <p>TO DO</p>
 </section>
@@ -821,13 +826,13 @@ P=\{x \in \RR^n \mid Ax \leq b\}
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">zurück</p>
-            <p class="prev-next-title"><span class="section-number">7. </span>Grundlagen der beschränkten Optimierung</p>
+            <p class="prev-next-title"><span class="section-number">8. </span>Grundlagen der beschränkten Optimierung</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="09_Standardprobleme.html" title="weiter Seite">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">weiter</p>
-        <p class="prev-next-title"><span class="section-number">9. </span>Einige Standardprobleme</p>
+        <p class="prev-next-title"><span class="section-number">10. </span>Einige Standardprobleme</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
