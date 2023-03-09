@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>6. Automatische Differentiation &#8212; Optimierungsverfahren, Modellierung und Simulation (DSCB410)</title>
+    <title>5. Automatische Differentiation &#8212; Optimierungsverfahren, Modellierung und Simulation (DSCB410)</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -55,8 +55,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Stichwortverzeichnis" href="genindex.html" />
     <link rel="search" title="Suche" href="search.html" />
-    <link rel="next" title="7. Gradientenverfahren für Probleme des maschinellen Lernens" href="06_Gradientenverfahren_ML.html" />
-    <link rel="prev" title="5. Verfahren zweiter Ordnung" href="04_Verfahren_zweiter_Ordnung.html" />
+    <link rel="next" title="6. Gradientenverfahren für Probleme des maschinellen Lernens" href="06_Gradientenverfahren_ML.html" />
+    <link rel="prev" title="4. Verfahren zweiter Ordnung" href="04_Verfahren_zweiter_Ordnung.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="de">
     
@@ -116,14 +116,7 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="01_Einleitung.html">
-   1. Einleitung
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
+        <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Nichtlineare Optimierung
  </span>
@@ -131,37 +124,37 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="02_Multivariate_Analysis.html">
-   2. Funktionen und Ableitungen
+   1. Funktionen und Ableitungen
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="02a_Theoretische_Grundlagen.html">
-   3. Theoretische Grundlagen der nichtlinearen Optimierung
+   2. Grundlagen der nichtlinearen Optimierung
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="03_Gradientenverfahren.html">
-   4. Gradientenverfahren
+   3. Gradientenverfahren
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="04_Verfahren_zweiter_Ordnung.html">
-   5. Verfahren zweiter Ordnung
+   4. Verfahren zweiter Ordnung
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   6. Automatische Differentiation
+   5. Automatische Differentiation
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="06_Gradientenverfahren_ML.html">
-   7. Gradientenverfahren für Probleme des maschinellen Lernens
+   6. Gradientenverfahren für Probleme des maschinellen Lernens
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="07_Grundlagen_beschraenkte_Optimierung.html">
-   8. Grundlagen der beschränkten Optimierung
+   7. Grundlagen der beschränkten Optimierung
   </a>
  </li>
 </ul>
@@ -173,32 +166,32 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="08_MILP.html">
-   9. Gemischt-ganzzahlige lineare Programmierung
+   8. Gemischt-ganzzahlige lineare Programmierung
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="09_Standardprobleme.html">
-   10. Einige Standardprobleme
+   9. Einige Standardprobleme
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="10_Modellierungstechniken.html">
-   11. Fortgeschrittene Modellierungstechniken
+   10. Fortgeschrittene Modellierungstechniken
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="11_Zeitdiskrete_Modelle.html">
-   12. Zeitdiskrete Modelle
+   11. Zeitdiskrete Modelle
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="12_Ablaufplanung.html">
-   13. Ablaufplanung
+   12. Ablaufplanung
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="13_Praxisaspekte.html">
-   14. Praxisaspekte beim Lösen von gemischt-ganzzahligen Programmen
+   13. Praxisaspekte beim Lösen von gemischt-ganzzahligen Programmen
   </a>
  </li>
 </ul>
@@ -336,7 +329,7 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="automatische-differentiation">
-<h1><span class="section-number">6. </span>Automatische Differentiation<a class="headerlink" href="#automatische-differentiation" title="Link zu dieser Überschrift">#</a></h1>
+<span id="sec-ad"></span><h1><span class="section-number">5. </span>Automatische Differentiation<a class="headerlink" href="#automatische-differentiation" title="Link zu dieser Überschrift">#</a></h1>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
@@ -373,13 +366,13 @@ title="Print to PDF"
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">zurück</p>
-            <p class="prev-next-title"><span class="section-number">5. </span>Verfahren zweiter Ordnung</p>
+            <p class="prev-next-title"><span class="section-number">4. </span>Verfahren zweiter Ordnung</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="06_Gradientenverfahren_ML.html" title="weiter Seite">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">weiter</p>
-        <p class="prev-next-title"><span class="section-number">7. </span>Gradientenverfahren für Probleme des maschinellen Lernens</p>
+        <p class="prev-next-title"><span class="section-number">6. </span>Gradientenverfahren für Probleme des maschinellen Lernens</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

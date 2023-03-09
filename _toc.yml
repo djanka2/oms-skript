@@ -6,10 +6,6 @@ root: 00_Ueberblick
 defaults:
   numbered: True
 parts:
-  - caption:
-    numbered: True
-    chapters:
-    - file: 01_Einleitung
   - caption: Nichtlineare Optimierung
     chapters:
     - file: 02_Multivariate_Analysis

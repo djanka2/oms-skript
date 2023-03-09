@@ -10,6 +10,7 @@ copyright: "2023"
 # See https://jupyterbook.org/content/execute.html
 execute:
   execute_notebooks: force
+  allow_errors: true
 
 # Define the name of the latex output file for PDF builds
 latex:
@@ -35,6 +36,7 @@ bibtex_bibfiles:
 sphinx:
   extra_extensions:
     - sphinx_proof
+  recursive_update: true
   config:
     language: de
     html_js_files:
@@ -56,8 +58,7 @@ sphinx:
           "derv": ["\\frac{\\partial #1}{\\partial #2}", 2]
           "dervquad": ["\\frac{\\partial^2 #1}{\\partial #2^2}", 2]
           "dervzwei": ["\\frac{\\partial^2 #1}{\\partial {#2} \\partial {#3}}", 3]
-          "mat": ["\\mathbf{#1}", 1]
-          "vec": ["\\mathbf{#1}", 1]
+          "v": ["\\mathbf{#1}", 1]
           "initial": "\\DeclareMathOperator{\\initial}{initial}"
           "reduced": "\\DeclareMathOperator{\\reduced}{reduced}"
           "lazy": "\\DeclareMathOperator{\\lazy}{lazy}"

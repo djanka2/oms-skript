@@ -1,6 +1,3 @@
+(sec:gradientenverfahren)=
 # Gradientenverfahren
 
-
-```python
-
-```
