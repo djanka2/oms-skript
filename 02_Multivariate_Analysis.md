@@ -504,6 +504,7 @@ Für multivariate Funktionen folgt aus der partiellen Differenzierbarkeit allerd
 \end{align*}
 Das bedeutet, dass es auch nicht stetige Funktionen geben kann, die aber trotzdem partiell abgeleitet werden können.
 ````{prf:example}
+:label: ex:partiell-unstetig
 Die Funktion aus {prf:ref}`ex:unstetig`
 \begin{align*}
 f(x,y)=\left\{\begin{array}{lr} 0, & x=y=0\\\frac{xy}{x^2+y^2}, & \text{sonst}\end{array}\right.
