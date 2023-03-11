@@ -641,7 +641,7 @@ y = np.linspace(-2,4,100)
 X,Y = np.meshgrid(x,y)
 z = X*(Y-1) + X**3
 
-fig = go.Figure(go.Surface(x=x,y=y,z=z, colorscale="Blues"))
+fig = go.Figure(go.Surface(x=x,y=y,z=z, colorscale="Blues", showscale=False))
 fig.update_layout( autosize=True, height=500,
                   margin=go.layout.Margin(l=0, r=0, b=0, t=0))
 
@@ -676,7 +676,7 @@ y = np.linspace(-2,2,100)
 X,Y = np.meshgrid(x,y)
 z = X**2 - Y**2
 
-fig = go.Figure(go.Surface(x=x,y=y,z=z, colorscale="Blues"))
+fig = go.Figure(go.Surface(x=x,y=y,z=z, colorscale="Blues", showscale=False))
 fig.update_layout( autosize=True, height=500,
                   margin=go.layout.Margin(l=0, r=0, b=0, t=0))
 
@@ -735,7 +735,7 @@ y = np.linspace(-1.5,2.5,100)
 X,Y = np.meshgrid(x,y)
 z = 1/4*(X**4 + Y**4) - 1/3*(X**3+Y**3) - X**2 - Y**2 + 4
 
-fig = go.Figure(go.Surface(x=x,y=y,z=z, colorscale="Blues"))
+fig = go.Figure(go.Surface(x=x,y=y,z=z, colorscale="Blues", showscale=False))
 fig.update_layout( autosize=True, height=300,
                   margin=go.layout.Margin(l=0, r=0, b=0, t=0))
 ```

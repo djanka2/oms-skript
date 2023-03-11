@@ -68,7 +68,7 @@ y = np.linspace(-2,2,100)
 X,Y = np.meshgrid(x,y)
 z = X + 2*Y
 
-fig = go.Figure(go.Surface(x=x,y=y,z=z, colorscale="Blues"))
+fig = go.Figure(go.Surface(x=x,y=y,z=z, colorscale="Blues", showscale=False))
 fig.update_layout( autosize=True, height=250,
                   margin=go.layout.Margin(l=0, r=0, b=0, t=0))
 ```
@@ -117,7 +117,7 @@ y = np.linspace(-4,4,100)
 X,Y = np.meshgrid(x,y)
 z = 3*X**2 + Y**2
 
-fig = go.Figure(go.Surface(x=x,y=y,z=z, colorscale="Blues"))
+fig = go.Figure(go.Surface(x=x,y=y,z=z, colorscale="Blues", showscale=False))
 fig.update_layout( autosize=True, height=250,
                   margin=go.layout.Margin(l=0, r=0, b=0, t=0))
 ```
@@ -150,7 +150,7 @@ y = np.linspace(0.1,3,100)
 X,Y = np.meshgrid(x,y)
 z = 0.5*np.sin(3*X*Y) + np.log(X) - np.sqrt(Y)
 
-fig = go.Figure(go.Surface(x=x,y=y,z=z, colorscale="Blues"))
+fig = go.Figure(go.Surface(x=x,y=y,z=z, colorscale="Blues", showscale=False))
 fig.update_layout(height=250, autosize=True,
                   margin=go.layout.Margin(l=0, r=0, b=0, t=0))
 ```
@@ -384,7 +384,7 @@ y = np.linspace(-3,3,100)
 X,Y = np.meshgrid(x,y)
 z = X*Y/(X**2 + Y**2)
 
-fig = go.Figure(go.Surface(x=x,y=y,z=z, colorscale="Blues"))
+fig = go.Figure(go.Surface(x=x,y=y,z=z, colorscale="Blues", showscale=False))
 fig.update_layout( autosize=True, height=250,
                   margin=go.layout.Margin(l=0, r=0, b=0, t=0))
 ```
@@ -800,7 +800,7 @@ y = np.linspace(-0.5,2.5,100)
 X,Y = np.meshgrid(x,y)
 z = (1-X)**2 + (Y-X**2)**2
 
-fig = go.Figure(go.Surface(x=x,y=y,z=z, colorscale="Blues"))
+fig = go.Figure(go.Surface(x=x,y=y,z=z, colorscale="Blues", showscale=False))
 
 # Richtungsvektor a=(2,1)
 a1 = 2

@@ -52,8 +52,6 @@ sphinx:
           "BB": "\\mathbb{B}"
           "norm": ["\\left\\lVert#1 \\right\\rVert", 1]
           "floor": ["\\lfloor#1\\rfloor", 1]
-          "ba" : ["\\begin{align*}"]
-          "ea" : ["\\end{align*}"]
           "bmat" : ["\\begin{pmatrix}"]
           "emat" : ["\\end{pmatrix}"]
           "scikit": ["\\texttt{scikit-learn}"]
@@ -62,7 +60,7 @@ sphinx:
           "dervzwei": ["\\frac{\\partial^2 #1}{\\partial {#2} \\partial {#3}}", 3]
           "v": ["\\mathbf{#1}", 1]
           "m": ["\\mathbf{#1}", 1]
-          "hyper": ["{\\color{Bleu de France}{#1}}", 1]
+          "hyper": ["{\\color{Bittersweet}{#1}}", 1]
           "initial": "\\DeclareMathOperator{\\initial}{initial}"
           "reduced": "\\DeclareMathOperator{\\reduced}{reduced}"
           "lazy": "\\DeclareMathOperator{\\lazy}{lazy}"
