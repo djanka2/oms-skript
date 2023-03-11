@@ -52,7 +52,7 @@ Wir betrachten zunächst einige Beispiele für multivariate Funktionen $\R^n\rig
 ````{prf:example} Lineare Funktion
 \begin{align}
 	f:\R^2\rightarrow\R\\
-	\begin{pmatrix}x\\y\end{pmatrix}\mapsto x+2y
+	\bmat x\\y\emat  \mapsto x+2y
 \end{align}
 ````
 Der Funktionsgraph dieser Funktion lässt sich als Ebene im $\R^3$ darstellen. Allgemein lassen sich Funktionen $f:\R^2\rightarrow \R$ als dreidimensionale Plots visualisieren. Dafür gibt es zwei Möglichkeiten:
@@ -102,7 +102,7 @@ Der Funktionsgraph einer linearen Funktion in $n$ Veränderlichen ist eine *Hype
 ````{prf:example} Quadratische Funktion
 \begin{align}
 	f:\R^2\rightarrow\R\\
-	\begin{pmatrix}x\\y\end{pmatrix}\mapsto 3x^2+y^2
+	\bmat x\\y\emat  \mapsto 3x^2+y^2
 \end{align}
 ````
 Der Graph der Funktion $f(x,y)=3x^2+y^2$ ist eine Verallgemeinerung der Parabel, auch *Paraboloid* genannt:
@@ -127,7 +127,7 @@ f(x_1,x_2,\dots,x_n)=\frac{1}{2}\v x^T\v A\v x+\v b^T\v x+c,
 \end{align*}
 wobei $\v A\in\R^{n\times n}$ eine symmetrische Matrix ist, $\v b\in\R^n$ ein Vektor und $c\in\R$ eine reelle Zahl. Zum Beispiel lässt sich $f(x,y)=3x^2+y^2$ schreiben als
 \begin{align*}
-f(x,y)=\frac{1}{2}(x,y) \begin{pmatrix}6 & 0\\0&2\end{pmatrix}\begin{pmatrix}x\\y\end{pmatrix} + (0,0)\begin{pmatrix}x\\y\end{pmatrix}+0.
+f(x,y)=\frac{1}{2}(x,y) \bmat 6 & 0\\0&2\emat  \bmat x\\y\emat   + (0,0)\bmat x\\y\emat  +0.
 \end{align*}
 Wir werden uns später noch eingehender mit quadratischen Funktionen beschäftigen (dann wird auch klar werden, warum man diese zunächst kompliziert anmutende Schreibweise bevorzugt).
 
@@ -135,7 +135,7 @@ Natürlich kann man auch aus dem eindimensionalen bekannte Funktionen wie Polyno
 ````{prf:example} 
 \begin{align}
 	f:\R_{>0}\times \R_{\geq 0}\rightarrow\R\\
-	\begin{pmatrix}x\\y\end{pmatrix}\mapsto \frac{1}{2}\sin(3xy) + \log(x) - \sqrt{y}\\
+	\bmat x\\y\emat  \mapsto \frac{1}{2}\sin(3xy) + \log(x) - \sqrt{y}\\
 \end{align}
 ````
 Und hier der Graph dieser Funktion:
@@ -520,9 +520,9 @@ Bisher haben wir nur Ableitungen von reellwertigen Funktionen $f:\R^n\rightarrow
 ```{math}
 :label: eq:fktvektor
 \begin{align}
-	\v f(\v x)=\begin{pmatrix}
+	\v f(\v x)=\bmat 
 		f_1(\v x)\\ \vdots \\f_m(\v x)
-	\end{pmatrix}\in \R^m.
+	\emat  \in \R^m.
 \end{align}
 ```
 Das bedeutet, wir können die Vektor-wertige Funktion $\v f$ als Vektor von reellwertigen Funktionen $\left(f_1,\dots,f_m\right)\in\R^m$ auffassen. 
@@ -533,15 +533,15 @@ Analog zum Gradienten werden die partiellen Ableitungen einer Funktion $\v f:\R^
 ````{prf:definition} Jacobimatrix
 Sei $\v f:\R^n\rightarrow \R^m$ eine differenzierbare Funktion. Dann heißt die $m\times n$ Matrix $\v J$ der partiellen Ableitungen,
 \begin{align}
-    \v J=\nabla \v f(\v x) = \begin{pmatrix}
+    \v J=\nabla \v f(\v x) = \bmat 
         \nabla f_1(\v x)\\
         \vdots\\
         \nabla f_m(\v x)
-    \end{pmatrix}=\begin{pmatrix}
+    \emat  =\bmat 
         \derv{f_1}{x_1}& \cdots & \derv{f_1}{x_n}\\
         \vdots\\
         \derv{f_m}{x_1}& \cdots & \derv{f_m}{x_n}
-    \end{pmatrix}\in \R^{m\times n}
+    \emat  \in \R^{m\times n}
 \end{align}
 die *Jacobimatrix* von $\v f$.
 ````
@@ -550,16 +550,16 @@ die *Jacobimatrix* von $\v f$.
 :label: ex:jacobi
 Sei $\v f:\R^3\rightarrow \R^2$ eine Funktion gegeben durch
 \begin{align*}
-    \v f(x_1,x_2,x_3)=\begin{pmatrix}
+    \v f(x_1,x_2,x_3)=\bmat 
         x_1x_2+x_3 \\x_3^2+1 
-    \end{pmatrix}
+    \emat  
 \end{align*}
 Dann ist die Jacobimatrix $J$:
 \begin{align*}
-    \v J=\begin{pmatrix}
+    \v J=\bmat 
         x_2 & x_1 & 1 \\
         0  & 0  &2x_3
-    \end{pmatrix}
+    \emat  
 \end{align*}
 ````
 
@@ -576,16 +576,16 @@ Nach der Definition der Jacobimatrix muss der Gradient dieser Funktion eine $m\t
 \end{align*}
 Wir fassen alle partiellen Ableitungen in der Jacobimatrix zusammen und erhalten:
 \begin{align*}
-    \nabla f = \begin{pmatrix}
+    \nabla f = \bmat 
         \derv{f_1}{x_1}& \cdots & \derv{f_1}{x_n}\\
         \vdots\\
         \derv{f_m}{x_1}& \cdots & \derv{f_m}{x_n}
-    \end{pmatrix}=
-    \begin{pmatrix}
+    \emat  =
+    \bmat 
         a_{11} &\cdots & a_{1n}\\
         \vdots & 		& \vdots\\
         a_{m1} & \cdots & a_{mn}
-    \end{pmatrix}=\v A\in \R^{m\times n}
+    \emat  =\v A\in \R^{m\times n}
 \end{align*}
 Das bedeutet, dass die Ableitung einer multivariaten linearen Funktion gerade die Koeffizientenmatrix ist. Dies entspricht im Eindimensionalen der Tatsache, dass die Ableitung einer Geradengleichung (=lineare Funktion im Eindimensionalen) die Geradensteigung (=Koeffizient von $x$) is.
 ````
@@ -623,11 +623,11 @@ Im folgenden möchten wir die Kettenregel zunächst an einem (wichtigen) Spezial
 ```{math}
 :label: eq:chain1
 \begin{align}\label{eq:chain1}
-	\nabla_t f = \begin{pmatrix}
+	\nabla_t f = \bmat 
 		\derv{g}{f_1(t)} & \derv{g}{f_2(t)}
-	\end{pmatrix}\begin{pmatrix}
+	\emat  \bmat 
 		\derv{f_1(t)}{t}\\\derv{f_2(t)}{t}
-	\end{pmatrix}=\derv{g}{f_1}\derv{f_1}{t}+\derv{g}{f_2}\derv{f_2}{t}
+	\emat  =\derv{g}{f_1}\derv{f_1}{t}+\derv{g}{f_2}\derv{f_2}{t}
 \end{align}
 ```
 Gleichung {eq}`eq:chain1` ist das Produkt von einem Zeilenvektor und einem Spaltenvektor mit jeweils zwei Einträgen. Hier wird deutlich, dass es wichtig ist, auf die korrekte Reihenfolge und die Dimensionen zu achten, da sonst u.U. das Produkt gar nicht definiert ist. Auch hier können wir, wie im Eindimensionalen, die Kettenregel zusammenfassen als ``äußere Ableitung ($g$ nach $\v f(t)$) $\times$ innere Ableitung ($\v f$ nach $t$)''.
@@ -656,29 +656,29 @@ Die Ableitung der Funktion $g\circ \v f$ berechnet sich wie folgt:
 \begin{align}
     \nabla (g(\v f(\v x))&= \nabla g(\v f(\v x))\cdot \nabla \v f(\v x)\\
     &=\nabla g(f_1(\v x),f_2(\v x))\cdot\nabla \v f(\v x)\\
-    &=\begin{pmatrix}
+    &=\bmat 
         \derv{g}{f_1(\v x)}&\derv{g}{f_2(\v x)}
-    \end{pmatrix}\begin{pmatrix}
+    \emat  \bmat 
         x_2 & x_1 & 1 \\
         0  & 0  &2x_3
-    \end{pmatrix}\\
-    &=\begin{pmatrix}
+    \emat  \\
+    &=\bmat 
         2f_1(x)f_2(x), &f_1(x)^2
-    \end{pmatrix}
-    \begin{pmatrix}
+    \emat  
+    \bmat 
         x_2 & x_1 & 1 \\
         0  & 0  &2x_3
-    \end{pmatrix}\label{eq:matmult}\\
-    %						&= \begin{pmatrix}
+    \emat  \label{eq:matmult}\\
+    %						&= \bmat 
         %							2(x_1x_2+x_3)(x_3^2+1)&(x_1x_2+x_3)^2
-        %						\end{pmatrix}
-    %					\begin{pmatrix}
+        %						\emat  
+    %					\bmat 
         %						x_2 & x_1 & 1 \\
         %						0  & 0  &2x_3
-        %					\end{pmatrix}		
-    &=\begin{pmatrix}
+        %					\emat  		
+    &=\bmat 
         2f_1(x)f_2(x)x_2, & 2f_1(x)f_2(x)x_1, & 2f_1(x)f_2(x) + f_1(x)^2 2x_3
-    \end{pmatrix}\label{eq:result1}
+    \emat  \label{eq:result1}
     %		x_1x_2+x_3 \\
     %x_3^2+1 
 \end{align}
@@ -688,9 +688,9 @@ Nun kann man in die letzte Gleichung für die Einträge $f_1(\v x)$ und $f_2(\v 
 :label: eq:result2
 \begin{align}
     &\nabla (g(\v f(\v x))=\\
-    &\begin{pmatrix}
+    &\bmat 
         2(x_1x_2+x_3)(x_3^2+1)x_2, & 2(x_1x_2+x_3)(x_3^2+1)x_1, & 2(x_1x_2+x_3)(x_3^2+1) + (x_1x_2+x_3)^2 2x_3
-    \end{pmatrix}\label{eq:result2}
+    \emat  \label{eq:result2}
 \end{align}
 ```
 
@@ -704,9 +704,9 @@ Auch im multivariaten Fall können wir Ableitungen höherer Ordnung betrachten. 
 :label: eq:gradfkt
 \begin{align}
 	\nabla f^T: \R^n \rightarrow \R^n\\
-	\v x\mapsto \begin{pmatrix}
+	\v x\mapsto \bmat 
 		\derv{f}{x_1} \\ \cdots \\ \derv{f}{x_n}
-	\end{pmatrix}\label{eq:gradfkt}
+	\emat  \label{eq:gradfkt}
 \end{align}
 ```
 Beachte, dass wir hier den transponierten Gradienten benutzen, um einen Spaltenvektor zu erhalten, in Übereinstimmung mit dem Ausdruck {eq}`eq:fktvektor`. Wenn wir nun die partielle Ableitung dieser partiellen Ableitung bilden (also die Jacobimatrix der Gradientenfunktion) erhalten wir die zweite partielle Ableitung. Gemäß der Definition der Jacobimatrix ist das eine Matrix mit $n$ Zeilen (da {eq}`eq:gradfkt` $n$ Komponenten hat) und $n$ Spalten (da {eq}`eq:gradfkt` eine Funktion in $n$ Variablen ist).
@@ -717,10 +717,10 @@ Wir benutzen die folgenden Schreibweisen:
 - $\dervzwei{f}{y}{x}=\derv{}{x}(\derv{f}{y})$ ist die partielle Ableitung von $f$, bei der erst nach $y$ und dann nach $x$ abgeleitet wird
 Die partiellen zweiten Ableitungen werden in der *Hessematrix* zusammengefasst. Für eine Funktion zweier Variablen $x$ und $y$ schreibt man
 \begin{align}
-	\nabla_{xy}^2f=H=\begin{pmatrix}
+	\nabla_{xy}^2f=H=\bmat 
 		\dervquad{f}{x} & \dervzwei{f}{y}{x} \\
 		\dervzwei{f}{x}{y} & \dervquad{f}{y}
-	\end{pmatrix}
+	\emat  
 \end{align}
 Alle Aussagen dieses Abschnitts gelten auch für $n$ Variablen. Man hat dann entsprechend $n$ statt $2$ Zeilen und Spalten.
 Achtung: im Allgemeinen ist die Hessematrix einer Funktion $f:\R^n\rightarrow\R$ selbst eine Funktion, und zwar $\v H:\R^n\rightarrow \R^{n\times n}$. Ächz. Das heißt für uns vor allem, dass $\v H$ keine feste Matrix ist, sondern dass sich die Einträge ändern, je nachdem, an welchem Punkt $\v x$ wir uns die Hessematrix anschauen.
@@ -763,10 +763,10 @@ Analog zur zweiten Ableitung im eindimensionalen beschreibt die Hessematrix die 
 ````{prf:example}
 Wir betrachten wieder das Paraboloid gegeben durch $f:\R^2\rightarrow\R$, $f(x,y)=x_1^2+x_2^2$. Als Hessematrix erhalten wir
 \begin{align*}
-    \nabla_{xy}^2 f= \begin{pmatrix}
+    \nabla_{xy}^2 f= \bmat 
         2 & 0\\
         0 & 2
-    \end{pmatrix}
+    \emat  
 \end{align*}
 Diese Matrix hat den (doppelten) *Eigenwert* $2$. Wenn eine quadratische Matrix nur positive Eigenwerte hat, nennt man sie *positiv definit*. Falls eine Hessematrix für alle Punkte $(x,y)$ aus dem Definitionsbereich positiv definit ist, nennt man die zugehörige Funktion *konvex*. In diesem Fall stimmt das mit der Anschauung überein, dass der Graph eines Paraboloids konvex ist. Das Thema Konvexität schauen wir uns im Abschnitt {ref}`sec:konvex` genauer an.
 ````
@@ -787,7 +787,7 @@ Wir können nun die Funktion $f$ auf diese Gerade anwenden (sie ist ja eine Gera
 \begin{align*}
 f(\v z(t))=f(\v x_0+t\v a)
 \end{align*}
-Hier ein Beispiel für den Fall $f:\R^2\rightarrow \R, f(x,y)=(1-x)^2 + (y-x^2)^2$, $x_0(0,0)$ und $a=\frac{1}{\sqrt{5}}\begin{pmatrix}1\\2\end{pmatrix}$:
+Hier ein Beispiel für den Fall $f:\R^2\rightarrow \R, f(x,y)=(1-x)^2 + (y-x^2)^2$, $x_0(0,0)$ und $a=\frac{1}{\sqrt{5}}\bmat 1\\2\emat  $:
 ```{code-cell} ipython3
 :tags: [hide-input]
 
@@ -816,7 +816,7 @@ fig.add_trace(go.Scatter3d(x=x,y=y,z=z, mode="lines", line=dict(width=5)))
 fig.update_layout( autosize=True,
                   margin=go.layout.Margin(l=0, r=0, b=0, t=0))
 ```
-Die Gerade $\v z(t)=t\begin{pmatrix}1\\2\end{pmatrix}$ in der Ebene wird mittels $f(\v z(t))$ eine Kurve im $\R^3$.
+Die Gerade $\v z(t)=t\bmat 1\\2\emat  $ in der Ebene wird mittels $f(\v z(t))$ eine Kurve im $\R^3$.
 
 Die Richtungsableitung in Richtung $a$ ist nun die Ableitung der (univariaten) Funktion $g:\R\rightarrow\R$, $g(t):=f(\v z(t))=f(\v x_0+t\v a)$ an der Stelle $\v x_0$. Wie bekommen wir die? Natürlich mit der Kettenregel! Dies ist eine skalare Funktion, die einen "Umweg" über den $\R^n$ macht:
 \begin{align*}
@@ -826,7 +826,7 @@ t&\mapsto \v x_0+t\v a=z &&\mapsto f(z)
 Anwendung der Kettenregel:
 \begin{align*}
 g'(t)&=\derv{g}{t}=\derv{f}{z}\derv{\v z}{t}\\
-     &=\left(\derv{f}{z_1},\dots,\derv{f}{z_2})\right)\cdot \begin{pmatrix}a_1\\\dots\\a_n\end{pmatrix}=\nabla f(\v z)\cdot \v a
+     &=\left(\derv{f}{z_1},\dots,\derv{f}{z_2})\right)\cdot \bmat a_1\\\dots\\a_n\emat  =\nabla f(\v z)\cdot \v a
 \end{align*}
 Ausgewertet an der Stelle $t=0$ ergibt sich:
 \begin{align*}
@@ -849,13 +849,13 @@ Daraus ergeben sich folgende beiden geometrischen Zusammenhänge:
 ### Jacobimatrix und Richtungsableitung
 Die Richtungsableitung kann man natürlich auch für Funktionen $f:\R^n\rightarrow \R^m$ berechnen. Hier erhält man dann einen $m$-dimensionalen Vektor als Richtungsableitung, wobei jeder Eintrag das Skalarprodukt einer Zeile der Jacobimatrix mit dem Richtungsvektor ist (das ist gerade das gewöhnliche Matrix-Vektor-Produkt):
 \begin{align*}
-\nabla f\cdot \v a&=\begin{pmatrix}\derv{f_1}{x_1} & \cdots & \derv{f_1}{x_n}\\
+\nabla f\cdot \v a&=\bmat \derv{f_1}{x_1} & \cdots & \derv{f_1}{x_n}\\
                                 \vdots & &\vdots\\
-                                \derv{f_m}{x_1}& \cdots & \derv{f_m}{x_n}\end{pmatrix}
-                                \begin{pmatrix}a_1 \\ \vdots \\a_n\end{pmatrix}\\
-                &=\begin{pmatrix}a_1\derv{f_1}{x_1}+ \cdots + a_n \derv{f_1}{x_n}\\
+                                \derv{f_m}{x_1}& \cdots & \derv{f_m}{x_n}\emat  
+                                \bmat a_1 \\ \vdots \\a_n\emat  \\
+                &=\bmat a_1\derv{f_1}{x_1}+ \cdots + a_n \derv{f_1}{x_n}\\
                                 \vdots\\
-                                a_1n\derv{f_m}{x_1}+ \cdots + a_n \derv{f_m}{x_n}\end{pmatrix}\in\R^m
+                                a_1n\derv{f_m}{x_1}+ \cdots + a_n \derv{f_m}{x_n}\emat  \in\R^m
 \end{align*}
 
 (sec:interpretation)=

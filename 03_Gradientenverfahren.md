@@ -17,9 +17,9 @@ In diesem Abschnitt schauen wir uns Details zu Gradientenverfahren an. Wir wolle
 Behalten Sie aber im Hinterkopf, dass die eigentliche Motivation von aktuellen Gradientenverfahren die Lösung von sehr schwierigen, hochdimensionalen Problemen ist. Gradientenverfahren werden z.B. dazu eingesetzt moderne KI-Systeme mit vielen Millionen bzw. Milliarden von Variablen zu trainieren.
 
 Das big picture: Wir sind nach wie vor an Optimierungsproblemen der Form
-\begin{align*}
+\ba  
 \min_{\v x\in\R^n} f(\v x)
-\end{align*}
+\ea 
 interessiert. Wir begnügen uns dabei mit *lokalen* Lösungen (von denen wir für streng konvexe Funktionen immerhin wissen, dass sie auch global sind). 
 
 ````{note}
@@ -32,11 +32,11 @@ Der in {ref}`sec:gd-preview` vorgestellte Gradientenabstieg ist ein Vertreter ei
 
 Bevor das allgemeine Verfahren aufschreiben, schauen wir uns zunächst noch einmal an, wie wir begründet haben, dass der Gradientenabstieg funktioniert. Wir haben das Taylor-Polynom erster Ordnung am Entwicklungspunkt $\v x^{[k]}$, der aktuellen Iterierten, aufgestellt (man sagt auch: die Funktion $f$ *linearisiert*) und damit den Funktionswert an der neuen Iterierten angenähert.
 
-\begin{align*}
+\ba  
 f(\v x^{[k+1]})=f(\v x^{[k]}+\v d^{[k]})&\approx f(\v x^{[k]})+\nabla f(\v x^{[k]})\v d^{[k]}\\
 &=f(\v x^{[k]})-\alpha^{[k]}\nabla f(\v x^{[k]})\nabla f(\v x^{[k]})^T\\
 &=f(\v x^{[k]})-\underbrace{\alpha^{[k]}\norm{\nabla f(\v x^{[k]})}^2}_{>0}
-\end{align*}
+\ea 
 In Worten: Der Funktionswert am neuen Punkt $\v x^{[k+1]}$ ist kleiner als am aktuellen Punkt $\v x^{[k]}$, wenn als Schritt $\v d^{[k]}=-\alpha^{[k]}\nabla f(\v x^{[k]})$ gewählt wird (mit einer geeignete Schrittweite $\alpha^{[k]}>0$). Wenn man für $\v d^{[k]}$ den Gradienten wählt, kann auf jeden Fall ein Abstieg erzielt werden.
 
 An der ersten Gleichung sieht man aber auch, dass eigentlich nur $\nabla f(\v x^{[k]})\v d^{[k]}<0$ gelten muss, um zu garantieren, dass sich der Funktionswert verringert (Voraussetzung nach wie vor: man bleibt nahe genug bei $\v x^{[k]}$, so dass die Linearisierung eine ausreichend gute Approximation ist). Interessant:  $\nabla f(\v x^{[k]})\v d^{[k]}$ ist die Richtungsableitung in Richtung $\v d^{[k]}$, siehe {ref}`sec:richtung`. Man nennt *jedes* $\v d^{[k]}$, für das gilt $\nabla f(\v x^{[k]})\v d^{[k]}<0$ eine *Abstiegsrichtung*. 

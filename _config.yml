@@ -52,8 +52,10 @@ sphinx:
           "BB": "\\mathbb{B}"
           "norm": ["\\left\\lVert#1 \\right\\rVert", 1]
           "floor": ["\\lfloor#1\\rfloor", 1]
-          "bmat" : ["\\left[\\begin{array}"]
-          "emat" : ["\\end{array}\\right]"]
+          "ba" : ["\\begin{align*}"]
+          "ea" : ["\\end{align*}"]
+          "bmat" : ["\\begin{pmatrix}"]
+          "emat" : ["\\end{pmatrix}"]
           "scikit": ["\\texttt{scikit-learn}"]
           "derv": ["\\frac{\\partial #1}{\\partial #2}", 2]
           "dervquad": ["\\frac{\\partial^2 #1}{\\partial #2^2}", 2]

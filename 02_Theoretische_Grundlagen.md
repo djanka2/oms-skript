@@ -511,9 +511,9 @@ Wir hatte die Richtung $\v a$ beliebig gewählt, d.h. dieser Ausdruck muss für 
 ````{prf:theorem} Notwendige Bedingung für lokale Extrema, mehrdimensionaler Fall
 An einem lokalen Minimum oder Maximum $\v x_0$ einer differenzierbaren Funktion $f:\R^n\rightarrow\R$ muss der Gradient verschwinden, d.h. es muss gelten:
 \begin{align*}
-    \nabla f (\v x_0) = \begin{pmatrix}
+    \nabla f (\v x_0) = \bmat  
         \derv{f}{x_1}(\v x_0) & \cdots & \derv{f}{x_n}(\v x_0)
-    \end{pmatrix} = \v 0
+    \emat   = \v 0
 \end{align*}
 ````
 Wenn wir uns erinnern, dass der Gradient in die Richtung des steilsten Anstiegs zeigt, bedeutet dieser Satz anschaulich: Am Gipfel ist man, wenn es nicht mehr weiter nach oben geht.
@@ -581,7 +581,7 @@ Auflösen ergibt $x=-2$, $y=1$.
 
 Nun überprüfen wir die Definitheit der Hessematrix:
 \begin{align*}
-\nabla^2 f(x,y) = \begin{pmatrix} 2 & 1 \\ 1 & 2\end{pmatrix}
+\nabla^2 f(x,y) = \bmat   2 & 1 \\ 1 & 2\emat  
 \end{align*}
 Die Eigenwerte sind $1$ und $3$. Damit ist die Hessematrix positiv definit und hat an der Stelle $(x,y)=(-2,1)$ ein Minimum. 
 ````
@@ -591,7 +591,7 @@ f(x_1,x_2,\dots,x_n)=\frac{1}{2}\v x^T\v A\v x+\v b^T\v x+c.
 \end{align*}
 Für das vorherige Beispiel wäre das:
 \begin{align*}
-f(x,y)=\frac{1}{2}(x,y) \begin{pmatrix}2 & 1\\ 1 & 2\end{pmatrix} \begin{pmatrix}x\\y\end{pmatrix}+(3,0) \begin{pmatrix}x\\y\end{pmatrix}+(-1),
+f(x,y)=\frac{1}{2}(x,y) \bmat  2 & 1\\ 1 & 2\emat   \bmat  x\\y\emat  +(3,0) \bmat  x\\y\emat  +(-1),
 \end{align*}
 Der Vorteil dieser Darstellung ist, dass man aus ihr direkt den Gradienten und die Hessematrix ablesen kann. Der Gradient lautet
 \begin{align*}
@@ -599,7 +599,7 @@ Der Vorteil dieser Darstellung ist, dass man aus ihr direkt den Gradienten und d
 \end{align*}
 im Beispiel also
 \begin{align*}
-\nabla f(x,y) = \begin{pmatrix}2 & 1\\ 1 & 2\end{pmatrix} \begin{pmatrix}x\\y\end{pmatrix}+ \begin{pmatrix}3\\0\end{pmatrix} 
+\nabla f(x,y) = \bmat  2 & 1\\ 1 & 2\emat   \bmat  x\\y\emat  + \bmat  3\\0\emat   
 \end{align*}
 Die Hessematrix ist die Matrix $\v A$.
 
@@ -622,11 +622,11 @@ Also ist $(0,1)^T$ kritischer Punkt.
 
 Nun überprüfen wir die Definitheit der Hessematrix:
 \begin{align*}
-\nabla^2 f(x,y) = \begin{pmatrix} 6x & 1 \\ 1 & 0\end{pmatrix}
+\nabla^2 f(x,y) = \bmat   6x & 1 \\ 1 & 0\emat  
 \end{align*}
 Diese müssen wir am kritischen Punkt $(0,1)^T$ auswerten:
 \begin{align*}
-\nabla^2 f(x,y) = \begin{pmatrix} 0 & 1 \\ 1 & 0\end{pmatrix}
+\nabla^2 f(x,y) = \bmat   0 & 1 \\ 1 & 0\emat  
 \end{align*}
 Die Eigenwerte sind $1$ und $-1$. Damit ist die Hessematrix weder positiv definit noch negativ definit. Der kritische Punkt ist damit weder ein Minimum noch ein Maximum.
 ````
@@ -661,9 +661,9 @@ Es lohnt sich (auch im Hinblick auf die Optimierungsverfahren, die wir uns in de
 
 Beispiel: Wir betrachten die Funktion $f(x,y)=x^2-y^2$. Die Hessematrix ist
 \begin{align*}
-\begin{pmatrix} 2&0\\0&-1\end{pmatrix}
+\bmat   2&0\\0&-1\emat  
 \end{align*}
-Die Eigenwerte sind $+2$ und $-2$, die zugehörigen Eigenvektoren sind z.B. $\begin{pmatrix}1\\0\end{pmatrix}$ und $\begin{pmatrix}0\\1\end{pmatrix}$.
+Die Eigenwerte sind $+2$ und $-2$, die zugehörigen Eigenvektoren sind z.B. $\bmat  1\\0\emat  $ und $\bmat  0\\1\emat  $.
 Der Graph der Funktion sieht wie folgt aus:
 
 ```{code-cell} ipython3
@@ -703,8 +703,8 @@ z = x**2 - y**2
 fig.add_trace(go.Scatter3d(x=x,y=y,z=z, mode="lines", line=dict(width=5), name="Richtung (0,1)"))
 ```
 In rot und grün sind die Schnitte durch den Funktionsgraph entlang der Eigenvektoren dargestellt:
-- Entlang des Eigenvektors $\begin{pmatrix}1\\0\end{pmatrix}$ ($x$-Achse) zum Eigenwert $+2$ hat die Funktion *positive* Krümmung.
-- Entlang des Eigenvektors $\begin{pmatrix}0\\1\end{pmatrix}$ ($y$-Achse) zum Eigenwert $-2$ hat die Funktion *negative* Krümmung.
+- Entlang des Eigenvektors $\bmat  1\\0\emat  $ ($x$-Achse) zum Eigenwert $+2$ hat die Funktion *positive* Krümmung.
+- Entlang des Eigenvektors $\bmat  0\\1\emat  $ ($y$-Achse) zum Eigenwert $-2$ hat die Funktion *negative* Krümmung.
 Die Hessematrix ist indefinit, und da der Graph der Funktion aussieht wie ein Reitsattel, nennt man einen solchen kritischen Punkt Sattelpunkt.
 
 
@@ -829,67 +829,67 @@ im Punkt $(\pi,1)$ durch Taylor-Polynome erster und zweiter Ordnung.
 Dazu berechnen wir zunächst den Gradienten und die Hessematrix:
 \begin{align*}
     \nabla f(x,y) &= (\cos x, 2y)\\
-    \nabla^2 f(x,y)&=\begin{pmatrix}
+    \nabla^2 f(x,y)&=\bmat  
         -\sin x & 0\\0 & 2
-    \end{pmatrix}
+    \emat  
 \end{align*}
 Dann werten wir $f$, $\nabla f(x,y)$ und $\nabla^2 f(x,y)$ im Punkt $(\pi,1)$ aus:
 \begin{align*}
     f(\pi,1) &= 1\\
     \nabla f(\pi,1) &= (-1, 2)\\
-    \nabla^2 f(\pi,1)&=\begin{pmatrix}
+    \nabla^2 f(\pi,1)&=\bmat  
         0 & 0\\0 & 2
-    \end{pmatrix}
+    \emat  
 \end{align*}
 Um das Taylor-Polynom erster Ordnung im Punkt $(\pi,1)$ zu berechnen, setzen wir zunächst:
 \begin{align*}
-    \begin{pmatrix}
+    \bmat  
         x \\ y
-    \end{pmatrix}&=\begin{pmatrix}
+    \emat  &=\bmat  
     \pi \\ 1
-    \end{pmatrix}+\begin{pmatrix}
+    \emat  +\bmat  
     d_1 \\ d_2
-    \end{pmatrix}
+    \emat  
 \end{align*}
-Dieser Schritt ist nicht unbedingt nötig, sie können auch stattdessen auf der rechten Seite mit dem Vektor $\begin{pmatrix}
+Dieser Schritt ist nicht unbedingt nötig, sie können auch stattdessen auf der rechten Seite mit dem Vektor $\bmat  
         x \\ y
-    \end{pmatrix}-\begin{pmatrix}
+    \emat  -\bmat  
     \pi \\ 1
-    \end{pmatrix}$ rechnen, das ist dann von der Notation etwas länger. 
+    \emat  $ rechnen, das ist dann von der Notation etwas länger. 
     
 Damit können wir das Taylor-Polynom erster Ordnung wie folgt schreiben:
 \begin{align*}
-        T_1\left( \begin{pmatrix}
+        T_1\left( \bmat  
             \pi \\ 1
-        \end{pmatrix}+\begin{pmatrix}
+        \emat  +\bmat  
         d_1 \\ d_2
-    \end{pmatrix} \right)&=f(\pi,1)+\nabla f(\pi,1)\begin{pmatrix}
+    \emat   \right)&=f(\pi,1)+\nabla f(\pi,1)\bmat  
     d_1 \\ d_2
-    \end{pmatrix}\\&=1+(-1, 2)\begin{pmatrix}
+    \emat  \\&=1+(-1, 2)\bmat  
     d_1 \\ d_2
-    \end{pmatrix}=1-d_1+d_2=y-x+\pi
+    \emat  =1-d_1+d_2=y-x+\pi
 \end{align*}
 Das Taylor-Polynom zweiter Ordnung im Punkt $(\pi,1)$ lautet:
 \begin{align*}
-    T_2\left( \begin{pmatrix}
+    T_2\left( \bmat  
         \pi \\ 1
-    \end{pmatrix}+\begin{pmatrix}
+    \emat  +\bmat  
         d_1 \\ d_2
-    \end{pmatrix} \right)&=f(\pi,1)+\nabla f(\pi,1)\begin{pmatrix}
+    \emat   \right)&=f(\pi,1)+\nabla f(\pi,1)\bmat  
         d_1 \\ d_2
-    \end{pmatrix}+\frac{1}{2}\begin{pmatrix}
+    \emat  +\frac{1}{2}\bmat  
     d_1 & d_2
-    \end{pmatrix}\nabla^2 f(\pi,1)\begin{pmatrix}
+    \emat  \nabla^2 f(\pi,1)\bmat  
         d_1 \\ d_2
-    \end{pmatrix}\\&=1+(-1, 2)\begin{pmatrix}
+    \emat  \\&=1+(-1, 2)\bmat  
         d_1 \\ d_2
-    \end{pmatrix}+\frac{1}{2}\begin{pmatrix}
+    \emat  +\frac{1}{2}\bmat  
     d_1 & d_2
-    \end{pmatrix}\begin{pmatrix}
+    \emat  \bmat  
     0 & 0\\0 & 2
-    \end{pmatrix}\begin{pmatrix}
+    \emat  \bmat  
     d_1 \\ d_2
-    \end{pmatrix}\\
+    \emat  \\
     &=1-d_1+2d_2+2d_2^2=1-x+\pi+2y^2-2y
 \end{align*}
 ````
