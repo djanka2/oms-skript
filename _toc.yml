@@ -8,8 +8,8 @@ defaults:
 parts:
   - caption: Nichtlineare Optimierung
     chapters:
-    - file: 02_Multivariate_Analysis
-    - file: 02a_Theoretische_Grundlagen
+    - file: 01_Multivariate_Analysis
+    - file: 02_Theoretische_Grundlagen
     - file: 03_Gradientenverfahren
     - file: 04_Verfahren_zweiter_Ordnung
     - file: 05_Automatische_Differentiation

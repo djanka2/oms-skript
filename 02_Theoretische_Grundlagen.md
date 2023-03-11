@@ -258,19 +258,19 @@ Zusammengefasst: eine Funktion ist "in der Nähe von $x_0$" ungefähr gleich ihr
 \exp⁡(−1/x^2),\quad &\text{falls } x\neq 0,\\ 0\quad &\text{falls } x=0\end{cases}$. Die Taylorreihe konvergiert auf keiner Umgebung von $x_0=0$ gegen die Funktion, siehe [hier](https://de.wikipedia.org/wiki/Taylorreihe#Eine_Funktion,_die_in_einer_Entwicklungsstelle_nicht_in_eine_Taylorreihe_entwickelt_werden_kann). 
 
 ### Kritische Punkte und Taylorentwicklung
-Um zu verstehen, warum die hinreichende Bedingung an die zweite Ableitung gilt, betrachten wir die Taylorentwicklung um einen kritischen Punkt $x_0$. Wir schreiben das Argument $x$ als $x=x_0+\delta$, also als Abstand zum Entwicklungspunkt. Das ist eine übliche Schreibweise, wenn man mit Taylorpolynomen rechnet, denn dadurch kann man den Ausdruck $(x-x_0)$ durch $x-x_0=(x_0+\delta)-x_0=\delta$ ersetzen, wodurch die Formel etwas übersichtlicher wird.
+Um zu verstehen, warum die hinreichende Bedingung an die zweite Ableitung gilt, betrachten wir die Taylorentwicklung um einen kritischen Punkt $x_0$. Wir schreiben das Argument $x$ als $x=x_0+d$, also als Abstand zum Entwicklungspunkt. Das ist eine übliche Schreibweise, wenn man mit Taylorpolynomen rechnet, denn dadurch kann man den Ausdruck $(x-x_0)$ durch $x-x_0=(x_0+d)-x_0=d$ ersetzen, wodurch die Formel etwas übersichtlicher wird.
 
 Mittels Taylorapproximation ist also der Funktionswert in der Umgebung eines kritischen Punktes $x_0$:
 \begin{align*}
-f(x_0+\delta)\approx f(x_0)+\underbrace{f'(x_0)}_{=0}\delta+\frac{f''(x_0)}{2}\delta^2+\frac{f'''(x_0)}{6}\delta^3
+f(x_0+d)\approx f(x_0)+\underbrace{f'(x_0)}_{=0}d+\frac{f''(x_0)}{2}d^2+\frac{f'''(x_0)}{6}d^3
 \end{align*}
-$\delta$ kann hier positiv oder negativ sein, aber $\delta^2$ ist immer positiv. Wenn nun $\frac{f''(x_0)}{2}>0$ (hinreichende Bedingung für ein Minimum aus {prf:ref}`thm:OB1`), so ist $f(x_0+\delta)>f(x_0)$, wenn $\delta$ klein genug ist, also der Auswertungspunkt $x$ nahe genug bei $x_0$ ist. Warum? Weil für kleine $\delta$ der nachfolgende Terme mit $\delta^3$ *noch* kleiner wird. Man kann immer erreichen, dass der Term \frac{f''(x_0)}{2}\delta^2 größer ist als der nachfolgende Term mit $\delta^3$. Das gilt erst recht, wenn man weitere Terme höherer Ordnung dazu nimmt, also $\delta^4$, $\delta^5$, usw. 
+$d$ kann hier positiv oder negativ sein, aber $d^2$ ist immer positiv. Wenn nun $\frac{f''(x_0)}{2}>0$ (hinreichende Bedingung für ein Minimum aus {prf:ref}`thm:OB1`), so ist $f(x_0+d)>f(x_0)$, wenn $d$ klein genug ist, also der Auswertungspunkt $x$ nahe genug bei $x_0$ ist. Warum? Weil für kleine $d$ der nachfolgende Terme mit $d^3$ *noch* kleiner wird. Man kann immer erreichen, dass der Term \frac{f''(x_0)}{2}d^2 größer ist als der nachfolgende Term mit $d^3$. Das gilt erst recht, wenn man weitere Terme höherer Ordnung dazu nimmt, also $d^4$, $d^5$, usw. 
 
-Die Aussage $f(x_0+\delta)>f(x_0)$ für alle Punkte in einer Umgebung von $x_0$ (also alle "ausreichend kleinen Werte" von $\delta$) bedeutet aber gerade, dass $f(x_0)$ ein lokales Minimum ist, nach {prf:ref}`def:minmax`. 
+Die Aussage $f(x_0+d)>f(x_0)$ für alle Punkte in einer Umgebung von $x_0$ (also alle "ausreichend kleinen Werte" von $d$) bedeutet aber gerade, dass $f(x_0)$ ein lokales Minimum ist, nach {prf:ref}`def:minmax`. 
 
 Diese Untersuchung mit Hilfe der Taylorentwicklung zeigt, warum die hinreichende Bedingung gültig ist. Für lokale Maxima gilt das analog, wenn man in der Argumentation $\frac{f''(x_0)}{2}>0$ durch $\frac{f''(x_0)}{2}<0$ ersetzt.
 
-Wenn die zweite Ableitung weder positiv noch negativ ist, also $f''(x_0)=0$, so müssen Terme höherer Ordnung betrachtet werden, um herauszufinden, ob ein Minimum oder ein Maximum vorliegt. Ist $f'''(x_0)\neq 0$, so liegt ein Sattelpunkt vor, da das Vorzeichen von $\frac{f'''(x_0)}{6}\delta^3$ wechselt, je nachdem ob $\delta$ positiv oder negativ ist. Ist $f'''(x_0)=0$, so kann man mit Hilfe des Vorzeichens von $f''''(x_0)$ entscheiden ob ein Minimum ($f''''(x_0)>0$) oder Maximum ($f''''(x_0)<0$) vorliegt.
+Wenn die zweite Ableitung weder positiv noch negativ ist, also $f''(x_0)=0$, so müssen Terme höherer Ordnung betrachtet werden, um herauszufinden, ob ein Minimum oder ein Maximum vorliegt. Ist $f'''(x_0)\neq 0$, so liegt ein Sattelpunkt vor, da das Vorzeichen von $\frac{f'''(x_0)}{6}d^3$ wechselt, je nachdem ob $d$ positiv oder negativ ist. Ist $f'''(x_0)=0$, so kann man mit Hilfe des Vorzeichens von $f''''(x_0)$ entscheiden ob ein Minimum ($f''''(x_0)>0$) oder Maximum ($f''''(x_0)<0$) vorliegt.
 
 
 ## Gradientenabstieg für univariate Funktionen
@@ -804,19 +804,19 @@ Beispiele:
 ### Taylor-Formel für multivariate Funktionen
 Auch von der Taylorformel gibt es eine mehrdimensionale Version. Wir schauen uns das Taylor-Polynom zweiter Ordnung an. In der Nähe eines Punktes $\v x_0$ gilt für eine stetig partiell differenzierbare Funktion $f:\R^n\rightarrow \R$:
 \begin{align*}
-f(\v x)=f(\v x_0 + \v \delta)\approx \underbrace{f(\v x_0)}_{\text{Skalar}} + \underbrace{\nabla f(\v x_0)}_{\text{Vektor}}\v \delta + \frac{1}{2}\v \delta^T\underbrace{\nabla^2 f(\v x_0)}_{\text{Matrix}}\v \delta
+f(\v x)=f(\v x_0 + \v d)\approx \underbrace{f(\v x_0)}_{\text{Skalar}} + \underbrace{\nabla f(\v x_0)}_{\text{Vektor}}\v d + \frac{1}{2}\v d^T\underbrace{\nabla^2 f(\v x_0)}_{\text{Matrix}}\v d
 \end{align*}
 Zum Vergleich noch einmal das Taylorpolynom zweiter Ordnung für eine *univariate* Funktion $g:\R\rightarrow \R$:
 \begin{align*}
-g(x)=g(x_0 + \delta)\approx \underbrace{g(x_0)}_{\text{Skalar}} + \underbrace{g'(x_0)}_{\text{Skalar}}\delta + \frac{1}{2}\underbrace{g''(x_0)}_{\text{Skalar}}\delta
+g(x)=g(x_0 + d)\approx \underbrace{g(x_0)}_{\text{Skalar}} + \underbrace{g'(x_0)}_{\text{Skalar}}d + \frac{1}{2}\underbrace{g''(x_0)}_{\text{Skalar}}d
 \end{align*}
 Man sieht bei der mehrdimensionalen Taylorformel, wie die Ableitungen höherer Ordnung jeweils eine "Dimension" dazugewinnen (Skalar -> Vektor -> Matrix). Die Objekte mit drei und mehr Indizes (also ab der dritten Ableitung) nennt man *Tensoren*. Das Ganze kann man sich etwa so vorstellen:
 ```{figure} ./bilder/linear_dogs.jpg
 [Quelle: Karl Stratos](https://karlstratos.com/#drawings)
 ```
 
-Diese Tensoren bilden mehrere Vektoren (im Falle der Taylorformel sind das die $\v \delta$) auf einen Skalar ab. Für die erste und zweite Ableitung wird das durch die übliche Matrix-Vektor Multiplikation bewerkstelligt.
-Ab der dritten Ableitung müsste man drei Vektoren $\v \delta$ geeignet an den Tensor "dranmultiplizieren" um ein Skalar als Funktionswert zu erhalten (man müsste natürlich noch definieren, wie das genau funktioniert). Wir bleiben hier bei Taylor-Polynomen zweiter Ordnung, in denen Gradient und Hessematrix vorkommen.
+Diese Tensoren bilden mehrere Vektoren (im Falle der Taylorformel sind das die $\v d$) auf einen Skalar ab. Für die erste und zweite Ableitung wird das durch die übliche Matrix-Vektor Multiplikation bewerkstelligt.
+Ab der dritten Ableitung müsste man drei Vektoren $\v d$ geeignet an den Tensor "dranmultiplizieren" um ein Skalar als Funktionswert zu erhalten (man müsste natürlich noch definieren, wie das genau funktioniert). Wir bleiben hier bei Taylor-Polynomen zweiter Ordnung, in denen Gradient und Hessematrix vorkommen.
 
 ````{prf:example}
 Wir approximieren die Funktion 
@@ -848,7 +848,7 @@ Um das Taylor-Polynom erster Ordnung im Punkt $(\pi,1)$ zu berechnen, setzen wir
     \end{pmatrix}&=\begin{pmatrix}
     \pi \\ 1
     \end{pmatrix}+\begin{pmatrix}
-    \delta_1 \\ \delta_2
+    d_1 \\ d_2
     \end{pmatrix}
 \end{align*}
 Dieser Schritt ist nicht unbedingt nötig, sie können auch stattdessen auf der rechten Seite mit dem Vektor $\begin{pmatrix}
@@ -862,12 +862,12 @@ Damit können wir das Taylor-Polynom erster Ordnung wie folgt schreiben:
         T_1\left( \begin{pmatrix}
             \pi \\ 1
         \end{pmatrix}+\begin{pmatrix}
-        \delta_1 \\ \delta_2
+        d_1 \\ d_2
     \end{pmatrix} \right)&=f(\pi,1)+\nabla f(\pi,1)\begin{pmatrix}
-    \delta_1 \\ \delta_2
+    d_1 \\ d_2
     \end{pmatrix}\\&=1+(-1, 2)\begin{pmatrix}
-    \delta_1 \\ \delta_2
-    \end{pmatrix}=1-\delta_1+\delta_2=y-x+\pi
+    d_1 \\ d_2
+    \end{pmatrix}=1-d_1+d_2=y-x+\pi
 \end{align*}
 Das Taylor-Polynom zweiter Ordnung im Punkt $(\pi,1)$ lautet:
 \begin{align*}
@@ -901,7 +901,7 @@ Noch mehr als im eindimensionalen wirken die Taylor-Polynome auf den ersten Blic
 
 Schauen wir uns noch einmal ein allgemeines Taylor-Polynom erster Ordnung an:
 \begin{align*}
-f(\v x)=f(\v x_0 + \v \delta)\approx f(\v x_0) + \nabla f(\v x_0)\v \delta
+f(\v x)=f(\v x_0 + \v d)\approx f(\v x_0) + \nabla f(\v x_0)\v d
 \end{align*}
 
 Die Approximationseigenschaft, also die Tatsache, dass das Taylorpolynom erster Ordnung eine bessere Approximation an die Funktion ist, je näher man das Polynom am Entwicklungspunkt betrachtet, ist ein Spezialfall des Satzes von Taylor für mehrdimensionale Funktionen:
@@ -938,7 +938,7 @@ Den Vektor $\v g\in\R^n$ nennen wir die *Ableitung* von $f$ im Punkt $x_0$.
 
 Man führt die Ableitung also nicht mehr über Differenzenquotienten ein, sondern *definiert* einfach "Differenzierbarkeit = linear approximierbar". 
 
-Die totale Differenzierbarkeit behebt auch den "Schönheitsfehler" der partiellen Differenzierbarkeit, dass partiell differenzierbare Funktionen nicht immer stetig sind (siehe {prf-ref}`ex:partiell-unstetig`). Total differenzierbare Funktionen sind nämlich immer stetig. Es gilt:
+Die totale Differenzierbarkeit behebt auch den "Schönheitsfehler" der partiellen Differenzierbarkeit, dass partiell differenzierbare Funktionen nicht immer stetig sind (siehe {prf:ref}`ex:partiell-unstetig`). Total differenzierbare Funktionen sind nämlich immer stetig. Es gilt:
 \begin{align*}
 \text{Stetig partiell differenzierbar} \Rightarrow \text{total differenzierbar} \Rightarrow \text{stetig}
 \end{align*}

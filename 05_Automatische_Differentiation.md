@@ -1,7 +1,6 @@
 (sec:ad)=
 # Automatische Differentiation
 
-
-```python
-
-```
+## Berechnungsgraphen
+## Kettenregel und Berechnunsgraphen
+## Backpropagation
