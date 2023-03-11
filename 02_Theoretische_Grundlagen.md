@@ -288,8 +288,8 @@ nach $x$ auflösen. Dies ist nicht möglich (versuchen Sie's mal...).
 
 Es gibt iterative Verfahren, mit denen man die Gleichung approximativ lösen kann, z.B. das Newtonverfahren, das wir uns in {ref}`sec:newton` genauer anschauen. Allerdings besteht das Problem, dass man möglicherweise ein Maximum oder einen Sattelpunkt statt eines Minimums findet.
 
-Wir bedienen uns stattdessen sogenannter *Abstiegsverfahren*: Man näher sich einem Minimum an, indem man eine Folge von Punkten konstruiert, bei denen man sicherstellt, dass der Funktionswert immer kleiner wird. Der prototypische Vertreter dieser Abstiegsverfahren ist das *Gradientenverfahren*, auch genannt Verfahren des steilsten Abstiegs/steepest descen oder Gradientenabstieg/gradient descent.
-Die Grundform dieses Algorithmus, der uns dieses Semester an vielen Stellen begegnen wird, ist wie folgt.
+Wir bedienen uns stattdessen sogenannter *Abstiegsverfahren*: Man näher sich einem Minimum an, indem man eine Folge von Punkten konstruiert, bei denen man sicherstellt, dass der Funktionswert immer kleiner wird. Der prototypische Vertreter dieser Abstiegsverfahren ist der *Gradientenabstieg*, auch genannt Verfahren des steilsten Abstiegs/steepest descen oder gradient descent.
+Wir schauen uns zunächst die Grundform dieses Algorithmus an, der uns dieses Semester an vielen Stellen begegnen wird. Zur Notation: hier und im Rest der Vorlesung indizieren wir die Iteration mit einem Superskript in eckigen Klammern: $^{[k]}$. Jede Größe (Skalar, Vektor, Matrix), an der Sie ein $^{[k]}$ sehen, kann sich von Iteration zu Iteration ändern. $x^{[k]}$ bezeichnet also den Wert $x$ während der Iteration $k$.
 
 ````{prf:algorithm} Gradientenabstieg für univariate Funktionen
 Gegeben: 
@@ -388,7 +388,7 @@ In der Tat kann es schon bei einfachen Problemen vorkommen, dass der Gradientena
 ```{figure} ./bilder/gd_beispiel_divergenz.png
 :width: 400px
 ```
-Die erste Ableitung ist $f'(x)=4x^3-32$ und das globale Minimum wird bei $x=2$ angenommen. Wir wählen als Startwert $x^{[0]}=3$ und als Schrittweite wieder  $\alpha^{[k]}=0.1$. Die Iterationen des Gradientenverfahrens sind dann wie folgt (der Code ist der gleiche wie oben):
+Die erste Ableitung ist $f'(x)=4x^3-32$ und das globale Minimum wird bei $x=2$ angenommen. Wir wählen als Startwert $x^{[0]}=3$ und als Schrittweite wieder  $\alpha^{[k]}=0.1$. Die Iterationen des Gradientenabstiegs sind dann wie folgt (der Code ist der gleiche wie oben):
 ```{code-cell} ipython3
 :tags: [hide-input]
 import numpy as np
@@ -460,7 +460,7 @@ f(x^{[k+1]})=f(x^{[k]}+d^{[k]})&\overset{\color{red}{(1)}}{\approx} f(x^{[k]})+d
 \end{align*}
 Dieser Schluss gilt allerdings nur, wenn die Approximation $\color{red}{(1)}$ nicht zu ungenau ist (d.h. die Terme aus der Taylorreihe, die man weggelassen hat, fallen nicht zu sehr ins Gewicht). Man kann das theoretisch garantieren, indem man $\alpha^{[k]}$ klein genug wählt.
 Das Dilemma, vor dem man bei der Wahl der Schrittweite steht ist folgendes:
-- Wenn die Schrittweite $\alpha^{[k]}$ zu klein ist, ist der Fortschritt in Richtung Lösung gering. Das Gradientenverfahren braucht sehr viele Schritte.
+- Wenn die Schrittweite $\alpha^{[k]}$ zu klein ist, ist der Fortschritt in Richtung Lösung gering. Der Gradientenabstieg braucht sehr viele Schritte.
 - Wenn die Schrittweite $\alpha^{[k]}$ zu groß ist, ist kein Abstieg mehr garantiert, da die Approximation durch ein Taylorpolynom erster Ordnung (nichts anderes ist der Gradientenabstieg) zu ungenau ist. In der Folge kann das Verfahren divergieren.
 
 ### Zusammenfassung
@@ -947,9 +947,9 @@ Die totale Differenzierbarkeit behebt auch den "Schönheitsfehler" der partielle
 Die Komponenten der totalen Ableitungen (wenn sie denn existieren) berechnet man ganz genauso wie die partiellen Ableitungen. Das ist kein fundamental anderer Differenzierbarkeitsbegriff, er ist nur ein wenig strikter und wird anders eingeführt.
 ````
 
-
+(sec:gd-preview)=
 ## Preview: Gradientenabstieg für multivariate Funktionen
-Wir haben nun alles beisammen, um das Gradientenverfahren analog zum eindimensionalen Fall beschreiben zu können. Wir müssen lediglich die Ableitung $f'$ durch ihre mehrdimensionale Verallgemeinerung, den Gradienten $\nabla f$, ersetzen, außerdem werden aus Zahlen $x$ Vektoren $\v x$.
+Wir haben nun alles beisammen, um den Gradientenabstieg analog zum eindimensionalen Fall beschreiben zu können. Wir müssen lediglich die Ableitung $f'$ durch ihre mehrdimensionale Verallgemeinerung, den Gradienten $\nabla f$, ersetzen, außerdem werden aus Zahlen $x$ Vektoren $\v x$.
 
 Die Grundform des Verfahrens ist wie folgt:
 ````{prf:algorithm} Gradientenabstieg für univariate Funktionen

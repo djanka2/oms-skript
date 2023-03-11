@@ -858,7 +858,7 @@ Die Richtungsableitung kann man natürlich auch für Funktionen $f:\R^n\rightarr
                                 a_1n\derv{f_m}{x_1}+ \cdots + a_n \derv{f_m}{x_n}\end{pmatrix}\in\R^m
 \end{align*}
 
-
+(sec:interpretation)=
 ## Zusammenfassung: Interpretation des Gradienten als Änderungsrate einer Funktion
 Wir haben in diesem Kapitel den Begriff der multivariaten Funktion und der partiellen Ableitung eingeführt. Als Anschauung diente uns dabei stets der Begriff der *Änderung* (genauer: der Änderungsrate) einer Funktion, die durch die partiellen Ableitung ausgedrückt werden. 
 Wenn man sich Gradienten $\nabla f$ einer Funktion $f:\R^n\rightarrow \R$ in einem beliebigen Punkt $x_0$ vorstellen möchte, so haben wir folgende hilfreiche Anschauungen diskutiert:

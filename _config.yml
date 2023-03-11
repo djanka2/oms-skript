@@ -59,6 +59,8 @@ sphinx:
           "dervquad": ["\\frac{\\partial^2 #1}{\\partial #2^2}", 2]
           "dervzwei": ["\\frac{\\partial^2 #1}{\\partial {#2} \\partial {#3}}", 3]
           "v": ["\\mathbf{#1}", 1]
+          "m": ["\\mathbf{#1}", 1]
+          "hyper": ["{\\color{Bleu de France}{#1}}", 1]
           "initial": "\\DeclareMathOperator{\\initial}{initial}"
           "reduced": "\\DeclareMathOperator{\\reduced}{reduced}"
           "lazy": "\\DeclareMathOperator{\\lazy}{lazy}"
