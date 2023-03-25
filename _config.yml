@@ -54,6 +54,8 @@ sphinx:
           "floor": ["\\lfloor#1\\rfloor", 1]
           "bmat" : ["\\begin{pmatrix}"]
           "emat" : ["\\end{pmatrix}"]
+          "bmats" : ["\\left(\\begin{smallmatrix}"]
+          "emats" : ["\\end{smallmatrix}\\right)"]
           "scikit": ["\\texttt{scikit-learn}"]
           "derv": ["\\frac{\\partial #1}{\\partial #2}", 2]
           "dervquad": ["\\frac{\\partial^2 #1}{\\partial #2^2}", 2]

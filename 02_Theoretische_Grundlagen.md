@@ -342,10 +342,12 @@ In diesem Beispiel ist man nach $15$ Iterationen schon recht nah an der Lösung 
 
 Beobachtung: Wenn wir die Schrittweite vergrößern, machen wir schneller Fortschritte in Richtung der Lösung. Nach 9 Iterationen beträgt die Differenz zur (normalerweise unbekannten) optimalen Lösung nur noch $0.001$.
 
-In folgendem Code ist ein einfaches Gradientenverfahren implementiert, das ein Minimum der Funktion $f(x)=x^2\ln(x)+x-1$ sucht. In jeder Iteration werden $x^{[k]},f(x^{[k]})$ und $f'(x^{[k]})$ ausgegeben.
+In folgendem Code ist ein einfaches Gradientenverfahren implementiert, das ein Minimum der Funktion $f(x)=x^2\ln(x)+x-1$ sucht. In jeder Iteration werden $x^{[k]},f(x^{[k]})$ und $f'(x^{[k]})$ ausgegeben. Des weiteren wird die Historie der $x^{[k]}$-Werte zurückgegeben und visualisiert.
  
 ```{code-cell} ipython3
 import numpy as np
+import seaborn as sns
+sns.set_style("darkgrid")
 
 def f(x):
     """ Function to minimize """
@@ -359,14 +361,21 @@ def gd(func, derv, alpha, x0, n_steps):
     """ Perform n_steps iterations of gradient descent with steplength alpha and print iterates """
     print(" k     x           f(x)        f'(x)")
     print(f"{0:2} {x0:10.4f}, {func(x0):10.4f}, {derv(x0):10.4f}")
-
+    x_history = [x0]
     x = x0
     for k in range(n_steps):
         dx = derv(x)
         x = x - alpha * dx
         print(f"{k+1:2} {x:10.4f}, {func(x):10.4f}, {dx:10.4f}")
+        x_history.append(x)
 
-gd(func=f, derv=df, alpha=0.1, x0=2.0, n_steps=15)
+    return x_history
+
+x_history = gd(func=f, derv=df, alpha=0.1, x0=2.0, n_steps=15)
+
+x = np.linspace(0.01,2,100)
+sns.lineplot(x=x,y=f(x))
+sns.lineplot(x=x_history, y=f(x_history), marker="o", sort=False)
 ```
 
 ### Abbruchbedingungen
@@ -392,6 +401,8 @@ Die erste Ableitung ist $f'(x)=4x^3-32$ und das globale Minimum wird bei $x=2$ a
 ```{code-cell} ipython3
 :tags: [hide-input]
 import numpy as np
+import seaborn as sns
+sns.set_style("darkgrid")
 
 def f(x):
     """ Function to minimize """
@@ -405,14 +416,21 @@ def gd(func, derv, alpha, x0, n_steps):
     """ Perform n_steps iterations of gradient descent with steplength alpha and print iterates """
     print(" k     x           f(x)        f'(x)")
     print(f"{0:2} {x0:10.4f}, {func(x0):10.4f}, {derv(x0):10.4f}")
-
+    x_history = [x0]
     x = x0
     for k in range(n_steps):
         dx = derv(x)
         x = x - alpha * dx
         print(f"{k+1:2} {x:10.4f}, {func(x):10.4f}, {dx:10.4f}")
+        x_history.append(x)
 
-gd(func=f, derv=df, alpha=0.1, x0=3.0, n_steps=15)
+    return x_history
+
+x_history = gd(func=f, derv=df, alpha=0.1, x0=3.0, n_steps=15)
+
+x = np.linspace(-2,4,100)
+sns.lineplot(x=x,y=f(x))
+sns.lineplot(x=x_history, y=f(x_history), marker="o", sort=False)
 ```
 
 Was ist hier passiert? Die Iterierten $x^{[k]}$ entfernen sich rasend schnell von der Lösung, nach wenigen Iterationen ist der Funktionswert zu groß und kann nicht mehr angezeigt werden.
@@ -421,6 +439,8 @@ Dieses Verhalten nennt man *Divergenz*. Verantwortlich dafür normalerweise ein 
 ```{code-cell} ipython3
 :tags: [hide-input]
 import numpy as np
+import seaborn as sns
+sns.set_style("darkgrid")
 
 def f(x):
     """ Function to minimize """
@@ -434,14 +454,21 @@ def gd(func, derv, alpha, x0, n_steps):
     """ Perform n_steps iterations of gradient descent with steplength alpha and print iterates """
     print(" k     x           f(x)        f'(x)")
     print(f"{0:2} {x0:10.4f}, {func(x0):10.4f}, {derv(x0):10.4f}")
-
+    x_history = [x0]
     x = x0
     for k in range(n_steps):
         dx = derv(x)
         x = x - alpha * dx
         print(f"{k+1:2} {x:10.4f}, {func(x):10.4f}, {dx:10.4f}")
+        x_history.append(x)
 
-gd(func=f, derv=df, alpha=0.01, x0=3.0, n_steps=15)
+    return x_history
+
+x_history = gd(func=f, derv=df, alpha=0.01, x0=3.0, n_steps=15)
+
+x = np.linspace(-2,4,100)
+sns.lineplot(x=x,y=f(x))
+sns.lineplot(x=x_history, y=f(x_history), marker="o", sort=False)
 ```
 
 ### Warum funktioniert der Gradientenabstieg?
@@ -917,7 +944,7 @@ und
 ````
 Was sagt dieser Satz nun eigentlich aus? Er sagt aus, dass jede differenzierbare Funktion $f$, so kompliziert sie auch sein mag, sich lokal so verhält wie eine lineare Funktion. Nehmen Sie z.B. an, dass $f$ eine Verlustfunktion für ein Modell im maschinellen Lernen ist, sagen wir ein tiefes neuronales Netz. Die Funktion gibt für einen Eingabevektor von Gewichten den Verlust (Fehler) auf einem gegebenem Datensatz  zurück. Diese Funktion ist immens kompliziert. Sie können Sie weder auf ein Blatt Papier aufschreiben (das wäre viel zu lang) noch können Sie sie sinnvoll visualisieren, d.h. Sie haben keine Ahnung wie sich diese Funktion verhält. Das einzige, was sie tun können, ist, die Funktion---und ihre Ableitung!---punktweise auszuwerten, d.h. für einen bestimmten Vektor von Eingabedaten bekommen Sie einen Funktionswert und den Gradientenvektor zurückgegeben. Der Satz von Taylor sagt: Das genügt, um in einer kleinen Umgebung eine beliebig gute Approximation an $f$ zu bekommen! Die Approximation lautet: 
 \begin{align*}
-f(\v x)\approx \underbrace{f(\v x_0)}_{\text{Zahl}} + \underbrace{\nabla f(\v x_0)}_{\text{Zeilenvektor}}\overbrace{(\v x - \v x_0)}^{\text{Spaltenvektor (Argument)}}
+f(\v x)\approx \underbrace{f(\v x_0)}_{\text{Zahl}} + \underbrace{\nabla f(\v x_0)}_{\text{Zeilenvektor}}\overbrace{(\v x - \v x_0)}^{\text{Spaltenvektor}}
 \end{align*}
 
 Das ist das Wesen der Differenzierbarkeit von mehrdimensionalen Funktionen. Wir hatten die partielle Differenzierbarkeit als Verallgemeinerung der eindimensionalen Ableitung eingeführt (partielle Differenzierbarkeit = eindimensionale Ableitung für jede der Variablen). Daneben gibt es noch einen etwas stärkeren Begriff, nämlich den der *totalen* Differenzierbarkeit. Deren (mathematisch etwas unsaubere) Definition geht so:
@@ -952,7 +979,7 @@ Die Komponenten der totalen Ableitungen (wenn sie denn existieren) berechnet man
 Wir haben nun alles beisammen, um den Gradientenabstieg analog zum eindimensionalen Fall beschreiben zu können. Wir müssen lediglich die Ableitung $f'$ durch ihre mehrdimensionale Verallgemeinerung, den Gradienten $\nabla f$, ersetzen, außerdem werden aus Zahlen $x$ Vektoren $\v x$.
 
 Die Grundform des Verfahrens ist wie folgt:
-````{prf:algorithm} Gradientenabstieg für univariate Funktionen
+````{prf:algorithm} Gradientenabstieg für multivariate Funktionen
 :label: alg:gd
 Gegeben: 
 : Differenzierbare Funktion $f:\R^n\rightarrow\R$.

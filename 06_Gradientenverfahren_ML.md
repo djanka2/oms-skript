@@ -15,6 +15,8 @@ kernelspec:
 
 ## Optimierungsprobleme im maschinellen Lernen
 ## Stochastischer Gradientenabstieg
+% MLRefined A.5
 ## Gradientenverfahren revisited: Adaptive Schrittweiten
+% MLRefined A.4
 ## Backpropagation revisited: Ableitungen neuronaler Netze
 

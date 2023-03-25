@@ -9,6 +9,9 @@ kernelspec:
   language: python
   name: python3
 ---
+% # Seaborn color palette:
+% # '#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', 
+% # '#8c564b', '#e377c2', '#7f7f7f', '#bcbd22', '#17becf'
 
 (sec:gradientenverfahren)=
 # Gradientenverfahren
@@ -30,7 +33,7 @@ Die Aufgabe, globale Minima für allgemeine, nicht-konvexe Funktionen $f$ zu fin
 ## Allgemeines Framework
 Der in {ref}`sec:gd-preview` vorgestellte Gradientenabstieg ist ein Vertreter einer ganzen Familie von Gradientenverfahren. Sie folgen alle einem bestimmten Aufbau, unterscheiden sich aber in der Ausgestaltung der einzelnen Schritte. Wie zuvor bezeichnen wir mit $k$ unseren Iterationszähler und wir schreiben $^{[k]}$ an jede Größe, die sich von Iteration zu Iteration ändern kann.
 
-Bevor das allgemeine Verfahren aufschreiben, schauen wir uns zunächst noch einmal an, wie wir begründet haben, dass der Gradientenabstieg funktioniert. Wir haben das Taylor-Polynom erster Ordnung am Entwicklungspunkt $\v x^{[k]}$, der aktuellen Iterierten, aufgestellt (man sagt auch: die Funktion $f$ *linearisiert*) und damit den Funktionswert an der neuen Iterierten angenähert.
+Bevor das allgemeine Verfahren aufschreiben, schauen wir uns zunächst noch einmal die Begründung, warum der Gradientenabstieg funktioniert, an. Wir haben das Taylor-Polynom erster Ordnung am Entwicklungspunkt $\v x^{[k]}$, der aktuellen Iterierten, aufgestellt (man sagt auch: die Funktion $f$ *linearisiert*) und damit den Funktionswert an der neuen Iterierten angenähert.
 
 \begin{align*}
 f(\v x^{[k+1]})=f(\v x^{[k]}+\v d^{[k]})&\approx f(\v x^{[k]})+\nabla f(\v x^{[k]})\v d^{[k]}\\
@@ -64,7 +67,364 @@ Für $k=0,1,2,\dots$:
 3. Bestimme **Schrittweite** $\alpha^{[k]}$.
 4. Berechne neue Iterierte $\v x^{[k+1]}=\v x^{[k]}+\alpha^{[k]}\v d^{[k]}$.
 ````
-Es gibt viele Abstiegsverfahren, die sich darin unterscheiden, wie die Abstiegsrichtung $\v d$ und die Schrittweite $\alpha$ bestimmt werden. Außerdem gibt es unterschiedliche Abbruchbedingungen. Wir schauen uns diese Aspekte in den folgenden Abschnitten an.
+
+
+````{important}
+Neben dem Gradientenabstieg gibt es viele weitere Abstiegsverfahren, die nach einem ähnlichen Prinzip funktionieren. Sie unterscheiden sich im wesentlichen in folgenden beiden Punkten:
+1. Wie wird die Abstiegsrichtung $\v d$ bestimmt?
+2. Wie wird die Schrittweite $\alpha$ bestimmt?
+````
+Außerdem gibt es unterschiedliche Abbruchbedingungen, die das Verhalten der Verfahren beeinflussen. Wir schauen uns diese Aspekte in den folgenden Abschnitten an. Zunächst jedoch schauen wir uns das Verfahren in Aktion an.
+
+### Implementierung und Visualisierung des Verfahrens
+Eine einfache Implementierung des Verfahrens (hier mit fest gewählter Schrittweite) in Python sieht so aus:
+```{code-cell} ipython3
+import numpy as np
+
+def f(x):
+    """ Function to minimize """
+    return 4*x[0]**2 + x[1]**2
+    
+def df(x):
+    """ Derivative of the function to minimize """
+    return np.array([8*x[0], 2*x[1]])
+
+def gd(func, derv, alpha, x0, n_steps):
+    """ Perform n_steps iterations of gradient descent with steplength alpha and print iterates """
+    x_history = [x0]
+    x = x0
+    for k in range(n_steps):
+        dx = derv(x)
+        x = x - alpha * dx
+        x_history.append(x)
+
+    return np.array(x_history)
+
+x0 = np.array([-1,1])
+x_history = gd(func=f, derv=df, alpha=0.01, x0=x0, n_steps=30)
+```
+
+Das Gradientenverfahren in Aktion: die Iterierten $x^{[k]}$, die das Gradientenverfahren (hier für die Funktion $f(x,y)=4x^2+y^2$) erzeugt, sind eine Folge von Vektoren. Visualisieren kann man das Ganze für Funktionen zweier Variablen wie folgt:
+```{code-cell} ipython3
+:tags: [hide-input]
+import numpy as np
+import plotly.graph_objects as go
+
+def plot_iterates(iterates, func):
+    """Plot objective function func as contour plot and visualize iterates"""
+    iterates_T = iterates.T
+    x1_min = min(1,np.min(iterates_T[0]))-0.1
+    x1_max = max(1,np.max(iterates_T[0]))+0.1
+    x2_min = min(1,np.min(iterates_T[1]))-0.1
+    x2_max = max(1,np.max(iterates_T[1]))+0.1
+
+    x1_range = np.linspace(x1_min, x1_max, 100)
+    x2_range = np.linspace(x2_min, x2_max, 100)
+    A = np.meshgrid(x1_range, x2_range)
+    Z = func(A)
+
+    n_iter = len(iterates_T[1])
+    fig = go.Figure(data=[go.Contour(z=Z, x=x1_range, y=x2_range, 
+                                     colorscale="Blues",
+                                     contours=dict(start=0,
+                                                   end=5,
+                                                   size=0.2,
+                                                    ))])
+
+    fig.add_scatter(x=iterates_T[0], y=iterates_T[1], 
+                    mode='lines+markers', name='iterates',
+                    marker=dict(color=np.arange(n_iter), cmin=0, cmax=n_iter, size=3, colorbar=dict(title="k", x=1.15), 
+                    colorscale="Oranges"),
+                    line=dict(color="grey")
+                   )
+
+    fig.show()
+
+
+def f(x):
+    """ Function to minimize """
+    return 4*x[0]**2 + x[1]**2
+    
+def df(x):
+    """ Derivative of the function to minimize """
+    return np.array([8*x[0], 2*x[1]])
+
+def gd(func, derv, alpha, x0, n_steps):
+    """ Perform n_steps iterations of gradient descent with steplength alpha and print iterates """
+    x_history = [x0]
+    x = x0
+    for k in range(n_steps):
+        dx = derv(x)
+        x = x - alpha * dx
+        x_history.append(x)
+
+    return np.array(x_history)
+
+x0 = np.array([-1,1])
+x_history = gd(func=f, derv=df, alpha=0.01, x0=x0, n_steps=30)
+plot_iterates(x_history, f)
+```
+
+
+## Wahl der Schrittweite 
+In diesem Abschnitt schauen wir uns verschiedene Strategien an, die Schrittweite in jeder Iteration $k$, $\alpha^{[k]}$, zu wählen. Dazu nehmen wir an, wir hätten eine Abstiegsrichtung $\v d^{[k]}$ gefunden, also eine Richtung, für die gilt $ \nabla f(\v x^{[k]})\v d^{[k]}<0$. Das kann, muss aber nicht, der negative Gradient sein, also $\v d^{[k]}=-\nabla f(\v x^{[k]})$. Wir werden später noch andere Möglichkeiten kennenlernen.
+
+Zunächst schauen wir uns das grundsätzliche Verhalten bei unterschiedlichen Schrittweiten anhand eines simplen Beispiels an. Wir minimieren die Funktion $f(x)=x^2$ mittels Gradientenabstieg. Der folgende Plot zeigt die ersten 15 Iterationen für vier Werte von $\alpha$, nämlich $\alpha\in\{0.01,0.1,0.9,1.1\}$.
+```{code-cell} ipython3
+:tags: [hide-input]
+import numpy as np
+# Seaborn color palette:
+# '#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', 
+# '#8c564b', '#e377c2', '#7f7f7f', '#bcbd22', '#17becf'
+import plotly.express as px
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+
+def f(x):
+    """ Function to minimize """
+    return x**2
+
+def df(x):
+    """ Derivative of the function to minimize """
+    return 2*x
+
+def gd(func, derv, alpha, x0, n_steps):
+    """ Perform n_steps iterations of gradient descent with steplength alpha and return iterates """
+    x_history = [x0]
+    x = x0
+    for k in range(n_steps):
+        dx = derv(x)
+        x = x - alpha * dx
+        x_history.append(x)
+
+    return np.array(x_history)
+
+x_history1 = gd(func=f, derv=df, alpha=0.01, x0=3.0, n_steps=15)
+x_history2 = gd(func=f, derv=df, alpha=0.1, x0=3.0, n_steps=15)
+x_history3 = gd(func=f, derv=df, alpha=0.9, x0=3.0, n_steps=15)
+x_history4 = gd(func=f, derv=df, alpha=1.1, x0=3.0, n_steps=15)
+
+x = np.linspace(-4,4,100)
+
+fig = make_subplots(rows=2, cols=2)
+fig.add_trace(go.Scatter(x=x, y=f(x), name="f(x)=x²", showlegend=False,
+                         mode="lines", 
+                         marker_color='#1f77b4'), row=1, col=1)
+fig.add_trace(go.Scatter(x=x_history1, y=f(x_history1), name="alpha=0.01",
+                         mode="lines+markers", 
+                         marker_color='#ff7f0e'), row=1, col=1)
+
+fig.add_trace(go.Scatter(x=x, y=f(x), name="f(x)=x²", showlegend=False,
+                         mode="lines", 
+                         marker_color='#1f77b4'), row=1, col=2)
+fig.add_trace(go.Scatter(x=x_history2, y=f(x_history2), name="alpha=0.1", 
+                         mode="lines+markers", 
+                         marker_color='#2ca02c'), row=1, col=2)
+
+fig.add_trace(go.Scatter(x=x, y=f(x), name="f(x)=x²", showlegend=False,
+                         mode="lines", 
+                         marker_color='#1f77b4'), row=2, col=1)
+fig.add_trace(go.Scatter(x=x_history3, y=f(x_history3), name="alpha=0.9",
+                         mode="lines+markers", 
+                         marker_color='#d62728'), row=2, col=1)
+
+fig.add_trace(go.Scatter(x=x, y=f(x), name="f(x)=x²", showlegend=False,
+                         mode="lines", 
+                         marker_color='#1f77b4'), row=2, col=2)
+fig.add_trace(go.Scatter(x=x_history4, y=f(x_history4), name="alpha=1.1",
+                         mode="lines+markers", 
+                         marker_color='#9467bd'), row=2, col=2)
+fig.show()
+```
+An dem Beispiel lassen sich folgende, auch für kompliziertere Beispiele oft zutreffende, Beobachtungen machen:
+- Wenn die Schrittweite zu klein ist, ist der Fortschritt in Richtung der Lösung gering (Beispiel: $\alpha=0.01$).
+- Wenn die Schrittweite zu groß ist, divergiert das Verfahren, d.h. es entfernt sich von der Lösung (Beispiel: $\alpha=1.1$)
+- Das Verfahren kann konvergieren, indem es sich "Stück für Stück" auf die Lösung zubewegt (Beispiel: $\alpha=0.1$ und $\alpha=0.01$) oder auch, indem es "um die Lösung herum fluktuiert" (Beispiel: $\alpha=0.9$).
+
+Wichtig: Die konkreten Werte für $\alpha$ (hier $\alpha\in\{0.01,0.1,0.9,1.1\}$) sind von der zu minimierenden Funktion $f$ abhängig. Für die Funktion $f(x)=x^2$ (und den Startwert $x^{[0]}=3$) ist $\alpha=0.01$ anscheinend zu klein. Für eine andere Funktion kann $\alpha=0.01$ aber auch zu groß sein.
+
+In dem Beispiel wurde die Schrittweite konstant gewählt, also $\alpha^{[k]}=\alpha$ für jede Iteration $k$. In der Tat ist eine konstante Schrittweite in der Praxis eine gängige Option, oft trifft man sie in Form von $10$er Potenzen, z.B. $\alpha=10^{-3}, \alpha=10^{-1}$ oder allgemein $\alpha=10^{\gamma}$, wobei $\gamma$ eine einstellige, oft negative ganze Zahl ist. Die Kunst ist es, eine Schrittweite zu finden, die bestmöglichen Fortschritt in Richtung der (unbekannten) Lösung macht. Für konstante Schrittweiten bedeutet das oft, die *größtmögliche* Schrittweite zu finden, so dass das Verfahren *nicht* divergiert.
+
+Im folgenden schauen wir uns weitere gängige Möglichkeiten vor, die Schrittweite zu wählen.
+
+### Dämpfung
+Eine weitere beliebte Strategie ist die gedämpfte Schrittweite. ier wird, ausgehend von einer Startschrittweite, die Schrittweite in jedem Schritt (oder allgemeiner alle $m$ Schritte) reduziert.
+Typische Dämpfungsstrategien sind:
+- Inverse Dämpfung: $\alpha^{[k+1]}=\frac{\hyper{\alpha_0}}{1+\hyper{\lambda}k}$. Mit dem Hyperparameter $\hyper{\lambda}\in\R$ kann die Reduktion der Schrittweite gesteuert werden: je größer $\hyper{\lambda}$, desto schneller wird $\alpha^{[k]}$ reduziert
+- Exponentielle Dämpfung: $\alpha^{[k+1]}=\hyper{\gamma}\alpha^{[k]}=\hyper{\gamma}^k\hyper{\alpha_0}$. Mit dem Hyperparameter $\hyper{\gamma}\in(0,1)$: je näher $\hyper{\gamma}$ an $1$ ist, desto weniger wird die Schrittweite in jedem Schritt reduziert. Wenn $\hyper{\gamma}$ nahe $0$ ist, wird die Schrittweite nach wenigen Iterationen sehr klein.
+
+In beiden Fällen ist die Startschrittweite $\hyper{\alpha_0}\in\R$ ein weiterer Hyperparameter.
+
+````{note}
+Die Parameter $\hyper{\alpha_0}, \hyper{\gamma}, \hyper{\lambda}$ sind Beispiele für *Hyperparameter* des Verfahren. Ähnlich wie in Texten über maschinelles Lernen bezeichnet der Begriff Hyperparameter hier eine Größe, die *vor* dem Ausführen des Verfahrens gewählt werden muss. Die Wahl der Hyperparameter beeinflusst die Performance des Verfahrens und die Qualität der Lösungen. Wie die Abhängigkeit eines Verfahrens von einem bestimmten Parameter ist ("Was passiert, wenn ich Hyperparameter "X" um Faktor 10 erhöhe?") lässt sich oft nur schwer vorhersagen. Jedoch gibt es für einige wichtige Hyperparameter Erfahrungswerte.
+
+Alle Verfahren, die wir in dieser Vorlesung kennenlernen, besitzen Hyperparameter. Um sie von den anderen Symbolen abzuheben, werden Sie $\hyper{\text{farbig}}$ hervorgehoben.
+```` 
+
+Die Motivation, eine gedämpfte Schrittweite zu verwenden ist, dass die Iterationen nicht "um die Lösung herum springen" bzw. oszillieren, sondern irgendwann, langsam aber sicher, in die Lösung "hineinlaufen". Wie so oft besteht ein Nachteil in der richtigen Wahl der Hyperparameter, wie durch folgendes Beispiel illustriert wird:
+
+Es wird die exponentielle Dämpfungsstrategie mit $\hyper\gamma=0.9$ angewendet, die Schrittweite in einer Iteration $k+1$ wird also bestimmt durch:
+\begin{align*}
+\alpha^{[k+1]}=0.9^k\hyper{\alpha_0}
+\end{align*}
+Nun werden für $\hyper{\alpha_0}$ die Werte $0.2$ und $2$ getestet. Hier das Ergebnis der beiden Läufe:
+
+```{figure} ./bilder/damped_stepsize.png
+:width: 400px
+```
+Man sieht: Beim Wert $\hyper{\alpha_0}=0.2$ (blaue Kurve) werden die Schrittweiten zu schnell gedämpft, das Verfahren kommt nicht in die Nähe der Lösung. Beim Wert $\hyper{\alpha_0}=2$ (rote Kurve) werden die Schrittweiten zu langsam gedämpft. Die Iterierten fluktuieren stark oder divergieren.
+ 
+
+### Exakte Liniensuche
+Wenn wir also eine Richtung $\v d^{[k]}$ identifiziert haben, so können wir folgendes tun: wir schauen wo die Funktion $f$ *entlang der Richtung* $\v d^{[k]}$ ihr Minimum annimmt. Das kann man sich etwa so vorstellen:
+
+```{code-cell} ipython3
+:tags: [hide-input]
+
+import plotly.graph_objects as go
+import numpy as np
+
+# Die Funktion f als Surface Plot
+x = np.linspace(-2,3,100)
+y = np.linspace(-2,3,100)
+X,Y = np.meshgrid(x,y)
+z = 1/4*(X**4 + Y**4) - 1/3*(X**3+Y**3) - X**2 - Y**2 + 4
+
+fig = go.Figure(go.Surface(x=x,y=y,z=z, colorscale="Blues", showscale=False))
+
+# Aktuelle iterierte
+xk = np.array([-1.5])
+yk = np.array([-0.75])
+z = 1/4*(xk**4 + yk**4) - 1/3*(xk**3+yk**3) - xk**2 - yk**2 + 4
+fig.add_trace(go.Scatter3d(x=xk,y=yk,z=z, 
+                           mode="markers", 
+                           line=dict(width=5), 
+                           marker_color="black", 
+                           marker_symbol=['circle'], 
+                           name="Aktuelle Iterierte"))
+
+# Abstiegsrichtung d=(2,1)
+d1 = 2
+d2 = 1
+# Konstruiere Gerade entlang der Abstiegsrichtung, die durch (xk,yk) geht
+t = np.linspace(-0.15,1.25,100)
+x = xk + t*(d1-xk)
+y = yk + t*(d2-yk)
+# Projektion der Gerade auf die Oberfläche
+z = 1/4*(x**4 + y**4) - 1/3*(x**3+y**3) - x**2 - y**2 + 4
+
+# x,y,z enthält jetzt die Koordinaten der Kurve f(xk+t*a). 
+fig.add_trace(go.Scatter3d(x=x,y=y,z=z, 
+                           mode="lines", marker_color='#ff7f0e',
+                           line=dict(width=5),
+                           name="Funktion für die Liniensuche"))
+
+
+# Minimum entlang der Abstiegsrichtung
+xk = np.array([7/3])
+yk = np.array([7/6])
+z = 1/4*(xk**4 + yk**4) - 1/3*(xk**3+yk**3) - xk**2 - yk**2 + 4
+fig.add_trace(go.Scatter3d(x=xk,y=yk,z=z, 
+                           mode="markers", 
+                           line=dict(width=5), 
+                           marker_color="red",
+                           marker_symbol=['cross'], 
+                           name="Nächste Iterierte"))
+
+fig.update_layout( autosize=True,
+                  margin=go.layout.Margin(l=0, r=0, b=0, t=0))
+```
+Der schwarze Punkt $(-1.5,-0.75)^T$ ist die aktuelle Iterierte $\v x^{[k]}$. Die Abstiegsrichtung $\v d^{[k]}=(2,1)^T$ wird auf die Oberfläche des Graphen projiziert und durch die Linie dargestellt. Eine Liniensuche fasst nun diese Linie als **eindimensionale** Funktion auf und sucht auf ihr das Minimum, im Graphen dargestellt durch das rote Kreuz[^fn:linesearch]. Das ist die nächste Iterierte $\v x^{[k+1]}$. Die Schrittweite $\alpha^{[k]}$ wird so gewählt, dass der Schritt genau bis zu diesem Minimum geht. Dann berechnet man in $\v x^{[k+1]}$ eine neue Abstiegsrichtung und bestimmt $\alpha^{[k+1]}$ nach dem gleichen Verfahren und so weiter.
+
+[^fn:linesearch]: Das ist nicht das Gleiche wie das Minimum von $f$, da man ja nicht im gesamten Raum sucht, sondern nur entlang einer Linie. 
+
+Mathematisch kann man die Schrittweite $\alpha^{[k]}$ als Lösung des folgenden **eindimensionalen** Optimierungsproblems auffassen:
+\begin{align*}
+\min_{\alpha} f(\v x^{[k]}+\alpha \v d^{[k]})
+\end{align*}
+Das Problem in Worte übersetzt: Suche dasjenige $\alpha$, dass die Funktion $f$ von $\v x^{[k]$ ausgehend entlang der Richtung (Linie) $\v d^{[k]}$ minimiert. Dieses Problem muss in jedem Schritt (also $k=0,1,2,\dots$) des Abstiegsverfahrens neu gelöst werden. Dafür könnte man auch wieder ein Gradientenverfahren nehmen, man kann es aber auch mit Verfahren machen, die speziell für 1D-Optimierung entwickelt wurden, wie z.B. das [Bisektionsverfahren](https://de.wikipedia.org/wiki/Bisektion#Kontinuierlicher_Fall).
+
+Dieses Verfahren zur Bestimmung der Schrittweite nennt man (*exakte*) *Liniensuche* (*line search*).
+
+````{prf:example} Exakte Liniensuche
+Für die Funktion $f:\R^3\rightarrow \R$
+\begin{align*}
+f(x_1,x_2,x_3)=\sin (x_1x_2)+\exp(x_2+x_3)-x_3
+\end{align*}
+soll ausgehend vom Punkt $\v x^{[k]}=\bmats 1\\2\\3\emats$ eine Liniensuche für die Abstiegsrichtung $\v d^{[k]}=\bmats 0\\-1\\-1\emats$ durchgeführt werden.
+
+Dafür müssen wir $f$ an der Stelle $\v x^{[k]}+\alpha \v d^{[k]}$ auswerten und als eindimensionale Funktion von $\alpha$ auffassen. Es gilt
+\begin{align*}
+\v x^{[k]}+\alpha \v d^{[k]}&=\bmat 1\\2\\3 \emat+\alpha \bmat 0\\-1\\-1 \emat\\
+                            &=\bmat 1\\ 2-\alpha \\ 3-\alpha\emat
+\end{align*}
+Einsetzen in $f$:
+\begin{align*}
+f(\v x^{[k]}+\alpha \v d^{[k]})=f(1, 2-\alpha, 3-\alpha)=\sin(1(2-\alpha))+\exp((2-\alpha)(3-\alpha))-(3-\alpha)
+\end{align*}
+Dies fassen wir als Zielfunktion des eindimensionalen Optimierungsproblems auf, mit dem wir $\alpha$ bestimmen:
+\begin{align*}
+\min_{\alpha} \sin(2-\alpha)+\exp(5-2\alpha)+\alpha-3
+\end{align*}
+Der Graph dieser Funktion:
+```{figure} ./bilder/exact_linesearch.png
+:width: 400px
+```
+Das Minimum liegt bei $\alpha\approx 3.127$. Damit wählen wir für die Schrittweite in Schritt $k$ $\alpha^{[k]}=3.127$ und erhalten somit als neue Iterierte des Gradientenverfahrens:
+\begin{align*}
+\v x^{[k+1]}=\v x^{[k]}+3.127\v d^{[k]}=\bmat 1\\ -1.126\\ -0.126 \emat
+\end{align*}
+````
+
+### Näherungsweise Liniensuche
+Ein Nachteil der exakten Liniensuche ist, dass für jeden Schritt $k$ des Abstiegsverfahrens ein 1D-Optimierungsproblem (normalerweise iterativ) gelöst werden muss. Dabei muss die Funktion $f$ an verschiedenen Punkten ausgewertet werden. Besonders wenn $f$ sehr "teuer" ist (z.B. eine Verlustfunktion im maschinellen Lernen für ein sehr großes Trainingsset oder ein Simulationsmodell), ist dies in der Praxis zu aufwendig. 
+
+%Außerdem dient das 1D-Optimierungsproblem ja nur dazu eine Schrittweite zu berechnen, die nur für den aktuellen Schritt des übergeordneten Verfahrens von Bedeutung ist, d.h. 
+
+Stattdessen macht man eine näherungsweise Liniensuche (approximate line search). Man möchte also nicht unbedingt die *beste* Schrittweite $\alpha$, sondern begnügt sich mit einer *guten* Schrittweite $\alpha$, kommt aber dafür mit möglichst wenigen zusätzlichen Auswertungen von $f$ aus.
+
+Frage: Wann ist eine Schrittweite gut bzw. akzeptabel? Antwort: wenn der Schritt die Zielfunktion um ein vorgegebenes Mindestmaß reduziert. Also: Statt zu fordern, dass die Differenz von einem zum nächsten Schritt $f(\v x^{[k]})-f(\v x^{[k+1]})$ so groß wie möglich ist (das wäre die exakte Liniensuche), fordert man, dass die Differenz $f(\v x^{[k]})-f(\v x^{[k+1]})$ "hinreichend groß" ist. 
+
+Die Überlegungen und Details, die hinter der Angabe "hinreichend groß" verbergen, sind theoretisch motiviert. Wir schreiben die Bedingung zunächst hin und versuchen dann, uns ihr Stück für Stück zu nähern.
+
+````{prf:Definition} Bedingung für hinreichenden Abstieg (1. Wolfe-Bedingung)
+Eine Schrittweite $\alpha$ erfüllt die *Bedingung für hinreichenden Abstieg* (*1. Wolfe-Bedingung*), wenn gilt:
+\begin{align*}
+f(\v x^{[k+1]})=f(\v x^{[k]}+\alpha \v d^{[k]})\leq f(\v x^{[k]})+\hyper{\beta}\alpha \nabla f(\v x^{[k]})\v d^{[k]},
+\end{align*}
+wobei $\hyper{\beta}$ ein Hyperparameter zwischen $0$ und $1$ ist. Der default ist oft $\hyper\beta = 10^{-4}$
+````
+Was bei dieser Bedingung eigentlich überprüft wird, lässt sich am besten mit einer Skizze beschreiben:
+```{figure} ./bilder/Wolfe_Bedingung.png
+Entlehnt aus: *Kochenderfer & Wheeler: Optimization Algorithms*, S. 56
+```
+Die Abbilung zeigt folgende Situation: Es wurde eine Abstiegsrichtung $\v d$ bestimmt und man seht nun vor der Frage, wie weit man in diese Richtung gehen soll, wie groß also $\alpha$ sein soll (den Iterationszähler $^{[k]}$ lassen wir hier aus Gründen der Lesbarkeit weg). Für unterschiedliche Werte von $\alpha$ wird die Zielfunktion $f$ nach dem Schritt, also $f(\v x + \alpha \v d)$ unterschiedlich groß. Bei der Bestimmtung "schaut" man in der Optimierungslandschaft also in Richtung $\v d$ und erhält so (egal in welcher Dimension $\v x$ lebt) einen eindimensionalen Schnitt durch diese Landschaft, also eine eindimensionale Funktion, dessen Argument die Schrittweite $\alpha$ ist. Bei $\alpha=0$ befindet man sich am alten Iterationspunkt $\v x^{[k]}$. Da $\v d$ eine Abstiegsrichtung ist (das kann, muss aber nicht der Gradient selbst sein), ist die Richtungsableitung auf jeden Fall negativ, also $\nabla f(\v x) \v d<0$. Laut Taylor-Entwicklung gilt dann auf jeden Fall $f(\v x)<f(\v x) + \alpha\nabla f(\v x) \v d$, wenn man $\alpha$ nur klein genug macht. Das Problem ist, dass man unter Umständen die Schrittweiten dafür *sehr* klein machen muss (wenn z.B. $\nabla f(\v x) \v d\ll 0$, also viel kleiner als $0$ ist) und der Algorithmus deshalb buchstäblich stecken bleibt. Die Bedingung für hinreichenden Abstieg weicht diese Bedingung nun auf, indem man den Term $\nabla f(\v x) \v d$ mit einer Zahl $\hyper{\beta}\in(0,1)$ multipliziert. Man fordert also nicht ganz so viel Abstieg. In der Grafik wird das durch die obere Gerade dargestellt. Diese ist weniger steil als die Gerade $f(\v x) + \alpha\nabla f(\v x) \v d$. Der blau markierte Bereich sind alle zulässigen Schrittweiten $\alpha$, also alle $\alpha$s, die für einen hinreichenden Abstieg sorgen.
+
+Wie wählen wir nun ein solches $\alpha$ aus? Eine Faustregel bei der Bestimmung der Schrittweite ist ja, diese so groß wie möglich zu wählen, ohne dass das Verfahren divergiert. Die sog. *Backtracking Liniensuche* zur Bestimmung der Schrittweite geht wie folgt vor: wir starten mit einer großen Schrittweite $\hyper{\alpha_0}$, z.B. $\hyper{\alpha_0}=10$. Wenn die uns (laut Wolfe-Bedingung) keinen hinreichenden Abstieg verschafft, halbieren wir die Schrittweite und testen die Wolfe-Bedingung erneut. Das machen wir so lange, bis wir eine Schrittweite gefunden haben, für die die Bedingung erfüllt ist. Dass es die gibt, stellt die Theorie sicher (Taylor-Approximation!). Formal
+
+````{prf:algorithm} Näherungsweise Liniensuche (Backtracking)
+Gegeben: 
+: Differenzierbare Funktion $f:\R^n\rightarrow\R$.
+: Ein fester Punkt $\v x$.
+: Abstiegsrichtung $\v d$.
+: Hyperparameter: Startschrittweite $\hyper{\alpha_0}$ (default: $\hyper{\alpha_0}=10$)
+: Hyperparameter: Faktor für die Reduktion $\hyper{p}<1$ (default: $\hyper{p}=0.5$)
+: Hyperparameter der Wolfe-Bedingung $\hyper{\beta}$ (default: $\hyper{\beta}=10^{-4}$)
+
+Gesucht: 
+: Schrittweite $\alpha$, die die Bedingung für den hinreichenden Abstieg erfüllt. .
+
+**Algorithmus**:
+
+Setze $\alpha \leftarrow \alpha_0$
+
+Solange $f(\v x+\alpha \v d)> f(\v x)+\hyper{\beta}\alpha \nabla f(\v x)\v d$:
+    Setze $\alpha \leftarrow \hyper{p}\alpha$
+
+Gib als Ergebnis $\alpha$ zurück.
+````
+Der Algorithmus wird typischerweise in *jedem* Schritt des Gradientenverfahrens aufgerufen. Die Hyperparameter kann man grob wie folgt interpretieren:
+$\hyper{\alpha_0}$ ist die größtmögliche Schrittweite in jeder Iteration $k$ des Gradientenverfahrens. Je größer $\hyper{\alpha_0}$ und $\hyper{p}$, die Reduktion der Testschrittweite, desto größer (und hoffentlich besser) wird potentiell der Schritt, aber es besteht die Gefahr, dass das Backtracking Verfahren viele Iterationen benötigt, bis eine geeignete Schrittweite gefunden wird.
 
 
 ## Abbruchbedingungen
@@ -99,12 +459,6 @@ Norm des Gradienten
   \end{align*}
   Die Idee dahinter ist, dass an einem Minimum die Ableitung $\v 0$ ist. Ähnlich wie bei den beiden vorherigen Kriterien ist $\hyper{\epsilon_{grad}}$ eine "kleine" Zahl, z.B. im Bereich $10^{-8}-10^{-4}$, die vorab gewählt werden muss.
 
-````{note}
-Die Parameter $\hyper{\epsilon_{abs}}, \hyper{\epsilon_{rel}}, \hyper{\epsilon_{grad}}$ und $\hyper{k_{max}}$ sind Beispiele für *Hyperparameter* des Verfahren. Ähnlich wie in Texten über maschinelles Lernen bezeichnet der Begriff Hyperparameter hier eine Größe, die *vor* dem Ausführen des Verfahrens gewählt werden muss. Die Wahl der Hyperparameter beeinflusst die Performance des Verfahrens und die Qualität der Lösungen. Wie die Abhängigkeit eines Verfahrens von einem bestimmten Parameter ist ("Was passiert, wenn ich Hyperparameter "X" um Faktor 10 erhöhe?") lässt sich oft nur schwer vorhersagen. Jedoch gibt es für einige wichtige Hyperparameter Erfahrungswerte.
-
-Alle Verfahren, die wir in dieser Vorlesung kennenlernen besitzen Hyperparameter. Um sie von den anderen Symbolen abzuheben, werden Sie $\hyper{\text{farbig}}$ hervorgehoben.
-```` 
-
 Die Wahl der Hyperparameter der Abbruchbedingungen ist ein Trade-Off zwischen Laufzeit und Genauigkeit bzw. Robustheit des Verfahrens. Wird der Parameter $\hyper{\epsilon}$ sehr klein gewählt, z.B. $10^{-8}$, so wird das Verfahren viel länger brauchen als, wenn der Parameter z.B. $10^{-4}$ ist. Andererseits ist man bei einem größeren Wert wie $10^{-4}$ weiter vom Minimum entfernt. Außerdem ist die Wahrscheinlichkeit höher, dass man gar nicht in der Nähe eines Minimums ist, sondern nur in einem Bereich der Funktion, in der die Steigung gering (aber nicht $0$) ist. Speziell die Hyperparameter $\hyper{\epsilon}$ nennt man auch *Abbruchtoleranz*.
 
 Wir schauen uns ein Beispiel an um den Unterschied zwischen den drei Kriterien absolute Verbesserung, relative Verbesserung und Norm des Gradienten zu verstehen. Wir betrachten die beiden Funktionen
@@ -137,7 +491,7 @@ fig.update_layout( height=300, margin=go.layout.Margin(l=0, r=0, b=0, t=0))
 ````
 
 Wir schauen uns an, wie die drei Abbruchbedingungen einen Schritt für ein Gradientenverfahren bewerten würde. Die Details des Verfahrens sind hier nicht wichtig, wir möchten nur verstehen, wie die Abbruchbedingungen funktionieren.
-Angenommen, unser Verfahren für die beiden Funktion $f_1$ und $f_2$ macht einen Schritt von $\bmat 1\\1\emat$ nach $\bmat 0.8\\0.8\emat$. In beiden Fällen wäre also der gleiche Fortschritt in Richtung der Lösung erzielt worden.
+Angenommen, unser Verfahren für die beiden Funktion $f_1$ und $f_2$ macht einen Schritt von $\bmat 1\\1\emat$ nach $\bmat 0.8\\0.8\emat$. In beiden Fällen wäre also der gleiche Fortschritt (im $(x,y)$-Raum!) in Richtung der Lösung erzielt worden.
 
 Wir schauen uns nun die linken Seiten der Abbruchbedingungen an, an Hand derer entschieden wird, ob das Verfahren abbricht.
 
@@ -173,13 +527,24 @@ Relative Verbesserung
 
 In der Praxis werden alle Kriterien eingesetzt. Wie bei allen Hyperparametern empfiehlt es sich, zunächst auf default-Werte aus der Implementierung bzw. der Literatur zurückzugreifen.
 
-## Wahl der Schrittweite 
-### Liniensuche
-### Näherungsweise Liniensuche
-### Dämpfung
 
 ## Probleme des Gradientenabstiegs
+TODO
+% Zigzag
+% Vanishing gradient near stationary points
+% MLRefined 3.6
 
 ## Gradientenabstieg mit Momentum
+TODO
+% MLRefined A.2
+
 ### Nesterov Modifikation
+
+
+## Normalisierter Gradientenabstieg
+TODO
+% MLRefined A.3
+
+
+
 
