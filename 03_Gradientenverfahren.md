@@ -90,7 +90,7 @@ def df(x):
     return np.array([8*x[0], 2*x[1]])
 
 def gd(func, derv, alpha, x0, n_steps):
-    """ Perform n_steps iterations of gradient descent with steplength alpha and print iterates """
+    """ Perform n_steps iterations of gradient descent with steplength alpha and return iterates """
     x_history = [x0]
     x = x0
     for k in range(n_steps):
@@ -150,7 +150,7 @@ def df(x):
     return np.array([8*x[0], 2*x[1]])
 
 def gd(func, derv, alpha, x0, n_steps):
-    """ Perform n_steps iterations of gradient descent with steplength alpha and print iterates """
+    """ Perform n_steps iterations of gradient descent with steplength alpha and return iterates """
     x_history = [x0]
     x = x0
     for k in range(n_steps):
@@ -173,9 +173,6 @@ Zunächst schauen wir uns das grundsätzliche Verhalten bei unterschiedlichen Sc
 ```{code-cell} ipython3
 :tags: [hide-input]
 import numpy as np
-# Seaborn color palette:
-# '#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', 
-# '#8c564b', '#e377c2', '#7f7f7f', '#bcbd22', '#17becf'
 import plotly.express as px
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
@@ -388,6 +385,8 @@ Frage: Wann ist eine Schrittweite gut bzw. akzeptabel? Antwort: wenn der Schritt
 Die Überlegungen und Details, die hinter der Angabe "hinreichend groß" verbergen, sind theoretisch motiviert. Wir schreiben die Bedingung zunächst hin und versuchen dann, uns ihr Stück für Stück zu nähern.
 
 ````{prf:Definition} Bedingung für hinreichenden Abstieg (1. Wolfe-Bedingung)
+:label: def:wolfe
+
 Eine Schrittweite $\alpha$ erfüllt die *Bedingung für hinreichenden Abstieg* (*1. Wolfe-Bedingung*), wenn gilt:
 \begin{align*}
 f(\v x^{[k+1]})=f(\v x^{[k]}+\alpha \v d^{[k]})\leq f(\v x^{[k]})+\hyper{\beta}\alpha \nabla f(\v x^{[k]})\v d^{[k]},
@@ -398,11 +397,21 @@ Was bei dieser Bedingung eigentlich überprüft wird, lässt sich am besten mit 
 ```{figure} ./bilder/Wolfe_Bedingung.png
 Entlehnt aus: *Kochenderfer & Wheeler: Optimization Algorithms*, S. 56
 ```
-Die Abbilung zeigt folgende Situation: Es wurde eine Abstiegsrichtung $\v d$ bestimmt und man seht nun vor der Frage, wie weit man in diese Richtung gehen soll, wie groß also $\alpha$ sein soll (den Iterationszähler $^{[k]}$ lassen wir hier aus Gründen der Lesbarkeit weg). Für unterschiedliche Werte von $\alpha$ wird die Zielfunktion $f$ nach dem Schritt, also $f(\v x + \alpha \v d)$ unterschiedlich groß. Bei der Bestimmtung "schaut" man in der Optimierungslandschaft also in Richtung $\v d$ und erhält so (egal in welcher Dimension $\v x$ lebt) einen eindimensionalen Schnitt durch diese Landschaft, also eine eindimensionale Funktion, dessen Argument die Schrittweite $\alpha$ ist. Bei $\alpha=0$ befindet man sich am alten Iterationspunkt $\v x^{[k]}$. Da $\v d$ eine Abstiegsrichtung ist (das kann, muss aber nicht der Gradient selbst sein), ist die Richtungsableitung auf jeden Fall negativ, also $\nabla f(\v x) \v d<0$. Laut Taylor-Entwicklung gilt dann auf jeden Fall $f(\v x)<f(\v x) + \alpha\nabla f(\v x) \v d$, wenn man $\alpha$ nur klein genug macht. Das Problem ist, dass man unter Umständen die Schrittweiten dafür *sehr* klein machen muss (wenn z.B. $\nabla f(\v x) \v d\ll 0$, also viel kleiner als $0$ ist) und der Algorithmus deshalb buchstäblich stecken bleibt. Die Bedingung für hinreichenden Abstieg weicht diese Bedingung nun auf, indem man den Term $\nabla f(\v x) \v d$ mit einer Zahl $\hyper{\beta}\in(0,1)$ multipliziert. Man fordert also nicht ganz so viel Abstieg. In der Grafik wird das durch die obere Gerade dargestellt. Diese ist weniger steil als die Gerade $f(\v x) + \alpha\nabla f(\v x) \v d$. Der blau markierte Bereich sind alle zulässigen Schrittweiten $\alpha$, also alle $\alpha$s, die für einen hinreichenden Abstieg sorgen.
+Die Abbilung zeigt folgende Situation: Es wurde eine Abstiegsrichtung $\v d$ bestimmt und man seht nun vor der Frage, wie weit man in diese Richtung gehen soll, wie groß also $\alpha$ sein soll (den Iterationszähler $^{[k]}$ lassen wir hier aus Gründen der Lesbarkeit weg). Für unterschiedliche Werte von $\alpha$ wird die Zielfunktion $f$ nach dem Schritt, also $f(\v x + \alpha \v d)$ unterschiedlich groß. Bei der Bestimmtung "schaut" man in der Optimierungslandschaft also in Richtung $\v d$ und erhält so (egal in welcher Dimension $\v x$ lebt) einen eindimensionalen Schnitt durch diese Landschaft, also eine eindimensionale Funktion, dessen Argument die Schrittweite $\alpha$ ist. Bei $\alpha=0$ befindet man sich am alten Iterationspunkt $\v x^{[k]}$. Da $\v d$ eine Abstiegsrichtung ist (das kann, muss aber nicht der Gradient selbst sein), ist die Richtungsableitung auf jeden Fall negativ, also $\nabla f(\v x) \v d<0$. Laut Taylor-Entwicklung wird $f$ auf jeden Fall kleiner, wenn man $\alpha$ nur klein genug macht. Unter Umständen ist die Reduktion und die Schrittweite aber sehr klein; der Algorithmus bleibt gewissermaßen stecken.
 
-Wie wählen wir nun ein solches $\alpha$ aus? Eine Faustregel bei der Bestimmung der Schrittweite ist ja, diese so groß wie möglich zu wählen, ohne dass das Verfahren divergiert. Die sog. *Backtracking Liniensuche* zur Bestimmung der Schrittweite geht wie folgt vor: wir starten mit einer großen Schrittweite $\hyper{\alpha_0}$, z.B. $\hyper{\alpha_0}=10$. Wenn die uns (laut Wolfe-Bedingung) keinen hinreichenden Abstieg verschafft, halbieren wir die Schrittweite und testen die Wolfe-Bedingung erneut. Das machen wir so lange, bis wir eine Schrittweite gefunden haben, für die die Bedingung erfüllt ist. Dass es die gibt, stellt die Theorie sicher (Taylor-Approximation!). Formal
+Die Bedingung für hinreichenden Abstieg fordert nun, dass nicht ein *beliebig* kleiner Abstieg erzielt wird, sondern ein Abstieg, der proportional zur Größe der Ableitung ist. Sie ist angelehnt an die Reduktion, die durch die lineare Approximation vorhergesagt wird (die untere Gerade):
+\begin{align*}
+f(\v x) + \alpha\nabla f(\v x) \v d
+\end{align*}
+So viel Reduktion kann nicht immer erzielt werden, deshalb wird die Bedingung "entschärft", indem man den Term $\nabla f(\v x) \v d$ mit einer Zahl $\hyper{\beta}\in(0,1)$ multipliziert:
+\begin{align*}
+f(\v x) + \hyper{\beta}\alpha\nabla f(\v x) \v d
+\end{align*}
+ Wenn man nun fordert, dass $f(\v x+\alpha \v d)\leq f(\v x) + \hyper{\beta}\alpha\nabla f(\v x) \v d$, fordert man also nicht ganz so viel Abstieg wie durch die lineare Approximation vorhergesagt. In der Grafik wird das durch die obere Gerade dargestellt. Diese ist weniger steil als die Gerade $f(\v x) + \alpha\nabla f(\v x) \v d$ und man kann im Gegensatz zu dieser immer eine Schrittweite finden, die dazu führt, dass der Funktionswert darunter liegt. Im Beispiel bezeichnet der blau markierte Bereich alle zulässigen Schrittweiten $\alpha$, also alle $\alpha$s, die für einen hinreichenden Abstieg sorgen.
 
-````{prf:algorithm} Näherungsweise Liniensuche (Backtracking)
+Wie wählen wir nun ein solches $\alpha$ aus? Eine Faustregel bei der Bestimmung der Schrittweite war ja, diese so groß wie möglich zu wählen, ohne dass das Verfahren divergiert. Die sog. *Backtracking Liniensuche* zur Bestimmung der Schrittweite geht wie folgt vor: wir starten mit einer großen Schrittweite $\hyper{\alpha_0}$, z.B. $\hyper{\alpha_0}=10$. Wenn die uns (laut Wolfe-Bedingung) keinen hinreichenden Abstieg verschafft, halbieren wir die Schrittweite und testen die Wolfe-Bedingung erneut. Das machen wir so lange, bis wir eine Schrittweite gefunden haben, für die die Bedingung erfüllt ist. Dass es die gibt, stellt die Theorie sicher. Tatsächlich kann man beweisen, dass die {prf:ref}`def:wolfe` zusammen mit der Backtracking Liniensuche garantiert zu einem lokalen Minimum konvergiert. Wir geben erst das allgemeine Verfahren an und zeigen in {prf:ref}`ex:backtracking` wie es bei einem konkreten Beispiel funktioniert. 
+
+````{prf:algorithm} Backtracking Liniensuche
 Gegeben: 
 : Differenzierbare Funktion $f:\R^n\rightarrow\R$.
 : Ein fester Punkt $\v x$.
@@ -414,17 +423,67 @@ Gegeben:
 Gesucht: 
 : Schrittweite $\alpha$, die die Bedingung für den hinreichenden Abstieg erfüllt. .
 
-**Algorithmus**:
-
-Setze $\alpha \leftarrow \alpha_0$
-
-Solange $f(\v x+\alpha \v d)> f(\v x)+\hyper{\beta}\alpha \nabla f(\v x)\v d$:
-    Setze $\alpha \leftarrow \hyper{p}\alpha$
-
-Gib als Ergebnis $\alpha$ zurück.
+**Algorithmus:**
+1. Setze $\alpha \leftarrow \alpha_0$
+2. Solange $f(\v x+\alpha \v d)> f(\v x)+\hyper{\beta}\alpha \nabla f(\v x)\v d$:  
+&nbsp;&nbsp;&nbsp;&nbsp;Setze $\alpha \leftarrow \hyper{p}\alpha$
+3. Gib als Ergebnis $\alpha$ zurück.
 ````
 Der Algorithmus wird typischerweise in *jedem* Schritt des Gradientenverfahrens aufgerufen. Die Hyperparameter kann man grob wie folgt interpretieren:
 $\hyper{\alpha_0}$ ist die größtmögliche Schrittweite in jeder Iteration $k$ des Gradientenverfahrens. Je größer $\hyper{\alpha_0}$ und $\hyper{p}$, die Reduktion der Testschrittweite, desto größer (und hoffentlich besser) wird potentiell der Schritt, aber es besteht die Gefahr, dass das Backtracking Verfahren viele Iterationen benötigt, bis eine geeignete Schrittweite gefunden wird.
+
+````{prf:example} Backtracking Liniensuche
+:label: ex:backtracking
+
+Wir befinden uns in Schritt $k$ eines Gradientenverfahrens zur Minimierung der Funktion
+\begin{align*}
+f(\v x)=x_1^2+x_1x_2+x_2^2 
+\end{align*}
+ausgehend vom Punkt $(x_1,x_2)^T=(1,2)^T$ haben wir als Abstiegsrichtung den Vektor $\v d=(−1,−1)^T$ bestimmt und möchten nun eine geeignete Schrittweite $\alpha$ identifizieren.
+
+Dafür führen wir die Backtracking Liniensuche mit den Hyperparametern Maximalschrittweite $\hyper{\alpha_0}=10$, Reduktionsfaktor $\hyper{p}=0.5$ und dem Parameter $\hyper{\beta}=10^{−4}$ aus.
+
+Der Gradient an der Stelle $(1,2)^T$ ist
+\begin{align*}
+\nabla f(1,2)=(4, 5).
+\end{align*}
+Die Richtungsableitung in Richtung der Abstiegsrichtung ist
+\begin{align*}
+\nabla f(1,2)\v d=\nabla f(1,2)\bmat -1\\-1\emat=-9.
+\end{align*}
+Wir führen nun die Iterationen der Backtracking Liniensuche durch:
+
+Iteration 1
+: Teste Wolfe Bedingung
+  \begin{align*}
+  f(\v x+\alpha \v d) &\leq f(\v x)+10^{-4}{\color{red}{\alpha}}\nabla f(1,2)\v d\\
+  \Leftrightarrow f((1,2)+{\color{red}{10}}\cdot (−1,−1))&\leq 7+10^(−4)\cdot {\color{red}{10}}\cdot (−9)\\
+  \Leftrightarrow 217&\leq 6.991
+  \end{align*}
+  Die Ungleichung ist nicht erfüllt, also muss $\alpha$ verringert werden:
+  \begin{align*}
+  \alpha \leftarrow 0.5\alpha = 5
+  \end{align*}
+
+Iteration 2
+: Teste Wolfe Bedingung
+  \begin{align*}
+  f((1,2)+{\color{red}{5}}\cdot (−1,−1))&\leq 7+10^(−4)\cdot {\color{red}{5}}\cdot (−9)\\
+  \Leftrightarrow 37&\leq 6.996
+  \end{align*}
+  Die Ungleichung ist nicht erfüllt, also muss $\alpha$ verringert werden:
+  \begin{align*}
+  \alpha \leftarrow 0.5\alpha = 2.5
+  \end{align*}
+
+Iteration 3
+: Teste Wolfe Bedingung
+  \begin{align*}
+  f((1,2)+{\color{red}{2.5}}\cdot (−1,−1))&\leq 7+10^(−4)\cdot {\color{red}{2.5}}\cdot (−9)\\
+  \Leftrightarrow 3.25&\leq 6.998
+  \end{align*}
+  Die Bedingung ist erfüllt, die Liniensuche terminiert und gibt als Schrittweite $\alpha=2.5$ zurück.
+````
 
 
 ## Abbruchbedingungen
@@ -529,22 +588,172 @@ In der Praxis werden alle Kriterien eingesetzt. Wie bei allen Hyperparametern em
 
 
 ## Probleme des Gradientenabstiegs
-TODO
-% Zigzag
+Der Gradientenabstieg ist ein Optimierungsverfahren, das in jeder Iteration den negativen Gradienten der Funktion, die minimiert werden soll, benutzt. Die Analysis garantiert, dass der negative Gradient eine Abstiegsrichtung ist. Außerdem können Gradienten oft einfach und schnell ausgewertet werden können (die Details werden in {ref}`sec:ad` beschrieben). Das macht den Gradientenabstieg in der Praxis sehr beliebt. Allerdings hat der Gradientenabstieg auch zwei fundamentale Probleme, durch die er in der Praxis oft sehr viele Iterationen benötigt.
+
+Woher kommen die Probleme des Gradientenabstiegs? Der (negative) Gradient, unsere Suchrichtung, ist ein *Vektor*. Wie jeder Vektor hat er eine *Richtung* und eine *Länge*. Abhängig von der Funktion, die minimiert werden soll, kann eines dieser
+Attribute -- oder beide -- Probleme verursachen, wenn man den negativen Gradienten
+als Abstiegsrichtung wählt. 
+
+Die *Richtung* des negatien Gradienten kann während der Iterationen des Gradientenverfahrens wild oszillieren, so dass "Zick-Zack Schritte" gemacht werden, bei denen es lange dauert, bis man ein Minimum erreicht.
+
+Die *Länge* des negativen Gradienen kann in der Nähe von kritischen Punkten sehr klein werden, was dazu führt, dass der Gradientenabstieg in flachen Regionen, insbesondere in der Nähe von Minima und Sattelpunkten, langsam durch die Optimierungslandschaft "kriecht".
+
+Diese beiden Probleme sind nicht bei jeder einzelnen Funktion zu beobachten, tauchen aber gerade bei Optimierungsproblemen des maschinellen Lernens oft auf. Viele Funktionen dort weisen lange, schmale Täler auf, die das oben beschriebene Verhalten begünstigen.
+
+### Zick-Zack Verhalten
+In {ref}`sec:interpretation` hatten wir überlegt, dass eine Eigenschaft des (negativen) Gradienten ist, dass er senkrecht auf den Höhenlinien der Funktion steht. Das ist eine universelle Eigenschaft und gilt für jede differenzierbare Funktion. In der Praxis kann diese Eigenschaft dazu führen (hängt natürlich von der genauen Funktion ab, die man betrachtet), dass die Gradientenrichtungen während des Gradientenabstiegs ein *Zick-Zack*-Verhalten aufweisen, was wiederum dazu führt, dass wenig Fortschritt in Richtung der Lösung gemacht wird. Konsequenz: das Verfahren benötigt sehr viele Schritte bis zur Konvergenz. 
+
+Wir betrachten das Verhalten anhand dreier Testbeispiele, den drei quadratischen Funktionen $f_i\R^2\rightarrow \R$:
+\begin{align*}
+f_1(x,y)&=0.5 x^2 + 9y^2\\
+f_2(x,y)&=0.1 x^2 + 9y^2\\
+f_3(x,y)&=0.01 x^2 + 9y^2
+\end{align*}
+Alle drei Funktionen haben dasselbe globale Minimum $(0,0)^T$. Die Funktionen $f_1,f_2,f_3$ sind (von oben nach unten) in den folgenden Plots dargestellt:
+```{code-cell} ipython3
+:tags: [hide-input]
+import numpy as np
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+
+def plot_iterates(iterates_list, func, c_list):
+    """Plot objective function func as contour plot and visualize iterates"""
+    fig = make_subplots(rows=len(iterates_list), cols=1)
+
+    for k, (iterates, c) in enumerate(zip(iterates_list, c_list)):
+        iterates_T = iterates.T
+        x1_min = min(0,np.min(iterates_T[0]))-0.1
+        x1_max = max(1,np.max(iterates_T[0]))+0.1
+        x2_min = min(0,np.min(iterates_T[1]))-0.1
+        x2_max = max(1,np.max(iterates_T[1]))+0.1
+
+        x1_range = np.linspace(x1_min, x1_max, 100)
+        x2_range = np.linspace(x2_min, x2_max, 100)
+        A = np.meshgrid(x1_range, x2_range)
+        Z = func(A, c)
+
+        n_iter = len(iterates_T[1])
+        fig.add_contour(z=Z, x=x1_range, y=x2_range, 
+                                        colorscale="Blues",
+                                        contours=dict(start=0,
+                                                    end=50,
+                                                    size=1),
+                                        row=k+1, col=1, showscale=False, showlegend=False)
+
+        fig.add_scatter(x=iterates_T[0], y=iterates_T[1], 
+                        mode='lines+markers', name='iterates',
+
+                        marker=dict(color=np.arange(n_iter), cmin=0, cmax=n_iter, size=7, colorbar=dict(title="k", x=1.15), 
+                        colorscale="Oranges"),
+                        line=dict(color="grey"),
+                        row=k+1, col=1, showlegend=False
+                    )
+
+    fig.update_layout(template="simple_white", height=800, margin=go.layout.Margin(l=0, r=0, b=0, t=0) )
+    fig.show()
+
+
+def f(x, c):
+    """ Function to minimize """
+    return c*x[0]**2 + 9*x[1]**2
+
+def df(x, c):
+    """ Derivative of the function to minimize """
+    return np.array([2*c*x[0], 18*x[1]])
+
+def gd(func, derv, alpha, x0, n_steps, c):
+    """ Perform n_steps iterations of gradient descent with steplength alpha and print iterates """
+    x_history = [x0]
+    x = x0
+    for k in range(n_steps):
+        dx = derv(x, c)
+        x = x - alpha * dx
+        x_history.append(x)
+
+    return np.array(x_history)
+
+
+x0 = np.array([10,1])
+x_history1 = gd(func=f, derv=df, alpha=0.1, x0=x0, n_steps=25, c=0.5)
+x_history2 = gd(func=f, derv=df, alpha=0.1, x0=x0, n_steps=25, c=0.1)
+x_history3 = gd(func=f, derv=df, alpha=0.1, x0=x0, n_steps=25, c=0.01)
+plot_iterates([x_history1, x_history2, x_history3], f, c_list=[0.5,0.1,0.01])
+```
+Je kleiner der Koeffizient von $x$ ist, desto länger und schmäler wird das Tal. Im unteren Plot der Funktion $f_3$ sind die Höhenlinien nahezu parallel in der Nähe des initialen Punktes $(10, 1)^T$. Von diesem Punkt machen wir 25 Schritte mit dem Gradientenabstieg mit Schrittweite $\alpha=0.1$. Beim Betrachten der Plots sehen wir in jedem Fall, aber zunehmend vom ersten bis zum dritten Beispiel, das Zick-Zack-Verhalten des Gradientenabstiegs. Im dritten Fall wird insgesamt sehr wenig Fortschritt in Richtung des Minimums erzielt.  
+
+Wir können auch die Ursache dieses Zick-Zack-Kurses erkennen: Der negative Gradient
+steht stets senkrecht zu den Höhenlinien der Funktion, und bei sehr schmalen Funktionen werden diese Konturen fast parallel.
+Dieses Zick-Zack-Verhalten kann zwar durch eine Verringerung der Schrittlänge verbessert werden.
+Das löst aber nicht das zu Grunde liegende Problem -- nämlich die langsame Konvergenz.
+
+
+### Langsames Kriechen durch flache Regionen
 % Vanishing gradient near stationary points
 % MLRefined 3.6
+Wie wir wissen aus den notwendigen Optimalitätsbedingungen wissen, verschwindet der Gradient bei kritischen Punkten, d.h. wenn $\v x$ ein Minimum, Maximum oder ein Sattelpunkt ist gilt $\nabla f(\v x)=\v 0$. Das bedeutet aber auch, dass die Länge des Gradientenvektors bei kritischen Punkten $0$ ist, also $\norm{\nabla f(\v x)}_2=0$. In der Nähe kritischer Punkte hat der negative Gradient eine Richtung, aber es gilt $\norm{\nabla f(\v x)}_2\approx 0$ (wegen der Stetigkeit der Ableitung). Diese Eigenschaft hat folgende Konsequenz für die Schritte des Gradientenabstiegs: Sie machen sehr wenig Fortschritt, sie "kriechen" förmlich in der Nähe von stationären Punkten. Das hat folgenden Grund: die Distanz, die der Gradientenabstieg in einem Schritt zurücklegt, also $\norm{\v x^{[k+1]}-\v x^{[k]}}_2$ hängt nicht nur von der Schrittweite ab, sondern auch von der Länge des Gradientenvektors:
+\begin{align*}
+\v x^{[k+1]}&=\v x^{[k]}-\alpha \nabla f(\v x^{[k]})\\
+\Leftrightarrow \alpha \nabla f(\v x^{[k]})&= \v x^{[k]}-\v x^{[k+1]}\\
+\Leftrightarrow \norm{\v x^{[k+1]}-\v x^{[k]}}_2&=\alpha \norm{\nabla f(\v x^{[k]})}_2
+\end{align*}
+Da der Gradient weit weg von der Lösung oft groß ist, z.B. bei den initialen Punkten, die zufällig initialisiert werden, sind die ersten Schritte eines Gradientenverfahrens typischerweise groß und es wird guter Fortschritt in Richtung der Lösung gemacht. Umgekehrt, wenn sich das Verfahren einem kritischen Punkt annähert, wird die Norm des Gradienten klein, und es wird nur noch wenig Fortschritt in Richtung der Lösung gemacht. Leider passiert das nicht nur in der Nähe von Minima, sondern auch in der Nähe von Sattelpunkten. In manchen Fällen kann es passieren, dass der Gradientenabstieg in der Nähe von Sattelpunkten vollständig zum Stillstand kommt.
+
+Wir illustrieren das am Beispiel der Funktion $f(x)=x^4$ mit dem Startwert $x^{[0]}=1$. Wie man sieht, sind die Schritte zu Beginn des Verfahrens noch sehr groß und werden dann immer kleiner in der Nähe der Lösung $x=0$. Der Gradient ist sehr groß, wenn sich der Punkt weit weg von der Lösung befindet und sehr klein in der Nähe der Lösung.
+```{code-cell} ipython3
+:tags: [hide-input]
+import numpy as np
+import plotly.express as px
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+
+def f(x):
+    """ Function to minimize """
+    return x**4
+
+def df(x):
+    """ Derivative of the function to minimize """
+    return 4*x**3
+
+def gd(func, derv, alpha, x0, n_steps):
+    """ Perform n_steps iterations of gradient descent with steplength alpha and return iterates """
+    x_history = [x0]
+    x = x0
+    for k in range(n_steps):
+        dx = derv(x)
+        x = x - alpha * dx
+        x_history.append(x)
+
+    return np.array(x_history)
+
+n_iter = 10
+x_history = gd(func=f, derv=df, alpha=0.1, x0=1.0, n_steps=n_iter)
+
+x = np.linspace(-1.1,1.1,100)
+
+fig = go.Figure(go.Scatter(x=x, y=f(x), name="f(x)=x²", showlegend=False,
+                         mode="lines", 
+                         marker_color='#1f77b4'))
+fig.add_trace(go.Scatter(x=x_history, y=f(x_history),
+                         mode="markers", 
+                         marker=dict(color=np.arange(n_iter+1), cmin=0, cmax=n_iter+1, size=7, colorbar=dict(title="k", x=1.15), 
+                         colorscale="solar"), showlegend=False))
+
+fig.update_layout(width=500)
+fig.show()
+```
 
 ## Gradientenabstieg mit Momentum
-TODO
+%TODO
 % MLRefined A.2
 
 ### Nesterov Modifikation
 
 
 ## Normalisierter Gradientenabstieg
-TODO
+%TODO
 % MLRefined A.3
 
 
-
+%## Zusammenfassung
+%TODO
 
