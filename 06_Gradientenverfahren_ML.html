@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>6. Gradientenverfahren für Probleme des maschinellen Lernens &#8212; Optimierungsverfahren, Modellierung und Simulation (DSCB410)</title>
+    <title>6. Gradientenverfahren im maschinellen Lernen &#8212; Optimierungsverfahren, Modellierung und Simulation (DSCB410)</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -123,12 +123,12 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="02_Multivariate_Analysis.html">
+  <a class="reference internal" href="01_Multivariate_Analysis.html">
    1. Funktionen und Ableitungen
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="02a_Theoretische_Grundlagen.html">
+  <a class="reference internal" href="02_Theoretische_Grundlagen.html">
    2. Grundlagen der nichtlinearen Optimierung
   </a>
  </li>
@@ -149,7 +149,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   6. Gradientenverfahren für Probleme des maschinellen Lernens
+   6. Gradientenverfahren im maschinellen Lernen
   </a>
  </li>
  <li class="toctree-l1">
@@ -245,6 +245,35 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/06_Gradientenverfahren_ML.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -266,6 +295,23 @@ title="Fullscreen mode"
   </button>
   <div class="menu-dropdown__content">
     <ul>
+      <li>
+        <a href="_sources/06_Gradientenverfahren_ML.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download notebook file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
       <li>
         <a href="_sources/06_Gradientenverfahren_ML.md"
    class="headerbtn"
@@ -304,23 +350,90 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#optimierungsprobleme-im-maschinellen-lernen">
+   6.1. Optimierungsprobleme im maschinellen Lernen
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#stochastischer-gradientenabstieg">
+   6.2. Stochastischer Gradientenabstieg
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gradientenverfahren-revisited-adaptive-schrittweiten">
+   6.3. Gradientenverfahren revisited: Adaptive Schrittweiten
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#backpropagation-revisited-ableitungen-neuronaler-netze">
+   6.4. Backpropagation revisited: Ableitungen neuronaler Netze
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Gradientenverfahren für Probleme des maschinellen Lernens</h1>
+                <h1>Gradientenverfahren im maschinellen Lernen</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#optimierungsprobleme-im-maschinellen-lernen">
+   6.1. Optimierungsprobleme im maschinellen Lernen
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#stochastischer-gradientenabstieg">
+   6.2. Stochastischer Gradientenabstieg
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gradientenverfahren-revisited-adaptive-schrittweiten">
+   6.3. Gradientenverfahren revisited: Adaptive Schrittweiten
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#backpropagation-revisited-ableitungen-neuronaler-netze">
+   6.4. Backpropagation revisited: Ableitungen neuronaler Netze
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -328,11 +441,20 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="gradientenverfahren-fur-probleme-des-maschinellen-lernens">
-<h1><span class="section-number">6. </span>Gradientenverfahren für Probleme des maschinellen Lernens<a class="headerlink" href="#gradientenverfahren-fur-probleme-des-maschinellen-lernens" title="Link zu dieser Überschrift">#</a></h1>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
+  <section class="tex2jax_ignore mathjax_ignore" id="gradientenverfahren-im-maschinellen-lernen">
+<span id="sec-ml"></span><h1><span class="section-number">6. </span>Gradientenverfahren im maschinellen Lernen<a class="headerlink" href="#gradientenverfahren-im-maschinellen-lernen" title="Link zu dieser Überschrift">#</a></h1>
+<section id="optimierungsprobleme-im-maschinellen-lernen">
+<h2><span class="section-number">6.1. </span>Optimierungsprobleme im maschinellen Lernen<a class="headerlink" href="#optimierungsprobleme-im-maschinellen-lernen" title="Link zu dieser Überschrift">#</a></h2>
+</section>
+<section id="stochastischer-gradientenabstieg">
+<h2><span class="section-number">6.2. </span>Stochastischer Gradientenabstieg<a class="headerlink" href="#stochastischer-gradientenabstieg" title="Link zu dieser Überschrift">#</a></h2>
+</section>
+<section id="gradientenverfahren-revisited-adaptive-schrittweiten">
+<h2><span class="section-number">6.3. </span>Gradientenverfahren revisited: Adaptive Schrittweiten<a class="headerlink" href="#gradientenverfahren-revisited-adaptive-schrittweiten" title="Link zu dieser Überschrift">#</a></h2>
+</section>
+<section id="backpropagation-revisited-ableitungen-neuronaler-netze">
+<h2><span class="section-number">6.4. </span>Backpropagation revisited: Ableitungen neuronaler Netze<a class="headerlink" href="#backpropagation-revisited-ableitungen-neuronaler-netze" title="Link zu dieser Überschrift">#</a></h2>
+</section>
 </section>
 
     <script type="text/x-thebe-config">

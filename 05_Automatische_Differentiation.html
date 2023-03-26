@@ -55,7 +55,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Stichwortverzeichnis" href="genindex.html" />
     <link rel="search" title="Suche" href="search.html" />
-    <link rel="next" title="6. Gradientenverfahren für Probleme des maschinellen Lernens" href="06_Gradientenverfahren_ML.html" />
+    <link rel="next" title="6. Gradientenverfahren im maschinellen Lernen" href="06_Gradientenverfahren_ML.html" />
     <link rel="prev" title="4. Verfahren zweiter Ordnung" href="04_Verfahren_zweiter_Ordnung.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="de">
@@ -123,12 +123,12 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="02_Multivariate_Analysis.html">
+  <a class="reference internal" href="01_Multivariate_Analysis.html">
    1. Funktionen und Ableitungen
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="02a_Theoretische_Grundlagen.html">
+  <a class="reference internal" href="02_Theoretische_Grundlagen.html">
    2. Grundlagen der nichtlinearen Optimierung
   </a>
  </li>
@@ -149,7 +149,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="06_Gradientenverfahren_ML.html">
-   6. Gradientenverfahren für Probleme des maschinellen Lernens
+   6. Gradientenverfahren im maschinellen Lernen
   </a>
  </li>
  <li class="toctree-l1">
@@ -304,12 +304,46 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#berechnungsgraphen">
+   5.1. Berechnungsgraphen
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#kettenregel-und-berechnunsgraphen">
+   5.2. Kettenregel und Berechnunsgraphen
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#backpropagation">
+   5.3. Backpropagation
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
@@ -321,6 +355,29 @@ title="Print to PDF"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#berechnungsgraphen">
+   5.1. Berechnungsgraphen
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#kettenregel-und-berechnunsgraphen">
+   5.2. Kettenregel und Berechnunsgraphen
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#backpropagation">
+   5.3. Backpropagation
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -330,9 +387,15 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="automatische-differentiation">
 <span id="sec-ad"></span><h1><span class="section-number">5. </span>Automatische Differentiation<a class="headerlink" href="#automatische-differentiation" title="Link zu dieser Überschrift">#</a></h1>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
+<section id="berechnungsgraphen">
+<h2><span class="section-number">5.1. </span>Berechnungsgraphen<a class="headerlink" href="#berechnungsgraphen" title="Link zu dieser Überschrift">#</a></h2>
+</section>
+<section id="kettenregel-und-berechnunsgraphen">
+<h2><span class="section-number">5.2. </span>Kettenregel und Berechnunsgraphen<a class="headerlink" href="#kettenregel-und-berechnunsgraphen" title="Link zu dieser Überschrift">#</a></h2>
+</section>
+<section id="backpropagation">
+<h2><span class="section-number">5.3. </span>Backpropagation<a class="headerlink" href="#backpropagation" title="Link zu dieser Überschrift">#</a></h2>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -372,7 +435,7 @@ title="Print to PDF"
     <a class='right-next' id="next-link" href="06_Gradientenverfahren_ML.html" title="weiter Seite">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">weiter</p>
-        <p class="prev-next-title"><span class="section-number">6. </span>Gradientenverfahren für Probleme des maschinellen Lernens</p>
+        <p class="prev-next-title"><span class="section-number">6. </span>Gradientenverfahren im maschinellen Lernen</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

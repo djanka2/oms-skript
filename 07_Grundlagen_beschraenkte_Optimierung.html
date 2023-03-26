@@ -56,7 +56,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Stichwortverzeichnis" href="genindex.html" />
     <link rel="search" title="Suche" href="search.html" />
     <link rel="next" title="8. Gemischt-ganzzahlige lineare Programmierung" href="08_MILP.html" />
-    <link rel="prev" title="6. Gradientenverfahren für Probleme des maschinellen Lernens" href="06_Gradientenverfahren_ML.html" />
+    <link rel="prev" title="6. Gradientenverfahren im maschinellen Lernen" href="06_Gradientenverfahren_ML.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="de">
     
@@ -123,12 +123,12 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="02_Multivariate_Analysis.html">
+  <a class="reference internal" href="01_Multivariate_Analysis.html">
    1. Funktionen und Ableitungen
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="02a_Theoretische_Grundlagen.html">
+  <a class="reference internal" href="02_Theoretische_Grundlagen.html">
    2. Grundlagen der nichtlinearen Optimierung
   </a>
  </li>
@@ -149,7 +149,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="06_Gradientenverfahren_ML.html">
-   6. Gradientenverfahren für Probleme des maschinellen Lernens
+   6. Gradientenverfahren im maschinellen Lernen
   </a>
  </li>
  <li class="toctree-l1 current active">
@@ -245,6 +245,35 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/07_Grundlagen_beschraenkte_Optimierung.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -266,6 +295,23 @@ title="Fullscreen mode"
   </button>
   <div class="menu-dropdown__content">
     <ul>
+      <li>
+        <a href="_sources/07_Grundlagen_beschraenkte_Optimierung.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download notebook file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
       <li>
         <a href="_sources/07_Grundlagen_beschraenkte_Optimierung.md"
    class="headerbtn"
@@ -304,12 +350,46 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gleichungsbeschrankte-optimierung">
+   7.1. Gleichungsbeschränkte Optimierung
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ungleichungsbeschrankte-optimierung">
+   7.2. Ungleichungsbeschränkte Optimierung
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#anwendung-support-vector-maschinen">
+   7.3. Anwendung: Support Vector Maschinen
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
@@ -321,6 +401,29 @@ title="Print to PDF"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gleichungsbeschrankte-optimierung">
+   7.1. Gleichungsbeschränkte Optimierung
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ungleichungsbeschrankte-optimierung">
+   7.2. Ungleichungsbeschränkte Optimierung
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#anwendung-support-vector-maschinen">
+   7.3. Anwendung: Support Vector Maschinen
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -330,9 +433,15 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="grundlagen-der-beschrankten-optimierung">
 <h1><span class="section-number">7. </span>Grundlagen der beschränkten Optimierung<a class="headerlink" href="#grundlagen-der-beschrankten-optimierung" title="Link zu dieser Überschrift">#</a></h1>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
+<section id="gleichungsbeschrankte-optimierung">
+<h2><span class="section-number">7.1. </span>Gleichungsbeschränkte Optimierung<a class="headerlink" href="#gleichungsbeschrankte-optimierung" title="Link zu dieser Überschrift">#</a></h2>
+</section>
+<section id="ungleichungsbeschrankte-optimierung">
+<h2><span class="section-number">7.2. </span>Ungleichungsbeschränkte Optimierung<a class="headerlink" href="#ungleichungsbeschrankte-optimierung" title="Link zu dieser Überschrift">#</a></h2>
+</section>
+<section id="anwendung-support-vector-maschinen">
+<h2><span class="section-number">7.3. </span>Anwendung: Support Vector Maschinen<a class="headerlink" href="#anwendung-support-vector-maschinen" title="Link zu dieser Überschrift">#</a></h2>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -366,7 +475,7 @@ title="Print to PDF"
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">zurück</p>
-            <p class="prev-next-title"><span class="section-number">6. </span>Gradientenverfahren für Probleme des maschinellen Lernens</p>
+            <p class="prev-next-title"><span class="section-number">6. </span>Gradientenverfahren im maschinellen Lernen</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="08_MILP.html" title="weiter Seite">

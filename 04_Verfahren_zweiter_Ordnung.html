@@ -123,12 +123,12 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="02_Multivariate_Analysis.html">
+  <a class="reference internal" href="01_Multivariate_Analysis.html">
    1. Funktionen und Ableitungen
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="02a_Theoretische_Grundlagen.html">
+  <a class="reference internal" href="02_Theoretische_Grundlagen.html">
    2. Grundlagen der nichtlinearen Optimierung
   </a>
  </li>
@@ -149,7 +149,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="06_Gradientenverfahren_ML.html">
-   6. Gradientenverfahren für Probleme des maschinellen Lernens
+   6. Gradientenverfahren im maschinellen Lernen
   </a>
  </li>
  <li class="toctree-l1">
@@ -245,6 +245,35 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/04_Verfahren_zweiter_Ordnung.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -266,6 +295,23 @@ title="Fullscreen mode"
   </button>
   <div class="menu-dropdown__content">
     <ul>
+      <li>
+        <a href="_sources/04_Verfahren_zweiter_Ordnung.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download notebook file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
       <li>
         <a href="_sources/04_Verfahren_zweiter_Ordnung.md"
    class="headerbtn"
@@ -304,12 +350,80 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#motivation">
+   4.1. Motivation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#newton-verfahren">
+   4.2. Newton Verfahren
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#konvergenzgeschwindigkeit">
+     4.2.1. Konvergenzgeschwindigkeit
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#regularisierung-des-verfahrens">
+     4.2.2. Regularisierung des Verfahrens
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#quasi-newton-verfahren">
+   4.3. Quasi-Newton Verfahren
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dfp">
+     4.3.1. DFP
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bfgs">
+     4.3.2. BFGS
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#limited-memory-bfgs">
+     4.3.3. Limited-memory BFGS
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#zusammenfassung-der-verfahren-erster-und-zweiter-ordnung">
+   4.4. Zusammenfassung der Verfahren erster und zweiter Ordnung
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
@@ -321,6 +435,63 @@ title="Print to PDF"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#motivation">
+   4.1. Motivation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#newton-verfahren">
+   4.2. Newton Verfahren
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#konvergenzgeschwindigkeit">
+     4.2.1. Konvergenzgeschwindigkeit
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#regularisierung-des-verfahrens">
+     4.2.2. Regularisierung des Verfahrens
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#quasi-newton-verfahren">
+   4.3. Quasi-Newton Verfahren
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dfp">
+     4.3.1. DFP
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bfgs">
+     4.3.2. BFGS
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#limited-memory-bfgs">
+     4.3.3. Limited-memory BFGS
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#zusammenfassung-der-verfahren-erster-und-zweiter-ordnung">
+   4.4. Zusammenfassung der Verfahren erster und zweiter Ordnung
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -330,9 +501,33 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="verfahren-zweiter-ordnung">
 <span id="sec-newton"></span><h1><span class="section-number">4. </span>Verfahren zweiter Ordnung<a class="headerlink" href="#verfahren-zweiter-ordnung" title="Link zu dieser Überschrift">#</a></h1>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
+<section id="motivation">
+<h2><span class="section-number">4.1. </span>Motivation<a class="headerlink" href="#motivation" title="Link zu dieser Überschrift">#</a></h2>
+</section>
+<section id="newton-verfahren">
+<h2><span class="section-number">4.2. </span>Newton Verfahren<a class="headerlink" href="#newton-verfahren" title="Link zu dieser Überschrift">#</a></h2>
+<section id="konvergenzgeschwindigkeit">
+<h3><span class="section-number">4.2.1. </span>Konvergenzgeschwindigkeit<a class="headerlink" href="#konvergenzgeschwindigkeit" title="Link zu dieser Überschrift">#</a></h3>
+</section>
+<section id="regularisierung-des-verfahrens">
+<h3><span class="section-number">4.2.2. </span>Regularisierung des Verfahrens<a class="headerlink" href="#regularisierung-des-verfahrens" title="Link zu dieser Überschrift">#</a></h3>
+</section>
+</section>
+<section id="quasi-newton-verfahren">
+<h2><span class="section-number">4.3. </span>Quasi-Newton Verfahren<a class="headerlink" href="#quasi-newton-verfahren" title="Link zu dieser Überschrift">#</a></h2>
+<section id="dfp">
+<h3><span class="section-number">4.3.1. </span>DFP<a class="headerlink" href="#dfp" title="Link zu dieser Überschrift">#</a></h3>
+</section>
+<section id="bfgs">
+<h3><span class="section-number">4.3.2. </span>BFGS<a class="headerlink" href="#bfgs" title="Link zu dieser Überschrift">#</a></h3>
+</section>
+<section id="limited-memory-bfgs">
+<h3><span class="section-number">4.3.3. </span>Limited-memory BFGS<a class="headerlink" href="#limited-memory-bfgs" title="Link zu dieser Überschrift">#</a></h3>
+</section>
+</section>
+<section id="zusammenfassung-der-verfahren-erster-und-zweiter-ordnung">
+<h2><span class="section-number">4.4. </span>Zusammenfassung der Verfahren erster und zweiter Ordnung<a class="headerlink" href="#zusammenfassung-der-verfahren-erster-und-zweiter-ordnung" title="Link zu dieser Überschrift">#</a></h2>
+</section>
 </section>
 
     <script type="text/x-thebe-config">

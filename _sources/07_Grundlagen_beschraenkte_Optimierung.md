@@ -1,6 +1,20 @@
+---
+jupytext:
+  formats: md:myst
+  text_representation:
+    extension: .md
+    format_name: myst
+kernelspec:
+  display_name: Python 3
+  language: python
+  name: python3
+---
+
 # Grundlagen der beschränkten Optimierung
 
 
-```python
+## Gleichungsbeschränkte Optimierung
 
-```
+## Ungleichungsbeschränkte Optimierung
+
+## Anwendung: Support Vector Maschinen
