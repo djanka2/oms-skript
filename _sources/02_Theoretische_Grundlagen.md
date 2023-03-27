@@ -991,7 +991,7 @@ Gesucht:
 **Algorithmus**:
 1. Starte mit initialer Schätzung $\v x^{[0]}$, setze $k=0$.
 2. Für $k=0,1,2,\dots$:
-    - Berechne neue Iterierte $\v x^{[k+1]}=x^{[k]}-\alpha^{[k]}\nabla f(\v x^{[k]})=\v x^{[k]}+\v d^{[k]}$, $\alpha^{[k]}>0$.
+    - Berechne neue Iterierte $\v x^{[k+1]}=x^{[k]}-\alpha^{[k]}\nabla f(\v x^{[k]})$, $\alpha^{[k]}>0$.
     - Erhöhe $k$ um $1$.
     - Falls Abbruchbedingung erfüllt, beende Algorithmus mit Lösung $\v x^{[k]}$.
 ````

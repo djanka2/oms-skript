@@ -53,6 +53,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"tex": {"macros": {"N": "\\mathbb{N}", "R": "\\mathbb{R}", "B": "\\mathbb{B}", "NN": "\\mathbb{N}", "RR": "\\mathbb{R}", "BB": "\\mathbb{B}", "norm": ["\\left\\lVert#1 \\right\\rVert", 1], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\begin{pmatrix}"], "emat": ["\\end{pmatrix}"], "bmats": ["\\left(\\begin{smallmatrix}"], "emats": ["\\end{smallmatrix}\\right)"], "scikit": ["\\texttt{scikit-learn}"], "derv": ["\\frac{\\partial #1}{\\partial #2}", 2], "dervquad": ["\\frac{\\partial^2 #1}{\\partial #2^2}", 2], "dervzwei": ["\\frac{\\partial^2 #1}{\\partial {#2} \\partial {#3}}", 3], "v": ["\\mathbf{#1}", 1], "m": ["\\mathbf{#1}", 1], "hyper": ["{\\color{Bittersweet}{#1}}", 1], "initial": "\\DeclareMathOperator{\\initial}{initial}", "reduced": "\\DeclareMathOperator{\\reduced}{reduced}", "lazy": "\\DeclareMathOperator{\\lazy}{lazy}", "ILP": "\\DeclareMathOperator{\\ILP}{ILP}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Stichwortverzeichnis" href="genindex.html" />
     <link rel="search" title="Suche" href="search.html" />
     <link rel="next" title="1. Funktionen und Ableitungen" href="01_Multivariate_Analysis.html" />
@@ -303,12 +305,48 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#inhaltsverzeichnis">
+   Inhaltsverzeichnis
+  </a>
+  <ul class="nav section-nav flex-column">
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#notation">
+   Notation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#kontakt">
+   Kontakt
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
@@ -320,6 +358,31 @@ title="Print to PDF"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#inhaltsverzeichnis">
+   Inhaltsverzeichnis
+  </a>
+  <ul class="nav section-nav flex-column">
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#notation">
+   Notation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#kontakt">
+   Kontakt
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -330,6 +393,10 @@ title="Print to PDF"
   <section class="tex2jax_ignore mathjax_ignore" id="uberblick">
 <h1>Überblick<a class="headerlink" href="#uberblick" title="Link zu dieser Überschrift">#</a></h1>
 <p>Dies ist das Skript für die Vorlesung Optimierung, Modellierung und Simulation an der Hochschule Karlsruhe im Studiengang Data Science.</p>
+<section id="inhaltsverzeichnis">
+<h2>Inhaltsverzeichnis<a class="headerlink" href="#inhaltsverzeichnis" title="Link zu dieser Überschrift">#</a></h2>
+<p>Die Vorlesung ist in zwei Teile gegliedert, die im Prinzip unabhängig voneinander gelesen werden können. Im Teil “Nichtlineare Optimierung” werden gradientenbasierte Optimierungsverfahren behandelt, wie sie z.B. beim Training  von Modellen des maschinellen Lernens benutzt werden.</p>
+<p>Im Teil “Lineare Optimierung” liegt der Fokus auf Problemmodellierung von Planungs- und Entscheidungsprobleme als gemischt-ganzzahlige lineare Optimierungsprobleme. Die Inhalte werden oft dem <em>Operations Research</em> zugerechnet.</p>
 <div class="toctree-wrapper compound">
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Nichtlineare Optimierung</span></p>
 <ul>
@@ -353,6 +420,35 @@ title="Print to PDF"
 <li class="toctree-l1"><a class="reference internal" href="13_Praxisaspekte.html">13. Praxisaspekte beim Lösen von gemischt-ganzzahligen Programmen</a></li>
 </ul>
 </div>
+</section>
+<section id="notation">
+<h2>Notation<a class="headerlink" href="#notation" title="Link zu dieser Überschrift">#</a></h2>
+<p>Naturgemäß werden Sie in diesem Mathe-Skript mit vielen Symbolen konfrontiert. Um Ihnen den Weg durch diesen algebraischen Dschungel zu erleichtern (was ist Zahl, was ist Vektor?), wird in diesem Skript folgende Notation angewendet.</p>
+<ul>
+<li><p><strong>Lateinische Kleinbuchstaben</strong> wie <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span>, <span class="math notranslate nohighlight">\(a\)</span> usw. bezeichnen (meist reelle) Zahlen.</p></li>
+<li><p><strong>Fettgedruckte, lateinische Kleinbuchstaben</strong> wie <span class="math notranslate nohighlight">\(\v x\)</span>, <span class="math notranslate nohighlight">\(\v y\)</span>, <span class="math notranslate nohighlight">\(\v a\)</span> usw. bezeichnen Vektoren im <span class="math notranslate nohighlight">\(\R^n\)</span>. Deren Komponenten sind reelle Zahlen und werden mit einem Subscript indiziert (und sind nicht fettgedruckt, sind ja Zahlen):</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    \v x=\bmat x_1\\x_2\\\vdots\\x_n\emat
+  \end{align*}\]</div>
+</li>
+<li><p><strong>Fettgedruckte, lateinische Großbuchstaben</strong> wie <span class="math notranslate nohighlight">\(\m A\)</span>, <span class="math notranslate nohighlight">\(\m X\)</span>, <span class="math notranslate nohighlight">\(\m H\)</span> usw. bezeichnen <span class="math notranslate nohighlight">\(m\times n\)</span>-Matrizen. Deren Einträge (reelle Zahlen) sind die zugehörigen Kleinbuchstaben (nicht fettgedruckt) und werden mit zwei Subscripten indiziert:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    \m A=\bmat a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n}\\
+                a_{21} &amp; \cdots &amp; \cdots &amp; \\
+                \vdots &amp;  &amp;      &amp; \vdots\\
+                a_{m1} &amp; \cdots &amp; \cdots &amp; a_{mn}\emat
+  \end{align*}\]</div>
+</li>
+<li><p><strong>Griechische Kleinbuchstaben</strong> wie <span class="math notranslate nohighlight">\(\alpha\)</span>, <span class="math notranslate nohighlight">\(\lambda\)</span>, <span class="math notranslate nohighlight">\(\mu\)</span> usw. bezeichnen reelle Zahlen.</p></li>
+<li><p>Iterationszähler in iterativen Verfahren (Gradientenverfahren u.ä.) werden mit einem <strong>Superscript in eckigen Klammern</strong> indiziert: So bezeichnet <span class="math notranslate nohighlight">\(\v x^{[k]}\)</span> den Vektor <span class="math notranslate nohighlight">\(\v x\)</span> während der <span class="math notranslate nohighlight">\(k\)</span>-ten Iteration.</p></li>
+</ul>
+</section>
+<section id="kontakt">
+<h2>Kontakt<a class="headerlink" href="#kontakt" title="Link zu dieser Überschrift">#</a></h2>
+<p>Wenn Sie Fehler finden oder sonstige Kommentare und Anregungen haben, schreiben Sie mir gerne eine E-Mail: <a class="reference external" href="mailto:dennis&#46;janka&#37;&#52;&#48;h-ka&#46;de">dennis<span>&#46;</span>janka<span>&#64;</span>h-ka<span>&#46;</span>de</a>.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">

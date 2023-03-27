@@ -113,10 +113,10 @@ import plotly.graph_objects as go
 def plot_iterates(iterates, func):
     """Plot objective function func as contour plot and visualize iterates"""
     iterates_T = iterates.T
-    x1_min = min(1,np.min(iterates_T[0]))-0.1
-    x1_max = max(1,np.max(iterates_T[0]))+0.1
-    x2_min = min(1,np.min(iterates_T[1]))-0.1
-    x2_max = max(1,np.max(iterates_T[1]))+0.1
+    x1_min = min(0,np.min(iterates_T[0]))-0.1
+    x1_max = max(0,np.max(iterates_T[0]))+0.1
+    x2_min = min(0,np.min(iterates_T[1]))-0.1
+    x2_max = max(0,np.max(iterates_T[1]))+0.1
 
     x1_range = np.linspace(x1_min, x1_max, 100)
     x2_range = np.linspace(x2_min, x2_max, 100)
@@ -127,13 +127,13 @@ def plot_iterates(iterates, func):
     fig = go.Figure(data=[go.Contour(z=Z, x=x1_range, y=x2_range, 
                                      colorscale="Blues",
                                      contours=dict(start=0,
-                                                   end=5,
+                                                   end=10,
                                                    size=0.2,
                                                     ))])
 
     fig.add_scatter(x=iterates_T[0], y=iterates_T[1], 
                     mode='lines+markers', name='iterates',
-                    marker=dict(color=np.arange(n_iter), cmin=0, cmax=n_iter, size=3, colorbar=dict(title="k", x=1.15), 
+                    marker=dict(color=np.arange(n_iter), cmin=0, cmax=n_iter, size=7, colorbar=dict(title="k", x=1.15), 
                     colorscale="Oranges"),
                     line=dict(color="grey")
                    )
@@ -247,13 +247,13 @@ Im folgenden schauen wir uns weitere gängige Möglichkeiten vor, die Schrittwei
 ### Dämpfung
 Eine weitere beliebte Strategie ist die gedämpfte Schrittweite. ier wird, ausgehend von einer Startschrittweite, die Schrittweite in jedem Schritt (oder allgemeiner alle $m$ Schritte) reduziert.
 Typische Dämpfungsstrategien sind:
-- Inverse Dämpfung: $\alpha^{[k+1]}=\frac{\hyper{\alpha_0}}{1+\hyper{\lambda}k}$. Mit dem Hyperparameter $\hyper{\lambda}\in\R$ kann die Reduktion der Schrittweite gesteuert werden: je größer $\hyper{\lambda}$, desto schneller wird $\alpha^{[k]}$ reduziert
+- Inverse Dämpfung: $\alpha^{[k]}=\frac{\hyper{\alpha_0}}{k}$.
 - Exponentielle Dämpfung: $\alpha^{[k+1]}=\hyper{\gamma}\alpha^{[k]}=\hyper{\gamma}^k\hyper{\alpha_0}$. Mit dem Hyperparameter $\hyper{\gamma}\in(0,1)$: je näher $\hyper{\gamma}$ an $1$ ist, desto weniger wird die Schrittweite in jedem Schritt reduziert. Wenn $\hyper{\gamma}$ nahe $0$ ist, wird die Schrittweite nach wenigen Iterationen sehr klein.
 
-In beiden Fällen ist die Startschrittweite $\hyper{\alpha_0}\in\R$ ein weiterer Hyperparameter.
+In beiden Fällen ist die Startschrittweite $\hyper{\alpha_0}\in\R$ ein Hyperparameter.
 
 ````{note}
-Die Parameter $\hyper{\alpha_0}, \hyper{\gamma}, \hyper{\lambda}$ sind Beispiele für *Hyperparameter* des Verfahren. Ähnlich wie in Texten über maschinelles Lernen bezeichnet der Begriff Hyperparameter hier eine Größe, die *vor* dem Ausführen des Verfahrens gewählt werden muss. Die Wahl der Hyperparameter beeinflusst die Performance des Verfahrens und die Qualität der Lösungen. Wie die Abhängigkeit eines Verfahrens von einem bestimmten Parameter ist ("Was passiert, wenn ich Hyperparameter "X" um Faktor 10 erhöhe?") lässt sich oft nur schwer vorhersagen. Jedoch gibt es für einige wichtige Hyperparameter Erfahrungswerte.
+Die Parameter $\hyper{\alpha_0} und \hyper{\gamma}$ sind Beispiele für *Hyperparameter* des Verfahrens. Ähnlich wie in Texten über maschinelles Lernen bezeichnet der Begriff Hyperparameter hier eine Größe, die *vor* dem Ausführen des Verfahrens gewählt werden muss. Die Wahl der Hyperparameter beeinflusst die Performance des Verfahrens und die Qualität der Lösungen. Wie die Abhängigkeit eines Verfahrens von einem bestimmten Parameter ist ("Was passiert, wenn ich Hyperparameter "X" um Faktor 10 erhöhe?") lässt sich oft nur schwer vorhersagen. Jedoch gibt es für einige wichtige Hyperparameter Erfahrungswerte.
 
 Alle Verfahren, die wir in dieser Vorlesung kennenlernen, besitzen Hyperparameter. Um sie von den anderen Symbolen abzuheben, werden Sie $\hyper{\text{farbig}}$ hervorgehoben.
 ```` 
@@ -273,7 +273,11 @@ Man sieht: Beim Wert $\hyper{\alpha_0}=0.2$ (blaue Kurve) werden die Schrittweit
  
 
 ### Exakte Liniensuche
-Wenn wir also eine Richtung $\v d^{[k]}$ identifiziert haben, so können wir folgendes tun: wir schauen wo die Funktion $f$ *entlang der Richtung* $\v d^{[k]}$ ihr Minimum annimmt. Das kann man sich etwa so vorstellen:
+Wie wir bisher gesehen haben, ist die Wahl der Schrittweite im Allgemeinen nicht so einfach und eine falsche Wahl kann schnell dazu führen, dass das Verfahren entweder sehr langsam oder überhaupt nicht konvergiert. 
+
+Die Idee der Liniensuche ist nun, in jedem Schritt die *beste* Schrittweite, also diejenige, die dafür sorgt, dass die Zielfunktion am meisten reduziert wird. Das ist ein Optimierungsproblem innerhalb des Optimierungsproblems. 
+
+Wie funktioniert das? Wenn wir eine Abstiegsrichtung $\v d^{[k]}$ identifiziert haben, schauen wir, wo die Funktion $f$ *entlang der Richtung* $\v d^{[k]}$ ihr Minimum annimmt. Das kann man sich etwa so vorstellen:
 
 ```{code-cell} ipython3
 :tags: [hide-input]
@@ -429,7 +433,35 @@ Gesucht:
 &nbsp;&nbsp;&nbsp;&nbsp;Setze $\alpha \leftarrow \hyper{p}\alpha$
 3. Gib als Ergebnis $\alpha$ zurück.
 ````
-Der Algorithmus wird typischerweise in *jedem* Schritt des Gradientenverfahrens aufgerufen. Die Hyperparameter kann man grob wie folgt interpretieren:
+Der Algorithmus wird typischerweise in *jedem* Schritt des Gradientenverfahrens aufgerufen. Eine einfache Python Implementierung sieht so aus:
+
+```{code-cell} ipython3
+def backtracking(alpha0, x, d, func, dfx):
+    """ 
+    Compute stepsize alpha by backtracking line search.
+    
+    :param float alpha0: Maximum stepsize
+    :param np.array x: Current iterate
+    :param np.array d: Current descent direction
+    :param function func: Objective function
+    :param np.array dfx: Gradient evaluated at current iterate
+    :return float: Stepsize alpha that provides sufficient reduction of the objective function
+    """
+    alpha = alpha0
+    beta = 1e-4
+    p = 0.5
+    fx = func(x)
+    dfx_dot_d = np.dot(dfx, d)
+    # Test 1. Wolfe condition
+    while func(x + alpha*d) > fx + beta*alpha*dfx_dot_d:
+        alpha = p*alpha
+        # Stop if stepsize gets too small
+        if alpha < 1e-16:
+            break
+    return alpha
+```
+
+Die Hyperparameter kann man grob wie folgt interpretieren:
 $\hyper{\alpha_0}$ ist die größtmögliche Schrittweite in jeder Iteration $k$ des Gradientenverfahrens. Je größer $\hyper{\alpha_0}$ und $\hyper{p}$, die Reduktion der Testschrittweite, desto größer (und hoffentlich besser) wird potentiell der Schritt, aber es besteht die Gefahr, dass das Backtracking Verfahren viele Iterationen benötigt, bis eine geeignete Schrittweite gefunden wird.
 
 ````{prf:example} Backtracking Liniensuche
@@ -693,7 +725,7 @@ Das löst aber nicht das zu Grunde liegende Problem -- nämlich die langsame Kon
 Wie wir wissen aus den notwendigen Optimalitätsbedingungen wissen, verschwindet der Gradient bei kritischen Punkten, d.h. wenn $\v x$ ein Minimum, Maximum oder ein Sattelpunkt ist gilt $\nabla f(\v x)=\v 0$. Das bedeutet aber auch, dass die Länge des Gradientenvektors bei kritischen Punkten $0$ ist, also $\norm{\nabla f(\v x)}_2=0$. In der Nähe kritischer Punkte hat der negative Gradient eine Richtung, aber es gilt $\norm{\nabla f(\v x)}_2\approx 0$ (wegen der Stetigkeit der Ableitung). Diese Eigenschaft hat folgende Konsequenz für die Schritte des Gradientenabstiegs: Sie machen sehr wenig Fortschritt, sie "kriechen" förmlich in der Nähe von stationären Punkten. Das hat folgenden Grund: die Distanz, die der Gradientenabstieg in einem Schritt zurücklegt, also $\norm{\v x^{[k+1]}-\v x^{[k]}}_2$ hängt nicht nur von der Schrittweite ab, sondern auch von der Länge des Gradientenvektors:
 \begin{align*}
 \v x^{[k+1]}&=\v x^{[k]}-\alpha \nabla f(\v x^{[k]})\\
-\Leftrightarrow \alpha \nabla f(\v x^{[k]})&= \v x^{[k]}-\v x^{[k+1]}\\
+\Leftrightarrow \v x^{[k+1]}-\v x^{[k]}&=-\alpha \nabla f(\v x^{[k]})\\
 \Leftrightarrow \norm{\v x^{[k+1]}-\v x^{[k]}}_2&=\alpha \norm{\nabla f(\v x^{[k]})}_2
 \end{align*}
 Da der Gradient weit weg von der Lösung oft groß ist, z.B. bei den initialen Punkten, die zufällig initialisiert werden, sind die ersten Schritte eines Gradientenverfahrens typischerweise groß und es wird guter Fortschritt in Richtung der Lösung gemacht. Umgekehrt, wenn sich das Verfahren einem kritischen Punkt annähert, wird die Norm des Gradienten klein, und es wird nur noch wenig Fortschritt in Richtung der Lösung gemacht. Leider passiert das nicht nur in der Nähe von Minima, sondern auch in der Nähe von Sattelpunkten. In manchen Fällen kann es passieren, dass der Gradientenabstieg in der Nähe von Sattelpunkten vollständig zum Stillstand kommt.
@@ -736,7 +768,7 @@ fig = go.Figure(go.Scatter(x=x, y=f(x), name="f(x)=x²", showlegend=False,
 fig.add_trace(go.Scatter(x=x_history, y=f(x_history),
                          mode="markers", 
                          marker=dict(color=np.arange(n_iter+1), cmin=0, cmax=n_iter+1, size=7, colorbar=dict(title="k", x=1.15), 
-                         colorscale="solar"), showlegend=False))
+                         colorscale="Oranges"), showlegend=False))
 
 fig.update_layout(width=500)
 fig.show()
