@@ -343,7 +343,7 @@ Mathematisch kann man die Schrittweite $\alpha^{[k]}$ als Lösung des folgenden 
 \begin{align*}
 \min_{\alpha} f(\v x^{[k]}+\alpha \v d^{[k]})
 \end{align*}
-Das Problem in Worte übersetzt: Suche dasjenige $\alpha$, dass die Funktion $f$ von $\v x^{[k]$ ausgehend entlang der Richtung (Linie) $\v d^{[k]}$ minimiert. Dieses Problem muss in jedem Schritt (also $k=0,1,2,\dots$) des Abstiegsverfahrens neu gelöst werden. Dafür könnte man auch wieder ein Gradientenverfahren nehmen, man kann es aber auch mit Verfahren machen, die speziell für 1D-Optimierung entwickelt wurden, wie z.B. das [Bisektionsverfahren](https://de.wikipedia.org/wiki/Bisektion#Kontinuierlicher_Fall).
+Das Problem in Worte übersetzt: Suche dasjenige $\alpha$, dass die Funktion $f$ von $\v x^{[k]}$ ausgehend entlang der Richtung (Linie) $\v d^{[k]}$ minimiert. Dieses Problem muss in jedem Schritt (also $k=0,1,2,\dots$) des Abstiegsverfahrens neu gelöst werden. Dafür könnte man auch wieder ein Gradientenverfahren nehmen, man kann es aber auch mit Verfahren machen, die speziell für 1D-Optimierung entwickelt wurden, wie z.B. das [Bisektionsverfahren](https://de.wikipedia.org/wiki/Bisektion#Kontinuierlicher_Fall).
 
 Dieses Verfahren zur Bestimmung der Schrittweite nennt man (*exakte*) *Liniensuche* (*line search*).
 
@@ -436,20 +436,23 @@ Gesucht:
 Der Algorithmus wird typischerweise in *jedem* Schritt des Gradientenverfahrens aufgerufen. Eine einfache Python Implementierung sieht so aus:
 
 ```{code-cell} ipython3
-def backtracking(alpha0, x, d, func, dfx):
+def backtracking(x, d, func, dfx):
     """ 
     Compute stepsize alpha by backtracking line search.
     
-    :param float alpha0: Maximum stepsize
     :param np.array x: Current iterate
     :param np.array d: Current descent direction
     :param function func: Objective function
     :param np.array dfx: Gradient evaluated at current iterate
     :return float: Stepsize alpha that provides sufficient reduction of the objective function
     """
-    alpha = alpha0
+    
+    # Hyperparameter
+    alpha = 10
     beta = 1e-4
     p = 0.5
+    
+    # Evaluate functions that are needed in every iteration
     fx = func(x)
     dfx_dot_d = np.dot(dfx, d)
     # Test 1. Wolfe condition
@@ -720,8 +723,6 @@ Das löst aber nicht das zu Grunde liegende Problem -- nämlich die langsame Kon
 
 
 ### Langsames Kriechen durch flache Regionen
-% Vanishing gradient near stationary points
-% MLRefined 3.6
 Wie wir wissen aus den notwendigen Optimalitätsbedingungen wissen, verschwindet der Gradient bei kritischen Punkten, d.h. wenn $\v x$ ein Minimum, Maximum oder ein Sattelpunkt ist gilt $\nabla f(\v x)=\v 0$. Das bedeutet aber auch, dass die Länge des Gradientenvektors bei kritischen Punkten $0$ ist, also $\norm{\nabla f(\v x)}_2=0$. In der Nähe kritischer Punkte hat der negative Gradient eine Richtung, aber es gilt $\norm{\nabla f(\v x)}_2\approx 0$ (wegen der Stetigkeit der Ableitung). Diese Eigenschaft hat folgende Konsequenz für die Schritte des Gradientenabstiegs: Sie machen sehr wenig Fortschritt, sie "kriechen" förmlich in der Nähe von stationären Punkten. Das hat folgenden Grund: die Distanz, die der Gradientenabstieg in einem Schritt zurücklegt, also $\norm{\v x^{[k+1]}-\v x^{[k]}}_2$ hängt nicht nur von der Schrittweite ab, sondern auch von der Länge des Gradientenvektors:
 \begin{align*}
 \v x^{[k+1]}&=\v x^{[k]}-\alpha \nabla f(\v x^{[k]})\\
