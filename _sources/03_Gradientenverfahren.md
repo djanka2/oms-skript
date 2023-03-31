@@ -49,6 +49,7 @@ Wenn $\v d^{[k]}=\nabla f(\v x^{[k]})$ gewählt wird, so liefert dies zwar den k
 Zur Notation : wir ziehen ab jetzt den skalaren Faktor $\alpha^{[k]}$ aus dem $\v d^{[k]}$ heraus, schreiben also $\v x^{[k+1]}=\v x^{[k]}+\alpha^{[k]}\v d^{[k]}$ statt $\v x^{[k+1]}=\v x^{[k]}+\v d^{[k]}$.
 
 ````{prf:algorithm} Allgemeines Framework Abstiegsverfahren
+:label: alg:gd_allgemein
 Gegeben: 
 : Differenzierbare Funktion $f:\R^n\rightarrow\R$.
 
@@ -635,6 +636,7 @@ Die *Länge* des negativen Gradienen kann in der Nähe von kritischen Punkten se
 
 Diese beiden Probleme sind nicht bei jeder einzelnen Funktion zu beobachten, tauchen aber gerade bei Optimierungsproblemen des maschinellen Lernens oft auf. Viele Funktionen dort weisen lange, schmale Täler auf, die das oben beschriebene Verhalten begünstigen.
 
+(sec:zickzack)=
 ### Zick-Zack Verhalten
 In {ref}`sec:interpretation` hatten wir überlegt, dass eine Eigenschaft des (negativen) Gradienten ist, dass er senkrecht auf den Höhenlinien der Funktion steht. Das ist eine universelle Eigenschaft und gilt für jede differenzierbare Funktion. In der Praxis kann diese Eigenschaft dazu führen (hängt natürlich von der genauen Funktion ab, die man betrachtet), dass die Gradientenrichtungen während des Gradientenabstiegs ein *Zick-Zack*-Verhalten aufweisen, was wiederum dazu führt, dass wenig Fortschritt in Richtung der Lösung gemacht wird. Konsequenz: das Verfahren benötigt sehr viele Schritte bis zur Konvergenz. 
 
@@ -721,7 +723,7 @@ steht stets senkrecht zu den Höhenlinien der Funktion, und bei sehr schmalen Fu
 Dieses Zick-Zack-Verhalten kann zwar durch eine Verringerung der Schrittlänge verbessert werden.
 Das löst aber nicht das zu Grunde liegende Problem -- nämlich die langsame Konvergenz.
 
-
+(sec:gdslow)=
 ### Langsames Kriechen durch flache Regionen
 Wie wir wissen aus den notwendigen Optimalitätsbedingungen wissen, verschwindet der Gradient bei kritischen Punkten, d.h. wenn $\v x$ ein Minimum, Maximum oder ein Sattelpunkt ist gilt $\nabla f(\v x)=\v 0$. Das bedeutet aber auch, dass die Länge des Gradientenvektors bei kritischen Punkten $0$ ist, also $\norm{\nabla f(\v x)}_2=0$. In der Nähe kritischer Punkte hat der negative Gradient eine Richtung, aber es gilt $\norm{\nabla f(\v x)}_2\approx 0$ (wegen der Stetigkeit der Ableitung). Diese Eigenschaft hat folgende Konsequenz für die Schritte des Gradientenabstiegs: Sie machen sehr wenig Fortschritt, sie "kriechen" förmlich in der Nähe von stationären Punkten. Das hat folgenden Grund: die Distanz, die der Gradientenabstieg in einem Schritt zurücklegt, also $\norm{\v x^{[k+1]}-\v x^{[k]}}_2$ hängt nicht nur von der Schrittweite ab, sondern auch von der Länge des Gradientenvektors:
 \begin{align*}
@@ -776,16 +778,203 @@ fig.show()
 ```
 
 ## Gradientenabstieg mit Momentum
-%TODO
-% MLRefined A.2
+Im Abschnitt {ref}`sec:zickzack` haben wir ein fundamentales Problem mit der *Richtung* des negativen Gradienten beobachtet: sie kann (je nach der zu minimierenden Funktion) schnell oszillieren, was zu zickzackförmigen Gradientenabstiegsschritten führt, die die
+Optimierung verlangsamen. In diesem Abschnitt beschreiben wir eine beliebte Erweiterung des Standard Gradientenabstiegsschritt, das sogenannte *Momentum*, das speziell darauf ausgelegt ist, dieses Problem zu beheben. 
+
+Die Grundidee ist, dass man in jedem Schritt nicht mehr nur dem aktuellen negativen Gradienten folgt, sondern auch die Richtung aus dem vorherigen Schritt mit berücksichtigt. Jeder Schritt $\v d^{[k]}$ ist eine Summe aus aktuellem negativen Gradienten und dem vorherigen Schritt. In Formeln:
+\begin{align*}
+\v d^{[k]} = \hyper{\beta}\v d^{[k-1]}-\nabla f(\v x^{[k]})
+\end{align*}
+Mit dem so berechneten Schritt generiert man dann gemäßt dem allgemeinen Framework {prf:ref}`alg:gd_allgemein` die nächste Iterierte $\v x^{[k+1]}$ als
+\begin{align*}
+\v x^{[k+1]} = \v x^{[k]}+\alpha^{[k]}\v d^{[k]}
+\end{align*}
+Als Start der Rekursion wählt man $\v d^{[0]}=\v 0$; der erste Schritt ist also ein normaler Gradientenschritt. Die Schrittweite $\alpha^{[k]}$ wird davon unabhängig bestimmt. Sie kann wie in den vergangenen Abschnitten beschrieben zum Beispiel konstant, gedämpft oder mittels Liniensuche bestimmt werden. 
+
+
+ Der Hyperparameter $\hyper{\beta}\in [0,1]$ bestimmt, wie viel von der "alten" Richtung mit in den aktuellen Schritt mit einfließen soll. Für sehr kleine Werte von $\hyper{\beta}$ wird für den aktuellen Schritt nur wenig alte Information verwendet und viel vom aktuellen Gradienten. Im Extremfall $\hyper{\beta}=0$ erhält man den normalen Gradientenabstieg. Für große Werte von $\hyper{\beta}$ wird mehr Wert auf alte Information gelegt. In der Praxis wählt man $\hyper{\beta}$ z.B. im Intervall $[0.7,1.0]$.
+ 
+ %Im Extremfall $\hyper{\beta}=1$ ist für *jeden* Schritt die Abstiegsrichtung $\v d^{[k]}=\v d^{[0]}=-\nabla f(\v x^{[0]})$, da der zweite Term $(-\nabla f(\v x^{[k]}))$ für $\hyper{\beta}=1$ ja immer gleich Null ist.
+ 
+ Wie können wir uns diese "alte" Gradienteninformation vorstellen? Durch die Rekursion hinterlassen ja *alle* Gradienten vom Start des Gradientenverfahrens an ihre Spuren im aktuellen Schritt. Wie genau, das schauen wir uns in einem Beispiel an, indem wir die Rekursion über die ersten drei Schritte ausrollen.
+
+ \begin{align*}
+  \v d^{[0]}&=-\nabla f(\v x^{[0]})\\
+  \v d^{[1]}&=\hyper{\beta}\v d^{[0]}-\nabla f(\v x^{[1]})\\
+          &=-\hyper{\beta}\nabla f(\v x^{[0]})-\nabla f(\v x^{[1]})\\
+  \v d^{[2]}&=\hyper{\beta}\v d^{[1]}-\nabla f(\v x^{[2]})\\
+          &=\hyper{\beta}(-\hyper{\beta}\nabla f(\v x^{[0]})-\nabla f(\v x^{[1]}))-\nabla f(\v x^{[2]})\\
+  \v d^{[3]}&=\hyper{\beta}\v d^{[2]}-\nabla f(\v x^{[3]})\\
+          &=\hyper{\beta}(\hyper{\beta}(-\hyper{\beta}\nabla f(\v x^{[0]})-\nabla f(\v x^{[1]}))-\nabla f(\v x^{[2]}))-\nabla f(\v x^{[3]})
+\end{align*}
+Was fällt auf? Schauen wir uns einmal den letzten Schritt $\v d^{[3]}$ an und multiplizieren die Klammern aus:
+\begin{align*}
+  \v d^{[3]}&=-\hyper{\beta}^3\nabla f(\v x^{[0]})-\hyper{\beta}^2\nabla f(\v x^{[1]})-\hyper{\beta}\nabla f(\v x^{[2]})-\nabla f(\v x^{[3]})
+\end{align*}
+Neben der "neuen" Gradienteninformation $\nabla f(\v x^{[3]})$ tauchen alle "alten" Gradienten $\nabla f(\v x^{[2]}), \nabla f(\v x^{[1]})$ und $\nabla f(\v x^{[0]})$ im Schritt $\v d^{[3]}$ auf. Sie werden aber exponentiell mit $\hyper{\beta}$ gedämpft (Annahme: $\hyper{\beta}<1$), während die Iterationen fortschreiten: $\nabla f(\v x^{[0]})$ wird mit $\hyper{\beta}^3$ multipliziert, $\nabla f(\v x^{[1]})$ mit $\hyper{\beta}^2$ und $\nabla f(\v x^{[2]})$ mit $\hyper{\beta}$. In der nächsten Iteration $k=4$ würde dann $\nabla f(\v x^{[0]})$ mit $\hyper{\beta}^4$ multipliziert, $\nabla f(\v x^{[1]})$ mit $\hyper{\beta}^3$ und so weiter. Die Dämpfung ist umso stärker, je kleiner $\hyper{\beta}$ ist ($0.1^4$ ist z.B. viel kleiner als $0.9^4$).
+
+Verhindert das nun wirklich das Zick-Zack Verhalten des Gradientenabstiegs? Ja! Wir betrachten wieder das quadratische Beispiel $f(x_1,x_2)=0.1x_1^2+9x_2^2$. Im folgenden Plot sieht man oben das normale Gradientenverfahren (also $\hyper{\beta}=0$) und darunter Gradientenverfahren mit Momentum für $\hyper{\beta}=0.2$ und $\hyper{\beta}=0.7$.
+```{code-cell} ipython3
+:tags: [hide-input]
+import numpy as np
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+
+def plot_iterates(iterates_list, func, c_list):
+    """Plot objective function func as contour plot and visualize iterates"""
+    fig = make_subplots(rows=len(iterates_list), cols=1)
+
+    for k, (iterates, c) in enumerate(zip(iterates_list, c_list)):
+        iterates_T = iterates.T
+        x1_min = min(0,np.min(iterates_T[0]))-0.1
+        x1_max = max(1,np.max(iterates_T[0]))+0.1
+        x2_min = min(0,np.min(iterates_T[1]))-0.1
+        x2_max = max(1,np.max(iterates_T[1]))+0.1
+
+        x1_range = np.linspace(x1_min, x1_max, 100)
+        x2_range = np.linspace(x2_min, x2_max, 100)
+        A = np.meshgrid(x1_range, x2_range)
+        Z = func(A, c)
+
+        n_iter = len(iterates_T[1])
+        fig.add_contour(z=Z, x=x1_range, y=x2_range, 
+                                        colorscale="Blues",
+                                        contours=dict(start=0,
+                                                    end=50,
+                                                    size=1),
+                                        row=k+1, col=1, showscale=False, showlegend=False)
+
+        fig.add_scatter(x=iterates_T[0], y=iterates_T[1], 
+                        mode='lines+markers', name='iterates',
+
+                        marker=dict(color=np.arange(n_iter), cmin=0, cmax=n_iter, size=7, colorbar=dict(title="k", x=1.15), 
+                        colorscale="Oranges"),
+                        line=dict(color="grey"),
+                        #line=dict(color="#ff7f0e"),
+                        row=k+1, col=1, showlegend=False
+                    )
+
+    fig.update_layout(template="simple_white", height=800, margin=go.layout.Margin(l=0, r=0, b=0, t=0) )
+    fig.show()
+
+
+def f(x, c):
+    """ Function to minimize """
+    return c*x[0]**2 + 9*x[1]**2
+
+def df(x, c):
+    """ Derivative of the function to minimize """
+    return np.array([2*c*x[0], 18*x[1]])
+
+def gd(func, derv, alpha, x0, beta, n_steps, c):
+    """ Perform n_steps iterations of gradient descent with steplength alpha and print iterates """
+    x_history = [x0]
+    x = x0
+    d = np.zeros_like(x)
+    for k in range(n_steps):
+        d = beta*d - derv(x,c)
+        x = x + alpha * d
+
+        x_history.append(x)
+
+    return np.array(x_history)
+
+
+x0 = np.array([10,1])
+x_history1 = gd(func=f, derv=df, alpha=0.1, x0=x0, beta=0.0, n_steps=25, c=0.1)
+x_history2 = gd(func=f, derv=df, alpha=0.1, x0=x0, beta=0.2, n_steps=25, c=0.1)
+x_history3 = gd(func=f, derv=df, alpha=0.1, x0=x0, beta=0.7, n_steps=25, c=0.1)
+plot_iterates([x_history1, x_history2, x_history3], f, c_list=[0.1,0.1,0.1])
+```
+Man sieht, die beiden Verfahren mit Momentum viel weniger Zick-Zack Verhalten aufweisen und durch das Momentum viel näher an die Lösung herangeführt werden.
+
+Zusammenfassend: Momentum dämpft Oszillationen und macht mehr Fortschritt in Richtungen die "auf Lange Sicht" Verbesserung bringen (d.h. Richtungen, die über mehrere Iterationen konsistent sind). 
+
+%Ein physikalisches Analogon dazu: Eine Kugel, die ein gekrümmtes Tal hinabrollt: Die Bewegungen in Richtung der steilen Seitenwände werden kleiner, je mehr Schwung die Kugel aufnimmt.
+
 
 ### Nesterov Modifikation
+Ein Problem mit Momentum ist, dass die Abstiegsrichtung eventuell zu *viel* Schwung in der Nähe eines Minimums besitzt. Die Iterierten "schießen" dann über das Minimum hinweg und müssen wieder Momentum in die entgegengesetzte Richtung sammeln.
+
+Die Idee von [Nesterovs](https://de.wikipedia.org/wiki/Juri_Jewgenjewitsch_Nesterow) Variante des Momentum Gradientenabstiegs ist, dass das Verfahren im Voraus wissen soll, dass der Gradient an der nächsten Iterierten flacher wird. Das kann nämlich bedeuten, dass das Minimum näher kommt. Es wäre doch gut, wenn wir in die aktuelle Abstiegsrichtung $\v d^{[k]}$ statt dem Gradienten am aktuellen Punkt $\nabla f(\v x^{[k]})$ den Gradienten am *nächsten* Punkt einfließen lassen könnten, also $\nabla f(\v x^{[k]}+\alpha^{[k]}\v d^{[k]})$. Das ist aber natürlich nicht möglich, da wir für diesen ja wiederum $\v d^{[k]}$ kennen müssten. 
+
+Aber einen Teil von $\v d^{[k]}$ kennen wir ja schon ohne den Gradienten auszurechnen: Nämlich den Momentumsterm $\hyper{\beta}\v d^{[k-1]}$, den wir zum aktuellen Gradienten addieren.
+
+Die Idee des "Nesterov Accelerated Gradient" Verfahren ist es, den Gradienten nicht bei $\v x^{[k]}$, sondern bei $\v x^{[k]} +\hyper{\beta}d{[k-1]}$ auszuwerten. Dieser Punkt sollte näher an $\v x^{[k+1]}$ liegen und somit nützlichere Gradienteninformation besitzen.
+
+Die Iterationsvorschrift lautet:
+\begin{align*}
+\v d^{[k]} = \hyper{\beta}\v d^{[k-1]}-\nabla f(\v x^{[k]} +\hyper{\beta}^d{[k-1]})
+\v x^{[k+1]} = \v x^{[k]}+\alpha^{[k]}\v d^{[k]}
+\end{align*}
+
+Zum Vergleich noch einmal die Iteration für das „normale“ Momentum:
+\begin{align*}
+\v d^{[k]} = \hyper{\beta}\v d^{[k-1]}-\nabla f(\v x^{[k]})
+\v x^{[k+1]} = \v x^{[k]}+\alpha^{[k]}\v d^{[k]}
+\end{align*}
+
+In der Praxis ist die Frage "Nesterov ja oder nein?" meistens genauso zu beantworten wie meistens bei Hyperparametern: Ausprobieren! Bei manchen Problemen funktioniert das Gradientenverfahren mit normalem Momentum besser, bei manchen das mit Nesterov. 
 
 
 ## Normalisierter Gradientenabstieg
-%TODO
-% MLRefined A.3
+Im Abschnitt {ref}`sec:gdslow` haben wir ein fundamentales Problem mit der *Länge* des negativen Gradienten (als Vektor betrachtet) beobachtet. Die Tatsache, dass sie in der Nähe eines Minimums verschwindend klein wird, führt dazu, dass das Verfahren in der Nähe von kritischen Punkten, also neben Minima auch Sattelpunkten, anhalten kann. Wir beschreiben in diesem Abschnitt eine beliebte Erweiterung des normalen Gradientenverfahrens namens *normalisierter Gradientenabstieg*, das speziell entwickelt wurde, um dieses Verhalten zu verbessern. Der Kern dieser Idee liegt in einer einfachen Frage:
+Da die (verschwindende) Länge des negativen Gradienten die Ursache dafür ist, dass der Gradientenabstieg in der Nähe stationärer Punkte langsam kriecht oder an Sattelpunkten anhält, was passiert, wenn wir die Größe bei jedem Schritt einfach ignorieren, indem wir sie herausrechnen, oder *normalisieren*?
 
+Wir haben in {ref}`sec:gdslow` gesehen, dass die Länge des Standard Gradientenschritt proportional zur Länge des Gradienten ist, algebraisch:
+\begin{align*}
+\alpha^{k}\norm{\nabla f(\v x^{[k]})}_2
+\end{align*}
+Weil diese Länge daran Schuld ist, dass das Verfahren in der Nähe von kritischen Punkten nur langsam kriecht, dividieren wir den Gradienten einfach durch seine Norm. Der Schritt ist dann:
+\begin{align*}
+\v d^{[k]}=-\alpha^{k}\frac{\nabla f(\v x^{[k]})}{\norm{\nabla f(\v x^{[k]})}_2}
+\end{align*}
+ Der entstehende Vektor hat Länge 1, aber er zeigt immer noch in dieselbe Richtung wie der Gradient. Die Länge des Schrittes wird jetzt nur noch durch die Schrittweite $\alpha^{[k]}$ bestimmt.
+
+Illustriert am Beispiel aus {ref}`sec:gdslow` $f(x)=x^4$ sieht man, das jeder Schritt (also die Veränderung in $x$-Richtung) gleich groß ist, unabhängig von der aktuellen Steigung:
+```{code-cell} ipython3
+:tags: [hide-input]
+import numpy as np
+import plotly.express as px
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+
+def f(x):
+    """ Function to minimize """
+    return x**4
+
+def df(x):
+    """ Derivative of the function to minimize """
+    return 4*x**3
+
+def gd(func, derv, alpha, x0, n_steps):
+    """ Perform n_steps iterations of gradient descent with steplength alpha and return iterates """
+    x_history = [x0]
+    x = x0
+    for k in range(n_steps):
+        dx = derv(x) / np.linalg.norm(derv(x))
+        x = x - alpha * dx
+        x_history.append(x)
+
+    return np.array(x_history)
+
+n_iter = 10
+x_history = gd(func=f, derv=df, alpha=0.1, x0=1.0, n_steps=n_iter)
+
+x = np.linspace(-1.1,1.1,100)
+
+fig = go.Figure(go.Scatter(x=x, y=f(x), name="f(x)=x²", showlegend=False,
+                         mode="lines", 
+                         marker_color='#1f77b4'))
+fig.add_trace(go.Scatter(x=x_history, y=f(x_history),
+                         mode="markers", 
+                         marker=dict(color=np.arange(n_iter+1), cmin=0, cmax=n_iter+1, size=7, colorbar=dict(title="k", x=1.15), 
+                         colorscale="Oranges"), showlegend=False))
+
+fig.update_layout(width=500)
+fig.show()
+```
+Der Nachteil ist, dass die ersten Schritte möglicherweise zu klein sind und dort dem normalen Gradientenabstieg unterlegen sind.
 
 %## Zusammenfassung
 %TODO
