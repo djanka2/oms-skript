@@ -591,6 +591,7 @@ Man mache sich die Gemeinsamkeiten und Unterschiede zu den eben hergeleiteten Be
 
  
 ````{prf:example} Quadratische Funktion
+:label: ex:quadratic
 Wir betrachten die Funktion
 \begin{align*}
 f(x,y)=x^2+y^2+xy+3x-1
@@ -631,7 +632,7 @@ im Beispiel also
 Die Hessematrix ist die Matrix $\v A$.
 
 Betrachten wir ein weiteres (nicht-quadratisches) Beispiel
-````{prf:example} Quadratische Funktion
+````{prf:example} 
 Wir betrachten die Funktion
 \begin{align*}
 f(x,y)=x(y-1)+x^3
