@@ -893,7 +893,7 @@ Zusammenfassend: Momentum dämpft Oszillationen und macht mehr Fortschritt in Ri
 %Ein physikalisches Analogon dazu: Eine Kugel, die ein gekrümmtes Tal hinabrollt: Die Bewegungen in Richtung der steilen Seitenwände werden kleiner, je mehr Schwung die Kugel aufnimmt.
 
 
-### Nesterov Modifikation
+<!-- ### Nesterov Modifikation
 Ein Problem mit Momentum ist, dass die Abstiegsrichtung eventuell zu *viel* Schwung in der Nähe eines Minimums besitzt. Die Iterierten "schießen" dann über das Minimum hinweg und müssen wieder Momentum in die entgegengesetzte Richtung sammeln.
 
 Die Idee von [Nesterovs](https://de.wikipedia.org/wiki/Juri_Jewgenjewitsch_Nesterow) Variante des Momentum Gradientenabstiegs ist, dass das Verfahren im Voraus wissen soll, dass der Gradient an der nächsten Iterierten flacher wird. Das kann nämlich bedeuten, dass das Minimum näher kommt. Es wäre doch gut, wenn wir in die aktuelle Abstiegsrichtung $\v d^{[k]}$ statt dem Gradienten am aktuellen Punkt $\nabla f(\v x^{[k]})$ den Gradienten am *nächsten* Punkt einfließen lassen könnten, also $\nabla f(\v x^{[k]}+\alpha^{[k]}\v d^{[k]})$. Das ist aber natürlich nicht möglich, da wir für diesen ja wiederum $\v d^{[k]}$ kennen müssten. 
@@ -914,7 +914,7 @@ Zum Vergleich noch einmal die Iteration für das „normale“ Momentum:
 \v x^{[k+1]} = \v x^{[k]}+\alpha^{[k]}\v d^{[k]}
 \end{align*}
 
-In der Praxis ist die Frage "Nesterov ja oder nein?" meistens genauso zu beantworten wie meistens bei Hyperparametern: Ausprobieren! Bei manchen Problemen funktioniert das Gradientenverfahren mit normalem Momentum besser, bei manchen das mit Nesterov. 
+In der Praxis ist die Frage "Nesterov ja oder nein?" meistens genauso zu beantworten wie meistens bei Hyperparametern: Ausprobieren! Bei manchen Problemen funktioniert das Gradientenverfahren mit normalem Momentum besser, bei manchen das mit Nesterov.  -->
 
 
 ## Normalisierter Gradientenabstieg

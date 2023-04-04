@@ -47,6 +47,7 @@ sphinx:
           "N": "\\mathbb{N}"
           "R": "\\mathbb{R}"
           "B": "\\mathbb{B}"
+          "I": "\\mathbb{BI}"
           "NN": "\\mathbb{N}"
           "RR": "\\mathbb{R}"
           "BB": "\\mathbb{B}"
