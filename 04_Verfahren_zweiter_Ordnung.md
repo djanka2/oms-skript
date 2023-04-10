@@ -530,7 +530,7 @@ Wir brauchen also nicht die Matrix $\v A^{[k]}$, sondern Matrix-Vektor Produkte 
 Damit können wir den vollständigen L-BFGS Algorithmus skizzieren:
 
 ````{prf:algorithm} Limited-memory BFGS Verfahren
-:label: alg:bfgs
+:label: alg:lbfgs
 Gegeben: 
 : Differenzierbare Funktion $f:\R^n\rightarrow\R$.
 
@@ -573,3 +573,23 @@ L-BFGS ist für viele unbeschränkte Optimierungsprobleme das Mittel das Wahl. E
 
 
 ## Zusammenfassung der Verfahren erster und zweiter Ordnung
+In den vergangenen beiden Kapiteln haben wir eine ganze Reihe von Verfahren zur Minimierung von differenzierbaren Funktionen kennengelernt. Alle Verfahren haben folgende Gemeinsamkeiten:
+
+1. Sie finden *lokale* Minima von Funktionen. Das Suchen eines *globalen* Minimums nicht-konvexer Funktionen ist eine wesentlich schwierigere Aufgabe. Stand heute kann das in vertretbarer Zeit nur für Funktionen mit wenigen dutzend Variablen geleistet werden. Ein pragmatischer Ansatz, die vorgestellten Verfahren zu verbessern, ist der *multi-start* Ansatz: man startet das Verfahren mehrmals von unterschiedlichen Startwerten und hofft, dass es zu unterschiedlichen Minima konvergiert. Unter diesen wählt man das das beste aus.
+
+2. Für viele der Verfahren kann theoretisch bewiesen werden, dass sie konvergieren. In der Praxis kann aber doch noch einiges schief gehen: zum einen ist nie gesagt nach *wie vielen* Schritten die Verfahren konvergieren, zum anderen rechnet man in der Regel mit endlicher Präzision, d.h. numerische Rundungsfehler können dazu führen, dass ein Verfahren in der Praxis nicht konvergiert.
+
+3. Alle Verfahren arbeiten erzeugen eine Folge von *Iterierten*, d.h. Vektoren $\v x^{[0]}, \v x^{[1]}, \v x^{[2]},\dots$. Die nächste Iterierte wird aus der vorherigen mit einer *Abstiegsrichtung* $\v d^{[k]}$ mutlipliziert mit einer skalaren *Schrittweite* $\alpha^{[k]}$ gewonnen: $\v x^{[k+1]}=\v x^{[k]}+\alpha^{[k]}\v d^{[k]}$. Den Unterschied $\v x^{[k+1]}-\v x^{[k]}$ nennt man auch *Schritt*.
+
+4. Alle Verfahren benötigen neben dem Funktionswert an einer beliebigen Stelle auch den Wert der Ableitung (erste und/oder zweite) an einer beliebigen Stelle.
+
+Die folgende Tabelle gibt eine Übersicht über die vorgestellten Verfahren
+
+| Name    |  Abstiegsrichtung  |  Schrittweitensteuerung | Vorteile | Nachteile |
+| :--- | ---| ---| ---| --- |
+| Gradientenabstieg   |  $\v d^{[k]}$$=-\nabla f(\v x^{[k]})^T$  | - Konstant<br>- Dämpfung<br>- Liniensuche    | - Einfach zu implementieren<br>- Einfach zu verstehen| - Langsame Konvergenz da oft schlechte Abstiegsrichtung<br>- Zick-Zack-Verhalten<br>- Kriechverhalten in flachen Gegenden| 
+| Gradientenabstieg <br> mit Momentum  |  $\v d^{[k]}$$=-\nabla f(\v x^{[k]})^T$  | - Konstant<br>- Dämpfung<br>- Liniensuche    | Zick-Zack- und Kriechverhalten wird abgemildert| - Evtl. keine gute Abstiegsrichtung<br>- Evtl. zu viel Momentum in der Nähe der Lösung | 
+| Normalisierter <br>Gradientenabstieg  |  $\v d^{[k]}$$=-\frac{\nabla f(\v x^{[k]})^T}{\norm{\nabla f(\v x^{[k]})}}_2$  | - Konstant<br>- Dämpfung<br>- Liniensuche    | Kriechverhalten wird abgemildert| Alle sonstigen Nachteile des Gradientenabstiegs | 
+| Newton-Verfahren  |  $\v d^{[k]}$$=-\nabla^2f(\v x^{[k]})^{-1}\nabla f(\v x^{[k]})^T$  | Nicht notwendig    | Lokal sehr schnelle Konvergenz | - Auswertung der Hessematrix in jedem Schritt <br> - Invertierung der Hessematrix in jedem Schritt <br> - Speicherplatzbedarf <br> - Evtl. keine Abstiegsrichtung  | 
+| BFGS-Verfahren  |  $\v d^{[k]}$$=-\v A^{[k]}\nabla f(\v x^{[k]})^T$  | Liniensuche    | - Lokal schnelle Konvergenz <br> - Einfache Berechnung der Approximation der Inversen der Hessematrix <br> - Abstiegsrichtung garantiert  | Speicherplatzbedarf bei großen Problem | 
+| L-BFGS-Verfahren  |  $\v d^{[k]}$$=-\v A^{[k]}\nabla f(\v x^{[k]})^T$  | Liniensuche    | - Lokal (oft) schnelle Konvergenz <br> - Einfache Berechnung der Approximation der Inversen der Hessematrix <br> - Abstiegsrichtung garantiert <br> - Geringer Speicherplatzbedarf | | 

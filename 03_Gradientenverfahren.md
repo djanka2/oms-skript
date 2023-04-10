@@ -14,7 +14,7 @@ kernelspec:
 % # '#8c564b', '#e377c2', '#7f7f7f', '#bcbd22', '#17becf'
 
 (sec:gradientenverfahren)=
-# Gradientenverfahren
+# Verfahren erster Ordnung
 In diesem Abschnitt schauen wir uns Details zu Gradientenverfahren an. Wir wollen das weiterhin anhand von einfachen, niedrig-dimensionalen (1d und 2d) Beispielen tun, um die Konzepte und Probleme der Verfahren zu verstehen. 
 
 Behalten Sie aber im Hinterkopf, dass die eigentliche Motivation von aktuellen Gradientenverfahren die Lösung von sehr schwierigen, hochdimensionalen Problemen ist. Gradientenverfahren werden z.B. dazu eingesetzt moderne KI-Systeme mit vielen Millionen bzw. Milliarden von Variablen zu trainieren.
