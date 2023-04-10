@@ -112,7 +112,7 @@ Aber Achtung: dies ist nur für positiv definite $\v H(\v x^{[k]})$ eine Abstieg
 
 Insgesamt haben wir also folgenden Algorithmus, der sich gut in {prf:ref}`alg:gd_allgemein` aus dem letzten Abschnitt einfügt:
 ````{prf:algorithm} Newton Verfahren zur Optimierung von Funktionen
-:label: alg:gd_allgemein
+:label: alg:newton
 Gegeben: 
 : Zwei Mal differenzierbare Funktion $f:\R^n\rightarrow\R$.
 
@@ -268,12 +268,308 @@ Im Kontext der Optimierung kann man sich das Newton Verfahren als einen Ansatz z
 %TODO Ausbauen
 
 
+## Nachteile des Newton Verfahrens
+Wir haben im vorherigen Abschnitt gesehen, wie das Newton-Verfahrens gegenüber Verfahren erster Ordnung ein dramatische beschleunigtes Konvergenzverhalten aufweisen kann. Leider gehen damit einige Nachteile einher, die wir hier noch einmal kurz zusammenfassen.
+
+Auswertung der Hessematrix
+: In jedem Schritt müssen alle zweiten Ableitungen ausgewertet werden. Dies sind, da die Hessematrix eine symmetrische $n\times n$-Matrix ist, $n(n+1)/2$ Terme. Bei komplizierten Funktionen stellt das einen erheblichen Mehraufwand pro Iteration dar.
+
+Invertierung der Hessematrix
+: In jeder Iteration muss die Hessematrix invertiert werden. Genauer gesagt: es muss ein lineares Gleichungssystem in $n$ Gleichungen und $n$ Variablen gelöst werden. Dies geschieht ebenfalls mit Hilfe numerischer Algorithmen (z.B. der [Cholesky-Zerlegung](https://de.wikipedia.org/wiki/Cholesky-Zerlegung)), deren Rechenaufwand in der Regel kubisch mit der Anzahl der Variablen wächst. Das bedeutet, für die doppelte Anzahl an Variablen entsteht der $2^3=8$-fache Aufwand.
+
+Keine Abstiegsrichtung
+: Abseits der Lösung kann es sein, dass die Hessematrix nich positiv definit ist. In diesem Fall ist der Newton-Schritt keine Abstiegs-, sondern eine Aufstiegsrichtung. Man kann den Newton-Schritt dann regularisieren. Dies ist aber mit zusätzlichem Aufwand verbunden und die entstehenden Abstiegsrichtung ähnelt einem (kurzen) Gradientenabstiegsschritt.
+
+Speicherplatz
+: Neben dem Rechenaufwand für die Berechnung des Schrittes ist auch der benötigte Speicherplatz nicht zu untersätzen. Beispiel: Die Hessematrix einer Funktion mit $10000$ Variablen besitzt $10000\cdot 10001/2=50005000$ Einträge. Wenn jeder Eintrag $8$ Bytes belegt, wären das etwa $400$ MB. Bei $20000$ Variablen beträgt der Speicherplatzbedarf bereits $1.6$ GB.
+
+
 ## Quasi-Newton Verfahren
 
-### DFP 
+### Idee von Quasi-Newton Verfahren
+Quasi-Newton Verfahren versuchen, den Vorteil der schnellen Konvergenz von Verfahren zweiter Ordnung beizubehalten, aber dabei die Nachteile zu umgehen. Die Grundidee ist es, eine Approximation der Hessematrix bzw. ihrer Inversen zu konstruieren und diese in jedem Schritt des Abstiegsverfahren basierend auf der vorherigen Iteration zu aktualisieren statt komplett neu zu berechnen.
 
-### BFGS
+Wir konzentrieren uns zunächst den ersten der vier Nachteile des Newton-Verfahrens: die Notwendigkeit, zweite Ableitungen auszuwerten, um Krümmungsinformation zu erhalten. Denn wie wir gesehen haben, produziert die Krümmungsinformation bessere Abstiegsrichtungen. Können wir Krümmungsinformation nicht auch bekommen, ohne zweite Ableitungen zu berechnen? Dazu betrachten wir zunächst ein eindimensionales Beispiel, das illustriert, was unter "Krümmung" eigentlich zu verstehen ist. Wir betrachten die Funktion
+
+$$
+f(x)=\frac{1}{4}x^4-3x^2-8x
+$$
+
+Die Steigung der Sekante an die Funktion $f$, die durch zwei Iterierte $x^{[k]}$ und $x^{[k+1]}$ geht, kann man als Approximation der *Tangentensteigung* im Punkt $x^{[k+1]}$ betrachten, also der ersten Ableitung: 
+
+\begin{align*}
+f'(x^{[k+1]})\approx \frac{f(x^{[k+1]})-f(x^{[k]})}{x^{[k+1]}-x^{[k]}}\label{eq:sek1}
+\end{align*}
+
+```{figure} ./bilder/sekante1.png
+:width: 400px
+Sekante an $f(x)$ als Approximation der ersten Ableitung im Punkt $x^{[k+1]}$. 
+```
+
+Mit dem gleichen Argument kann man die Steigung der Sekante an die erste Ableitung $f'$ als Approximation der Tangentensteigung der ersten Ableitung im Punkt $x^{[k+1]}$ betrachten, also der zweiten Ableitung:
+
+$$
+f''(x^{[k+1]})\approx \frac{f'(x^{[k+1]})-f'(x^{[k]})}{x^{[k+1]}-x^{[k]}}
+$$(eq:sek1)
+
+```{figure} ./bilder/sekante2.png
+:width: 400px
+Sekante an $f'(x)$ als Approximation der zweiten Ableitung im Punkt $x^{[k+1]}$.
+```
+
+Wir führen folgende Abkürzungen ein:
+\begin{align*}
+s^{[k]}&:=x^{[k+1]}-x^{[k]}\\
+g^{[k]}&:=f'(x^{[k+1]})-f'(x^{[k]})
+\end{align*}
+
+Damit können wir die Gleichung {eq}`eq:sek1` schreiben als:
+
+$$
+f''(x^{[k+1]})\approx \frac{g^{[k]}}{s^{[k]}}
+$$(eq:sek2)
+
+oder auch 
+
+$$
+f''(x^{[k+1]})s^{[k]}\approx g^{[k]}
+$$(eq:sek3)
+
+Wir nennen {eq}`eq:sek3` die *Sekantenbedingung*. Der Unterschied zwischen {eq}`eq:sek2` und {eq}`eq:sek3` ist, dass man {eq}`eq:sek3` auch für mehrdimensionale Funktionen formulieren kann:
+
+$$
+\nabla^2 f(\v x^{[k+1]})\v s^{[k]}\approx \v g^{[k]}
+$$(eq:sek4)
+
+Die zweite Ableitung $\nabla^2 f(\v x^{[k+1]})$ ist nun eine quadratische und symmetrische Matrix, $\v s^{[k]}$ und $\v g^{[k]}$ sind Vektoren. Die Aussage {eq}`eq:sek4` ist also eine Aussage für eine bestimmte *Richtung*, nämlich $\v s^{[k]}$, die Richtung des letzten Schritts.
+
+Diese Sekantenbedingung ist die Grundlage von Quasi-Newton Verfahren und sie führt zu einigen der erfolgreichsten Verfahren für ableitungsbasierte Optimierung. Wir möchten einerseits die Hessematrix einer mehrdimensionalen Funktion $\nabla^2 f$ mit einer Matrix $\v B^{[k]}$ approximieren, andererseits aber $\nabla^2 f$ nicht berechnen. Wir fordern von unserer Approximation, dass sie die Krümmung wenigstens in eine Richtung $\v s^{[k]}$ approximiert. Dies ist eine Näherung für die zweite Ableitung in dieser Richtung. Wir wollen also, dass
+
+$$
+\v B^{[k+1]}\v s^{[k]}=\v g^{[k]},
+$$
+
+wobei $\v s^{[k]}=\v x^{[k+1]}-\v x^{[k]}$ der Schritt und $g^{[k]}:=\nabla f(x^{[k+1]})^T-\nabla f(x^{[k]})^T$ die Differenz der Gradienten (als Spaltenvektor) ist.
+
+Zusammenfassend: Wir suchen eine Matrix $\v B^{[k+1]}$, für die gilt:
+1. $\v B^{[k+1]}$ erfüllt die Sekantenbedingung $\v B^{[k+1]}\v s^{[k]}=\v g^{[k]}$
+2. $\v B^{[k+1]}$ ist symmetrisch, wie die Hessematrix
+3. $\v B^{[k+1]}$ ist positiv definit, damit Abstieg garantiert ist.
+
+Da eine symmetrische $n\times n$-Matrix mehr Einträge, also Freiheitsgrade hat als die Anzahl dieser Bedingungen, gibt es viele Matrizen, die alle diese Bedingungen erfüllen, genauer gesagt: unendlich viele.
+
+### Das DFP-Update
+Die Idee des *Davidon-Fletcher-Powell-Updates* *(DFP-Update)* ist es, die neue Approximation $\v B^{[k+1]}$ als diejenige Matrix zu wählen, die die drei Bedingungen oben erfüllt und die am *nächsten* an der aktuellen Approximation $\v B^{[k]}$ liegt, d.h. 
+
+$$
+\v B^{[k+1]} = \argmin{} \norm{\v B-\v B^{[k]}}
+$$
+
+Das $\argmin{B}$ bedeutet: $\v B^{[k+1]}$ soll aus allen Matrizen $\v B$, die die drei Bedingungen oben erfüllen, diejenige sein, für die der Ausdruck $\norm{\v B-\v B^{[k]}}$ minimal wird. Je nachdem, welche Matrixnorm man hier benutzt, erhält man unterschiedliche Hessematrix Approximationen als Lösung dieses Problems. Für die Frobenius-Norm (quadriere alle Einträge der Matrix, bilde die Summe und ziehe die Wurzel -- also genauso wie die Euklidische Norm für Vektoren funktioniert) kann man theoretisch beweisen, dass dies für folgende Matrix $\v B^{[k+1]}$ der Fall ist (der Einfachheit halber lassen wir auf der rechten Seite das Superscript $^{[k]}$ weg, d.h. $\v B:=\v B^{[k]}, \v s=\v s^{[k]}, \v g=\v g^{[k]}$):
+
+$$
+\v B^{[k+1]}=\left( \I - \frac{\v g\v s^T}{\v g^T\v s}\right)\v B
+\left( \I - \frac{\v s\v g^T}{\v g^T\v s}\right)+\frac{\v g\v g^T}{\v g^T\v s}
+$$(eq:dfp)
+
+Bevor wir in die Details dieser kompliziert anmutenden Formel eintauchen, stellen wir fest, dass die Berechnung von $\v B^{[k+1]}$ nur auf drei Größen basiert:
+1. Die aktuelle Approximation der Hessematrix $\v B:=\v B^{[k]}$.
+2. Die Differenz der Gradienten aus der aktuellen und der vorherigen Iteration: $\v g=\v g^{[k]}=\nabla f(\v x^{[k+1]})^T-\nabla f(\v x^{[k]})^T$.
+3. Die Differenz der Iterierten aus der aktuellen und der vorherigen Iteration (der Schritt): $\v s^{[k]}=\v x^{[k+1]}-\v x^{[k]}$.
+
+Dies ist eine weitere zentrale Idee von Quasi-Newton Verfahren: die Verwendung von *Update-Formeln* für die Berechnung der Approximation der Hessematrix, die nur Größen verwenden, die ohnehin in der akuellen Iteration verfügbar sind. Die Update-Formeln sehen zwar kompliziert aus, der Rechenaufwand ist aber relativ gering. Schauen wir uns die einzelnen Elemente der Berechnung einmal genauer an:
+- $\v g^T\v s$ ist ein Skalar, der durch die Multiplikation des Zeilenvektors $\v g^T$ mit dem Spaltenvektor $\v s$ entsteht.  $\v g^T\v s$ ist ein Spezialfall eines *inneren Produktes*
+- Die Ausdrücke $\v g\v s^T$, $\v s\v g^T$ und $\v g\v g^T$ sind sogenannte *äußere Produkte*: Ein Spaltenvektor multipliziert mit einem Zeilenvektor ergibt ein Matrix vom Rang 1.
+- Schließlich bezeichnet $\I$ noch die $n\times n$ Einheitsmatrix.
+
+Die Matrix $\v B=\v B^{[k]}$ wird also von links und rechts mit einer Matrix multipliziert und anschließend wird eine weitere Rang 1-Matrix $\frac{\v g\v g^T}{\v g^T\v s}$ addiert. 
+
+Es stellt sich heraus, dass die Update Formel einen weiteren Vorteil gegenüber der exakten Hessematrix hat: Statt einer Approximation der Hessematrix kann man auch eine Approximation der *Inversen* der Hessematrix vorhalten und updaten.
+Mit der [Sherman-Morrison-Woodbury-Formel](https://de.wikipedia.org/wiki/Sherman-Morrison-Woodbury-Formel) kann man die Formeln analytisch umformulieren und erhält folgende Formel für die Approximation der Inversen $\v A^{[k+1]}=(\v B^{[k+1]})^{-1}$:
+
+$$
+\v A^{[k+1]}=\v A-\frac{\v A \v g\v g^T \v A}{\v g^T\v A \v g}+\frac{\v s \v s^T}{\v g^T \v s}
+$$(eq:dfp-inv)
+
+Damit wäre auch der zweite Nachteil des Newton-Verfahrens, die Notwendigkeit, in jeder Iteration eine Matrix zu invertieren, behoben. 
+
+Eine Updateformel ist natürlich noch kein fertiger Algorithmus. Bevor wir uns ein komplettes Quasi-Newton Verfahren anschauen, schauen wir uns noch eine zweite Update-Formel an. Das DFP-Update wurde zuerst von W. C. Davidon entdeckt[^fn:davidon] und 1960 unabhängig von Fletcher und Powell beschrieben. Der Erfolg des Verfahrens führte zu einer verstärkten Forschungsaktivität im Bereich der Quasi-Newton Methoden. Im Jahre 1970 entdeckten die vier Autoren Broyden, Fletcher, Goldfarb und Shanno schließlich unabhängig(!) voneinander[^fn:bfgs] das bis heute erfolgreichste und meistgenutzte Quasi-Newton Update. 
+
+[^fn:davidon]: *William Davidon: Variable metric method for minimization. In: Argonne National Laboratory (Hrsg.): A.E.C. Research and Development Report. ANL-5990, 1959.*
+
+[^fn:bfgs]: 
+    *Charles G. Broyden: The convergence of a class of double-rank minimization algorithms. In: Journal of the Institute of Mathematics and Its Applications. Band 6, 1970, S. 76–90, doi:10.1093/imamat/6.1.76.*
+    
+    *Roger Fletcher: A New Approach to Variable Metric Algorithms. In: Computer Journal. Band 13, Nr. 3, 1970, S. 317–322, doi:10.1093/comjnl/13.3.317.*
+    
+    *Donald Goldfarb: A Family of Variable Metric Updates Derived by Variational Means. In: Mathematics of Computation. Band 24, Nr. 109, 1970, S. 23–26, doi:10.1090/S0025-5718-1970-0258249-6.*
+    
+    *David F. Shanno: Conditioning of quasi-Newton methods for function minimization. In: Mathematics of Computation. Band 24, Nr. 111, Juli 1970, S. 647–656, doi:10.1090/S0025-5718-1970-0274029-X.*
+
+### Das BFGS-Update
+Das *Broyden-Fletcher-Goldfarb-Shanno-Update* *(BFGS-Update)* lässt sich auf ähnlichem Wege herleiten wie das DFP-Update. Statt von der Sekantenbedingung $\v B^{[k+1]}\v s^{[k]}=\v g^{[k]}$ auszugehen, formuliert man die Sekantenbedingung um
+
+\begin{align*}
+\v B^{[k+1]}\v s^{[k]}&=\v g^{[k]}\\ \Leftrightarrow (\v B^{[k+1]})^{-1}\v B^{[k+1]}\v s^{[k]}&=(\v B^{[k+1]})^{-1}\v g^{[k]}
+\end{align*}
+
+Mit der Kurzform $\v A^{[k+1]}=(\v B^{[k+1]})^{-1}$ erhält man die äquivalente Form der Sekantenbedingung $\v A^{[k+1]}\v g^{[k]}=\v s^{[k]}$. Ein ähnliches Argument wie beim DFP Update -- die Approximation soll die äquivalente Sekantenbedingung erfüllen, symmetrisch sein und möglichst nahe bei der aktuellen Approximation liegen -- führt zum BFGS Update. Wie beim DFP-Update kann man entweder eine Approximation der Hessematrix $\v B^{[k+1]}$ oder der Inverse $\v A^{[k+1]}$ vorhalten. Die Formeln lauten:
+
+$$
+\v B^{[k+1]}=\v B-\frac{\v B \v s\v s^T \v B}{\v s^T\v B \v s}+\frac{\v g \v g^T}{\v s^T \v g}
+$$(eq:bfgs)
+
+für die Approximation der Hessematrix und
+
+$$
+\v A^{[k+1]}=\left( \I - \frac{\v s\v g^T}{\v s^T\v g}\right)\v A
+\left( \I - \frac{\v g\v s^T}{\v s^T\v g}\right)+\frac{\v s\v s^T}{\v s^T\v g}
+$$(eq:bfgs-inv)
+
+für ihre Inverse. Beim Vergleich der Formeln {eq}`eq:bfgs-inv` und {eq}`eq:dfp` bzw. {eq}`eq:bfgs` und {eq}`eq:dfp-inv` fällt auf, dass DFP-Update und BFGS-Update *dual* zueinander sind. Man erhält das eine aus dem anderen, indem man die Buchstaben $\v A$ und $\v B$ sowie $\v s$ und $\v g$ miteinander vertauscht.
+
+Eine weitere wichtige Eigenschaft der beiden Update-Formeln ist die Tatsache, dass es *Rang-2 Updates* sind: Die ursprüngliche Approximation $\v B^{[k]}$ wird modifiziert, indem zwei Rang-1-Matrizen (äußere Produkte von Vektoren) als "Korrekturterme" addiert werden. Die rekursive Definition bedeutet auch, dass man mit einer Matrix vollen Ranges starten muss. Häufig nimmt man hier eine skalierte Einheitsmatrix oder auch die (dann einmalig auszuwertende) exakte Hessematrix.
+
+Es gibt viele weitere Rang-2-Updates, die ähnlich funktionieren wie das DFP und das BFGS-Update. Das BFGS-Update wird am häufigsten verwendet, da es (empirisch) die besten Resultate liefert, d.h. die besten Abstiegsrichtungen. Das vollständige *BFGS-Verfahren* sieht wie folgt aus:
+
+````{prf:algorithm} BFGS Verfahren
+:label: alg:bfgs
+Gegeben: 
+: Differenzierbare Funktion $f:\R^n\rightarrow\R$.
+
+Gesucht: 
+: Lokales Minimum von $f$.
+
+**Algorithmus**:
+
+Starte mit initialer Schätzung $\v x^{[0]}$ und $\v A^{[0]}$, setze $k=0$.
+
+Für $k=0,1,2,\dots$:
+1. Überprüfe, ob $\v x^{[k]}$ die **Abbruchbedingung** erfüllt. 
+    - Falls ja: Abbruch mit Lösung $\v x^{[k]}$
+    - Falls nein: gehe zu Schritt 2.
+2. Bestimme **Abstiegsrichtung** $\v d^{[k]}$ durch
+    \begin{align*}
+    \v d^{[k]}=-\v A{[k]}^{-1}\nabla f(\v x^{[k]})^T
+    \end{align*}
+3. Bestimme **Schrittweite** $\alpha^{[k]}$ durch Liniensuche.
+4. Berechne neue **Iterierte** $\v x^{[k+1]}=\v x^{[k]}+\alpha^{[k]}\v d^{[k]}$. 
+
+   Setze
+    \begin{align*}
+    \v s^{[k]}&=\alpha^{[k]}\v d^{[k]}\\
+    \v g^{[k]}&=\nabla f(\v x^{[k]})^T-\nabla f(\v x^{[k+1]})^T
+    \end{align*}
+5. Berechne neue Approximation der Inversen der Hessematrix $\v A^{[k+1]}$ aus $\v A^{[k]}, \v s^{[k]}$ und $\v g^{[k]}$ mit dem **BFGS-Update**.
+````
+
+Anmerkungen zu dem Verfahren:
+- Wenn im ersten Schritt für $\v A^{[0]}$ die Einheitsmatrix $\I$ gewählt wird, entspricht der erste Schritt im Verfahren einem Gradientenabstieg.
+- Durch eine geeignete Liniensuche (backtracking Liniensuche) kann man erreichen, dass $\v A^{[k+1]}$ immer positiv definit ist, wenn $\v A^{[k]}$ positiv definit war.
+- Die Folge $\v A^{[k]}$, $k=0,1,2,\dots$ konvergiert nicht unbedingt gegen die echte Hessematrix, d.h. im Grenzfall erhält man nicht unbedingt das Newton Verfahren.
+
+Wir schauen uns das Verfahren anhand eines numerischen Beispiels an.
+````{prf:example}
+Es soll die Funktion $f(x_1,x_2)=x_1^2+0.5x_2^2+3$ minimiert werden. Der Gradient von $f$ ist $\nabla f(x_1,x_2)=2x_1+x_2$. Wir zeigen den ersten Schritt des BFGS-Verfahrens.
+
+Der Startwert für die Iterierte sei $\v x^{[0]}=\bmats 1\\2\emats$ und der Startwert für die Hessematrix Approximation sei die Einheitsmatrix $\v A^{[0]}=\bmats 1&0\\0&1\emats$. Der Einfachheit halber nehmen wir an, das $\alpha^{[k]}=1$. 
+
+$k=0$
+: - Abstiegsrichtung bestimmen: 
+    \begin{align*}
+    \v d^{[0]}=-\v A^{[0]}\nabla f(1,2)^T=-\bmat 1&0\\0&1\emat\bmat 2\\2\emat=\bmat -2\\-2\emat
+    \end{align*}
+
+  - Nächste Iterierte:
+    \begin{align*}
+    \v x^{[1]} &= \v x^{[0]}+\v d^{[0]}=\bmat -1\\0 \emat\\
+    \v s^{[0]} &= \bmat -2\\ -2\emat\\
+    \v g^{[0]} &= \nabla f(-1,0)^T-\nabla f(1,2)^T=\bmat -2\\0\emat -\bmat 2\\2 \emat=\bmat -4\\-2\emat
+    \end{align*}
+
+  - BFGS Update (denken Sie sich das Superscript $^{[0]}$ dazu):
+    \begin{align*}
+    \v A^{[1]}=\left( \I - \frac{\v s\v g^T}{\v s^T\v g}\right)\v A
+\left( \I - \frac{\v g\v s^T}{\v s^T\v g}\right)+\frac{\v s\v s^T}{\v s^T\v g}
+    \end{align*}
+    Mit $\v s^T\v g = (-2)(-4)+(-2)(-2)=12$ ergibt sich
+    \begin{align*}
+    \v A^{[1]}&=\left( \bmat 1&0\\0&1\emat - \frac{1}{12}\bmat 8&4\\8&4\emat\right)\bmat 1&0\\0&1\emat
+\left( \bmat 1&0\\0&1\emat - \frac{1}{12}\bmat 8&4\\8&4\emat\right)+\frac{1}{12}\bmat 4&4\\4&4\emat\\
+    &=\frac{1}{9}\bmat 5&-1\\-1&11\emat
+    \end{align*}
+
+$k=1$
+: - Abstiegsrichtung bestimmen:
+    \begin{align*}
+    \v d^{[1]}=-\v A^{[1]}\nabla f(-1,0)^T=-\frac{1}{9}\bmat 5&-1\\-1&11\emat\bmat -2\\0\emat=\frac{1}{9}\bmat 10\\-2\emat
+    \end{align*}
+  - usw.
+````
+
+Das BFGS-Verfahren behebt drei der vier Nachteile des Newton-Verfahrens (Auswertung der Hessematrix, Invertierung der Hessematrix, positive Definitheit) und tatsächlich ist das BFGS-Verfahren für viele Optimierungsprobleme eine gute Wahl. Es braucht meist mehr Iterationen als das Newton-Verfahren. Auch die theoretischen Konvergenzeigenschaften sind etwas schlechter als beim Newton-Verfahren, es konvergiert *superlinear*. Allerdings ist es oft trotzdem schneller, da eine Iteration wesentlich weniger aufwendig ist. Es ist außerdem erheblich schneller als ein Gradientenabstieg, da bereits ein wenig Krümmungsinformation (wie sie durch das BFGS-Update reflektiert wird) ausreicht, um bessere Iterierte zu erzeugen und mehr Fortschritt in Richtung der Lösung zu erzielen.
+
 
 ### Limited-memory BFGS
+Ein Nachteil des Newton-Verfahrens wird durch das normale BFGS-Update jedoch nicht beseitigt, nämlich dass man die gesamte Hessematrix(-approximation) bzw. deren Inverse speichern muss. Für große Optimierungsprobleme ist der Speicherbedarf alles andere als vernachlässigbar. So benötigt man für ein Optimierungsproblem mit $25,000$ Variablen ca. $25,000 \times 25,000 \times 8$ Byte $=5$ Gigabyte Speicherplatz (oder etwa die Hälfte, wenn nur die obere Dreiecksmatrix gespeichert wird).
+
+Die Idee des *Limited-memory BFGS-Verfahrens* (*L-BFGS-Verfahren*) ist es, nur Krümmungsinformation aus den letzten $m$ Iterationen zu verwenden, wobei $m$ nicht zu groß gewählt wird, etwa $m=20$. Die Motivation dahinter ist, dass die Krümmungsinformation an dem Punkt, an dem das Verfahren vor mehr als $m$ Iterationen war, nicht mehr relevant für die aktuelle Iteration ist, da die Funktion in der Umgebung der aktuellen Iteration wahrscheinlich ganz anders gekrümmt ist. Den Begriff *memory* kann man hier auch mit dem Wort *Gedächtnis* übersetzen. Wie hilft uns das bei unserem anderen *memory*-Problem, nämlich dem *Speicherplatz*-Problem?
+
+Zunächst ist klar, das die vollständige Krümmungsinformation der letzten $m$ Iterationen implizit in den Vektoren $\v s^{[k-i]}, \v g^{[k-i]}$, $i=1,\dots,m$ steckt. Das Ziel des L-BFGS-Verfahrens ist, anstatt der gesamten Matrix nur diese $2m$ Vektoren zu speichern, die das BFGS-Update *implizit* repräsentieren. Wie können wir aber die Hessematrix $\v A^{[k]}$ benutzen, ohne sie explizit aus den Vektoren $\v s^{[k-i]}$ und $\v g^{[k-i]}$ aufzubauen?
+
+Wenn wir uns {prf:ref}`alg:bfgs` anschauen, stellen wir fest, dass das Verfahren die Matrix $\v A^{[k]}$ nur benötigt, um den Schritt zu berechnen:
+
+$$
+\v d^{[k]}=-\v A^{[k]}\nabla f(\v x^{[k]})^T
+$$
+
+Wir brauchen also nicht die Matrix $\v A^{[k]}$, sondern Matrix-Vektor Produkte  $\v A^{[k]}f(\v x^{[k]})^T$. Dies kann man tatsächlich nur mittels inneren Produkten und Summen von Vektoren erreichen. Für die Details dieses Algorithmus sei auf die Literatur verwiesen[^fn:l-bfgs]. Zusammenfassend: Man kann das Matrix-Vektor Produkt mit der BFGS-Approximation $\v A^{[k]}f(\v x^{[k]})^T$ berechnen, ohne die BFGS-Approximation $\v A^{[k]}$ zu kennen. Es reicht aus, die Vektoren $\v s^{[k]}$  und $\v g^{[k]}$ aus den letzten $m$ Iterationen zu speichern. Dadurch wird Speicherplatz gespart.
+
+[^fn:l-bfgs]: Algorithm 7.4 (S. 177) in J. Nocedal, und S. J. Wright. Numerical Optimization. 2nd ed. Springer Series in Operations Research. New York: Springer, 2006.
+
+Damit können wir den vollständigen L-BFGS Algorithmus skizzieren:
+
+````{prf:algorithm} Limited-memory BFGS Verfahren
+:label: alg:bfgs
+Gegeben: 
+: Differenzierbare Funktion $f:\R^n\rightarrow\R$.
+
+Gesucht: 
+: Lokales Minimum von $f$.
+
+**Algorithmus**:
+
+Gegeben: $m>0$. Starte mit initialer Schätzung $\v x^{[0]}$, setze $k=0$.
+
+Für $k=0,1,2,\dots$:
+1. Überprüfe, ob $\v x^{[k]}$ die **Abbruchbedingung** erfüllt. 
+    - Falls ja: Abbruch mit Lösung $\v x^{[k]}$
+    - Falls nein: gehe zu Schritt 2.
+2. Wähle initiale Approximation der Hessematrix $\v A_0^{[k]}$.
+2. Bestimme **Abstiegsrichtung**
+    \begin{align*}
+    \v d^{[k]}=-\v A{[k]}^{-1}\nabla f(\v x^{[k]})^T
+    \end{align*}
+    durch "matrixfreies" Matrix-Vektor Produkt mit der BFGS-Approximation der Inversen der Hessematrix. Benutze dazu die Vektorpaaren $\{\v s^{[k-i]},\v g^{[k-i]}\}$, $i=1,\dots,m$.
+3. Bestimme **Schrittweite** $\alpha^{[k]}$ durch Liniensuche.
+4. Berechne neue **Iterierte** $\v x^{[k+1]}=\v x^{[k]}+\alpha^{[k]}\v d^{[k]}$. 
+5. Falls $k>m$: Lösche Vektorpaar $\{\v s^{[k-m]},\v g^{[k-m]}\}$ aus dem Speicher.
+6. Setze
+    \begin{align*}
+    \v s^{[k]}&=\alpha^{[k]}\v d^{[k]}\\
+    \v g^{[k]}&=\nabla f(\v x^{[k]})^T-\nabla f(\v x^{[k+1]})^T
+    \end{align*}
+    und füge $\{\v s^{[k]},\v g^{[k]}\}$ zum Speicher hinzu.
+````
+Anmerkungen:
+- Schritt 2: Da man das Update in jedem Schritt ja aus den letzten $m$ Iterationen neu aufbaut, kann man auch in jedem Schritt eine andere initiale Hessematrix-Approximation wählen.
+- In den ersten $m$ Iterationen produzieren BFGS und L-BFGS die gleichen Iterierten (bei gleicher Wahl der $\v A_0^{[k]}=\v A^{[0]}$). Danach unterscheiden Sie sich, da im BFGS Update immer noch Spuren von allen Iterationen vorhanden sind, während das L-BFGS Update diese explizit nicht berücksichtigt (die entsprechenden Vektoren $\v s^{[k-m]}, \v g^{[k-m]}$ werden gelöscht).
+
+L-BFGS ist für viele unbeschränkte Optimierungsprobleme das Mittel das Wahl. Es ist
+- Effizient in der Laufzeit
+- Effizient im Speicherbedarf
+- Relativ robust, es müssen nur wenige Hyperparameter getunt werden
+- Es sind gute Implementierungen verfügbar, z.B. in [scipy](https://docs.scipy.org/doc/scipy/reference/optimize.minimize-lbfgsb.html).
+
 
 ## Zusammenfassung der Verfahren erster und zweiter Ordnung

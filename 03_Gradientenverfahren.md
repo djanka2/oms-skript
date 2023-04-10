@@ -796,7 +796,8 @@ Als Start der Rekursion wählt man $\v d^{[0]}=\v 0$; der erste Schritt ist also
  
  %Im Extremfall $\hyper{\beta}=1$ ist für *jeden* Schritt die Abstiegsrichtung $\v d^{[k]}=\v d^{[0]}=-\nabla f(\v x^{[0]})$, da der zweite Term $(-\nabla f(\v x^{[k]}))$ für $\hyper{\beta}=1$ ja immer gleich Null ist.
  
- Wie können wir uns diese "alte" Gradienteninformation vorstellen? Durch die Rekursion hinterlassen ja *alle* Gradienten vom Start des Gradientenverfahrens an ihre Spuren im aktuellen Schritt. Wie genau, das schauen wir uns in einem Beispiel an, indem wir die Rekursion über die ersten drei Schritte ausrollen.
+ Wie können wir uns diese "alte" Gradienteninformation vorstellen? Durch die Rekursion hinterlassen ja *alle* Gradienten vom Start des Gradientenverfahrens an ihre Spuren im aktuellen Schritt. Wie genau, das schauen wir uns in einem Beispiel an, indem wir die Rekursion über die ersten drei Schritte ausrollen. 
+ %Wir schreiben dafür y^{[k]}:=\nabla f(\v x^{[k]})), um die Formel etwas übersichtlicher zu gestalten.
 
  \begin{align*}
   \v d^{[0]}&=-\nabla f(\v x^{[0]})\\
