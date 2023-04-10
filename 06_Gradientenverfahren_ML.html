@@ -378,18 +378,45 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#was-ist-anders-beim-optimieren-von-verlustfunktionen">
+   6.2. Was ist anders beim Optimieren von Verlustfunktionen?
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#wahrscheinlichkeitstheoretische-uberlegungen">
+     6.2.1. Wahrscheinlichkeitstheoretische Überlegungen
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#overfitting-und-regularisierung">
+     6.2.2. Overfitting und Regularisierung
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#eigenschaften-der-verlustfunktion">
+     6.2.3. Eigenschaften der Verlustfunktion
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#stochastischer-gradientenabstieg">
-   6.2. Stochastischer Gradientenabstieg
+   6.3. Stochastischer Gradientenabstieg
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#neuronale-netze">
+   6.4. Neuronale Netze
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#gradientenverfahren-revisited-adaptive-schrittweiten">
-   6.3. Gradientenverfahren revisited: Adaptive Schrittweiten
+   6.5. Gradientenverfahren revisited: Adaptive Schrittweiten
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#backpropagation-revisited-ableitungen-neuronaler-netze">
-   6.4. Backpropagation revisited: Ableitungen neuronaler Netze
+   6.6. Backpropagation revisited: Ableitungen neuronaler Netze
   </a>
  </li>
 </ul>
@@ -417,18 +444,45 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#was-ist-anders-beim-optimieren-von-verlustfunktionen">
+   6.2. Was ist anders beim Optimieren von Verlustfunktionen?
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#wahrscheinlichkeitstheoretische-uberlegungen">
+     6.2.1. Wahrscheinlichkeitstheoretische Überlegungen
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#overfitting-und-regularisierung">
+     6.2.2. Overfitting und Regularisierung
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#eigenschaften-der-verlustfunktion">
+     6.2.3. Eigenschaften der Verlustfunktion
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#stochastischer-gradientenabstieg">
-   6.2. Stochastischer Gradientenabstieg
+   6.3. Stochastischer Gradientenabstieg
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#neuronale-netze">
+   6.4. Neuronale Netze
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#gradientenverfahren-revisited-adaptive-schrittweiten">
-   6.3. Gradientenverfahren revisited: Adaptive Schrittweiten
+   6.5. Gradientenverfahren revisited: Adaptive Schrittweiten
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#backpropagation-revisited-ableitungen-neuronaler-netze">
-   6.4. Backpropagation revisited: Ableitungen neuronaler Netze
+   6.6. Backpropagation revisited: Ableitungen neuronaler Netze
   </a>
  </li>
 </ul>
@@ -446,14 +500,29 @@ title="Print to PDF"
 <section id="optimierungsprobleme-im-maschinellen-lernen">
 <h2><span class="section-number">6.1. </span>Optimierungsprobleme im maschinellen Lernen<a class="headerlink" href="#optimierungsprobleme-im-maschinellen-lernen" title="Link zu dieser Überschrift">#</a></h2>
 </section>
+<section id="was-ist-anders-beim-optimieren-von-verlustfunktionen">
+<h2><span class="section-number">6.2. </span>Was ist anders beim Optimieren von Verlustfunktionen?<a class="headerlink" href="#was-ist-anders-beim-optimieren-von-verlustfunktionen" title="Link zu dieser Überschrift">#</a></h2>
+<section id="wahrscheinlichkeitstheoretische-uberlegungen">
+<h3><span class="section-number">6.2.1. </span>Wahrscheinlichkeitstheoretische Überlegungen<a class="headerlink" href="#wahrscheinlichkeitstheoretische-uberlegungen" title="Link zu dieser Überschrift">#</a></h3>
+</section>
+<section id="overfitting-und-regularisierung">
+<h3><span class="section-number">6.2.2. </span>Overfitting und Regularisierung<a class="headerlink" href="#overfitting-und-regularisierung" title="Link zu dieser Überschrift">#</a></h3>
+</section>
+<section id="eigenschaften-der-verlustfunktion">
+<h3><span class="section-number">6.2.3. </span>Eigenschaften der Verlustfunktion<a class="headerlink" href="#eigenschaften-der-verlustfunktion" title="Link zu dieser Überschrift">#</a></h3>
+</section>
+</section>
 <section id="stochastischer-gradientenabstieg">
-<h2><span class="section-number">6.2. </span>Stochastischer Gradientenabstieg<a class="headerlink" href="#stochastischer-gradientenabstieg" title="Link zu dieser Überschrift">#</a></h2>
+<h2><span class="section-number">6.3. </span>Stochastischer Gradientenabstieg<a class="headerlink" href="#stochastischer-gradientenabstieg" title="Link zu dieser Überschrift">#</a></h2>
+</section>
+<section id="neuronale-netze">
+<h2><span class="section-number">6.4. </span>Neuronale Netze<a class="headerlink" href="#neuronale-netze" title="Link zu dieser Überschrift">#</a></h2>
 </section>
 <section id="gradientenverfahren-revisited-adaptive-schrittweiten">
-<h2><span class="section-number">6.3. </span>Gradientenverfahren revisited: Adaptive Schrittweiten<a class="headerlink" href="#gradientenverfahren-revisited-adaptive-schrittweiten" title="Link zu dieser Überschrift">#</a></h2>
+<h2><span class="section-number">6.5. </span>Gradientenverfahren revisited: Adaptive Schrittweiten<a class="headerlink" href="#gradientenverfahren-revisited-adaptive-schrittweiten" title="Link zu dieser Überschrift">#</a></h2>
 </section>
 <section id="backpropagation-revisited-ableitungen-neuronaler-netze">
-<h2><span class="section-number">6.4. </span>Backpropagation revisited: Ableitungen neuronaler Netze<a class="headerlink" href="#backpropagation-revisited-ableitungen-neuronaler-netze" title="Link zu dieser Überschrift">#</a></h2>
+<h2><span class="section-number">6.6. </span>Backpropagation revisited: Ableitungen neuronaler Netze<a class="headerlink" href="#backpropagation-revisited-ableitungen-neuronaler-netze" title="Link zu dieser Überschrift">#</a></h2>
 </section>
 </section>
 
