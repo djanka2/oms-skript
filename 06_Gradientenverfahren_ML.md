@@ -11,20 +11,27 @@ kernelspec:
 ---
 
 (sec:ml)=
-# Gradientenverfahren im maschinellen Lernen
+# Optimierung im maschinellen Lernen
 
-## Optimierungsprobleme im maschinellen Lernen
+## Überwachtes Lernen
 
-## Was ist anders beim Optimieren von Verlustfunktionen?
+## Besonderheiten beim Optimieren von Verlustfunktionen
 ### Wahrscheinlichkeitstheoretische Überlegungen
 ### Overfitting und Regularisierung
 ### Eigenschaften der Verlustfunktion
-
+Summe über Trainingsdaten
+Man möchte nicht "zu gut" werden
+Dimension(en): N und p=n groß?
 
 ## Stochastischer Gradientenabstieg
 % MLRefined A.5
+
 ## Neuronale Netze
+
+## Verschwindende Gradienten
+
 ## Gradientenverfahren revisited: Adaptive Schrittweiten
 % MLRefined A.4
+
 ## Backpropagation revisited: Ableitungen neuronaler Netze
 
