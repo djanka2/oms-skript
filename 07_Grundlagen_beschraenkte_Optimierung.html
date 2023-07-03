@@ -53,10 +53,12 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"tex": {"macros": {"N": "\\mathbb{N}", "R": "\\mathbb{R}", "B": "\\mathbb{B}", "I": "\\mathbb{I}", "NN": "\\mathbb{N}", "RR": "\\mathbb{R}", "BB": "\\mathbb{B}", "norm": ["\\left\\lVert#1 \\right\\rVert", 1], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\begin{pmatrix}"], "emat": ["\\end{pmatrix}"], "bmats": ["\\left(\\begin{smallmatrix}"], "emats": ["\\end{smallmatrix}\\right)"], "scikit": ["\\texttt{scikit-learn}"], "derv": ["\\frac{\\partial #1}{\\partial #2}", 2], "dervquad": ["\\frac{\\partial^2 #1}{\\partial #2^2}", 2], "dervzwei": ["\\frac{\\partial^2 #1}{\\partial {#2} \\partial {#3}}", 3], "v": ["\\mathbf{#1}", 1], "m": ["\\mathbf{#1}", 1], "argmin": ["\\underset{#1}{\\operatorname{arg\\!min}}", 1], "hyper": ["{\\color{Bittersweet}{#1}}", 1], "initial": "\\DeclareMathOperator{\\initial}{initial}", "reduced": "\\DeclareMathOperator{\\reduced}{reduced}", "lazy": "\\DeclareMathOperator{\\lazy}{lazy}", "ILP": "\\DeclareMathOperator{\\ILP}{ILP}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Stichwortverzeichnis" href="genindex.html" />
     <link rel="search" title="Suche" href="search.html" />
     <link rel="next" title="8. Gemischt-ganzzahlige lineare Programmierung" href="08_MILP.html" />
-    <link rel="prev" title="6. Gradientenverfahren im maschinellen Lernen" href="06_Gradientenverfahren_ML.html" />
+    <link rel="prev" title="6. Optimierung im maschinellen Lernen" href="06_Gradientenverfahren_ML.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="de">
     
@@ -134,7 +136,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="03_Gradientenverfahren.html">
-   3. Gradientenverfahren
+   3. Verfahren erster Ordnung
   </a>
  </li>
  <li class="toctree-l1">
@@ -149,7 +151,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="06_Gradientenverfahren_ML.html">
-   6. Gradientenverfahren im maschinellen Lernen
+   6. Optimierung im maschinellen Lernen
   </a>
  </li>
  <li class="toctree-l1 current active">
@@ -382,11 +384,6 @@ title="Print to PDF"
    7.2. Ungleichungsbeschränkte Optimierung
   </a>
  </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#anwendung-support-vector-maschinen">
-   7.3. Anwendung: Support Vector Maschinen
-  </a>
- </li>
 </ul>
 
     </nav>
@@ -416,11 +413,6 @@ title="Print to PDF"
    7.2. Ungleichungsbeschränkte Optimierung
   </a>
  </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#anwendung-support-vector-maschinen">
-   7.3. Anwendung: Support Vector Maschinen
-  </a>
- </li>
 </ul>
 
                         </nav>
@@ -438,10 +430,61 @@ title="Print to PDF"
 </section>
 <section id="ungleichungsbeschrankte-optimierung">
 <h2><span class="section-number">7.2. </span>Ungleichungsbeschränkte Optimierung<a class="headerlink" href="#ungleichungsbeschrankte-optimierung" title="Link zu dieser Überschrift">#</a></h2>
+<div class="proof example admonition" id="example:KKT">
+<p class="admonition-title"><span class="caption-number">Example 7.1 </span> (Aufstellen der KKT-Bedingungen)</p>
+<section class="example-content" id="proof-content">
+<p>Gegeben sei das Optimierungsproblem</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\min_{x,y \in \mathbb{R}} \quad &amp; \frac{1}{2}(x-2)^2+\frac{1}{2}(y-\frac{1}{2})^2 \\
+\text{s.t.} \quad &amp; (x+1)^{-1}-y-\frac{1}{4}\geq 0\\
+&amp; x\geq 0\\
+&amp; y\geq 0
+\end{align*}\]</div>
+<p>Wir stellen dafür nun die KKT-Bedingungen auf. Dazu benötigen wir die Lagrange-Funktion, bei der wir für jede Nebenbedingung einen Lagrange-Multiplikator <span class="math notranslate nohighlight">\(\mu_i\)</span> einführen:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\mathcal{L}(x,y,\mu_1,\mu_2,\mu_3) = \frac{1}{2}(x-2)^2+\frac{1}{2}(y-\frac{1}{2})^2 - \mu_1\left((x+1)^{-1}-y-\frac{1}{4}\right) - \mu_2 x - \mu_3 y
+\end{align*}\]</div>
+<p>Nun können wir die KKT-Bedingungen aufstellen.</p>
+<ol>
+<li><p>Der Gradient der Lagrange-Funktion nach <span class="math notranslate nohighlight">\(x\)</span> und <span class="math notranslate nohighlight">\(y\)</span> muss <span class="math notranslate nohighlight">\(0\)</span> sein (Stationarität):</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    \frac{\partial \mathcal{L}}{\partial x} &amp;= x-2 + \frac{\mu_1}{(x+1)^2} - \mu_2 = 0\\
+    \frac{\partial \mathcal{L}}{\partial y} &amp;= y-\frac{1}{2} + \mu_1 - \mu_3 = 0
+    \end{align*}\]</div>
+</li>
+<li><p>Die Nebenbedingungen müssen erfüllt sein (Zulässigkeit):</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    (x+1)^{-1}-y-\frac{1}{4}&amp;\geq 0\\
+    x&amp;\geq 0\\
+    y&amp;\geq 0
+    \end{align*}\]</div>
+</li>
+<li><p>Die Lagrange-Multiplikatoren müssen nicht-negativ sein (Nicht-Negativität):</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    \mu_1 &amp;\geq 0\\
+    \mu_2 &amp;\geq 0\\
+    \mu_3 &amp;\geq 0
+    \end{align*}\]</div>
+</li>
+<li><p>Entweder muss die Ungleichungsnebenbedingung gleich <span class="math notranslate nohighlight">\(0\)</span> sein oder der zugehörige Lagrange-Multiplikator (Komplementarität):</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    \mu_1\left((x+1)^{-1}-y-\frac{1}{4}\right) &amp;= 0\\
+    \mu_2 x &amp;= 0\\
+    \mu_3 y &amp;= 0
+    \end{align*}\]</div>
+</li>
+</ol>
+<p>Die Schwierigkeit, einen KKT-Punkt (also einen Punkt, der alle Bedingungen erfüllt) zu finden, liegt darin, dass wir es mit einem System aus Gleichungen und <em>Ungleichungen</em> zu tun haben. Wir können nicht einfach die Gleichungen nach <span class="math notranslate nohighlight">\(x, y\)</span> und <span class="math notranslate nohighlight">\(\mu_1,\mu_2,\mu_3\)</span> auflösen. Stattdessen müssen wir Fallunterscheidungen machen, je nachdem, ob die Ungleichungsnebenbedingungen aktiv sind (d.h. es gilt <span class="math notranslate nohighlight">\(=\)</span>) oder nicht (d.h. es gilt <span class="math notranslate nohighlight">\(&gt;\)</span>).</p>
+<p>Praktisch müsste man alle <span class="math notranslate nohighlight">\(2^3\)</span> Möglichkeiten durchgehen, welche der drei Ungleichungsnebenbedingungen mit Gleichheit erfüllt sind, also <em>aktiv</em> sind. Bei den Ungleichungen, die <span class="math notranslate nohighlight">\(&gt;0\)</span> sind (die <em>inaktiven</em> Ungleichungsnebenbedingungen) muss der zugehörige Lagrange-Multiplikator <span class="math notranslate nohighlight">\(0\)</span> sein, damit Komplementarität erfüllt ist.</p>
+<p>Für die aktiven Ungleichungen muss man nun testweise ein Gleichungssystem lösen. Nach der Lösung muss man das Vorzeichen der <span class="math notranslate nohighlight">\(\mu_1,\mu_2,\mu_3\)</span> überprüfen: Nur wenn diese nicht negativ sind, ist die Nicht-Negativitätsbedingung der KKT-Bedingungen erfüllt und der so berechnete Punkt ist ein KKT-Punkt. Ist das nicht der Fall, muss eine andere Kombination von aktiven Ungleichungsnebenbedingungen getestet werden.</p>
 </section>
-<section id="anwendung-support-vector-maschinen">
-<h2><span class="section-number">7.3. </span>Anwendung: Support Vector Maschinen<a class="headerlink" href="#anwendung-support-vector-maschinen" title="Link zu dieser Überschrift">#</a></h2>
-</section>
+</div></section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -475,7 +518,7 @@ title="Print to PDF"
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">zurück</p>
-            <p class="prev-next-title"><span class="section-number">6. </span>Gradientenverfahren im maschinellen Lernen</p>
+            <p class="prev-next-title"><span class="section-number">6. </span>Optimierung im maschinellen Lernen</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="08_MILP.html" title="weiter Seite">
