@@ -34,7 +34,7 @@ Wir stellen dafür nun die KKT-Bedingungen auf. Dazu benötigen wir die Lagrange
 \mathcal{L}(x,y,\mu_1,\mu_2,\mu_3) = \frac{1}{2}(x-2)^2+\frac{1}{2}(y-\frac{1}{2})^2 - \mu_1\left((x+1)^{-1}-y-\frac{1}{4}\right) - \mu_2 x - \mu_3 y
 \end{align*}
 
-Nun können wir die KKT-Bedingungen aufstellen. 
+Nun können wir die KKT-Bedingungen aufstellen. Dies sind die folgenden Gruppen von Gleichungen bzw. Ungleichungen (insgesamt 5 Gleichungen und 6 Ungleichungen):
 
 1. Der Gradient der Lagrange-Funktion nach $x$ und $y$ muss $0$ sein (Stationarität):  
     \begin{align*}
