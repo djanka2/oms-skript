@@ -369,7 +369,7 @@ def gd(func, derv, alpha, x0, n_steps):
         print(f"{k+1:2} {x:10.4f}, {func(x):10.4f}, {dx:10.4f}")
         x_history.append(x)
 
-    return x_history
+    return np.array(x_history)
 
 x_history = gd(func=f, derv=df, alpha=0.1, x0=2.0, n_steps=15)
 
@@ -895,7 +895,7 @@ Damit können wir das Taylor-Polynom erster Ordnung wie folgt schreiben:
     d_1 \\ d_2
     \emat  \\&=1+(-1, 2)\bmat  
     d_1 \\ d_2
-    \emat  =1-d_1+d_2=y-x+\pi
+    \emat  =1-d_1+2d_2\\&=1-(x-\pi)+2(y-1)=2y-x+\pi-1
 \end{align*}
 Das Taylor-Polynom zweiter Ordnung im Punkt $(\pi,1)$ lautet:
 \begin{align*}
@@ -918,7 +918,7 @@ Das Taylor-Polynom zweiter Ordnung im Punkt $(\pi,1)$ lautet:
     \emat  \bmat  
     d_1 \\ d_2
     \emat  \\
-    &=1-d_1+2d_2+2d_2^2=1-x+\pi+2y^2-2y
+    &=1-d_1+2d_2+d_2^2=2y-x+\pi-1+(y-1)^2=y^2-x+\pi
 \end{align*}
 ````
 
