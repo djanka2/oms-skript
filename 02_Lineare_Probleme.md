@@ -9,7 +9,7 @@ Die Vorlesung orientiert sich an den Büchern
 
 auf denen es teilweise auch basiert. 
 
-# Gemischt-ganzzahlige lineare Programmierung
+# Lineare Optimierung
 
 ## Ein Beispiel
 
@@ -266,48 +266,36 @@ Besitzt ein lineares Programm eine optimale Lösung, so besitzt es auch mindeste
 TO DO
 ````
 
-## Ganzzahligkeitsbedingungen und weitere Modellarten
+## Beispiel: Transportproblem
 
-In vielen Problemstellungen dürfen manche oder alle Entscheidungsvariablen nicht beliebige reelle Werte, sondern nur einen eingeschränkten Wertebereich, etwa den der ganzen Zahlen annehmen. Beispiele sind etwa der Kauf eines Investitionsgutes oder das An- und Ausschalten einer Maschine. Man unterscheidet unter anderem die folgende Problemarten, die wir der Einfachheit halber nur in Standardform darstellen.
+## Modellierungstricks I
 
-Lineare Programme 
-: Die Entscheidungsvariablen dürfen beliebige reelle Werte annehmen.
+### Betragsfunktion
+
+### Maximumsfunktion als Teil der Zielfunktion
+Die Zielfunktion linearer Programme besteht aus gewichteten Summen. In manchen Anwendungen benötigen wir eine Zielfunktion der Form
+\begin{align*}
+\min \max\{f_1(x_1, \ldots, x_n), f_2(x_1, \ldots, x_n), \ldots, f_d(x_1, \ldots, x_n)\}
+\end{align*}
+mit linearen Ausdrücken $f_1, f_2, \ldots, f_d$. Wie können wir diese Zielfunktion in der Form eines linearen Programms ausdrücken?
+Wir führen dazu eine neue Variable $z \in \RR$ ein und modellieren
+\begin{align*}
+\min z
+\end{align*}
+unter den Nebenbedingungen
+\begin{eqnarray*}
+	f_1(x_1, \ldots, x_n) & \leq & z \\
+	f_2(x_1, \ldots, x_n) & \leq & z \\
+	\ldots \\
+	f_d(x_1, \ldots, x_n) & \leq & z.
+\end{eqnarray*}
+Die Ungleichungen in den Nebenbedingungen übernehmen damit die Funktion des Maximums in der originalen Zielfunktion.
+
 
 ````{prf:example}
-TO DO
-````
+Ein Projektplanungsproblem besteht aus vier Arbeitsschritten. Als Entscheidungsvariablen  sind durch $s_1, s_2, s_3, s_4$ die Startzeiten jedes Arbeitsschrittes, durch $d_1, d_2, d_3, d_4$ die Dauer jedes Arbeitsschrittes gegeben. Alle anderen Zusammenhänge vernachlässigen wir in diesem Beispiel. Modellierungsziel ist die möglichst frühe Fertigstellung des Projekts. 
 
-Ganzzahlige lineare Programme
-: Alle Entscheidungsvariablen dürfen nur ganzzahlige Werte annehmen.
-
-````{prf:example}
-TO DO
+\Karos{33}{16}
 ````
 
 
-Binäre lineare Programme
-: Alle Entscheidungsvariablen dürfen nur die Werte $0$ und $1$ annehmen.
-
-````{prf:example}
-TO DO
-````
-
-Gemischt-ganzzahlige lineare Programme
-: Manche Entscheidungsvariablen dürfen nur ganzzahlige Werte annehmen.
-
-````{prf:example}
-TO DO
-````
-
-
-## Relaxierung von Problemen mit Ganzzahligkeitsbedingungen
-
-Für alle Problemtypen, die Ganzzahligkeitsbedingungen enthalten, bezeichnet das zugehörige *relaxierte Problem* das Problem, bei dem die Ganzzahligkeitsbedingungen entfernt wurden. Für jede Binärvariable $x_i$ fordern wir im zugehörigen relaxierten Problem zusätzlich, dass $0 \leq x_i \leq 1$ gilt.
-````{prf:example}
-TO DO
-````
-
-An folgenden Beispiel sehen wir den Zusammenhang der Lösungsräume zwischen einem ganzzahligen linearen Problem und seiner relaxierten Version:
-````{prf:example}
-TO DO
-````

@@ -9,13 +9,16 @@ kernelspec:
   language: python
   name: python3
 ---
+# Quadratische Probleme
+## Beispiele
+## Anwendung: Training von linearen Regressionsmodellen
 
-# Grundlagen der beschränkten Optimierung
+## Grundlagen der beschränkten Optimierung
 
 
-## Gleichungsbeschränkte Optimierung
+### Gleichungsbeschränkte Optimierung
 
-## Ungleichungsbeschränkte Optimierung
+### Ungleichungsbeschränkte Optimierung
 ````{prf:example} Aufstellen der KKT-Bedingungen
 :label: example:KKT
 

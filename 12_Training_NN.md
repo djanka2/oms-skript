@@ -11,7 +11,7 @@ kernelspec:
 ---
 
 (sec:ml)=
-# Optimierung im maschinellen Lernen
+# Training von Neuronalen Netzen
 
 ## Überwachtes Lernen
 

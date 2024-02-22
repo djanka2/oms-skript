@@ -3,6 +3,8 @@
 
 Wir betrachten in diesem Kapitel Probleme, bei denen sich die Entscheidungsmöglichkeiten über einen gewissen Zeithorizont erstrecken. Wir betrachten folgendes Beispiel:
 
+
+## Energiespeicher
 ````{prf:example}
 Ein Unternehmen kann gut vorhersagen, wann es wieviel Strom benötigt. Das Unternehmen bezieht den Strom durch einen Versorger. Der Strompreis wechselt über die Zeit, ist vorher aber bekannt. Zusätzlich hat das Unternehmen einen Batteriespeicher installiert. So kann das Unternehmen Strom in die Batterie einspeichern, wenn der Strompreis niedrig ist und den Strom wieder ausspeichern und selbst verbrauchen, wenn der Strom teuer ist. Das Unternehmen möchte den Batteriespeicher optimal nutzen.
 
@@ -47,3 +49,14 @@ Das Ergebnis einer Beispielrechnung ist
 
 Ergebnis zeitabhängiges lineare Optimierungsproblem.
 ```
+
+## Produktionsplanungsproblem
+
+## Kraftwerkeinsatzplanung
+
+## MILP als Policy für ein dynamisches Problem
+### Rollierendes Fenster Ansatz
+### Evaluierung der Zielfunktion
+### Umgang mit Unsicherheiten 
+
+

@@ -6,20 +6,19 @@ root: 00_Ueberblick
 defaults:
   numbered: True
 parts:
-  - caption: Nichtlineare Optimierung
+  - caption: Lineare Optimierungsmodelle
     chapters:
-    - file: 01_Multivariate_Analysis
-    - file: 02_Theoretische_Grundlagen
-    - file: 03_Gradientenverfahren
-    - file: 04_Verfahren_zweiter_Ordnung
-    - file: 05_Automatische_Differentiation
-    - file: 06_Gradientenverfahren_ML
-    - file: 07_Grundlagen_beschraenkte_Optimierung
-  - caption: Lineare Optimierung
+      - file: 01_Grundbegriffe
+      - file: 02_Lineare_Probleme
+      - file: 03_Ganzzahlige_Probleme
+      - file: 04_Dynamische_Probleme
+      - file: 05_Praxisaspekte
+  - caption: Nichtlineare Optimierungsmodelle und -verfahren
     chapters:
-    - file: 08_MILP
-    - file: 09_Standardprobleme
-    - file: 10_Modellierungstechniken
-    - file: 11_Zeitdiskrete_Modelle
-    - file: 12_Ablaufplanung
-    - file: 13_Praxisaspekte
+      - file: 06_Multivariate_Analysis
+      - file: 07_Theoretische_Grundlagen
+      - file: 08_Quadratische_Probleme
+      - file: 09_Gradientenverfahren
+      - file: 10_Verfahren_zweiter_Ordnung
+      - file: 11_Stochastischer_Gradientenabstieg
+      - file: 12_Training_NN

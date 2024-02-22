@@ -874,3 +874,11 @@ Im maschinellen Lernen versuchen wir beispielsweise extrem komplizierte mathemat
 %Nächstes Kapitel: über Approximation, Taylorreihen (als alternative Interpretation, statt über Änderungen), totale Differenzierbarkeit.
 
 [^fn:infinitesimal]: Eigentlich: *infinitesimal*, also "unendlich" kleine Änderungen - was natürlich schon wieder weniger anschaulich ist. 
+
+
+(sec:ad)=
+## Automatische Differentiation
+
+### Berechnungsgraphen
+### Kettenregel und Berechnunsgraphen
+### Backpropagation
