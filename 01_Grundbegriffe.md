@@ -50,6 +50,7 @@ Constraints
 
 Wir schauen uns nun ein Beispiel eines mathematischen Modells anhand einer konkreten Anwendung an.
 
+(sec:production-example)=
 ### Beispiel: Ein Produktionsplanungsproblem
 
 Eine Chemiefirma betreibt einen Reaktor, der in zwei verschiedenen Modi betrieben werden kann. Die Modi unterscheiden sich z. B. in der Reaktortemperatur oder dem Druck. Je nach gewähltem Modus produziert der Reaktor drei verschiedene Produkte mit folgenden Ausbeuten (in Tonnen pro Tag):
@@ -111,8 +112,9 @@ Das ganze Problem schreiben wir kompakt als
              & & x_1, x_2 &\geq 0
 \end{alignat}
 ```
-Das $s.t.$ steht für "subject to" also etwa "unter der Bedingung, dass". Eine optimale Lösung des Problems ist $x_1=4, x_2=3$. Für diese Werte sind alle Ungleichungen erfüllt und die Zielfunktion wird maximal. Der Profit beträgt dann $2\cdot 4 + 2\cdot 3=14$ M€.  
+Das $s.t.$ steht für "subject to" also etwa "unter der Bedingung, dass". Eine optimale Lösung des Problems ist $x_1^{\star}=4, x_2^{\star}=3$. Für diese Werte sind alle Ungleichungen erfüllt und die Zielfunktion wird maximal. Der Profit beträgt dann $2\cdot 4 + 2\cdot 3=14$ M€.  
 
+(sec:grundbegriffe)=
 ## Grundbegriffe der Optimierung
 Im Beispiel {eq}`eq:prodopt` hatten wir es mit zwei Entscheidungsvariablen zu tun und einer konkreten Zielfunktion, bei der der Profit maximiert werden sollte. Im Allgemeinen können natürlich beliebig viele Entscheidungsvariablen vorliegen und eine beliebige Funktion dieser Variablen optimiert, d.h. maximiert oder minimiert werden.
 
@@ -136,7 +138,7 @@ Analog definiert man ein *Maximierungsproblem* als
 Der Oberbegriff für Minimierungs- und Maximierungsproblem ist *Optimierungsproblem*.  
 ````
 
-````{note} Minimierung oder Maximierung?
+````{prf:remark} Minimierung oder Maximierung?
 Per Konvention schauen wir uns, wenn wir von Optimierungsproblemen reden, nur Minimierungsprobleme an, d.h. eine Funktion soll so *klein* wie möglich sein. Haben wir es doch einmal mit einem Maximierungsproblem zu tun, also 
 \begin{align*}
 \max_{\v x} f(\v x)\quad \text{s.t. }\v x\in D\subseteq\R^n,
@@ -156,14 +158,14 @@ Jeder Punkt (Vektor) $\v x\in D$ ist ein zulässiger Punkt des Optimierungsprobl
 \min_{\v x} f(\v x)\quad \text{s.t. }\v x\in D\subseteq\R^n
 \end{align*}
 ````
-Bei manchen Problemen ist $D=\R^n$, d.h., jeder Vektor $\v x\in D$ ist zulässig. Diese Probleme nennt man *unrestringierte Probleme*, alle anderen *restringierte Probleme*. Sie unterscheiden sich vor allem in der Wahl der Lösungsverfahren.
+Bei manchen Problemen ist $D=\R^n$, d.h., jeder Vektor $\v x\in D$ ist zulässig. Diese Probleme nennt man *unrestringierte Probleme*, alle anderen *restringierte Probleme*. Sie unterscheiden sich vor allem in der Wahl der Lösungsverfahren. Eine weiterer Spezialfall liegt dann vor, wenn nur *ganzzahlige* Werte für manche oder alle Variablen zulässig sind. Mit diesen mächtigen (und algorithmisch besonders anspruchsvollen) Bedingungen beschäftigen wir uns im Kapitel {ref}`sec:integer-problems`.
 
 Wir möchten nun noch die Lösungen von Optimierungsproblemen etwas genauer charakterisieren (ohne zu sagen, wie man die Lösungen eigentlich findet). Im Beispiel {eq}`eq:prodopt` hatten wir als Lösung des Optimierungsproblems die Werte $x_1=4, x_2=3$ und den zugehörigen maximalen Profit von $14$ M€ angegeben (ohne zu sagen, wie man darauf kommt). Allgemein benutzen wir folgende Begriffe:
 
 ````{prf:definition} Lösung eines Optimierungsproblems
 :label: def:loesung
 
-Ein Punkt $\v x^{\star}\in D$ heißt *Optimum*, *Lösungspunkt* oder einfach *Lösung* des Minimierungsproblems $\min_{\v x} f(\v x)\quad \text{s.t. }\v x\in D\subseteq\R^n$, wenn $\v x$ zulässig ist und wenn es den kleinsten Zielfunktionswert aller zulässigen Punkte besitzt, also
+Ein Punkt $\v x^{\star}\in D$ heißt *Optimum*, *Optimalpunkt*, *Lösungspunkt* oder einfach *Lösung* des Minimierungsproblems $\min_{\v x} f(\v x)\quad \text{s.t. }\v x\in D\subseteq\R^n$, wenn $\v x$ zulässig ist und wenn es den kleinsten Zielfunktionswert aller zulässigen Punkte besitzt, also
 \begin{align*}
 f(\v x^{\star})\leq f(\v x) \text{ für *jeden* zulässigen Vektor $\v x\in D$.}
 \end{align*}
@@ -191,10 +193,10 @@ Unendlich viele Lösungen:
 
 Unzulässiges Problem
 : Das Problem
- \begin{align}{5}
+ \begin{alignat}{5}
  \min_{x} & \quad  &   x & & & \\[2mm]
- \text{s.t. } & &  x_1&\leq 0\\
-              & &  x_1&\geq 1
- \end{align}
+ \text{s.t. } & &  x&\leq 0\\
+              & &  x&\geq 1
+ \end{alignat}
 : besitzt *keinen* zulässigen Punkt und hat daher auch keine Lösung. Dies ist ein Beispiel für ein *unzulässiges* Problem.
 ````

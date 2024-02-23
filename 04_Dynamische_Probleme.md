@@ -1,5 +1,5 @@
 (sec:zeitdiskret)=
-# Zeitdiskrete Modelle
+# Zeitabhängige Probleme
 
 Wir betrachten in diesem Kapitel Probleme, bei denen sich die Entscheidungsmöglichkeiten über einen gewissen Zeithorizont erstrecken. Wir betrachten folgendes Beispiel:
 

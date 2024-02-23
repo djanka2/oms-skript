@@ -1,3 +1,4 @@
+(sec:integer-problems)=
 # Ganzzahlige Probleme
 
 ## Ganzzahligkeitsbedingungen und weitere Modellarten

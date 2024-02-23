@@ -71,6 +71,7 @@ sphinx:
           "reduced": "\\DeclareMathOperator{\\reduced}{reduced}"
           "lazy": "\\DeclareMathOperator{\\lazy}{lazy}"
           "ILP": "\\DeclareMathOperator{\\ILP}{ILP}"
+          "red": ["{\\color{BrickRed}{#1}}", 1]
 parse:   
   myst_enable_extensions:
     - amsmath

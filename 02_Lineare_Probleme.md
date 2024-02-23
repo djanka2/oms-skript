@@ -1,52 +1,32 @@
-Das Thema dieses Vorlesungsteils ist das Modellieren und Lösen von Problemen aus der Unternehmenspraxis durch *gemischt-ganzzahlige lineare Programme*. Ziel ist gleichermaßen die Vermittlung der theoretischen Grundlagen als auch der nötigen Praxisaspekte. Dieser Teil des Skriptes wurde größtenteils übernommen von Prof. Dr. Reinhard Bauer (Fakultät W).
-
-Die Vorlesung orientiert sich an den Büchern
-- J. Kallrath: *Gemischt-ganzzahlige Optimierung in der Praxis*, Springer Spektrum, 2013.
-- H. P. Williams: *Model Building in Mathematical Programming, 5th Edition*, Wiley, 2013.
-- K. G. Murty: *Case Studies in Operations Research*, Springer, 2015.
-- H. Hamacher, K. Klamroth: *Lineare Optimierung und Netzwerkoptimierung*, Vieweg, 2006.
-- S. Bradley, A. Hax, T. Magnanti: *Applied Mathematical Programming*, Addison-Wesley, 1977.
-
-auf denen es teilweise auch basiert. 
-
 # Lineare Optimierung
 
-## Ein Beispiel
+Im ersten Teil dieser Vorlesung beschäftigen wird uns mit *linearen Optimierungsproblemen*, auch genannt *lineare Programme (LP)*. Dieses Kapitel bildet die Grundlage für die folgenden Kapitel {ref}`sec:integer-problems`, {ref}`sec:zeitdiskret` und {ref}`sec:practical-aspects`, in denen verschiedene Varianten und Aspekte dieser Probleme vorgestellt werden. 
 
-Ein chemisches Unternehmen handelt mit drei verschiedenen Substanzen, die in verschiedenen Mengen simultan durch den gleichen Produktionsprozess erzeugt werden. 
-Das Unternehmen kann pro Monat (maximal) die folgenden Mengen verkaufen:
+## Grundbegriffe
+Ein *lineares Programm* ist ein Optimierungsproblem, bei dem eine lineare Zielfunktion unter linearen Nebenbedingungen optimiert werden soll. Ein Beispiel für lineares Optimierungsproblem haben wir bereits in Abschnitt {ref}`sec:production-example` gesehen. Es lautete:
 
-Substanz A: 50t, Substanz B: 72t, Substanz C: 20t 
+\begin{alignat}{5}
+\max_{x_1, x_2} & \quad  &   2x_1+2x_2 & & & \\[2mm]
+\text{s.t. } & &  5x_1+10x_2&\leq 50\\
+             & &  12x_2+8x_2&\leq 72\\
+             & &  4x_1+0x_2&\leq 20\\
+             & &  x_1+x_2&\leq 30\\
+             & & x_1, x_2 &\geq 0
+\end{alignat}
 
-Zur Produktion der Substanzen besitzt das Unternehmen zwei verschiedene Anlagen, die nach leicht verschiedenen Verfahren arbeiten. Dadurch ergeben sich unterschiedliche Produktionsmengen pro Tag. Der Betrieb der Anlagen erbringt pro Tag einen Profit von je 2 Millionen Euro.
-An Tagen an denen die Anlagen nicht produzieren, fällt kein Profit, aber auch keine Kosten an.
+Zur Erinnerung: *Linear* bedeutet, dass alle Variablen $x_i$ nur in einfacher Potenz (mit konstanten Koeffizienten) vorkommen dürfen, also Ausdrücke der Form $x_1+2x_2-7x_3$, aber keine Ausdrücke der Form $x_1^2$, $\sin x_2$, $1/x_1$ oder auch $x_1x_2$. Jede lineare Funktion $f:\R^n\rightarrow\R$ lässt sich darstellen als
+\begin{align*}
+f(\v x)=c_1x_1+\dots +c_nx_n=\sum_{i=1}^nc_ix_i=\v c^T\v x,
+\end{align*}
+wobei $c_1,\dots,c_n\in\R$ reelle Zahlen sind, die natürlich auch den Wert Null annehmen dürfen. Wir fassen sie im Vektor $\v c\in\R^n$ zusammen.
 
-Darüber hinaus ist Folgendes über die Tagesproduktion der Anlagen bekannt:
+Als Nebenbedingungen sind Ungleichungen und Gleichungen der Art $\leq, \geq, =$ erlaubt. Nicht erlaubt und typischerweise auch nicht sinnvoll sind Ungleichungen der Art $<$ bzw $>$ (was sollte z.B. die kleinste Zahl $x>0$, also die Lösung des LPs $\min_{x} x\quad \text{s.t. } x>0$ sein?).
 
-|           | Anlage 1  | Anlage 2  |
-|:----------|-----------|----------:|    
-|Substanz A | 5t / Tag  | 10t / Tag |
-|Substanz B | 12t / Tag | 8t / Tag  | 
-|Substanz C | 4t / Tag  | 0t / Tag  | 
-
-Die Firma hat keine Lagermöglichkeit und kann pro Monat nicht mehr produzieren, als sie verkaufen kann. Wie viele Tage pro Monat muss die Firma in den jeweiligen Anlagen produzieren, um ihren Profit zu optimieren? Anmerkung: Die Firma kann auch für den Bruchteil eines Tages produzieren (anstatt den ganzen Tag) und erhält dann auch nur den entsprechenden Bruchteil des Profits.
-
-````{prf:example}
-TO DO
-````
-
-## Definition
-Ein *lineares Programm* ist ein Optimierungsproblem, bei dem eine lineare Zielfunktion unter linearen Nebenbedingungen optimiert werden soll.
-
-````{prf:example}
-TO DO
-````
-
-Als Nebenbedingungen sind Ungleichungen und Gleichungen der Art $\leq, \geq, =$ erlaubt. Nicht erlaubt und typischerweise auch nicht sinnvoll sind Ungleichungen der Art $<$ bzw $>$. 
+Durch die lineare Struktur kann man die Koeffizienten der Variablen in den Ungleichungen in einer Matrix zusammenfassen, deren Spalten der Anzahl der Variablen und deren Zeilen der Anzahl der Nebenbedingungen entspricht.
 
 ````{prf:definition} Lineares Programm in allgemeiner Form
 
-Gegeben sei eine $m \times n$-Matrix $A=(a_{ij})$, ein $m$-dimensionaler Vektor $b$, sowie ein $n$-dimensionaler Vektor $c$. Ein *lineares Programm* ist ein Optimierungsproblem der Form
+Gegeben sei eine $m \times n$-Matrix $A=(a_{ij})$, ein $m$-dimensionaler Vektor $b$, sowie ein $n$-dimensionaler Vektor $c$. Ein *lineares Programm (LP)* ist ein Optimierungsproblem der Form
 \begin{alignat*}{5}
 \min / \max          & \quad  &   c_1x_1 + \ldots + c_nx_n &          & & \\[2mm]
 \text{s.t. } & &  a_{i1}x_1 + \ldots + a_{in}x_n & = & \ b_i & \quad\quad & & \forall i= 1, \ldots, p \\
@@ -56,12 +36,11 @@ Gegeben sei eine $m \times n$-Matrix $A=(a_{ij})$, ein $m$-dimensionaler Vektor 
 \end{alignat*}
 ````
 
-Es müssen dabei nicht alle möglichen Arten von Nebenbedingungen ($\leq, =, \geq, \geq 0$) vorkommen.
-Um mit einer einheitlichen Darstellung arbeiten zu können, benutzt man gerne lineare Programme in der sogenannten *Standardform*.
+Es müssen dabei nicht alle möglichen Arten von Nebenbedingungen ($\leq, =, \geq, \geq 0$) vorkommen. Die genaue Form eines beliebigen LP ergibt sich normalerweise aus der Modellierung der Anwendung wie etwa bei unserem Produktionsbeispiel. Die Form wird dabei meist so gewählt, dass sie möglichst gut verständlich ist. Wenn man Aussagen über beliebige, allgemeine LPs treffen möchte (z.B. bei der Beschreibung von Lösungsverfahren, die für alle möglichen LPs funktionieren sollen), benutzt man gerne lineare Programme in der sogenannten *Standardform*.
 
 ````{prf:definition} Lineares Programm in Standardform
-
-Gegeben sei eine $m \times n$-Matrix $A$, ein $m$-dimensionaler Vektor $b$, sowie ein $n$-dimensionaler Vektor $c$. Ein *lineares Programm* ist ein Optimierungsproblem der Form
+:label: def:LP
+Gegeben sei eine $m \times n$-Matrix $A$, ein $m$-dimensionaler Vektor $b$, sowie ein $n$-dimensionaler Vektor $c$. Ein *lineares Programm (LP)* ist ein Optimierungsproblem der Form
 \begin{alignat*}{5}
 \min          & \quad  &   c_1x_1 + \ldots + c_nx_n &          & & \\[2mm]
 \text{s.t. } & &  a_{i1}x_1 + \ldots + a_{in}x_n & = & \ b_i & \quad\quad & & \forall i= 1, \ldots, m \\
@@ -77,8 +56,9 @@ In Matrixform
 ````
 
 ## Standardumformungen
+Wie bringt man nun ein *beliebiges* Lineares Programm in Standardform? 
 
-Wie bringt man ein beliebiges Lineares Programm in Standardform? Wir gehen als Zwischenschritt einen etwas umständlichen Weg, der sich später als praktisch und einfacher zu verstehen erweist. Wir bringen dazu das LP erst in eine Form, bei der ein Minimierungsproblem vorliegt, alle Variablen nicht-negativ sind und nur Nebenbedingungen der Form $\leq$ vorliegen:
+<!-- Wir gehen als Zwischenschritt einen etwas umständlichen Weg, der sich später als praktisch und einfacher zu verstehen erweist. Wir bringen dazu das LP erst in eine Form, bei der ein Minimierungsproblem vorliegt, alle Variablen nicht-negativ sind und nur Nebenbedingungen der Form $\leq$ vorliegen: 
 
 \begin{alignat*}{5}
 \min_{x_1, \ldots, x_p} &\quad & \sum_{j=1}^{n}c_j x_j \\[2mm]
@@ -86,104 +66,129 @@ Wie bringt man ein beliebiges Lineares Programm in Standardform? Wir gehen als Z
              & & x_j                      &\geq&  0 &  && \forall j =1 ,\ldots ,n
 \end{alignat*}
 
-Danach bringen wir es in Standardform. Wir starten mit einem beliebigen linearen Problem
+Danach bringen wir es in Standardform. -->
+
+Wir starten mit einem beliebigen linearen Problem, das nicht in Standardform vorliegt.
+Es enthält beliebig viele Gleichungen, $\leq$-Ungleichungen und $\geq$-Ungleichungen mit beliebigen Koeffizienten $a_{ij}, i=1,\dots,m, j=1,\dots,n$:
 \begin{alignat*}{5}
 \max_{x_1, \ldots, x_p} &\quad & \sum_{j=1}^{n}c_j x_j \\[2mm]
 \text{s.t. } & &\sum_{j=1}^{n} a_{ij} x_j &\leq&  \ b_i & \quad\quad & & \forall i=1,\ldots,m_1 \\
              & &\sum_{j=1}^{n} a_{ij} x_j &\geq&  \ b_i & \quad\quad & & \forall i=m_1+1,\ldots,m_2 \\
              & &\sum_{j=1}^{n} a_{ij} x_j &=&  \ b_i & \quad\quad & & \forall i=m_2+1,\ldots,m \\
 \end{alignat*}
-````{prf:example}
-TO DO
+
+````{prf:example} LP, welches nicht in Standardform vorliegt
+\begin{alignat}{5}
+\max_{x_1, x_2} & \quad  &  2x_1-3x_2 & & & \\[2mm]
+\text{s.t. } & &  3x_1+x_2&\leq 3\\
+             & &  -x_1+5x_2&\geq 7\\
+             & &  x_1+x_2&= 1\\
+             & & x_1&\geq 0
+\end{alignat}
 ````
 
-Wir wandeln das LP nun wie folgt in ein neues LP um: 
+Wir wandeln das LP nun in vier Schritten in ein neues LP um:
+1. Transformation der Zielfunktion
+2. Transformation von $\geq$-Ungleichungsnebenbedingungen
+3. Transformation auf nichtnegative Variablen
+4. Transformation auf Gleichungsbedingungen
 
-**(1)** Falls ein Maximierungsproblem vorliegt, wandeln wir es in ein Minimierungsproblem um, indem wir die Zielfunktion
-\begin{align*}
+Schritt 1
+: Falls ein Maximierungsproblem vorliegt, wandeln wir es in ein Minimierungsproblem um, indem wir die Zielfunktion
+: \begin{align*}
 \max \sum_{j=1}^{n}c_j x_j 
 \end{align*}
-durch
-\begin{align*}
+: durch
+: \begin{align*}
 \min \sum_{j=1}^{n}-c_j x_j
 \end{align*} 
-ersetzen.
-````{prf:example}
-TO DO
+: ersetzen.
+````{prf:example} Transformation der Zielfunktion
+\begin{alignat*}{5}
+\red{\min_{x_1, x_2}} & \quad  &  \red{-2x_1+3x_2} & & & \\[2mm]
+\text{s.t. } & &  3x_1+x_2&\leq 3\\
+             & &  -x_1+5x_2&\geq 7\\
+             & &  x_1+x_2&= 1\\
+             & & x_1&\geq 0
+\end{alignat*}
 ````
 
-**(2)** Nebenbedingungen der $=$-Form 
-\begin{align*}
-\sum_{j=1}^{n} a_{ij} x_j = b_i 
-\end{align*}
-ersetzen wir durch zwei Nebenbedingungen
-\begin{eqnarray*}
-    \sum_{j=1}^{n} a_{ij} x_j & \leq & b_i \\
-    \sum_{j=1}^{n} a_{ij} x_j & \geq & b_i.
-\end{eqnarray*}
-````{prf:example}
-TO DO
-````
     
-**(3)** Nebenbedingungen der $\geq$-Form 
-\begin{align*}
+Schritt 2
+: Nebenbedingungen der $\geq$-Form 
+: \begin{align*}
 \sum_{j=1}^{n} a_{ij} x_j \geq b_i
 \end{align*}
-multiplizieren wir mit $-1$ durch und erhalten 
+: multiplizieren wir mit $-1$ durch und erhalten 
 \begin{align*}
 \sum_{j=1}^{n} -a_{ij} x_j \leq -b_i
 \end{align*}
-````{prf:example}
-TO DO
+````{prf:example} Transformation der $\geq$-Ungleichungen
+\begin{alignat*}{5}
+\min_{x_1, x_2} & \quad  &  -2x_1+3x_2 & & & \\[2mm]
+\text{s.t. } & &  3x_1+x_2&\leq 3\\
+             & &  \red{x_1-5x_2}&\red{\leq -7}\\
+             & &  x_1+x_2&= 1\\
+             & & x_1&\geq 0
+\end{alignat*}
 ````
     
-**(4)** Für jede Variable $x_i$, die negativ werden kann, fügen wir zwei neue Variablen 
-\begin{align*}
-x_i^+ \text{ und } x_i^- 
-\end{align*}
-mit den Nichtnegativitätsbedingungen 
-\begin{align*}
+Schritt 3
+: Für jede Variable $x_i$, die negativ werden kann, fügen wir zwei neue Variablen $x_i^+$ und $x_i^-$ mit den Nichtnegativitätsbedingungen 
+: \begin{align*}
 x_i^+\geq 0\\
 x_i^-\geq 0
 \end{align*}
-ein. Nun ersetzen wir jedes Vorkommen von $x_i$ durch $(x_i^+-x_i^-)$
-````{prf:example}
-TO DO
+: ein. Nun ersetzen wir jedes Vorkommen von $x_i$ durch $(x_i^+-x_i^-)$
+````{prf:example} Transformation auf nichtnegative Variablen
+\begin{alignat*}{5}
+\min_{x_1, \red{x_2^+, x_2^-}} & \quad  &  -2x_1+\red{3x_2^+-3x_2^-} & & & \\[2mm]
+\text{s.t. } & &  3x_1+\red{x_2^+-x_2^-}&\leq 3\\
+             & &  x_1-\red{5x_2^+-5x_2^-}&\red{\leq -7}\\
+             & &  x_1+\red{x_2^+-x_2^-}&= 1\\
+             & & x_1,\red{x_2^+,x_2^-}&\geq 0
+\end{alignat*}
 ````
 
-**(5)** Wir haben nun die Form des Zwischenschrittes erreicht: 
-\begin{alignat*}{5}
-\min_{x_1, \ldots, x_p} &\quad & \sum_{j=1}^{n}c_j x_j \\[2mm]
-\text{s.t. } & &\sum_{j=1}^{n} a_{ij} x_j &\leq&  \ b_i & \quad\quad & & \forall i=1,\ldots,m \\
-             & & x_j                      &\geq&  0 &  && \forall j =1 ,\ldots ,n
-\end{alignat*}
-
-
-Um das Problem in Standardform 
-zu bringen, müssen wir die Nebenbedingungen von der $\leq$-Form in die $=$-Form bringen. Dies lässt sich durch das Zufügen von neuen Variablen, sogenannten *Schlupfvariablen* $x_{p+1},\ldots,x_n$  erreichen:
-\begin{align*}
+Schritt 4
+: Um das Problem in Standardform zu bringen, müssen wir die Nebenbedingungen von der $\leq$-Form in die $=$-Form bringen. Dies lässt sich durch das Hinzufügen von neuen Variablen, sogenannten *Schlupfvariablen* $x_{n+1},\ldots,x_{n+m_2}$  erreichen:
+: \begin{align*}
 \begin{array}{llllll}
-a_{11} x_1+\ldots +a_{1p} x_p	& +x_{p+1} & &  &   & =b_1\\ 
-a_{21} x_1+\ldots +a_{2p} x_p	&  & +x_{p+2} & &   & =b_2\\
+a_{11} x_1+\ldots +a_{1n} x_n	& \red{+x_{n+1}} & &  &   & =b_1\\ 
+a_{21} x_1+\ldots +a_{2n} x_n	&  & \red{+x_{n+2}} & &   & =b_2\\
 \vdots & & & \ddots & & \vdots\\
-a_{m1} x_1+\ldots +a_{mp} x_p	&  & &&  +x_{p+m} & =b_m\\  
+a_{m1} x_1+\ldots +a_{mp} x_n	&  & &&  \red{+x_{n+m_2}} & =b_m\\  
 \end{array} 
 \end{align*}
+
 Auf unser Beispiel übertragen ergibt dies
-````{prf:example}
-TO DO
+````{prf:example} Transformation auf Gleichungsnebenbedingung
+Transformation auf nichtnegative Variablen
+\begin{alignat*}{5}
+\min_{x_1, x_2^+, x_2^-, \red{x_3, x_4}} & \quad  &  -2x_1+\red{3x_2^+-3x_2^-} & & & \\[2mm]
+\text{s.t. } & &  3x_1+x_2^+-x_2^-\red{+x_3}&\red{=} 3\\
+             & &  x_1-5x_2^+-5x_2^-\red{+x_4}&\red{=} -7\\
+             & &  x_1+x_2^+-x_2^-&= 1\\
+             & & x_1,x_2^+,x_2^-,\red{x_3,x_4}&\geq 0
+\end{alignat*}
 ````
 
 Damit ist das LP in Standardform. In Matrixform schreiben wir
 ````{prf:example}
-TO DO
+\begin{alignat}{5}
+\min_{x_1, x_2^+, x_2^-, x_3, x_4} & \quad  &  \bmat -2,&3,&-3,&0,&0 \emat\bmat x_1\\x_2^+\\x_2^-\\x_3\\x_4\emat & & & \\[2mm]
+\text{s.t. } & &  \bmat 3&1&-1&1&0\\ 1&-5&5&0&1\\ 1&1&-1&0&0 \emat\bmat x_1\\x_2^+\\x_2^-\\x_3\\x_4\emat&=\bmat 3\\-7\\1\emat\\
+             & & (x_1,x_2^+,x_2^-,x_3,x_4)&\geq 0
+\end{alignat}
 ````
 
 ## Lösbarkeit von Linearen Programmen
 
-Wir betrachten ein beliebiges lineares Problem LP. Wir haben gesehen, dass wir ohne Beschränkung der Allgemeinheit annehmen können, dass LP in Standardform gegeben ist. Wir nennen jedes $x$, das alle Nebenbedingungen erfüllt, eine *zulässige Lösung* des linearen Problems.
+Wir wiederholen nun die Grundbegriffe aus Abschnitt {ref}`sec:grundbegriffe` speziell für den Fall beliebiger linearer Probleme. Streng genommen sind diese natürlich durch die Definitionen im Abschnitt {ref}`sec:grundbegriffe` mit abgedeckt, aber etwas Wiederholung schadet an dieser Stelle nicht.
 
-````{prf:definition} Zulässige Lösung
+Wir nennen jedes $x$, das alle Nebenbedingungen erfüllt, eine *zulässige Lösung* des linearen Problems.
+
+````{prf:definition} Zulässige Lösung eines LP
 Gegeben ist ein Lineares Programm LP: $\min  c^Tx$ unter den Nebenbedingungen $Ax=b$ und $x\geq 0$. 
 Es heißt
 \begin{align*}
@@ -194,85 +199,167 @@ die *Menge aller zulässigen Lösungen* von LP.
 
 Eine zulässige Lösung heißt *optimal*, wenn es keine andere zulässige Lösung mit einem besseren Zielfunktionswert gibt.
 
-````{prf:definition} Optimale Lösung
+````{prf:definition} Optimale Lösung eines LP
 Gegeben ist ein lineares Programm LP: $\min  c^Tx$ unter den Nebenbedingungen $Ax=b$ und $x\geq 0$. 
 Es sei $P$ die Menge der zulässigen Lösungen von LP. Es heißt $x^*\in P$ *optimal* für LP, wenn für alle $x' \in P$ gilt, dass $c^Tx^* \leq c^Tx'$.
 ````
 
-Ein lineares Problem heißt *unbeschränkt*, wenn es für jeden Wert $k$ eine  zulässige Lösung mit Zielfunktionswert gibt, der besser als $k$ ist. Man kann also "beliebig gut werden".
+Ein lineares Problem heißt *unbeschränkt*, wenn es für jeden Wert $k$ eine zulässige Lösung mit Zielfunktionswert gibt, der besser als $k$ ist. Man kann also "beliebig gut werden".
 
 ````{prf:definition} Unbeschränktes Lineares Programm
 Gegeben ist ein lineares Programm LP: $\min  c^Tx$ unter den Nebenbedingungen $Ax=b$ und $x\geq 0$. 
 Es sei $P$ die Menge der zulässigen Lösungen von LP. LP heißt *unbeschränkt*, wenn es für alle $k \in \RR$ ein $x \in P$ gibt, so dass $c^Tx \leq k$.
 ````
 
-
-Für jedes lineare Programm LP trifft genau einer der folgenden Möglichkeiten zu:
-1. LP besitzt eine optimale Lösung.
+Für jedes lineare Programm LP trifft genau eine der folgenden Möglichkeiten zu:
+1. LP besitzt (mindestens) eine optimale Lösung.
 2. LP besitzt keine zulässige Lösung.
 3. LP ist unbeschränkt.
 
-````{prf:example}
-TO DO
-````
+
+## Grafisches Lösen
+Wir betrachten noch einmal das Produktionsbeispiel {eq}`prodopt`:
+\begin{alignat}{5}
+\max_{x_1, x_2} & \quad  &   2x_1+2x_2 & & & \\[2mm]
+\text{s.t. } & &  5x_1+10x_2&\leq 50\\
+             & &  12x_2+8x_2&\leq 72\\
+             & &  4x_1+0x_2&\leq 20\\
+             & &  x_1+x_2&\leq 30\\
+             & & x_1, x_2 &\geq 0
+\end{alignat}
+Im vorigen Kapitel haben wir die Lösung angegeben: $x_1^{\star}=4, x_2^{\star}=3$. Wir wollen uns nun anschauen, wie man auf diese Lösung kommt. Dazu stellen wir uns den Variablenvektor $\v x=\bmat x_1\\x_2\emat$ als Punkt im zweidimensionalen Raum, also der Ebene, vor. Jede der Nebenbedingungen teilt den $\R^2$ in zwei Bereiche: einen Bereich, in dem alle Punkte liegen, die diese Nebenbedingung erfüllen und einen Bereich, in dem alle Punkte liegen, die sie nicht erfüllen. Die Trennlinie dieser Bereiche -- man nennt sie auch *Halbräume* -- ist die Gerade, die durch Gleichsetzen der linken und rechten Seite der Ungleichung entsteht. Dies kann man nun für jede der Ungleichungen machen. Dort, wo sich die Bereiche überlagern, liegen die zulässigen Punkte des Problems.
+
+```{figure} ./bilder/prodopt-feasible.png
+:name: fig:feasible-set
+:width: 400px
+
+Nebenbedingungen (orange Linien) und die resultierende zulässige Menge (in blau) des Produktionsoptimierungsbeispiel {eq:prodopt}. Die Nebenbedingung $x_1+x_2\leq 30$ ist hier nicht eingezeichnet, da sie auf die zulässige Menge keinen Einfluss hat.
+```
+Doch welcher der zulässigen Punkte ist ein optimaler Punkt? Dazu betrachten wir eine sog. *Höhenlinie* der Zielfunktion. Die Höhenlinie zu einem Wert $\beta\in\R$ ist eine Gerade entlang derer die Zielfunktion den konstanten Wert $\beta$ annimmt. Im Bild ist z.B. die Höhenlinie zum Niveau $\beta=8$ eingezeichnet, was bedeutet, dass alle Punkte auf der Linie den Zielfunktionswert 8 haben. Wenn wir die Höhenlinie parallel in Pfeilrichtung verschieben -- das ist übrigens die Richtung $\v c=\bmat 2\\2\emat$, der Vektor, der die Zielfunktion definiert! -- verbessert sich die Zielfunktion. Dies tun wir nun so lange, bis wir die zulässige Menge gerade so noch berühren. Dieser letzte Berührungspunkt zwischen Höhenlinie und zulässiger Menge ist ein Optimalpunkt des Problems. 
+
+```{figure} ./bilder/prodopt-feasible-opt.png
+:name: fig:feasible-opt
+:width: 450px
+
+Höhenlinie und Verschiebung der Höhenlinie bis zum optimalen Punkt.
+```
+
+Wir beobachten, dass der Optimalpunkt in diesem Beispiel in einer Ecke der zulässigen Menge liegt. 
+Dies ist tatsächlich nicht nur in diesem Beispiel so, sondern immer, d.h. für jedes beliebige LP. Diese Tatsache ist sehr wichtig, da sie die Grundlage für Lösungsverfahren von LPs bildet. Im nächsten Abschnitt beschreiben wir diese Eigenschaft von LPs etwas formaler.
 
 (subsec:polyeder)=
 ## Der Polyeder der zulässigen Lösungen
 Jede Gleichung der Form 
 \begin{align*} \sum_{j=1}^{n} a_{ij} x_j = b_i \end{align*}
-unterteilt den Raum $\RR^n$ in zwei *Halbräume*
+unterteilt den Raum $\R^n$ in zwei *Halbräume*
 $\sum_{j=1}^{n} a_{ij} x_j \leq b_i$ und
 $\sum_{j=1}^{n} a_{ij} x_j \geq  b_i$.
-````{prf:example}
-TO DO
-````
 
-Wir erinnern uns, dass man die Menge $P$ der zulässigen Lösungen eines linearen Programms auch ausschließlich durch Ungleichungen des Typs $\sum_{j=1}^{n} a_{ij} x_j  \leq  b_i$ beschreiben kann. 
-Es ist $P$ dann genau die Schnittmenge von den endlich vielen Halbräumen, die durch die Nebenbedingungen definiert sind. Man nennt eine solche Punktmenge einen *Polyeder*.
+
+```{figure} ./bilder/halbraeume.png
+:name: fig:halbraeume
+:width: 400px
+
+Zwei Halbräume, die durch die Gleichung $x_2=\frac{1}{2}x_1+1$ definiert sind.
+```
+
+Die Schnittmenge von (endlich vielen) Halbräumen nennt man einen *Polyeder*.
 
 ````{prf:definition} Polyeder
-Ein *Polyeder* $P \subseteq \RR^n$ ist eine Punktmenge, die eine endliche Zahl an linearen Ungleichungen erfüllt, d.h. die durch die Form 
+Ein *Polyeder* $P \subseteq \R^n$ ist eine Punktmenge, die eine endliche Zahl an linearen Ungleichungen erfüllt, d.h. die durch die Form 
 
 \begin{align*}
-P=\{x \in \RR^n \mid Ax \leq b\}
+P=\{x \in \R^n \mid Ax \leq b\}
 \end{align*}
 
 darstellbar ist für eine $m \times n$ Matrix A und einen $m$-dimensionalen Vektor $b$.
 ````
 
-Ein Punkt $x \in P$ in einem Polyeder $P$ heißt *Ecke*, wenn er nicht in der Mitte von zwei anderen Punkten aus $P$ liegt.
+Polyeder und lineare Optimierungsprobleme haben eine enge Verbindung, da die zulässige Menge eines linearen Programms immer als ein Polyeder aufgefasst werden kann. Das liegt daran, dass man die Menge der zulässigen Punkte auch ausschließlich durch *Un*gleichungen beschreiben kann (womit sie die Polyeder-Definition erfüllen). In unserer Standardformulierung {prf:ref}`def:LP` haben wir eigentlich festgehalten, dass ein LP beliebig viele Gleichungen der Form
+\begin{align*}
+\sum_{j=1}^{n} a_{ij} x_j  =  b_i
+\end{align*}
+enthalten kann. Nun kann man aber offenbar jede solche Gleichung durch die beiden Ungleichungen
+\begin{align*}
+\sum_{j=1}^{n} a_{ij} x_j  &\leq  b_i
+\sum_{j=1}^{n} a_{ij} x_j  &\geq  b_i
+\end{align*}
+ersetzen und erhält damit ein äquivalentes LP, welches ausschließlich Ungleichungen als Nebenbedingung hat. Die Menge der Punkte, die alle Ungleichungen erfüllen, bilden den *Polyeder der zulässigen Lösungen*.
 
-````{prf:example}
-TO DO
-````
+Ein Punkt $x \in P$ in einem Polyeder $P$ heißt *Ecke*, wenn er nicht in der Mitte von zwei anderen Punkten aus $P$ liegt. Mathematisch exakt drückt man das wie folgt aus
+
+```{figure} ./bilder/ecken.png
+:name: fig:ecken
+:width: 400px
+
+Ein Polyeder mit fünf Ecken $e_1,e_2,e_3,e_4,e_5$.
+```
 
 ````{prf:definition} Ecke
 Ein Punkt $x \in P$ in einem Polyeder $P$ heißt *Ecke* von $P$, falls es keine zwei Punkte $x^1, x^2 \in P$ gibt mit $x^1\not=x^2$, so dass $x=\frac{1}{2}x^1+\frac{1}{2}x^2$ gilt.
 ````
 
-Eine Menge $T \subseteq \RR^n$ heißt *konvex*, wenn für jedes Punktepaar $x^1, x^2 \in T$ auch die komplette Verbindungslinie zwischen $x^1$ und $x^2$ in der Menge $T$ liegt. Polyeder sind konvexe Mengen.
+Eine Menge $T \subseteq \R^n$ heißt *konvex*, wenn für jedes Punktepaar $x^1, x^2 \in T$ auch die komplette Verbindungslinie zwischen $x^1$ und $x^2$ in der Menge $T$ liegt. Polyeder sind konvexe Mengen.
 
-````{prf:example}
-TO DO
-````
+```{figure} ./bilder/konvexe_menge.png
+:name: fig:konvexe-mengen
+:width: 400px
+
+Beispiele konvexer und nicht konvexer Mengen.
+```
 
 ````{prf:definition} Konvexität
-Eine Menge $T \subseteq \RR^n$ heißt *konvex*, falls aus $x^1 \in T$ und $x^2 \in T$ folgt, dass $\lambda x^1 + (1-\lambda) x^2 \in T$ gilt.
+Eine Menge $T \subseteq \R^n$ heißt *konvex*, falls aus $x^1 \in T$ und $x^2 \in T$ folgt, dass $\lambda x^1 + (1-\lambda) x^2 \in T$ gilt.
 ````
+Konvexität ist in der Optimierung eine sehr starke und wünschenswerte Eigenschaft und wird uns im Laufe der Vorlesung noch öfter begegnen.
 
+````{prf:theorem}
+:label: thm:ecken
 Besitzt ein lineares Programm eine optimale Lösung, so besitzt es auch mindestens eine optimale Lösung, die eine Ecke im zugehörigen Lösungspolyeder ist.
-
-````{prf:example}
-TO DO
 ````
 
-## Beispiel: Transportproblem
+```{figure} ./bilder/ecke-loesung.png
+:name: fig:ecke-loesung
+:width: 500px
+
+Optimallösungen im Polyeder.
+```
+
+## Lösungsmethoden für LPs
+Zur Lösung allgemeiner LPs der Form {prf:ref}`def:LP` gibt es im wesentlichen zwei Ansätze, die in der Praxis verwendet werden. In diesem Abschnitt erklären wir kurz die Ideen dieser beiden Ansätze. Auf Details verzichten wir an dieser Stelle, da mittlerweile für beide Ansätze sehr gute Software verfügbar ist, die in (zumindest für viele Probleme) als black box verwendet kann.
+
+### Simplex-Verfahren
+Das Simplex Verfahren wurde 1947 von George Dantzig entwickelt, einem der wichtigsten Menschen im Bereich der mathematischen Optimierung (er entwickelte es im Rahmen einer Planungsaufgabe für das US Militär). In dem Verfahrens wird ausgenutzt, dass sich eine Lösung des LPs stets in einer Ecke des Polyeders der zulässigen Punkte befindet (siehe {prf:ref}`thm:ecken`). Das Verfahren iteriert über die Ecken des Polyeders und prüft an jeder Ecke, ob es sich um eine optimale Lösung handelt. Wichtig: Man muss für dieses "Prüfen" auf Optimalität nicht *alle* Ecken besuchen, sondern man kann es einer Ecke "ansehen", ob es sich um eine optimale handelt (durch Überprüfung gewisser mathematischer Bedingungen).
+Warum ist das wichtig? Die Anzahl der Ecken des Polyeders der zulässigen Lösungen kann überraschend groß sein. So hat ein $n$-dimensionaler Einheitswürfel, also die Menge $C=\{\v x\in\R^n \mid 0\leq x_i\leq 1, i=1,\dots,n\}$ $2^n$ Ecken. Ein Quadrat im $\R^2$ hat $2^2=4$ Ecken, ein Würfel im $\R^3$ hat $2^3=8$ Ecken. Wenn man ein LP auf 500 Variablen betrachtet, beträgt die Anzahl der Ecken $2^{500}\approx 3\cdot 10^{150}$. Zum Vergleich: man geht davon aus, dass es im gesamten Universum etwa $10^{80}$ Atome gibt.
+Um so erstaunlicher ist es, dass moderne Varianten des Simplex-Verfahrens Probleminstanzen mit hunderttausenden Variablen und Constraints oft innerhalb Sekunden auf einem Standardlaptop lösen können.
+
+Die exakte Laufzeit vorherzusehen, ist allerdings schwierig und in der Tat hat das Simplex-Verfahren im worst-case exponentielle Laufzeit. So wurde in den 1970er Jahren ein Beispiel konstruiert, der sogenannte Klee-Minty-Würfel, bei denen Simplex-Verfahren eben doch alle Ecken besuchen würden. 
+
+Um eine Vorstellung von der Komplexität zu bekommen: Hätte Dantzig 1947 sein Simplex-Verfahren für ein Klee-Minty-Würfel mit 500 Variablen auf einem Rechner gestartet, der pro Sekunde eine Billiarde ($10^15$) Ecken überprüft und bis heute ununterbrochen läuft, so hätte er heute nicht einmal $10^{25}$ Ecken überprüft, also gerade mal etwa $10^{-123}=0.00000\dots001\%$ der Ecken des Polytops.
+
+In der Praxis treten solche Worst-Case Probleme allerdings eher nicht auf und das Simplex-Verfahren ist ein robustes und schnelles Verfahren für lineare Programme.  
+
+
+### Innere-Punkte-Verfahren
+Neben Simplex-Verfahren gibt es eine weiter Klasse von Verfahren, die eine andere Lösungsstrategie verfolgt, sogenannte *Innere-Punkte-Verfahren*. Wie der Name schon sagt, besteht die Idee darin, im Inneren des Polyeders zu starten und iterativ zu versuchen, sich der optimalen Ecken approximativ zu nähern. Aktuelle Löser starten in der Regel beide Typen von Verfahren gleichzeitig (auf unterschiedlichen Kernen), da keines der Verfahren dem anderen auf allen Probleminstanzen überlegen ist. Der Lösungslauf endet, sobald eines der Verfahren das LP gelöst hat.
+
+
+## Software
+Für allgemeines lineare Programme existieren heutzutage ausgereifte Softwarepakete, die Instanzen mit hundertausenden Variablen und Nebenbedingungen innerhalb von Sekunden auf Standardlaptops lösen können (dies hängt natürlich von der konkreten Probleminstanz ab). Der schnellste Löser ist [Gurobi](https://www.gurobi.com/) (nach den Erfindern Gu, Rothberg und Bixby). Dieser ist proprietär, aber für den akademischen Gebrauch ist die Lizenz immerhin kostenlos. Weitere kommerzielle Löser sind CPLEX, Mosek und FICO Xpress.
+
+Daneben gibt es frei erhältliche Software wie [CLP](https://github.com/coin-or/Clp) oder [SoPlex](https://soplex.zib.de/) (bzw. [CBC](https://github.com/coin-or/Cbc) und [SCIP](https://scipopt.org/), falls auch Ganzzahligkeitsbedingungen betrachtet werden sollen). Besonders für große und schwierige Instanzen mit Ganzzahligkeitsbedingungen sind die kommerziellen Löser den freien allerdings z.T. deutlich überlegen.
+
+Gurobi z.B. bietet eine eigene Python Schnittstelle zur einfachen Modellierung von Problemen. Des weiteren existieren Modellierungsbibliotheken wie [PuLP](https://coin-or.github.io/pulp/) oder [Python-MIP](https://www.python-mip.com/), mit denen ein Problem formuliert werden kann, welches dann an einen Löser nach Wahl (u.a. Gurobi, CLP) übergeben wird.
+
+Wir benutzen in dieser Vorlesung das Python-Interface von Gurobi. Der folgende Code erstellt zuerst das Modell, ruft dann Gurobi auf und gibt schließlich die berechnet Lösung aus.
+
+TODO
 
 ## Modellierungstricks I
 
-### Betragsfunktion
-
 ### Maximumsfunktion als Teil der Zielfunktion
+TODO
+
 Die Zielfunktion linearer Programme besteht aus gewichteten Summen. In manchen Anwendungen benötigen wir eine Zielfunktion der Form
 \begin{align*}
 \min \max\{f_1(x_1, \ldots, x_n), f_2(x_1, \ldots, x_n), \ldots, f_d(x_1, \ldots, x_n)\}
@@ -298,4 +385,8 @@ Ein Projektplanungsproblem besteht aus vier Arbeitsschritten. Als Entscheidungsv
 \Karos{33}{16}
 ````
 
+### Beträge
+TODO
 
+## Anwendung: Transportproblem
+TODO
