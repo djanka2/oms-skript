@@ -106,7 +106,7 @@ Das ganze Problem schreiben wir kompakt als
 \begin{alignat}{5}
 \max_{x_1, x_2} & \quad  &   2x_1+2x_2 & & & \\[2mm]
 \text{s.t. } & &  5x_1+10x_2&\leq 50\\
-             & &  12x_2+8x_2&\leq 72\\
+             & &  12x_1+8x_2&\leq 72\\
              & &  4x_1+0x_2&\leq 20\\
              & &  x_1+x_2&\leq 30\\
              & & x_1, x_2 &\geq 0

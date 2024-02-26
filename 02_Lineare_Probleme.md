@@ -1,3 +1,16 @@
+---
+jupytext:
+  text_representation:
+    extension: .md
+    format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.14.4
+kernelspec:
+  display_name: Python 3 (ipykernel)
+  language: python
+  name: python3
+---
+
 # Lineare Optimierung
 
 Im ersten Teil dieser Vorlesung beschäftigen wird uns mit *linearen Optimierungsproblemen*, auch genannt *lineare Programme (LP)*. Dieses Kapitel bildet die Grundlage für die folgenden Kapitel {ref}`sec:integer-problems`, {ref}`sec:zeitdiskret` und {ref}`sec:practical-aspects`, in denen verschiedene Varianten und Aspekte dieser Probleme vorgestellt werden. 
@@ -218,7 +231,7 @@ Für jedes lineare Programm LP trifft genau eine der folgenden Möglichkeiten zu
 
 
 ## Grafisches Lösen
-Wir betrachten noch einmal das Produktionsbeispiel {eq}`prodopt`:
+Wir betrachten noch einmal das Produktionsbeispiel {eq}`eq:prodopt`:
 \begin{alignat}{5}
 \max_{x_1, x_2} & \quad  &   2x_1+2x_2 & & & \\[2mm]
 \text{s.t. } & &  5x_1+10x_2&\leq 50\\
@@ -299,7 +312,7 @@ Ein Polyeder mit fünf Ecken $e_1,e_2,e_3,e_4,e_5$.
 Ein Punkt $x \in P$ in einem Polyeder $P$ heißt *Ecke* von $P$, falls es keine zwei Punkte $x^1, x^2 \in P$ gibt mit $x^1\not=x^2$, so dass $x=\frac{1}{2}x^1+\frac{1}{2}x^2$ gilt.
 ````
 
-Eine Menge $T \subseteq \R^n$ heißt *konvex*, wenn für jedes Punktepaar $x^1, x^2 \in T$ auch die komplette Verbindungslinie zwischen $x^1$ und $x^2$ in der Menge $T$ liegt. Polyeder sind konvexe Mengen.
+Eine Menge $T \subseteq \R^n$ heißt *konvex*, wenn für jedes Punktepaar $x^1, x^2 \in T$ auch die komplette Verbindungslinie zwischen $x^1$ und $x^2$ in der Menge $T$ liegt. Polyeder sind konvexe Mengen (Umgekehrt kann eine nichtkonvexe Menge kein Polyeder sein).
 
 ```{figure} ./bilder/konvexe_menge.png
 :name: fig:konvexe-mengen
@@ -351,21 +364,108 @@ Daneben gibt es frei erhältliche Software wie [CLP](https://github.com/coin-or/
 
 Gurobi z.B. bietet eine eigene Python Schnittstelle zur einfachen Modellierung von Problemen. Des weiteren existieren Modellierungsbibliotheken wie [PuLP](https://coin-or.github.io/pulp/) oder [Python-MIP](https://www.python-mip.com/), mit denen ein Problem formuliert werden kann, welches dann an einen Löser nach Wahl (u.a. Gurobi, CLP) übergeben wird.
 
-Wir benutzen in dieser Vorlesung das Python-Interface von Gurobi. Der folgende Code erstellt zuerst das Modell, ruft dann Gurobi auf und gibt schließlich die berechnet Lösung aus.
+Wir benutzen in dieser Vorlesung das Python-Interface von Gurobi. Der folgende Code erstellt zuerst das Modell, ruft dann Gurobi auf und gibt schließlich die berechnete Lösung aus.
 
-TODO
+```{code-cell} ipython3
+:tags: []
+
+import gurobipy as gp
+from gurobipy import GRB
+import numpy as np
+```
+
+Formulierung in mathematischer Form
+
+\begin{alignat}{5}
+\max_{x_1, x_2} & \quad  &   2x_1+2x_2 & & & \\[2mm]
+\text{s.t. } & &  5x_1+10x_2&\leq 50\\
+             & &  12x_1+8x_2&\leq 72\\
+             & &  4x_1+0x_2&\leq 20\\
+             & &  x_1+x_2&\leq 30\\
+             & & x_1, x_2 &\geq 0
+\end{alignat}
+
+Zuerst erzeugen wir ein leeres Modell:
+
+```{code-cell} ipython3
+:tags: []
+m = gp.Model("Production Optimization")
+```
+
+Danach können wir einzelne Variablen anlegen. Als Parameter geben wir an
+* Den Namen mit "name="
+* Den Variablentyp mit "vtype=". Es gibt folgende Möglichkeiten
+  * GRB.CONTINUOUS 
+  * GRB.BINARY
+  * GRB.INTEGER
+* Die untere Schranke für die Variable mit "lb=". Falls nichts angegeben wird, ist die Variable automatisch nichtnegativ. Falls die Variable nach unten unbeschränkt sein soll, können wir "lb=-np.infty" spezifizieren.
+
+```{code-cell} ipython3
+:tags: []
+
+x1 = m.addVar(name="x1", vtype=GRB.CONTINUOUS, lb=0)
+x2 = m.addVar(name="x2", vtype=GRB.CONTINUOUS, lb=0)
+```
+
+Einzelne Nebenbedinungen können wir dann direkt mit dem Befehl addConstr angeben.
+
+```{code-cell} ipython3
+:tags: []
+m.addConstr(5*x1+10*x2 <= 50)
+m.addConstr(12*x1+8*x2 <= 72)
+m.addConstr(4*x1 <= 20)
+m.addConstr(x1+x2 <= 30)
+#m.addConstr(x1 >= 0) # nicht nötig, da bereits über den Parameter lb=0 beim Anlegen der Variable spezifiziert
+#m.addConstr(x2 >= 0)
+```
+
+Danach folgt die Zielfunktion:
+
+```{code-cell} ipython3
+m.setObjective(2*x1+2*x2, GRB.MAXIMIZE)
+```
+
+Nun starten wir den Solver.
+
+```{code-cell} ipython3
+:tags: []
+m.optimize()
+```
+
+Die Lösung können wir wie folgt auslesen:
+
+```{code-cell} ipython3
+print(f"x1={x1.x}, x2={x2.x}")
+```
 
 ## Modellierungstricks I
 
 ### Maximumsfunktion als Teil der Zielfunktion
-TODO
 
-Die Zielfunktion linearer Programme besteht aus gewichteten Summen. In manchen Anwendungen benötigen wir eine Zielfunktion der Form
+````{prf:example} Min Max
+Ein Projektplanungsproblem besteht aus vier Arbeitsschritten. Als Entscheidungsvariablen sind durch $s_1, s_2, s_3, s_4$ die Startzeiten jedes Arbeitsschrittes, durch $d_1, d_2, d_3, d_4$ die Dauer jedes Arbeitsschrittes gegeben. Alle anderen Zusammenhänge vernachlässigen wir in diesem Beispiel. Modellierungsziel ist die möglichst frühe Fertigstellung des Projekts. 
+
+Die Endzeiten der einzelnen Arbeitsschritte sind gegeben durch $s_1+d_1, s_2+d_2, s_3+d_3, s_4+d_4$. Die letzte (größte) dieser Zeiten soll möglichst klein werden. Mathematisch drückt man das so aus:
+
+```{math}
+:label: eq:minmax
+\begin{align*}
+\min \max \{s_1+d_1, s_2+d_2, s_3+d_3, s_4+d_4\}
+\end{align*}
+```
+
+```{figure} ./bilder/minmax.png
+:width: 400px
+```
+Löser für lineare Programme können mit diesen $\min\max$ meist nicht direkt umgehen. Wie kann man das $\min\max$-Problem in ein reines Minimierungsproblem von der Form {prf:ref}`def:LP` überführen?
+````
+
+Die Zielfunktion linearer Programme besteht immer aus einer gewichteten Summen der Variablen. In manchen Anwendungen benötigen wir eine Zielfunktion der Form
 \begin{align*}
 \min \max\{f_1(x_1, \ldots, x_n), f_2(x_1, \ldots, x_n), \ldots, f_d(x_1, \ldots, x_n)\}
 \end{align*}
 mit linearen Ausdrücken $f_1, f_2, \ldots, f_d$. Wie können wir diese Zielfunktion in der Form eines linearen Programms ausdrücken?
-Wir führen dazu eine neue Variable $z \in \RR$ ein und modellieren
+Wir führen dazu eine neue Variable $z \in \R$ ein und modellieren
 \begin{align*}
 \min z
 \end{align*}
@@ -377,16 +477,83 @@ unter den Nebenbedingungen
 	f_d(x_1, \ldots, x_n) & \leq & z.
 \end{eqnarray*}
 Die Ungleichungen in den Nebenbedingungen übernehmen damit die Funktion des Maximums in der originalen Zielfunktion.
+Sie garantieren, dass $z$ größer oder gleich *jeder* der Funktionen $f_i$ ist. Gleichzeitig soll $z$ aber minimiert werden, dadurch wird es auf das Maximum der $f_i$ "gedrückt". Ähnlich können übrigens auch $\max \min$ Probleme reformuliert werden. Bei Problemen der Form $\max \max$ oder $\min \min$ gestaltet sich die Sache schwieriger (mehr dazu im nächsten Kapitel).
 
+%max min als Übung?
+  
+````{prf:example} Min Max (Forsetzung)
+Wir führen eine neue Variable $y$ und 4 Nebenbedingungen ein. Der zur $\min\max$-Formulierung {eq}`eq:minmax` äquivalente Teile eines linearen Programms lautet:
 
-````{prf:example}
-Ein Projektplanungsproblem besteht aus vier Arbeitsschritten. Als Entscheidungsvariablen  sind durch $s_1, s_2, s_3, s_4$ die Startzeiten jedes Arbeitsschrittes, durch $d_1, d_2, d_3, d_4$ die Dauer jedes Arbeitsschrittes gegeben. Alle anderen Zusammenhänge vernachlässigen wir in diesem Beispiel. Modellierungsziel ist die möglichst frühe Fertigstellung des Projekts. 
-
-\Karos{33}{16}
+\begin{alignat}{5}
+\min_{s_1,d_1,s_2,d_2,s_3,d_3,s_4,d_4,y} & \quad  &   y & & & \\[2mm]
+\text{s.t. } & &  s_1+d_1&\leq y\\
+             & &  s_2+d_2&\leq y\\
+             & &  s_3+d_3&\leq y\\
+             & &  s_4+d_4&\leq y
+\end{alignat}
 ````
 
-### Beträge
-TODO
 
-## Anwendung: Transportproblem
-TODO
+### Beträge
+Die Betragsfunktion ist definiert als
+\begin{align*}
+f(x)=|x|=\left\{ \begin{array}{lr} 
+                x, & \text{ falls }x\geq0\\
+                -x, & \text{ falls }x<0
+                \end{array}
+\right.
+\end{align*}
+Beträge sind bei vielen Modellen hilfreich, wenn z.B. der Abstand zwischen zwei Variablen betrachtet werden soll, aber nicht klar ist, welche von beiden Variablen die größere ist. Ähnlich wie bei $\min \max$-Problemen muss man auch die Betragsfunktion umformulieren, so dass das Problem von der Form {prf:ref}`def:LP` ist und an einen Löser übergeben werden kann.
+
+Eine erste Beobachtung ist die Tatsache, dass der Betrag einer Zahl gerade dem Maximum der Zahl und ihres negativen Wertes entspricht, in Formeln:
+\begin{align*}
+f(x)=|x|=\max\{x,-x\}
+\end{align*}
+
+Damit können wir ähnlich vorgehen wie im vorherigen Abschnitt. Folgende Bedingungen sind äquivalent:
+\begin{align*}
+|x|\leq 2 \Leftrightarrow \max\{x,-x\}\leq 2 \Leftrightarrow x\leq 2, -x\leq 2
+\end{align*}
+
+Funktioniert das auch bei Ungleichungen der Form $|x|\geq2$? Leider nicht, da $|x|\geq 2$ bedeutet, dass entweder $x\leq -2$ oder $x\geq 2$ gelten muss. Die zulässige Menge dieser "Entweder-Oder-Aussage" ist nicht konvex; sie hat ein Loch zwischen $-2$ und $2$. Wir hatten aber im vorherigen Abschnitt festgestellt, dass sich die zulässige Menge eines LP als Polyeder darstellen lässt und Polyeder konvex sind. Daher kann die Menge $|x|\geq2$ nicht die zulässige Menge eines LP sein. Wie man Bedingungen dieser Art mit Hilfe binärer Variablen modellieren kann, erfahren Sie im nächsten Kapitel.
+
+Wir halten fest:
+````{prf:remark}
+Die Bedingung $|x|\leq \alpha$ ist äquivalent zu den beiden Bedingungen $x\leq\alpha$ und $-x\leq \alpha$.
+````
+
+Falls Beträge in der Zielfunktion eines *Minimierungs*problems auftauchen, so kann man sie ebenfalls umformulieren. Beispiel:
+\begin{align*}
+\min_{x\in\R} |x+2|
+\end{align*}
+lässt sich über folgende Schritte in ein äquivalentes LP umwandeln:
+\begin{align*}
+\min_{x\in\R} |x+2| &\Leftrightarrow \min_{(x,\alpha)\in\R^2} \alpha \quad \text{s.t. } |x+2|\leq \alpha\\
+&\Leftrightarrow \min_{(x,\alpha)\in\R^2} \alpha \quad \text{s.t. } x+2\leq \alpha, -(x+2)\leq \alpha
+\end{align*}
+
+Das lässt sich verallgemeinern, wenn die Summe von mehreren Beträgen minimiert werden soll. In diesem Fall muss jeder Summand durch zwei Ungleichungsnebenbedingungen aufgelöst werden. Beispiel: Das Problem
+\begin{align*}
+\min_{(x_1,x_2)\in\R} |x_1+2|+|2x_2|
+\end{align*}
+wird zunächst umformuliert zu
+\begin{align*}
+\min_{(x_1,x_2,\alpha_1,\alpha_2)\in\R^4} \alpha_1+\alpha_2 \quad \text{s.t. } |x_1+2|\leq \alpha_1, |2x_2|\leq\alpha_2
+\end{align*}
+und im nächsten Schritt zu
+\begin{align*}
+\min_{(x_1,x_2,\alpha_1,\alpha_2)\in\R^4} \alpha_1+\alpha_2 \quad \text{s.t. } \quad &x_1+2\leq \alpha_1,\quad -(x_1+2)\leq \alpha_1\\ 
+                                                              &2x_2\leq\alpha_2,\quad -2x_2\leq \alpha_2
+\end{align*}
+Achtung: Das funktioniert nur, wenn die Koeffizienten der Beträge in der Zielfunktion nicht negativ sind. Formal:
+````{prf:theorem}
+Das Optimierungsproblem 
+\begin{align*}
+\min_{\v x\in\R^n}\sum_{i=1}^N\lambda_i |f_i(\v x)|
+\end{align*}
+ist äquivalent zum Problem
+\begin{align*}
+\min_{\v x\in\R^n, \v \alpha \in\R^N}\sum_{i=1}^N\lambda_i \alpha_i \quad \text{s.t. }\quad f_i(\v x)&\leq\alpha_i,\quad -f_i(\v x)\leq\alpha_i, i\in\{1,\dots,N\}
+\end{align*}
+für Funktionen $f_1,\dots,f_N$ und *nichtnegative* Zahlen $\lambda_1,\dots,\lambda_N$.
+````

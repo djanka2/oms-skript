@@ -50,9 +50,9 @@ Das Ergebnis einer Beispielrechnung ist
 Ergebnis zeitabhängiges lineare Optimierungsproblem.
 ```
 
-## Produktionsplanungsproblem
+## Anwendung: Produktionsplanungsproblem
 
-## Kraftwerkeinsatzplanung
+## Anwendung: Kraftwerkeinsatzplanung
 
 ## MILP als Policy für ein dynamisches Problem
 ### Rollierendes Fenster Ansatz
