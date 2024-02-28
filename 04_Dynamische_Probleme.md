@@ -51,8 +51,10 @@ Ergebnis zeitabhängiges lineare Optimierungsproblem.
 ```
 
 ## Anwendung: Produktionsplanungsproblem
+% Projekt 2 SS24
 
 ## Anwendung: Kraftwerkeinsatzplanung
+%https://www.gurobi.com/jupyter_models/electrical-power-generation/
 
 ## MILP als Policy für ein dynamisches Problem
 ### Rollierendes Fenster Ansatz

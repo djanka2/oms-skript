@@ -6,7 +6,7 @@ Die Vorlesung ist in zwei Teile gegliedert, die im Prinzip unabhängig voneinand
 
 Im Teil "Lineare Optimierungsmodelle" liegt der Fokus auf Problemmodellierung von Planungs- und Entscheidungsprobleme als gemischt-ganzzahlige lineare Optimierungsprobleme. Die Inhalte werden oft dem *Operations Research* zugerechnet.
 
-Im Teil "Nichtlineare Optimierungsmodelle und -verfahren" werden gradientenbasierte Optimierungsverfahren behandelt, wie sie z.B. beim Training von Modellen des maschinellen Lernens benutzt werden. Dabei werden auch die benötigten Grundbegriffe der multivariaten Analysis eingeführt.
+Im Teil "Ableitungsbasierte Optimierung" werden gradientenbasierte Optimierungsverfahren behandelt, wie sie z.B. beim Training von Modellen des maschinellen Lernens benutzt werden. Dabei werden auch die benötigten Grundbegriffe der multivariaten Analysis eingeführt.
 
 
 ```{tableofcontents}

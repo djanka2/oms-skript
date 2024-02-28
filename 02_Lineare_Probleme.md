@@ -39,9 +39,9 @@ Durch die lineare Struktur kann man die Koeffizienten der Variablen in den Ungle
 
 ````{prf:definition} Lineares Programm in allgemeiner Form
 
-Gegeben sei eine $m \times n$-Matrix $A=(a_{ij})$, ein $m$-dimensionaler Vektor $b$, sowie ein $n$-dimensionaler Vektor $c$. Ein *lineares Programm (LP)* ist ein Optimierungsproblem der Form
+Gegeben sei eine $m \times n$-Matrix $\m A=(a_{ij})$, ein $m$-dimensionaler Vektor $\v b$, sowie ein $n$-dimensionaler Vektor $\v c$. Ein *lineares Programm (LP)* ist ein Optimierungsproblem der Form
 \begin{alignat*}{5}
-\min / \max          & \quad  &   c_1x_1 + \ldots + c_nx_n &          & & \\[2mm]
+\min_{\v x} / \max_{\v x}          & \quad  &   c_1x_1 + \ldots + c_nx_n &          & & \\[2mm]
 \text{s.t. } & &  a_{i1}x_1 + \ldots + a_{in}x_n & = & \ b_i & \quad\quad & & \forall i= 1, \ldots, p \\
 & &  a_{i1}x_1 + \ldots + a_{in}x_n & \leq & \ b_i & \quad\quad & & \forall i= p+1, \ldots, q \\
 & &  a_{i1}x_1 + \ldots + a_{in}x_n & \geq & \ b_i & \quad\quad & & \forall i= q+1, \ldots, m \\
@@ -55,16 +55,16 @@ Es müssen dabei nicht alle möglichen Arten von Nebenbedingungen ($\leq, =, \ge
 :label: def:LP
 Gegeben sei eine $m \times n$-Matrix $A$, ein $m$-dimensionaler Vektor $b$, sowie ein $n$-dimensionaler Vektor $c$. Ein *lineares Programm (LP)* ist ein Optimierungsproblem der Form
 \begin{alignat*}{5}
-\min          & \quad  &   c_1x_1 + \ldots + c_nx_n &          & & \\[2mm]
+\min_{\v x}          & \quad  &   c_1x_1 + \ldots + c_nx_n &          & & \\[2mm]
 \text{s.t. } & &  a_{i1}x_1 + \ldots + a_{in}x_n & = & \ b_i & \quad\quad & & \forall i= 1, \ldots, m \\
 & & x_j & \geq & \ 0 & && \forall j= 1, \ldots, n.
 \end{alignat*}
 In Matrixform
 
 \begin{alignat*}{5}
-\min          & \quad  &   c^Tx &          & & \\[2mm]
-\text{s.t. } & &  Ax & = & b & \\
-& & x & \geq & \ 0 & &&
+\min_{\v x}          & \quad  &   \v c^T\v x &          & & \\[2mm]
+\text{s.t. } & &  \m A\v x & = & \v b & \\
+& & \v x & \geq & \ \v 0 & &&
 \end{alignat*}
 ````
 
@@ -202,10 +202,10 @@ Wir wiederholen nun die Grundbegriffe aus Abschnitt {ref}`sec:grundbegriffe` spe
 Wir nennen jedes $x$, das alle Nebenbedingungen erfüllt, eine *zulässige Lösung* des linearen Problems.
 
 ````{prf:definition} Zulässige Lösung eines LP
-Gegeben ist ein Lineares Programm LP: $\min  c^Tx$ unter den Nebenbedingungen $Ax=b$ und $x\geq 0$. 
+Gegeben ist ein Lineares Programm LP: $\min  c^Tx$ unter den Nebenbedingungen $\m A\v x=\v b$ und $\v x\geq \v 0$. 
 Es heißt
 \begin{align*}
-P=\{x \in \RR^n \mid Ax=b, \ x\geq 0\}
+P=\{\v x \in \R^n \mid Ax=b, \ \v x\geq \v 0\}
 \end{align*}
 die *Menge aller zulässigen Lösungen* von LP.
 ````
@@ -213,15 +213,15 @@ die *Menge aller zulässigen Lösungen* von LP.
 Eine zulässige Lösung heißt *optimal*, wenn es keine andere zulässige Lösung mit einem besseren Zielfunktionswert gibt.
 
 ````{prf:definition} Optimale Lösung eines LP
-Gegeben ist ein lineares Programm LP: $\min  c^Tx$ unter den Nebenbedingungen $Ax=b$ und $x\geq 0$. 
-Es sei $P$ die Menge der zulässigen Lösungen von LP. Es heißt $x^*\in P$ *optimal* für LP, wenn für alle $x' \in P$ gilt, dass $c^Tx^* \leq c^Tx'$.
+Gegeben ist ein lineares Programm LP: $\min  c^Tx$ unter den Nebenbedingungen $\m A\v x=\v b$ und $\v x\geq \v 0$. 
+Es sei $P$ die Menge der zulässigen Lösungen von LP. Es heißt $x^*\in P$ *optimal* für LP, wenn für alle $\v x' \in P$ gilt, dass $\v c^T\v x^* \leq \v c^T\v x'$.
 ````
 
 Ein lineares Problem heißt *unbeschränkt*, wenn es für jeden Wert $k$ eine zulässige Lösung mit Zielfunktionswert gibt, der besser als $k$ ist. Man kann also "beliebig gut werden".
 
 ````{prf:definition} Unbeschränktes Lineares Programm
-Gegeben ist ein lineares Programm LP: $\min  c^Tx$ unter den Nebenbedingungen $Ax=b$ und $x\geq 0$. 
-Es sei $P$ die Menge der zulässigen Lösungen von LP. LP heißt *unbeschränkt*, wenn es für alle $k \in \RR$ ein $x \in P$ gibt, so dass $c^Tx \leq k$.
+Gegeben ist ein lineares Programm LP: $\min  \v c^T\v x$ unter den Nebenbedingungen $\m A\v x=\v b$ und $\v x\geq \v 0$. 
+Es sei $P$ die Menge der zulässigen Lösungen von LP. LP heißt *unbeschränkt*, wenn es für alle $k \in \R$ ein $\v x \in P$ gibt, so dass $\v c^T\v x \leq k$.
 ````
 
 Für jedes lineare Programm LP trifft genau eine der folgenden Möglichkeiten zu:
@@ -282,10 +282,10 @@ Die Schnittmenge von (endlich vielen) Halbräumen nennt man einen *Polyeder*.
 Ein *Polyeder* $P \subseteq \R^n$ ist eine Punktmenge, die eine endliche Zahl an linearen Ungleichungen erfüllt, d.h. die durch die Form 
 
 \begin{align*}
-P=\{x \in \R^n \mid Ax \leq b\}
+P=\{\v x \in \R^n \mid \m A\v x \leq \v b\}
 \end{align*}
 
-darstellbar ist für eine $m \times n$ Matrix A und einen $m$-dimensionalen Vektor $b$.
+darstellbar ist für eine $m \times n$ Matrix $\m A$ und einen $m$-dimensionalen Vektor $\v b$.
 ````
 
 Polyeder und lineare Optimierungsprobleme haben eine enge Verbindung, da die zulässige Menge eines linearen Programms immer als ein Polyeder aufgefasst werden kann. Das liegt daran, dass man die Menge der zulässigen Punkte auch ausschließlich durch *Un*gleichungen beschreiben kann (womit sie die Polyeder-Definition erfüllen). In unserer Standardformulierung {prf:ref}`def:LP` haben wir eigentlich festgehalten, dass ein LP beliebig viele Gleichungen der Form
@@ -299,7 +299,7 @@ enthalten kann. Nun kann man aber offenbar jede solche Gleichung durch die beide
 \end{align*}
 ersetzen und erhält damit ein äquivalentes LP, welches ausschließlich Ungleichungen als Nebenbedingung hat. Die Menge der Punkte, die alle Ungleichungen erfüllen, bilden den *Polyeder der zulässigen Lösungen*.
 
-Ein Punkt $x \in P$ in einem Polyeder $P$ heißt *Ecke*, wenn er nicht in der Mitte von zwei anderen Punkten aus $P$ liegt. Mathematisch exakt drückt man das wie folgt aus
+Ein Punkt $\v x \in P$ in einem Polyeder $P$ heißt *Ecke*, wenn er nicht in der Mitte von zwei anderen Punkten aus $P$ liegt. Mathematisch exakt drückt man das wie folgt aus
 
 ```{figure} ./bilder/ecken.png
 :name: fig:ecken
@@ -309,10 +309,10 @@ Ein Polyeder mit fünf Ecken $e_1,e_2,e_3,e_4,e_5$.
 ```
 
 ````{prf:definition} Ecke
-Ein Punkt $x \in P$ in einem Polyeder $P$ heißt *Ecke* von $P$, falls es keine zwei Punkte $x^1, x^2 \in P$ gibt mit $x^1\not=x^2$, so dass $x=\frac{1}{2}x^1+\frac{1}{2}x^2$ gilt.
+Ein Punkt $\v x \in P$ in einem Polyeder $P$ heißt *Ecke* von $P$, falls es keine zwei Punkte $\v x^1, \v x^2 \in P$ gibt mit $\v x^1\not=\v x^2$, so dass $\v x=\frac{1}{2}\v x^1+\frac{1}{2}\v x^2$ gilt.
 ````
 
-Eine Menge $T \subseteq \R^n$ heißt *konvex*, wenn für jedes Punktepaar $x^1, x^2 \in T$ auch die komplette Verbindungslinie zwischen $x^1$ und $x^2$ in der Menge $T$ liegt. Polyeder sind konvexe Mengen (Umgekehrt kann eine nichtkonvexe Menge kein Polyeder sein).
+Eine Menge $T \subseteq \R^n$ heißt *konvex*, wenn für jedes Punktepaar $\v x^1, \v x^2 \in T$ auch die komplette Verbindungslinie zwischen $\v x^1$ und $\v x^2$ in der Menge $T$ liegt. Polyeder sind konvexe Mengen (Umgekehrt kann eine nichtkonvexe Menge kein Polyeder sein).
 
 ```{figure} ./bilder/konvexe_menge.png
 :name: fig:konvexe-mengen
@@ -322,7 +322,7 @@ Beispiele konvexer und nicht konvexer Mengen.
 ```
 
 ````{prf:definition} Konvexität
-Eine Menge $T \subseteq \R^n$ heißt *konvex*, falls aus $x^1 \in T$ und $x^2 \in T$ folgt, dass $\lambda x^1 + (1-\lambda) x^2 \in T$ gilt.
+Eine Menge $T \subseteq \R^n$ heißt *konvex*, falls aus $\v x^1 \in T$ und $\v x^2 \in T$ folgt, dass $\lambda \v x^1 + (1-\lambda) \v x^2 \in T$ gilt.
 ````
 Konvexität ist in der Optimierung eine sehr starke und wünschenswerte Eigenschaft und wird uns im Laufe der Vorlesung noch öfter begegnen.
 
@@ -437,9 +437,10 @@ Die Lösung können wir wie folgt auslesen:
 ```{code-cell} ipython3
 print(f"x1={x1.x}, x2={x2.x}")
 ```
-
+(subsubsec:tricks1)=
 ## Modellierungstricks I
 
+(subsubsec:minmax)=
 ### Maximumsfunktion als Teil der Zielfunktion
 
 ````{prf:example} Min Max
@@ -493,7 +494,7 @@ Wir führen eine neue Variable $y$ und 4 Nebenbedingungen ein. Der zur $\min\max
 \end{alignat}
 ````
 
-
+(subsubsec:betraege)=
 ### Beträge
 Die Betragsfunktion ist definiert als
 \begin{align*}

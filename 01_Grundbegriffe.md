@@ -34,6 +34,7 @@ Um diese Probleme der Mathematik zugänglich zu machen, übersetzen wir sie zun�
 >
 > George Box (1919-2013), britischer Statistiker 
 
+````{important}
 Ein mathematisches Optimierungsmodell besteht aus folgenden Bestandteilen:
 
 Problemdaten
@@ -47,7 +48,7 @@ Zielfunktion
 
 Constraints
 : Welchen Einschränkungen unterliegen unsere Entscheidungen?
-
+````
 Wir schauen uns nun ein Beispiel eines mathematischen Modells anhand einer konkreten Anwendung an.
 
 (sec:production-example)=

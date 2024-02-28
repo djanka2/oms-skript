@@ -48,12 +48,10 @@ sphinx:
       tex:
         macros:
           "N": "\\mathbb{N}"
+          "Z": "\\mathbb{Z}"
           "R": "\\mathbb{R}"
           "B": "\\mathbb{B}"
           "I": "\\mathbb{I}"
-          "NN": "\\mathbb{N}"
-          "RR": "\\mathbb{R}"
-          "BB": "\\mathbb{B}"
           "norm": ["\\left\\lVert#1 \\right\\rVert", 1]
           "floor": ["\\lfloor#1\\rfloor", 1]
           "bmat" : ["\\begin{pmatrix}"]

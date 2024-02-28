@@ -15,7 +15,7 @@ parts:
       - file: 03_Ganzzahlige_Probleme
       - file: 04_Dynamische_Probleme
       - file: 05_Praxisaspekte
-  - caption: Nichtlineare Optimierungsmodelle und Lösungsverfahren
+  - caption: Ableitungsbasierte Optimierung
     chapters:
       - file: 06_Multivariate_Analysis
       - file: 07_Theoretische_Grundlagen
