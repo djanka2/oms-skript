@@ -1,5 +1,27 @@
+---
+jupytext:
+  text_representation:
+    extension: .md
+    format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.14.4
+kernelspec:
+  display_name: Python 3 (ipykernel)
+  language: python
+  name: python3
+---
+```{code-cell} ipython3
+:tags: ["remove-cell"]
+
+from datetime import datetime
+from myst_nb import glue
+
+today = datetime.today().strftime("%d.%m.%Y")
+glue("today", today)
+```
+
 # Überblick
-Dies ist das Skript für die Vorlesung Optimierung, Modellierung und Simulation an der Hochschule Karlsruhe im Studiengang Data Science. 
+Dies ist das Skript für die Vorlesung Optimierung, Modellierung und Simulation an der Hochschule Karlsruhe im Studiengang Data Science. Letze Änderung am {glue:text}`today`.
 
 ## Inhaltsverzeichnis
 Die Vorlesung ist in zwei Teile gegliedert, die im Prinzip unabhängig voneinander gelesen werden können. 

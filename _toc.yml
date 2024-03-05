@@ -4,7 +4,8 @@
 format: jb-book
 root: 00_Ueberblick
 defaults:
-  numbered: True
+  numbered: 3
+  maxdepth: 2
 parts:
   - caption: Lineare Optimierungsmodelle
     chapters:

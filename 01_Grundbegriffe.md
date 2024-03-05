@@ -1,3 +1,4 @@
+(sec:intro)=
 # Einführung und Grundbegriffe
 
 ## Zur mathematischen Notation
@@ -28,14 +29,14 @@ Es gibt unzählige Fragestellungen, die man mit Hilfe von mathematischer Optimie
 - Welche Personen sollten auf eine Krankheit getestet werden, um die Ausbreitung der Krankheit möglichst gut vorhersagen zu können? Wie soll Impfstoff für eine Krankheit verteilt werden, um die Ausbreitung möglichst gut einzudämmen?
 - Was ist die schnellste Route zwischen zwei Punkten in einem Straßennetz?
 
-Um diese Probleme der Mathematik zugänglich zu machen, übersetzen wir sie zunächst in *mathematische Modelle*, d.h. Abstraktionen und Vereinfachungen der Realität. Ein gegebenes Problem aus der echten Welt in ein mathematisches Modell zu überführen ist im Allgemeinen nicht einfach. Dabei gibt es auch nicht *das* eine richtige Modell, denn:
+Um diese Probleme der Mathematik zugänglich zu machen, übersetzen wir sie zunächst in *mathematische Modelle*, d.h. Abstraktionen und Vereinfachungen der Realität, die als  mathematische Ausdrücke angegeben werden (Zahlen, Vektoren, Gleichungen, Ungleichungen,...) . Ein gegebenes Problem aus der echten Welt in ein mathematisches Modell zu überführen ist im Allgemeinen nicht einfach und erfordert viel Übung. Außerdem gibt es beim Modellieren auch nicht *das* eine richtige Modell, denn:
 
 > *All* models are wrong, but some are useful.
 >
 > George Box (1919-2013), britischer Statistiker 
 
 ````{important}
-Ein mathematisches Optimierungsmodell besteht aus folgenden Bestandteilen:
+Die Optimierungsmodelle in dieser Vorlesung bestehen immer aus folgenden Bestandteilen:
 
 Problemdaten
 : Informationen bzw. Rahmenbedingungen des Problems. Dies sind konkrete Zahlenwerte, die sich während der Berechnung der Lösung nicht ändern.
@@ -168,7 +169,7 @@ Wir möchten nun noch die Lösungen von Optimierungsproblemen etwas genauer char
 
 Ein Punkt $\v x^{\star}\in D$ heißt *Optimum*, *Optimalpunkt*, *Lösungspunkt* oder einfach *Lösung* des Minimierungsproblems $\min_{\v x} f(\v x)\quad \text{s.t. }\v x\in D\subseteq\R^n$, wenn $\v x$ zulässig ist und wenn es den kleinsten Zielfunktionswert aller zulässigen Punkte besitzt, also
 \begin{align*}
-f(\v x^{\star})\leq f(\v x) \text{ für *jeden* zulässigen Vektor $\v x\in D$.}
+f(\v x^{\star})\leq f(\v x) \text{ für jeden zulässigen Vektor $\v x\in D$.}
 \end{align*}
 
 Der zugehörige Zielfunktionswert $f(\v x^{\star})\in\R$ heißt *Optimalwert*.
@@ -187,17 +188,17 @@ Unbeschränktes Problem
 
 Unendlich viele Lösungen:
 : Die konstante Funktion $f(x)=3$ hat unendlich viele Minima (und Maxima): 
-: ```{figure} ./bilder/minima3.png
+: ```{figure} ./bilder/minima0.png
   :width: 400px
   ```
 : Das Optimierungsproblem $\min_x 3$ hat somit unendlich viele Lösungen, die alle den Optimalwert $3$ haben. 
 
 Unzulässiges Problem
 : Das Problem
- \begin{alignat}{5}
- \min_{x} & \quad  &   x & & & \\[2mm]
- \text{s.t. } & &  x&\leq 0\\
+  \begin{alignat}{5}
+  \min_{x} & \quad  &   x & & & \\[2mm]
+  \text{s.t. } & &  x&\leq 0\\
               & &  x&\geq 1
- \end{alignat}
+  \end{alignat}
 : besitzt *keinen* zulässigen Punkt und hat daher auch keine Lösung. Dies ist ein Beispiel für ein *unzulässiges* Problem.
 ````

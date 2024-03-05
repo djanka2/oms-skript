@@ -4,13 +4,15 @@
 title: Optimierungsverfahren, Modellierung und Simulation (DSCB410)
 author: Dennis Janka
 logo: bilder/HKA_IWI_Bildmarke-h_RGB.svg
-copyright: "2023"
+copyright: "2024"
 
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
 execute:
   execute_notebooks: force
   allow_errors: true
+
+exclude_patterns: [code.ipynb, plots.ipynb]
 
 # Define the name of the latex output file for PDF builds
 latex:
@@ -21,6 +23,7 @@ latex:
 bibtex_bibfiles:
   - references.bib
 
+only_build_toc_files: true
 # Information about where the book exists on the web
 #repository:
 #  url: https://github.com/executablebooks/jupyter-book  # Online location of your book

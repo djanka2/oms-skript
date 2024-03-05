@@ -13,7 +13,7 @@ kernelspec:
 ## Beispiele
 ## Anwendung: Training von linearen Regressionsmodellen
 
-## Grundlagen der beschränkten Optimierung
+<!-- ## Grundlagen der beschränkten Optimierung
 
 
 ### Gleichungsbeschränkte Optimierung
@@ -69,7 +69,5 @@ Praktisch müsste man alle $2^3$ Möglichkeiten durchgehen, welche der drei Ungl
 
 Für die aktiven Ungleichungen muss man nun testweise ein Gleichungssystem lösen. Nach der Lösung muss man das Vorzeichen der $\mu_1,\mu_2,\mu_3$ überprüfen: Nur wenn diese nicht negativ sind, ist die Nicht-Negativitätsbedingung der KKT-Bedingungen erfüllt und der so berechnete Punkt ist ein KKT-Punkt. Ist das nicht der Fall, muss eine andere Kombination von aktiven Ungleichungsnebenbedingungen getestet werden.
 ````
-
-
-
+ -->
 %## Anwendung: Support Vector Maschinen

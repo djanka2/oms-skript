@@ -1,3 +1,16 @@
+---
+jupytext:
+  text_representation:
+    extension: .md
+    format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.14.4
+kernelspec:
+  display_name: Python 3 (ipykernel)
+  language: python
+  name: python3
+---
+
 (sec:integer-problems)=
 # Ganzzahlige Probleme
 
@@ -585,10 +598,10 @@ TO DO
 #### Modellierung der Junktoren als arithmetische Ausdrücke
 Logische Variablen werden durch Binärvariablen modelliert. Für jede logische Variable $V$ führen wir eine Binärvariable $x_V$ ein, mit der Bedeutung
 \begin{align*}
-x_V=\begin{array}{rl}
+x_V=\left\{\begin{array}{rl}
 1 & \text{, V ist wahr} \\
 0 & \text{, V ist falsch}
-\end{array}
+\end{array}\right.
 \end{align*}
 
 ````{prf:theorem}
@@ -1099,6 +1112,61 @@ kann wie folgt linearisiert werden. Wir benötigen zunächst eine obere Schranke
 
 Danach kann man jedes Auftreten des nichtlinearen Terms $x\cdot b$ durch (den linearen Term) $y$ ersetzen.
 
+## Allgemeines Vorgehen bei der Modellierung
+In {ref}`sec:intro` und in den Beispielmodellen in diesem Kapitel haben wir bereits gesehen, dass die Optimierungsmodelle in dieser Vorlesung aus den vier Komponenten Problemdaten, Entscheidungsvariablen, Zielfunktion und Nebenbedingungen bestehen. 
+
+In diesem Abschnitt möchten wir noch auf einige Punkte eingehen, die besonders beim Erstellen von größeren Modellen mit Gurobi oder einem anderen Framework hilfreich, um Modellierungsfehler zu vermeiden und den Code nachvollziehbarer zu machen.
+
+Konkret empfiehlt es sich, bei der Erstellung eines Modells nach den folgenden fünf Schritten vorzugehen.
+
+**Schritt 1: Indexmengen decklarieren**
+
+Gerade wenn es mehrere Mengen gibt, über die iteriert wird, ist es hilfreich auch Indexvariablen festzulegen, die durchgängig verwendet werden. Die Indexmengen werden wir in allen folgenden Schritten (2.-5.) benutzt, daher empfiehlt es sich, diese als erstes anzulegen. Die Indexmengen können und sollten dabei möglichst nah an der Problemformulierung gewählt werden.
+
+Beispiel: Für ein Standortproblem möchten Sie als mögliche Standorte für ein Warenlager die Städte Karlsruhe, Berlin und Heidelberg modellieren. Statt $x_1,x_2,x_3$ können Sie die zugehörigen Entscheidungsvariablen auch $x_{Karlsruhe}, x_{Berlin}, x_{Heidelberg}$ nennen. In Gurobi können Sie die Indexmenge dann direkt beim Erstellen der Variablen übergeben, d.h. anstatt
+
+```{code-cell} ipython3
+:tags: ["remove-output","remove-stderr"]
+
+x = m.addVars(3, name="x", vtype=GRB.BINARY)
+```
+schreiben Sie
+```{code-cell} ipython3
+:tags: ["remove-output","remove-stderr"]
+
+staedte = ["Karlsruhe", "Berlin", "Heidelberg"]
+x = m.addVars(staedte, vtype=GRB.BINARY)
+```
+
+Sie können dann auf die Variablen z.B. mit ``x["Karlsruhe"]`` zugreifen. Das funktioniert auch, wenn der Index aus Paaren besteht. Wollen Sie z.B. eine Variable für die Transportkosten von Karlsruhe nach Berlin anlegen und diese mit $y_{Karlsruhe, Berlin}$ bezeichnen, so können Sie das in Gurobi wie folgt tun:
+```{code-cell} ipython3
+:tags: ["remove-output","remove-stderr"]
+
+transport = [("Karlsruhe", "Berlin"), ("Heidelberg", "Karlsruhe")]
+y = m.addVars(staedte, vtype=GRB.BINARY)
+```
+Dadurch werden zwei Variablen erzeugt, auf die Sie dann einfach mit ``y["Karlsruhe","Berlin"]`` und ``y["Heidelberg","Karlsruhe"]`` zugreifen können.
+
+Indexmengen sind ein wichtiges Werkzeug, um kurzen, lesbaren Code zu erzeugen.
+
+
+**Schritt 2: Problemdaten identifizieren und Bezeichner festlegen**
+
+Im Kontext der Optimierung sind Problemdaten zwar feste Zahlen, es empfiehlt sich aber trotzdem, ihnen Bezeichner zu geben. Dadurch ist man näher an der mathematischen Formulierung, die Nachvollziehbarkeit des Programms wird erhöht und Änderungen am Code sowie Rechnen von verschiedenen Szenarien werden enorm erleichtert. 
+
+**Schritt 3: Entscheidungsvariablen definieren**
+
+Auch genannt Optimierungsvariablen, also das, was der Löser berechnen soll. Zu einer Variable gehören ein Datentyp (stetig, ganzzahlig, binär) und evtl. Grenzen (z.B. $0\leq x\leq 20$). Wir sprechen oft von Entscheidungsvariablen, auch wenn manche der Variablen keine "Entscheidungen" im umgangssprachlichen Sinne sind. Sämtliche unbekannten Werte, von denen Sie möchten, dass der Löser für sie einen Wert berechnet, gehören zu den Entscheidungs- bwz. Optimierungsvariablen.
+
+**Schritt 4: Zielfunktion formulieren**
+
+Was soll optimiert werden? Das muss ein (linearer) Ausdruck in den Entscheidungsvariablen und den Problemdaten sein. Evtl. empfiehlt es sich, schrittweise vorzugehen: wenn z.B. die Gesamtkosten minimiert werden sollen, sollte man zunächst die einzelnen Beiträge zu den Gesamtkosten identifizieren und Terme für diese aufstellen.
+
+**Schritt 5: Nebenbedingungen formulieren**
+
+Schließlich formulieren Sie die Nebenbedingungen an die Variablen, die sich aus der Problemstellung ergeben oder aus der Definition der Optimierungsvariablen. Wenn das Problem unzulässig oder unbeschränkt ist, sind die Nebenbedingungen oft die Fehlerquelle. Etwa, wenn bestimmte Nebenbedingungen vergessen wurden oder versehentlich sich widersprechende Nebenbedingungen formuliert wurden. 
+
+
 
 ## Anwendung: Ablaufplanung (Scheduling)
 Ablaufplanung wird im Englischen *scheduling* genannt. 
@@ -1182,7 +1250,7 @@ Als allgemeines Modell für diese Problemklasse ergibt sich
 mit den Entscheidungsvariablen
 - $y$: Endzeitpunkt der letzten Aufgabe
 - $x_i$: Startzeitpunkt von Aufgabe $i$
-- $z_{ij}=\begin{cases} 1 &\text{ , wenn Aufgabe }i\text{ vor Aufgabe }j\text{ ausgeführt wird}\\ 0 & \text{, sonst}. \end{cases}$ 
+- $z_{ij}=\left\{\begin{array}{rl} 1, &\text{ wenn Aufgabe }i\text{ vor Aufgabe }j\text{ ausgeführt wird}\\ 0, & \text{ sonst}. \end{array}\right.$ 
 
 und dem Wert
 \begin{align*}
@@ -1191,7 +1259,7 @@ d_{max}=\sum_{i \in A}d_i.
 
 
 ## Anwendung: Sudoku
-
+In Vorlesung zusammen entwickeln, als Übung coden lassen (Notebook vervollständigen).
 
 ## Anwendung: Studierende auf Projekte verteilen
 AWP Notebook, enthält BigM
