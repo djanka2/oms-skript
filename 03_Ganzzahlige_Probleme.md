@@ -119,9 +119,8 @@ Eine detaillierte Beschreibung solcher Presolve-Routinen findet sich in *Achterb
 ## Einige Standardprobleme 
 Wir schauen uns in diesem Abschnitt einige Standardprobleme an, mit denen das typische Vorgehen bei der ganzzahligen Programmierung verdeutlicht werden soll. Diese Probleme tauchen in der Praxis oft auch als Teil von umfangreicheren Modellen auf. 
 
-### Packprobleme
 
-#### Das Rucksackproblem
+### Das Rucksackproblem
 Das *Rucksackproblem* sind verschiedene Gegenstände mit einem bestimmten Gewicht und einem Nutzwert gegeben. Aus diesen Gegenständen soll nun eine Auswahl getroffen werden, die in einen Rucksack mit einer vorgegebenen Gewichtsschranke mitgenommen werden können.
 
 ```{figure} ./bilder/rucksack.png
@@ -183,7 +182,7 @@ oder in Matrixform
 Möglich sind auch Instanzen, bei denen der gleiche Objekttyp (festgelegt durch die Kombination von Wert und Gewicht) mehrfach vorkommen darf. In diesem Fall werden die Nebenbedingungen $x_i\in\{0,1\}$ ersetzt durch $0\leq x_i\leq h_i,\quad x_i\in\N$, wobei jeder Gegenstand $i$ maximal $h_i$ Mal mitgenommen werden darf.
 
 
-#### Bin Packing
+### Bin Packing
 Beim *Bin Packing-Problem* betrachtet man eine Menge an Objekten mit zugehörigen Gewichten. Außerdem sind beliebig viele Behälter ("bins") mit einer vorgegeben Kapazität vorhanden. Ziel ist es, die Objekte so in Behälter zu packen, dass die Kapazitätseinschränkung für jeden Behälter eingehalten wird und insgesamt möglichst wenige Behälter gebraucht werden.
 
 ```{figure} ./bilder/binpacking.png
@@ -256,11 +255,9 @@ Die allgemeine Formulierung als (binäres) lineares Programm lautet:
 & & \sum_{j=1}^{k_{max}} x_{ij} & = && \ 1,\quad &&i=1,\dots,n\\
 & & x_{ij},y_j &\in && \{0,1\},\quad &&i=1,\dots,n\quad j=1,\dots,k_{max}
 \end{alignat*}
+ 
 
-
-### Mengenprobleme 
-
-#### Einführung: Ein einfaches Standortproblem 
+### Einführung Mengenprobleme: Ein einfaches Standortproblem 
 % Siehe auch Gurobi Cell Tower
 Ein Telekommunikationsunternehmen will ein neues Wohngebiet mit Breitband-Internet versorgen. 
 Dazu müssen Versorgungsstationen aufgestellt werden.
@@ -326,7 +323,7 @@ Nebenbedingungen
 
 
 
-#### Überdeckungensprobleme auf Mengen
+### Überdeckungensprobleme auf Mengen
 
 Das obige Standortproblem ist ein Beispiel für ein *minimum set cover* Problem. Wir führen diese Problemklasse nun formell ein. Gegeben ist eine Grundmenge $S$ sowie ein Mengensystem $C \subseteq 2^S$. Dabei bezeichnet $2^S$ die Potenzmenge von $S$, also die Menge $2^S=\{S' \mid S' \subseteq S \}$ aller möglichen Teilmengen von $S$. 
 
@@ -403,7 +400,7 @@ Allgemein ergibt sich für das gewichtete Überdeckungsproblem das binäre Progr
 \end{alignat*}
 mit dem Gewichtsvektor $\v w\in\R^{|C|}$ und der Inzidenzmatrix $\m A\in\R^{|S|\times|C|}$.
 
-#### Packungsprobleme auf Mengen
+### Packungsprobleme auf Mengen
 Im Englischen heißt das Packungsproblem auf Mengen *set packing*.
 Gegeben ist eine Grundmenge $S$ sowie ein Mengensystem $C \subseteq 2^S$. 
 Im gewichteten Fall ist jeweils ein Gewicht $w_c$ für jedes Menge aus $C$ gegeben. Zwei Mengen heißen disjunkt, falls sie kein Element gemeinsam besitzen.
@@ -439,7 +436,7 @@ Mit der Definition der Adjazenzmatrix aus dem letzten Abschnitt ergibt sich folg
 mit dem Gewichtsvektor $\v w\in\R^{|C|}$ und der Inzidenzmatrix $\m A\in\R^{|S|\times|C|}$.
 
 
-#### Zerlegungsprobleme auf Mengen
+### Zerlegungsprobleme auf Mengen
 Im Englischen heißt das Zerlegungsproblem *set partitioning*. Gegeben ist eine Grundmenge $S$ sowie ein Mengensystem $C \subseteq 2^S$. Im gewichteten Fall ist jeweils ein Gewicht $w_c$ für jedes Menge aus $C$ gegeben. 
 ````{prf:example}
 ```{figure} ./bilder/setpartition.png

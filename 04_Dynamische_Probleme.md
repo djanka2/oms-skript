@@ -4,7 +4,7 @@
 Wir betrachten in diesem Kapitel Probleme, bei denen sich die Entscheidungsmöglichkeiten über einen gewissen Zeithorizont erstrecken. Wir betrachten folgendes Beispiel:
 
 (subsec:energiespeicher)=
-## Energiespeicher
+## Einführendes Beispiel: Energiespeicher
 Ein Unternehmen kann gut vorhersagen, wann es wieviel Strom benötigt. Das Unternehmen bezieht den Strom durch einen Versorger. Der Strompreis ändert sich über die Zeit, sei vorher aber bekannt. Zusätzlich hat das Unternehmen einen Batteriespeicher installiert. So kann das Unternehmen Strom in die Batterie einspeichern, wenn der Strompreis niedrig ist und den Strom wieder ausspeichern und selbst verbrauchen, wenn der Strom teuer ist. Das Unternehmen möchte den Batteriespeicher optimal nutzen.
 
 ```{figure} ./bilder/BeispielBatterie1.png
@@ -54,23 +54,11 @@ Das Ergebnis einer Beispielrechnung ist
 Ergebnis zeitabhängiges lineares Optimierungsproblem.
 ```
 
-%## Anwendung: Stromnetzwerk
-% Projekt 2 SS23
-% Übung: Energiespeicher Problem erweitern / modifizieren
-
-## Anwendung: Produktionsplanungsproblem
-% Projekt 2 SS22
-
-## Anwendung: Kraftwerkeinsatzplanung
-%https://www.gurobi.com/jupyter_models/electrical-power-generation/
-
-% Übung: Reinhards Übungen?
-
 ## Unsicherheiten in Optimierungsmodellen
-Zeitabhängige Optimierungsprobleme sind gute Beispiele dafür, ein allgemeines Problem von Optimierungsmodellen zu diskutieren. Nehmen wir noch einmal das Beispiel {ref}`subsec:energiespeicher`. In dem Beispiel gehen wir (bzw. der Löser) davon aus, dass wir den Strombedarf $d_1,d_2,\dots,d_{24}$ und den Strompreis $p_1,p_2,\dots,p_{24}$ für die nächsten 24 Stunden *genau* kennen und berechnen auf Basis dieser Annahme die optimale Lösung. Natürlich ist die Annahme, den Strompreis, den Strombedarf, das Wetter, den Aktienkurs oder die Lottozahlen von nächster Woche im Voraus *genau* zu kennen, falsch. Der Löser sieht aber die Unsicherheit in den Annahmen nicht; für ihn sind alles nur feste Zahlen (man spricht auch von *deterministischer* Optimierung). Obwohl diese Beobachtung beinahe trivial ist, halten wir sie doch an prominenter Stelle fest:
+Zeitabhängige Optimierungsprobleme sind ein guter Anlass, um ein allgemeines Problem von Optimierungsmodellen zu diskutieren. Nehmen wir noch einmal das Beispiel {ref}`subsec:energiespeicher`. In dem Beispiel gehen wir (bzw. der Löser) davon aus, dass wir den Strombedarf $d_1,d_2,\dots,d_{24}$ und den Strompreis $p_1,p_2,\dots,p_{24}$ für die nächsten 24 Stunden *genau* kennen und berechnen auf Basis dieser Annahme die optimale Lösung. Natürlich ist die Annahme, den Strompreis, den Strombedarf, das Wetter, den Aktienkurs oder die Lottozahlen von nächster Woche im Voraus *genau* zu kennen, falsch. Der Löser sieht aber die Unsicherheit in den Annahmen nicht; für ihn sind die Problemdaten lediglich feste Zahlen (man spricht auch von *deterministischer* Optimierung). Obwohl diese Beobachtung beinahe trivial ist, halten wir sie doch an prominenter Stelle fest:
 
 ````{important}
-Die optimale Lösung eines *mathematischen Modells* ist nicht unbedingt die optimale Lösung des modellierten realen Problems. Das liegt daran, dass das Modell die Wirklichkeit nicht perfekt abbildet. Die Güte der Lösung hängt davon ab, wie groß und von welcher Art die Abweichungen von Modell und Wirklichkeit sind.
+Die optimale Lösung eines *mathematischen Modells* ist nicht unbedingt die optimale Lösung des modellierten *realen Problems*. Das liegt daran, dass das Modell die Wirklichkeit nicht perfekt abbildet. Die Güte der Lösung hängt davon ab, wie groß und von welcher Art die Abweichungen von Modell und Wirklichkeit sind.
 ````
 
 Typische Beispiele für deutliche Abweichungen von Modell und Wirklichkeit in Optimierungsmodellen:
@@ -80,7 +68,8 @@ Typische Beispiele für deutliche Abweichungen von Modell und Wirklichkeit in Op
 
 Was also tun? Zunächst einmal: (Gemischt-ganzzahlige) lineare Programmierung ist ein seit Jahrzehnten in der Industrie etabliertes Werkzeug, um praktisch relevante Planungs- und Entscheidungsprobleme zu lösen. In vielen Fällen sind die Modellfehler klein genug, so dass sie ignoriert werden können oder so dass die berechnete optimale Lösung des Modells zwar nicht die optimale Lösung des modellierten Problems ist, aber eben doch ziemlich dicht dran -- und in jedem Fall besser als die Lösung, die ein Mensch ganz ohne mathematische Modell hervorgebracht hätte.
 
-Sind die Modellfehler -- man sagt auch *Unsicherheiten* -- sehr groß, kommen darüber hinaus auch viele unterschiedliche Ansätze zum Einsatz, bei denen man versucht, Unsicherheiten zu quantifizieren und mit Hilfe stochastischer Modelle abzubilden. Diese werden in dieser Vorlesung nicht behandelt.
+Eine Methode mit Modellfehlern -- man sagt auch *Unsicherheiten* -- umzugehen ist, ein MILP nicht nur einmal zu lösen, sondern mehrmals, und zwar zu unterschiedlichen Zeitpunkten. Dabei werden stets die aktuellsten Problemdaten mit einbezogen. Einen systematischen Ansatz, der auf dieser Idee basiert, beschreiben wir im nächsten Abschnitt. Darüber hinaus gibt es auch viele unterschiedliche Ansätze, bei denen man versucht, Unsicherheiten zu quantifizieren und mit Hilfe stochastischer Modelle abzubilden. Diese werden in dieser Vorlesung nicht behandelt.
+
 
 ### Sequentielle Optimierung auf rollierendem Zeitfenster
 Speziell für den Fall von zeitabhängigen Problemen, die man als MILP formulieren kann, bietet sich folgender Ansatz an, der sich relativ einfach umsetzen lässt und im Wesentlichen ohne Stochastik auskommt. Um ihn zu illustrieren, benutzen wir wieder das Energiespeicherproblem. Wir nehmen zunächst an, dass der Strombedarf im Voraus bekannt ist, aber dass für den Preis $p_t$ nur eine 24-Stunden-Vorhersage[^VorhersageML] vorhanden ist. Der Ansatz ist aber auch auf alle anderen zeitabhängigen Probleme und weitere Unsicherheiten anwendbar.
@@ -114,19 +103,24 @@ BILD mit MPC Schema
 Wir halten fest:
 - Um das Energiespeicherproblem zu lösen, lösen wir eine Serie von 24 MILPs, die sich in den Problemdaten (nämlich der jeweils aktuellen 24-Stunden-Preisvorhersage) unterscheiden
 - Von jeder Lösung nutzen wir nur den Teil, der sich auf die nächste Zeitperiode bezieht, also $s_{\tau,\tau+1}^{\star},s_{\tau,\tau+1}^{-\star},s_{\tau,\tau+1}^{+\star},k_{\tau,\tau+1}^{\star}$. Der Rest der Lösung wird nicht verwendet!
-- Der Grundgedanke ist, dass so für eine Entscheidung immer die aktuellsten (und damit in der Regel besten) Vorhersagedaten verwendet werden.   
+- Der Grundgedanke ist, dass so für eine Entscheidung immer die aktuellsten (und damit in der Regel besten) Vorhersagedaten verwendet werden.
+- Ein solches Problem wird auch als *sequenzielles Entscheidungsproblem* bezeichnet, ein Problem der Form "Entscheidung, Information, Entscheidung, Information, ...". 
 
 % Policy, sequentielles Entscheidungsproblem. Keine optimale Lösung!
 
-````{prf:algorithm} Sequentielle Optimierung auf rollierendem Zeitfenster
+````{prf:algorithm} Sequenzielle Optimierung auf rollierendem Zeitfenster
 :label: alg:mpc
 
 Gegeben: 
-: Zeitdiskretisiertes gemischt-ganzzahliges lineares Optimierungsproblem auf einem Zeithorizont $t=1,\dots,T$ mit Optimierungsvariablen $\v x_t$ und Problemdaten $\v p_t$  
-: Folge von Vorhersagen für die Problemdaten, die zu den Zeitpunkten $\tau=0,1,\dots,T-1$ bekannt werden. Bezeichnung $\v p_{\tau,\tau+t}, t=1,\dots,T$
+: Zeitdiskretisiertes gemischt-ganzzahliges lineares Optimierungsproblem auf einem Zeithorizont $t=1,\dots,T$ mit Optimierungsvariablen $\v x_t$, Problemdaten $\v p_t$ und Zielfunktion
+: \begin{align*}
+  \sum_{t=1}^T \v c_t^T\v x_t,
+  \end{align*}
+: wobei die Vektoren $\v c_t$ Teil der Problemdaten $\v p_t$ sind für $t=1,\dots,T$.
+: Folge von Vorhersagen bzw. Schätzungen für die Problemdaten, die zu den Zeitpunkten $\tau=0,1,\dots,T-1$ bekannt werden. Bezeichnung $\v p_{\tau,\tau+t}, t=1,\dots,T$
 
 Gesucht: 
-: Optimale Entscheidungen $\bar{\v x}^{\star}_{\tau}$ (die jeweils zum Zeitpunkt $\tau-1$ bekannt berechnet werden).
+: Optimale Entscheidungen $\bar{\v x}^{\star}_{\tau}$ (die jeweils zum Zeitpunkt $\tau-1$ berechnet werden).
 
 **Algorithmus**:
 Für $\tau=0,1,\dots,T-1$: 
@@ -151,19 +145,43 @@ Die Vektoren $\bar{\v x}^{\star}_{\tau}, \tau=1,\dots,T$ enthalten die Lösung d
 
 Dieser und ähnliche Ansätze sind in der industriellen Praxis weit verbreitet. Hier noch einige Anmerkungen dazu:
 - Das in {prf:ref}`alg:mpc` beschriebene Schema ist in den Ingenieurswissenschaften als *modellprädiktive Regelung* (engl: model predictive control (MPC)) bekannt und wird dort vor allem zur Steuerung von technischen Prozessen verwendet.
-- Der allgemeine Begriff für Verfahren, mit denen man sequentielle Entscheidungsprobleme unter Unsicherheiten löst lautet *policy*. {prf:ref}`alg:mpc` ist ein Beispiel für eine policy.
+- Der allgemeine Begriff für Verfahren, mit denen man sequenzielle Entscheidungsprobleme unter Unsicherheiten löst lautet *Policy*. {prf:ref}`alg:mpc` ist ein Beispiel für eine Policy.
 - Da das Zeitfenster immer für eine feste Zeitperiode in die Zukunft geht, reicht es natürlich über den Zeithorizont $t=1,\dots,T$ im ursprünglichen Problem hinaus. Sollte das nicht funktionieren, da der Prozess z.B. eine feste Endzeit hat, so kann das Zeitfenster auch in jedem Schritt verkleinert werden (das letzte MILP besteht dann nur noch aus einem Zeitschritt).
-- In vielen Anwendungen sind Vorhersagen für die nahe Zukunft sehr gut und werden schlechter, je weiter sie in der Zukunft liegen. Falls die Vorhersage auch für den ersten Zeitschritt $\tau+1$ falsch ist, kann es passieren, dass die vom Löser berechnete Lösung (physikalisch) unzulässig ist. Am Beispiel des Energiespeicherproblems wäre das der Fall, wenn die Vorhersage für den Strombedarf ungenau ist. Dann wäre die Bilanzgleichung $k_1^{\star} - s_1^+{\star} + s_1^-{\star}= d_1$ nicht erfüllt, was bedeutet, dass entweder der Bedarf nicht gedeckt würde (Stomausfälle) oder zu mehr als 100\% gedeckt wäre (zu viel Strom im Netz, was zu Schäden an der Infrastruktur führen kann). In der Realität müssten dann eine oder mehrere der Variablen $k_1^{\star}, s_1^{+\star}, s_1^{-\star}$ angepasst werden.
-- Die Lösung $\bar{\v x}^{\star}_{\tau}$ wird zwar auf Basis von optimalen Lösungen von MILPs konstruiert, sie ist aber selbst *keine* optimale Lösung bzw. optimale policy.
+- In vielen Anwendungen sind Vorhersagen für die nahe Zukunft sehr gut und werden schlechter, je weiter sie in der Zukunft liegen. Falls die Vorhersage auch für den ersten Zeitschritt $\tau+1$ falsch ist, kann es passieren, dass die vom Löser berechnete Lösung (physikalisch) unzulässig ist. Am Beispiel des Energiespeicherproblems wäre das der Fall, wenn die Vorhersage für den Strombedarf ungenau ist. Dann wäre die Bilanzgleichung $k_1^{\star} - s_1^{+\star} + s_1^{-\star}= d_1$ nicht erfüllt, was bedeutet, dass entweder der Bedarf nicht gedeckt würde (Stomausfälle) oder zu mehr als 100\% gedeckt wäre (zu viel Strom im Netz, was zu Schäden an der Infrastruktur führen kann). In der Realität müssten dann eine oder mehrere der Variablen $k_1^{\star}, s_1^{+\star}, s_1^{-\star}$ angepasst werden. 
+- Die Lösung $\bar{\v x}^{\star}_{\tau}$ wird zwar auf Basis von optimalen Lösungen von MILPs konstruiert, sie ist aber selbst *keine* optimale Lösung des übergeordneten sequenziellen Entscheidungsproblems (eine sog. optimale Policy).
 
-### Evaluation der Lösung 
-% Policy, sequentielles Entscheidungsproblem. Keine optimale Lösung!
-% Was ist die eigentliche Zielfunktion?
-% Wichtig: Lösung ist nicht mehr optimal
+
+### Evaluation der Lösung
+Wir haben nun eine konkrete Vorgehensweise beschrieben, wie man mit Unsicherheiten in den Problemdaten umgehen kann, indem man eine Folge von MILPs löst. Wie gut ist dieses Vorgehen? Dies lässt sich nur a posteriori (also im Nachhinein) bewerten. Wir stellen dafür die Zielfunktion des MILP, die aus den tatsächlichen Problemdaten besteht (z.B. den Strompreisen).
+
+Seien $\v p_{\tau}, \tau=1,\dots,T$ die tatsächlichen Problemdaten und $\v c_{\tau}, \tau=1,\dots,T$ der Teil der Problemdaten, der in der Zielfunktion verwendet wird. Dann bewerten wir unsere Lösung $\bar{\v x}^{\star}_{\tau}$ mit der Funktion
+\begin{align*}
+\sum_{\tau=1}^T \v c_{\tau}^T\bar{\v x}^{\star}_{\tau}
+\end{align*}
+Wichtig: Diese Funktion ist zum Zeitpunkt der Optimierung nie vollständig bekannt, weil man ja nicht in die Zukunft sehen kann. Aber wir können mit diesem Wert die Lösung $\bar{\v x}^{\star}_{\tau}$ mit verschiedenen Policies vergleichen, z.B.
+1. ... mit dem theoretischen, aber nicht erreichbaren Optimum, das man a posteriori durch Lösen des MILPs mit Problemdaten $\v p_{\tau}, \tau=1,\dots,T$ erhält.
+2. ... mit der Strategie, nur *ein* MILP zu Beginn des Zeithorizonts zu lösen. In der Notation von {prf:ref}`alg:mpc` wäre das
+  \begin{align*}
+  \sum_{\tau=1}^T \v c_{\tau}^T\v x^{\star}_{0,\tau}
+  \end{align*}
+
+Eine *optimale* Policy, also eine optimale tatsächlich (d.h. ohne genaue Kenntnis der Zukunft) durchführbare Strategie lässt sich für praktisch relevante Probleme normalerweise nicht bestimmen. In jedem Fall braucht man mehr Informationen über die statistische Güte der Vorhersagen $\v p_{\tau,\tau +t}$. Sind die Vorhersagen präzise und ändern sich von Zeitschritt zu Zeitschritt nur wenig, so wird man näher am theoretischen Optimum liegen als wenn die Vorhersagen sehr unsicher sind und sich über die Zeit stark ändern.  
 
 %### Parametrisierung der Probleme 
 % +Parametersuche
 
-### Anwendung: Energiespeicherproblem (sequentielle Optimierung) 
+%## Anwendung: Stromnetzwerk
+% Projekt 2 SS23
+% Übung: Energiespeicher Problem erweitern / modifizieren
+
+## Anwendung: Produktionsplanungsproblem
+% Projekt 2 SS22
+
+## Anwendung: Kraftwerkeinsatzplanung
+%https://www.gurobi.com/jupyter_models/electrical-power-generation/
+
+% Übung: Reinhards Übungen?
+
+## Anwendung: Energiespeicherproblem (sequenzielle Optimierung) 
 % Beispielimplementierung
 
