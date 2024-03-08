@@ -19,9 +19,10 @@ parts:
   - caption: Ableitungsbasierte Optimierung
     chapters:
       - file: 06_Multivariate_Analysis
-      - file: 07_Theoretische_Grundlagen
-      - file: 08_Quadratische_Probleme
-      - file: 09_Gradientenverfahren
-      - file: 10_Verfahren_zweiter_Ordnung
-      - file: 11_Stochastischer_Gradientenabstieg
-      - file: 12_Training_NN
+      - file: 07_Automatische_Differentiation
+      - file: 08_Theoretische_Grundlagen
+      - file: 09_Quadratische_Probleme
+      - file: 10_Gradientenverfahren
+      - file: 11_Verfahren_zweiter_Ordnung
+      - file: 12_Stochastischer_Gradientenabstieg
+      - file: 13_Training_NN

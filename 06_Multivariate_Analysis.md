@@ -10,6 +10,7 @@ kernelspec:
   name: python3
 ---
 
+(sec:analysis)=
 # Funktionen und Ableitungen
 In diesem Kapitel führen wir den Begriff der *multivariaten Funktion* und der *partiellen Ableitung* ein. Diese beiden Begriffe sind von zentraler Bedeutung für die gesamte Vorlesung.
 
@@ -17,8 +18,8 @@ In diesem Kapitel führen wir den Begriff der *multivariaten Funktion* und der *
 ## Multivariate Funktionen
 Ein zentraler Begriff der nichtlinearen Optimierung und des maschinelles Lernen ist der Begriff der *multivariaten Funktion*. Dies ist eine Verallgemeinerung des Funktionenbegriffs, wie er aus der Analysis einer Veränderlicher (1. Semester) bekannt ist: Wie im eindimensionalen beschreibt eine multivariate Funktion eine Beziehung zwischen einer Eingabegröße und einer Ausgabegröße (dem *Funktionswert*), nur dass die Eingabegröße nicht wie im eindimensionalen Fall eine Zahl ist, sondern ein Vektor im $\R^n$, wobei $n\in\N$ im folgenden eine beliebige natürliche Zahl sei. Die Ausgabegröße kann ebenfalls ein Vektor sein, der von anderer Dimension wie der Eingangsvektor sein kann. Anschaulich:
 ```{figure} ./bilder/multivariate_funktion.png
-:name: Multivariate Funktion $\R^n\rightarrow\R^m$ (schematisch).
 :width: 400px
+Multivariate Funktion $\R^n\rightarrow\R^m$ (schematisch).
 ```
 
 Um eine Funktion (mathematische korrekt) zu spezifizieren, schreiben wir oft
@@ -34,7 +35,6 @@ Obwohl $\v x\in\R^n$ ein Spaltenvektor ist, schreibt man normalerweise $\v f(\v 
 
 In der Optimierung interessiert man sich vor allem für den Fall, dass der Funktionswert eine reelle Zahl ist (also der Spezialfall $m=1$), oder in der Sprache des vorherigen Bildes:
 ```{figure} ./bilder/multivariate_funktion_1.png
-:name: Multivariate Funktion $\R^n\rightarrow\R$ (schematisch).
 :width: 400px
 ```
 Solch eine Funktion spezifiziert man als
@@ -299,6 +299,7 @@ Das folgende Bild veranschaulicht die beiden Distanzbegriffe: Die euklidische Di
 :width: 400px
 ```
 
+(sec:stetigkeit)=
 ## Stetigkeit multivariater Funktionen
 Mit diesem Abstandsbegriff ausgerüstet, definieren wir nun den Begriff der Stetigkeit, analog zum eindimensionalen Fall. Wir tun dies hier direkt für den allgemeinsten Fall, d.h. Abbildungen von Vektoren auf Vektoren.
 
@@ -590,6 +591,7 @@ Wir fassen alle partiellen Ableitungen in der Jacobimatrix zusammen und erhalten
 Das bedeutet, dass die Ableitung einer multivariaten linearen Funktion gerade die Koeffizientenmatrix ist. Dies entspricht im Eindimensionalen der Tatsache, dass die Ableitung einer Geradengleichung (=lineare Funktion im Eindimensionalen) die Geradensteigung (=Koeffizient von $x$) is.
 ````
 
+(sec:kettenregel)=
 ## Die Kettenregel
 Für multivariate Funktionen $f:\R^n\rightarrow \R$ gelten die gleichen Regeln wie für univariate Funktionen: Summenregel, Produktregel und Kettenregel, siehe Tab. {numref}`tab:ableitung2`. Summenregel und Produktregel für zwei Funktionen $f,g:\R^n\rightarrow \R$ sind wie folgt:
 - Summenregel:
@@ -868,17 +870,9 @@ Wenn man sich Gradienten $\nabla f$ einer Funktion $f:\R^n\rightarrow \R$ in ein
 3. Geometrisch: Der Gradient ist ein Vektor, der in Richtung des steilsten Anstiegs zeigt. Dies folgt aus der Interpretation als Richtungsableitung.
 4. Geometrisch: Der Gradient ist ein Vektor, der senkrecht auf den Höhenlinien steht. Dies folgt aus der Interpretation als Richtungsableitung.
 
-Im nächsten Kapitel schauen wir uns den Begriff der Ableitung noch unter einem anderen Aspekt her an: Der Gradient bzw. die Jacobi Matrix ausgewertet an einem Punkt können auch als lineare Abbildung aufgefasst werden, die die Funktion in einer Umgebung dieses Punktes approximieren. Ableitungen können also als *Approximation* einer differenzierbaren Funktion betrachtet werden. Wichtig: es handelt sich dabei nur um unterschiedliche Sichtweisen auf ein und dasselbe Konzept ("Ableitung"). Keine der verschiedenen Interpretationen von Ableitungen ist per se besser oder schlechter. Alle sind richtig. Warum gebe ich dem Begriff der Ableitung überhaupt so viel Raum in dieser Vorlesung? Funktionen, insbesondere multivariate, sind komplizierte Objekte, für die man nur sehr schwer eine Anschauung entwickeln kann. Das geht manchmal unter, wenn man sich nur mit einfachen Beispielen in einer oder zwei Dimensionen beschäftigt.
+Im Kapitel {ref}`sec:theo` schauen wir uns den Begriff der Ableitung noch unter einem anderen Aspekt her an: Der Gradient bzw. die Jacobi Matrix ausgewertet an einem Punkt können auch als lineare Abbildung aufgefasst werden, die die Funktion in einer Umgebung dieses Punktes approximieren. Ableitungen können also als *Approximation* einer differenzierbaren Funktion betrachtet werden. Wichtig: es handelt sich dabei nur um unterschiedliche Sichtweisen auf ein und dasselbe Konzept ("Ableitung"). Keine der verschiedenen Interpretationen von Ableitungen ist per se besser oder schlechter. Alle sind richtig. Warum gebe ich dem Begriff der Ableitung überhaupt so viel Raum in dieser Vorlesung? Funktionen, insbesondere multivariate, sind komplizierte Objekte, für die man nur sehr schwer eine Anschauung entwickeln kann. Das geht manchmal unter, wenn man sich nur mit einfachen Beispielen in einer oder zwei Dimensionen beschäftigt.
 Im maschinellen Lernen versuchen wir beispielsweise extrem komplizierte mathematische Funktionen zu lernen, die sehr komplizierte Sachverhalte nachbilden ("Email-Text $\rightarrow$ {Spam, kein Spam}", "historische Daten$\rightarrow$ zukünftiger Umsatz", "Bild$\rightarrow$ Objekte im Bild"). Es ist hoffnungslos, sich eine solche Funktion vorzustellen. Wenn wir aber die Ableitung einer Funktion kennen, so können wir zumindest approximieren, wie sich die Funktion in der Umgebung eines Punktes verhält -- nämlich wie eine lineare Funktion, was wiederum die einfachste Klasse von Funktionen ist. Algorithmen im maschinellen Lernen bedienen sich dieser zusätzlichen Information. 
 
 %Nächstes Kapitel: über Approximation, Taylorreihen (als alternative Interpretation, statt über Änderungen), totale Differenzierbarkeit.
 
 [^fn:infinitesimal]: Eigentlich: *infinitesimal*, also "unendlich" kleine Änderungen - was natürlich schon wieder weniger anschaulich ist. 
-
-
-(sec:ad)=
-## Automatische Differentiation
-
-### Berechnungsgraphen
-### Kettenregel und Berechnunsgraphen
-### Backpropagation
