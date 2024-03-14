@@ -14,8 +14,10 @@ kernelspec:
 # Grundlagen der nichtlinearen Optimierung
 Aufbauend auf dem Kapitel {ref}`sec:analysis` führen wir in diesem Kapitel die Grundlagen der nichtlinearen Optimierung ein, insbesondere die benötigten *Optimalitätsbedingungen*. Diese liegen den Optimierungsverfahren, die wir in dieser Vorlesung betrachten, zugrunde. Als weiteres theoretisches Werkzeug beschäftigen wir uns mit Taylor-Entwicklungen differenzierbarer Funktionen, die zweite wichtige Zutat bei der Herleitung von Optimierungsverfahren. Außerdem schauen wir uns auch schon direkt die einfachste Form des Gradientenverfahrens an. Zunächst aber führen wir einige Grundbegriffe ein. 
 
-## Grundbegriffe
-Was ist eigentlich ein Optimierungsproblem? Bei einem Optimierungsproblem besteht die Aufgabe darin, einen Vektor $\v x$ zu suchen, so dass eine Funktion $f(\v x)$, also ein mathematischer Ausdruck, der von $\v x$ abhängt, *minimal* oder *maximal* wird. In der Mathematik gibt es eine standardisierte Form um Optimierungsprobleme zu spezifizieren.
+## Lokale und globale Minima
+<!-- Was ist eigentlich ein Optimierungsproblem? 
+
+Bei einem Optimierungsproblem besteht die Aufgabe darin, einen Vektor $\v x$ zu suchen, so dass eine Funktion $f(\v x)$, also ein mathematischer Ausdruck, der von $\v x$ abhängt, *minimal* oder *maximal* wird. In der Mathematik gibt es eine standardisierte Form um Optimierungsprobleme zu spezifizieren.
 ````{prf:definition} Optimierungsproblem
 Ein *Optimierungsproblem* ist ein Problem der Form
 \begin{align*}
@@ -26,13 +28,24 @@ Dabei nennen wir
 - $f:\R^n\rightarrow \R$ die *Zielfunktion* (manchmal auch *Kostenfunktion*, speziell im maschinellen Lernen auch *Verlustfunktion*)
 - den Vektor $x\in\R^n$ die *(Optimierungs-)Variablen* (im Kontext des maschinellen Lernens oft auch *Parameter*, *Koeffizienten* oder *Gewichte*)
 ````
-Wir nehmen in dieser Vorlesung an, dass $f$ *stetig differenzierbar* ist. Dies ist in der Praxis, gerade im Bereich des maschinellen Lernens, nicht immer erfüllt, soll uns aber hier nicht weiter stören. Weiterhin möchten wir annehmen, dass es bei der Wahl des Vektors $\v x$ keine Einschränkungen gibt, d.h. der Bereich $D$, in dem wir nach einer Lösung suchen, soll der gesamte $\R^n$ sein.  
+Wir nehmen in dieser Vorlesung an, dass $f$ *stetig differenzierbar* ist. Dies ist in der Praxis, gerade im Bereich des maschinellen Lernens, nicht immer erfüllt, soll uns aber hier nicht weiter stören. Weiterhin möchten wir annehmen, dass es bei der Wahl des Vektors $\v x$ keine Einschränkungen gibt, d.h. der Bereich $D$, in dem wir nach einer Lösung suchen, soll der gesamte $\R^n$ sein.   -->
 
-````{note} Minimierung vs. Maximierung
-Per Konvention schauen wir uns nur Minimierungsprobleme an, d.h. eine Funktion soll so *klein* wie möglich sein. Haben wir es doch einmal mit einem Maximierungsproblem zu tun, also $\max_{\v x\in D\in\R^n} f(\v x)$, so können wir genausogut das Minimierungsproblem $\min_{\v x\in D\in\R^n} f(\v x)$ betrachten.
-````
+%````{note} Minimierung vs. Maximierung
+%Per Konvention schauen wir uns nur Minimierungsprobleme an, d.h. eine Funktion soll so *klein* wie möglich sein. Haben wir es doch einmal mit einem Maximierungsproblem zu tun, also $\max_{\v x\in D\in\R^n} f(\v x)$, so können wir genausogut das Minimierungsproblem $\min_{\v x\in D\in\R^n} f(\v x)$ betrachten.
+%````
 
-Wir haben nun schon von einer *Lösung* des Problems gesprochen, ohne präzise zu sagen, was das überhaupt sein soll. Man unterscheidet dabei zwischen lokalen und globalen Lösungen. Hier die Definitionen:
+
+%Wir haben nun schon von einer *Lösung* des Problems gesprochen, ohne präzise zu sagen, was das überhaupt sein soll. Man unterscheidet dabei zwischen lokalen und globalen Lösungen. Hier die Definitionen:
+
+Während wir uns im ersten Teil der Vorlesung mit linearen Optimierungsproblemen beschäftigt haben, d.h. lineare Zielfunktion und lineare Nebenbedingungen, beschäftigen wir uns in diesem Teil mit Problemen, bei denen die Zielfunktion nicht linear ist (diese Eigenschaft heißt bezeichnenderweise *nichtlinear*). Auch hier gibt es den Fall der restringierten und unrestringierten Probleme, also mit oder ohne Nebenbedingungen. Wir beschränken uns hier auf unrestringierte Probleme, da diese besonders für Probleme des maschinellen Lernens eine große Rolle spielen. Im weiteren Verlauf haben wir es also mit folgendem Problem zu tun.
+Wir suchen nach einem Vektor $\v x\in\R^n$, so dass die Funktion $f:\R^n\rightarrow\R$ minimal wird. In Formeln
+\begin{align*}
+\min_{\v x\in\R^n} f(\v x)
+\end{align*}
+Wir setzen voraus, dass $f$ dabei mindestens zwei Mal *stetig differenzierbare* sein soll. Das bedeutet, dass ihre partiellen Ableitungen existieren und selbst auch stetige Funktionen sind. Dies ist in der Praxis, gerade im Bereich des maschinellen Lernens, nicht immer erfüllt, soll uns aber hier nicht weiter stören. 
+
+Eine wichtige Unterscheidung zu linearen Optimierungsproblemen ist die Existenz von *lokalen Lösungen*. 
+
 ````{prf:definition} Globale und lokale Minima
 :label: def:minmax
 
@@ -43,7 +56,7 @@ Ein Punkt $\v x^{\star}\in D$ heißt *lokales  Minimum* von $f$ oder *lokale Lö
 Wenn ein Minimierungsproblem keine globale Lösung besitzt, nennt man es *unbeschränkt*.
 ````
 Wie groß diese "Umgebung" ist, ist nicht weiter spezifiziert. Die Aussage bedeutet lediglich, dass es eine solche gibt. Mathematisch exakter kann man das auch so formulieren:
-Wir definieren für eine Zahl $\varepsilon>0$ die Menge $U_{\varepsilon}(\v x^{\star})$ als $\varepsilon$-Kugel um $\v x^{\star}$, formell $U_{\varepsilon}(\v x^{\star})=\{\v x\in\R^n :\ \norm{\v x^{\star}}-\v x\}<\varepsilon \}$. Ein Vektor $\v x^{\star}$ ist ein lokales Minimum, wenn es eine Zahl $\varepsilon>0$ gibt, so dass $f(\v x)\geq f(\v x^{\star})$ für *jeden* Vektor $\v x\in U_{\varepsilon}$
+Wir definieren für eine Zahl $\varepsilon>0$ die Menge $U_{\varepsilon}(\v x^{\star})$ als $\varepsilon$-Kugel um $\v x^{\star}$, formell $U_{\varepsilon}(\v x^{\star})=\{\v x\in\R^n \mid \norm{\v x^{\star}}-\v x\}<\varepsilon \}$. Ein Vektor $\v x^{\star}$ ist ein lokales Minimum, wenn es eine Zahl $\varepsilon>0$ gibt, so dass $f(\v x)\geq f(\v x^{\star})$ für *jeden* Vektor $\v x\in U_{\varepsilon}$
 
 ````{prf:example} Lokale und globale Minima
 Die folgenden Beispiele zeigen, dass eine Funktion weder lokale noch globale Minima haben muss. Wenn es welche gibt, kann es auch sein, dass es mehrere gibt. 
@@ -313,8 +326,9 @@ An einem lokalen Minimum oder Maximum $\v x_0$ einer differenzierbaren Funktion 
 \begin{align*}
     \nabla f (\v x_0) = \bmat  
         \derv{f}{x_1}(\v x_0) & \cdots & \derv{f}{x_n}(\v x_0)
-    \emat   = \v 0
+    \emat   = \v 0:=\bmat 0\\\vdots\\0 \emat
 \end{align*}
+Analog zum univariaten Fall nennt man einen Punkt, an dem der Gradient der Nullvektor ist ebenfalls *kritischer Punkt*..
 ````
 Wenn wir uns erinnern, dass der Gradient in die Richtung des steilsten Anstiegs zeigt, bedeutet dieser Satz anschaulich: Am Gipfel ist man, wenn es nicht mehr weiter nach oben geht.
 
@@ -373,7 +387,7 @@ Der Gradient ist
 \begin{align*}
 \nabla f(x,y)=\left(2x+y+3,\ 2y+x\right)
 \end{align*}
-Um einen kritischen Punkt zu berechnen, müssen das lineare Gleichungssystem $\nabla f(x,y)=\v 0$ lösen:
+Um einen kritischen Punkt zu berechnen, müssen wir das lineare Gleichungssystem $\nabla f(x,y)=\v 0$ lösen:
 \begin{align*}
 2x+y+3 &=0\\
  x+2y    &=0\\
@@ -386,23 +400,7 @@ Nun überprüfen wir die Definitheit der Hessematrix:
 \end{align*}
 Die Eigenwerte sind $1$ und $3$. Damit ist die Hessematrix positiv definit und hat an der Stelle $(x,y)=(-2,1)$ ein Minimum. 
 ````
-In {ref}`sec:multivariate_Funktionen` wurde erwähnt, dass sich jede quadratische Funktion schreiben läßt als
-\begin{align*}
-f(x_1,x_2,\dots,x_n)=\frac{1}{2}\v x^T\v A\v x+\v b^T\v x+c.
-\end{align*}
-Für das vorherige Beispiel wäre das:
-\begin{align*}
-f(x,y)=\frac{1}{2}(x,y) \bmat  2 & 1\\ 1 & 2\emat   \bmat  x\\y\emat  +(3,0) \bmat  x\\y\emat  +(-1),
-\end{align*}
-Der Vorteil dieser Darstellung ist, dass man aus ihr direkt den Gradienten und die Hessematrix ablesen kann. Der Gradient lautet
-\begin{align*}
-\nabla f(x_1,x_2,\dots,x_n) = \v A\v x + b
-\end{align*}
-im Beispiel also
-\begin{align*}
-\nabla f(x,y) = \bmat  2 & 1\\ 1 & 2\emat   \bmat  x\\y\emat  + \bmat  3\\0\emat   
-\end{align*}
-Die Hessematrix ist die Matrix $\v A$.
+
 
 Betrachten wir ein weiteres (nicht-quadratisches) Beispiel
 ````{prf:example} 
@@ -575,7 +573,12 @@ Konvexe Funktionen müssen nicht unbedingt differenzierbar sein.
 Hier einige Beispiel konvexer und nicht-konvexer Funktionen:
 ```{figure} ./bilder/konvexe_funktionen.png
 ```
-Was bringt uns das? Folgender Satz erklärt die wichtige Bedeutung des Begriffes der Konvexität in der mathematischen Optimierung.
+Was bringt uns das? Folgende beiden Sätze erklären die wichtige Bedeutung des Begriffes der Konvexität in der mathematischen Optimierung.
+````{prf:theorem}
+:label: thm:konvex_
+Die kritischen Punkte einer differenzierbaren konvexen Funktion $f\R^n\rightarrow\R$ sind genau die Minimalpunkte von $f$.
+````
+Das heißt zwar nicht, dass jede konvexe Funktion einen Minimalpunkt hat. Aber falls es einen kritischen Punkt gibt, so ist dieser auch ein Minimalpunkt von $f$.
 ````{prf:theorem}
 :label: thm:konvex
 Wenn eine Funktion *strikt konvex* ist, d.h. es gilt
@@ -622,7 +625,7 @@ Ab der dritten Ableitung müsste man drei Vektoren $\v d$ geeignet an den Tensor
 ````{prf:example}
 Wir approximieren die Funktion 
 \begin{align*}
-f:\R^2\rightarrow \R$\\
+f:\R^2\rightarrow \R\\
 f(x,y)=\sin x + y^2
 \end{align*}
 im Punkt $(\pi,1)$ durch Taylor-Polynome erster und zweiter Ordnung.

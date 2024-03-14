@@ -100,6 +100,7 @@ Der Funktionsgraph einer linearen Funktion in $n$ Veränderlichen ist eine *Hype
 - $n=2$: Ebene im $\R^3$
 
 ````{prf:example} Quadratische Funktion
+:name: ex:quadratic
 \begin{align}
 	f:\R^2\rightarrow\R\\
 	\bmat x\\y\emat  \mapsto 3x^2+y^2
@@ -121,15 +122,6 @@ fig = go.Figure(go.Surface(x=x,y=y,z=z, colorscale="Blues", showscale=False))
 fig.update_layout( autosize=True, height=250,
                   margin=go.layout.Margin(l=0, r=0, b=0, t=0))
 ```
-Allgemein lässt sich *jede* **quadratische** Funktion $f:\R^n\rightarrow \R$ in $n$ Variablen auf folgende Form bringen:
-\begin{align*}
-f(x_1,x_2,\dots,x_n)=\frac{1}{2}\v x^T\v A\v x+\v b^T\v x+c,
-\end{align*}
-wobei $\v A\in\R^{n\times n}$ eine symmetrische Matrix ist, $\v b\in\R^n$ ein Vektor und $c\in\R$ eine reelle Zahl. Zum Beispiel lässt sich $f(x,y)=3x^2+y^2$ schreiben als
-\begin{align*}
-f(x,y)=\frac{1}{2}(x,y) \bmat 6 & 0\\0&2\emat  \bmat x\\y\emat   + (0,0)\bmat x\\y\emat  +0.
-\end{align*}
-Wir werden uns später noch eingehender mit quadratischen Funktionen beschäftigen (dann wird auch klar werden, warum man diese zunächst kompliziert anmutende Schreibweise bevorzugt).
 
 Natürlich kann man auch aus dem eindimensionalen bekannte Funktionen wie Polynome, Winkelfunktionen, Exponentialfunktion, Logarithmus, etc. zu mehrdimensionalen Funktionen kombinieren. Der Definitionsbereich muss eingeschränkt werden, falls Funktionen wie $\sqrt{\ }$ oder $\log$ verwendet werden.
 ````{prf:example} 

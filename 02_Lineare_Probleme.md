@@ -205,7 +205,7 @@ Wir nennen jedes $x$, das alle Nebenbedingungen erfüllt, eine *zulässige Lösu
 Gegeben ist ein Lineares Programm LP: $\min  c^Tx$ unter den Nebenbedingungen $\m A\v x=\v b$ und $\v x\geq \v 0$. 
 Es heißt
 \begin{align*}
-P=\{\v x \in \R^n \mid Ax=b, \ \v x\geq \v 0\}
+P=\{\v x \in \R^n \mid \v A\v x=\v b, \ \v x\geq \v 0\}
 \end{align*}
 die *Menge aller zulässigen Lösungen* von LP.
 ````

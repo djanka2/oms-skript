@@ -1,7 +1,11 @@
 # Stochastischer Gradientenabstieg
 
-## Newsvendor Problem
+## Ein stochastisches Optimierungsproblem
+% Umsatzmaximierung, wobei demand (M) uncertain bzw. Reduktion (k) oder beides
+
+## Stochastischer Gradientenabstieg
 
 ## Training von ML Modellen als stochastische Probleme
 
-## Stochastischer Gradientenabstieg
+## Stochastischer Gradientenabstieg für ML Modelle
+% minibatch etc

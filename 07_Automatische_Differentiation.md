@@ -234,6 +234,7 @@ Der Backpropagation Algorithmus erlaubt es, Ableitungen beliebig komplizierter F
 ### Das `autograd` Paket
 Im Paket `autograd` ist der Rückwärtsmodus der automatischen Differentiation implementiert. Es ist sehr benutzerfreundlich. Sie können es mittels 
 > pip install autograd
+
 aus den Python Paketquellen installieren. `autograd` baut auf NumPy auf und erweitert es um automatische Ableitungsberechnung. Wir schauen uns das Paket anhand der Beispielfunktion aus dem vorherigen Abschnitt an. Zunächst müssen wir anstatt NumPy `autograd.numpy` importieren. Dies ist ein Wrapper für die NumPy Klassen und Funktionen, d.h. es lässt sich bedienen wie NumPy, aber es wird der entsprechende Berechnungsgraph mit erzeugt. Weiterhin importieren wir die Methode grad, mit der Gradienten berechnet werden.
 
 ```{code-cell} ipython3
@@ -253,7 +254,7 @@ x_0 = np.sqrt(np.pi)
 
 print(f(x_0))
 ```
-Nun kommt die Ableitungsberechnung. Wir rufen die eben importierte Funktion `grad` auf und übergeben ihr unsere Funktion `f` als Argument. Das Rückgabewert ist wieder eine Funktion, nämlich eine Funktion, die den Gradienten von `f` auswertet.
+Nun kommt die Ableitungsberechnung. Wir rufen die eben importierte Funktion `grad` auf und übergeben ihr unsere Funktion `f` als Argument. Das Rückgabewert ist wieder eine Funktion, nämlich eine Funktion, die den Gradienten von `f` an einer beliebigen Stelle auswertet.
 ```{code-cell} ipython3
 :tags: []
 
