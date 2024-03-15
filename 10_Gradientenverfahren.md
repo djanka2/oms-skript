@@ -1234,7 +1234,5 @@ fig.show()
 ```
 Der Nachteil ist, dass die ersten Schritte möglicherweise zu klein sind und dort dem normalen Gradientenabstieg unterlegen sind.
 
-%## Zusammenfassung
-%TODO
-## Anwendung: Training von logistischen Regressionsmodellen
-bla
+%## Anwendung: Training von logistischen Regressionsmodellen
+% TODO

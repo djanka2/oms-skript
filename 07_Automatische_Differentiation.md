@@ -46,8 +46,8 @@ Wie erwartet wird eine Parabel geplottet. Schauen wir uns aber genauer an, wie d
 Dieses Paradigma des punktweisen Auswertens wird auch bei der automatischen Berechnung von Ableitungen verfolgt. Anstatt den algebraischen Ausdruck $x^2-3x$ bzw. dessen Code-Repräsentation `x*x - 3*x` umzuformen, so wie wir es tun würden, wenn wir per Hand die Ableitung berechnen, wird mittels eines speziellen Algorithmus sichergestellt, dass bei einer punktweisen Auswertung von `f` auch deren Ableitung an diesem Punkt ausgewertet wird.
 
 
-### Finite Differenzen
-TODO
+% ### Finite Differenzen
+% TODO
 
 
 ### Berechnungsgraphen
@@ -102,10 +102,14 @@ h(x)=g(f(x))=\cos x^2
 Erinnerung: das hatten wir in den Abschnitten {ref}`sec:stetigkeit` und {ref}`sec:kettenregel` mit $g\circ f$ (erst $f$, dann $g$) bezeichnet.
 
 Der Berechnungsgraph zur Funktion $h(x)=\cos x^2$ ist
+
 ```{figure} ./bilder/berechnungsgraph2.png
-:name: fig:simple_graph
+:name: fig:simplegraph
 :width: 600px
+
+Ein einfacher Berechnungsgraph.
 ```
+
 Der Graph beschreibt also gerade die Verkettung $g(f(x))$. Dies ist auch nicht nur in diesem einfachen univariaten Beispiel so, sondern gilt allgemein für Berechnungsgraphen. Um nun die Ableitung dieses Berechnungsgraphen zu berechnen, der die *Verkettung* von Funktionen darstellt, benutzt man die ...... Kettenregel!
 
 Wir schauen uns nun an, wie die Kettenregel für Berechnungsgraphen funktioniert. Dafür berechnen wir zunächst die Ableitung der Funktion $h$ mit der gewöhnlichen Kettenregel:[^kettenregel]
@@ -122,7 +126,7 @@ Dies entspricht der bekannten Merkregel "Äußere Ableitung $\times$ innere Able
 Annotiere jeden Knoten mit seiner Ableitung bezüglich des Inputs (d.h. die Ableitung einer der "elementaren Operationen") und multipliziere die Knoten entlang des Pfades.
 ```
 
-Nun haben Berechnungsgraphen im Allgemeinen eine kompliziertere Gestalt als {ref}`fig:simple_graph`. Wie lässt sich die Pfadregel verallgemeinern? Wir betrachten dazu das (immer noch univariate) Beispiel $f(x)=\sin x^2 + \cos x^2$. Der Berechnungsgraph von $f$ ist:[^argumente]
+Nun haben Berechnungsgraphen im Allgemeinen eine kompliziertere Gestalt als {numref}`fig:simplegraph`. Wie lässt sich die Pfadregel verallgemeinern? Wir betrachten dazu das (immer noch univariate) Beispiel $f(x)=\sin x^2 + \cos x^2$. Der Berechnungsgraph von $f$ ist:[^argumente]
 ```{figure} ./bilder/berechnungsgraph3.png
 :name: fig:example_graph
 :width: 600px
@@ -151,7 +155,7 @@ Die Ableitung der Variable im Output Knoten $f$ nach einer Variable in einem Ein
 
 Wir haben das Problem der Ableitungsberechnung nun also auf ein Problem auf Berechnungsgraphen zurückgeführt. Die Anzahl der möglichen Pfade zwischen Eingangs- und Ausgangsknoten wächst allerdings exponentiell, wie wir anhand des folgenden Beispiels sehen können.
 
-TODO
+% TODO
 
 Das Problem der vielen Pfade äußert sich dadurch, dass mehrfach die gleichen Berechnungen durchgeführt werden. In dem Beispiel liegt jeder Zwischenknoten auf 16 Pfaden, es würde also 16 Mal exakt die gleiche Berechnung durchgeführt. 
 

@@ -71,7 +71,7 @@ Was also tun? Zunächst einmal: (Gemischt-ganzzahlige) lineare Programmierung is
 Eine Methode mit Modellfehlern -- man sagt auch *Unsicherheiten* -- umzugehen ist, ein MILP nicht nur einmal zu lösen, sondern mehrmals, und zwar zu unterschiedlichen Zeitpunkten. Dabei werden stets die aktuellsten Problemdaten mit einbezogen. Einen systematischen Ansatz, der auf dieser Idee basiert, beschreiben wir im nächsten Abschnitt. Darüber hinaus gibt es auch viele unterschiedliche Ansätze, bei denen man versucht, Unsicherheiten zu quantifizieren und mit Hilfe stochastischer Modelle abzubilden. Diese werden in dieser Vorlesung nicht behandelt.
 
 
-### Sequentielle Optimierung auf rollierendem Zeitfenster
+### Sequenzielle Optimierung auf rollierendem Zeitfenster
 Speziell für den Fall von zeitabhängigen Problemen, die man als MILP formulieren kann, bietet sich folgender Ansatz an, der sich relativ einfach umsetzen lässt und im Wesentlichen ohne Stochastik auskommt. Um ihn zu illustrieren, benutzen wir wieder das Energiespeicherproblem. Wir nehmen zunächst an, dass der Strombedarf im Voraus bekannt ist, aber dass für den Preis $p_t$ nur eine 24-Stunden-Vorhersage[^VorhersageML] vorhanden ist. Der Ansatz ist aber auch auf alle anderen zeitabhängigen Probleme und weitere Unsicherheiten anwendbar.
 
 Als erstens nehmen wir eine Änderung an der Notation des betrachteten Zeitintervalls vor: Oben haben wir das Zeitintervall von 24 Stunden durch die Zeitpunkte $t=1,2,\dots,24$ beschrieben, d.h. zum Zeitpunkt der Berechnung befinden wir uns am Zeitpunkt $t=0$. Allgemeiner: wenn wir die Berechnung zu irgendeinem Zeitpunkt $t=\tau$ ausführen, wären die Zeitpunkte der 24-Stunden-Vorschauperiode $t=\tau+1, \tau+2,\dots,\tau+24$. Wir gehen davon aus, dass wir zu jedem Zeitpunkt $\tau$ eine aktualisierte 24-Stunden-Vorhersage für den Strompreis erhalten. Das bedeutet insbesondere, dass es für einen Zeitpunkt im Laufe der Zeit unterschiedliche Vorhersagen gibt (nämlich insgesamt 24 Stück).
@@ -171,17 +171,21 @@ Eine *optimale* Policy, also eine optimale tatsächlich (d.h. ohne genaue Kenntn
 % +Parametersuche
 
 %## Anwendung: Stromnetzwerk
+% TODO
 % Projekt 2 SS23
 % Übung: Energiespeicher Problem erweitern / modifizieren
 
-## Anwendung: Produktionsplanungsproblem
+%## Anwendung: Produktionsplanungsproblem
+% TODO
 % Projekt 2 SS22
 
-## Anwendung: Kraftwerkeinsatzplanung
+%## Anwendung: Kraftwerkeinsatzplanung
+% TODO
 %https://www.gurobi.com/jupyter_models/electrical-power-generation/
 
 % Übung: Reinhards Übungen?
 
-## Anwendung: Energiespeicherproblem (sequenzielle Optimierung) 
+%## Anwendung: Energiespeicherproblem (sequenzielle Optimierung) 
+% TODO
 % Beispielimplementierung
 

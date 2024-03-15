@@ -325,7 +325,7 @@ Auf der nächsten Seite findet sich die komplette Ausgabe für das Modell.
 
 
 ```
-
+<!-- 
 # Fortgeschrittene Themen
 
 ## Rundreiseprobleme
@@ -674,5 +674,5 @@ Beispiel einer nichtlinearen Funktion.
 
 Wir können solche Funktionen approximativ modellieren, indem wir Stützstellen einfügen und die Funktion zwischen den Stützstellen als stückweise linear ansehen. Je mehr Stützstellen benutzt werden, desto genauer kann der echte Funktionsverlauf nachmodelliert werden. Allerdings steigt mit genauerer Modellierung der Speicherbedarf und wahrscheinlich auch die Komplexität des resultierenden gemischt-ganzzahligen linearen Programms.
 
-
+ -->
 	

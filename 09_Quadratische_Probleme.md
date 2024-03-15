@@ -157,15 +157,17 @@ keine Lösung hat.
 ```
 
 
-## Anwendung: Umsatzmaximierung im Einproduktfall
+%## Anwendung: Umsatzmaximierung im Einproduktfall
+% TODO
 
 
-
-## Anwendung: Training von linearen Regressionsmodellen
-
+%## Anwendung: Training von linearen Regressionsmodellen
+% TODO
 
 
 %## Anwendung: Ridge Regression
+% TODO
+
 
 <!-- ## Grundlagen der beschränkten Optimierung
 

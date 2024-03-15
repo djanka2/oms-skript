@@ -1255,15 +1255,18 @@ d_{max}=\sum_{i \in A}d_i.
 \end{align*}
 
 
-## Anwendung: Sudoku
-In Vorlesung zusammen entwickeln, als Übung coden lassen (Notebook vervollständigen).
+%## Anwendung: Sudoku
+% TODO
+%In Vorlesung zusammen entwickeln, als Übung coden lassen (Notebook vervollständigen).
 
-## Anwendung: Studierende auf Projekte verteilen
-AWP Notebook, enthält BigM
+%## Anwendung: Studierende auf Projekte verteilen
+% TODO
+%AWP Notebook, enthält BigM
 % Aufgabe dazu: https://colab.research.google.com/github/Gurobi/modeling-examples/blob/master/milp_tutorial/introduction_to_modeling.ipynb
 
-## Anwendung: EV Charger Placement
-Musterlösung, enthält BigM
+%## Anwendung: EV Charger Placement
+% TODO
+%Musterlösung, enthält BigM
 % Aufgabe dazu: https://colab.research.google.com/github/Gurobi/modeling-examples/blob/master/facility_location/facility_location.ipynb#scrollTo=8RUukodHFOMf
 
 %## Anwendung: Payments

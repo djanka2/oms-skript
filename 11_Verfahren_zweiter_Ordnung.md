@@ -265,7 +265,7 @@ $$
 $$
 
 Im Kontext der Optimierung kann man sich das Newton Verfahren als einen Ansatz zum iterativen Lösen der Optimalitätsbedingungen erster Ordnung, $\nabla f(\v x)=\v 0$ vorstellen ($\nabla f(\v x)$ spielt dann die Rolle der Funktion $\v g$). Das erklärt auch das Verhalten des Newton Verfahrens, möglicherweise zu Maxima oder Sattelpunkten zu konvergieren, da die Optimalitätsbedingungen erster Ordnung zwischen diesen ja auch keinen Unterschied machen. Erklärungen zum klassischen Newton Verfahren für Nullstellen findet man z.B. [hier](https://de.wikipedia.org/wiki/Newtonverfahren).
-%TODO Ausbauen
+% TODO Ausbauen
 
 
 ## Nachteile des Newton Verfahrens

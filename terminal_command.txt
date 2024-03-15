@@ -1,2 +1,0 @@
-C:\Users\jade0001\Miniconda3\Scripts\activate.bat C:\Users\jade0001\Miniconda3
-jupyter-book build ./
