@@ -65,8 +65,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Stichwortverzeichnis" href="genindex.html" />
     <link rel="search" title="Suche" href="search.html" />
-    <link rel="next" title="2.9. Anwendung: Transportproblem" href="02_Transportproblem.html" />
-    <link rel="prev" title="1. Einführung und Grundbegriffe" href="01_Grundbegriffe.html" />
+    <link rel="next" title="1. Anwendung: Transportproblem" href="02_Transportproblem.html" />
+    <link rel="prev" title="2. Einführung und Grundbegriffe" href="01_Grundbegriffe.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="de"/>
   </head>
@@ -183,9 +183,9 @@
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lineare Optimierungsmodelle</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01_Grundbegriffe.html">1. Einführung und Grundbegriffe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_Grundbegriffe.html">2. Einführung und Grundbegriffe</a></li>
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">2. Lineare Optimierung</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="02_Transportproblem.html">2.9. Anwendung: Transportproblem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_Transportproblem.html">1. Anwendung: Transportproblem</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="03_Ganzzahlige_Probleme.html">3. Ganzzahlige Probleme</a></li>
@@ -378,13 +378,13 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="lineare-optimierung">
-<h1><span class="section-number">2. </span>Lineare Optimierung<a class="headerlink" href="#lineare-optimierung" title="Link to this heading">#</a></h1>
+<h1>Lineare Optimierung<a class="headerlink" href="#lineare-optimierung" title="Link to this heading">#</a></h1>
 <p>Im ersten Teil dieser Vorlesung beschäftigen wird uns mit <em>linearen Optimierungsproblemen</em>, auch genannt <em>lineare Programme (LP)</em>. Dieses Kapitel bildet die Grundlage für die folgenden Kapitel <a class="reference internal" href="03_Ganzzahlige_Probleme.html#sec-integer-problems"><span class="std std-ref">Ganzzahlige Probleme</span></a>, <a class="reference internal" href="04_Dynamische_Probleme.html#sec-zeitdiskret"><span class="std std-ref">Zeitabhängige Probleme</span></a> und <a class="reference internal" href="05_Praxisaspekte.html#sec-practical-aspects"><span class="std std-ref">Praxisaspekte beim Lösen von gemischt-ganzzahligen Programmen</span></a>, in denen verschiedene Varianten und Aspekte dieser Probleme vorgestellt werden.</p>
 <section id="grundbegriffe">
-<h2><span class="section-number">2.1. </span>Grundbegriffe<a class="headerlink" href="#grundbegriffe" title="Link to this heading">#</a></h2>
+<h2>Grundbegriffe<a class="headerlink" href="#grundbegriffe" title="Link to this heading">#</a></h2>
 <p>Ein <em>lineares Programm</em> ist ein Optimierungsproblem, bei dem eine lineare Zielfunktion unter linearen Nebenbedingungen optimiert werden soll. Ein Beispiel für lineares Optimierungsproblem haben wir bereits in Abschnitt <a class="reference internal" href="01_Grundbegriffe.html#sec-production-example"><span class="std std-ref">Beispiel: Ein Produktionsplanungsproblem</span></a> gesehen. Es lautete:</p>
 <div class="amsmath math notranslate nohighlight" id="equation-f9fba454-2c4c-4477-bf88-2cfeba54647f">
-<span class="eqno">(2.1)<a class="headerlink" href="#equation-f9fba454-2c4c-4477-bf88-2cfeba54647f" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
+<span class="eqno">(1)<a class="headerlink" href="#equation-f9fba454-2c4c-4477-bf88-2cfeba54647f" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
 \max_{x_1, x_2} &amp; \quad  &amp;   2x_1+2x_2 &amp; &amp; &amp; \\[2mm]
 \text{s.t. } &amp; &amp;  5x_1+10x_2&amp;\leq 50\\
              &amp; &amp;  12x_2+8x_2&amp;\leq 72\\
@@ -401,7 +401,7 @@ f(\v x)=c_1x_1+\dots +c_nx_n=\sum_{i=1}^nc_ix_i=\v c^T\v x,
 <p>Als Nebenbedingungen sind Ungleichungen und Gleichungen der Art <span class="math notranslate nohighlight">\(\leq, \geq, =\)</span> erlaubt. Nicht erlaubt und typischerweise auch nicht sinnvoll sind Ungleichungen der Art <span class="math notranslate nohighlight">\(&lt;\)</span> bzw <span class="math notranslate nohighlight">\(&gt;\)</span> (was sollte z.B. die kleinste Zahl <span class="math notranslate nohighlight">\(x&gt;0\)</span>, also die Lösung des LPs <span class="math notranslate nohighlight">\(\min_{x} x\quad \text{s.t. } x&gt;0\)</span> sein?).</p>
 <p>Durch die lineare Struktur kann man die Koeffizienten der Variablen in den Ungleichungen in einer Matrix zusammenfassen, deren Spalten der Anzahl der Variablen und deren Zeilen der Anzahl der Nebenbedingungen entspricht.</p>
 <div class="proof definition admonition" id="definition-0">
-<p class="admonition-title"><span class="caption-number">Definition 2.1 </span> (Lineares Programm in allgemeiner Form)</p>
+<p class="admonition-title"><span class="caption-number">Definition 1 </span> (Lineares Programm in allgemeiner Form)</p>
 <section class="definition-content" id="proof-content">
 <p>Gegeben sei eine <span class="math notranslate nohighlight">\(m \times n\)</span>-Matrix <span class="math notranslate nohighlight">\(\m A=(a_{ij})\)</span>, ein <span class="math notranslate nohighlight">\(m\)</span>-dimensionaler Vektor <span class="math notranslate nohighlight">\(\v b\)</span>, sowie ein <span class="math notranslate nohighlight">\(n\)</span>-dimensionaler Vektor <span class="math notranslate nohighlight">\(\v c\)</span>. Ein <em>lineares Programm (LP)</em> ist ein Optimierungsproblem der Form</p>
 <div class="amsmath math notranslate nohighlight">
@@ -415,7 +415,7 @@ f(\v x)=c_1x_1+\dots +c_nx_n=\sum_{i=1}^nc_ix_i=\v c^T\v x,
 </section>
 </div><p>Es müssen dabei nicht alle möglichen Arten von Nebenbedingungen (<span class="math notranslate nohighlight">\(\leq, =, \geq, \geq 0\)</span>) vorkommen. Die genaue Form eines beliebigen LP ergibt sich normalerweise aus der Modellierung der Anwendung wie etwa bei unserem Produktionsbeispiel. Die Form wird dabei meist so gewählt, dass sie möglichst gut verständlich ist. Wenn man Aussagen über beliebige, allgemeine LPs treffen möchte (z.B. bei der Beschreibung von Lösungsverfahren, die für alle möglichen LPs funktionieren sollen), benutzt man gerne lineare Programme in der sogenannten <em>Standardform</em>.</p>
 <div class="proof definition admonition" id="def:LP">
-<p class="admonition-title"><span class="caption-number">Definition 2.2 </span> (Lineares Programm in Standardform)</p>
+<p class="admonition-title"><span class="caption-number">Definition 2 </span> (Lineares Programm in Standardform)</p>
 <section class="definition-content" id="proof-content">
 <p>Gegeben sei eine <span class="math notranslate nohighlight">\(m \times n\)</span>-Matrix <span class="math notranslate nohighlight">\(A\)</span>, ein <span class="math notranslate nohighlight">\(m\)</span>-dimensionaler Vektor <span class="math notranslate nohighlight">\(b\)</span>, sowie ein <span class="math notranslate nohighlight">\(n\)</span>-dimensionaler Vektor <span class="math notranslate nohighlight">\(c\)</span>. Ein <em>lineares Programm (LP)</em> ist ein Optimierungsproblem der Form</p>
 <div class="amsmath math notranslate nohighlight">
@@ -434,7 +434,7 @@ f(\v x)=c_1x_1+\dots +c_nx_n=\sum_{i=1}^nc_ix_i=\v c^T\v x,
 </section>
 </div></section>
 <section id="standardumformungen">
-<h2><span class="section-number">2.2. </span>Standardumformungen<a class="headerlink" href="#standardumformungen" title="Link to this heading">#</a></h2>
+<h2>Standardumformungen<a class="headerlink" href="#standardumformungen" title="Link to this heading">#</a></h2>
 <p>Wie bringt man nun ein <em>beliebiges</em> Lineares Programm in Standardform?</p>
 <!-- Wir gehen als Zwischenschritt einen etwas umständlichen Weg, der sich später als praktisch und einfacher zu verstehen erweist. Wir bringen dazu das LP erst in eine Form, bei der ein Minimierungsproblem vorliegt, alle Variablen nicht-negativ sind und nur Nebenbedingungen der Form $\leq$ vorliegen: 
 
@@ -455,10 +455,10 @@ Es enthält beliebig viele Gleichungen, <span class="math notranslate nohighligh
              &amp; &amp;\sum_{j=1}^{n} a_{ij} x_j &amp;=&amp;  \ b_i &amp; \quad\quad &amp; &amp; \forall i=m_2+1,\ldots,m \\
 \end{alignat*}\]</div>
 <div class="proof example admonition" id="example-2">
-<p class="admonition-title"><span class="caption-number">Example 2.1 </span> (LP, welches nicht in Standardform vorliegt)</p>
+<p class="admonition-title"><span class="caption-number">Example 1 </span> (LP, welches nicht in Standardform vorliegt)</p>
 <section class="example-content" id="proof-content">
 <div class="amsmath math notranslate nohighlight" id="equation-0ae7a114-a398-439c-a2fa-078cd5c054e3">
-<span class="eqno">(2.2)<a class="headerlink" href="#equation-0ae7a114-a398-439c-a2fa-078cd5c054e3" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
+<span class="eqno">(2)<a class="headerlink" href="#equation-0ae7a114-a398-439c-a2fa-078cd5c054e3" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
 \max_{x_1, x_2} &amp; \quad  &amp;  2x_1-3x_2 &amp; &amp; &amp; \\[2mm]
 \text{s.t. } &amp; &amp;  3x_1+x_2&amp;\leq 3\\
              &amp; &amp;  -x_1+5x_2&amp;\geq 7\\
@@ -492,7 +492,7 @@ Es enthält beliebig viele Gleichungen, <span class="math notranslate nohighligh
 </dd>
 </dl>
 <div class="proof example admonition" id="example-3">
-<p class="admonition-title"><span class="caption-number">Example 2.2 </span> (Transformation der Zielfunktion)</p>
+<p class="admonition-title"><span class="caption-number">Example 2 </span> (Transformation der Zielfunktion)</p>
 <section class="example-content" id="proof-content">
 <div class="amsmath math notranslate nohighlight">
 \[\begin{alignat*}{5}
@@ -519,7 +519,7 @@ Es enthält beliebig viele Gleichungen, <span class="math notranslate nohighligh
 \sum_{j=1}^{n} -a_{ij} x_j \leq -b_i
 \end{align*}\]</div>
 <div class="proof example admonition" id="example-4">
-<p class="admonition-title"><span class="caption-number">Example 2.3 </span> (Transformation der <span class="math notranslate nohighlight">\(\geq\)</span>-Ungleichungen)</p>
+<p class="admonition-title"><span class="caption-number">Example 3 </span> (Transformation der <span class="math notranslate nohighlight">\(\geq\)</span>-Ungleichungen)</p>
 <section class="example-content" id="proof-content">
 <div class="amsmath math notranslate nohighlight">
 \[\begin{alignat*}{5}
@@ -543,7 +543,7 @@ x_i^-\geq 0
 </dd>
 </dl>
 <div class="proof example admonition" id="example-5">
-<p class="admonition-title"><span class="caption-number">Example 2.4 </span> (Transformation auf nichtnegative Variablen)</p>
+<p class="admonition-title"><span class="caption-number">Example 4 </span> (Transformation auf nichtnegative Variablen)</p>
 <section class="example-content" id="proof-content">
 <div class="amsmath math notranslate nohighlight">
 \[\begin{alignat*}{5}
@@ -570,7 +570,7 @@ a_{m1} x_1+\ldots +a_{mp} x_n	&amp;  &amp; &amp;&amp;  \red{+x_{n+m_2}} &amp; =b
 </dl>
 <p>Auf unser Beispiel übertragen ergibt dies</p>
 <div class="proof example admonition" id="example-6">
-<p class="admonition-title"><span class="caption-number">Example 2.5 </span> (Transformation auf Gleichungsnebenbedingung)</p>
+<p class="admonition-title"><span class="caption-number">Example 5 </span> (Transformation auf Gleichungsnebenbedingung)</p>
 <section class="example-content" id="proof-content">
 <p>Transformation auf nichtnegative Variablen</p>
 <div class="amsmath math notranslate nohighlight">
@@ -584,10 +584,10 @@ a_{m1} x_1+\ldots +a_{mp} x_n	&amp;  &amp; &amp;&amp;  \red{+x_{n+m_2}} &amp; =b
 </section>
 </div><p>Damit ist das LP in Standardform. In Matrixform schreiben wir</p>
 <div class="proof example admonition" id="example-7">
-<p class="admonition-title"><span class="caption-number">Example 2.6 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 6 </span></p>
 <section class="example-content" id="proof-content">
 <div class="amsmath math notranslate nohighlight" id="equation-074514c4-0ebd-45b4-80e0-201973c2855f">
-<span class="eqno">(2.3)<a class="headerlink" href="#equation-074514c4-0ebd-45b4-80e0-201973c2855f" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
+<span class="eqno">(3)<a class="headerlink" href="#equation-074514c4-0ebd-45b4-80e0-201973c2855f" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
 \min_{x_1, x_2^+, x_2^-, x_3, x_4} &amp; \quad  &amp;  \bmat -2,&amp;3,&amp;-3,&amp;0,&amp;0 \emat\bmat x_1\\x_2^+\\x_2^-\\x_3\\x_4\emat &amp; &amp; &amp; \\[2mm]
 \text{s.t. } &amp; &amp;  \bmat 3&amp;1&amp;-1&amp;1&amp;0\\ 1&amp;-5&amp;5&amp;0&amp;1\\ 1&amp;1&amp;-1&amp;0&amp;0 \emat\bmat x_1\\x_2^+\\x_2^-\\x_3\\x_4\emat&amp;=\bmat 3\\-7\\1\emat\\
              &amp; &amp; (x_1,x_2^+,x_2^-,x_3,x_4)&amp;\geq 0
@@ -595,11 +595,11 @@ a_{m1} x_1+\ldots +a_{mp} x_n	&amp;  &amp; &amp;&amp;  \red{+x_{n+m_2}} &amp; =b
 </section>
 </div></section>
 <section id="losbarkeit-von-linearen-programmen">
-<h2><span class="section-number">2.3. </span>Lösbarkeit von Linearen Programmen<a class="headerlink" href="#losbarkeit-von-linearen-programmen" title="Link to this heading">#</a></h2>
+<h2>Lösbarkeit von Linearen Programmen<a class="headerlink" href="#losbarkeit-von-linearen-programmen" title="Link to this heading">#</a></h2>
 <p>Wir wiederholen nun die Grundbegriffe aus Abschnitt <a class="reference internal" href="01_Grundbegriffe.html#sec-grundbegriffe"><span class="std std-ref">Grundbegriffe der Optimierung</span></a> speziell für den Fall beliebiger linearer Probleme. Streng genommen sind diese natürlich durch die Definitionen im Abschnitt <a class="reference internal" href="01_Grundbegriffe.html#sec-grundbegriffe"><span class="std std-ref">Grundbegriffe der Optimierung</span></a> mit abgedeckt, aber etwas Wiederholung schadet an dieser Stelle nicht.</p>
 <p>Wir nennen jedes <span class="math notranslate nohighlight">\(x\)</span>, das alle Nebenbedingungen erfüllt, eine <em>zulässige Lösung</em> des linearen Problems.</p>
 <div class="proof definition admonition" id="definition-8">
-<p class="admonition-title"><span class="caption-number">Definition 2.3 </span> (Zulässige Lösung eines LP)</p>
+<p class="admonition-title"><span class="caption-number">Definition 3 </span> (Zulässige Lösung eines LP)</p>
 <section class="definition-content" id="proof-content">
 <p>Gegeben ist ein Lineares Programm LP: <span class="math notranslate nohighlight">\(\min  c^Tx\)</span> unter den Nebenbedingungen <span class="math notranslate nohighlight">\(\m A\v x=\v b\)</span> und <span class="math notranslate nohighlight">\(\v x\geq \v 0\)</span>.
 Es heißt</p>
@@ -611,14 +611,14 @@ P=\{\v x \in \R^n \mid \v A\v x=\v b, \ \v x\geq \v 0\}
 </section>
 </div><p>Eine zulässige Lösung heißt <em>optimal</em>, wenn es keine andere zulässige Lösung mit einem besseren Zielfunktionswert gibt.</p>
 <div class="proof definition admonition" id="definition-9">
-<p class="admonition-title"><span class="caption-number">Definition 2.4 </span> (Optimale Lösung eines LP)</p>
+<p class="admonition-title"><span class="caption-number">Definition 4 </span> (Optimale Lösung eines LP)</p>
 <section class="definition-content" id="proof-content">
 <p>Gegeben ist ein lineares Programm LP: <span class="math notranslate nohighlight">\(\min  c^Tx\)</span> unter den Nebenbedingungen <span class="math notranslate nohighlight">\(\m A\v x=\v b\)</span> und <span class="math notranslate nohighlight">\(\v x\geq \v 0\)</span>.
 Es sei <span class="math notranslate nohighlight">\(P\)</span> die Menge der zulässigen Lösungen von LP. Es heißt <span class="math notranslate nohighlight">\(x^*\in P\)</span> <em>optimal</em> für LP, wenn für alle <span class="math notranslate nohighlight">\(\v x' \in P\)</span> gilt, dass <span class="math notranslate nohighlight">\(\v c^T\v x^* \leq \v c^T\v x'\)</span>.</p>
 </section>
 </div><p>Ein lineares Problem heißt <em>unbeschränkt</em>, wenn es für jeden Wert <span class="math notranslate nohighlight">\(k\)</span> eine zulässige Lösung mit Zielfunktionswert gibt, der besser als <span class="math notranslate nohighlight">\(k\)</span> ist. Man kann also “beliebig gut werden”.</p>
 <div class="proof definition admonition" id="definition-10">
-<p class="admonition-title"><span class="caption-number">Definition 2.5 </span> (Unbeschränktes Lineares Programm)</p>
+<p class="admonition-title"><span class="caption-number">Definition 5 </span> (Unbeschränktes Lineares Programm)</p>
 <section class="definition-content" id="proof-content">
 <p>Gegeben ist ein lineares Programm LP: <span class="math notranslate nohighlight">\(\min  \v c^T\v x\)</span> unter den Nebenbedingungen <span class="math notranslate nohighlight">\(\m A\v x=\v b\)</span> und <span class="math notranslate nohighlight">\(\v x\geq \v 0\)</span>.
 Es sei <span class="math notranslate nohighlight">\(P\)</span> die Menge der zulässigen Lösungen von LP. LP heißt <em>unbeschränkt</em>, wenn es für alle <span class="math notranslate nohighlight">\(k \in \R\)</span> ein <span class="math notranslate nohighlight">\(\v x \in P\)</span> gibt, so dass <span class="math notranslate nohighlight">\(\v c^T\v x \leq k\)</span>.</p>
@@ -631,10 +631,10 @@ Es sei <span class="math notranslate nohighlight">\(P\)</span> die Menge der zul
 </ol>
 </section>
 <section id="grafisches-losen">
-<h2><span class="section-number">2.4. </span>Grafisches Lösen<a class="headerlink" href="#grafisches-losen" title="Link to this heading">#</a></h2>
-<p>Wir betrachten noch einmal das Produktionsbeispiel <a class="reference internal" href="01_Grundbegriffe.html#equation-eq-prodopt">(1.1)</a>:</p>
+<h2>Grafisches Lösen<a class="headerlink" href="#grafisches-losen" title="Link to this heading">#</a></h2>
+<p>Wir betrachten noch einmal das Produktionsbeispiel <a class="reference internal" href="01_Grundbegriffe.html#equation-eq-prodopt">(2.1)</a>:</p>
 <div class="amsmath math notranslate nohighlight" id="equation-8944813f-d5e0-4a6a-a441-38eff7b6959a">
-<span class="eqno">(2.4)<a class="headerlink" href="#equation-8944813f-d5e0-4a6a-a441-38eff7b6959a" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
+<span class="eqno">(4)<a class="headerlink" href="#equation-8944813f-d5e0-4a6a-a441-38eff7b6959a" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
 \max_{x_1, x_2} &amp; \quad  &amp;   2x_1+2x_2 &amp; &amp; &amp; \\[2mm]
 \text{s.t. } &amp; &amp;  5x_1+10x_2&amp;\leq 50\\
              &amp; &amp;  12x_2+8x_2&amp;\leq 72\\
@@ -646,21 +646,21 @@ Es sei <span class="math notranslate nohighlight">\(P\)</span> die Menge der zul
 <figure class="align-default" id="fig-feasible-set">
 <a class="reference internal image-reference" href="_images/prodopt-feasible.png"><img alt="_images/prodopt-feasible.png" src="_images/prodopt-feasible.png" style="width: 400px;" /></a>
 <figcaption>
-<p><span class="caption-number">Abb. 2.1 </span><span class="caption-text">Nebenbedingungen (orange Linien) und die resultierende zulässige Menge (in blau) des Produktionsoptimierungsbeispiel {eq:prodopt}. Die Nebenbedingung <span class="math notranslate nohighlight">\(x_1+x_2\leq 30\)</span> ist hier nicht eingezeichnet, da sie auf die zulässige Menge keinen Einfluss hat.</span><a class="headerlink" href="#fig-feasible-set" title="Link to this image">#</a></p>
+<p><span class="caption-number">Abb. 1 </span><span class="caption-text">Nebenbedingungen (orange Linien) und die resultierende zulässige Menge (in blau) des Produktionsoptimierungsbeispiel {eq:prodopt}. Die Nebenbedingung <span class="math notranslate nohighlight">\(x_1+x_2\leq 30\)</span> ist hier nicht eingezeichnet, da sie auf die zulässige Menge keinen Einfluss hat.</span><a class="headerlink" href="#fig-feasible-set" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Doch welcher der zulässigen Punkte ist ein optimaler Punkt? Dazu betrachten wir eine sog. <em>Höhenlinie</em> der Zielfunktion. Die Höhenlinie zu einem Wert <span class="math notranslate nohighlight">\(\beta\in\R\)</span> ist eine Gerade entlang derer die Zielfunktion den konstanten Wert <span class="math notranslate nohighlight">\(\beta\)</span> annimmt. Im Bild ist z.B. die Höhenlinie zum Niveau <span class="math notranslate nohighlight">\(\beta=8\)</span> eingezeichnet, was bedeutet, dass alle Punkte auf der Linie den Zielfunktionswert 8 haben. Wenn wir die Höhenlinie parallel in Pfeilrichtung verschieben – das ist übrigens die Richtung <span class="math notranslate nohighlight">\(\v c=\bmat 2\\2\emat\)</span>, der Vektor, der die Zielfunktion definiert! – verbessert sich die Zielfunktion. Dies tun wir nun so lange, bis wir die zulässige Menge gerade so noch berühren. Dieser letzte Berührungspunkt zwischen Höhenlinie und zulässiger Menge ist ein Optimalpunkt des Problems.</p>
 <figure class="align-default" id="fig-feasible-opt">
 <a class="reference internal image-reference" href="_images/prodopt-feasible-opt.png"><img alt="_images/prodopt-feasible-opt.png" src="_images/prodopt-feasible-opt.png" style="width: 450px;" /></a>
 <figcaption>
-<p><span class="caption-number">Abb. 2.2 </span><span class="caption-text">Höhenlinie und Verschiebung der Höhenlinie bis zum optimalen Punkt.</span><a class="headerlink" href="#fig-feasible-opt" title="Link to this image">#</a></p>
+<p><span class="caption-number">Abb. 2 </span><span class="caption-text">Höhenlinie und Verschiebung der Höhenlinie bis zum optimalen Punkt.</span><a class="headerlink" href="#fig-feasible-opt" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Wir beobachten, dass der Optimalpunkt in diesem Beispiel in einer Ecke der zulässigen Menge liegt.
 Dies ist tatsächlich nicht nur in diesem Beispiel so, sondern immer, d.h. für jedes beliebige LP. Diese Tatsache ist sehr wichtig, da sie die Grundlage für Lösungsverfahren von LPs bildet. Im nächsten Abschnitt beschreiben wir diese Eigenschaft von LPs etwas formaler.</p>
 </section>
 <section id="der-polyeder-der-zulassigen-losungen">
-<span id="subsec-polyeder"></span><h2><span class="section-number">2.5. </span>Der Polyeder der zulässigen Lösungen<a class="headerlink" href="#der-polyeder-der-zulassigen-losungen" title="Link to this heading">#</a></h2>
+<span id="subsec-polyeder"></span><h2>Der Polyeder der zulässigen Lösungen<a class="headerlink" href="#der-polyeder-der-zulassigen-losungen" title="Link to this heading">#</a></h2>
 <p>Jede Gleichung der Form</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*} \sum_{j=1}^{n} a_{ij} x_j = b_i \end{align*}\]</div>
@@ -670,12 +670,12 @@ Dies ist tatsächlich nicht nur in diesem Beispiel so, sondern immer, d.h. für 
 <figure class="align-default" id="fig-halbraeume">
 <a class="reference internal image-reference" href="_images/halbraeume.png"><img alt="_images/halbraeume.png" src="_images/halbraeume.png" style="width: 400px;" /></a>
 <figcaption>
-<p><span class="caption-number">Abb. 2.3 </span><span class="caption-text">Zwei Halbräume, die durch die Gleichung <span class="math notranslate nohighlight">\(x_2=\frac{1}{2}x_1+1\)</span> definiert sind.</span><a class="headerlink" href="#fig-halbraeume" title="Link to this image">#</a></p>
+<p><span class="caption-number">Abb. 3 </span><span class="caption-text">Zwei Halbräume, die durch die Gleichung <span class="math notranslate nohighlight">\(x_2=\frac{1}{2}x_1+1\)</span> definiert sind.</span><a class="headerlink" href="#fig-halbraeume" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Die Schnittmenge von (endlich vielen) Halbräumen nennt man einen <em>Polyeder</em>.</p>
 <div class="proof definition admonition" id="definition-11">
-<p class="admonition-title"><span class="caption-number">Definition 2.6 </span> (Polyeder)</p>
+<p class="admonition-title"><span class="caption-number">Definition 6 </span> (Polyeder)</p>
 <section class="definition-content" id="proof-content">
 <p>Ein <em>Polyeder</em> <span class="math notranslate nohighlight">\(P \subseteq \R^n\)</span> ist eine Punktmenge, die eine endliche Zahl an linearen Ungleichungen erfüllt, d.h. die durch die Form</p>
 <div class="amsmath math notranslate nohighlight">
@@ -684,7 +684,7 @@ P=\{\v x \in \R^n \mid \m A\v x \leq \v b\}
 \end{align*}\]</div>
 <p>darstellbar ist für eine <span class="math notranslate nohighlight">\(m \times n\)</span> Matrix <span class="math notranslate nohighlight">\(\m A\)</span> und einen <span class="math notranslate nohighlight">\(m\)</span>-dimensionalen Vektor <span class="math notranslate nohighlight">\(\v b\)</span>.</p>
 </section>
-</div><p>Polyeder und lineare Optimierungsprobleme haben eine enge Verbindung, da die zulässige Menge eines linearen Programms immer als ein Polyeder aufgefasst werden kann. Das liegt daran, dass man die Menge der zulässigen Punkte auch ausschließlich durch <em>Un</em>gleichungen beschreiben kann (womit sie die Polyeder-Definition erfüllen). In unserer Standardformulierung <a class="reference internal" href="#def:LP">Definition 2.2</a> haben wir eigentlich festgehalten, dass ein LP beliebig viele Gleichungen der Form</p>
+</div><p>Polyeder und lineare Optimierungsprobleme haben eine enge Verbindung, da die zulässige Menge eines linearen Programms immer als ein Polyeder aufgefasst werden kann. Das liegt daran, dass man die Menge der zulässigen Punkte auch ausschließlich durch <em>Un</em>gleichungen beschreiben kann (womit sie die Polyeder-Definition erfüllen). In unserer Standardformulierung <a class="reference internal" href="#def:LP">Definition 2</a> haben wir eigentlich festgehalten, dass ein LP beliebig viele Gleichungen der Form</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
 \sum_{j=1}^{n} a_{ij} x_j  =  b_i
@@ -700,11 +700,11 @@ P=\{\v x \in \R^n \mid \m A\v x \leq \v b\}
 <figure class="align-default" id="fig-ecken">
 <a class="reference internal image-reference" href="_images/ecken.png"><img alt="_images/ecken.png" src="_images/ecken.png" style="width: 400px;" /></a>
 <figcaption>
-<p><span class="caption-number">Abb. 2.4 </span><span class="caption-text">Ein Polyeder mit fünf Ecken <span class="math notranslate nohighlight">\(e_1,e_2,e_3,e_4,e_5\)</span>.</span><a class="headerlink" href="#fig-ecken" title="Link to this image">#</a></p>
+<p><span class="caption-number">Abb. 4 </span><span class="caption-text">Ein Polyeder mit fünf Ecken <span class="math notranslate nohighlight">\(e_1,e_2,e_3,e_4,e_5\)</span>.</span><a class="headerlink" href="#fig-ecken" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="proof definition admonition" id="definition-12">
-<p class="admonition-title"><span class="caption-number">Definition 2.7 </span> (Ecke)</p>
+<p class="admonition-title"><span class="caption-number">Definition 7 </span> (Ecke)</p>
 <section class="definition-content" id="proof-content">
 <p>Ein Punkt <span class="math notranslate nohighlight">\(\v x \in P\)</span> in einem Polyeder <span class="math notranslate nohighlight">\(P\)</span> heißt <em>Ecke</em> von <span class="math notranslate nohighlight">\(P\)</span>, falls es keine zwei Punkte <span class="math notranslate nohighlight">\(\v x^1, \v x^2 \in P\)</span> gibt mit <span class="math notranslate nohighlight">\(\v x^1\not=\v x^2\)</span>, so dass <span class="math notranslate nohighlight">\(\v x=\frac{1}{2}\v x^1+\frac{1}{2}\v x^2\)</span> gilt.</p>
 </section>
@@ -712,33 +712,33 @@ P=\{\v x \in \R^n \mid \m A\v x \leq \v b\}
 <figure class="align-default" id="fig-konvexe-mengen">
 <a class="reference internal image-reference" href="_images/konvexe_menge.png"><img alt="_images/konvexe_menge.png" src="_images/konvexe_menge.png" style="width: 400px;" /></a>
 <figcaption>
-<p><span class="caption-number">Abb. 2.5 </span><span class="caption-text">Beispiele konvexer und nicht konvexer Mengen.</span><a class="headerlink" href="#fig-konvexe-mengen" title="Link to this image">#</a></p>
+<p><span class="caption-number">Abb. 5 </span><span class="caption-text">Beispiele konvexer und nicht konvexer Mengen.</span><a class="headerlink" href="#fig-konvexe-mengen" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="proof definition admonition" id="definition-13">
-<p class="admonition-title"><span class="caption-number">Definition 2.8 </span> (Konvexität)</p>
+<p class="admonition-title"><span class="caption-number">Definition 8 </span> (Konvexität)</p>
 <section class="definition-content" id="proof-content">
 <p>Eine Menge <span class="math notranslate nohighlight">\(T \subseteq \R^n\)</span> heißt <em>konvex</em>, falls aus <span class="math notranslate nohighlight">\(\v x^1 \in T\)</span> und <span class="math notranslate nohighlight">\(\v x^2 \in T\)</span> folgt, dass <span class="math notranslate nohighlight">\(\lambda \v x^1 + (1-\lambda) \v x^2 \in T\)</span> gilt.</p>
 </section>
 </div><p>Konvexität ist in der Optimierung eine sehr starke und wünschenswerte Eigenschaft und wird uns im Laufe der Vorlesung noch öfter begegnen.</p>
 <div class="proof theorem admonition" id="thm:ecken">
-<p class="admonition-title"><span class="caption-number">Theorem 2.1 </span></p>
+<p class="admonition-title"><span class="caption-number">Theorem 1 </span></p>
 <section class="theorem-content" id="proof-content">
 <p>Besitzt ein lineares Programm eine optimale Lösung, so besitzt es auch mindestens eine optimale Lösung, die eine Ecke im zugehörigen Lösungspolyeder ist.</p>
 </section>
 </div><figure class="align-default" id="fig-ecke-loesung">
 <a class="reference internal image-reference" href="_images/ecke-loesung.png"><img alt="_images/ecke-loesung.png" src="_images/ecke-loesung.png" style="width: 500px;" /></a>
 <figcaption>
-<p><span class="caption-number">Abb. 2.6 </span><span class="caption-text">Optimallösungen im Polyeder.</span><a class="headerlink" href="#fig-ecke-loesung" title="Link to this image">#</a></p>
+<p><span class="caption-number">Abb. 6 </span><span class="caption-text">Optimallösungen im Polyeder.</span><a class="headerlink" href="#fig-ecke-loesung" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="losungsmethoden-fur-lps">
-<h2><span class="section-number">2.6. </span>Lösungsmethoden für LPs<a class="headerlink" href="#losungsmethoden-fur-lps" title="Link to this heading">#</a></h2>
-<p>Zur Lösung allgemeiner LPs der Form <a class="reference internal" href="#def:LP">Definition 2.2</a> gibt es im wesentlichen zwei Ansätze, die in der Praxis verwendet werden. In diesem Abschnitt erklären wir kurz die Ideen dieser beiden Ansätze. Auf Details verzichten wir an dieser Stelle, da mittlerweile für beide Ansätze sehr gute Software verfügbar ist, die in (zumindest für viele Probleme) als black box verwendet kann.</p>
+<h2>Lösungsmethoden für LPs<a class="headerlink" href="#losungsmethoden-fur-lps" title="Link to this heading">#</a></h2>
+<p>Zur Lösung allgemeiner LPs der Form <a class="reference internal" href="#def:LP">Definition 2</a> gibt es im wesentlichen zwei Ansätze, die in der Praxis verwendet werden. In diesem Abschnitt erklären wir kurz die Ideen dieser beiden Ansätze. Auf Details verzichten wir an dieser Stelle, da mittlerweile für beide Ansätze sehr gute Software verfügbar ist, die in (zumindest für viele Probleme) als black box verwendet kann.</p>
 <section id="simplex-verfahren">
-<h3><span class="section-number">2.6.1. </span>Simplex-Verfahren<a class="headerlink" href="#simplex-verfahren" title="Link to this heading">#</a></h3>
-<p>Das Simplex Verfahren wurde 1947 von George Dantzig entwickelt, einem der wichtigsten Menschen im Bereich der mathematischen Optimierung (er entwickelte es im Rahmen einer Planungsaufgabe für das US Militär). In dem Verfahrens wird ausgenutzt, dass sich eine Lösung des LPs stets in einer Ecke des Polyeders der zulässigen Punkte befindet (siehe <a class="reference internal" href="#thm:ecken">Theorem 2.1</a>). Das Verfahren iteriert über die Ecken des Polyeders und prüft an jeder Ecke, ob es sich um eine optimale Lösung handelt. Wichtig: Man muss für dieses “Prüfen” auf Optimalität nicht <em>alle</em> Ecken besuchen, sondern man kann es einer Ecke “ansehen”, ob es sich um eine optimale handelt (durch Überprüfung gewisser mathematischer Bedingungen).
+<h3>Simplex-Verfahren<a class="headerlink" href="#simplex-verfahren" title="Link to this heading">#</a></h3>
+<p>Das Simplex Verfahren wurde 1947 von George Dantzig entwickelt, einem der wichtigsten Menschen im Bereich der mathematischen Optimierung (er entwickelte es im Rahmen einer Planungsaufgabe für das US Militär). In dem Verfahrens wird ausgenutzt, dass sich eine Lösung des LPs stets in einer Ecke des Polyeders der zulässigen Punkte befindet (siehe <a class="reference internal" href="#thm:ecken">Theorem 1</a>). Das Verfahren iteriert über die Ecken des Polyeders und prüft an jeder Ecke, ob es sich um eine optimale Lösung handelt. Wichtig: Man muss für dieses “Prüfen” auf Optimalität nicht <em>alle</em> Ecken besuchen, sondern man kann es einer Ecke “ansehen”, ob es sich um eine optimale handelt (durch Überprüfung gewisser mathematischer Bedingungen).
 Warum ist das wichtig? Die Anzahl der Ecken des Polyeders der zulässigen Lösungen kann überraschend groß sein. So hat ein <span class="math notranslate nohighlight">\(n\)</span>-dimensionaler Einheitswürfel, also die Menge <span class="math notranslate nohighlight">\(C=\{\v x\in\R^n \mid 0\leq x_i\leq 1, i=1,\dots,n\}\)</span> <span class="math notranslate nohighlight">\(2^n\)</span> Ecken. Ein Quadrat im <span class="math notranslate nohighlight">\(\R^2\)</span> hat <span class="math notranslate nohighlight">\(2^2=4\)</span> Ecken, ein Würfel im <span class="math notranslate nohighlight">\(\R^3\)</span> hat <span class="math notranslate nohighlight">\(2^3=8\)</span> Ecken. Wenn man ein LP auf 500 Variablen betrachtet, beträgt die Anzahl der Ecken <span class="math notranslate nohighlight">\(2^{500}\approx 3\cdot 10^{150}\)</span>. Zum Vergleich: man geht davon aus, dass es im gesamten Universum etwa <span class="math notranslate nohighlight">\(10^{80}\)</span> Atome gibt.
 Um so erstaunlicher ist es, dass moderne Varianten des Simplex-Verfahrens Probleminstanzen mit hunderttausenden Variablen und Constraints oft innerhalb Sekunden auf einem Standardlaptop lösen können.</p>
 <p>Die exakte Laufzeit vorherzusehen, ist allerdings schwierig und in der Tat hat das Simplex-Verfahren im worst-case exponentielle Laufzeit. So wurde in den 1970er Jahren ein Beispiel konstruiert, der sogenannte Klee-Minty-Würfel, bei denen Simplex-Verfahren eben doch alle Ecken besuchen würden.</p>
@@ -746,12 +746,12 @@ Um so erstaunlicher ist es, dass moderne Varianten des Simplex-Verfahrens Proble
 <p>In der Praxis treten solche Worst-Case Probleme allerdings eher nicht auf und das Simplex-Verfahren ist ein robustes und schnelles Verfahren für lineare Programme.</p>
 </section>
 <section id="innere-punkte-verfahren">
-<h3><span class="section-number">2.6.2. </span>Innere-Punkte-Verfahren<a class="headerlink" href="#innere-punkte-verfahren" title="Link to this heading">#</a></h3>
+<h3>Innere-Punkte-Verfahren<a class="headerlink" href="#innere-punkte-verfahren" title="Link to this heading">#</a></h3>
 <p>Neben Simplex-Verfahren gibt es eine weiter Klasse von Verfahren, die eine andere Lösungsstrategie verfolgt, sogenannte <em>Innere-Punkte-Verfahren</em>. Wie der Name schon sagt, besteht die Idee darin, im Inneren des Polyeders zu starten und iterativ zu versuchen, sich der optimalen Ecken approximativ zu nähern. Aktuelle Löser starten in der Regel beide Typen von Verfahren gleichzeitig (auf unterschiedlichen Kernen), da keines der Verfahren dem anderen auf allen Probleminstanzen überlegen ist. Der Lösungslauf endet, sobald eines der Verfahren das LP gelöst hat.</p>
 </section>
 </section>
 <section id="software">
-<h2><span class="section-number">2.7. </span>Software<a class="headerlink" href="#software" title="Link to this heading">#</a></h2>
+<h2>Software<a class="headerlink" href="#software" title="Link to this heading">#</a></h2>
 <p>Für allgemeines lineare Programme existieren heutzutage ausgereifte Softwarepakete, die Instanzen mit hundertausenden Variablen und Nebenbedingungen innerhalb von Sekunden auf Standardlaptops lösen können (dies hängt natürlich von der konkreten Probleminstanz ab). Der schnellste Löser ist <a class="reference external" href="https://www.gurobi.com/">Gurobi</a> (nach den Erfindern Gu, Rothberg und Bixby). Dieser ist proprietär, aber für den akademischen Gebrauch ist die Lizenz immerhin kostenlos. Weitere kommerzielle Löser sind CPLEX, Mosek und FICO Xpress.</p>
 <p>Daneben gibt es frei erhältliche Software wie <a class="reference external" href="https://github.com/coin-or/Clp">CLP</a> oder <a class="reference external" href="https://soplex.zib.de/">SoPlex</a> (bzw. <a class="reference external" href="https://github.com/coin-or/Cbc">CBC</a> und <a class="reference external" href="https://scipopt.org/">SCIP</a>, falls auch Ganzzahligkeitsbedingungen betrachtet werden sollen). Besonders für große und schwierige Instanzen mit Ganzzahligkeitsbedingungen sind die kommerziellen Löser den freien allerdings z.T. deutlich überlegen.</p>
 <p>Gurobi z.B. bietet eine eigene Python Schnittstelle zur einfachen Modellierung von Problemen. Des weiteren existieren Modellierungsbibliotheken wie <a class="reference external" href="https://coin-or.github.io/pulp/">PuLP</a> oder <a class="reference external" href="https://www.python-mip.com/">Python-MIP</a>, mit denen ein Problem formuliert werden kann, welches dann an einen Löser nach Wahl (u.a. Gurobi, CLP) übergeben wird.</p>
@@ -779,7 +779,7 @@ Um so erstaunlicher ist es, dass moderne Varianten des Simplex-Verfahrens Proble
 </div>
 <p>Formulierung in mathematischer Form</p>
 <div class="amsmath math notranslate nohighlight" id="equation-9995c6a9-42a2-4874-a6f0-b95f9c02f1e2">
-<span class="eqno">(2.5)<a class="headerlink" href="#equation-9995c6a9-42a2-4874-a6f0-b95f9c02f1e2" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
+<span class="eqno">(5)<a class="headerlink" href="#equation-9995c6a9-42a2-4874-a6f0-b95f9c02f1e2" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
 \max_{x_1, x_2} &amp; \quad  &amp;   2x_1+2x_2 &amp; &amp; &amp; \\[2mm]
 \text{s.t. } &amp; &amp;  5x_1+10x_2&amp;\leq 50\\
              &amp; &amp;  12x_1+8x_2&amp;\leq 72\\
@@ -917,22 +917,22 @@ Um so erstaunlicher ist es, dass moderne Varianten des Simplex-Verfahrens Proble
 </div>
 </section>
 <section id="modellierungstricks-i">
-<span id="subsubsec-tricks1"></span><h2><span class="section-number">2.8. </span>Modellierungstricks I<a class="headerlink" href="#modellierungstricks-i" title="Link to this heading">#</a></h2>
+<span id="subsubsec-tricks1"></span><h2>Modellierungstricks I<a class="headerlink" href="#modellierungstricks-i" title="Link to this heading">#</a></h2>
 <section id="maximumsfunktion-als-teil-der-zielfunktion">
-<span id="subsubsec-minmax"></span><h3><span class="section-number">2.8.1. </span>Maximumsfunktion als Teil der Zielfunktion<a class="headerlink" href="#maximumsfunktion-als-teil-der-zielfunktion" title="Link to this heading">#</a></h3>
+<span id="subsubsec-minmax"></span><h3>Maximumsfunktion als Teil der Zielfunktion<a class="headerlink" href="#maximumsfunktion-als-teil-der-zielfunktion" title="Link to this heading">#</a></h3>
 <div class="proof example admonition" id="example-15">
-<p class="admonition-title"><span class="caption-number">Example 2.7 </span> (Min Max)</p>
+<p class="admonition-title"><span class="caption-number">Example 7 </span> (Min Max)</p>
 <section class="example-content" id="proof-content">
 <p>Ein Projektplanungsproblem besteht aus vier Arbeitsschritten. Als Entscheidungsvariablen sind durch <span class="math notranslate nohighlight">\(s_1, s_2, s_3, s_4\)</span> die Startzeiten jedes Arbeitsschrittes, durch <span class="math notranslate nohighlight">\(d_1, d_2, d_3, d_4\)</span> die Dauer jedes Arbeitsschrittes gegeben. Alle anderen Zusammenhänge vernachlässigen wir in diesem Beispiel. Modellierungsziel ist die möglichst frühe Fertigstellung des Projekts.</p>
 <p>Die Endzeiten der einzelnen Arbeitsschritte sind gegeben durch <span class="math notranslate nohighlight">\(s_1+d_1, s_2+d_2, s_3+d_3, s_4+d_4\)</span>. Die letzte (größte) dieser Zeiten soll möglichst klein werden. Mathematisch drückt man das so aus:</p>
 <div class="math notranslate nohighlight" id="equation-eq-minmax">
-<span class="eqno">(2.6)<a class="headerlink" href="#equation-eq-minmax" title="Link to this equation">#</a></span>\[\begin{align*}
+<span class="eqno">(6)<a class="headerlink" href="#equation-eq-minmax" title="Link to this equation">#</a></span>\[\begin{align*}
 \min \max \{s_1+d_1, s_2+d_2, s_3+d_3, s_4+d_4\}
 \end{align*}\]</div>
 <figure class="align-default">
 <a class="reference internal image-reference" href="_images/minmax.png"><img alt="_images/minmax.png" src="_images/minmax.png" style="width: 400px;" /></a>
 </figure>
-<p>Löser für lineare Programme können mit diesen <span class="math notranslate nohighlight">\(\min\max\)</span> meist nicht direkt umgehen. Wie kann man das <span class="math notranslate nohighlight">\(\min\max\)</span>-Problem in ein reines Minimierungsproblem von der Form <a class="reference internal" href="#def:LP">Definition 2.2</a> überführen?</p>
+<p>Löser für lineare Programme können mit diesen <span class="math notranslate nohighlight">\(\min\max\)</span> meist nicht direkt umgehen. Wie kann man das <span class="math notranslate nohighlight">\(\min\max\)</span>-Problem in ein reines Minimierungsproblem von der Form <a class="reference internal" href="#def:LP">Definition 2</a> überführen?</p>
 </section>
 </div><p>Die Zielfunktion linearer Programme besteht immer aus einer gewichteten Summen der Variablen. In manchen Anwendungen benötigen wir eine Zielfunktion der Form</p>
 <div class="amsmath math notranslate nohighlight">
@@ -956,11 +956,11 @@ Wir führen dazu eine neue Variable <span class="math notranslate nohighlight">\
 <p>Die Ungleichungen in den Nebenbedingungen übernehmen damit die Funktion des Maximums in der originalen Zielfunktion.
 Sie garantieren, dass <span class="math notranslate nohighlight">\(z\)</span> größer oder gleich <em>jeder</em> der Funktionen <span class="math notranslate nohighlight">\(f_i\)</span> ist. Gleichzeitig soll <span class="math notranslate nohighlight">\(z\)</span> aber minimiert werden, dadurch wird es auf das Maximum der <span class="math notranslate nohighlight">\(f_i\)</span> “gedrückt”. Ähnlich können übrigens auch <span class="math notranslate nohighlight">\(\max \min\)</span> Probleme reformuliert werden. Bei Problemen der Form <span class="math notranslate nohighlight">\(\max \max\)</span> oder <span class="math notranslate nohighlight">\(\min \min\)</span> gestaltet sich die Sache schwieriger (mehr dazu im nächsten Kapitel).</p>
 <div class="proof example admonition" id="example-16">
-<p class="admonition-title"><span class="caption-number">Example 2.8 </span> (Min Max (Forsetzung))</p>
+<p class="admonition-title"><span class="caption-number">Example 8 </span> (Min Max (Forsetzung))</p>
 <section class="example-content" id="proof-content">
-<p>Wir führen eine neue Variable <span class="math notranslate nohighlight">\(y\)</span> und 4 Nebenbedingungen ein. Der zur <span class="math notranslate nohighlight">\(\min\max\)</span>-Formulierung <a class="reference internal" href="#equation-eq-minmax">(2.6)</a> äquivalente Teile eines linearen Programms lautet:</p>
+<p>Wir führen eine neue Variable <span class="math notranslate nohighlight">\(y\)</span> und 4 Nebenbedingungen ein. Der zur <span class="math notranslate nohighlight">\(\min\max\)</span>-Formulierung <a class="reference internal" href="#equation-eq-minmax">(6)</a> äquivalente Teile eines linearen Programms lautet:</p>
 <div class="amsmath math notranslate nohighlight" id="equation-29b3bdb9-52ec-4540-9844-736b3f55e04a">
-<span class="eqno">(2.7)<a class="headerlink" href="#equation-29b3bdb9-52ec-4540-9844-736b3f55e04a" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
+<span class="eqno">(7)<a class="headerlink" href="#equation-29b3bdb9-52ec-4540-9844-736b3f55e04a" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
 \min_{s_1,d_1,s_2,d_2,s_3,d_3,s_4,d_4,y} &amp; \quad  &amp;   y &amp; &amp; &amp; \\[2mm]
 \text{s.t. } &amp; &amp;  s_1+d_1&amp;\leq y\\
              &amp; &amp;  s_2+d_2&amp;\leq y\\
@@ -970,7 +970,7 @@ Sie garantieren, dass <span class="math notranslate nohighlight">\(z\)</span> gr
 </section>
 </div></section>
 <section id="betrage">
-<span id="subsubsec-betraege"></span><h3><span class="section-number">2.8.2. </span>Beträge<a class="headerlink" href="#betrage" title="Link to this heading">#</a></h3>
+<span id="subsubsec-betraege"></span><h3>Beträge<a class="headerlink" href="#betrage" title="Link to this heading">#</a></h3>
 <p>Die Betragsfunktion ist definiert als</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
@@ -980,7 +980,7 @@ f(x)=|x|=\left\{ \begin{array}{lr}
                 \end{array}
 \right.
 \end{align*}\]</div>
-<p>Beträge sind bei vielen Modellen hilfreich, wenn z.B. der Abstand zwischen zwei Variablen betrachtet werden soll, aber nicht klar ist, welche von beiden Variablen die größere ist. Ähnlich wie bei <span class="math notranslate nohighlight">\(\min \max\)</span>-Problemen muss man auch die Betragsfunktion umformulieren, so dass das Problem von der Form <a class="reference internal" href="#def:LP">Definition 2.2</a> ist und an einen Löser übergeben werden kann.</p>
+<p>Beträge sind bei vielen Modellen hilfreich, wenn z.B. der Abstand zwischen zwei Variablen betrachtet werden soll, aber nicht klar ist, welche von beiden Variablen die größere ist. Ähnlich wie bei <span class="math notranslate nohighlight">\(\min \max\)</span>-Problemen muss man auch die Betragsfunktion umformulieren, so dass das Problem von der Form <a class="reference internal" href="#def:LP">Definition 2</a> ist und an einen Löser übergeben werden kann.</p>
 <p>Eine erste Beobachtung ist die Tatsache, dass der Betrag einer Zahl gerade dem Maximum der Zahl und ihres negativen Wertes entspricht, in Formeln:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
@@ -994,7 +994,7 @@ f(x)=|x|=\max\{x,-x\}
 <p>Funktioniert das auch bei Ungleichungen der Form <span class="math notranslate nohighlight">\(|x|\geq2\)</span>? Leider nicht, da <span class="math notranslate nohighlight">\(|x|\geq 2\)</span> bedeutet, dass entweder <span class="math notranslate nohighlight">\(x\leq -2\)</span> oder <span class="math notranslate nohighlight">\(x\geq 2\)</span> gelten muss. Die zulässige Menge dieser “Entweder-Oder-Aussage” ist nicht konvex; sie hat ein Loch zwischen <span class="math notranslate nohighlight">\(-2\)</span> und <span class="math notranslate nohighlight">\(2\)</span>. Wir hatten aber im vorherigen Abschnitt festgestellt, dass sich die zulässige Menge eines LP als Polyeder darstellen lässt und Polyeder konvex sind. Daher kann die Menge <span class="math notranslate nohighlight">\(|x|\geq2\)</span> nicht die zulässige Menge eines LP sein. Wie man Bedingungen dieser Art mit Hilfe binärer Variablen modellieren kann, erfahren Sie im nächsten Kapitel.</p>
 <p>Wir halten fest:</p>
 <div class="proof remark admonition" id="remark-17">
-<p class="admonition-title"><span class="caption-number">Remark 2.1 </span></p>
+<p class="admonition-title"><span class="caption-number">Remark 1 </span></p>
 <section class="remark-content" id="proof-content">
 <p>Die Bedingung <span class="math notranslate nohighlight">\(|x|\leq \alpha\)</span> ist äquivalent zu den beiden Bedingungen <span class="math notranslate nohighlight">\(x\leq\alpha\)</span> und <span class="math notranslate nohighlight">\(-x\leq \alpha\)</span>.</p>
 </section>
@@ -1027,7 +1027,7 @@ f(x)=|x|=\max\{x,-x\}
 \end{align*}\]</div>
 <p>Achtung: Das funktioniert nur, wenn die Koeffizienten der Beträge in der Zielfunktion nicht negativ sind. Formal:</p>
 <div class="proof theorem admonition" id="theorem-18">
-<p class="admonition-title"><span class="caption-number">Theorem 2.2 </span></p>
+<p class="admonition-title"><span class="caption-number">Theorem 2 </span></p>
 <section class="theorem-content" id="proof-content">
 <p>Das Optimierungsproblem</p>
 <div class="amsmath math notranslate nohighlight">
@@ -1083,7 +1083,7 @@ f(x)=|x|=\max\{x,-x\}
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">zurück</p>
-        <p class="prev-next-title"><span class="section-number">1. </span>Einführung und Grundbegriffe</p>
+        <p class="prev-next-title"><span class="section-number">2. </span>Einführung und Grundbegriffe</p>
       </div>
     </a>
     <a class="right-next"
@@ -1091,7 +1091,7 @@ f(x)=|x|=\max\{x,-x\}
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">weiter</p>
-        <p class="prev-next-title"><span class="section-number">2.9. </span>Anwendung: Transportproblem</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>Anwendung: Transportproblem</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

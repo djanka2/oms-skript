@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>2.9. Anwendung: Transportproblem &#8212; Optimierungsverfahren, Modellierung und Simulation (DSCB410)</title>
+    <title>1. Anwendung: Transportproblem &#8212; Optimierungsverfahren, Modellierung und Simulation (DSCB410)</title>
   
   
   
@@ -183,9 +183,9 @@
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lineare Optimierungsmodelle</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01_Grundbegriffe.html">1. Einführung und Grundbegriffe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_Grundbegriffe.html">2. Einführung und Grundbegriffe</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="02_Lineare_Probleme.html">2. Lineare Optimierung</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">2.9. Anwendung: Transportproblem</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">1. Anwendung: Transportproblem</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="03_Ganzzahlige_Probleme.html">3. Ganzzahlige Probleme</a></li>
@@ -350,21 +350,21 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objective-and-prerequisites">2.9.1. Objective and Prerequisites</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-description">2.9.2. Problem Description</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-formulation">2.9.3. Model Formulation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sets-and-indices">Sets and Indices</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters">Parameters</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-variables">Decision Variables</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#objective-function">Objective Function</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#constraints">Constraints</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objective-and-prerequisites">1.1. Objective and Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-description">1.2. Problem Description</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-formulation">1.3. Model Formulation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sets-and-indices">1.3.1. Sets and Indices</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters">1.3.2. Parameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-variables">1.3.3. Decision Variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#objective-function">1.3.4. Objective Function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#constraints">1.3.5. Constraints</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-implementation">2.9.4. Python Implementation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#input-data">2.9.5. Input Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-deployment">2.9.6. Model Deployment</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis">2.9.7. Analysis</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">2.9.8. References</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-implementation">1.4. Python Implementation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#input-data">1.5. Input Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-deployment">1.6. Model Deployment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis">1.7. Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">1.8. References</a></li>
 </ul>
             </nav>
         </div>
@@ -377,10 +377,10 @@ document.write(`
                 <article class="bd-article">
                   
   <section id="anwendung-transportproblem">
-<h1><span class="section-number">2.9. </span>Anwendung: Transportproblem<a class="headerlink" href="#anwendung-transportproblem" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">1. </span>Anwendung: Transportproblem<a class="headerlink" href="#anwendung-transportproblem" title="Link to this heading">#</a></h1>
 <p>Dieses Anwendungsproblem finden Sie auch auf der <a class="reference external" href="https://www.gurobi.com/jupyter_models/supply-network-design/">Gurobi Homepage</a> unter dem Namen “Supply Network Design 1”.</p>
 <section id="objective-and-prerequisites">
-<h2><span class="section-number">2.9.1. </span>Objective and Prerequisites<a class="headerlink" href="#objective-and-prerequisites" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.1. </span>Objective and Prerequisites<a class="headerlink" href="#objective-and-prerequisites" title="Link to this heading">#</a></h2>
 <p>Try this Jupyter Notebook Modeling Example to learn how to solve a classic supply network design problem that involves finding the minimum cost flow through a network. We’ll show you how – given a set of factories, depots, and customers – you can use mathematical optimization to determine the best way to satisfy customer demand while minimizing shipping costs.</p>
 <p>This model is example 19 from the fifth edition of Model Building in Mathematical Programming, by H. Paul Williams on pages 273-275 and 330-332.</p>
 <p>This example is of beginning difficulty; we assume that you know Python and have some knowledge of the Gurobi Python API and building mathematical optimization models.</p>
@@ -389,7 +389,7 @@ You can download the repository containing this and other examples by clicking <
 </section>
 <hr class="docutils" />
 <section id="problem-description">
-<h2><span class="section-number">2.9.2. </span>Problem Description<a class="headerlink" href="#problem-description" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.2. </span>Problem Description<a class="headerlink" href="#problem-description" title="Link to this heading">#</a></h2>
 <p>In this problem, we have six end customers, each with a known demand for a product.  Customer demand can be satisfied from a set of four depots, or directly from a set of two factories.  Each depot can support a maximum volume of product moving through it, and each factory can produce a maximum amount of product.  There are known costs associated with transporting the product, from a factory to a depot, from a depot to a customer, or from a factory directly to a customer.</p>
 <p>Our supply network has two factories, in Liverpool and Brighton, that produce a product.  Each has a maximum production capacity:</p>
 <table class="table">
@@ -572,56 +572,56 @@ You can download the repository containing this and other examples by clicking <
 </section>
 <hr class="docutils" />
 <section id="model-formulation">
-<h2><span class="section-number">2.9.3. </span>Model Formulation<a class="headerlink" href="#model-formulation" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.3. </span>Model Formulation<a class="headerlink" href="#model-formulation" title="Link to this heading">#</a></h2>
 <section id="sets-and-indices">
-<h3>Sets and Indices<a class="headerlink" href="#sets-and-indices" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">1.3.1. </span>Sets and Indices<a class="headerlink" href="#sets-and-indices" title="Link to this heading">#</a></h3>
 <p><span class="math notranslate nohighlight">\(f \in \text{Factories}=\{\text{Liverpool}, \text{Brighton}\}\)</span></p>
 <p><span class="math notranslate nohighlight">\(d \in \text{Depots}=\{\text{Newcastle}, \text{Birmingham}, \text{London}, \text{Exeter}\}\)</span></p>
 <p><span class="math notranslate nohighlight">\(c \in \text{Customers}=\{\text{C1}, \text{C2}, \text{C3}, \text{C4}, \text{C5}, \text{C6}\}\)</span></p>
 <p><span class="math notranslate nohighlight">\(\text{Cities} = \text{Factories} \cup \text{Depots} \cup \text{Customers}\)</span></p>
 </section>
 <section id="parameters">
-<h3>Parameters<a class="headerlink" href="#parameters" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">1.3.2. </span>Parameters<a class="headerlink" href="#parameters" title="Link to this heading">#</a></h3>
 <p><span class="math notranslate nohighlight">\(\text{cost}_{s,t} \in \mathbb{R}^+\)</span>: Cost of shipping one ton from source <span class="math notranslate nohighlight">\(s\)</span> to destination <span class="math notranslate nohighlight">\(t\)</span>.</p>
 <p><span class="math notranslate nohighlight">\(\text{supply}_f \in \mathbb{R}^+\)</span>: Maximum possible supply from factory <span class="math notranslate nohighlight">\(f\)</span> (in tons).</p>
 <p><span class="math notranslate nohighlight">\(\text{through}_d \in \mathbb{R}^+\)</span>: Maximum possible flow through depot <span class="math notranslate nohighlight">\(d\)</span> (in tons).</p>
 <p><span class="math notranslate nohighlight">\(\text{demand}_c \in \mathbb{R}^+\)</span>: Demand for goods at customer <span class="math notranslate nohighlight">\(c\)</span> (in tons).</p>
 </section>
 <section id="decision-variables">
-<h3>Decision Variables<a class="headerlink" href="#decision-variables" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">1.3.3. </span>Decision Variables<a class="headerlink" href="#decision-variables" title="Link to this heading">#</a></h3>
 <p><span class="math notranslate nohighlight">\(\text{flow}_{s,t} \in \mathbb{N}^+\)</span>: Quantity of goods (in tons) that is shipped from source <span class="math notranslate nohighlight">\(s\)</span> to destionation <span class="math notranslate nohighlight">\(t\)</span>.</p>
 </section>
 <section id="objective-function">
-<h3>Objective Function<a class="headerlink" href="#objective-function" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">1.3.4. </span>Objective Function<a class="headerlink" href="#objective-function" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p><strong>Cost</strong>: Minimize total shipping costs.</p></li>
 </ul>
 <div class="amsmath math notranslate nohighlight" id="equation-3934928c-c717-4bb6-b097-0c55e6e6b7ab">
-<span class="eqno">(2.8)<a class="headerlink" href="#equation-3934928c-c717-4bb6-b097-0c55e6e6b7ab" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<span class="eqno">(1.1)<a class="headerlink" href="#equation-3934928c-c717-4bb6-b097-0c55e6e6b7ab" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \text{Minimize} \quad Z = \sum_{(s,t) \in \text{Cities} \times \text{Cities}}{\text{cost}_{s,t}*\text{flow}_{s,t}}
 \end{equation}\]</div>
 </section>
 <section id="constraints">
-<h3>Constraints<a class="headerlink" href="#constraints" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">1.3.5. </span>Constraints<a class="headerlink" href="#constraints" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p><strong>Factory output</strong>: Flow of goods from a factory must respect maximum capacity.</p></li>
 </ul>
 <div class="amsmath math notranslate nohighlight" id="equation-6a63b917-662d-40ba-8b29-303ef2cb62ea">
-<span class="eqno">(2.9)<a class="headerlink" href="#equation-6a63b917-662d-40ba-8b29-303ef2cb62ea" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<span class="eqno">(1.2)<a class="headerlink" href="#equation-6a63b917-662d-40ba-8b29-303ef2cb62ea" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \sum_{t \in \text{Cities}}{\text{flow}_{f,t}} \leq \text{supply}_{f} \quad \forall f \in \text{Factories}
 \end{equation}\]</div>
 <ul class="simple">
 <li><p><strong>Customer demand</strong>: Flow of goods must meet customer demand.</p></li>
 </ul>
 <div class="amsmath math notranslate nohighlight" id="equation-4a668309-a87b-40f9-901b-71fa10fd2dd8">
-<span class="eqno">(2.10)<a class="headerlink" href="#equation-4a668309-a87b-40f9-901b-71fa10fd2dd8" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<span class="eqno">(1.3)<a class="headerlink" href="#equation-4a668309-a87b-40f9-901b-71fa10fd2dd8" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \sum_{s \in \text{Cities}}{\text{flow}_{s,c}} = \text{demand}_{c} \quad \forall c \in \text{Customers}
 \end{equation}\]</div>
 <ul class="simple">
 <li><p><strong>Depot flow</strong>: Flow into a depot equals flow out of the depot.</p></li>
 </ul>
 <div class="amsmath math notranslate nohighlight" id="equation-1418ae0e-d4b7-4c51-849d-534e2f07b079">
-<span class="eqno">(2.11)<a class="headerlink" href="#equation-1418ae0e-d4b7-4c51-849d-534e2f07b079" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<span class="eqno">(1.4)<a class="headerlink" href="#equation-1418ae0e-d4b7-4c51-849d-534e2f07b079" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \sum_{s \in \text{Cities}}{\text{flow}_{s,d}} =
 \sum_{t \in \text{Cities}}{\text{flow}_{d,t}}
 \quad \forall d \in \text{Depots}
@@ -630,7 +630,7 @@ You can download the repository containing this and other examples by clicking <
 <li><p><strong>Depot capacity</strong>: Flow into a depot must respect depot capacity.</p></li>
 </ul>
 <div class="amsmath math notranslate nohighlight" id="equation-4fb14f4f-04c8-40ce-ae04-7929faeb1901">
-<span class="eqno">(2.12)<a class="headerlink" href="#equation-4fb14f4f-04c8-40ce-ae04-7929faeb1901" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<span class="eqno">(1.5)<a class="headerlink" href="#equation-4fb14f4f-04c8-40ce-ae04-7929faeb1901" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \sum_{s \in \text{Cities}}{\text{flow}_{s,d}} \leq \text{through}_{d}
 \quad \forall d \in \text{Depots}
 \end{equation}\]</div>
@@ -638,7 +638,7 @@ You can download the repository containing this and other examples by clicking <
 </section>
 <hr class="docutils" />
 <section id="python-implementation">
-<h2><span class="section-number">2.9.4. </span>Python Implementation<a class="headerlink" href="#python-implementation" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.4. </span>Python Implementation<a class="headerlink" href="#python-implementation" title="Link to this heading">#</a></h2>
 <p>We import the Gurobi Python Module and other Python libraries.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -664,7 +664,7 @@ You can download the repository containing this and other examples by clicking <
 </div>
 </section>
 <section id="input-data">
-<h2><span class="section-number">2.9.5. </span>Input Data<a class="headerlink" href="#input-data" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.5. </span>Input Data<a class="headerlink" href="#input-data" title="Link to this heading">#</a></h2>
 <p>We define all the input data for the model.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -771,7 +771,7 @@ You can download the repository containing this and other examples by clicking <
 </div>
 </section>
 <section id="model-deployment">
-<h2><span class="section-number">2.9.6. </span>Model Deployment<a class="headerlink" href="#model-deployment" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.6. </span>Model Deployment<a class="headerlink" href="#model-deployment" title="Link to this heading">#</a></h2>
 <p>We create a model and the variables. The variables simply capture the amount of product that flows along each allowed path between a source and destination.  Objective coefficients are provided here (in <span class="math notranslate nohighlight">\(\text{cost}\)</span>) , so we don’t need to provide an optimization objective later.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -911,7 +911,7 @@ You can download the repository containing this and other examples by clicking <
 </section>
 <hr class="docutils" />
 <section id="analysis">
-<h2><span class="section-number">2.9.7. </span>Analysis<a class="headerlink" href="#analysis" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.7. </span>Analysis<a class="headerlink" href="#analysis" title="Link to this heading">#</a></h2>
 <p>Product demand from all of our customers can be satisfied for a total cost of <span class="math notranslate nohighlight">\(\$198,500\)</span>. The optimal plan is as follows.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -941,7 +941,7 @@ You can download the repository containing this and other examples by clicking <
 </section>
 <hr class="docutils" />
 <section id="references">
-<h2><span class="section-number">2.9.8. </span>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.8. </span>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
 <p>H. Paul Williams, Model Building in Mathematical Programming, fifth edition.</p>
 <p>Copyright © 2020 Gurobi Optimization, LLC</p>
 </section>
@@ -1011,21 +1011,21 @@ You can download the repository containing this and other examples by clicking <
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objective-and-prerequisites">2.9.1. Objective and Prerequisites</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-description">2.9.2. Problem Description</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-formulation">2.9.3. Model Formulation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sets-and-indices">Sets and Indices</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters">Parameters</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-variables">Decision Variables</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#objective-function">Objective Function</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#constraints">Constraints</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objective-and-prerequisites">1.1. Objective and Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-description">1.2. Problem Description</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-formulation">1.3. Model Formulation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sets-and-indices">1.3.1. Sets and Indices</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters">1.3.2. Parameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-variables">1.3.3. Decision Variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#objective-function">1.3.4. Objective Function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#constraints">1.3.5. Constraints</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-implementation">2.9.4. Python Implementation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#input-data">2.9.5. Input Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-deployment">2.9.6. Model Deployment</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis">2.9.7. Analysis</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">2.9.8. References</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-implementation">1.4. Python Implementation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#input-data">1.5. Input Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-deployment">1.6. Model Deployment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis">1.7. Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">1.8. References</a></li>
 </ul>
   </nav></div>
 

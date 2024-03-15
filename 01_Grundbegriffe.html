@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>1. Einführung und Grundbegriffe &#8212; Optimierungsverfahren, Modellierung und Simulation (DSCB410)</title>
+    <title>2. Einführung und Grundbegriffe &#8212; Optimierungsverfahren, Modellierung und Simulation (DSCB410)</title>
   
   
   
@@ -183,9 +183,9 @@
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lineare Optimierungsmodelle</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">1. Einführung und Grundbegriffe</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">2. Einführung und Grundbegriffe</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="02_Lineare_Probleme.html">2. Lineare Optimierung</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="02_Transportproblem.html">2.9. Anwendung: Transportproblem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_Transportproblem.html">1. Anwendung: Transportproblem</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="03_Ganzzahlige_Probleme.html">3. Ganzzahlige Probleme</a></li>
@@ -350,12 +350,12 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#zur-mathematischen-notation">1.1. Zur mathematischen Notation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#worum-geht-es">1.2. Worum geht es?</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#beispiel-ein-produktionsplanungsproblem">1.2.1. Beispiel: Ein Produktionsplanungsproblem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#zur-mathematischen-notation">2.1. Zur mathematischen Notation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#worum-geht-es">2.2. Worum geht es?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#beispiel-ein-produktionsplanungsproblem">2.2.1. Beispiel: Ein Produktionsplanungsproblem</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grundbegriffe-der-optimierung">1.3. Grundbegriffe der Optimierung</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grundbegriffe-der-optimierung">2.3. Grundbegriffe der Optimierung</a></li>
 </ul>
             </nav>
         </div>
@@ -368,9 +368,9 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="einfuhrung-und-grundbegriffe">
-<span id="sec-intro"></span><h1><span class="section-number">1. </span>Einführung und Grundbegriffe<a class="headerlink" href="#einfuhrung-und-grundbegriffe" title="Link to this heading">#</a></h1>
+<span id="sec-intro"></span><h1><span class="section-number">2. </span>Einführung und Grundbegriffe<a class="headerlink" href="#einfuhrung-und-grundbegriffe" title="Link to this heading">#</a></h1>
 <section id="zur-mathematischen-notation">
-<h2><span class="section-number">1.1. </span>Zur mathematischen Notation<a class="headerlink" href="#zur-mathematischen-notation" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.1. </span>Zur mathematischen Notation<a class="headerlink" href="#zur-mathematischen-notation" title="Link to this heading">#</a></h2>
 <p>Naturgemäß werden Sie in diesem Mathe-Skript mit vielen Symbolen konfrontiert. Um Ihnen den Weg durch diesen algebraischen Dschungel zu erleichtern (was ist Zahl, was ist Vektor, was ist Matrix?), wird in diesem Skript folgende Notation angewendet.</p>
 <ul>
 <li><p><strong>Lateinische Kleinbuchstaben</strong> wie <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span>, <span class="math notranslate nohighlight">\(a\)</span> usw. bezeichnen (meist reelle) Zahlen.</p></li>
@@ -394,7 +394,7 @@ document.write(`
 </ul>
 </section>
 <section id="worum-geht-es">
-<h2><span class="section-number">1.2. </span>Worum geht es?<a class="headerlink" href="#worum-geht-es" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.2. </span>Worum geht es?<a class="headerlink" href="#worum-geht-es" title="Link to this heading">#</a></h2>
 <p>Mathematische Optimierung beschreibt verschiedene Techniken und Algorithmen mit dem Ziel, etwas <em>bestmöglich</em> zu tun: Entweder für ein gegebenes Problem die <em>bestmöglichen</em> Entscheidungen treffen oder für ein System die <em>bestmöglichen</em> Parameter zu finden.</p>
 <p>Es gibt unzählige Fragestellungen, die man mit Hilfe von mathematischer Optimierung beantworten kann. Hier einige Beispiele:</p>
 <ul class="simple">
@@ -426,7 +426,7 @@ document.write(`
 </div>
 <p>Wir schauen uns nun ein Beispiel eines mathematischen Modells anhand einer konkreten Anwendung an.</p>
 <section id="beispiel-ein-produktionsplanungsproblem">
-<span id="sec-production-example"></span><h3><span class="section-number">1.2.1. </span>Beispiel: Ein Produktionsplanungsproblem<a class="headerlink" href="#beispiel-ein-produktionsplanungsproblem" title="Link to this heading">#</a></h3>
+<span id="sec-production-example"></span><h3><span class="section-number">2.2.1. </span>Beispiel: Ein Produktionsplanungsproblem<a class="headerlink" href="#beispiel-ein-produktionsplanungsproblem" title="Link to this heading">#</a></h3>
 <p>Eine Chemiefirma betreibt einen Reaktor, der in zwei verschiedenen Modi betrieben werden kann. Die Modi unterscheiden sich z. B. in der Reaktortemperatur oder dem Druck. Je nach gewähltem Modus produziert der Reaktor drei verschiedene Produkte mit folgenden Ausbeuten (in Tonnen pro Tag):</p>
 <table class="table">
 <thead>
@@ -506,7 +506,7 @@ document.write(`
 </dl>
 <p>Das ganze Problem schreiben wir kompakt als</p>
 <div class="math notranslate nohighlight" id="equation-eq-prodopt">
-<span class="eqno">(1.1)<a class="headerlink" href="#equation-eq-prodopt" title="Link to this equation">#</a></span>\[\begin{split}\begin{alignat}{5}
+<span class="eqno">(2.1)<a class="headerlink" href="#equation-eq-prodopt" title="Link to this equation">#</a></span>\[\begin{split}\begin{alignat}{5}
 \max_{x_1, x_2} &amp; \quad  &amp;   2x_1+2x_2 &amp; &amp; &amp; \\[2mm]
 \text{s.t. } &amp; &amp;  5x_1+10x_2&amp;\leq 50\\
              &amp; &amp;  12x_1+8x_2&amp;\leq 72\\
@@ -518,11 +518,11 @@ document.write(`
 </section>
 </section>
 <section id="grundbegriffe-der-optimierung">
-<span id="sec-grundbegriffe"></span><h2><span class="section-number">1.3. </span>Grundbegriffe der Optimierung<a class="headerlink" href="#grundbegriffe-der-optimierung" title="Link to this heading">#</a></h2>
-<p>Im Beispiel <a class="reference internal" href="#equation-eq-prodopt">(1.1)</a> hatten wir es mit zwei Entscheidungsvariablen zu tun und einer konkreten Zielfunktion, bei der der Profit maximiert werden sollte. Im Allgemeinen können natürlich beliebig viele Entscheidungsvariablen vorliegen und eine beliebige Funktion dieser Variablen optimiert, d.h. maximiert oder minimiert werden.</p>
+<span id="sec-grundbegriffe"></span><h2><span class="section-number">2.3. </span>Grundbegriffe der Optimierung<a class="headerlink" href="#grundbegriffe-der-optimierung" title="Link to this heading">#</a></h2>
+<p>Im Beispiel <a class="reference internal" href="#equation-eq-prodopt">(2.1)</a> hatten wir es mit zwei Entscheidungsvariablen zu tun und einer konkreten Zielfunktion, bei der der Profit maximiert werden sollte. Im Allgemeinen können natürlich beliebig viele Entscheidungsvariablen vorliegen und eine beliebige Funktion dieser Variablen optimiert, d.h. maximiert oder minimiert werden.</p>
 <p>Ein allgemeines mathematisches Optimierungsproblem notieren wir wie folgt:</p>
 <div class="proof definition admonition" id="definition-0">
-<p class="admonition-title"><span class="caption-number">Definition 1.1 </span> (Optimierungsproblem)</p>
+<p class="admonition-title"><span class="caption-number">Definition 2.1 </span> (Optimierungsproblem)</p>
 <section class="definition-content" id="proof-content">
 <p>Ein <em>Minimierungsproblem</em> ist ein Problem der Form</p>
 <div class="amsmath math notranslate nohighlight">
@@ -543,7 +543,7 @@ document.write(`
 <p>Der Oberbegriff für Minimierungs- und Maximierungsproblem ist <em>Optimierungsproblem</em>.</p>
 </section>
 </div><div class="proof remark admonition" id="remark-1">
-<p class="admonition-title"><span class="caption-number">Remark 1.1 </span> (Minimierung oder Maximierung?)</p>
+<p class="admonition-title"><span class="caption-number">Remark 2.1 </span> (Minimierung oder Maximierung?)</p>
 <section class="remark-content" id="proof-content">
 <p>Per Konvention schauen wir uns, wenn wir von Optimierungsproblemen reden, nur Minimierungsprobleme an, d.h. eine Funktion soll so <em>klein</em> wie möglich sein. Haben wir es doch einmal mit einem Maximierungsproblem zu tun, also</p>
 <div class="amsmath math notranslate nohighlight">
@@ -557,9 +557,9 @@ document.write(`
 \end{align*}\]</div>
 <p>betrachten.</p>
 </section>
-</div><p>Was genau ist die “zulässige Menge <span class="math notranslate nohighlight">\(D\)</span>”? Im Beispiel <a class="reference internal" href="#equation-eq-prodopt">(1.1)</a> wurde die Menge <span class="math notranslate nohighlight">\(D\subset\R^2\)</span> durch verschiedene Ungleichungen repräsentiert. Jeden Punkt, der alle Ungleichungen erfüllt, bezeichnet man als <em>zulässigen Punkt</em>. Allgemeiner:</p>
+</div><p>Was genau ist die “zulässige Menge <span class="math notranslate nohighlight">\(D\)</span>”? Im Beispiel <a class="reference internal" href="#equation-eq-prodopt">(2.1)</a> wurde die Menge <span class="math notranslate nohighlight">\(D\subset\R^2\)</span> durch verschiedene Ungleichungen repräsentiert. Jeden Punkt, der alle Ungleichungen erfüllt, bezeichnet man als <em>zulässigen Punkt</em>. Allgemeiner:</p>
 <div class="proof definition admonition" id="definition-2">
-<p class="admonition-title"><span class="caption-number">Definition 1.2 </span> (Zulässiger Punkt)</p>
+<p class="admonition-title"><span class="caption-number">Definition 2.2 </span> (Zulässiger Punkt)</p>
 <section class="definition-content" id="proof-content">
 <p>Jeder Punkt (Vektor) <span class="math notranslate nohighlight">\(\v x\in D\)</span> ist ein zulässiger Punkt des Optimierungsproblems</p>
 <div class="amsmath math notranslate nohighlight">
@@ -568,9 +568,9 @@ document.write(`
 \end{align*}\]</div>
 </section>
 </div><p>Bei manchen Problemen ist <span class="math notranslate nohighlight">\(D=\R^n\)</span>, d.h., jeder Vektor <span class="math notranslate nohighlight">\(\v x\in D\)</span> ist zulässig. Diese Probleme nennt man <em>unrestringierte Probleme</em>, alle anderen <em>restringierte Probleme</em>. Sie unterscheiden sich vor allem in der Wahl der Lösungsverfahren. Eine weiterer Spezialfall liegt dann vor, wenn nur <em>ganzzahlige</em> Werte für manche oder alle Variablen zulässig sind. Mit diesen mächtigen (und algorithmisch besonders anspruchsvollen) Bedingungen beschäftigen wir uns im Kapitel <a class="reference internal" href="03_Ganzzahlige_Probleme.html#sec-integer-problems"><span class="std std-ref">Ganzzahlige Probleme</span></a>.</p>
-<p>Wir möchten nun noch die Lösungen von Optimierungsproblemen etwas genauer charakterisieren (ohne zu sagen, wie man die Lösungen eigentlich findet). Im Beispiel <a class="reference internal" href="#equation-eq-prodopt">(1.1)</a> hatten wir als Lösung des Optimierungsproblems die Werte <span class="math notranslate nohighlight">\(x_1=4, x_2=3\)</span> und den zugehörigen maximalen Profit von <span class="math notranslate nohighlight">\(14\)</span> M€ angegeben (ohne zu sagen, wie man darauf kommt). Allgemein benutzen wir folgende Begriffe:</p>
+<p>Wir möchten nun noch die Lösungen von Optimierungsproblemen etwas genauer charakterisieren (ohne zu sagen, wie man die Lösungen eigentlich findet). Im Beispiel <a class="reference internal" href="#equation-eq-prodopt">(2.1)</a> hatten wir als Lösung des Optimierungsproblems die Werte <span class="math notranslate nohighlight">\(x_1=4, x_2=3\)</span> und den zugehörigen maximalen Profit von <span class="math notranslate nohighlight">\(14\)</span> M€ angegeben (ohne zu sagen, wie man darauf kommt). Allgemein benutzen wir folgende Begriffe:</p>
 <div class="proof definition admonition" id="def:loesung">
-<p class="admonition-title"><span class="caption-number">Definition 1.3 </span> (Lösung eines Optimierungsproblems)</p>
+<p class="admonition-title"><span class="caption-number">Definition 2.3 </span> (Lösung eines Optimierungsproblems)</p>
 <section class="definition-content" id="proof-content">
 <p>Ein Punkt <span class="math notranslate nohighlight">\(\v x^{\star}\in D\)</span> heißt <em>Optimum</em>, <em>Optimalpunkt</em>, <em>Lösungspunkt</em> oder einfach <em>Lösung</em> des Minimierungsproblems <span class="math notranslate nohighlight">\(\min_{\v x} f(\v x)\quad \text{s.t. }\v x\in D\subseteq\R^n\)</span>, wenn <span class="math notranslate nohighlight">\(\v x\)</span> zulässig ist und wenn es den kleinsten Zielfunktionswert aller zulässigen Punkte besitzt, also</p>
 <div class="amsmath math notranslate nohighlight">
@@ -581,7 +581,7 @@ f(\v x^{\star})\leq f(\v x) \text{ für jeden zulässigen Vektor $\v x\in D$.}
 </section>
 </div><p>Hat jedes Optimierungsproblem (genau) eine Lösung? Gibt es immer zulässige Punkte? Nein, wie man sich leicht anhand der folgenden Beispiele überzeugt:</p>
 <div class="proof example admonition" id="example-4">
-<p class="admonition-title"><span class="caption-number">Example 1.1 </span> (Verschiedene Arten von Lösungen)</p>
+<p class="admonition-title"><span class="caption-number">Example 2.1 </span> (Verschiedene Arten von Lösungen)</p>
 <section class="example-content" id="proof-content">
 <dl class="simple myst">
 <dt>Unbeschränktes Problem</dt><dd><p>Die Funktion <span class="math notranslate nohighlight">\(f(x)=x\)</span> hat weder ein Minimum noch ein Maximum, da die Funktion beliebig klein oder groß wird.</p>
@@ -602,7 +602,7 @@ f(\v x^{\star})\leq f(\v x) \text{ für jeden zulässigen Vektor $\v x\in D$.}
 </dd>
 <dt>Unzulässiges Problem</dt><dd><p>Das Problem</p>
 <div class="amsmath math notranslate nohighlight" id="equation-c1e3d728-1f21-4851-bb9b-9fd45de760c7">
-<span class="eqno">(1.2)<a class="headerlink" href="#equation-c1e3d728-1f21-4851-bb9b-9fd45de760c7" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
+<span class="eqno">(2.2)<a class="headerlink" href="#equation-c1e3d728-1f21-4851-bb9b-9fd45de760c7" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
   \min_{x} &amp; \quad  &amp;   x &amp; &amp; &amp; \\[2mm]
   \text{s.t. } &amp; &amp;  x&amp;\leq 0\\
               &amp; &amp;  x&amp;\geq 1
@@ -679,12 +679,12 @@ f(\v x^{\star})\leq f(\v x) \text{ für jeden zulässigen Vektor $\v x\in D$.}
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#zur-mathematischen-notation">1.1. Zur mathematischen Notation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#worum-geht-es">1.2. Worum geht es?</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#beispiel-ein-produktionsplanungsproblem">1.2.1. Beispiel: Ein Produktionsplanungsproblem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#zur-mathematischen-notation">2.1. Zur mathematischen Notation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#worum-geht-es">2.2. Worum geht es?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#beispiel-ein-produktionsplanungsproblem">2.2.1. Beispiel: Ein Produktionsplanungsproblem</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grundbegriffe-der-optimierung">1.3. Grundbegriffe der Optimierung</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grundbegriffe-der-optimierung">2.3. Grundbegriffe der Optimierung</a></li>
 </ul>
   </nav></div>
 
