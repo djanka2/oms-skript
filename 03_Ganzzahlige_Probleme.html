@@ -1,0 +1,1904 @@
+
+<!DOCTYPE html>
+
+
+<html lang="de" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>3. Ganzzahlige Probleme &#8212; Optimierungsverfahren, Modellierung und Simulation (DSCB410)</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=ca93fcec" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="_static/documentation_options.js?v=91fba89f"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="_static/translations.js?v=70a09b52"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"tex": {"macros": {"N": "\\mathbb{N}", "Z": "\\mathbb{Z}", "R": "\\mathbb{R}", "B": "\\mathbb{B}", "I": "\\mathbb{I}", "norm": ["\\left\\lVert#1 \\right\\rVert", 1], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\begin{pmatrix}"], "emat": ["\\end{pmatrix}"], "bmats": ["\\left(\\begin{smallmatrix}"], "emats": ["\\end{smallmatrix}\\right)"], "scikit": ["\\texttt{scikit-learn}"], "derv": ["\\frac{\\partial #1}{\\partial #2}", 2], "dervquad": ["\\frac{\\partial^2 #1}{\\partial #2^2}", 2], "dervzwei": ["\\frac{\\partial^2 #1}{\\partial {#2} \\partial {#3}}", 3], "v": ["\\mathbf{#1}", 1], "m": ["\\mathbf{#1}", 1], "argmin": ["\\underset{#1}{\\operatorname{arg\\!min}}", 1], "hyper": ["{\\color{Bittersweet}{#1}}", 1], "initial": "\\DeclareMathOperator{\\initial}{initial}", "reduced": "\\DeclareMathOperator{\\reduced}{reduced}", "lazy": "\\DeclareMathOperator{\\lazy}{lazy}", "ILP": "\\DeclareMathOperator{\\ILP}{ILP}", "red": ["{\\color{BrickRed}{#1}}", 1]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '03_Ganzzahlige_Probleme';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Stichwortverzeichnis" href="genindex.html" />
+    <link rel="search" title="Suche" href="search.html" />
+    <link rel="next" title="4. Zeitabhängige Probleme" href="04_Dynamische_Probleme.html" />
+    <link rel="prev" title="2.9. Anwendung: Transportproblem" href="02_Transportproblem.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="de"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="00_Ueberblick.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/HKA_IWI_Bildmarke-h_RGB.svg" class="logo__image only-light" alt="Optimierungsverfahren, Modellierung und Simulation (DSCB410) - Home"/>
+    <script>document.write(`<img src="_static/HKA_IWI_Bildmarke-h_RGB.svg" class="logo__image only-dark" alt="Optimierungsverfahren, Modellierung und Simulation (DSCB410) - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Suche" aria-label="Suche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Suche</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="00_Ueberblick.html">
+                    Überblick
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lineare Optimierungsmodelle</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_Grundbegriffe.html">1. Einführung und Grundbegriffe</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="02_Lineare_Probleme.html">2. Lineare Optimierung</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="02_Transportproblem.html">2.9. Anwendung: Transportproblem</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">3. Ganzzahlige Probleme</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_Dynamische_Probleme.html">4. Zeitabhängige Probleme</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_Praxisaspekte.html">5. Praxisaspekte beim Lösen von gemischt-ganzzahligen Programmen</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Ableitungsbasierte Optimierung</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="06_Multivariate_Analysis.html">6. Funktionen und Ableitungen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_Automatische_Differentiation.html">7. Automatische Differentiation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_Theoretische_Grundlagen.html">8. Grundlagen der nichtlinearen Optimierung</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_Quadratische_Probleme.html">9. Quadratische Probleme</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_Gradientenverfahren.html">10. Verfahren erster Ordnung</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_Verfahren_zweiter_Ordnung.html">11. Verfahren zweiter Ordnung</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_Stochastischer_Gradientenabstieg.html">12. Stochastischer Gradientenabstieg</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_Training_NN.html">13. Training von Neuronalen Netzen</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Laden Sie diese Seite herunter">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/03_Ganzzahlige_Probleme.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Quelldatei herunterladen"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="In PDF drucken"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Vollbildmodus"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Suche" aria-label="Suche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Ganzzahlige Probleme</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Inhalt </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ganzzahligkeitsbedingungen-und-weitere-modellarten">3.1. Ganzzahligkeitsbedingungen und weitere Modellarten</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relaxierung-von-problemen-mit-ganzzahligkeitsbedingungen">3.2. Relaxierung von Problemen mit Ganzzahligkeitsbedingungen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#losungsverfahren">3.3. Lösungsverfahren</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#branch-and-bound">3.3.1. Branch and bound</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#schnittebenen">3.3.2. Schnittebenen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing">3.3.3. Preprocessing</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#einige-standardprobleme">3.4. Einige Standardprobleme</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#das-rucksackproblem">3.4.1. Das Rucksackproblem</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bin-packing">3.4.2. Bin Packing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#einfuhrung-mengenprobleme-ein-einfaches-standortproblem">3.4.3. Einführung Mengenprobleme: Ein einfaches Standortproblem</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uberdeckungensprobleme-auf-mengen">3.4.4. Überdeckungensprobleme auf Mengen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#packungsprobleme-auf-mengen">3.4.5. Packungsprobleme auf Mengen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#zerlegungsprobleme-auf-mengen">3.4.6. Zerlegungsprobleme auf Mengen</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modellierungstricks-ii">3.5. Modellierungstricks II</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logische-bedingungen-an-variablen">3.5.1. Logische Bedingungen an Variablen</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#junktoren">Junktoren</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#modellierung-der-junktoren-als-arithmetische-ausdrucke">Modellierung der Junktoren als arithmetische Ausdrücke</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transformation-logischer-zusammenhange-in-arithmetische-ausdrucke">Transformation logischer Zusammenhänge in arithmetische Ausdrücke</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logische-bedingungen-fur-nebenbedingungen">3.5.2. Logische Bedingungen für Nebenbedingungen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#min-min-probleme">3.5.3. Min min Probleme</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#betrage-revisited">3.5.4. Beträge revisited</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linearisieren-von-nichtlinearitaten">3.5.5. Linearisieren von Nichtlinearitäten</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#produkt-von-binarvariablen">Produkt von Binärvariablen</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#produkt-von-einer-binarvariablen-und-einer-kontinuierlichen-variable">Produkt von einer Binärvariablen und einer kontinuierlichen Variable</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#allgemeines-vorgehen-bei-der-modellierung">3.6. Allgemeines Vorgehen bei der Modellierung</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#anwendung-ablaufplanung-scheduling">3.7. Anwendung: Ablaufplanung (Scheduling)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ein-einfaches-zeitkontinuierliches-modell">3.7.1. Ein einfaches zeitkontinuierliches Modell</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="ganzzahlige-probleme">
+<span id="sec-integer-problems"></span><h1><span class="section-number">3. </span>Ganzzahlige Probleme<a class="headerlink" href="#ganzzahlige-probleme" title="Link to this heading">#</a></h1>
+<section id="ganzzahligkeitsbedingungen-und-weitere-modellarten">
+<h2><span class="section-number">3.1. </span>Ganzzahligkeitsbedingungen und weitere Modellarten<a class="headerlink" href="#ganzzahligkeitsbedingungen-und-weitere-modellarten" title="Link to this heading">#</a></h2>
+<p>In vielen Problemstellungen dürfen manche oder alle Entscheidungsvariablen nicht beliebige reelle Werte, sondern nur einen eingeschränkten Wertebereich, etwa den der ganzen Zahlen annehmen. Beispiele sind etwa der Kauf eines Investitionsgutes oder das An- und Ausschalten einer Maschine. Man unterscheidet unter anderem die folgende Problemarten, die wir der Einfachheit halber nur in Standardform darstellen.</p>
+<dl class="simple myst">
+<dt>Lineare Programme (LP)</dt><dd><p>Die Entscheidungsvariablen dürfen beliebige reelle Werte annehmen.</p>
+</dd>
+<dd><div class="amsmath math notranslate nohighlight">
+\[\begin{alignat*}{5}
+\min          &amp; \quad  &amp;   \v c^T\v x &amp;          &amp; &amp; \\[2mm]
+\text{s.t. } &amp; &amp;  \m A\v x &amp; = &amp; \v b &amp; \\
+&amp; &amp; \v x &amp; \geq &amp; \ \v 0 &amp; &amp;&amp;
+\end{alignat*}\]</div>
+</dd>
+<dt>Ganzzahlige lineare Programme (Integer Linear Programs / ILP)</dt><dd><p>Alle Entscheidungsvariablen dürfen nur ganzzahlige Werte annehmen.</p>
+</dd>
+<dd><div class="amsmath math notranslate nohighlight">
+\[\begin{alignat*}{5}
+\min_{\v x}         &amp; \quad  &amp;   \v c^T\v x &amp;          &amp; &amp; \\[2mm]
+\text{s.t. } &amp; &amp; \m A\v x &amp; = &amp; \v b &amp; \\
+&amp; &amp; \v x &amp; \geq &amp; \ \v 0 &amp; &amp;&amp;\\
+&amp; &amp; \v x &amp; \in &amp; \Z
+\end{alignat*}\]</div>
+</dd>
+<dt>Binäre lineare Programme</dt><dd><p>Alle Entscheidungsvariablen dürfen nur die Werte <span class="math notranslate nohighlight">\(0\)</span> und <span class="math notranslate nohighlight">\(1\)</span> annehmen.</p>
+</dd>
+<dd><div class="amsmath math notranslate nohighlight">
+\[\begin{alignat*}{5}
+\min_{\v x}          &amp; \quad  &amp;   \v c^T\v x &amp;          &amp; &amp; \\[2mm]
+\text{s.t. } &amp; &amp;  \m A\v x &amp; = &amp;&amp; \ \v b &amp; \\
+&amp; &amp; \v x &amp; \geq &amp;&amp; \ \v 0 &amp;\\
+&amp; &amp; \v x &amp; \in &amp;&amp; \{0,1\}^n 
+\end{alignat*}\]</div>
+</dd>
+<dt>Gemischt-ganzzahlige lineare Programme (Mixed Integer Linear Programs / MILP)</dt><dd><p>Manche Entscheidungsvariablen dürfen nur ganzzahlige Werte annehmen.</p>
+</dd>
+<dd><div class="amsmath math notranslate nohighlight">
+\[\begin{alignat*}{5}
+\min_{\v x,\v y}         &amp; \quad  &amp;   \v c^T\v x+\v h^T\v y &amp;          &amp; &amp; \\[2mm]
+\text{s.t. } &amp; &amp;  \m A\v x +\m G\v y&amp; = &amp; \v b &amp; \\
+&amp; &amp; \v x &amp; \geq &amp; \ \v 0 &amp; &amp;&amp;\\
+&amp; &amp; \v y &amp; \geq &amp; \ \v 0 &amp; &amp;&amp;\\
+&amp; &amp; \v y &amp; \in &amp; \Z
+\end{alignat*}\]</div>
+</dd>
+</dl>
+</section>
+<section id="relaxierung-von-problemen-mit-ganzzahligkeitsbedingungen">
+<h2><span class="section-number">3.2. </span>Relaxierung von Problemen mit Ganzzahligkeitsbedingungen<a class="headerlink" href="#relaxierung-von-problemen-mit-ganzzahligkeitsbedingungen" title="Link to this heading">#</a></h2>
+<p>Für alle Problemtypen, die Ganzzahligkeitsbedingungen enthalten, bezeichnet das zugehörige <em>relaxierte Problem</em> das Problem, bei dem die Ganzzahligkeitsbedingungen entfernt wurden. Für jede Binärvariable <span class="math notranslate nohighlight">\(x_i\)</span> fordern wir im zugehörigen relaxierten Problem zusätzlich, dass <span class="math notranslate nohighlight">\(0 \leq x_i \leq 1\)</span> gilt.</p>
+<p>Das relaxierte Problem des ILP</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{alignat*}{5}
+\min_{\v x}         &amp; \quad  &amp;   \v c^T\v x &amp;          &amp; &amp; \\[2mm]
+\text{s.t. } &amp; &amp;  \m A\v x &amp; = &amp; \v b &amp; \\
+&amp; &amp; \v x &amp; \geq &amp; \ \v 0 &amp; &amp;&amp;\\
+&amp; &amp; \v x &amp; \in &amp; \Z
+\end{alignat*}\]</div>
+<p>ist das LP</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{alignat*}{5}
+\min_x         &amp; \quad  &amp;   \v c^T\v x &amp;          &amp; &amp; \\[2mm]
+\text{s.t. } &amp; &amp;  \m A\v x &amp; = &amp; \v b &amp; \\
+&amp; &amp; \v x &amp; \geq &amp; \ \v 0 &amp; &amp;&amp;
+\end{alignat*}\]</div>
+<p>An folgenden Beispiel sehen wir den Zusammenhang der Lösungsräume zwischen einem ganzzahligen linearen Problem und seiner relaxierten Version:</p>
+<figure class="align-default" id="fig-relaxierung">
+<a class="reference internal image-reference" href="_images/relaxierung.png"><img alt="_images/relaxierung.png" src="_images/relaxierung.png" style="width: 400px;" /></a>
+<figcaption>
+<p><span class="caption-number">Abb. 3.1 </span><span class="caption-text">Zulässige Menge eines ILP und des zugehörigen relaxierten Problems.</span><a class="headerlink" href="#fig-relaxierung" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Beobachtung: Eine Lösung des ganzzahligen Problems ist zwar zulässig für das relaxierte Problem, aber möglicherweise nicht optimal. Ein zulässiger Punkt des relaxierten Problems ist für das ganzzahlige Problem möglicherweise unzulässig (da evtl. die Ganzzahligkeitsbedingungen nicht erfüllt sind). Das gilt insbesondere für die optimale Lösung des relaxierten Problems. Allerdings gilt für die optimale Lösung des relaxierten Problems, das sie mindestens so gut ist wie die optimale Lösung des ganzzahligen Problems. Diesen Umstand machen sich viele Lösungsverfahren für ganzzahlige Probleme zu Nutze.</p>
+</section>
+<section id="losungsverfahren">
+<h2><span class="section-number">3.3. </span>Lösungsverfahren<a class="headerlink" href="#losungsverfahren" title="Link to this heading">#</a></h2>
+<section id="branch-and-bound">
+<h3><span class="section-number">3.3.1. </span>Branch and bound<a class="headerlink" href="#branch-and-bound" title="Link to this heading">#</a></h3>
+<p>Es gibt verschiedene Verfahren, um gemischt-ganzzahlige Programme zu lösen.
+Der Kern aktueller Softwaresysteme sind <em>Branch-And-Bound</em> Verfahren.
+Hierbei wird zuerst das relaxierte Problem gelöst (die sogenannte Root-Relaxation).
+Danach wird nach ganzzahligen Variablen, für die eine fraktionale (nicht ganzzahlige) Lösung vorliegt, verzweigt. Das bedeutet, diese Variablen werden probehalber auf verschiedene ganzzahlige Werte fixiert und es wird eine neue Relaxierung gelöst.  Sobald eine <em>zulässige</em> ganzzahlige Lösung gefunden wurde, kann man deren Zielfunktionswert mit dem Zielfunktionswert der Relaxierung vergleichen. Daraus kann man dann die Güte der gefundenen zulässigen Lösung abschätzen.
+Eine gute Einführung in Branch-And-Bound Verfahren für gemischt-ganzzahlige Programme findet sich in <a class="reference external" href="http://web.mit.edu/15.053/www/AMP.htm">Bradley, Hax, Magnanti: Applied Mathematical Programming, Addison-Wesley, 1977</a>.</p>
+<p>Im schlechtesten Fall werden beim reinen Branch-and-Bound alle Kombinationen von ganzzahligen Variablen betrachtet (also sehr sehr viele). Deshalb wird dieser algorithmische Kern wird häufig durch zahlreiche heuristische Zusätze erweitert.
+Beispielsweise werden Heuristiken benutzt, um schnell zulässige Lösungen zu finden oder gute Branching-Regeln zu lernen.
+Bedingt durch das Branch-And-Bound Verfahren selbst, sowie die Zusatzheuristiken ist eine genaue Vorhersage der nötigen Rechenzeit normalerweise nicht möglich.
+Es gibt allerdings Anhaltspunkte, von denen einige in Abschnitt <a class="reference internal" href="05_Praxisaspekte.html#subsubsec-kriterienbewertung"><span class="std std-ref">Allgemeine Kriterien für die Bewertung eines Modells</span></a> geschildert werden.</p>
+</section>
+<section id="schnittebenen">
+<h3><span class="section-number">3.3.2. </span>Schnittebenen<a class="headerlink" href="#schnittebenen" title="Link to this heading">#</a></h3>
+<p>Eine Möglichkeit, um den Lösungsprozess zu beschleunigen, ist das Zufügen von zusätzlichen Nebenbedingungen, die den zulässigen Lösungsraum nicht verändern, aber in einer schärferen Relaxierung resultieren. Solche Nebenbedinungen heißen <em>Schnittebenen</em> (eng: cutting planes).
+Bei tiefer Problemkenntnis können Schnittebenen manuell zugefügt werden.
+Einige Löser erzeugen und nutzen automatisiert Schnittebenen.</p>
+</section>
+<section id="preprocessing">
+<h3><span class="section-number">3.3.3. </span>Preprocessing<a class="headerlink" href="#preprocessing" title="Link to this heading">#</a></h3>
+<p>Leistungsstarke Löser setzen <em>Presolve-Routinen</em> ein.
+Diese stellen einen Vorberechnungsschritt dar, der das Ziel hat, das zu lösende Problem zu verkleinern, sowie zu vereinfachen.
+Der ursprüngliche zulässige Bereich soll dabei voll rekonstruierbar bleiben.</p>
+<p>Eine detaillierte Beschreibung solcher Presolve-Routinen findet sich in <em>Achterberg, Bixby, Gu, Rothberg, Weninger: Presolve Reductions in Mixed Integer Programming, INFORMS Journal On Computing, 2019</em>.</p>
+</section>
+</section>
+<section id="einige-standardprobleme">
+<h2><span class="section-number">3.4. </span>Einige Standardprobleme<a class="headerlink" href="#einige-standardprobleme" title="Link to this heading">#</a></h2>
+<p>Wir schauen uns in diesem Abschnitt einige Standardprobleme an, mit denen das typische Vorgehen bei der ganzzahligen Programmierung verdeutlicht werden soll. Diese Probleme tauchen in der Praxis oft auch als Teil von umfangreicheren Modellen auf.</p>
+<section id="das-rucksackproblem">
+<h3><span class="section-number">3.4.1. </span>Das Rucksackproblem<a class="headerlink" href="#das-rucksackproblem" title="Link to this heading">#</a></h3>
+<p>Das <em>Rucksackproblem</em> sind verschiedene Gegenstände mit einem bestimmten Gewicht und einem Nutzwert gegeben. Aus diesen Gegenständen soll nun eine Auswahl getroffen werden, die in einen Rucksack mit einer vorgegebenen Gewichtsschranke mitgenommen werden können.</p>
+<figure class="align-default" id="fig-rucksack">
+<a class="reference internal image-reference" href="_images/rucksack.png"><img alt="_images/rucksack.png" src="_images/rucksack.png" style="width: 400px;" /></a>
+<figcaption>
+<p><span class="caption-number">Abb. 3.2 </span><span class="caption-text">Beispiel Rucksackproblem.</span><a class="headerlink" href="#fig-rucksack" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Um das Beispiel aus <a class="reference internal" href="#fig-rucksack"><span class="std std-numref">Abb. 3.2</span></a> zu modellieren, orientieren wir uns an den vier Elementen eines Optimierungsproblems (Problemdaten, Entscheidungen, Zielfunktion, Nebenbedingungen):</p>
+<dl class="simple myst">
+<dt>Problemdaten</dt><dd><p>5 Gegenstände mit Gewichten (2kg, 1kg, 4kg, 1kg, 12kg) und Werten (<span class="math notranslate nohighlight">\(2, \)</span>1, <span class="math notranslate nohighlight">\(10, \)</span>2, $4).</p>
+</dd>
+<dd><p>Maximales Rucksackgewicht von 15kg.</p>
+</dd>
+<dt>Entscheidungen (Optimierungsvariablen)</dt><dd><p>Für jeden Gegenstand <span class="math notranslate nohighlight">\(i, i=1,\dots,5\)</span> wird entschieden, ob er mitgenommen wird (<span class="math notranslate nohighlight">\(x_i=1\)</span>) oder nicht (<span class="math notranslate nohighlight">\(x_i=0\)</span>).</p>
+</dd>
+<dt>Zielfunktion</dt><dd><p>Der Gesamtwert des Rucksacks soll maximiert werden:</p>
+</dd>
+<dd><div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+	\max_{x_1,x_2,x_3,x_4,x_5} 2x_1+1x_2+10x_3+2x_4+4x_5
+  \end{align*}\]</div>
+</dd>
+<dt>Nebenbedingungen</dt><dd><p>Das maximale Gewicht darf nicht überschritten werden:</p>
+</dd>
+<dd><div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+	2x_1+1x_2+4x_3+1x_4+12x_5\leq 15
+  \end{align*}\]</div>
+</dd>
+<dd><p>Die Entscheidungen sind binär:</p>
+</dd>
+<dd><div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+	x_1,x_2,x_3,x_4,x_5\in \{0,1\}
+  \end{align*}\]</div>
+</dd>
+</dl>
+<p>Die allgemeine Definition lautet:</p>
+<div class="proof definition admonition" id="definition-0">
+<p class="admonition-title"><span class="caption-number">Definition 3.1 </span> (Rucksackproblem)</p>
+<section class="definition-content" id="proof-content">
+<dl class="simple myst">
+<dt>Instanz</dt><dd><p>Gegeben sind <span class="math notranslate nohighlight">\(n\)</span> Objekte mit Werten <span class="math notranslate nohighlight">\(v_i\)</span> und Gewichten <span class="math notranslate nohighlight">\(w_i\)</span> für <span class="math notranslate nohighlight">\(i=1, \ldots, n\)</span> sowie ein maximales Gesamtgewicht <span class="math notranslate nohighlight">\(W\)</span>.</p>
+</dd>
+<dt>Aufgabe</dt><dd><p>Gesucht ist eine Teilmenge der Objekte mit möglichst großem Gesamtwert, deren Gesamt-gewicht kleiner oder gleich <span class="math notranslate nohighlight">\(W\)</span> ist.</p>
+</dd>
+</dl>
+</section>
+</div><p>Die allgemeine Formulierung als (binäres) lineares Programm lautet:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{alignat*}{5}
+\min_{\v x}          &amp; \quad  &amp;   \sum_{i=1}^n v_ix_i &amp;          &amp; &amp; \\[2mm]
+\text{s.t. } &amp; &amp;  \sum_{i=1}^n w_ix_i &amp; \leq &amp;&amp; \ W &amp; \\
+&amp; &amp; x_i &amp; \in &amp;&amp; \{0,1\},\quad i=1,\dots,n
+\end{alignat*}\]</div>
+<p>oder in Matrixform</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{alignat*}{5}
+\min_{\v x}          &amp; \quad  &amp;   \v v^T\v x &amp;          &amp; &amp; \\[2mm]
+\text{s.t. } &amp; &amp;  \v w^T\v x &amp; \leq &amp;&amp; \ W &amp; \\
+&amp; &amp; \v x &amp;\in &amp;&amp; \{0,1\}^n
+\end{alignat*}\]</div>
+<p>Möglich sind auch Instanzen, bei denen der gleiche Objekttyp (festgelegt durch die Kombination von Wert und Gewicht) mehrfach vorkommen darf. In diesem Fall werden die Nebenbedingungen <span class="math notranslate nohighlight">\(x_i\in\{0,1\}\)</span> ersetzt durch <span class="math notranslate nohighlight">\(0\leq x_i\leq h_i,\quad x_i\in\N\)</span>, wobei jeder Gegenstand <span class="math notranslate nohighlight">\(i\)</span> maximal <span class="math notranslate nohighlight">\(h_i\)</span> Mal mitgenommen werden darf.</p>
+</section>
+<section id="bin-packing">
+<h3><span class="section-number">3.4.2. </span>Bin Packing<a class="headerlink" href="#bin-packing" title="Link to this heading">#</a></h3>
+<p>Beim <em>Bin Packing-Problem</em> betrachtet man eine Menge an Objekten mit zugehörigen Gewichten. Außerdem sind beliebig viele Behälter (“bins”) mit einer vorgegeben Kapazität vorhanden. Ziel ist es, die Objekte so in Behälter zu packen, dass die Kapazitätseinschränkung für jeden Behälter eingehalten wird und insgesamt möglichst wenige Behälter gebraucht werden.</p>
+<figure class="align-default" id="fig-binpacking">
+<a class="reference internal image-reference" href="_images/binpacking.png"><img alt="_images/binpacking.png" src="_images/binpacking.png" style="width: 400px;" /></a>
+<figcaption>
+<p><span class="caption-number">Abb. 3.3 </span><span class="caption-text">Beispiel Bin Packing Problem.</span><a class="headerlink" href="#fig-binpacking" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Um das Beispiel aus <a class="reference internal" href="#fig-binpacking"><span class="std std-numref">Abb. 3.3</span></a> zu modellieren, formulieren wir wieder Problemdaten, Entscheidungen, Zielfunktion und Nebenbedingungen:</p>
+<dl class="simple myst">
+<dt>Problemdaten</dt><dd><p>5 Gegenstände mit Gewichten <span class="math notranslate nohighlight">\(\v w=(2,2,2,3,3)\)</span></p>
+</dd>
+<dd><p>Maximale Behälterkapazität <span class="math notranslate nohighlight">\(B=4\)</span>.</p>
+</dd>
+<dt>Entscheidungen (Optimierungsvariablen)</dt><dd><p>Man braucht zunächst eine obere Schranke <span class="math notranslate nohighlight">\(k_{max}\)</span> für die Anzahl der benötigten Behälter. Die Anzahl der Objekte ist eine solche obere Schranke. Mehr als 5 Behälter werden wir sicher nicht brauchen.</p>
+</dd>
+<dd><p>Wir führen folgende Binärvariablen ein:</p>
+</dd>
+<dd><div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+	x_{ij}&amp;=\left\{\begin{array}{lr}1 &amp;\text{Objekt }i\text{ ist in Behälter }j.\\
+									0&amp; \text{sonst} \end{array}\right.,\quad i=1,\dots,5, j=1,\dots,k_{max}\\
+	y_j&amp;=\left\{\begin{array}{lr}1 &amp;\text{Behälter }j\text{ wird benutzt.}\\
+									0&amp; \text{sonst} \end{array}\right.,\quad j=1,\dots,k_{max}
+	\end{align*}\]</div>
+</dd>
+<dt>Zielfunktion</dt><dd><p>Minimiere die Anzahl der benutzten Behälter:</p>
+</dd>
+<dd><div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+	\min_{\v x, \v y} y_1+y_2+y_3+y_4+y_5
+  \end{align*}\]</div>
+</dd>
+<dt>Nebenbedingungen</dt><dd><ol class="arabic simple">
+<li><p>Bei jedem benutzten Behälter muss das zulässige Gesamtgewicht beachtet werden. Wenn der Behälter nicht benutzt wird (<span class="math notranslate nohighlight">\(y_j=0\)</span>), dann dürfen auch keine Gegenstände darin sein (alle <span class="math notranslate nohighlight">\(x_{ij}=0\)</span> für dieses <span class="math notranslate nohighlight">\(j\)</span>)</p></li>
+</ol>
+</dd>
+<dd><div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+		2x_{1,1}+2x_{2,1}+2x_{3,1}+3x_{4,1}+3x_{5,1}&amp;\leq 6\cdot y_1\\
+		2x_{1,2}+2x_{2,2}+2x_{3,2}+3x_{4,2}+3x_{5,2}&amp;\leq 6\cdot y_2\\
+		2x_{1,3}+2x_{2,3}+2x_{3,3}+3x_{4,3}+3x_{5,3}&amp;\leq 6\cdot y_3\\
+		2x_{1,4}+2x_{2,4}+2x_{3,4}+3x_{4,4}+3x_{5,4}&amp;\leq 6\cdot y_4\\
+		2x_{1,5}+2x_{2,5}+2x_{3,5}+3x_{4,5}+3x_{5,5}&amp;\leq 6\cdot y_5
+	\end{align*}\]</div>
+</dd>
+<dd><ol class="arabic simple" start="2">
+<li><p>Jeder Gegenstand muss in genau einem Behälter sein (nicht mehr und nicht weniger):</p></li>
+</ol>
+</dd>
+<dd><div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+		x_{1,1}+x_{1,2}+x_{1,3}+x_{1,4}+x_{1,5}&amp;=1\\
+		x_{2,1}+x_{2,2}+x_{2,3}+x_{2,4}+x_{2,5}&amp;=1\\
+		x_{3,1}+x_{3,2}+x_{3,3}+x_{3,4}+x_{3,5}&amp;=1\\
+		x_{4,1}+x_{4,2}+x_{4,3}+x_{4,4}+x_{4,5}&amp;=1\\
+		x_{5,1}+x_{5,2}+x_{5,3}+x_{5,4}+x_{5,5}&amp;=1
+	\end{align*}\]</div>
+</dd>
+<dd><ol class="arabic simple" start="3">
+<li><p>Alle Variablen sind binär:</p></li>
+</ol>
+</dd>
+<dd><div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+		x_{ij}, y_{j}\in \{0,1\},\quad i,j=1,\dots,5
+	\end{align*}\]</div>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Bemerkung</p>
+<p>Kleinere Werte für <span class="math notranslate nohighlight">\(k_{max}\)</span> (wir sagen dazu: schärfere obere Schranken) sind nützlich, da sie zu kleineren Modellen und damit zu einer kürzeren Rechenzeit führen.</p>
+</div>
+<p>Die allgemeine mathematische Definition lautet:</p>
+<div class="proof definition admonition" id="definition-1">
+<p class="admonition-title"><span class="caption-number">Definition 3.2 </span> (Bin Packing Problem)</p>
+<section class="definition-content" id="proof-content">
+<dl class="simple myst">
+<dt>Instanz</dt><dd><p>Gegeben ist eine Menge <span class="math notranslate nohighlight">\(U=\{1, 2, \ldots, n\}\)</span> mit Gewichten <span class="math notranslate nohighlight">\(w_i\)</span> für <span class="math notranslate nohighlight">\(i\in U\)</span> sowie eine (Behälter-)Kapazität <span class="math notranslate nohighlight">\(B\)</span>.</p>
+</dd>
+<dt>Aufgabe</dt><dd><p>Gesucht ist eine Aufteilung <span class="math notranslate nohighlight">\(U=U_1 \cup U_2 \cup \ldots \cup U_k\)</span> in <span class="math notranslate nohighlight">\(k\)</span> disjunkte Mengen, so dass die Summe der Elemente in jedem <span class="math notranslate nohighlight">\(U_i\)</span> kleiner als <span class="math notranslate nohighlight">\(B\)</span> ist und <span class="math notranslate nohighlight">\(k\)</span> minimal wird.</p>
+</dd>
+</dl>
+</section>
+</div><p>Die allgemeine Formulierung als (binäres) lineares Programm lautet:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{alignat*}{5}
+\min_{\v x, \v y}          &amp; \quad  &amp;   \sum_{j=1}^{k_{max}} y_j &amp;          &amp; &amp; \\[2mm]
+\text{s.t. } &amp; &amp;  \sum_{i=1}^n w_ix_{ij} &amp; \leq &amp;&amp; \ B\cdot y_j,\quad &amp;&amp;j=1,\dots,k_{max} \\
+&amp; &amp; \sum_{j=1}^{k_{max}} x_{ij} &amp; = &amp;&amp; \ 1,\quad &amp;&amp;i=1,\dots,n\\
+&amp; &amp; x_{ij},y_j &amp;\in &amp;&amp; \{0,1\},\quad &amp;&amp;i=1,\dots,n\quad j=1,\dots,k_{max}
+\end{alignat*}\]</div>
+</section>
+<section id="einfuhrung-mengenprobleme-ein-einfaches-standortproblem">
+<h3><span class="section-number">3.4.3. </span>Einführung Mengenprobleme: Ein einfaches Standortproblem<a class="headerlink" href="#einfuhrung-mengenprobleme-ein-einfaches-standortproblem" title="Link to this heading">#</a></h3>
+<p>Ein Telekommunikationsunternehmen will ein neues Wohngebiet mit Breitband-Internet versorgen.
+Dazu müssen Versorgungsstationen aufgestellt werden.
+Das Wohngebiet ist in Häuserblocks <span class="math notranslate nohighlight">\(S=\{1, 2, \ldots, s\}\)</span> unterteilt.
+Es gibt <span class="math notranslate nohighlight">\(v\)</span> mögliche Positionen <span class="math notranslate nohighlight">\(V=\{1, 2, \ldots, v\}\)</span> für die Versorgungsstationen.
+Jede Versorgungsstation darf höchstens 200 Meter von den zu versorgenden Häuserblocks entfernt sein. Für jede mögliche Position <span class="math notranslate nohighlight">\(i\)</span> sind die Kosten <span class="math notranslate nohighlight">\(w_i\)</span> gegeben, eine Versorgungsstation an Position <span class="math notranslate nohighlight">\(i\)</span> zu bauen. Gesucht ist eine kostenoptimale Auswahl an Versorgungsstationen, die alle Blocks versorgt.</p>
+<figure class="align-default" id="fig-standortproblem">
+<a class="reference internal image-reference" href="_images/standortproblem.png"><img alt="_images/standortproblem.png" src="_images/standortproblem.png" style="width: 400px;" /></a>
+<figcaption>
+<p><span class="caption-number">Abb. 3.4 </span><span class="caption-text">Beispiel Standortproblem mit Häuserblocks <span class="math notranslate nohighlight">\(1,\dots,6\)</span> und möglichen Standorten für Versorgungsstationen <span class="math notranslate nohighlight">\(v_1,\dots,v_5\)</span>. Orange Linien bedeuten, dass der jeweilige Häuserblock von dem Standort <span class="math notranslate nohighlight">\(v_i\)</span> abgedeckt ist.</span><a class="headerlink" href="#fig-standortproblem" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<dl class="simple myst">
+<dt>Problemdaten</dt><dd><p>Es ist gegeben, welche Standorte welche Häuserblocks abdecken. Im Beispiel <a class="reference internal" href="#fig-standortproblem"><span class="std std-numref">Abb. 3.4</span></a> sind das:</p>
+</dd>
+<dd><div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+	v_1=\{1,2,4\},\quad v_2=\{1,4,5\},\quad v_3=\{2,4,5,6\},\\
+	v_4=\{3,5,6\},\quad v_5=\{1,2,3,5\}
+  \end{align*}\]</div>
+</dd>
+<dd><p>Dies können wir in der folgenden <em>Abdeckungsmatrix</em> zusammenfassen:</p>
+</dd>
+<dd><div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+	\begin{array}{r|cccccc}
+	 &amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5 &amp; 6\\
+	 \hline
+	 v_1 &amp; x &amp; x &amp;   &amp; x &amp;  &amp; \\
+	 v_2 &amp; x &amp;   &amp;   &amp; x &amp; x &amp; \\
+	 v_3 &amp;   &amp; x &amp;   &amp; x &amp; x &amp; x\\
+	 v_4 &amp;   &amp;   &amp; x &amp;   &amp; x &amp; x\\
+	 v_5 &amp; x &amp; x &amp; x &amp;   &amp; x &amp; \\
+	\end{array}
+	\end{align*}\]</div>
+</dd>
+<dd><p>Weiterhin sind die Kosten <span class="math notranslate nohighlight">\(w_1,w_2,w_3,w_4,w_5\)</span> für die Errichtung einer Station gegeben.</p>
+</dd>
+<dt>Entscheidungen (Optimierungsvariablen)</dt><dd><div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+	x_{i}&amp;=\left\{\begin{array}{lr}1 &amp;\text{Station am Standort }v_i\text{ wird gebaut}.\\
+									0&amp; \text{sonst} \end{array}\right.,\quad i=1,\dots,5.
+	\end{align*}\]</div>
+</dd>
+<dt>Zielfunktion</dt><dd><p>Die Gesamtkosten sollen minimiert werden:</p>
+</dd>
+<dd><div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+	\min_{\v x} w_1x_1+w_2x_2+w_3x_3+w_4x_4+w_5x_5
+  \end{align*}\]</div>
+</dd>
+<dt>Nebenbedingungen</dt><dd><p>Jeder Block soll versorgt werden. Dies ergibt eine Nebenbedingung pro Block:</p>
+</dd>
+<dd><div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+	x_1+x_2+x_5&amp;\geq 1\\
+	x_1+x_3+x_5&amp;\geq 1\\
+	x_4+x_5&amp;\geq 1\\
+	x_1+x_2+x_3&amp;\geq 1\\
+	x_2+x_3+x_4+x_5&amp;\geq 1\\
+	x_3+x_4&amp;\geq 1
+  \end{align*}\]</div>
+</dd>
+<dd><p>Ganzzahligkeitsbedingungen:</p>
+</dd>
+<dd><div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+	x_1,\dots,x_5\in\{0,1\}
+  \end{align*}\]</div>
+</dd>
+</dl>
+<!-- Ist zusätzlich noch einen Teilnehmeranzahl $t_i$ für jeden Block und eine Kapazität $k_i$ für jede Versorgungsposition gegeben, so ergibt sich folgende zusätzliche Nebenbedingung: -->
+</section>
+<section id="uberdeckungensprobleme-auf-mengen">
+<h3><span class="section-number">3.4.4. </span>Überdeckungensprobleme auf Mengen<a class="headerlink" href="#uberdeckungensprobleme-auf-mengen" title="Link to this heading">#</a></h3>
+<p>Das obige Standortproblem ist ein Beispiel für ein <em>minimum set cover</em> Problem. Wir führen diese Problemklasse nun formell ein. Gegeben ist eine Grundmenge <span class="math notranslate nohighlight">\(S\)</span> sowie ein Mengensystem <span class="math notranslate nohighlight">\(C \subseteq 2^S\)</span>. Dabei bezeichnet <span class="math notranslate nohighlight">\(2^S\)</span> die Potenzmenge von <span class="math notranslate nohighlight">\(S\)</span>, also die Menge <span class="math notranslate nohighlight">\(2^S=\{S' \mid S' \subseteq S \}\)</span> aller möglichen Teilmengen von <span class="math notranslate nohighlight">\(S\)</span>.</p>
+<p>Im gewichteten Fall ist jeweils ein Gewicht <span class="math notranslate nohighlight">\(w_c\)</span> für jedes Element aus <span class="math notranslate nohighlight">\(C\)</span> gegeben.</p>
+<div class="proof example admonition" id="example-2">
+<p class="admonition-title"><span class="caption-number">Example 3.1 </span></p>
+<section class="example-content" id="proof-content">
+<figure class="align-default" id="fig-setcover">
+<a class="reference internal image-reference" href="_images/setcover.png"><img alt="_images/setcover.png" src="_images/setcover.png" style="width: 400px;" /></a>
+</figure>
+</section>
+</div><p>Das <em>(ungewichtetet) Überdeckungsproblem</em> sucht eine Menge von möglichst wenigen Elementen <span class="math notranslate nohighlight">\(\{C_1, C_2, \ldots, C_l\} \subseteq C\)</span>, die <span class="math notranslate nohighlight">\(S\)</span> überdecken, für die also jedes Element aus <span class="math notranslate nohighlight">\(S\)</span> in mindestens einer Menge <span class="math notranslate nohighlight">\(C_i\)</span> enthalten ist.</p>
+<div class="proof example admonition" id="example-3">
+<p class="admonition-title"><span class="caption-number">Example 3.2 </span></p>
+<section class="example-content" id="proof-content">
+<p><span class="math notranslate nohighlight">\(C_1\cup C_2 \cup C_4\)</span> überdeckt <span class="math notranslate nohighlight">\(S\)</span> mit Kosten <span class="math notranslate nohighlight">\(3\)</span>, denn <span class="math notranslate nohighlight">\(\{1,2\}\cup\{3,4\}\cup\{4,5\}=\{1,2,3,4,5\}=S\)</span>.</p>
+</section>
+</div><p>Die <em>gewichtete</em> Variante sucht nicht nach möglichst wenigen Mengen sondern nach einer Lösung mit einem möglichst kleinem Gesamtgewicht:</p>
+<div class="proof example admonition" id="example-4">
+<p class="admonition-title"><span class="caption-number">Example 3.3 </span></p>
+<section class="example-content" id="proof-content">
+<p><span class="math notranslate nohighlight">\(C_1\cup C_2 \cup C_4\)</span> überdeckt <span class="math notranslate nohighlight">\(S\)</span> mit Kosten <span class="math notranslate nohighlight">\(2+2+1=5\)</span>, denn <span class="math notranslate nohighlight">\(\{1,2\}\cup\{3,4\}\cup\{4,5\}=\{1,2,3,4,5\}=S\)</span>.</p>
+</section>
+</div><p>Es ergibt sich folgende formale Definition.</p>
+<div class="proof definition admonition" id="definition-5">
+<p class="admonition-title"><span class="caption-number">Definition 3.3 </span> (Gewichtetes Überdeckungsproblem)</p>
+<section class="definition-content" id="proof-content">
+<dl class="simple myst">
+<dt>Instanz</dt><dd><p>Gegeben ist eine endliche Menge <span class="math notranslate nohighlight">\(S=\{1, 2, \ldots, |S|\}\)</span>, ein Mengensystem <span class="math notranslate nohighlight">\(C=\{C_1, C_2, \ldots, C_{|C|}\} \subseteq 2^S\)</span> sowie Gewichte <span class="math notranslate nohighlight">\(w_c\)</span> für jedes <span class="math notranslate nohighlight">\(c \in C\)</span>.</p>
+</dd>
+<dt>Aufgabe</dt><dd><p>Gesucht ist eine Teilmenge <span class="math notranslate nohighlight">\(C'= \{C_1, C_2, \ldots, C_l\} \subseteq C\)</span>, so dass <span class="math notranslate nohighlight">\(S=C_1 \cup C_2 \cup \ldots \cup C_l\)</span> und das  Gesamtgewicht <span class="math notranslate nohighlight">\(\sum_{c \in C'}w_c\)</span> minimal ist.</p>
+</dd>
+</dl>
+</section>
+</div><p>Das ungewichtete Überdeckungsproblem kann als Spezialfall des gewichteten Problems angesehen werden, bei dem alle Gewichte <span class="math notranslate nohighlight">\(1\)</span> sind.</p>
+<p>Um das Problem als binäres Programm zu modellieren, müssen wir die Eingabedaten, also vor allem die Mengen <span class="math notranslate nohighlight">\(S\)</span> und <span class="math notranslate nohighlight">\(C\)</span>, in eine passende Form bringen. Wir konstruieren dafür die sogenannte <em>Inzidenzmatrix</em> <span class="math notranslate nohighlight">\(A \in \B^{|S|\times |C|}\)</span> für <span class="math notranslate nohighlight">\(C\)</span>. Zeilen der Matrix repräsentieren Elemente aus <span class="math notranslate nohighlight">\(S\)</span>. Spalten repräsentieren Mengen aus <span class="math notranslate nohighlight">\(C\)</span>. Ein Matrixelement <span class="math notranslate nohighlight">\(a_{ij}\)</span> hat den Wert <span class="math notranslate nohighlight">\(1\)</span> genau dann, wenn das zugehörige Element in der entsprechenden Menge enthalten ist. Ansonsten besitzt das Element den Wert <span class="math notranslate nohighlight">\(0\)</span>. Es ist also</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}a_{ij}=\begin{cases}
+1 &amp; ,i \in C_j \\
+0 &amp; , \text{sonst }
+\end{cases}
+\end{align*}\]</div>
+<p>Wir betrachten wieder das vorherige ungewichtete Beispiel.</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+C=\{\{1,2\},\{2,3,4\},\{3,4\},\{4,5\}\}
+\end{align*}\]</div>
+<p>Es ergibt sich folgende Inzidenzmatrix:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\m A=\bmat 1 &amp; 0 &amp; 0 &amp; 0\\
+			1 &amp; 1 &amp; 0 &amp; 0\\
+			0 &amp; 1 &amp; 1 &amp; 0\\
+			0 &amp; 1 &amp; 1 &amp; 1\\
+			0 &amp; 0 &amp; 0 &amp; 1\emat
+\end{align*}\]</div>
+<p>Jede Zeile steht dabei für ein Element der Grundmenge <span class="math notranslate nohighlight">\(S\)</span>, und jede Spalte für eine Element des Mengensystems <span class="math notranslate nohighlight">\(C\)</span>.</p>
+<p>Das zugehörige binäre Programm löst unsere Instanz:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{alignat*}{5}
+\min_{\v x}         &amp; \quad  &amp;   x_1+x_2+x_3+x_4 &amp;          &amp; &amp; \\[2mm]
+\text{s.t. } &amp; &amp; \bmat 1 &amp; 0 &amp; 0 &amp; 0\\
+			1 &amp; 1 &amp; 0 &amp; 0\\
+			0 &amp; 1 &amp; 1 &amp; 0\\
+			0 &amp; 1 &amp; 1 &amp; 1\\
+			0 &amp; 0 &amp; 0 &amp; 1\emat \bmat x_1\\x_2\\x_3\\x_4 &amp; \geq &amp;&amp; \bmat 1\\1\\1\\1\emat &amp; \\
+&amp; &amp; x_1,x_2,x_3,x_4 &amp; \in &amp;&amp; \{0,1\}
+\end{alignat*}\]</div>
+<p>Allgemein ergibt sich für das gewichtete Überdeckungsproblem das binäre Programm</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{alignat*}{5}
+\min_{\v x}         &amp; \quad  &amp;   \v w^T\v x &amp;          &amp; &amp; \\[2mm]
+\text{s.t. } &amp; &amp; \m A\v x &amp; \geq &amp;\ \v 1 &amp; \\
+&amp; &amp; \v x &amp; \in &amp; \{0,1\}^n
+\end{alignat*}\]</div>
+<p>mit dem Gewichtsvektor <span class="math notranslate nohighlight">\(\v w\in\R^{|C|}\)</span> und der Inzidenzmatrix <span class="math notranslate nohighlight">\(\m A\in\R^{|S|\times|C|}\)</span>.</p>
+</section>
+<section id="packungsprobleme-auf-mengen">
+<h3><span class="section-number">3.4.5. </span>Packungsprobleme auf Mengen<a class="headerlink" href="#packungsprobleme-auf-mengen" title="Link to this heading">#</a></h3>
+<p>Im Englischen heißt das Packungsproblem auf Mengen <em>set packing</em>.
+Gegeben ist eine Grundmenge <span class="math notranslate nohighlight">\(S\)</span> sowie ein Mengensystem <span class="math notranslate nohighlight">\(C \subseteq 2^S\)</span>.
+Im gewichteten Fall ist jeweils ein Gewicht <span class="math notranslate nohighlight">\(w_c\)</span> für jedes Menge aus <span class="math notranslate nohighlight">\(C\)</span> gegeben. Zwei Mengen heißen disjunkt, falls sie kein Element gemeinsam besitzen.</p>
+<div class="proof example admonition" id="example-6">
+<p class="admonition-title"><span class="caption-number">Example 3.4 </span></p>
+<section class="example-content" id="proof-content">
+<figure class="align-default" id="fig-setpacking">
+<a class="reference internal image-reference" href="_images/setpacking.png"><img alt="_images/setpacking.png" src="_images/setpacking.png" style="width: 400px;" /></a>
+</figure>
+</section>
+</div><p>Gesucht ist eine Teilmenge <span class="math notranslate nohighlight">\(C'=\{C_1, C_2, \ldots, C_l\}\)</span> von paarweise disjunkten Mengen mit maximalem Gesamtgewicht.</p>
+<div class="proof example admonition" id="example-7">
+<p class="admonition-title"><span class="caption-number">Example 3.5 </span></p>
+<section class="example-content" id="proof-content">
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\{1,2\},\{3,4\}\)</span> ist Packung und hat Gewicht <span class="math notranslate nohighlight">\(4\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\{1,2\},\{4,5\}\)</span> ist Packung und hat Gewicht <span class="math notranslate nohighlight">\(3\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\{2,3,4\},\{4,5\}\)</span> ist keine Packung.</p></li>
+</ul>
+</section>
+</div><p>In der <em>ungewichteten</em> Variante besitzen alle Elemente das Gewicht <span class="math notranslate nohighlight">\(1\)</span>.
+Es ergibt sich folgende formale Definition.</p>
+<div class="proof definition admonition" id="definition-8">
+<p class="admonition-title"><span class="caption-number">Definition 3.4 </span> (Packungsproblem)</p>
+<section class="definition-content" id="proof-content">
+<dl class="simple myst">
+<dt>Instanz</dt><dd><p>Gegeben ist eine endliche Menge <span class="math notranslate nohighlight">\(S=\{1, 2, \ldots, |S|\}\)</span>, ein Mengensystem <span class="math notranslate nohighlight">\(C=\{C_1, C_2, \ldots, C_{|C|}\} \subseteq 2^S\)</span> sowie Gewichte <span class="math notranslate nohighlight">\(w_c\)</span> für jedes <span class="math notranslate nohighlight">\(c \in C\)</span>.</p>
+</dd>
+<dt>Aufgabe</dt><dd><p>Gesucht ist eine Teilmenge <span class="math notranslate nohighlight">\(C'= \{C_1, C_2, \ldots, C_l\} \subseteq C\)</span>, so dass <span class="math notranslate nohighlight">\(C_i \cap C_j = \emptyset\)</span> für <span class="math notranslate nohighlight">\(C_i, C_j \in C'\)</span> und <span class="math notranslate nohighlight">\(C_i \not=C_j\)</span> und so dass das  Gesamtgewicht <span class="math notranslate nohighlight">\(\sum_{c \in C'}w_c\)</span> maximal ist.</p>
+</dd>
+</dl>
+</section>
+</div><p>Mit der Definition der Adjazenzmatrix aus dem letzten Abschnitt ergibt sich folgendes binäre Programm zur Lösung des Problems:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{alignat*}{5}
+\max_{\v x}         &amp; \quad  &amp;   \v w^T\v x &amp;          &amp; &amp; \\[2mm]
+\text{s.t. } &amp; &amp; \m A\v x &amp; \leq &amp;&amp;\ \v 1 &amp; \\
+&amp; &amp; \v x &amp; \in &amp;&amp; \{0,1\}^n
+\end{alignat*}\]</div>
+<p>mit dem Gewichtsvektor <span class="math notranslate nohighlight">\(\v w\in\R^{|C|}\)</span> und der Inzidenzmatrix <span class="math notranslate nohighlight">\(\m A\in\R^{|S|\times|C|}\)</span>.</p>
+</section>
+<section id="zerlegungsprobleme-auf-mengen">
+<h3><span class="section-number">3.4.6. </span>Zerlegungsprobleme auf Mengen<a class="headerlink" href="#zerlegungsprobleme-auf-mengen" title="Link to this heading">#</a></h3>
+<p>Im Englischen heißt das Zerlegungsproblem <em>set partitioning</em>. Gegeben ist eine Grundmenge <span class="math notranslate nohighlight">\(S\)</span> sowie ein Mengensystem <span class="math notranslate nohighlight">\(C \subseteq 2^S\)</span>. Im gewichteten Fall ist jeweils ein Gewicht <span class="math notranslate nohighlight">\(w_c\)</span> für jedes Menge aus <span class="math notranslate nohighlight">\(C\)</span> gegeben.</p>
+<div class="proof example admonition" id="example-9">
+<p class="admonition-title"><span class="caption-number">Example 3.6 </span></p>
+<section class="example-content" id="proof-content">
+<figure class="align-default" id="fig-setpartition">
+<a class="reference internal image-reference" href="_images/setpartition.png"><img alt="_images/setpartition.png" src="_images/setpartition.png" style="width: 400px;" /></a>
+</figure>
+</section>
+</div><p>Gesucht ist eine Überdeckung von <span class="math notranslate nohighlight">\(S\)</span> durch <em>disjunkte</em> Mengen aus <span class="math notranslate nohighlight">\(C\)</span>.</p>
+<div class="proof example admonition" id="example-10">
+<p class="admonition-title"><span class="caption-number">Example 3.7 </span></p>
+<section class="example-content" id="proof-content">
+<p>Die Beispielinstanz besitzt keine zulässige Lösung.</p>
+</section>
+</div><p>In der <em>ungewichteten</em> Variante besitzen alle Elemente das Gewicht <span class="math notranslate nohighlight">\(1\)</span>.
+Es ergibt sich folgende formale Definition.</p>
+<div class="proof definition admonition" id="definition-11">
+<p class="admonition-title"><span class="caption-number">Definition 3.5 </span> (Zerlegungsproblem)</p>
+<section class="definition-content" id="proof-content">
+<dl class="simple myst">
+<dt>Instanz</dt><dd><p>Gegeben ist eine endliche Menge <span class="math notranslate nohighlight">\(S=\{1, 2, \ldots, |S|\}\)</span>, ein Mengensystem <span class="math notranslate nohighlight">\(C=\{C_1, C_2, \ldots, C_{|C|}\} \subseteq 2^S\)</span> sowie Gewichte <span class="math notranslate nohighlight">\(w_c\)</span> für jedes <span class="math notranslate nohighlight">\(c \in C\)</span>.</p>
+</dd>
+<dt>Aufgabe</dt><dd><p>Gesucht ist eine Teilmenge <span class="math notranslate nohighlight">\(C'= \{C_1, C_2, \ldots, C_l\} \subseteq C\)</span>, so dass <span class="math notranslate nohighlight">\(C_i \cap C_j = \emptyset\)</span> für <span class="math notranslate nohighlight">\(C_i, C_j \in C'\)</span> und <span class="math notranslate nohighlight">\(C_i \not=C_j\)</span>, sowie <span class="math notranslate nohighlight">\(S=C_1 \cup C_2 \cup \ldots \cup C_l\)</span>  und das  Gesamtgewicht <span class="math notranslate nohighlight">\(\sum_{c \in C'}w_c\)</span> maximal ist.</p>
+</dd>
+</dl>
+</section>
+</div><p>Mit der Definition der Adjazenzmatrix aus dem letzten Abschnitt ergibt sich folgendes binäre Programm zur Lösung des Problems:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{alignat*}{5}
+\max_{\v x}         &amp; \quad  &amp;   \v w^T\v x &amp;          &amp; &amp; \\[2mm]
+\text{s.t. } &amp; &amp; \m A\v x &amp; = &amp;&amp;\ \v 1 &amp; \\
+&amp; &amp; \v x &amp; \in &amp;&amp; \{0,1\}^n
+\end{alignat*}\]</div>
+</section>
+</section>
+<section id="modellierungstricks-ii">
+<h2><span class="section-number">3.5. </span>Modellierungstricks II<a class="headerlink" href="#modellierungstricks-ii" title="Link to this heading">#</a></h2>
+<p>Viele Echtweltprobleme zeichnen sich durch eine große Anzahl an zu modellierenden Aspekten aus.
+Die Standardprobleme aus dem letzten Kapitel bilden bereits einen kleinen Fundus an Bausteinen für die Modellierung.
+Im Folgenden werden einige wiederkehrende Aspekte zusammen mit einer möglichen Lösung präsentiert. Dies knüpft an <a class="reference internal" href="02_Lineare_Probleme.html#subsubsec-tricks1"><span class="std std-ref">Modellierungstricks I</span></a> an mit dem Unterschied, dass für die nächsten Tricks immer ganzzahlige (binäre) Variablen benötigt werden.</p>
+<section id="logische-bedingungen-an-variablen">
+<h3><span class="section-number">3.5.1. </span>Logische Bedingungen an Variablen<a class="headerlink" href="#logische-bedingungen-an-variablen" title="Link to this heading">#</a></h3>
+<section id="junktoren">
+<span id="subsubsec-logikbeispiel"></span><h4>Junktoren<a class="headerlink" href="#junktoren" title="Link to this heading">#</a></h4>
+<p>Viele Echtweltprobleme beinhalten auch logische Zusammenhänge. Wir betrachten ein Beispiel aus der Produktion.</p>
+<div class="proof example admonition" id="example-12">
+<p class="admonition-title"><span class="caption-number">Example 3.8 </span></p>
+<section class="example-content" id="proof-content">
+<p>Es gibt <span class="math notranslate nohighlight">\(5\)</span> Maschinen <span class="math notranslate nohighlight">\(A,B,C,D, E\)</span>, die jeweils ein- oder ausgeschaltet sein können.</p>
+<ol class="arabic simple">
+<li><p>Ist  <span class="math notranslate nohighlight">\(A\)</span> eingeschaltet, so darf <span class="math notranslate nohighlight">\(B\)</span> nicht eingeschaltet sein.</p></li>
+<li><p>Ist  <span class="math notranslate nohighlight">\(D\)</span> eingeschaltet, so ist immer auch mindestens  <span class="math notranslate nohighlight">\(B\)</span> oder  <span class="math notranslate nohighlight">\(C\)</span> eingeschaltet.</p></li>
+<li><p>Ist  <span class="math notranslate nohighlight">\(D\)</span> ausgeschaltet, so sind immer auch  <span class="math notranslate nohighlight">\(B\)</span> und  <span class="math notranslate nohighlight">\(C\)</span> ausgeschaltet.</p></li>
+<li><p>Es ist immer genau eine der beiden Maschinen <span class="math notranslate nohighlight">\(D\)</span> und <span class="math notranslate nohighlight">\(E\)</span> eingeschaltet.</p></li>
+</ol>
+</section>
+</div><p>Wir übersetzen dies in einen logischen Ausdruck mit den logischen Variablen <span class="math notranslate nohighlight">\(A,B,C,D,E\)</span>, die die Werte <em>wahr</em> und <em>falsch</em> annehmen können.</p>
+<div class="proof example admonition" id="example-13">
+<p class="admonition-title"><span class="caption-number">Example 3.9 </span></p>
+<section class="example-content" id="proof-content">
+<p>Variablen <span class="math notranslate nohighlight">\(A,B,C,D,E\)</span> mit der Bedeutung</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+	\text{Variable }X\text{ ist wahr}\Leftrightarrow \text{Maschine }X\text{ ist angeschaltet.}
+	\end{align*}\]</div>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(A\Rightarrow \neg B\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(D\Rightarrow (B\vee C)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\neg D \Rightarrow (\neg B \wedge \neg C)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(D\dot{\vee}E\)</span></p></li>
+</ol>
+</section>
+</div><div class="admonition note">
+<p class="admonition-title">Bemerkung</p>
+<p>Aussagenlogische Variablen können durch sogenannte <em>Junktoren</em> miteinander verknüpft werden. Die wichtigsten Junktoren sind</p>
+<ul class="simple">
+<li><p>Konjunktion (UND-Verknüpfung), Symbol: <span class="math notranslate nohighlight">\(\wedge\)</span></p></li>
+<li><p>Disjunktion (ODER-Verknüpfung), Symbol: <span class="math notranslate nohighlight">\(\vee\)</span></p></li>
+<li><p>Negation (Verneinung), Symbol: <span class="math notranslate nohighlight">\(\neg\)</span></p></li>
+<li><p>Implikation (logischer Schluss), Symbol: <span class="math notranslate nohighlight">\(\Rightarrow\)</span></p></li>
+<li><p>Äquivalenz (Gleichheit), Symbol: <span class="math notranslate nohighlight">\(\Leftrightarrow\)</span></p></li>
+<li><p>Exklusiv-Oder (Entweder-Oder), Symbol: <span class="math notranslate nohighlight">\(\dot\vee\)</span></p></li>
+</ul>
+</div>
+<!-- #### Exkurs: Crash-Kurs Logik
+Wir wiederholen einige wichtige Ergebnisse aus der Logik. 
+Eine aussagenlogische Variable kann die Werte *wahr* oder *falsch* annehmen. 
+Wir schreiben dafür kurz auch $1$ (wahr) und $0$ (falsch).
+
+Aussagenlogische Variablen können durch sogenannte *Junktoren miteinander verknüpft werden. Die wichtigsten Junktoren sind 
+- Konjunktion (UND-Verknüpfung), Symbol: $\land$
+- Disjunktion (ODER-Verknüpfung), Symbol: $\lor$	
+- Negation (Verneinung), Symbol: $\lnot$	
+- Implikation (logischer Schluss), Symbol: $\Rightarrow$	
+- Äquivalenz (Gleichheit), Symbol: $\Leftrightarrow$	
+- Exklusiv-Oder (Entweder-Oder), Symbol: $\dot\lor$	
+
+Die Bedeutung der einzelnen Junktoren ergibt sich aus folgender **Wahrheitstabelle**
+
+| $A$ | $B$ | $A \land B$ | $A\lor B$ | $\lnot A$ | $A \Rightarrow B$ | $A \Leftrightarrow B$ | $ A \dot\lor B$ | 
+|--:|--:|------------:|----------:|----------:|------------------:|----------------------:|----------------:| 
+| 0 | 0 | 0           | 0         | 1         | 1                 | 1                     | 0 |
+| 0 | 1 | 0 | 1 | 1 | 1 | 0 | 1 | 
+| 1 | 0 | 0 | 1 | 0 | 0 | 0 | 1 | 
+| 1 | 1 | 1 | 1 | 0 | 1 | 1 | 0 | 
+
+##### Darstellung durch Konjunktion, Disjunktion und Negation
+Grundsätzlich muss man nicht mit allen Junktoren gleichzeitig arbeiten und kann sich auch auf bestimmte Teilmengen beschränken. So kann man etwa durch Konjunktion, Disjunktion und Negation alle anderen Junktoren ausdrücken:
+- Implikation $A \Rightarrow B$ entspricht $\lnot A \lor B$.
+- Äquivalenz $A \Leftrightarrow B$ entspricht $(A \Rightarrow B) \land (B \Rightarrow A)$. Dies entspricht 
+	$(\lnot A \lor B) \land (\lnot B \lor A)$.
+- Exklusiv-Oder $\dot\lor$ entspricht $A \Leftrightarrow \lnot B$. Dies entspricht 
+		$(\lnot A \lor \lnot B) \land (A \lor B)$.
+
+````{prf:example}
+TO DO
+````
+
+##### Rechenregeln für aussagenlogische Formeln
+Idempotenz 
+: $ A \lor A = A$ 
+: $A \land A = A$ 
+
+Neutralität:
+: $A \lor 0 = A $ 
+: $A \land 1=A$ 
+
+Negation
+: $\lnot\lnot A = A$  
+: $A \lor \lnot A = 1$ 
+: $A \land \lnot A =0$ 
+
+Kommutativität
+: $A \land B = B \land A $ 
+: $A \lor B = B \lor A $ 
+
+Assoziativität
+: $A \land (B \land C) = (A \land B) \land C$ 
+: $A \lor (B \lor C) = (A \lor B) \lor C$ 
+
+Distributivität
+: $A \land (B \lor C) = (A \land B) \lor (A \land C)$ 
+: $A \lor (B \land C) = (A \lor B) \land (A \lor C)$ 
+
+De Morgansche Regeln
+: $\lnot (A \land B) = \lnot A \lor \lnot B$  
+: $\lnot (A \lor B) = \lnot A \land \lnot B$  	
+
+
+##### Die Konjunktive Normalform
+
+Ein *Literal* ist eine aussagenlogische Variable oder die Negation einer aussagenlogischen Variable. Beispiel: $A$ bzw $\lnot B$.
+Eine *Klausel* ist eine Disjunktion vom Literalen. Beispiel: $(A \lor B \lor \lnot C)$.
+
+Eine aussagenlogische Formel ist in *konjunktiver Normalform*, wenn Sie eine Konjunktion von Klauseln ist.
+Beispiel: 
+\begin{align*}
+(A \lor B \lor \lnot C) \land (A \lor C \lor  D) \land (\lnot D \lor \lnot E \lor  F).
+\end{align*} 
+
+````{prf:example}
+TO DO
+```` 
+-->
+</section>
+<section id="modellierung-der-junktoren-als-arithmetische-ausdrucke">
+<h4>Modellierung der Junktoren als arithmetische Ausdrücke<a class="headerlink" href="#modellierung-der-junktoren-als-arithmetische-ausdrucke" title="Link to this heading">#</a></h4>
+<p>Logische Variablen werden durch Binärvariablen modelliert. Für jede logische Variable <span class="math notranslate nohighlight">\(V\)</span> führen wir eine Binärvariable <span class="math notranslate nohighlight">\(x_V\)</span> ein, mit der Bedeutung</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+x_V=\left\{\begin{array}{rl}
+1 &amp; \text{, V ist wahr} \\
+0 &amp; \text{, V ist falsch}
+\end{array}\right.
+\end{align*}\]</div>
+<div class="proof theorem admonition" id="theorem-14">
+<p class="admonition-title"><span class="caption-number">Theorem 3.1 </span></p>
+<section class="theorem-content" id="proof-content">
+<p>Die logischen Operationen Negation, Und, Oder, Implikation und Äquivalenz lassen sich wie folgt modellieren:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>Logische Formel</p></th>
+<th class="head text-right"><p>Arithmetischer Ausdruck</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p></p></td>
+<td><p><span class="math notranslate nohighlight">\(A\)</span></p></td>
+<td class="text-right"><p><span class="math notranslate nohighlight">\(x_A=1\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Negation</p></td>
+<td><p><span class="math notranslate nohighlight">\(\neg A\)</span></p></td>
+<td class="text-right"><p><span class="math notranslate nohighlight">\(1-x_A=1\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Konjunktion</p></td>
+<td><p><span class="math notranslate nohighlight">\(A\wedge B\)</span></p></td>
+<td class="text-right"><p><span class="math notranslate nohighlight">\(x_A+x_B=2\)</span> oder <span class="math notranslate nohighlight">\(x_A=1, x_B=1\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Diskunktion</p></td>
+<td><p><span class="math notranslate nohighlight">\(A\vee B\)</span></p></td>
+<td class="text-right"><p><span class="math notranslate nohighlight">\(x_A+x_B\geq 1\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Implikation</p></td>
+<td><p><span class="math notranslate nohighlight">\(A\Rightarrow B\)</span></p></td>
+<td class="text-right"><p><span class="math notranslate nohighlight">\(x_A\leq x_B\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Exklusiv-Oder</p></td>
+<td><p><span class="math notranslate nohighlight">\(A\dot\vee B\)</span></p></td>
+<td class="text-right"><p><span class="math notranslate nohighlight">\(x_A+x_B=1\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Äquivalenz</p></td>
+<td><p><span class="math notranslate nohighlight">\(A\Leftrightarrow B\)</span></p></td>
+<td class="text-right"><p><span class="math notranslate nohighlight">\(x_A=x_B\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<p>Sind Literale <span class="math notranslate nohighlight">\(L_1, L_2, \ldots, L_n\)</span> gegeben, so können wir die Situation “{mindestens, genau, höchstens} <span class="math notranslate nohighlight">\(k\)</span> aus <span class="math notranslate nohighlight">\(n\)</span> Literalen sind wahr” modellieren:</p>
+<ul>
+<li><p>Mindestens <span class="math notranslate nohighlight">\(k\)</span> aus <span class="math notranslate nohighlight">\(n\)</span> sind wahr:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+  \sum_{i=1}^n x_{L_i} \geq k
+  \end{align*}\]</div>
+</li>
+<li><p>Höchsten <span class="math notranslate nohighlight">\(k\)</span> aus <span class="math notranslate nohighlight">\(n\)</span> sind wahr:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+  \sum_{i=1}^n x_{L_i} \leq k
+  \end{align*}\]</div>
+</li>
+<li><p>Genau <span class="math notranslate nohighlight">\(k\)</span> aus <span class="math notranslate nohighlight">\(n\)</span> sind wahr:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+  \sum_{i=1}^n x_{L_i} = k
+  \end{align*}\]</div>
+</li>
+</ul>
+</section>
+</div></section>
+<section id="transformation-logischer-zusammenhange-in-arithmetische-ausdrucke">
+<h4>Transformation logischer Zusammenhänge in arithmetische Ausdrücke<a class="headerlink" href="#transformation-logischer-zusammenhange-in-arithmetische-ausdrucke" title="Link to this heading">#</a></h4>
+<p>Sind mehrere logische Formeln konjunktiv (also durch UND-Verknüpfungen) miteinander verbunden, so können die Formeln  einzeln behandelt werden.</p>
+<div class="proof example admonition" id="example-15">
+<p class="admonition-title"><span class="caption-number">Example 3.10 </span></p>
+<section class="example-content" id="proof-content">
+<p>Die logische Formel</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+	(A\vee B \vee C) \wedge (\neg B \Leftrightarrow C)\wedge D \wedge (A\Rightarrow C)
+\end{align*}\]</div>
+<p>ergibt</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+	x_A+x_B+x_C&amp;\geq 1\\
+	1-x_B&amp;=x_C\\
+	x_D&amp;=1\\
+	x_A&amp;\leq x_C
+\end{align*}\]</div>
+</section>
+</div><p>Sind umfangreichere Formeln gegeben, so können diese über die Rechenregeln für aussagenlogische Formeln in die Konjunktion (d.h. mit UND verknüpfte) von bekannten durch arithmetische Ausdrücke modellierbaren Formeln zurückgeführt werden.</p>
+<p>Wir wandeln das einführende Beispiel aus Abschnitt <a class="reference internal" href="#subsubsec-logikbeispiel"><span class="std std-ref">Junktoren</span></a> um:</p>
+<div class="proof example admonition" id="example-16">
+<p class="admonition-title"><span class="caption-number">Example 3.11 </span></p>
+<section class="example-content" id="proof-content">
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(A\Rightarrow \neg B: \quad x_A\leq 1-x_B\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(D\Rightarrow (B\vee C):\quad x_D\leq x_B+x_C\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\neg D \Rightarrow (\neg B \wedge \neg C):\quad 1-x_D\leq 1-x_B, 1-x_D\leq 1-x_C\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(D\dot{\vee}E: x_D+x_E=1\)</span></p></li>
+</ol>
+</section>
+</div><!-- ##### Allgemeines Vorgehen
+Die in der Praxis auftretenden Formeln sind typischerweise einfach genug, dass keine komplizierten Umformungen vorgenommen werden müssen. Als allgemeines Verfahren für sehr komplizierte Ausdrücke kann man folgendes Verfahren nutzen: Schritt 1: Umwandlung der Formel in konjunktive Normalform. Schritt 2: Behandlung der einzelnen Klauseln nach der Methode "mindestens $1$ aus $k$". -->
+</section>
+</section>
+<section id="logische-bedingungen-fur-nebenbedingungen">
+<h3><span class="section-number">3.5.2. </span>Logische Bedingungen für Nebenbedingungen<a class="headerlink" href="#logische-bedingungen-fur-nebenbedingungen" title="Link to this heading">#</a></h3>
+<!-- In manchen Fällen sollen Nebenbedingungen nicht durchgehend gelten, sondern nur, wenn eine logische Variable wahr ist. Wir betrachten dazu ein Beispiel:
+
+````{prf:example}
+Ein Kraftwerk hat eine maximale Kapazität von 570 MW, sowie einen minimalen stabilen Produktionslevel von 290 MW. Ist das Kraftwerk ausgeschaltet, so produziert es 0 MW. Ist das Kraftwerk angeschaltet, so produziert es zwischen 290 und 570 MW.
+````
+
+Zur Modellierung benutzen wir folgende Entscheidungsvariablen
+\begin{align*}
+z=&\begin{cases}
+	1 & \text{ Kraftwerk ist eingeschaltet}  \\
+	0 & \text{ Kraftwerk ist ausgeschaltet}
+	\end{cases}
+p =& \text{Produktionslevel des Kraftwerks}
+\end{align*}
+
+Es gelten immer die Nebenbedingungen
+\begin{align*}0 \leq p \leq 570 \end{align*}
+Ist das Kraftwerk eingeschaltet, soll zusätzlich die Nebenbedingung
+\begin{align*}290 \geq p \end{align*}
+gelten. Falls das Kraftwerk ausgeschaltet ist, soll zusätzlich die Nebenbedingung
+\begin{align*}p \leq 0 \end{align*}
+gelten. Wie können wir dies modellieren?
+
+````{prf:example}
+TO DO
+````
+
+#### Allgemeines Vorgehen zu logischen Bedingungen für Nebenbedingungen
+Wir betrachten nun den allgemeinen Fall, dass eine Nebenbedingung 
+\begin{align*}a_{1}x_1 + a_{2}x_1 + \ldots + a_{n}x_n  \leq  b \end{align*}
+nur abhängig von dem Wert einer binären Variable $v$ wirklich aktiv sein soll. Wir müssen dazu erst eine 
+%untere Schranke $L$ sowie eine 
+obere Schranke $U$ für den Wert
+\begin{align*}a_{1}x_1 + a_{2}x_1 + \ldots + a_{n}x_n - b \end{align*}
+bestimmen. Hierfür gibt es keine allgemeine Vorgehensweise. Die Möglichkeit der Berechnung solcher Schranken ist abhängig vom konkreten Modell. Es ergibt sich dann die Nebenbedingung
+\begin{align*}
+a_{1}x_1 + a_{2}x_1 + \ldots + a_{n}x_n - b \leq U (1-v)
+\end{align*}
+Für $v=1$ ergibt sich die ursprüngliche Bedingung. Für $v=0$ ist die neue Bedingung immer erfüllt.
+Für den Fall 
+\begin{align*}a_{1}x_1 + a_{2}x_1 + \ldots + a_{n}x_n  \geq  b \end{align*}
+bestimmen wir eine untere Schranke $L$ für 
+\begin{align*}a_{1}x_1 + a_{2}x_1 + \ldots + a_{n}x_n - b \end{align*}
+und erhalten die Bedingung 
+\begin{align*}
+a_{1}x_1 + a_{2}x_1 + \ldots + a_{n}x_n - b \geq L (1-v).
+\end{align*}
+Nebenbedingung der Form
+\begin{align*}a_{1}x_1 + a_{2}x_1 + \ldots + a_{n}x_n  = b \end{align*}
+ersetzen wir durch eine $\leq-$ und eine $\geq-$Ungleichung und verfahren wie in den ersten beiden Fällen.
+
+````{prf:example}
+TO DO
+```` -->
+<!-- ### Endliche Wertemenge für Entscheidungsvariablen
+Wir betrachten noch einen interessanten Spezialfall. Wir haben eine Nebenbedingung gegeben, für die nicht nur ein fester $b$-Wert sondern eine Menge von $b$-Werten möglich ist. Es soll also gelten
+\begin{eqnarray*}
+	a_{1}x_1 + a_{2}x_1 + \ldots + a_{n}x_n  & =  & b_1 \text{ oder} \\
+	a_{1}x_1 + a_{2}x_1 + \ldots + a_{n}x_n  & =  & b_2 \text{ oder} \\
+	\ldots \\
+	a_{1}x_1 + a_{2}x_1 + \ldots + a_{n}x_n  & =  & b_k. 
+\end{eqnarray*}
+Wir können dies wie folgt modellieren: Wir führen neue Binärvariablen $z_1, z_2, \ldots, z_n$ ein, sowie die Nebenbedingungen
+\begin{align*}
+a_{1}x_1 + a_{2}x_1 + \ldots + a_{n}x_n   =   b_1z_1+b_2z_2+ \ldots + b_nz_n
+\end{align*}
+und
+\begin{align*}
+z_1 + z_2 + \ldots + z_n = 1. 
+\end{align*} 
+Dies löst unsere Aufgabenstellung.
+
+````{prf:example}
+TO DO
+````
+-->
+<p>In manchen Anwendungen liegen mehrere Mengen von Nebenbedingungen vor, die durch eine logische Oder-Verknüpfung miteinander verbunden sind. Man gibt die Menge der zulässigen Lösungen manchmal auch in der Form</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\bigcup_{i=1\ldots k}\left\{\v x \mid \m A_i\v x \leq \v b_i, \ \v x \geq 0 \right\}
+\end{align*}\]</div>
+<p>an. Diese Darstellung kann sich etwa ergeben, wenn die Menge der zulässigen Lösungen nicht zusammenhängend oder nicht konvex ist. Ein Beispiel dafür haben wir schon in <a class="reference internal" href="02_Lineare_Probleme.html#subsubsec-betraege"><span class="std std-ref">Beträge</span></a> gesehen: Soll z.B. für eine Variable <span class="math notranslate nohighlight">\(x\)</span> die Nebenbedingung <span class="math notranslate nohighlight">\(|x|\geq 2\)</span> gelten, so ist dies gleichbedeutend damit, dass entweder <span class="math notranslate nohighlight">\(x\geq 2\)</span> oder aber <span class="math notranslate nohighlight">\(x\leq -2\)</span> ist.
+Allgemein kann dies auch für eine größere Anzahl von Ungleichungen gelten.</p>
+<div class="proof example admonition" id="example-17">
+<p class="admonition-title"><span class="caption-number">Example 3.12 </span></p>
+<section class="example-content" id="proof-content">
+<p>Für zwei Variablen <span class="math notranslate nohighlight">\(x_1,x_2\)</span> eines MILP soll entweder gelten</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+ 2&amp;\leq x_1\leq 4\\
+ 3&amp;\leq x_2\leq 4
+\end{align*}\]</div>
+<p>oder</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+ 1&amp;\leq x_1\leq 3\\
+ 0&amp;\leq x_2\leq 2
+\end{align*}\]</div>
+<p>Grafisch lässt sich die zulässige Menge wie folgt darstellen:</p>
+<figure class="align-default" id="fig-disjunktiv">
+<a class="reference internal image-reference" href="_images/DisjunctiveProgramm_Instance.png"><img alt="_images/DisjunctiveProgramm_Instance.png" src="_images/DisjunctiveProgramm_Instance.png" style="width: 400px;" /></a>
+</figure>
+</section>
+</div><p>Für das weitere Vorgehen benötigen wir den Begriff des “großen <span class="math notranslate nohighlight">\(M\)</span>”: In der Optimierung bezeichnet der Buchstabe <span class="math notranslate nohighlight">\(M\)</span> typischerweise einen sehr großen Wert. Dabei ist nicht von Bedeutung wie groß der Wert von <span class="math notranslate nohighlight">\(M\)</span> genau ist, solange er “groß genug” ist. Das große <span class="math notranslate nohighlight">\(M\)</span> kann im Zusammenspiel mit einer Binärvariable <span class="math notranslate nohighlight">\(y\)</span> dazu verwendet werden, einzelne Ungleichungen an- oder abzuschalten. Das “Abschalten” einer Ungleichung geschieht, indem die Grenzen bei Bedarf auf einen so großen Wert (das große <span class="math notranslate nohighlight">\(M\)</span>) gesetzt werden, dass die Ungleichung für das Problem irrelevant wird.</p>
+<div class="proof example admonition" id="example-18">
+<p class="admonition-title"><span class="caption-number">Example 3.13 </span></p>
+<section class="example-content" id="proof-content">
+<p>Für ein MILP soll die Ungleichung</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+1\leq x_1\leq 3
+\end{align*}\]</div>
+<p>gelten, falls <span class="math notranslate nohighlight">\(y_1=1\)</span> ist, wobei <span class="math notranslate nohighlight">\(y_1\in\{0,1\}\)</span>.
+Die Nebenbedingung wird nun wie folgt formuliert:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+-M(1-y_1)+1\leq x_1\leq 3+M(1-y_1)
+\end{align*}\]</div>
+<p>Es ergibt sich z.B. für <span class="math notranslate nohighlight">\(M=1000\)</span>:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+y_1=0 \Rightarrow -999\leq x_1\leq 1003\\
+y_1=1 \Rightarrow 1\leq x_1\leq 3\\
+\end{align*}\]</div>
+<p>Klar ist: Wenn <span class="math notranslate nohighlight">\(M\)</span> groß genug ist, wird die erste Ungleichung immer erfüllt sein und so die Lösung nicht einschränken. Ein passender Wert für <span class="math notranslate nohighlight">\(M\)</span> ist dabei noch zu bestimmen.</p>
+</section>
+</div><p>Wir versuchen unser Beispiel mit Hilfe von zusätzlichen Binärvariablen <span class="math notranslate nohighlight">\(y_1\)</span> und <span class="math notranslate nohighlight">\(y_2\)</span> sowie einem großen <span class="math notranslate nohighlight">\(M\)</span> zu formulieren. <span class="math notranslate nohighlight">\(y_1\)</span> bezeichnet dabei das erste Paar von Ungleichungen, <span class="math notranslate nohighlight">\(y_2\)</span> das zweite.</p>
+<div class="proof example admonition" id="example-19">
+<p class="admonition-title"><span class="caption-number">Example 3.14 </span></p>
+<section class="example-content" id="proof-content">
+<p>Auswahl der beiden Varianten:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+y_1+y_2&amp;=1\\
+y_1,y_2&amp;\in \{0,1\}
+\end{align*}\]</div>
+<p>Nebenbedingungen für <span class="math notranslate nohighlight">\(x_1\)</span> und <span class="math notranslate nohighlight">\(x_2\)</span>:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+-M(1-y_1)+1&amp;\leq x_1 \leq 3+M(1-y_1)\\
+-M(1-y_1)+0&amp;\leq x_2 \leq 3+M(1-y_1)\\
+-M(1-y_2)+2&amp;\leq x_1 \leq 3+M(1-y_2)\\
+-M(1-y_2)+3&amp;\leq x_2 \leq 3+M(1-y_2)\\
+\end{align*}\]</div>
+<p>Wie groß muss dann <span class="math notranslate nohighlight">\(M\)</span> mindestens sein? Es gilt auf jeden Fall</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+1&amp;\leq x_1\leq 4\\
+0&amp;\leq x_2\leq 4
+\end{align*}\]</div>
+<p>Damit ist <span class="math notranslate nohighlight">\(M=4\)</span> groß genug.</p>
+</section>
+</div><div class="admonition note">
+<p class="admonition-title">Bemerkung</p>
+<p>Möglichst kleine Werte für <span class="math notranslate nohighlight">\(M\)</span> können unter Umständen die Lösungsgeschwindigkeit des Modells verbessern.</p>
+</div>
+<p>Allgemein ergibt sich als Groß-M Reformulierung</p>
+<div class="proof definition admonition" id="definition-20">
+<p class="admonition-title"><span class="caption-number">Definition 3.6 </span> (Groß-M Reformulierung)</p>
+<section class="definition-content" id="proof-content">
+<p>Gegeben sind durch “Oder” verknüpfte Mengen von Nebenbedingungen</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\left[
+\begin{array}{rcl}
+l_{11} &amp; \leq x_1 \leq &amp; u_{11} \\
+l_{21} &amp; \leq x_2 \leq &amp; u_{21} \\
+&amp; \ldots &amp; \\
+l_{n1} &amp; \leq x_n \leq &amp; u_{n1} 
+\end{array}
+\right]
+\vee
+\ldots
+\vee
+\left[
+\begin{array}{rcl}
+l_{1k} &amp; \leq x_1 \leq &amp; u_{1k} \\
+l_{2k} &amp; \leq x_2 \leq &amp; u_{2k} \\
+&amp; \ldots &amp; \\
+l_{nk} &amp; \leq x_n \leq &amp; u_{nk} 
+\end{array}
+\right]
+\end{align*}\]</div>
+<p>sowie Zahlen <span class="math notranslate nohighlight">\(M_i\in\R\)</span>, so dass</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}x_i \in [-M_i+\min\{l_{ij} \mid k=1,\ldots, k\},\max\{u_{ij} \mid k=1,\ldots, k\}+M_i]\end{align*}\]</div>
+<p>für alle <span class="math notranslate nohighlight">\(i=1\ldots n\)</span> in jeder zulässigen Lösung <span class="math notranslate nohighlight">\(x\)</span> gilt.</p>
+<p>Die <em>Groß-M Reformulierung</em> für die Nebenbedingungen ist</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{eqnarray*}
+y_1 + y_2 + \ldots + y_k &amp; = &amp; 1 \\
+y_1, y_2, \ldots, y_k &amp; \in &amp; \B
+\end{eqnarray*}\]</div>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\begin{array}{rcl}
+-M(1-y_1) + l_{11}  &amp; \leq x_1 \leq &amp; u_{11} + M(1-y_1) \\
+-M(1-y_1) + l_{21}  &amp; \leq x_2 \leq &amp; u_{21} + M(1-y_1) \\
+&amp; \ldots &amp; \\
+-M(1-y_1) + l_{n1}  &amp; \leq x_n \leq &amp; u_{n1} + M(1-y_1) \\[8mm]
+&amp; \ldots &amp; \\[8mm]
+-M(1-y_k) + l_{1k}  &amp; \leq x_1 \leq &amp; u_{1k} + M(1-y_k) \\
+-M(1-y_k) + l_{2k}  &amp; \leq x_2 \leq &amp; u_{2k} + M(1-y_k) \\
+&amp; \ldots &amp; \\
+-M(1-y_k) + l_{nk}  &amp; \leq x_n \leq &amp; u_{nk} + M(1-y_k).
+\end{array}
+\end{align*}\]</div>
+</section>
+</div><div class="admonition note">
+<p class="admonition-title">Bemerkung</p>
+<p>Die Definition kann für beliebige Nebenbedingungen der Form</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+l \leq a_1x_1 + a_2x_2 + \ldots + a_nx_n \leq u
+\end{align*}\]</div>
+<p>erweitert werden.</p>
+</div>
+<!-- #### Konvexe-Hülle Reformulierung
+```{figure} ./bilder/DisjunctiveProgramm_Instance.png
+:name: dp_example
+:height: 300px
+
+Beispiel: Zulässige Menge für ein disjunktives Programm.
+```
+Die Idee der Konvexe-Hülle Reformulierung ist, zusätzliche Entscheidungsvariablen für jede Oder-Variante zu erzeugen. Wir benötigen dann immer noch ein großes M, können dies aber für jede Oder-Variante einzeln wählen. Für unser Beispiel ergibt sich.
+
+````{prf:example}
+TO DO
+````
+
+Allgemein ergibt sich als Konvexe-Hülle Reformulierung:
+
+````{prf:definition} Konvexe-Hülle Reformulierung
+Gegeben ist ein Disjunktives Programm DP
+\begin{align*}
+	\left[
+	\begin{array}{rcl}
+	& y_1 & \\
+	l_{11} & \leq x_1 \leq & u_{11} \\
+	l_{21} & \leq x_2 \leq & u_{21} \\
+	& \ldots & \\
+	l_{n1} & \leq x_n \leq & u_{n1} 
+	\end{array}
+	\right]
+	\vee
+	\ldots
+	\vee
+	\left[
+	\begin{array}{rcl}
+	& y_k & \\
+	l_{1k} & \leq x_1 \leq & u_{1k} \\
+	l_{2k} & \leq x_2 \leq & u_{2k} \\
+	& \ldots & \\
+	l_{nk} & \leq x_n \leq & u_{nk} 
+	\end{array}
+	\right] .
+\end{align*}
+		
+Die *Konvexe-Hülle Reformulierung* von DP ist
+\begin{eqnarray*}
+		y_1 + y_2 + \ldots + y_k & = & 1 \\
+		y_1, y_2, \ldots, y_k & \in & \B \\[6mm]
+		x_{11} + x_{12} + \ldots + x_{1k} & = & x_1 \\
+		& \vdots &  \\
+  	    x_{n1} + x_{n2} + \ldots + x_{nk} & = & x_n \\
+\end{eqnarray*}
+
+\begin{align*}
+\begin{array}{ccc}
+l_{11}y_1   \leq x_{11} \leq  u_{11}y_1 & \hspace{1cm} \ldots \hspace{1cm} \ & l_{1k}y_k   \leq x_{1k} \leq  u_{1k}y_k \\
+l_{21}y_1   \leq x_{21} \leq  u_{21}y_1 & \hspace{1cm} \ldots \hspace{1cm} \ & l_{2k}y_k   \leq x_{2k} \leq  u_{2k}y_k \\
+\vdots &  & \vdots \\
+l_{n1}y_1   \leq x_{n1} \leq  u_{n1}y_1 & \hspace{1cm} \ldots \hspace{1cm} \ & l_{nk}y_k   \leq x_{nk} \leq  u_{nk}y_k \\
+\end{array}
+\end{align*}
+````
+
+```{note} Die Definition kann für beliebige Nebenbedingungen der Form
+\begin{align*}
+l \leq a_1x_1 + a_2x_2 + \ldots + a_nx_n \leq u
+\end{align*}
+erweitert werden.
+```
+
+
+#### Vergleich zwischen beiden Formulierungen
+Der Lösungsraum beider Formulierungen stimmt überein. 
+Die Groß-M Formulierung benötigt weniger Entscheidungsvariablen als die Konvexe-Hülle-Formulierung.
+Wird das Modell durch ein typisches Branch-And-Bound Verfahren gelöst, dient die Relaxierung des Models zur Berechnung von oberen Schranken (bei Maximierungsproblemen) bzw. unteren Schranken (bei Minimierungsproblemen) als ein Anhaltspunkt für die Güte der Formulierung. Die Konvexe-Hülle Reformulierung besitzt eine engere Relaxierung und resultiert damit in schärferen Schranken. 
+
+```{figure} ./bilder/DisjunctiveProgramm_BigM_Reformulation.png
+:name: dp_example_bigm
+:height: 300px
+
+Relaxierung der Groß-M Reformulierung.
+```
+
+```{figure} ./bilder/DisjunctiveProgramm_ConvexHull.png
+:name: dp_example_convhull
+:height: 300px
+
+Relaxierung der Konvexe-Hülle Reformulierung.
+```
+ -->
+</section>
+<section id="min-min-probleme">
+<h3><span class="section-number">3.5.3. </span>Min min Probleme<a class="headerlink" href="#min-min-probleme" title="Link to this heading">#</a></h3>
+<p>In <a class="reference internal" href="02_Lineare_Probleme.html#subsubsec-minmax"><span class="std std-ref">Maximumsfunktion als Teil der Zielfunktion</span></a> hatten wir das Problem betrachtet, die maximale Endzeit eines Projektes zu minimieren – ein <span class="math notranslate nohighlight">\(\min \max\)</span> Problem. Wir greifen das Beispiel wieder auf, um das Prinzip eines <span class="math notranslate nohighlight">\(\min \min\)</span> Problems zu illustrieren.</p>
+<div class="proof example admonition" id="example-21">
+<p class="admonition-title"><span class="caption-number">Example 3.15 </span></p>
+<section class="example-content" id="proof-content">
+<p>Ein Projektplanungsproblem besteht aus vier Arbeitspaketen. Die Startzeiten jedes Arbeitspakets <span class="math notranslate nohighlight">\(s_1,s_2,s_3,s_4\)</span> sind die Entscheidungsvariablen. Ziel des Optimierungsproblems ist es, so früh wie möglich mit dem Projekt zu beginnen. Das Optimierungsproblem lautet also:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\min_{s_1,s_2,s_3,s_4} \min\{s_1,s_2,s_3,s_4\}
+\end{align*}\]</div>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/minmin.png"><img alt="_images/minmin.png" src="_images/minmin.png" style="width: 400px;" /></a>
+</figure>
+<p>Die Reformulierung als MILP ist etwas komplizierter als im <span class="math notranslate nohighlight">\(\min \max\)</span> Fall. Wir führen für jedes <span class="math notranslate nohighlight">\(s_i\)</span> eine binäre Variable <span class="math notranslate nohighlight">\(z_i\)</span> ein, die den Wert <span class="math notranslate nohighlight">\(1\)</span> annimmt, wenn es sich bei <span class="math notranslate nohighlight">\(s_i\)</span> um das Minimum der Menge <span class="math notranslate nohighlight">\(\{s_1,s_2,s_3,s_4\}\)</span> handelt und <span class="math notranslate nohighlight">\(0\)</span> sonst. Des weiteren führen wir ein großes <span class="math notranslate nohighlight">\(M\)</span> ein. Das gibt uns die Möglichkeit, die Konstruktion aus <a class="reference internal" href="02_Lineare_Probleme.html#subsubsec-minmax"><span class="std std-ref">Maximumsfunktion als Teil der Zielfunktion</span></a> so zu erweitern, dass alle Nebenbedingungen bis auf eine (die, für die <span class="math notranslate nohighlight">\(y_i=1\)</span> ist) durch das große <span class="math notranslate nohighlight">\(M\)</span> “abgeschaltet” werden.</p>
+<p>Das folgende MILP ist äquivalent zum obigen <span class="math notranslate nohighlight">\(\min \min\)</span> Problem:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-8ecef63e-698e-4d2c-8b0c-613d0858d0c3">
+<span class="eqno">(3.1)<a class="headerlink" href="#equation-8ecef63e-698e-4d2c-8b0c-613d0858d0c3" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
+\min_{s_1,s_2,s_3,s_4,z_1,z_2,z_3,z_4,y} &amp; \quad  &amp;   y &amp; &amp; &amp; \\[2mm]
+\text{s.t. } &amp; &amp;  s_1&amp;\leq y-M(1-z_1)\\
+             &amp; &amp;  s_2&amp;\leq y-M(1-z_2)\\
+             &amp; &amp;  s_3&amp;\leq y-M(1-z_3)\\
+             &amp; &amp;  s_4&amp;\leq y-M(1-z_4)\\
+			 &amp; &amp;  1 &amp; = z_1+z_2+z_3+z_4\\
+			 &amp; &amp; z_i&amp;\in \{0,1\},\quad i=1,\dots,4
+\end{alignat}\]</div>
+<p>Als Wert für <span class="math notranslate nohighlight">\(M\)</span> kommt z.B. die größtmögliche Startzeit, die in dem Problem vorkommen kann, in Frage.</p>
+</section>
+</div></section>
+<section id="betrage-revisited">
+<h3><span class="section-number">3.5.4. </span>Beträge revisited<a class="headerlink" href="#betrage-revisited" title="Link to this heading">#</a></h3>
+<p>In <a class="reference internal" href="02_Lineare_Probleme.html#subsubsec-betraege"><span class="std std-ref">Beträge</span></a> haben wir festgestellt, dass Nebenbedingungen der Art</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+|x|\geq \alpha
+\end{align*}\]</div>
+<p>zu einer nicht konvexen zulässigen Menge führen. Ebenso lässt sich die Zielfunktion</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\min_x -|x|
+\end{align*}\]</div>
+<p>nicht mit den dort vorgestellten Techniken reformulieren. Der Grund dafür ist, dass der Betrag eine versteckte Maximumsbildung ist. Wenn wir die in obige Formel einsetzen, erhalten wir</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+ \min_x -|x| = \min_x (-\max\{x,-x\}) = \min_x \min\{x,-x\}
+\end{align*}\]</div>
+<p>Nicht konvexe Menge und <span class="math notranslate nohighlight">\(\min \min\)</span> Probleme… dahinter verbirgt sich doch wieder ein großes <span class="math notranslate nohighlight">\(M\)</span>!</p>
+<p>Konkret geht man so vor, dass man <span class="math notranslate nohighlight">\(x\)</span> durch die <em>Different zweier</em> positiver Variablen <span class="math notranslate nohighlight">\(x_p-x_n\)</span> ersetzt, wobei garantiert wird, dass eine von den beiden gleich Null ist. Welche das ist, kommt darauf an, ob <span class="math notranslate nohighlight">\(x\)</span> positiv (dann ist <span class="math notranslate nohighlight">\(x_n=0\)</span>) oder negativ ist (dann ist <span class="math notranslate nohighlight">\(x_p=0\)</span>). Den Betrag wiederum kann man dan als <em>Summe</em> dieser beiden Variablen schreiben, diese ist dann immer positiv. Das Konstrukt wird mit Hilfe einer Binärvariable und einem großen <span class="math notranslate nohighlight">\(M\)</span> umgesetzt und sieht wie folgt aus: Das Optimierungsproblem</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\min_x -|x|
+\end{align*}\]</div>
+<p>ist äquivalent zu</p>
+<div class="amsmath math notranslate nohighlight" id="equation-98f3bbcf-4995-45e7-aa1b-46c63c27e749">
+<span class="eqno">(3.2)<a class="headerlink" href="#equation-98f3bbcf-4995-45e7-aa1b-46c63c27e749" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
+\min_{x,x_p,x_n,y}   \quad &amp;   -(x_p+x_n) &amp; &amp; &amp; \\[2mm]
+\text{s.t. }\quad  &amp;   x=x_p-x_n\\
+             &amp;   0\leq x_p \leq My\\
+             &amp;   0\leq x_n \leq M(1-y)\\
+			 &amp;   y\in \{0,1\}
+\end{alignat}\]</div>
+<p>Ähnlich ist die Nebenbedingung</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+|x|\geq \alpha
+\end{align*}\]</div>
+<p>äquivalent zu</p>
+<div class="amsmath math notranslate nohighlight" id="equation-b9b8b09a-47f4-42c5-a1c9-2bc9bc311403">
+<span class="eqno">(3.3)<a class="headerlink" href="#equation-b9b8b09a-47f4-42c5-a1c9-2bc9bc311403" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
+			 &amp; &amp;  x_p+x_n&amp;\geq \alpha\\
+			 &amp; &amp;  x&amp;=x_p-x_n\\
+             &amp; &amp;  0&amp;\leq x_p \leq My\\
+             &amp; &amp;  0&amp;\leq x_n \leq M(1-y)\\
+			 &amp; &amp;  y&amp;\in \{0,1\}
+\end{alignat}\]</div>
+<p>Dieses Vorgehen ist rechentechnisch aufwendiger als das in <a class="reference internal" href="02_Lineare_Probleme.html#subsubsec-betraege"><span class="std std-ref">Beträge</span></a> vorgestellte, da man eine zusätzliche Binärvariable, zwei kontinuierliche Variablen und zwei zusätzliche Ungleichungen einführt. Dafür ist es allgemeiner, da es für beide Richtungen der Ungleichung funktioniert.</p>
+</section>
+<section id="linearisieren-von-nichtlinearitaten">
+<h3><span class="section-number">3.5.5. </span>Linearisieren von Nichtlinearitäten<a class="headerlink" href="#linearisieren-von-nichtlinearitaten" title="Link to this heading">#</a></h3>
+<p>(Gemischt-ganzzahlige) lineare Programme sind in der Anwendung populär, da sie sich vergleichsweise gut lösen lassen.
+Es ist deswegen wünschenswert, Modelleinschränkungen möglichst als lineare Nebenbedingungen modellieren zu können.
+In manchen Fällen lassen sich nichtlineare Nebenbedingungen durch äquivalente lineare Ausdrücke beschreiben.
+Wir lernen im Folgenden drei solche Beispiele kennen.</p>
+<div class="proof example admonition" id="example-22">
+<p class="admonition-title"><span class="caption-number">Example 3.16 </span></p>
+<section class="example-content" id="proof-content">
+<p>Wir linearisieren das Problem</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{alignat*}{5}
+\min &amp; \quad  &amp;   4b_1^3-7b_1b_2+b_3 &amp;          &amp; &amp; \\[2mm]
+\text{s.t. } &amp; &amp;  b_1 + b_2+b_3 &amp; \leq  2 &amp; \quad\quad &amp; &amp;  \\
+ &amp; &amp;  b_1,  b_2, b_3 &amp; \in   \{0,1\} &amp; \quad\quad &amp; &amp;  \\
+\end{alignat*}\]</div>
+<p>Es gilt</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+b_1^3 = \left\{\begin{array}{rl}1, &amp; \quad \text{wenn } b_1=1\\
+								0, &amp; \quad \text{wenn } b_1=0\end{array}\right. = b_1
+\end{align*}\]</div>
+<p>für <span class="math notranslate nohighlight">\(b_1\in\{0,1\}\)</span>. Damit können wir <span class="math notranslate nohighlight">\(b_1^3\)</span> ersetzen.</p>
+<p>Um <span class="math notranslate nohighlight">\(b_1\cdot b_2\)</span> zu reformulieren, führen wir eine neue Variable <span class="math notranslate nohighlight">\(b_{12}\)</span> ein, für die gelten soll <span class="math notranslate nohighlight">\(b_{12}=b_1\cdot b_2\)</span>. Das erreichen wir durch folgende zusätzliche Nebenbedingungen:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+b_{12}&amp;\leq b_1\\
+b_{12}&amp;\leq b_2\\
+b_{12}&amp;\geq b_1+b_2-1
+\end{align*}\]</div>
+<p>Insgesamt ist das Problem damit äquivalent zu folgendem MILP:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{alignat*}{5}
+\min &amp; \quad  &amp;   4b_1-7b_{12}+b_3 &amp;          &amp; &amp; \\[2mm]
+\text{s.t. } &amp; &amp;  b_1 + b_2+b_3 &amp; \leq  2 &amp; \quad\quad &amp; &amp;  \\
+ &amp; &amp;  b_{12}&amp;\leq b_1 &amp; \quad\quad &amp; &amp;  \\
+ &amp; &amp;  b_{12}&amp;\leq b_2 &amp; \quad\quad &amp; &amp;  \\
+ &amp; &amp;  b_{12}&amp;\geq b_1+b_2-1 &amp; \quad\quad &amp; &amp;  \\
+ &amp; &amp;  b_1,  b_2, b_3 &amp; \in   \{0,1\} &amp; \quad\quad &amp; &amp;  \\
+ &amp; &amp; b_{12} &amp; \in   \{0,1\}
+\end{alignat*}\]</div>
+</section>
+</div><section id="produkt-von-binarvariablen">
+<h4>Produkt von Binärvariablen<a class="headerlink" href="#produkt-von-binarvariablen" title="Link to this heading">#</a></h4>
+<p>Es seien <span class="math notranslate nohighlight">\(b_1, b_2, \ldots b_k \in \B\)</span> binäre Variablen. Das Produkt</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+y=\prod_{i=1}^kb_i
+\end{align*}\]</div>
+<p>kann durch folgende Bedingungen an die Variable <span class="math notranslate nohighlight">\(y\)</span> linearisiert werden:</p>
+<ol class="arabic">
+<li><div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+  y\leq b_i,\quad i=1,\dots, k
+  \end{align*}\]</div>
+</li>
+</ol>
+<p>Damit ist sichergestellt, dass <span class="math notranslate nohighlight">\(y=0\)</span>, sobald (mindestens) eines der <span class="math notranslate nohighlight">\(b_i=0\)</span>.
+2. \begin{align*}
+y\geq \sum_{i=1}^k b_i-k+1,\quad i=1,\dots, k
+\end{align*}
+Damit ist sichergestellt, dass <span class="math notranslate nohighlight">\(y=1\)</span>, wenn alle <span class="math notranslate nohighlight">\(b_i=1\)</span>.
+Danach kann man jedes Auftreten des nichtlinearen Terms <span class="math notranslate nohighlight">\(\prod_{i=1}^kb_i\)</span> durch (den linearen Term) <span class="math notranslate nohighlight">\(y\)</span> ersetzen.</p>
+</section>
+<section id="produkt-von-einer-binarvariablen-und-einer-kontinuierlichen-variable">
+<h4>Produkt von einer Binärvariablen und einer kontinuierlichen Variable<a class="headerlink" href="#produkt-von-einer-binarvariablen-und-einer-kontinuierlichen-variable" title="Link to this heading">#</a></h4>
+<p>Es sei <span class="math notranslate nohighlight">\(x \in \R^+\)</span> eine kontinuierliche und <span class="math notranslate nohighlight">\(b\in \B\)</span> eine binäre Variable. Das Produkt</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+y=x\cdot b
+\end{align*}\]</div>
+<p>kann wie folgt linearisiert werden. Wir benötigen zunächst eine obere Schranke <span class="math notranslate nohighlight">\(M\)</span> für <span class="math notranslate nohighlight">\(x\)</span> (diese sollte sich aus dem Probleme ergeben). Wir fügen dem Problem nun folgende Nebenbedingungen hinzu:</p>
+<ol class="arabic">
+<li><div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+  y&amp;\leq Mb
+  \end{align*}\]</div>
+</li>
+</ol>
+<p>Damit ist sichergestellt, dass wenn <span class="math notranslate nohighlight">\(b=0\)</span> auch <span class="math notranslate nohighlight">\(y=0\)</span> ist.
+2.  \begin{align*}
+y&amp;\leq x
+y&amp;\geq x-M(1-b)
+\end{align*}
+Damit ist sichergestellt, dass wenn <span class="math notranslate nohighlight">\(b=1\)</span> ist, sowohl <span class="math notranslate nohighlight">\(y\leq x\)</span> als auch <span class="math notranslate nohighlight">\(y\geq x\)</span> gilt. Mit anderen Worten <span class="math notranslate nohighlight">\(y=x\)</span>, wie gewünscht.</p>
+<p>Danach kann man jedes Auftreten des nichtlinearen Terms <span class="math notranslate nohighlight">\(x\cdot b\)</span> durch (den linearen Term) <span class="math notranslate nohighlight">\(y\)</span> ersetzen.</p>
+</section>
+</section>
+</section>
+<section id="allgemeines-vorgehen-bei-der-modellierung">
+<h2><span class="section-number">3.6. </span>Allgemeines Vorgehen bei der Modellierung<a class="headerlink" href="#allgemeines-vorgehen-bei-der-modellierung" title="Link to this heading">#</a></h2>
+<p>In <a class="reference internal" href="01_Grundbegriffe.html#sec-intro"><span class="std std-ref">Einführung und Grundbegriffe</span></a> und in den Beispielmodellen in diesem Kapitel haben wir bereits gesehen, dass die Optimierungsmodelle in dieser Vorlesung aus den vier Komponenten Problemdaten, Entscheidungsvariablen, Zielfunktion und Nebenbedingungen bestehen.</p>
+<p>In diesem Abschnitt möchten wir noch auf einige Punkte eingehen, die besonders beim Erstellen von größeren Modellen mit Gurobi oder einem anderen Framework hilfreich, um Modellierungsfehler zu vermeiden und den Code nachvollziehbarer zu machen.</p>
+<p>Konkret empfiehlt es sich, bei der Erstellung eines Modells nach den folgenden fünf Schritten vorzugehen.</p>
+<p><strong>Schritt 1: Indexmengen decklarieren</strong></p>
+<p>Gerade wenn es mehrere Mengen gibt, über die iteriert wird, ist es hilfreich auch Indexvariablen festzulegen, die durchgängig verwendet werden. Die Indexmengen werden wir in allen folgenden Schritten (2.-5.) benutzt, daher empfiehlt es sich, diese als erstes anzulegen. Die Indexmengen können und sollten dabei möglichst nah an der Problemformulierung gewählt werden.</p>
+<p>Beispiel: Für ein Standortproblem möchten Sie als mögliche Standorte für ein Warenlager die Städte Karlsruhe, Berlin und Heidelberg modellieren. Statt <span class="math notranslate nohighlight">\(x_1,x_2,x_3\)</span> können Sie die zugehörigen Entscheidungsvariablen auch <span class="math notranslate nohighlight">\(x_{Karlsruhe}, x_{Berlin}, x_{Heidelberg}\)</span> nennen. In Gurobi können Sie die Indexmenge dann direkt beim Erstellen der Variablen übergeben, d.h. anstatt</p>
+<div class="cell tag_remove-output tag_remove-stderr docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">addVars</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">BINARY</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>schreiben Sie</p>
+<div class="cell tag_remove-output tag_remove-stderr docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">staedte</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Karlsruhe&quot;</span><span class="p">,</span> <span class="s2">&quot;Berlin&quot;</span><span class="p">,</span> <span class="s2">&quot;Heidelberg&quot;</span><span class="p">]</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">addVars</span><span class="p">(</span><span class="n">staedte</span><span class="p">,</span> <span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">BINARY</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Sie können dann auf die Variablen z.B. mit <code class="docutils literal notranslate"><span class="pre">x[&quot;Karlsruhe&quot;]</span></code> zugreifen. Das funktioniert auch, wenn der Index aus Paaren besteht. Wollen Sie z.B. eine Variable für die Transportkosten von Karlsruhe nach Berlin anlegen und diese mit <span class="math notranslate nohighlight">\(y_{Karlsruhe, Berlin}\)</span> bezeichnen, so können Sie das in Gurobi wie folgt tun:</p>
+<div class="cell tag_remove-output tag_remove-stderr docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">transport</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;Karlsruhe&quot;</span><span class="p">,</span> <span class="s2">&quot;Berlin&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;Heidelberg&quot;</span><span class="p">,</span> <span class="s2">&quot;Karlsruhe&quot;</span><span class="p">)]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">addVars</span><span class="p">(</span><span class="n">staedte</span><span class="p">,</span> <span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">BINARY</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Dadurch werden zwei Variablen erzeugt, auf die Sie dann einfach mit <code class="docutils literal notranslate"><span class="pre">y[&quot;Karlsruhe&quot;,&quot;Berlin&quot;]</span></code> und <code class="docutils literal notranslate"><span class="pre">y[&quot;Heidelberg&quot;,&quot;Karlsruhe&quot;]</span></code> zugreifen können.</p>
+<p>Indexmengen sind ein wichtiges Werkzeug, um kurzen, lesbaren Code zu erzeugen.</p>
+<p><strong>Schritt 2: Problemdaten identifizieren und Bezeichner festlegen</strong></p>
+<p>Im Kontext der Optimierung sind Problemdaten zwar feste Zahlen, es empfiehlt sich aber trotzdem, ihnen Bezeichner zu geben. Dadurch ist man näher an der mathematischen Formulierung, die Nachvollziehbarkeit des Programms wird erhöht und Änderungen am Code sowie Rechnen von verschiedenen Szenarien werden enorm erleichtert.</p>
+<p><strong>Schritt 3: Entscheidungsvariablen definieren</strong></p>
+<p>Auch genannt Optimierungsvariablen, also das, was der Löser berechnen soll. Zu einer Variable gehören ein Datentyp (stetig, ganzzahlig, binär) und evtl. Grenzen (z.B. <span class="math notranslate nohighlight">\(0\leq x\leq 20\)</span>). Wir sprechen oft von Entscheidungsvariablen, auch wenn manche der Variablen keine “Entscheidungen” im umgangssprachlichen Sinne sind. Sämtliche unbekannten Werte, von denen Sie möchten, dass der Löser für sie einen Wert berechnet, gehören zu den Entscheidungs- bwz. Optimierungsvariablen.</p>
+<p><strong>Schritt 4: Zielfunktion formulieren</strong></p>
+<p>Was soll optimiert werden? Das muss ein (linearer) Ausdruck in den Entscheidungsvariablen und den Problemdaten sein. Evtl. empfiehlt es sich, schrittweise vorzugehen: wenn z.B. die Gesamtkosten minimiert werden sollen, sollte man zunächst die einzelnen Beiträge zu den Gesamtkosten identifizieren und Terme für diese aufstellen.</p>
+<p><strong>Schritt 5: Nebenbedingungen formulieren</strong></p>
+<p>Schließlich formulieren Sie die Nebenbedingungen an die Variablen, die sich aus der Problemstellung ergeben oder aus der Definition der Optimierungsvariablen. Wenn das Problem unzulässig oder unbeschränkt ist, sind die Nebenbedingungen oft die Fehlerquelle. Etwa, wenn bestimmte Nebenbedingungen vergessen wurden oder versehentlich sich widersprechende Nebenbedingungen formuliert wurden.</p>
+</section>
+<section id="anwendung-ablaufplanung-scheduling">
+<h2><span class="section-number">3.7. </span>Anwendung: Ablaufplanung (Scheduling)<a class="headerlink" href="#anwendung-ablaufplanung-scheduling" title="Link to this heading">#</a></h2>
+<p>Ablaufplanung wird im Englischen <em>scheduling</em> genannt.
+Es gibt sehr viele verschiedene Probleme der Ablaufplanung. Eine Übersicht über akademische Arbeiten findet sich etwa in
+<em>Michael L. Pinedo: Scheduling. Theory, Algorithms and Systems, Springer, 2016</em>.</p>
+<p>Allen Problemvarianten gemeinsam ist, dass es um die <em>Zuteilung von Resourcen zu Aufgaben über die Zeit</em> geht, sowie um das <em>Erstellen eines zugehörigen Zeitplans</em>. Wir betrachten zuerst ein Beispiel aus der Produktion:</p>
+<div class="proof example admonition" id="example-23">
+<p class="admonition-title"><span class="caption-number">Example 3.17 </span></p>
+<section class="example-content" id="proof-content">
+<p>Farbe wird in drei Schritten produziert: Zuerst werden die Rohmaterialien gemahlen, dann wird gemixt und am Ende verpackt. Wir erstellen den Produktionsplan für eine Fabrik, die weiße und blaue Farbe produzieren kann. Der Mixer muss 10 Minuten gesäubert werden, wenn von blauer auf weißer Farbe gewechselt wird. In umgekehrter Reihenfolge muss nicht gesäubert werden. Wir besitzen zwei Mühlen (eine langsame und eine schnelle), einen Mixer sowie eine Packstation. Alle Maschinen können Batches zu je 1000 Litern bewältigen. Unsere Aufgabe ist, 2000 Liter weiße Farbe und 2000 Liter blaue Farbe zu produzieren.</p>
+</section>
+</div><p>Ein Produktionsplan wird typischerweise über ein <em>Gantt-Chart</em> visualisiert:</p>
+<figure class="align-default" id="fig-gantt">
+<a class="reference internal image-reference" href="_images/gantt.png"><img alt="_images/gantt.png" src="_images/gantt.png" style="width: 400px;" /></a>
+</figure>
+<p>In der Produktionsplanung sind häufig für die einzelnen Aufgaben zusätzlich individuelle, gewünschte Fertigstellungszeitpunkte gegeben.
+Typische Zielfunktionen sind die Minimierung einer der folgenden Terme</p>
+<ul class="simple">
+<li><p>Die Summe der Fertigstellungszeitpunkte aller Aufgaben (engl: total completion time).</p></li>
+<li><p>Der Fertigstellungszeitpunkt der letzten Aufgabe(n) (engl: makespan)</p></li>
+<li><p>Die Anzahl der zu spät fertiggestellten Aufgaben (engl: total number of tardy/late jobs)</p></li>
+<li><p>Die längste Verzögerung für eine Aufgabe (engl: maximum lateness).
+In Realweltproblemen gibt es typischerweise eine hohe Anzahl an zusätzlichen Arten von Nebenbedingungen die in ihrer Kombination meistens sehr individuell auf ein spezifisches Problem angepasst sind.</p></li>
+</ul>
+<p>Bei der Modellierung von Ablaufplanungsproblemen durch gemischt-ganzzahlige Programme gibt es zwei grundsätzliche Modelltypen: <em>zeitdiskretisierte Modelle</em> sowie <em>zeitkontinuierliche Modelle</em>. Mit allgemeinen zeitdiskretisierten Modellen beschäftigen wir uns im nächsten Kapitel. Im folgenden werden wir ein zeitkontinuierliches Modell für ein einfaches Problem aus der Projektplanung entwickeln.</p>
+<section id="ein-einfaches-zeitkontinuierliches-modell">
+<h3><span class="section-number">3.7.1. </span>Ein einfaches zeitkontinuierliches Modell<a class="headerlink" href="#ein-einfaches-zeitkontinuierliches-modell" title="Link to this heading">#</a></h3>
+<p>Ein Projektleiter erstellt einen Zeitplan für sein Projekt. Er nutzt dafür folgende Informationen.</p>
+<ul class="simple">
+<li><p>Eine Menge an Aufgaben <span class="math notranslate nohighlight">\(A=\{1, 2, \ldots, n\}\)</span>.</p></li>
+<li><p>Für jede Aufgabe <span class="math notranslate nohighlight">\(i\)</span> ist ihre Dauer <span class="math notranslate nohighlight">\(d_i\)</span> gegeben. <span class="math notranslate nohighlight">\(D=\{d_1, d_2, \ldots, d_n\}\)</span></p></li>
+<li><p>Es ist eine Menge <span class="math notranslate nohighlight">\(L=\{(p_1,s_1), \ldots, (p_n,s_n)\} \subset A\times A\)</span> von Abhängigkeiten gegeben mit der Bedeutung: Aufgabe <span class="math notranslate nohighlight">\(p_i\)</span> muss abgeschlossen sein, bevor Aufgabe <span class="math notranslate nohighlight">\(s_i\)</span> starten kann.</p></li>
+<li><p>Es ist eine Menge <span class="math notranslate nohighlight">\(B=\{(a_1,b_1), \ldots, (a_n,b_n)\} \subset A\times A\)</span> von Blockierungen gegeben mit der Bedeutung: Aufgabe <span class="math notranslate nohighlight">\(a_i\)</span> und <span class="math notranslate nohighlight">\(b_i\)</span> können nicht zeitgleich ausgeführt werden.</p></li>
+</ul>
+<p>Gesucht ist</p>
+<ul class="simple">
+<li><p>die Startzeit <span class="math notranslate nohighlight">\(x_i\)</span> für jede Aufgabe <span class="math notranslate nohighlight">\(i \in A\)</span>, so dass das Projekt möglichst schnell abgeschlossen ist (d.h. alle Aufgaben sind beendet).</p></li>
+</ul>
+<p>Wir betrachten die Beispielinstanz <span class="math notranslate nohighlight">\(A=\{1, 2, \ldots, 6\}\)</span> und <span class="math notranslate nohighlight">\(L=\{(1,4),(2,4),(3,6), (4,5),(4,6)\}\)</span> und <span class="math notranslate nohighlight">\(D=(1,2,1,2,2,1)\)</span> und <span class="math notranslate nohighlight">\(B=\{(1,2),(2,3),(1,3)\}\)</span>.</p>
+<figure class="align-default" id="fig-scheduling-beispiel">
+<a class="reference internal image-reference" href="_images/scheduling_beispiel.png"><img alt="_images/scheduling_beispiel.png" src="_images/scheduling_beispiel.png" style="width: 400px;" /></a>
+</figure>
+<p>Wir führen folgende Optimierungsvariablen ein:</p>
+<ul class="simple">
+<li><p>Den Anfangszeitpunkt <span class="math notranslate nohighlight">\(x_1,\dots,x_6\)</span> für jede Aufgabe</p></li>
+<li><p>Den spätesten Endzeitpunkt <span class="math notranslate nohighlight">\(y\)</span> (siehe die <span class="math notranslate nohighlight">\(\min \max\)</span> Konstruktion <a class="reference internal" href="02_Lineare_Probleme.html#subsubsec-minmax"><span class="std std-ref">Maximumsfunktion als Teil der Zielfunktion</span></a>)</p></li>
+<li><p>Um die Blockierungsbedingungen zu modellieren, führen wir für jede der Blockierungen in <span class="math notranslate nohighlight">\(B\)</span> eine binäre Entscheidungsvariable <span class="math notranslate nohighlight">\(z_{ij}\)</span>, die angibt, welcher der beiden Aufgaben <span class="math notranslate nohighlight">\(i\)</span> bzw. <span class="math notranslate nohighlight">\(j\)</span> zuerst ausgeführt wird.</p></li>
+</ul>
+<p>Für jede Vorgängerbedingung führen wir eine Nebenbedingung ein. Die Blockierungsbedingungen sind etwas komplizierter: Hier brauchen wir zwei Bedingungen für jede Blockierungsbedingung, von denen jeweils eine mittels eines großen <span class="math notranslate nohighlight">\(M\)</span> “abgeschaltet” wird. Wir können <span class="math notranslate nohighlight">\(M\)</span> z.B. <span class="math notranslate nohighlight">\(M=d_1+d_2+d_3+d_4+d_5+d_6\)</span> setzen. Dies ist offenbar eine obere Schranke für die Endzeit, wenn nämlich alle Aufgaben einfach sequentiell abgearbeitet werden.</p>
+<p>Es ergibt sich als Modell für diese Instanz:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{alignat*}{5}
+\min_{\v x, y, \v z}         &amp; \quad  &amp;   y &amp;          &amp; &amp; \\[2mm]
+\text{s.t. } &amp; &amp; &amp; &amp;&amp; &amp; \\
+\text{Makespan}\quad &amp;&amp; \text{Vorgänger}\quad &amp;&amp; \text{Blockierungen}\quad &amp;&amp;\\
+x_1+d_1 &amp;\leq y \quad &amp; x_1+d_1&amp;\leq x_4 \quad &amp; x_1+d_1&amp;\leq x_2+Mz_{12}\\
+x_2+d_2 &amp;\leq y \quad &amp; x_2+d_2&amp;\leq x_4 \quad &amp; x_2+d_2&amp;\leq x_1+M(1-z_{12})\\
+x_3+d_3 &amp;\leq y \quad &amp; x_3+d_3&amp;\leq x_6 \quad &amp; x_1+d_1&amp;\leq x_3+Mz_{13}\\
+x_4+d_4 &amp;\leq y \quad &amp; x_4+d_4&amp;\leq x_5 \quad &amp; x_3+d_3&amp;\leq x_1+M(1-z_{13})\\
+x_5+d_5 &amp;\leq y \quad &amp; x_4+d_4&amp;\leq x_6 \quad &amp; x_2+d_2&amp;\leq x_3+Mz_{23}\\
+x_6+d_6 &amp;\leq y \quad &amp; &amp;				 \quad &amp; x_3+d_3&amp;\leq x_2+M(1-z_{23})\\
+x_1,x_2,\dots,x_6 &amp; \geq 0 \quad &amp; &amp;		 \quad &amp; z_{12},z_{13},z_{23}&amp;\in \{0,1\}
+\end{alignat*}\]</div>
+<p>Als allgemeines Modell für diese Problemklasse ergibt sich</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{alignat*}{5}
+\min_{\v x, y, \v z} &amp; \quad  &amp;   y &amp;          &amp; &amp; \\[4mm]
+\text{s.t. } &amp; &amp; x_i + d_i  &amp; \leq   \ y &amp; \quad\quad &amp; &amp; \forall i \in A \\
+&amp; &amp; x_i + d_i  &amp; \leq   \ x_j &amp; \quad\quad &amp; &amp; \forall (i,j) \in L \\[4mm]
+&amp; &amp; x_i + d_i  &amp; \leq   \ x_j + (1-z_{ij})d_{max} &amp; \quad\quad &amp; &amp; \forall (i,j) \in B \\
+&amp; &amp; x_j + d_j  &amp; \leq   \ x_i + z_{ij}d_{max} &amp; \quad\quad &amp; &amp; \forall (i,j) \in B \\[4mm]
+&amp; &amp; x_i &amp; \geq  \ 0 &amp; &amp;&amp; \forall i \in A \\
+&amp; &amp; z_{ij} &amp; \in \ \B &amp; &amp;&amp; \forall (i,j) \in B
+\end{alignat*}\]</div>
+<p>mit den Entscheidungsvariablen</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(y\)</span>: Endzeitpunkt der letzten Aufgabe</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_i\)</span>: Startzeitpunkt von Aufgabe <span class="math notranslate nohighlight">\(i\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(z_{ij}=\left\{\begin{array}{rl} 1, &amp;\text{ wenn Aufgabe }i\text{ vor Aufgabe }j\text{ ausgeführt wird}\\ 0, &amp; \text{ sonst}. \end{array}\right.\)</span></p></li>
+</ul>
+<p>und dem Wert</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+d_{max}=\sum_{i \in A}d_i.
+\end{align*}\]</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="02_Transportproblem.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">zurück</p>
+        <p class="prev-next-title"><span class="section-number">2.9. </span>Anwendung: Transportproblem</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="04_Dynamische_Probleme.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">weiter</p>
+        <p class="prev-next-title"><span class="section-number">4. </span>Zeitabhängige Probleme</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Inhalt
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ganzzahligkeitsbedingungen-und-weitere-modellarten">3.1. Ganzzahligkeitsbedingungen und weitere Modellarten</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relaxierung-von-problemen-mit-ganzzahligkeitsbedingungen">3.2. Relaxierung von Problemen mit Ganzzahligkeitsbedingungen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#losungsverfahren">3.3. Lösungsverfahren</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#branch-and-bound">3.3.1. Branch and bound</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#schnittebenen">3.3.2. Schnittebenen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing">3.3.3. Preprocessing</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#einige-standardprobleme">3.4. Einige Standardprobleme</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#das-rucksackproblem">3.4.1. Das Rucksackproblem</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bin-packing">3.4.2. Bin Packing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#einfuhrung-mengenprobleme-ein-einfaches-standortproblem">3.4.3. Einführung Mengenprobleme: Ein einfaches Standortproblem</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uberdeckungensprobleme-auf-mengen">3.4.4. Überdeckungensprobleme auf Mengen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#packungsprobleme-auf-mengen">3.4.5. Packungsprobleme auf Mengen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#zerlegungsprobleme-auf-mengen">3.4.6. Zerlegungsprobleme auf Mengen</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modellierungstricks-ii">3.5. Modellierungstricks II</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logische-bedingungen-an-variablen">3.5.1. Logische Bedingungen an Variablen</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#junktoren">Junktoren</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#modellierung-der-junktoren-als-arithmetische-ausdrucke">Modellierung der Junktoren als arithmetische Ausdrücke</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transformation-logischer-zusammenhange-in-arithmetische-ausdrucke">Transformation logischer Zusammenhänge in arithmetische Ausdrücke</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logische-bedingungen-fur-nebenbedingungen">3.5.2. Logische Bedingungen für Nebenbedingungen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#min-min-probleme">3.5.3. Min min Probleme</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#betrage-revisited">3.5.4. Beträge revisited</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linearisieren-von-nichtlinearitaten">3.5.5. Linearisieren von Nichtlinearitäten</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#produkt-von-binarvariablen">Produkt von Binärvariablen</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#produkt-von-einer-binarvariablen-und-einer-kontinuierlichen-variable">Produkt von einer Binärvariablen und einer kontinuierlichen Variable</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#allgemeines-vorgehen-bei-der-modellierung">3.6. Allgemeines Vorgehen bei der Modellierung</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#anwendung-ablaufplanung-scheduling">3.7. Anwendung: Ablaufplanung (Scheduling)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ein-einfaches-zeitkontinuierliches-modell">3.7.1. Ein einfaches zeitkontinuierliches Modell</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Durch Dennis Janka
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

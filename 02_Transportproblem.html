@@ -1,0 +1,1083 @@
+
+<!DOCTYPE html>
+
+
+<html lang="de" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>2.9. Anwendung: Transportproblem &#8212; Optimierungsverfahren, Modellierung und Simulation (DSCB410)</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=ca93fcec" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="_static/documentation_options.js?v=91fba89f"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="_static/translations.js?v=70a09b52"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"tex": {"macros": {"N": "\\mathbb{N}", "Z": "\\mathbb{Z}", "R": "\\mathbb{R}", "B": "\\mathbb{B}", "I": "\\mathbb{I}", "norm": ["\\left\\lVert#1 \\right\\rVert", 1], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\begin{pmatrix}"], "emat": ["\\end{pmatrix}"], "bmats": ["\\left(\\begin{smallmatrix}"], "emats": ["\\end{smallmatrix}\\right)"], "scikit": ["\\texttt{scikit-learn}"], "derv": ["\\frac{\\partial #1}{\\partial #2}", 2], "dervquad": ["\\frac{\\partial^2 #1}{\\partial #2^2}", 2], "dervzwei": ["\\frac{\\partial^2 #1}{\\partial {#2} \\partial {#3}}", 3], "v": ["\\mathbf{#1}", 1], "m": ["\\mathbf{#1}", 1], "argmin": ["\\underset{#1}{\\operatorname{arg\\!min}}", 1], "hyper": ["{\\color{Bittersweet}{#1}}", 1], "initial": "\\DeclareMathOperator{\\initial}{initial}", "reduced": "\\DeclareMathOperator{\\reduced}{reduced}", "lazy": "\\DeclareMathOperator{\\lazy}{lazy}", "ILP": "\\DeclareMathOperator{\\ILP}{ILP}", "red": ["{\\color{BrickRed}{#1}}", 1]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '02_Transportproblem';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Stichwortverzeichnis" href="genindex.html" />
+    <link rel="search" title="Suche" href="search.html" />
+    <link rel="next" title="3. Ganzzahlige Probleme" href="03_Ganzzahlige_Probleme.html" />
+    <link rel="prev" title="2. Lineare Optimierung" href="02_Lineare_Probleme.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="de"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="00_Ueberblick.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/HKA_IWI_Bildmarke-h_RGB.svg" class="logo__image only-light" alt="Optimierungsverfahren, Modellierung und Simulation (DSCB410) - Home"/>
+    <script>document.write(`<img src="_static/HKA_IWI_Bildmarke-h_RGB.svg" class="logo__image only-dark" alt="Optimierungsverfahren, Modellierung und Simulation (DSCB410) - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Suche" aria-label="Suche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Suche</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="00_Ueberblick.html">
+                    Überblick
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lineare Optimierungsmodelle</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_Grundbegriffe.html">1. Einführung und Grundbegriffe</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="02_Lineare_Probleme.html">2. Lineare Optimierung</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">2.9. Anwendung: Transportproblem</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="03_Ganzzahlige_Probleme.html">3. Ganzzahlige Probleme</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_Dynamische_Probleme.html">4. Zeitabhängige Probleme</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_Praxisaspekte.html">5. Praxisaspekte beim Lösen von gemischt-ganzzahligen Programmen</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Ableitungsbasierte Optimierung</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="06_Multivariate_Analysis.html">6. Funktionen und Ableitungen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_Automatische_Differentiation.html">7. Automatische Differentiation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_Theoretische_Grundlagen.html">8. Grundlagen der nichtlinearen Optimierung</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_Quadratische_Probleme.html">9. Quadratische Probleme</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_Gradientenverfahren.html">10. Verfahren erster Ordnung</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_Verfahren_zweiter_Ordnung.html">11. Verfahren zweiter Ordnung</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_Stochastischer_Gradientenabstieg.html">12. Stochastischer Gradientenabstieg</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_Training_NN.html">13. Training von Neuronalen Netzen</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Laden Sie diese Seite herunter">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/02_Transportproblem.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Quelldatei herunterladen"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="In PDF drucken"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Vollbildmodus"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Suche" aria-label="Suche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Anwendung: Transportproblem</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Inhalt </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objective-and-prerequisites">2.9.1. Objective and Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-description">2.9.2. Problem Description</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-formulation">2.9.3. Model Formulation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sets-and-indices">Sets and Indices</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters">Parameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-variables">Decision Variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#objective-function">Objective Function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#constraints">Constraints</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-implementation">2.9.4. Python Implementation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#input-data">2.9.5. Input Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-deployment">2.9.6. Model Deployment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis">2.9.7. Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">2.9.8. References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="anwendung-transportproblem">
+<h1><span class="section-number">2.9. </span>Anwendung: Transportproblem<a class="headerlink" href="#anwendung-transportproblem" title="Link to this heading">#</a></h1>
+<p>Dieses Anwendungsproblem finden Sie auch auf der <a class="reference external" href="https://www.gurobi.com/jupyter_models/supply-network-design/">Gurobi Homepage</a> unter dem Namen “Supply Network Design 1”.</p>
+<section id="objective-and-prerequisites">
+<h2><span class="section-number">2.9.1. </span>Objective and Prerequisites<a class="headerlink" href="#objective-and-prerequisites" title="Link to this heading">#</a></h2>
+<p>Try this Jupyter Notebook Modeling Example to learn how to solve a classic supply network design problem that involves finding the minimum cost flow through a network. We’ll show you how – given a set of factories, depots, and customers – you can use mathematical optimization to determine the best way to satisfy customer demand while minimizing shipping costs.</p>
+<p>This model is example 19 from the fifth edition of Model Building in Mathematical Programming, by H. Paul Williams on pages 273-275 and 330-332.</p>
+<p>This example is of beginning difficulty; we assume that you know Python and have some knowledge of the Gurobi Python API and building mathematical optimization models.</p>
+<p><strong>Download the Repository</strong> <br />
+You can download the repository containing this and other examples by clicking <a class="reference external" href="https://github.com/Gurobi/modeling-examples/archive/master.zip">here</a>.</p>
+</section>
+<hr class="docutils" />
+<section id="problem-description">
+<h2><span class="section-number">2.9.2. </span>Problem Description<a class="headerlink" href="#problem-description" title="Link to this heading">#</a></h2>
+<p>In this problem, we have six end customers, each with a known demand for a product.  Customer demand can be satisfied from a set of four depots, or directly from a set of two factories.  Each depot can support a maximum volume of product moving through it, and each factory can produce a maximum amount of product.  There are known costs associated with transporting the product, from a factory to a depot, from a depot to a customer, or from a factory directly to a customer.</p>
+<p>Our supply network has two factories, in Liverpool and Brighton, that produce a product.  Each has a maximum production capacity:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Factory</p></th>
+<th class="head"><p>Supply (tons)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Liverpool</p></td>
+<td><p>150,000</p></td>
+</tr>
+<tr class="row-odd"><td><p>Brighton</p></td>
+<td><p>200,000</p></td>
+</tr>
+</tbody>
+</table>
+<p>The product can be shipped from a factory to a set of four depots.  Each depot has a maximum throughput.  Depots don’t produce or consume the product; they simply pass the product on to customers.</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Depot</p></th>
+<th class="head"><p>Throughput (tons)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Newcastle</p></td>
+<td><p>70,000</p></td>
+</tr>
+<tr class="row-odd"><td><p>Birmingham</p></td>
+<td><p>50,000</p></td>
+</tr>
+<tr class="row-even"><td><p>London</p></td>
+<td><p>100,000</p></td>
+</tr>
+<tr class="row-odd"><td><p>Exeter</p></td>
+<td><p>40,000</p></td>
+</tr>
+</tbody>
+</table>
+<p>Our network has six customers, each with a given demand.</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Customer</p></th>
+<th class="head"><p>Demand (tons)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>C1</p></td>
+<td><p>50,000</p></td>
+</tr>
+<tr class="row-odd"><td><p>C2</p></td>
+<td><p>10,000</p></td>
+</tr>
+<tr class="row-even"><td><p>C3</p></td>
+<td><p>40,000</p></td>
+</tr>
+<tr class="row-odd"><td><p>C4</p></td>
+<td><p>35,000</p></td>
+</tr>
+<tr class="row-even"><td><p>C5</p></td>
+<td><p>60,000</p></td>
+</tr>
+<tr class="row-odd"><td><p>C6</p></td>
+<td><p>20,000</p></td>
+</tr>
+</tbody>
+</table>
+<p>Shipping costs are given in the following table (in dollars per ton).  Columns are source cities and rows are destination cities.  Thus, for example, it costs $1 per ton to ship the product from Liverpool to London.  A ‘-’ in the table indicates that that combination is not possible, so for example it is not possible to ship from the factory in Brighton to the depot in Newcastle.</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>To</p></th>
+<th class="head"><p>Liverpool</p></th>
+<th class="head"><p>Brighton</p></th>
+<th class="head"><p>Newcastle</p></th>
+<th class="head"><p>Birmingham</p></th>
+<th class="head"><p>London</p></th>
+<th class="head"><p>Exeter</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Depots</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>Newcastle</p></td>
+<td><p>0.5</p></td>
+<td><p>-</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>Birmingham</p></td>
+<td><p>0.5</p></td>
+<td><p>0.3</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>London</p></td>
+<td><p>1.0</p></td>
+<td><p>0.5</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>Exeter</p></td>
+<td><p>0.2</p></td>
+<td><p>0.2</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>Customers</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>C1</p></td>
+<td><p>1.0</p></td>
+<td><p>2.0</p></td>
+<td><p>-</p></td>
+<td><p>1.0</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>C2</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>1.5</p></td>
+<td><p>0.5</p></td>
+<td><p>1.5</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>C3</p></td>
+<td><p>1.5</p></td>
+<td><p>-</p></td>
+<td><p>0.5</p></td>
+<td><p>0.5</p></td>
+<td><p>2.0</p></td>
+<td><p>0.2</p></td>
+</tr>
+<tr class="row-odd"><td><p>C4</p></td>
+<td><p>2.0</p></td>
+<td><p>-</p></td>
+<td><p>1.5</p></td>
+<td><p>1.0</p></td>
+<td><p>-</p></td>
+<td><p>1.5</p></td>
+</tr>
+<tr class="row-even"><td><p>C5</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>0.5</p></td>
+<td><p>0.5</p></td>
+<td><p>0.5</p></td>
+</tr>
+<tr class="row-odd"><td><p>C6</p></td>
+<td><p>1.0</p></td>
+<td><p>-</p></td>
+<td><p>1.0</p></td>
+<td><p>-</p></td>
+<td><p>1.5</p></td>
+<td><p>1.5</p></td>
+</tr>
+</tbody>
+</table>
+<p>The question to be answered is how to satisfy the demands of the end customers while minimizing shipping costs.</p>
+</section>
+<hr class="docutils" />
+<section id="model-formulation">
+<h2><span class="section-number">2.9.3. </span>Model Formulation<a class="headerlink" href="#model-formulation" title="Link to this heading">#</a></h2>
+<section id="sets-and-indices">
+<h3>Sets and Indices<a class="headerlink" href="#sets-and-indices" title="Link to this heading">#</a></h3>
+<p><span class="math notranslate nohighlight">\(f \in \text{Factories}=\{\text{Liverpool}, \text{Brighton}\}\)</span></p>
+<p><span class="math notranslate nohighlight">\(d \in \text{Depots}=\{\text{Newcastle}, \text{Birmingham}, \text{London}, \text{Exeter}\}\)</span></p>
+<p><span class="math notranslate nohighlight">\(c \in \text{Customers}=\{\text{C1}, \text{C2}, \text{C3}, \text{C4}, \text{C5}, \text{C6}\}\)</span></p>
+<p><span class="math notranslate nohighlight">\(\text{Cities} = \text{Factories} \cup \text{Depots} \cup \text{Customers}\)</span></p>
+</section>
+<section id="parameters">
+<h3>Parameters<a class="headerlink" href="#parameters" title="Link to this heading">#</a></h3>
+<p><span class="math notranslate nohighlight">\(\text{cost}_{s,t} \in \mathbb{R}^+\)</span>: Cost of shipping one ton from source <span class="math notranslate nohighlight">\(s\)</span> to destination <span class="math notranslate nohighlight">\(t\)</span>.</p>
+<p><span class="math notranslate nohighlight">\(\text{supply}_f \in \mathbb{R}^+\)</span>: Maximum possible supply from factory <span class="math notranslate nohighlight">\(f\)</span> (in tons).</p>
+<p><span class="math notranslate nohighlight">\(\text{through}_d \in \mathbb{R}^+\)</span>: Maximum possible flow through depot <span class="math notranslate nohighlight">\(d\)</span> (in tons).</p>
+<p><span class="math notranslate nohighlight">\(\text{demand}_c \in \mathbb{R}^+\)</span>: Demand for goods at customer <span class="math notranslate nohighlight">\(c\)</span> (in tons).</p>
+</section>
+<section id="decision-variables">
+<h3>Decision Variables<a class="headerlink" href="#decision-variables" title="Link to this heading">#</a></h3>
+<p><span class="math notranslate nohighlight">\(\text{flow}_{s,t} \in \mathbb{N}^+\)</span>: Quantity of goods (in tons) that is shipped from source <span class="math notranslate nohighlight">\(s\)</span> to destionation <span class="math notranslate nohighlight">\(t\)</span>.</p>
+</section>
+<section id="objective-function">
+<h3>Objective Function<a class="headerlink" href="#objective-function" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Cost</strong>: Minimize total shipping costs.</p></li>
+</ul>
+<div class="amsmath math notranslate nohighlight" id="equation-3934928c-c717-4bb6-b097-0c55e6e6b7ab">
+<span class="eqno">(2.8)<a class="headerlink" href="#equation-3934928c-c717-4bb6-b097-0c55e6e6b7ab" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\text{Minimize} \quad Z = \sum_{(s,t) \in \text{Cities} \times \text{Cities}}{\text{cost}_{s,t}*\text{flow}_{s,t}}
+\end{equation}\]</div>
+</section>
+<section id="constraints">
+<h3>Constraints<a class="headerlink" href="#constraints" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Factory output</strong>: Flow of goods from a factory must respect maximum capacity.</p></li>
+</ul>
+<div class="amsmath math notranslate nohighlight" id="equation-6a63b917-662d-40ba-8b29-303ef2cb62ea">
+<span class="eqno">(2.9)<a class="headerlink" href="#equation-6a63b917-662d-40ba-8b29-303ef2cb62ea" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\sum_{t \in \text{Cities}}{\text{flow}_{f,t}} \leq \text{supply}_{f} \quad \forall f \in \text{Factories}
+\end{equation}\]</div>
+<ul class="simple">
+<li><p><strong>Customer demand</strong>: Flow of goods must meet customer demand.</p></li>
+</ul>
+<div class="amsmath math notranslate nohighlight" id="equation-4a668309-a87b-40f9-901b-71fa10fd2dd8">
+<span class="eqno">(2.10)<a class="headerlink" href="#equation-4a668309-a87b-40f9-901b-71fa10fd2dd8" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\sum_{s \in \text{Cities}}{\text{flow}_{s,c}} = \text{demand}_{c} \quad \forall c \in \text{Customers}
+\end{equation}\]</div>
+<ul class="simple">
+<li><p><strong>Depot flow</strong>: Flow into a depot equals flow out of the depot.</p></li>
+</ul>
+<div class="amsmath math notranslate nohighlight" id="equation-1418ae0e-d4b7-4c51-849d-534e2f07b079">
+<span class="eqno">(2.11)<a class="headerlink" href="#equation-1418ae0e-d4b7-4c51-849d-534e2f07b079" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\sum_{s \in \text{Cities}}{\text{flow}_{s,d}} =
+\sum_{t \in \text{Cities}}{\text{flow}_{d,t}}
+\quad \forall d \in \text{Depots}
+\end{equation}\]</div>
+<ul class="simple">
+<li><p><strong>Depot capacity</strong>: Flow into a depot must respect depot capacity.</p></li>
+</ul>
+<div class="amsmath math notranslate nohighlight" id="equation-4fb14f4f-04c8-40ce-ae04-7929faeb1901">
+<span class="eqno">(2.12)<a class="headerlink" href="#equation-4fb14f4f-04c8-40ce-ae04-7929faeb1901" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\sum_{s \in \text{Cities}}{\text{flow}_{s,d}} \leq \text{through}_{d}
+\quad \forall d \in \text{Depots}
+\end{equation}\]</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="python-implementation">
+<h2><span class="section-number">2.9.4. </span>Python Implementation<a class="headerlink" href="#python-implementation" title="Link to this heading">#</a></h2>
+<p>We import the Gurobi Python Module and other Python libraries.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="kn">import</span> <span class="nn">gurobipy</span> <span class="k">as</span> <span class="nn">gp</span>
+<span class="kn">from</span> <span class="nn">gurobipy</span> <span class="kn">import</span> <span class="n">GRB</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">gurobipy</span> <span class="k">as</span> <span class="nn">gp</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">from</span> <span class="nn">gurobipy</span> <span class="kn">import</span> <span class="n">GRB</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;gurobipy&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="input-data">
+<h2><span class="section-number">2.9.5. </span>Input Data<a class="headerlink" href="#input-data" title="Link to this heading">#</a></h2>
+<p>We define all the input data for the model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create dictionaries to capture factory supply limits, depot throughput limits, and customer demand.</span>
+
+<span class="n">supply</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">({</span><span class="s1">&#39;Liverpool&#39;</span><span class="p">:</span> <span class="mi">150000</span><span class="p">,</span>
+               <span class="s1">&#39;Brighton&#39;</span><span class="p">:</span> <span class="mi">200000</span><span class="p">})</span>
+
+<span class="n">through</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">({</span><span class="s1">&#39;Newcastle&#39;</span><span class="p">:</span> <span class="mi">70000</span><span class="p">,</span>
+                <span class="s1">&#39;Birmingham&#39;</span><span class="p">:</span> <span class="mi">50000</span><span class="p">,</span>
+                <span class="s1">&#39;London&#39;</span><span class="p">:</span> <span class="mi">100000</span><span class="p">,</span>
+                <span class="s1">&#39;Exeter&#39;</span><span class="p">:</span> <span class="mi">40000</span><span class="p">})</span>
+
+<span class="n">demand</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">({</span><span class="s1">&#39;C1&#39;</span><span class="p">:</span> <span class="mi">50000</span><span class="p">,</span>
+               <span class="s1">&#39;C2&#39;</span><span class="p">:</span> <span class="mi">10000</span><span class="p">,</span>
+               <span class="s1">&#39;C3&#39;</span><span class="p">:</span> <span class="mi">40000</span><span class="p">,</span>
+               <span class="s1">&#39;C4&#39;</span><span class="p">:</span> <span class="mi">35000</span><span class="p">,</span>
+               <span class="s1">&#39;C5&#39;</span><span class="p">:</span> <span class="mi">60000</span><span class="p">,</span>
+               <span class="s1">&#39;C6&#39;</span><span class="p">:</span> <span class="mi">20000</span><span class="p">})</span>
+
+<span class="c1"># Create a dictionary to capture shipping costs.</span>
+
+<span class="n">arcs</span><span class="p">,</span> <span class="n">cost</span> <span class="o">=</span> <span class="n">gp</span><span class="o">.</span><span class="n">multidict</span><span class="p">({</span>
+    <span class="p">(</span><span class="s1">&#39;Liverpool&#39;</span><span class="p">,</span> <span class="s1">&#39;Newcastle&#39;</span><span class="p">):</span> <span class="mf">0.5</span><span class="p">,</span>
+    <span class="p">(</span><span class="s1">&#39;Liverpool&#39;</span><span class="p">,</span> <span class="s1">&#39;Birmingham&#39;</span><span class="p">):</span> <span class="mf">0.5</span><span class="p">,</span>
+    <span class="p">(</span><span class="s1">&#39;Liverpool&#39;</span><span class="p">,</span> <span class="s1">&#39;London&#39;</span><span class="p">):</span> <span class="mf">1.0</span><span class="p">,</span>
+    <span class="p">(</span><span class="s1">&#39;Liverpool&#39;</span><span class="p">,</span> <span class="s1">&#39;Exeter&#39;</span><span class="p">):</span> <span class="mf">0.2</span><span class="p">,</span>
+    <span class="p">(</span><span class="s1">&#39;Liverpool&#39;</span><span class="p">,</span> <span class="s1">&#39;C1&#39;</span><span class="p">):</span> <span class="mf">1.0</span><span class="p">,</span>
+    <span class="p">(</span><span class="s1">&#39;Liverpool&#39;</span><span class="p">,</span> <span class="s1">&#39;C3&#39;</span><span class="p">):</span> <span class="mf">1.5</span><span class="p">,</span>
+    <span class="p">(</span><span class="s1">&#39;Liverpool&#39;</span><span class="p">,</span> <span class="s1">&#39;C4&#39;</span><span class="p">):</span> <span class="mf">2.0</span><span class="p">,</span>
+    <span class="p">(</span><span class="s1">&#39;Liverpool&#39;</span><span class="p">,</span> <span class="s1">&#39;C6&#39;</span><span class="p">):</span> <span class="mf">1.0</span><span class="p">,</span>
+    <span class="p">(</span><span class="s1">&#39;Brighton&#39;</span><span class="p">,</span> <span class="s1">&#39;Birmingham&#39;</span><span class="p">):</span> <span class="mf">0.3</span><span class="p">,</span>
+    <span class="p">(</span><span class="s1">&#39;Brighton&#39;</span><span class="p">,</span> <span class="s1">&#39;London&#39;</span><span class="p">):</span> <span class="mf">0.5</span><span class="p">,</span>
+    <span class="p">(</span><span class="s1">&#39;Brighton&#39;</span><span class="p">,</span> <span class="s1">&#39;Exeter&#39;</span><span class="p">):</span> <span class="mf">0.2</span><span class="p">,</span>
+    <span class="p">(</span><span class="s1">&#39;Brighton&#39;</span><span class="p">,</span> <span class="s1">&#39;C1&#39;</span><span class="p">):</span> <span class="mf">2.0</span><span class="p">,</span>
+    <span class="p">(</span><span class="s1">&#39;Newcastle&#39;</span><span class="p">,</span> <span class="s1">&#39;C2&#39;</span><span class="p">):</span> <span class="mf">1.5</span><span class="p">,</span>
+    <span class="p">(</span><span class="s1">&#39;Newcastle&#39;</span><span class="p">,</span> <span class="s1">&#39;C3&#39;</span><span class="p">):</span> <span class="mf">0.5</span><span class="p">,</span>
+    <span class="p">(</span><span class="s1">&#39;Newcastle&#39;</span><span class="p">,</span> <span class="s1">&#39;C5&#39;</span><span class="p">):</span> <span class="mf">1.5</span><span class="p">,</span>
+    <span class="p">(</span><span class="s1">&#39;Newcastle&#39;</span><span class="p">,</span> <span class="s1">&#39;C6&#39;</span><span class="p">):</span> <span class="mf">1.0</span><span class="p">,</span>
+    <span class="p">(</span><span class="s1">&#39;Birmingham&#39;</span><span class="p">,</span> <span class="s1">&#39;C1&#39;</span><span class="p">):</span> <span class="mf">1.0</span><span class="p">,</span>
+    <span class="p">(</span><span class="s1">&#39;Birmingham&#39;</span><span class="p">,</span> <span class="s1">&#39;C2&#39;</span><span class="p">):</span> <span class="mf">0.5</span><span class="p">,</span>
+    <span class="p">(</span><span class="s1">&#39;Birmingham&#39;</span><span class="p">,</span> <span class="s1">&#39;C3&#39;</span><span class="p">):</span> <span class="mf">0.5</span><span class="p">,</span>
+    <span class="p">(</span><span class="s1">&#39;Birmingham&#39;</span><span class="p">,</span> <span class="s1">&#39;C4&#39;</span><span class="p">):</span> <span class="mf">1.0</span><span class="p">,</span>
+    <span class="p">(</span><span class="s1">&#39;Birmingham&#39;</span><span class="p">,</span> <span class="s1">&#39;C5&#39;</span><span class="p">):</span> <span class="mf">0.5</span><span class="p">,</span>
+    <span class="p">(</span><span class="s1">&#39;London&#39;</span><span class="p">,</span> <span class="s1">&#39;C2&#39;</span><span class="p">):</span> <span class="mf">1.5</span><span class="p">,</span>
+    <span class="p">(</span><span class="s1">&#39;London&#39;</span><span class="p">,</span> <span class="s1">&#39;C3&#39;</span><span class="p">):</span> <span class="mf">2.0</span><span class="p">,</span>
+    <span class="p">(</span><span class="s1">&#39;London&#39;</span><span class="p">,</span> <span class="s1">&#39;C5&#39;</span><span class="p">):</span> <span class="mf">0.5</span><span class="p">,</span>
+    <span class="p">(</span><span class="s1">&#39;London&#39;</span><span class="p">,</span> <span class="s1">&#39;C6&#39;</span><span class="p">):</span> <span class="mf">1.5</span><span class="p">,</span>
+    <span class="p">(</span><span class="s1">&#39;Exeter&#39;</span><span class="p">,</span> <span class="s1">&#39;C3&#39;</span><span class="p">):</span> <span class="mf">0.2</span><span class="p">,</span>
+    <span class="p">(</span><span class="s1">&#39;Exeter&#39;</span><span class="p">,</span> <span class="s1">&#39;C4&#39;</span><span class="p">):</span> <span class="mf">1.5</span><span class="p">,</span>
+    <span class="p">(</span><span class="s1">&#39;Exeter&#39;</span><span class="p">,</span> <span class="s1">&#39;C5&#39;</span><span class="p">):</span> <span class="mf">0.5</span><span class="p">,</span>
+    <span class="p">(</span><span class="s1">&#39;Exeter&#39;</span><span class="p">,</span> <span class="s1">&#39;C6&#39;</span><span class="p">):</span> <span class="mf">1.5</span>
+<span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">20</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="n">demand</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">({</span><span class="s1">&#39;C1&#39;</span><span class="p">:</span> <span class="mi">50000</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span>                <span class="s1">&#39;C2&#39;</span><span class="p">:</span> <span class="mi">10000</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span>                <span class="s1">&#39;C3&#39;</span><span class="p">:</span> <span class="mi">40000</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span>                <span class="s1">&#39;C4&#39;</span><span class="p">:</span> <span class="mi">35000</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span>                <span class="s1">&#39;C5&#39;</span><span class="p">:</span> <span class="mi">60000</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span>                <span class="s1">&#39;C6&#39;</span><span class="p">:</span> <span class="mi">20000</span><span class="p">})</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span> <span class="c1"># Create a dictionary to capture shipping costs.</span>
+<span class="ne">---&gt; </span><span class="mi">20</span> <span class="n">arcs</span><span class="p">,</span> <span class="n">cost</span> <span class="o">=</span> <span class="n">gp</span><span class="o">.</span><span class="n">multidict</span><span class="p">({</span>
+<span class="g g-Whitespace">     </span><span class="mi">21</span>     <span class="p">(</span><span class="s1">&#39;Liverpool&#39;</span><span class="p">,</span> <span class="s1">&#39;Newcastle&#39;</span><span class="p">):</span> <span class="mf">0.5</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">22</span>     <span class="p">(</span><span class="s1">&#39;Liverpool&#39;</span><span class="p">,</span> <span class="s1">&#39;Birmingham&#39;</span><span class="p">):</span> <span class="mf">0.5</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">23</span>     <span class="p">(</span><span class="s1">&#39;Liverpool&#39;</span><span class="p">,</span> <span class="s1">&#39;London&#39;</span><span class="p">):</span> <span class="mf">1.0</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">24</span>     <span class="p">(</span><span class="s1">&#39;Liverpool&#39;</span><span class="p">,</span> <span class="s1">&#39;Exeter&#39;</span><span class="p">):</span> <span class="mf">0.2</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">25</span>     <span class="p">(</span><span class="s1">&#39;Liverpool&#39;</span><span class="p">,</span> <span class="s1">&#39;C1&#39;</span><span class="p">):</span> <span class="mf">1.0</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">26</span>     <span class="p">(</span><span class="s1">&#39;Liverpool&#39;</span><span class="p">,</span> <span class="s1">&#39;C3&#39;</span><span class="p">):</span> <span class="mf">1.5</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">27</span>     <span class="p">(</span><span class="s1">&#39;Liverpool&#39;</span><span class="p">,</span> <span class="s1">&#39;C4&#39;</span><span class="p">):</span> <span class="mf">2.0</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">28</span>     <span class="p">(</span><span class="s1">&#39;Liverpool&#39;</span><span class="p">,</span> <span class="s1">&#39;C6&#39;</span><span class="p">):</span> <span class="mf">1.0</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">29</span>     <span class="p">(</span><span class="s1">&#39;Brighton&#39;</span><span class="p">,</span> <span class="s1">&#39;Birmingham&#39;</span><span class="p">):</span> <span class="mf">0.3</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">30</span>     <span class="p">(</span><span class="s1">&#39;Brighton&#39;</span><span class="p">,</span> <span class="s1">&#39;London&#39;</span><span class="p">):</span> <span class="mf">0.5</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">31</span>     <span class="p">(</span><span class="s1">&#39;Brighton&#39;</span><span class="p">,</span> <span class="s1">&#39;Exeter&#39;</span><span class="p">):</span> <span class="mf">0.2</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">32</span>     <span class="p">(</span><span class="s1">&#39;Brighton&#39;</span><span class="p">,</span> <span class="s1">&#39;C1&#39;</span><span class="p">):</span> <span class="mf">2.0</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">33</span>     <span class="p">(</span><span class="s1">&#39;Newcastle&#39;</span><span class="p">,</span> <span class="s1">&#39;C2&#39;</span><span class="p">):</span> <span class="mf">1.5</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">34</span>     <span class="p">(</span><span class="s1">&#39;Newcastle&#39;</span><span class="p">,</span> <span class="s1">&#39;C3&#39;</span><span class="p">):</span> <span class="mf">0.5</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">35</span>     <span class="p">(</span><span class="s1">&#39;Newcastle&#39;</span><span class="p">,</span> <span class="s1">&#39;C5&#39;</span><span class="p">):</span> <span class="mf">1.5</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">36</span>     <span class="p">(</span><span class="s1">&#39;Newcastle&#39;</span><span class="p">,</span> <span class="s1">&#39;C6&#39;</span><span class="p">):</span> <span class="mf">1.0</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">37</span>     <span class="p">(</span><span class="s1">&#39;Birmingham&#39;</span><span class="p">,</span> <span class="s1">&#39;C1&#39;</span><span class="p">):</span> <span class="mf">1.0</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">38</span>     <span class="p">(</span><span class="s1">&#39;Birmingham&#39;</span><span class="p">,</span> <span class="s1">&#39;C2&#39;</span><span class="p">):</span> <span class="mf">0.5</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">39</span>     <span class="p">(</span><span class="s1">&#39;Birmingham&#39;</span><span class="p">,</span> <span class="s1">&#39;C3&#39;</span><span class="p">):</span> <span class="mf">0.5</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">40</span>     <span class="p">(</span><span class="s1">&#39;Birmingham&#39;</span><span class="p">,</span> <span class="s1">&#39;C4&#39;</span><span class="p">):</span> <span class="mf">1.0</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">41</span>     <span class="p">(</span><span class="s1">&#39;Birmingham&#39;</span><span class="p">,</span> <span class="s1">&#39;C5&#39;</span><span class="p">):</span> <span class="mf">0.5</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">42</span>     <span class="p">(</span><span class="s1">&#39;London&#39;</span><span class="p">,</span> <span class="s1">&#39;C2&#39;</span><span class="p">):</span> <span class="mf">1.5</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">43</span>     <span class="p">(</span><span class="s1">&#39;London&#39;</span><span class="p">,</span> <span class="s1">&#39;C3&#39;</span><span class="p">):</span> <span class="mf">2.0</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">44</span>     <span class="p">(</span><span class="s1">&#39;London&#39;</span><span class="p">,</span> <span class="s1">&#39;C5&#39;</span><span class="p">):</span> <span class="mf">0.5</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">45</span>     <span class="p">(</span><span class="s1">&#39;London&#39;</span><span class="p">,</span> <span class="s1">&#39;C6&#39;</span><span class="p">):</span> <span class="mf">1.5</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">46</span>     <span class="p">(</span><span class="s1">&#39;Exeter&#39;</span><span class="p">,</span> <span class="s1">&#39;C3&#39;</span><span class="p">):</span> <span class="mf">0.2</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">47</span>     <span class="p">(</span><span class="s1">&#39;Exeter&#39;</span><span class="p">,</span> <span class="s1">&#39;C4&#39;</span><span class="p">):</span> <span class="mf">1.5</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">48</span>     <span class="p">(</span><span class="s1">&#39;Exeter&#39;</span><span class="p">,</span> <span class="s1">&#39;C5&#39;</span><span class="p">):</span> <span class="mf">0.5</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">49</span>     <span class="p">(</span><span class="s1">&#39;Exeter&#39;</span><span class="p">,</span> <span class="s1">&#39;C6&#39;</span><span class="p">):</span> <span class="mf">1.5</span>
+<span class="g g-Whitespace">     </span><span class="mi">50</span> <span class="p">})</span>
+
+<span class="ne">NameError</span>: name &#39;gp&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="model-deployment">
+<h2><span class="section-number">2.9.6. </span>Model Deployment<a class="headerlink" href="#model-deployment" title="Link to this heading">#</a></h2>
+<p>We create a model and the variables. The variables simply capture the amount of product that flows along each allowed path between a source and destination.  Objective coefficients are provided here (in <span class="math notranslate nohighlight">\(\text{cost}\)</span>) , so we don’t need to provide an optimization objective later.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">gp</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="s1">&#39;SupplyNetworkDesign&#39;</span><span class="p">)</span>
+<span class="n">flow</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVars</span><span class="p">(</span><span class="n">arcs</span><span class="p">,</span> <span class="n">obj</span><span class="o">=</span><span class="n">cost</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;flow&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">model</span> <span class="o">=</span> <span class="n">gp</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="s1">&#39;SupplyNetworkDesign&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">flow</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVars</span><span class="p">(</span><span class="n">arcs</span><span class="p">,</span> <span class="n">obj</span><span class="o">=</span><span class="n">cost</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;flow&quot;</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;gp&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+<p>Our first constraints require the total flow along arcs leaving a factory to be at most as large as the supply capacity of that factory.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Production capacity limits</span>
+
+<span class="n">factories</span> <span class="o">=</span> <span class="n">supply</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+<span class="n">factory_flow</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addConstrs</span><span class="p">((</span><span class="n">gp</span><span class="o">.</span><span class="n">quicksum</span><span class="p">(</span><span class="n">flow</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">factory</span><span class="p">,</span> <span class="s1">&#39;*&#39;</span><span class="p">))</span> <span class="o">&lt;=</span> <span class="n">supply</span><span class="p">[</span><span class="n">factory</span><span class="p">]</span>
+                                 <span class="k">for</span> <span class="n">factory</span> <span class="ow">in</span> <span class="n">factories</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;factory&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Production capacity limits</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">factories</span> <span class="o">=</span> <span class="n">supply</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+<span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">factory_flow</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addConstrs</span><span class="p">((</span><span class="n">gp</span><span class="o">.</span><span class="n">quicksum</span><span class="p">(</span><span class="n">flow</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">factory</span><span class="p">,</span> <span class="s1">&#39;*&#39;</span><span class="p">))</span> <span class="o">&lt;=</span> <span class="n">supply</span><span class="p">[</span><span class="n">factory</span><span class="p">]</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>                                  <span class="k">for</span> <span class="n">factory</span> <span class="ow">in</span> <span class="n">factories</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;factory&quot;</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;model&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+<p>Our next constraints require the total flow along arcs entering a customer to be equal to the demand from that customer.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Customer demand</span>
+
+<span class="n">customers</span> <span class="o">=</span> <span class="n">demand</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+<span class="n">customer_flow</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addConstrs</span><span class="p">((</span><span class="n">gp</span><span class="o">.</span><span class="n">quicksum</span><span class="p">(</span><span class="n">flow</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">customer</span><span class="p">))</span> <span class="o">==</span> <span class="n">demand</span><span class="p">[</span><span class="n">customer</span><span class="p">]</span>
+                                  <span class="k">for</span> <span class="n">customer</span> <span class="ow">in</span> <span class="n">customers</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;customer&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Customer demand</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">customers</span> <span class="o">=</span> <span class="n">demand</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+<span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">customer_flow</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addConstrs</span><span class="p">((</span><span class="n">gp</span><span class="o">.</span><span class="n">quicksum</span><span class="p">(</span><span class="n">flow</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">customer</span><span class="p">))</span> <span class="o">==</span> <span class="n">demand</span><span class="p">[</span><span class="n">customer</span><span class="p">]</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>                                   <span class="k">for</span> <span class="n">customer</span> <span class="ow">in</span> <span class="n">customers</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;customer&quot;</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;model&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+<p>Our final constraints relate to depots.  The first constraints require that the total amount of product entering the depot must equal the total amount leaving.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Depot flow conservation</span>
+
+<span class="n">depots</span> <span class="o">=</span> <span class="n">through</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+<span class="n">depot_flow</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addConstrs</span><span class="p">((</span><span class="n">gp</span><span class="o">.</span><span class="n">quicksum</span><span class="p">(</span><span class="n">flow</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">depot</span><span class="p">,</span> <span class="s1">&#39;*&#39;</span><span class="p">))</span> <span class="o">==</span> <span class="n">gp</span><span class="o">.</span><span class="n">quicksum</span><span class="p">(</span><span class="n">flow</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">depot</span><span class="p">))</span>
+                               <span class="k">for</span> <span class="n">depot</span> <span class="ow">in</span> <span class="n">depots</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;depot&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Depot flow conservation</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">depots</span> <span class="o">=</span> <span class="n">through</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+<span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">depot_flow</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addConstrs</span><span class="p">((</span><span class="n">gp</span><span class="o">.</span><span class="n">quicksum</span><span class="p">(</span><span class="n">flow</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">depot</span><span class="p">,</span> <span class="s1">&#39;*&#39;</span><span class="p">))</span> <span class="o">==</span> <span class="n">gp</span><span class="o">.</span><span class="n">quicksum</span><span class="p">(</span><span class="n">flow</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">depot</span><span class="p">))</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>                                <span class="k">for</span> <span class="n">depot</span> <span class="ow">in</span> <span class="n">depots</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;depot&quot;</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;model&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+<p>The second set limits the product passing through the depot to be at most equal the throughput of that deport.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Depot throughput</span>
+
+<span class="n">depot_capacity</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addConstrs</span><span class="p">((</span><span class="n">gp</span><span class="o">.</span><span class="n">quicksum</span><span class="p">(</span><span class="n">flow</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">depot</span><span class="p">))</span> <span class="o">&lt;=</span> <span class="n">through</span><span class="p">[</span><span class="n">depot</span><span class="p">]</span>
+                                   <span class="k">for</span> <span class="n">depot</span> <span class="ow">in</span> <span class="n">depots</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;depot_capacity&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Depot throughput</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">depot_capacity</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addConstrs</span><span class="p">((</span><span class="n">gp</span><span class="o">.</span><span class="n">quicksum</span><span class="p">(</span><span class="n">flow</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">depot</span><span class="p">))</span> <span class="o">&lt;=</span> <span class="n">through</span><span class="p">[</span><span class="n">depot</span><span class="p">]</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span>                                    <span class="k">for</span> <span class="n">depot</span> <span class="ow">in</span> <span class="n">depots</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;depot_capacity&quot;</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;model&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+<p>We now optimize the model</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">optimize</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">model</span><span class="o">.</span><span class="n">optimize</span><span class="p">()</span>
+
+<span class="ne">NameError</span>: name &#39;model&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="analysis">
+<h2><span class="section-number">2.9.7. </span>Analysis<a class="headerlink" href="#analysis" title="Link to this heading">#</a></h2>
+<p>Product demand from all of our customers can be satisfied for a total cost of <span class="math notranslate nohighlight">\(\$198,500\)</span>. The optimal plan is as follows.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">product_flow</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">arc</span> <span class="ow">in</span> <span class="n">arcs</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">flow</span><span class="p">[</span><span class="n">arc</span><span class="p">]</span><span class="o">.</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mf">1e-6</span><span class="p">:</span>
+        <span class="n">product_flow</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;From&quot;</span><span class="p">:</span> <span class="n">arc</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;To&quot;</span><span class="p">:</span> <span class="n">arc</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;Flow&quot;</span><span class="p">:</span> <span class="n">flow</span><span class="p">[</span><span class="n">arc</span><span class="p">]</span><span class="o">.</span><span class="n">x</span><span class="p">})</span>
+<span class="n">product_flow</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">product_flow</span><span class="p">)</span>
+<span class="n">product_flow</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">product_flow</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="k">for</span> <span class="n">arc</span> <span class="ow">in</span> <span class="n">arcs</span><span class="p">:</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="k">if</span> <span class="n">flow</span><span class="p">[</span><span class="n">arc</span><span class="p">]</span><span class="o">.</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mf">1e-6</span><span class="p">:</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span>         <span class="n">product_flow</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;From&quot;</span><span class="p">:</span> <span class="n">arc</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;To&quot;</span><span class="p">:</span> <span class="n">arc</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;Flow&quot;</span><span class="p">:</span> <span class="n">flow</span><span class="p">[</span><span class="n">arc</span><span class="p">]</span><span class="o">.</span><span class="n">x</span><span class="p">})</span>
+
+<span class="ne">NameError</span>: name &#39;arcs&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="references">
+<h2><span class="section-number">2.9.8. </span>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<p>H. Paul Williams, Model Building in Mathematical Programming, fifth edition.</p>
+<p>Copyright © 2020 Gurobi Optimization, LLC</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="02_Lineare_Probleme.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">zurück</p>
+        <p class="prev-next-title"><span class="section-number">2. </span>Lineare Optimierung</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="03_Ganzzahlige_Probleme.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">weiter</p>
+        <p class="prev-next-title"><span class="section-number">3. </span>Ganzzahlige Probleme</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Inhalt
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objective-and-prerequisites">2.9.1. Objective and Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-description">2.9.2. Problem Description</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-formulation">2.9.3. Model Formulation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sets-and-indices">Sets and Indices</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters">Parameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-variables">Decision Variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#objective-function">Objective Function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#constraints">Constraints</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-implementation">2.9.4. Python Implementation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#input-data">2.9.5. Input Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-deployment">2.9.6. Model Deployment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis">2.9.7. Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">2.9.8. References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Durch Dennis Janka
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

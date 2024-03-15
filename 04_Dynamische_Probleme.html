@@ -1,0 +1,666 @@
+
+<!DOCTYPE html>
+
+
+<html lang="de" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>4. Zeitabhängige Probleme &#8212; Optimierungsverfahren, Modellierung und Simulation (DSCB410)</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=ca93fcec" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="_static/documentation_options.js?v=91fba89f"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="_static/translations.js?v=70a09b52"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"tex": {"macros": {"N": "\\mathbb{N}", "Z": "\\mathbb{Z}", "R": "\\mathbb{R}", "B": "\\mathbb{B}", "I": "\\mathbb{I}", "norm": ["\\left\\lVert#1 \\right\\rVert", 1], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\begin{pmatrix}"], "emat": ["\\end{pmatrix}"], "bmats": ["\\left(\\begin{smallmatrix}"], "emats": ["\\end{smallmatrix}\\right)"], "scikit": ["\\texttt{scikit-learn}"], "derv": ["\\frac{\\partial #1}{\\partial #2}", 2], "dervquad": ["\\frac{\\partial^2 #1}{\\partial #2^2}", 2], "dervzwei": ["\\frac{\\partial^2 #1}{\\partial {#2} \\partial {#3}}", 3], "v": ["\\mathbf{#1}", 1], "m": ["\\mathbf{#1}", 1], "argmin": ["\\underset{#1}{\\operatorname{arg\\!min}}", 1], "hyper": ["{\\color{Bittersweet}{#1}}", 1], "initial": "\\DeclareMathOperator{\\initial}{initial}", "reduced": "\\DeclareMathOperator{\\reduced}{reduced}", "lazy": "\\DeclareMathOperator{\\lazy}{lazy}", "ILP": "\\DeclareMathOperator{\\ILP}{ILP}", "red": ["{\\color{BrickRed}{#1}}", 1]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '04_Dynamische_Probleme';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Stichwortverzeichnis" href="genindex.html" />
+    <link rel="search" title="Suche" href="search.html" />
+    <link rel="next" title="5. Praxisaspekte beim Lösen von gemischt-ganzzahligen Programmen" href="05_Praxisaspekte.html" />
+    <link rel="prev" title="3. Ganzzahlige Probleme" href="03_Ganzzahlige_Probleme.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="de"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="00_Ueberblick.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/HKA_IWI_Bildmarke-h_RGB.svg" class="logo__image only-light" alt="Optimierungsverfahren, Modellierung und Simulation (DSCB410) - Home"/>
+    <script>document.write(`<img src="_static/HKA_IWI_Bildmarke-h_RGB.svg" class="logo__image only-dark" alt="Optimierungsverfahren, Modellierung und Simulation (DSCB410) - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Suche" aria-label="Suche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Suche</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="00_Ueberblick.html">
+                    Überblick
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lineare Optimierungsmodelle</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_Grundbegriffe.html">1. Einführung und Grundbegriffe</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="02_Lineare_Probleme.html">2. Lineare Optimierung</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="02_Transportproblem.html">2.9. Anwendung: Transportproblem</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="03_Ganzzahlige_Probleme.html">3. Ganzzahlige Probleme</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">4. Zeitabhängige Probleme</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_Praxisaspekte.html">5. Praxisaspekte beim Lösen von gemischt-ganzzahligen Programmen</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Ableitungsbasierte Optimierung</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="06_Multivariate_Analysis.html">6. Funktionen und Ableitungen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_Automatische_Differentiation.html">7. Automatische Differentiation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_Theoretische_Grundlagen.html">8. Grundlagen der nichtlinearen Optimierung</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_Quadratische_Probleme.html">9. Quadratische Probleme</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_Gradientenverfahren.html">10. Verfahren erster Ordnung</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_Verfahren_zweiter_Ordnung.html">11. Verfahren zweiter Ordnung</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_Stochastischer_Gradientenabstieg.html">12. Stochastischer Gradientenabstieg</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_Training_NN.html">13. Training von Neuronalen Netzen</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Laden Sie diese Seite herunter">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/04_Dynamische_Probleme.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Quelldatei herunterladen"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="In PDF drucken"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Vollbildmodus"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Suche" aria-label="Suche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Zeitabhängige Probleme</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Inhalt </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#einfuhrendes-beispiel-energiespeicher">4.1. Einführendes Beispiel: Energiespeicher</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unsicherheiten-in-optimierungsmodellen">4.2. Unsicherheiten in Optimierungsmodellen</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sequenzielle-optimierung-auf-rollierendem-zeitfenster">4.2.1. Sequenzielle Optimierung auf rollierendem Zeitfenster</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-der-losung">4.2.2. Evaluation der Lösung</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="zeitabhangige-probleme">
+<span id="sec-zeitdiskret"></span><h1><span class="section-number">4. </span>Zeitabhängige Probleme<a class="headerlink" href="#zeitabhangige-probleme" title="Link to this heading">#</a></h1>
+<p>Wir betrachten in diesem Kapitel Probleme, bei denen sich die Entscheidungsmöglichkeiten über einen gewissen Zeithorizont erstrecken. Wir betrachten folgendes Beispiel:</p>
+<section id="einfuhrendes-beispiel-energiespeicher">
+<span id="subsec-energiespeicher"></span><h2><span class="section-number">4.1. </span>Einführendes Beispiel: Energiespeicher<a class="headerlink" href="#einfuhrendes-beispiel-energiespeicher" title="Link to this heading">#</a></h2>
+<p>Ein Unternehmen kann gut vorhersagen, wann es wieviel Strom benötigt. Das Unternehmen bezieht den Strom durch einen Versorger. Der Strompreis ändert sich über die Zeit, sei vorher aber bekannt. Zusätzlich hat das Unternehmen einen Batteriespeicher installiert. So kann das Unternehmen Strom in die Batterie einspeichern, wenn der Strompreis niedrig ist und den Strom wieder ausspeichern und selbst verbrauchen, wenn der Strom teuer ist. Das Unternehmen möchte den Batteriespeicher optimal nutzen.</p>
+<figure class="align-default" id="fig-batterie1">
+<a class="reference internal image-reference" href="_images/BeispielBatterie1.png"><img alt="_images/BeispielBatterie1.png" src="_images/BeispielBatterie1.png" style="width: 600px;" /></a>
+</figure>
+<p>Ein gängiges Vorgehen bei dieser Problemklasse ist die <em>Zeitdiskretisierung</em>: Die Zeit wird in gleichlange Zeitscheiben eingeteilt. Innerhalb einer Zeitscheibe werden alle Werte als konstant angenommen. Je kürzer die Zeitscheiben sind, desto genauer wird das Problem modelliert. Mit höherer Detailtreue steigt aber auch der Rechenaufwand um das Modell zu lösen.</p>
+<p>Für die Modellierung wählen wir Zeitscheiben von einer Stunde Länge. Die Modellierungsgenauigkeit orientiert sich in diesem Fall am Strompreis. Dieser ändert sich jede Stunde und die zeitabhängige Abrechnung erfolgt in dieser Auflösung.</p>
+<p>Es sind folgende Daten gegeben:</p>
+<ul class="simple">
+<li><p>Ein betrachteter Zeithorizont <span class="math notranslate nohighlight">\(\{1,2, \ldots, 24\}\)</span> von einem Tag.</p></li>
+<li><p>Der Verbrauch <span class="math notranslate nohighlight">\(d_t\)</span> zum Zeitpunkt <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
+<li><p>Der Strompreis <span class="math notranslate nohighlight">\(p_t\)</span> zum Zeitpunkt <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
+<li><p>Die Kapazität <span class="math notranslate nohighlight">\(s_{max}\)</span> des installierten Batteriespeichers.</p></li>
+<li><p>Der initiale Füllstand <span class="math notranslate nohighlight">\(s_0\)</span> des installierten Batteriespeichers.
+Wir nutzen folgende Entscheidungsvariablen</p></li>
+<li><p>Den Strombezug <span class="math notranslate nohighlight">\(k_t\)</span> vom Netzbetreiber zum Zeitpunkt <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
+<li><p>Die Einspeicherung <span class="math notranslate nohighlight">\(s^+_t\)</span> in den Batteriespeicher zum Zeitpunkt <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
+<li><p>Die Ausspeicherung <span class="math notranslate nohighlight">\(s^-_t\)</span> aus dem Batteriespeicher zum Zeitpunkt <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
+<li><p>Den Speicherstand <span class="math notranslate nohighlight">\(s_t\)</span> zum Zeitpunkt <span class="math notranslate nohighlight">\(t\)</span>.
+Dies führt zu folgender Modellierung:</p></li>
+</ul>
+<figure class="align-default" id="fig-batterie2">
+<a class="reference internal image-reference" href="_images/BeispielBatterie2.png"><img alt="_images/BeispielBatterie2.png" src="_images/BeispielBatterie2.png" style="width: 600px;" /></a>
+</figure>
+<p>In kurzer Schreibweise ergibt sich</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{alignat*}{5}
+\min_{s_t,s_t^-,s_t^+,k_t} &amp; \quad  &amp;   \sum_{t=1}^{24}p_tk_t &amp;          &amp; &amp; \\[4mm]
+\text{s.t. } &amp; &amp; k_t - s_t^+ + s_t^-  &amp; =  &amp; \quad d_t &amp; \quad\quad &amp; &amp; \forall t= 1, \ldots, 24 \\[2mm]
+&amp; &amp; s_{t-1} + s_t^+ - s_t^-  &amp; = &amp; s_t &amp; &amp; &amp; \forall t= 1, \ldots, 24 \\[3mm]
+&amp; &amp; s_t &amp; \leq &amp; \quad s_{max} &amp; &amp;&amp; \forall t= 1, \ldots, 24. \\
+&amp; &amp; s_t &amp; \geq &amp; \quad 0 &amp; &amp;&amp; \forall t= 1, \ldots, 24. \\
+&amp; &amp; k_t &amp; \geq &amp; \quad 0 &amp; &amp;&amp; \forall t= 1, \ldots, 24.
+\end{alignat*}\]</div>
+<p>Wir halten fest: Für jeden Zeitschritt müssen vier Variablen (<span class="math notranslate nohighlight">\(s_t,s_t^-,s_t^+,k_t\)</span>) und zwei Gleichungen eingeführt werden (sog. <em>Bilanzgleichungen</em>). Die Beispielinstanz hat also <span class="math notranslate nohighlight">\(4\cdot24=96\)</span> Variablen und <span class="math notranslate nohighlight">\(2\cdot24=48\)</span> Gleichungsnebenbedingungen.</p>
+<p>Das Ergebnis einer Beispielrechnung ist</p>
+<figure class="align-default" id="fig-batterie3">
+<a class="reference internal image-reference" href="_images/BeispielBatterie3.png"><img alt="_images/BeispielBatterie3.png" src="_images/BeispielBatterie3.png" style="width: 500px;" /></a>
+<figcaption>
+<p><span class="caption-number">Abb. 4.1 </span><span class="caption-text">Ergebnis zeitabhängiges lineares Optimierungsproblem.</span><a class="headerlink" href="#fig-batterie3" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="unsicherheiten-in-optimierungsmodellen">
+<h2><span class="section-number">4.2. </span>Unsicherheiten in Optimierungsmodellen<a class="headerlink" href="#unsicherheiten-in-optimierungsmodellen" title="Link to this heading">#</a></h2>
+<p>Zeitabhängige Optimierungsprobleme sind ein guter Anlass, um ein allgemeines Problem von Optimierungsmodellen zu diskutieren. Nehmen wir noch einmal das Beispiel <a class="reference internal" href="#subsec-energiespeicher"><span class="std std-ref">Einführendes Beispiel: Energiespeicher</span></a>. In dem Beispiel gehen wir (bzw. der Löser) davon aus, dass wir den Strombedarf <span class="math notranslate nohighlight">\(d_1,d_2,\dots,d_{24}\)</span> und den Strompreis <span class="math notranslate nohighlight">\(p_1,p_2,\dots,p_{24}\)</span> für die nächsten 24 Stunden <em>genau</em> kennen und berechnen auf Basis dieser Annahme die optimale Lösung. Natürlich ist die Annahme, den Strompreis, den Strombedarf, das Wetter, den Aktienkurs oder die Lottozahlen von nächster Woche im Voraus <em>genau</em> zu kennen, falsch. Der Löser sieht aber die Unsicherheit in den Annahmen nicht; für ihn sind die Problemdaten lediglich feste Zahlen (man spricht auch von <em>deterministischer</em> Optimierung). Obwohl diese Beobachtung beinahe trivial ist, halten wir sie doch an prominenter Stelle fest:</p>
+<div class="admonition important">
+<p class="admonition-title">Wichtig</p>
+<p>Die optimale Lösung eines <em>mathematischen Modells</em> ist nicht unbedingt die optimale Lösung des modellierten <em>realen Problems</em>. Das liegt daran, dass das Modell die Wirklichkeit nicht perfekt abbildet. Die Güte der Lösung hängt davon ab, wie groß und von welcher Art die Abweichungen von Modell und Wirklichkeit sind.</p>
+</div>
+<p>Typische Beispiele für deutliche Abweichungen von Modell und Wirklichkeit in Optimierungsmodellen:</p>
+<ul class="simple">
+<li><p>Zeitreihen, in denen Vorhersagen über die Zukunft gemacht werden, z.B. wie oben erwähnt Preise, Nachfragen, Wetter.</p></li>
+<li><p>Vereinfachte mathematische Zusammenhänge. Z.B. geht beim Ein- und Ausspeichern in bzw. aus der Batterie elektrische Energie verloren (in Form von Wärme). Die Bilanzgleichung wird also nicht exakt stimmen. Wie viel Energie verloren geht, könnte auch wiederum von der Umgebungstemperatur, dem Alter der Batterie oder ihrem Füllstand abhängen.</p></li>
+<li><p>Bei Schedulingproblemen wird davon ausgegangen, dass man die Länge einer Aufgabe vorher kennt. Wie gut diese Annahme ist, hängt stark vom Anwendungsfall ab: Während die Annahme “Backzeit für Brot: 50 Minuten” bei der Produktionsplanung einer Großbäckerei wohl recht gut zutrifft, sind die Zeiten für bestimmte Arbeitsschritte z.B. im Bergbau sehr schwer abzuschätzen. Wie lange es dauert, eine gewisse Menge Fels abzutragen, hängt extrem von der Beschaffenheit des Felses, der Zuverlässigkeit der Maschinen und der Fähigkeit der Arbeiter:innen ab.</p></li>
+</ul>
+<p>Was also tun? Zunächst einmal: (Gemischt-ganzzahlige) lineare Programmierung ist ein seit Jahrzehnten in der Industrie etabliertes Werkzeug, um praktisch relevante Planungs- und Entscheidungsprobleme zu lösen. In vielen Fällen sind die Modellfehler klein genug, so dass sie ignoriert werden können oder so dass die berechnete optimale Lösung des Modells zwar nicht die optimale Lösung des modellierten Problems ist, aber eben doch ziemlich dicht dran – und in jedem Fall besser als die Lösung, die ein Mensch ganz ohne mathematische Modell hervorgebracht hätte.</p>
+<p>Eine Methode mit Modellfehlern – man sagt auch <em>Unsicherheiten</em> – umzugehen ist, ein MILP nicht nur einmal zu lösen, sondern mehrmals, und zwar zu unterschiedlichen Zeitpunkten. Dabei werden stets die aktuellsten Problemdaten mit einbezogen. Einen systematischen Ansatz, der auf dieser Idee basiert, beschreiben wir im nächsten Abschnitt. Darüber hinaus gibt es auch viele unterschiedliche Ansätze, bei denen man versucht, Unsicherheiten zu quantifizieren und mit Hilfe stochastischer Modelle abzubilden. Diese werden in dieser Vorlesung nicht behandelt.</p>
+<section id="sequenzielle-optimierung-auf-rollierendem-zeitfenster">
+<h3><span class="section-number">4.2.1. </span>Sequenzielle Optimierung auf rollierendem Zeitfenster<a class="headerlink" href="#sequenzielle-optimierung-auf-rollierendem-zeitfenster" title="Link to this heading">#</a></h3>
+<p>Speziell für den Fall von zeitabhängigen Problemen, die man als MILP formulieren kann, bietet sich folgender Ansatz an, der sich relativ einfach umsetzen lässt und im Wesentlichen ohne Stochastik auskommt. Um ihn zu illustrieren, benutzen wir wieder das Energiespeicherproblem. Wir nehmen zunächst an, dass der Strombedarf im Voraus bekannt ist, aber dass für den Preis <span class="math notranslate nohighlight">\(p_t\)</span> nur eine 24-Stunden-Vorhersage<a class="footnote-reference brackets" href="#vorhersageml" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> vorhanden ist. Der Ansatz ist aber auch auf alle anderen zeitabhängigen Probleme und weitere Unsicherheiten anwendbar.</p>
+<p>Als erstens nehmen wir eine Änderung an der Notation des betrachteten Zeitintervalls vor: Oben haben wir das Zeitintervall von 24 Stunden durch die Zeitpunkte <span class="math notranslate nohighlight">\(t=1,2,\dots,24\)</span> beschrieben, d.h. zum Zeitpunkt der Berechnung befinden wir uns am Zeitpunkt <span class="math notranslate nohighlight">\(t=0\)</span>. Allgemeiner: wenn wir die Berechnung zu irgendeinem Zeitpunkt <span class="math notranslate nohighlight">\(t=\tau\)</span> ausführen, wären die Zeitpunkte der 24-Stunden-Vorschauperiode <span class="math notranslate nohighlight">\(t=\tau+1, \tau+2,\dots,\tau+24\)</span>. Wir gehen davon aus, dass wir zu jedem Zeitpunkt <span class="math notranslate nohighlight">\(\tau\)</span> eine aktualisierte 24-Stunden-Vorhersage für den Strompreis erhalten. Das bedeutet insbesondere, dass es für einen Zeitpunkt im Laufe der Zeit unterschiedliche Vorhersagen gibt (nämlich insgesamt 24 Stück).</p>
+<p>BILD mit unterschiedlichen Forecasts mit unterschiedlichen Zeithorizonten</p>
+<p>Um die verschiedenen Vorhersagen zu unterscheiden, führen wir einen zweiten Zeitindex ein. Die Größe <span class="math notranslate nohighlight">\(p_{\tau, \tau+t}\)</span>, wobei <span class="math notranslate nohighlight">\(t=1,\dots,24\)</span> bedeutet: der vorhergesagte Preis für den Zeitpunkt <span class="math notranslate nohighlight">\(\tau+t\)</span> basierend auf der Vorhersage zum Zeitpunkt <span class="math notranslate nohighlight">\(\tau\)</span>. Der Buchstabe <span class="math notranslate nohighlight">\(\tau\)</span> bezeichnet also die real ablaufende Zeit, in der neue Vorhersagen eintreffen und die Berechnungen gestartet werden, während <span class="math notranslate nohighlight">\(t\)</span> weiterhin die vorausschauende, diskretisierte Zeit im MILP bezeichnet (wie zu Anfang des Kapitels eingeführt).</p>
+<p>Die Strategie, die wir nun verfolgen, um das Energiespeicherproblem zu lösen, lässt sich wie folgt beschreiben: Wir befinden uns am Zeitpunkt <span class="math notranslate nohighlight">\(\tau=0\)</span>. Wir benutzen die aktuelle 24-Stunden-Preisvorhersage <span class="math notranslate nohighlight">\(p_{0,0+t}, t=1,\dots,24\)</span>, um damit das erste MILP zu generieren und lösen es. Die optimale Lösung des MILPs bezeichnen wir mit</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    s_{0,t}^{\star},s_{0,t}^{-\star},s_{0,t}^{+\star},k_{0,t}^{\star},\quad t=1,\dots,24 
+\end{align*}\]</div>
+<p>Wir beginnen nun damit, die Lösung umzusetzen, d.h. wir setzen die Entscheidung um, die durch die optimale Lösung des MILPs für den ersten Zeitschritt repräsentiert wird</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+s_{0,1}^{\star},s_{0,1}^{-\star},s_{0,1}^{+\star},k_{0,1}^{\star}
+\end{align*}\]</div>
+<p>Nun schreitet die Zeit voran, d.h. aus <span class="math notranslate nohighlight">\(\tau=0\)</span> wird <span class="math notranslate nohighlight">\(\tau=1\)</span>. Wir erhalten nun eine neue 24-Stunden-Preisvorhersage <span class="math notranslate nohighlight">\(p_{1,1+t}, t=1,\dots,24\)</span>. Nun stellen wir das zweite MILP auf mit der aktualisierten Vorhersage als Problemdaten und lösen es. Aus der Lösung dieses MILP verwenden wir wieder nur den Teil, der sich auf die nächste Zeitperiode, in dem Fall <span class="math notranslate nohighlight">\(\tau=2\)</span> bezieht, nämlich:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+s_{1,2}^{\star},s_{1,2}^{-\star},s_{1,2}^{+\star},k_{1,2}^{\star}
+\end{align*}\]</div>
+<p>Nun schreitet die Zeit wieder voran, d.h. aus <span class="math notranslate nohighlight">\(\tau=1\)</span> wird <span class="math notranslate nohighlight">\(\tau=2\)</span>, wir erhalten eine neue Vorhersage, stellen das dritte MILP auf, lösen es, implementieren den ersten Zeitschritt der Lösung und so weiter.</p>
+<p>BILD mit MPC Schema</p>
+<p>Wir halten fest:</p>
+<ul class="simple">
+<li><p>Um das Energiespeicherproblem zu lösen, lösen wir eine Serie von 24 MILPs, die sich in den Problemdaten (nämlich der jeweils aktuellen 24-Stunden-Preisvorhersage) unterscheiden</p></li>
+<li><p>Von jeder Lösung nutzen wir nur den Teil, der sich auf die nächste Zeitperiode bezieht, also <span class="math notranslate nohighlight">\(s_{\tau,\tau+1}^{\star},s_{\tau,\tau+1}^{-\star},s_{\tau,\tau+1}^{+\star},k_{\tau,\tau+1}^{\star}\)</span>. Der Rest der Lösung wird nicht verwendet!</p></li>
+<li><p>Der Grundgedanke ist, dass so für eine Entscheidung immer die aktuellsten (und damit in der Regel besten) Vorhersagedaten verwendet werden.</p></li>
+<li><p>Ein solches Problem wird auch als <em>sequenzielles Entscheidungsproblem</em> bezeichnet, ein Problem der Form “Entscheidung, Information, Entscheidung, Information, …”.</p></li>
+</ul>
+<div class="proof algorithm admonition" id="alg:mpc">
+<p class="admonition-title"><span class="caption-number">Algorithm 4.1 </span> (Sequenzielle Optimierung auf rollierendem Zeitfenster)</p>
+<section class="algorithm-content" id="proof-content">
+<dl class="simple myst">
+<dt>Gegeben:</dt><dd><p>Zeitdiskretisiertes gemischt-ganzzahliges lineares Optimierungsproblem auf einem Zeithorizont <span class="math notranslate nohighlight">\(t=1,\dots,T\)</span> mit Optimierungsvariablen <span class="math notranslate nohighlight">\(\v x_t\)</span>, Problemdaten <span class="math notranslate nohighlight">\(\v p_t\)</span> und Zielfunktion</p>
+</dd>
+<dd><div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+  \sum_{t=1}^T \v c_t^T\v x_t,
+  \end{align*}\]</div>
+</dd>
+<dd><p>wobei die Vektoren <span class="math notranslate nohighlight">\(\v c_t\)</span> Teil der Problemdaten <span class="math notranslate nohighlight">\(\v p_t\)</span> sind für <span class="math notranslate nohighlight">\(t=1,\dots,T\)</span>.</p>
+</dd>
+<dd><p>Folge von Vorhersagen bzw. Schätzungen für die Problemdaten, die zu den Zeitpunkten <span class="math notranslate nohighlight">\(\tau=0,1,\dots,T-1\)</span> bekannt werden. Bezeichnung <span class="math notranslate nohighlight">\(\v p_{\tau,\tau+t}, t=1,\dots,T\)</span></p>
+</dd>
+<dt>Gesucht:</dt><dd><p>Optimale Entscheidungen <span class="math notranslate nohighlight">\(\bar{\v x}^{\star}_{\tau}\)</span> (die jeweils zum Zeitpunkt <span class="math notranslate nohighlight">\(\tau-1\)</span> berechnet werden).</p>
+</dd>
+</dl>
+<p><strong>Algorithmus</strong>:
+Für <span class="math notranslate nohighlight">\(\tau=0,1,\dots,T-1\)</span>:</p>
+<ol class="arabic">
+<li><p>Wähle aktuelle Vorhersage als Problemdaten:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+  \v p_t=\v p_{\tau,\tau+t},t=1,\dots,T.
+  \end{align*}\]</div>
+</li>
+<li><p>Löse MILP mit Problemdaten <span class="math notranslate nohighlight">\(\v p_t\)</span>, erhalte Lösung</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+  \v x^{\star}_{\tau,\tau+t}:=\v x^{\star}_t,t=1,\dots,T.
+  \end{align*}\]</div>
+</li>
+<li><p>Behalte ersten Zeitschritt der MILP Lösung:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    \bar{\v x}^{\star}_{\tau+1}=\v x^{\star}_{\tau,\tau+1}.
+  \end{align*}\]</div>
+</li>
+</ol>
+<p>Die Vektoren <span class="math notranslate nohighlight">\(\bar{\v x}^{\star}_{\tau}, \tau=1,\dots,T\)</span> enthalten die Lösung des Problems.</p>
+</section>
+</div><p>Dieser und ähnliche Ansätze sind in der industriellen Praxis weit verbreitet. Hier noch einige Anmerkungen dazu:</p>
+<ul class="simple">
+<li><p>Das in <a class="reference internal" href="#alg:mpc">Algorithm 4.1</a> beschriebene Schema ist in den Ingenieurswissenschaften als <em>modellprädiktive Regelung</em> (engl: model predictive control (MPC)) bekannt und wird dort vor allem zur Steuerung von technischen Prozessen verwendet.</p></li>
+<li><p>Der allgemeine Begriff für Verfahren, mit denen man sequenzielle Entscheidungsprobleme unter Unsicherheiten löst lautet <em>Policy</em>. <a class="reference internal" href="#alg:mpc">Algorithm 4.1</a> ist ein Beispiel für eine Policy.</p></li>
+<li><p>Da das Zeitfenster immer für eine feste Zeitperiode in die Zukunft geht, reicht es natürlich über den Zeithorizont <span class="math notranslate nohighlight">\(t=1,\dots,T\)</span> im ursprünglichen Problem hinaus. Sollte das nicht funktionieren, da der Prozess z.B. eine feste Endzeit hat, so kann das Zeitfenster auch in jedem Schritt verkleinert werden (das letzte MILP besteht dann nur noch aus einem Zeitschritt).</p></li>
+<li><p>In vielen Anwendungen sind Vorhersagen für die nahe Zukunft sehr gut und werden schlechter, je weiter sie in der Zukunft liegen. Falls die Vorhersage auch für den ersten Zeitschritt <span class="math notranslate nohighlight">\(\tau+1\)</span> falsch ist, kann es passieren, dass die vom Löser berechnete Lösung (physikalisch) unzulässig ist. Am Beispiel des Energiespeicherproblems wäre das der Fall, wenn die Vorhersage für den Strombedarf ungenau ist. Dann wäre die Bilanzgleichung <span class="math notranslate nohighlight">\(k_1^{\star} - s_1^{+\star} + s_1^{-\star}= d_1\)</span> nicht erfüllt, was bedeutet, dass entweder der Bedarf nicht gedeckt würde (Stomausfälle) oder zu mehr als 100% gedeckt wäre (zu viel Strom im Netz, was zu Schäden an der Infrastruktur führen kann). In der Realität müssten dann eine oder mehrere der Variablen <span class="math notranslate nohighlight">\(k_1^{\star}, s_1^{+\star}, s_1^{-\star}\)</span> angepasst werden.</p></li>
+<li><p>Die Lösung <span class="math notranslate nohighlight">\(\bar{\v x}^{\star}_{\tau}\)</span> wird zwar auf Basis von optimalen Lösungen von MILPs konstruiert, sie ist aber selbst <em>keine</em> optimale Lösung des übergeordneten sequenziellen Entscheidungsproblems (eine sog. optimale Policy).</p></li>
+</ul>
+</section>
+<section id="evaluation-der-losung">
+<h3><span class="section-number">4.2.2. </span>Evaluation der Lösung<a class="headerlink" href="#evaluation-der-losung" title="Link to this heading">#</a></h3>
+<p>Wir haben nun eine konkrete Vorgehensweise beschrieben, wie man mit Unsicherheiten in den Problemdaten umgehen kann, indem man eine Folge von MILPs löst. Wie gut ist dieses Vorgehen? Dies lässt sich nur a posteriori (also im Nachhinein) bewerten. Wir stellen dafür die Zielfunktion des MILP, die aus den tatsächlichen Problemdaten besteht (z.B. den Strompreisen).</p>
+<p>Seien <span class="math notranslate nohighlight">\(\v p_{\tau}, \tau=1,\dots,T\)</span> die tatsächlichen Problemdaten und <span class="math notranslate nohighlight">\(\v c_{\tau}, \tau=1,\dots,T\)</span> der Teil der Problemdaten, der in der Zielfunktion verwendet wird. Dann bewerten wir unsere Lösung <span class="math notranslate nohighlight">\(\bar{\v x}^{\star}_{\tau}\)</span> mit der Funktion</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\sum_{\tau=1}^T \v c_{\tau}^T\bar{\v x}^{\star}_{\tau}
+\end{align*}\]</div>
+<p>Wichtig: Diese Funktion ist zum Zeitpunkt der Optimierung nie vollständig bekannt, weil man ja nicht in die Zukunft sehen kann. Aber wir können mit diesem Wert die Lösung <span class="math notranslate nohighlight">\(\bar{\v x}^{\star}_{\tau}\)</span> mit verschiedenen Policies vergleichen, z.B.</p>
+<ol class="arabic simple">
+<li><p>… mit dem theoretischen, aber nicht erreichbaren Optimum, das man a posteriori durch Lösen des MILPs mit Problemdaten <span class="math notranslate nohighlight">\(\v p_{\tau}, \tau=1,\dots,T\)</span> erhält.</p></li>
+<li><p>… mit der Strategie, nur <em>ein</em> MILP zu Beginn des Zeithorizonts zu lösen. In der Notation von <a class="reference internal" href="#alg:mpc">Algorithm 4.1</a> wäre das</p></li>
+</ol>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+  \sum_{\tau=1}^T \v c_{\tau}^T\v x^{\star}_{0,\tau}
+  \end{align*}\]</div>
+<p>Eine <em>optimale</em> Policy, also eine optimale tatsächlich (d.h. ohne genaue Kenntnis der Zukunft) durchführbare Strategie lässt sich für praktisch relevante Probleme normalerweise nicht bestimmen. In jedem Fall braucht man mehr Informationen über die statistische Güte der Vorhersagen <span class="math notranslate nohighlight">\(\v p_{\tau,\tau +t}\)</span>. Sind die Vorhersagen präzise und ändern sich von Zeitschritt zu Zeitschritt nur wenig, so wird man näher am theoretischen Optimum liegen als wenn die Vorhersagen sehr unsicher sind und sich über die Zeit stark ändern.</p>
+<hr class="footnotes docutils" />
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="vorhersageml" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>Die Vorhersagen werden ihrerseits auch mit einem mathematische Modell gemacht, z.B. einem Zeitreihenmodell oder einem Machine Learning Modell. Zeitabhängige Optimierungsprobleme sind schöne Beispiele für das Zusammenspiel zwischen Machine Learning und Optimierung. Das Machine Learning Modell liefert mit seinen Vorhersagen die Problemdaten für das Optimierungsmodell.</p>
+</aside>
+</aside>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="03_Ganzzahlige_Probleme.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">zurück</p>
+        <p class="prev-next-title"><span class="section-number">3. </span>Ganzzahlige Probleme</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="05_Praxisaspekte.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">weiter</p>
+        <p class="prev-next-title"><span class="section-number">5. </span>Praxisaspekte beim Lösen von gemischt-ganzzahligen Programmen</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Inhalt
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#einfuhrendes-beispiel-energiespeicher">4.1. Einführendes Beispiel: Energiespeicher</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unsicherheiten-in-optimierungsmodellen">4.2. Unsicherheiten in Optimierungsmodellen</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sequenzielle-optimierung-auf-rollierendem-zeitfenster">4.2.1. Sequenzielle Optimierung auf rollierendem Zeitfenster</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-der-losung">4.2.2. Evaluation der Lösung</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Durch Dennis Janka
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

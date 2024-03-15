@@ -1,29 +1,51 @@
+---
+jupytext:
+  text_representation:
+    extension: .md
+    format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.14.4
+kernelspec:
+  display_name: Python 3 (ipykernel)
+  language: python
+  name: python3
+---
+```{code-cell} ipython3
+:tags: ["remove-cell"]
+
+from datetime import datetime
+from myst_nb import glue
+
+today = datetime.today().strftime("%d.%m.%Y")
+glue("today", today)
+```
+
 # Überblick
-Dies ist das Skript für die Vorlesung Optimierung, Modellierung und Simulation an der Hochschule Karlsruhe im Studiengang Data Science. 
+Dies ist das Skript für die Vorlesung Optimierung, Modellierung und Simulation an der Hochschule Karlsruhe im Studiengang Data Science. Letze Änderung am {glue:text}`today`.
 
 ## Inhaltsverzeichnis
-Die Vorlesung ist in zwei Teile gegliedert, die im Prinzip unabhängig voneinander gelesen werden können. Im Teil "Nichtlineare Optimierung" werden gradientenbasierte Optimierungsverfahren behandelt, wie sie z.B. beim Training  von Modellen des maschinellen Lernens benutzt werden.
+Die Vorlesung ist in zwei Teile gegliedert, die im Prinzip unabhängig voneinander gelesen werden können. 
 
-Im Teil "Lineare Optimierung" liegt der Fokus auf Problemmodellierung von Planungs- und Entscheidungsprobleme als gemischt-ganzzahlige lineare Optimierungsprobleme. Die Inhalte werden oft dem *Operations Research* zugerechnet.
+Im Teil "Lineare Optimierungsmodelle" liegt der Fokus auf Problemmodellierung von Planungs- und Entscheidungsprobleme als gemischt-ganzzahlige lineare Optimierungsprobleme. Die Inhalte werden oft dem *Operations Research* zugerechnet.
+
+Im Teil "Ableitungsbasierte Optimierung" werden gradientenbasierte Optimierungsverfahren behandelt, wie sie z.B. beim Training von Modellen des maschinellen Lernens benutzt werden. Dabei werden auch die benötigten Grundbegriffe der multivariaten Analysis eingeführt.
+
+
 ```{tableofcontents}
 ```
 
-## Notation
-Naturgemäß werden Sie in diesem Mathe-Skript mit vielen Symbolen konfrontiert. Um Ihnen den Weg durch diesen algebraischen Dschungel zu erleichtern (was ist Zahl, was ist Vektor?), wird in diesem Skript folgende Notation angewendet. 
-- **Lateinische Kleinbuchstaben** wie $x$, $y$, $a$ usw. bezeichnen (meist reelle) Zahlen.
-- **Fettgedruckte, lateinische Kleinbuchstaben** wie $\v x$, $\v y$, $\v a$ usw. bezeichnen Vektoren im $\R^n$. Deren Komponenten sind reelle Zahlen und werden mit einem Subscript indiziert (und sind nicht fettgedruckt, sind ja Zahlen):
-  \begin{align*}
-    \v x=\bmat x_1\\x_2\\\vdots\\x_n\emat
-  \end{align*}
-- **Fettgedruckte, lateinische Großbuchstaben** wie $\m A$, $\m X$, $\m H$ usw. bezeichnen $m\times n$-Matrizen. Deren Einträge (reelle Zahlen) sind die zugehörigen Kleinbuchstaben (nicht fettgedruckt) und werden mit zwei Subscripten indiziert:
-  \begin{align*}
-    \m A=\bmat a_{11} & a_{12} & \cdots & a_{1n}\\
-                a_{21} & \cdots & \cdots & \\
-                \vdots &  &      & \vdots\\
-                a_{m1} & \cdots & \cdots & a_{mn}\emat
-  \end{align*}
-- **Griechische Kleinbuchstaben** wie $\alpha$, $\lambda$, $\mu$ usw. bezeichnen reelle Zahlen.
-- Iterationszähler in iterativen Verfahren (Gradientenverfahren u.ä.) werden mit einem **Superscript in eckigen Klammern** indiziert: So bezeichnet $\v x^{[k]}$ den Vektor $\v x$ während der $k$-ten Iteration.
+## Literatur
+
+Teil 1:
+- R. Bauer: Skript *Datenbasierte Optimierung in der Unternehmenspraxis*, Hochschule Karlsruhe
+- N. Sudermann-Merx: *Einführung in Optimierungsmodelle*, Springer, 2023
+- H. P. Williams: *Model Building in Mathematical Programming, 5th Edition*, Wiley, 2013.
+
+Teil 2:
+- M. P. Deisenroth, A. A. Faisal, C. S. Ong: *Mathematics for Machine Learning*, Springer, 2021
+- J. Watt, R. Borhani, A. Katsaggelos: *Machine learning refined: foundations, algorithms, and applications, 2nd edition*, Cambridge University Press 2020
+- M. J. Kochenderfer, T. A. Wheeler: *Algorithms for Optimization*, The MIT Press, 2019
+- J. Nocedal, S. J. Wright: *Numerical Optimization*, Springer, 2006
 
 ## Kontakt
 Wenn Sie Fehler finden oder sonstige Kommentare und Anregungen haben, schreiben Sie mir gerne eine E-Mail: dennis.janka@h-ka.de.
