@@ -388,7 +388,7 @@ Das zugehörige binäre Programm löst unsere Instanz:
 			1 & 1 & 0 & 0\\
 			0 & 1 & 1 & 0\\
 			0 & 1 & 1 & 1\\
-			0 & 0 & 0 & 1\emat \bmat x_1\\x_2\\x_3\\x_4 & \geq && \bmat 1\\1\\1\\1\emat & \\
+			0 & 0 & 0 & 1\emat \bmat x_1\\x_2\\x_3\\x_4\emat & \geq && \bmat 1\\1\\1\\1\emat & \\
 & & x_1,x_2,x_3,x_4 & \in && \{0,1\}
 \end{alignat*}
 
