@@ -92,7 +92,7 @@ Constraints:
 : Da nichts eingelagert werden kann, darf die Produktionsmenge für ein Produkt nicht deren Bedarf überschreiten. Dies formulieren wir als Ungleichungen (eine Ungleichung für jedes Produkt):
 : \begin{align*}
     5x_1+10x_2&\leq 50\\
-    12x_2+8x_2&\leq 72\\
+    12x_1+8x_2&\leq 72\\
     4x_1+0x_2&\leq 20
   \end{align*}
 : Weiterhin darf die Anzahl der Tage nicht negativ sein, sowie die Gesamtanzahl an Tagen, an denen produziert wird, darf nicht größer sein als die Anzahl der Tage im Monat (Vereinfachung: ein Monat hat 30 Tage).

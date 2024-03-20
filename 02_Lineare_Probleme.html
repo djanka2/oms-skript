@@ -32,9 +32,9 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=ca93fcec" />
     <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -351,7 +351,7 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grundbegriffe">2.1. Grundbegriffe</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#standardumformungen">2.2. Standardumformungen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#standardform">2.2. Standardform</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#losbarkeit-von-linearen-programmen">2.3. Lösbarkeit von Linearen Programmen</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grafisches-losen">2.4. Grafisches Lösen</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#der-polyeder-der-zulassigen-losungen">2.5. Der Polyeder der zulässigen Lösungen</a></li>
@@ -383,11 +383,11 @@ document.write(`
 <section id="grundbegriffe">
 <h2><span class="section-number">2.1. </span>Grundbegriffe<a class="headerlink" href="#grundbegriffe" title="Link to this heading">#</a></h2>
 <p>Ein <em>lineares Programm</em> ist ein Optimierungsproblem, bei dem eine lineare Zielfunktion unter linearen Nebenbedingungen optimiert werden soll. Ein Beispiel für lineares Optimierungsproblem haben wir bereits in Abschnitt <a class="reference internal" href="01_Grundbegriffe.html#sec-production-example"><span class="std std-ref">Beispiel: Ein Produktionsplanungsproblem</span></a> gesehen. Es lautete:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d89b867c-8a7b-4e3f-a7ff-13bb5e482fac">
-<span class="eqno">(2.1)<a class="headerlink" href="#equation-d89b867c-8a7b-4e3f-a7ff-13bb5e482fac" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
+<div class="amsmath math notranslate nohighlight" id="equation-175f6b65-9c67-49e5-83c1-ccbd5e8f5979">
+<span class="eqno">()<a class="headerlink" href="#equation-175f6b65-9c67-49e5-83c1-ccbd5e8f5979" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
 \max_{x_1, x_2} &amp; \quad  &amp;   2x_1+2x_2 &amp; &amp; &amp; \\[2mm]
 \text{s.t. } &amp; &amp;  5x_1+10x_2&amp;\leq 50\\
-             &amp; &amp;  12x_2+8x_2&amp;\leq 72\\
+             &amp; &amp;  12x_1+8x_2&amp;\leq 72\\
              &amp; &amp;  4x_1+0x_2&amp;\leq 20\\
              &amp; &amp;  x_1+x_2&amp;\leq 30\\
              &amp; &amp; x_1, x_2 &amp;\geq 0
@@ -413,11 +413,15 @@ f(\v x)=c_1x_1+\dots +c_nx_n=\sum_{i=1}^nc_ix_i=\v c^T\v x,
 &amp; &amp; x_j &amp; \geq &amp; \ 0 &amp; &amp;&amp; \forall j= 1, \ldots, n.
 \end{alignat*}\]</div>
 </section>
-</div><p>Es müssen dabei nicht alle möglichen Arten von Nebenbedingungen (<span class="math notranslate nohighlight">\(\leq, =, \geq, \geq 0\)</span>) vorkommen. Die genaue Form eines beliebigen LP ergibt sich normalerweise aus der Modellierung der Anwendung wie etwa bei unserem Produktionsbeispiel. Die Form wird dabei meist so gewählt, dass sie möglichst gut verständlich ist. Wenn man Aussagen über beliebige, allgemeine LPs treffen möchte (z.B. bei der Beschreibung von Lösungsverfahren, die für alle möglichen LPs funktionieren sollen), benutzt man gerne lineare Programme in der sogenannten <em>Standardform</em>.</p>
+</div><p>Es müssen dabei nicht alle möglichen Arten von Nebenbedingungen (<span class="math notranslate nohighlight">\(\leq, =, \geq, \geq 0\)</span>) vorkommen. Die genaue Form eines beliebigen LP ergibt sich normalerweise aus der Modellierung der Anwendung wie etwa bei unserem Produktionsbeispiel. Die Form wird dabei meist so gewählt, dass sie möglichst gut verständlich ist.</p>
+</section>
+<section id="standardform">
+<h2><span class="section-number">2.2. </span>Standardform<a class="headerlink" href="#standardform" title="Link to this heading">#</a></h2>
+<p>Wenn man Aussagen über beliebige, allgemeine LPs treffen möchte (z.B. bei der Beschreibung von Lösungsverfahren, die für alle möglichen LPs funktionieren sollen), benutzt man gerne lineare Programme in der sogenannten <em>Standardform</em>.</p>
 <div class="proof definition admonition" id="def:LP">
 <p class="admonition-title"><span class="caption-number">Definition 2.2 </span> (Lineares Programm in Standardform)</p>
 <section class="definition-content" id="proof-content">
-<p>Gegeben sei eine <span class="math notranslate nohighlight">\(m \times n\)</span>-Matrix <span class="math notranslate nohighlight">\(A\)</span>, ein <span class="math notranslate nohighlight">\(m\)</span>-dimensionaler Vektor <span class="math notranslate nohighlight">\(b\)</span>, sowie ein <span class="math notranslate nohighlight">\(n\)</span>-dimensionaler Vektor <span class="math notranslate nohighlight">\(c\)</span>. Ein <em>lineares Programm (LP)</em> ist ein Optimierungsproblem der Form</p>
+<p>Gegeben sei eine <span class="math notranslate nohighlight">\(m \times n\)</span>-Matrix <span class="math notranslate nohighlight">\(\v A\)</span>, ein <span class="math notranslate nohighlight">\(m\)</span>-dimensionaler Vektor <span class="math notranslate nohighlight">\(\v b\)</span>, sowie ein <span class="math notranslate nohighlight">\(n\)</span>-dimensionaler Vektor <span class="math notranslate nohighlight">\(\v c\)</span>. Ein <em>lineares Programm (LP)</em> ist ein Optimierungsproblem der Form</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{alignat*}{5}
 \min_{\v x}          &amp; \quad  &amp;   c_1x_1 + \ldots + c_nx_n &amp;          &amp; &amp; \\[2mm]
@@ -432,10 +436,7 @@ f(\v x)=c_1x_1+\dots +c_nx_n=\sum_{i=1}^nc_ix_i=\v c^T\v x,
 &amp; &amp; \v x &amp; \geq &amp; \ \v 0 &amp; &amp;&amp;
 \end{alignat*}\]</div>
 </section>
-</div></section>
-<section id="standardumformungen">
-<h2><span class="section-number">2.2. </span>Standardumformungen<a class="headerlink" href="#standardumformungen" title="Link to this heading">#</a></h2>
-<p>Wie bringt man nun ein <em>beliebiges</em> Lineares Programm in Standardform?</p>
+</div><p>Wie bringt man nun ein <em>beliebiges</em> Lineares Programm in Standardform?</p>
 <!-- Wir gehen als Zwischenschritt einen etwas umständlichen Weg, der sich später als praktisch und einfacher zu verstehen erweist. Wir bringen dazu das LP erst in eine Form, bei der ein Minimierungsproblem vorliegt, alle Variablen nicht-negativ sind und nur Nebenbedingungen der Form $\leq$ vorliegen: 
 
 \begin{alignat*}{5}
@@ -449,7 +450,7 @@ Danach bringen wir es in Standardform. -->
 Es enthält beliebig viele Gleichungen, <span class="math notranslate nohighlight">\(\leq\)</span>-Ungleichungen und <span class="math notranslate nohighlight">\(\geq\)</span>-Ungleichungen mit beliebigen Koeffizienten <span class="math notranslate nohighlight">\(a_{ij}, i=1,\dots,m, j=1,\dots,n\)</span>:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{alignat*}{5}
-\max_{x_1, \ldots, x_p} &amp;\quad &amp; \sum_{j=1}^{n}c_j x_j \\[2mm]
+\max_{x_1, \ldots, x_n} &amp;\quad &amp; \sum_{j=1}^{n}c_j x_j \\[2mm]
 \text{s.t. } &amp; &amp;\sum_{j=1}^{n} a_{ij} x_j &amp;\leq&amp;  \ b_i &amp; \quad\quad &amp; &amp; \forall i=1,\ldots,m_1 \\
              &amp; &amp;\sum_{j=1}^{n} a_{ij} x_j &amp;\geq&amp;  \ b_i &amp; \quad\quad &amp; &amp; \forall i=m_1+1,\ldots,m_2 \\
              &amp; &amp;\sum_{j=1}^{n} a_{ij} x_j &amp;=&amp;  \ b_i &amp; \quad\quad &amp; &amp; \forall i=m_2+1,\ldots,m \\
@@ -457,8 +458,8 @@ Es enthält beliebig viele Gleichungen, <span class="math notranslate nohighligh
 <div class="proof example admonition" id="example-2">
 <p class="admonition-title"><span class="caption-number">Example 2.1 </span> (LP, welches nicht in Standardform vorliegt)</p>
 <section class="example-content" id="proof-content">
-<div class="amsmath math notranslate nohighlight" id="equation-020880ad-583a-45ab-a6f6-94c14be9d090">
-<span class="eqno">(2.2)<a class="headerlink" href="#equation-020880ad-583a-45ab-a6f6-94c14be9d090" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
+<div class="amsmath math notranslate nohighlight" id="equation-278f31db-d659-471f-819d-8149c4f3bb74">
+<span class="eqno">()<a class="headerlink" href="#equation-278f31db-d659-471f-819d-8149c4f3bb74" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
 \max_{x_1, x_2} &amp; \quad  &amp;  2x_1-3x_2 &amp; &amp; &amp; \\[2mm]
 \text{s.t. } &amp; &amp;  3x_1+x_2&amp;\leq 3\\
              &amp; &amp;  -x_1+5x_2&amp;\geq 7\\
@@ -586,11 +587,11 @@ a_{m1} x_1+\ldots +a_{mp} x_n	&amp;  &amp; &amp;&amp;  \red{+x_{n+m_2}} &amp; =b
 <div class="proof example admonition" id="example-7">
 <p class="admonition-title"><span class="caption-number">Example 2.6 </span></p>
 <section class="example-content" id="proof-content">
-<div class="amsmath math notranslate nohighlight" id="equation-50315af5-a971-4c5d-b92e-ed455a76f6a8">
-<span class="eqno">(2.3)<a class="headerlink" href="#equation-50315af5-a971-4c5d-b92e-ed455a76f6a8" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
+<div class="amsmath math notranslate nohighlight" id="equation-a785a5e6-b43c-487f-af1e-c4a6a7f7b4a8">
+<span class="eqno">()<a class="headerlink" href="#equation-a785a5e6-b43c-487f-af1e-c4a6a7f7b4a8" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
 \min_{x_1, x_2^+, x_2^-, x_3, x_4} &amp; \quad  &amp;  \bmat -2,&amp;3,&amp;-3,&amp;0,&amp;0 \emat\bmat x_1\\x_2^+\\x_2^-\\x_3\\x_4\emat &amp; &amp; &amp; \\[2mm]
 \text{s.t. } &amp; &amp;  \bmat 3&amp;1&amp;-1&amp;1&amp;0\\ 1&amp;-5&amp;5&amp;0&amp;1\\ 1&amp;1&amp;-1&amp;0&amp;0 \emat\bmat x_1\\x_2^+\\x_2^-\\x_3\\x_4\emat&amp;=\bmat 3\\-7\\1\emat\\
-             &amp; &amp; (x_1,x_2^+,x_2^-,x_3,x_4)&amp;\geq 0
+             &amp; &amp; (x_1,x_2^+,x_2^-,x_3,x_4)&amp;\geq \v 0
 \end{alignat}\]</div>
 </section>
 </div></section>
@@ -609,12 +610,12 @@ P=\{\v x \in \R^n \mid \v A\v x=\v b, \ \v x\geq \v 0\}
 \end{align*}\]</div>
 <p>die <em>Menge aller zulässigen Lösungen</em> von LP.</p>
 </section>
-</div><p>Eine zulässige Lösung heißt <em>optimal</em>, wenn es keine andere zulässige Lösung mit einem besseren Zielfunktionswert gibt.</p>
+</div><p>Das ist dasselbe wie ein zulässiger <em>Punkt</em> in der allgemeinen Formulierung, aber in der LP-Community hat sich die Bezeichnung <em>Lösung</em> statt Punkt etabliert. Man nennt dort eine zulässige Lösung <em>optimal</em>, wenn es keine andere zulässige Lösung mit einem besseren Zielfunktionswert gibt.</p>
 <div class="proof definition admonition" id="definition-9">
 <p class="admonition-title"><span class="caption-number">Definition 2.4 </span> (Optimale Lösung eines LP)</p>
 <section class="definition-content" id="proof-content">
 <p>Gegeben ist ein lineares Programm LP: <span class="math notranslate nohighlight">\(\min  c^Tx\)</span> unter den Nebenbedingungen <span class="math notranslate nohighlight">\(\m A\v x=\v b\)</span> und <span class="math notranslate nohighlight">\(\v x\geq \v 0\)</span>.
-Es sei <span class="math notranslate nohighlight">\(P\)</span> die Menge der zulässigen Lösungen von LP. Es heißt <span class="math notranslate nohighlight">\(x^*\in P\)</span> <em>optimal</em> für LP, wenn für alle <span class="math notranslate nohighlight">\(\v x' \in P\)</span> gilt, dass <span class="math notranslate nohighlight">\(\v c^T\v x^* \leq \v c^T\v x'\)</span>.</p>
+Es sei <span class="math notranslate nohighlight">\(P\)</span> die Menge der zulässigen Lösungen von LP. Es heißt <span class="math notranslate nohighlight">\(x^*\in P\)</span> <em>optimal</em> für LP, wenn für alle <span class="math notranslate nohighlight">\(\v x \in P\)</span> gilt, dass <span class="math notranslate nohighlight">\(\v c^T\v x^* \leq \v c^T\v x\)</span>.</p>
 </section>
 </div><p>Ein lineares Problem heißt <em>unbeschränkt</em>, wenn es für jeden Wert <span class="math notranslate nohighlight">\(k\)</span> eine zulässige Lösung mit Zielfunktionswert gibt, der besser als <span class="math notranslate nohighlight">\(k\)</span> ist. Man kann also “beliebig gut werden”.</p>
 <div class="proof definition admonition" id="definition-10">
@@ -633,11 +634,11 @@ Es sei <span class="math notranslate nohighlight">\(P\)</span> die Menge der zul
 <section id="grafisches-losen">
 <h2><span class="section-number">2.4. </span>Grafisches Lösen<a class="headerlink" href="#grafisches-losen" title="Link to this heading">#</a></h2>
 <p>Wir betrachten noch einmal das Produktionsbeispiel <a class="reference internal" href="01_Grundbegriffe.html#equation-eq-prodopt">(1.1)</a>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ed655dcc-c513-4b81-aa07-55dbc98888e4">
-<span class="eqno">(2.4)<a class="headerlink" href="#equation-ed655dcc-c513-4b81-aa07-55dbc98888e4" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
+<div class="amsmath math notranslate nohighlight" id="equation-8002d9d2-692c-4d60-8b95-127bfa677c11">
+<span class="eqno">()<a class="headerlink" href="#equation-8002d9d2-692c-4d60-8b95-127bfa677c11" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
 \max_{x_1, x_2} &amp; \quad  &amp;   2x_1+2x_2 &amp; &amp; &amp; \\[2mm]
 \text{s.t. } &amp; &amp;  5x_1+10x_2&amp;\leq 50\\
-             &amp; &amp;  12x_2+8x_2&amp;\leq 72\\
+             &amp; &amp;  12x_1+8x_2&amp;\leq 72\\
              &amp; &amp;  4x_1+0x_2&amp;\leq 20\\
              &amp; &amp;  x_1+x_2&amp;\leq 30\\
              &amp; &amp; x_1, x_2 &amp;\geq 0
@@ -646,7 +647,7 @@ Es sei <span class="math notranslate nohighlight">\(P\)</span> die Menge der zul
 <figure class="align-default" id="fig-feasible-set">
 <a class="reference internal image-reference" href="_images/prodopt-feasible.png"><img alt="_images/prodopt-feasible.png" src="_images/prodopt-feasible.png" style="width: 400px;" /></a>
 <figcaption>
-<p><span class="caption-number">Abb. 2.1 </span><span class="caption-text">Nebenbedingungen (orange Linien) und die resultierende zulässige Menge (in blau) des Produktionsoptimierungsbeispiel {eq:prodopt}. Die Nebenbedingung <span class="math notranslate nohighlight">\(x_1+x_2\leq 30\)</span> ist hier nicht eingezeichnet, da sie auf die zulässige Menge keinen Einfluss hat.</span><a class="headerlink" href="#fig-feasible-set" title="Link to this image">#</a></p>
+<p><span class="caption-number">Abb. 2.1 </span><span class="caption-text">Nebenbedingungen (orange Linien) und die resultierende zulässige Menge (in blau) des Produktionsoptimierungsbeispiel <a class="reference internal" href="01_Grundbegriffe.html#equation-eq-prodopt">(1.1)</a>. Die Nebenbedingung <span class="math notranslate nohighlight">\(x_1+x_2\leq 30\)</span> ist hier nicht eingezeichnet, da sie auf die zulässige Menge keinen Einfluss hat.</span><a class="headerlink" href="#fig-feasible-set" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Doch welcher der zulässigen Punkte ist ein optimaler Punkt? Dazu betrachten wir eine sog. <em>Höhenlinie</em> der Zielfunktion. Die Höhenlinie zu einem Wert <span class="math notranslate nohighlight">\(\beta\in\R\)</span> ist eine Gerade entlang derer die Zielfunktion den konstanten Wert <span class="math notranslate nohighlight">\(\beta\)</span> annimmt. Im Bild ist z.B. die Höhenlinie zum Niveau <span class="math notranslate nohighlight">\(\beta=8\)</span> eingezeichnet, was bedeutet, dass alle Punkte auf der Linie den Zielfunktionswert 8 haben. Wenn wir die Höhenlinie parallel in Pfeilrichtung verschieben – das ist übrigens die Richtung <span class="math notranslate nohighlight">\(\v c=\bmat 2\\2\emat\)</span>, der Vektor, der die Zielfunktion definiert! – verbessert sich die Zielfunktion. Dies tun wir nun so lange, bis wir die zulässige Menge gerade so noch berühren. Dieser letzte Berührungspunkt zwischen Höhenlinie und zulässiger Menge ist ein Optimalpunkt des Problems.</p>
@@ -692,7 +693,7 @@ P=\{\v x \in \R^n \mid \m A\v x \leq \v b\}
 <p>enthalten kann. Nun kann man aber offenbar jede solche Gleichung durch die beiden Ungleichungen</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
-\sum_{j=1}^{n} a_{ij} x_j  &amp;\leq  b_i
+\sum_{j=1}^{n} a_{ij} x_j  &amp;\leq  b_i\\
 \sum_{j=1}^{n} a_{ij} x_j  &amp;\geq  b_i
 \end{align*}\]</div>
 <p>ersetzen und erhält damit ein äquivalentes LP, welches ausschließlich Ungleichungen als Nebenbedingung hat. Die Menge der Punkte, die alle Ungleichungen erfüllen, bilden den <em>Polyeder der zulässigen Lösungen</em>.</p>
@@ -718,7 +719,7 @@ P=\{\v x \in \R^n \mid \m A\v x \leq \v b\}
 <div class="proof definition admonition" id="definition-13">
 <p class="admonition-title"><span class="caption-number">Definition 2.8 </span> (Konvexität)</p>
 <section class="definition-content" id="proof-content">
-<p>Eine Menge <span class="math notranslate nohighlight">\(T \subseteq \R^n\)</span> heißt <em>konvex</em>, falls aus <span class="math notranslate nohighlight">\(\v x^1 \in T\)</span> und <span class="math notranslate nohighlight">\(\v x^2 \in T\)</span> folgt, dass <span class="math notranslate nohighlight">\(\lambda \v x^1 + (1-\lambda) \v x^2 \in T\)</span> gilt.</p>
+<p>Eine Menge <span class="math notranslate nohighlight">\(T \subseteq \R^n\)</span> heißt <em>konvex</em>, falls aus <span class="math notranslate nohighlight">\(\v x^1 \in T\)</span> und <span class="math notranslate nohighlight">\(\v x^2 \in T\)</span> folgt, dass auch <span class="math notranslate nohighlight">\(\lambda \v x^1 + (1-\lambda) \v x^2 \in T\)</span> gilt für jede Zahl <span class="math notranslate nohighlight">\(\lambda \in [0,1]\)</span>.</p>
 </section>
 </div><p>Konvexität ist in der Optimierung eine sehr starke und wünschenswerte Eigenschaft und wird uns im Laufe der Vorlesung noch öfter begegnen.</p>
 <div class="proof theorem admonition" id="thm:ecken">
@@ -766,8 +767,8 @@ Um so erstaunlicher ist es, dass moderne Varianten des Simplex-Verfahrens Proble
 </div>
 </div>
 <p>Formulierung in mathematischer Form</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9510336b-06ea-493a-b645-8d563626cdde">
-<span class="eqno">(2.5)<a class="headerlink" href="#equation-9510336b-06ea-493a-b645-8d563626cdde" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
+<div class="amsmath math notranslate nohighlight" id="equation-50693009-7d04-4c19-92cd-5c2f9a564242">
+<span class="eqno">()<a class="headerlink" href="#equation-50693009-7d04-4c19-92cd-5c2f9a564242" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
 \max_{x_1, x_2} &amp; \quad  &amp;   2x_1+2x_2 &amp; &amp; &amp; \\[2mm]
 \text{s.t. } &amp; &amp;  5x_1+10x_2&amp;\leq 50\\
              &amp; &amp;  12x_1+8x_2&amp;\leq 72\\
@@ -862,7 +863,7 @@ Iteration    Objective       Primal Inf.    Dual Inf.      Time
        0    2.0000000e+01   8.000000e+00   0.000000e+00      0s
        2    1.4000000e+01   0.000000e+00   0.000000e+00      0s
 
-Solved in 2 iterations and 0.01 seconds (0.00 work units)
+Solved in 2 iterations and 0.00 seconds (0.00 work units)
 Optimal objective  1.400000000e+01
 </pre></div>
 </div>
@@ -925,8 +926,8 @@ Sie garantieren, dass <span class="math notranslate nohighlight">\(z\)</span> gr
 <p class="admonition-title"><span class="caption-number">Example 2.8 </span> (Min Max (Forsetzung))</p>
 <section class="example-content" id="proof-content">
 <p>Wir führen eine neue Variable <span class="math notranslate nohighlight">\(y\)</span> und 4 Nebenbedingungen ein. Der zur <span class="math notranslate nohighlight">\(\min\max\)</span>-Formulierung <a class="reference internal" href="#equation-eq-minmax">(2.6)</a> äquivalente Teile eines linearen Programms lautet:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-4c61971d-d0a2-4382-a4bc-feeb539c3132">
-<span class="eqno">(2.7)<a class="headerlink" href="#equation-4c61971d-d0a2-4382-a4bc-feeb539c3132" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
+<div class="amsmath math notranslate nohighlight" id="equation-be576fe7-8cfa-4afc-8527-fcd863f5b59d">
+<span class="eqno">()<a class="headerlink" href="#equation-be576fe7-8cfa-4afc-8527-fcd863f5b59d" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
 \min_{s_1,d_1,s_2,d_2,s_3,d_3,s_4,d_4,y} &amp; \quad  &amp;   y &amp; &amp; &amp; \\[2mm]
 \text{s.t. } &amp; &amp;  s_1+d_1&amp;\leq y\\
              &amp; &amp;  s_2+d_2&amp;\leq y\\
@@ -1078,7 +1079,7 @@ f(x)=|x|=\max\{x,-x\}
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grundbegriffe">2.1. Grundbegriffe</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#standardumformungen">2.2. Standardumformungen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#standardform">2.2. Standardform</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#losbarkeit-von-linearen-programmen">2.3. Lösbarkeit von Linearen Programmen</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grafisches-losen">2.4. Grafisches Lösen</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#der-polyeder-der-zulassigen-losungen">2.5. Der Polyeder der zulässigen Lösungen</a></li>

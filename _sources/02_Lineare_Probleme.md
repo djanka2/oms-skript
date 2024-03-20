@@ -21,7 +21,7 @@ Ein *lineares Programm* ist ein Optimierungsproblem, bei dem eine lineare Zielfu
 \begin{alignat}{5}
 \max_{x_1, x_2} & \quad  &   2x_1+2x_2 & & & \\[2mm]
 \text{s.t. } & &  5x_1+10x_2&\leq 50\\
-             & &  12x_2+8x_2&\leq 72\\
+             & &  12x_1+8x_2&\leq 72\\
              & &  4x_1+0x_2&\leq 20\\
              & &  x_1+x_2&\leq 30\\
              & & x_1, x_2 &\geq 0
@@ -49,11 +49,15 @@ Gegeben sei eine $m \times n$-Matrix $\m A=(a_{ij})$, ein $m$-dimensionaler Vekt
 \end{alignat*}
 ````
 
-Es müssen dabei nicht alle möglichen Arten von Nebenbedingungen ($\leq, =, \geq, \geq 0$) vorkommen. Die genaue Form eines beliebigen LP ergibt sich normalerweise aus der Modellierung der Anwendung wie etwa bei unserem Produktionsbeispiel. Die Form wird dabei meist so gewählt, dass sie möglichst gut verständlich ist. Wenn man Aussagen über beliebige, allgemeine LPs treffen möchte (z.B. bei der Beschreibung von Lösungsverfahren, die für alle möglichen LPs funktionieren sollen), benutzt man gerne lineare Programme in der sogenannten *Standardform*.
+Es müssen dabei nicht alle möglichen Arten von Nebenbedingungen ($\leq, =, \geq, \geq 0$) vorkommen. Die genaue Form eines beliebigen LP ergibt sich normalerweise aus der Modellierung der Anwendung wie etwa bei unserem Produktionsbeispiel. Die Form wird dabei meist so gewählt, dass sie möglichst gut verständlich ist. 
+
+## Standardform
+
+Wenn man Aussagen über beliebige, allgemeine LPs treffen möchte (z.B. bei der Beschreibung von Lösungsverfahren, die für alle möglichen LPs funktionieren sollen), benutzt man gerne lineare Programme in der sogenannten *Standardform*.
 
 ````{prf:definition} Lineares Programm in Standardform
 :label: def:LP
-Gegeben sei eine $m \times n$-Matrix $A$, ein $m$-dimensionaler Vektor $b$, sowie ein $n$-dimensionaler Vektor $c$. Ein *lineares Programm (LP)* ist ein Optimierungsproblem der Form
+Gegeben sei eine $m \times n$-Matrix $\v A$, ein $m$-dimensionaler Vektor $\v b$, sowie ein $n$-dimensionaler Vektor $\v c$. Ein *lineares Programm (LP)* ist ein Optimierungsproblem der Form
 \begin{alignat*}{5}
 \min_{\v x}          & \quad  &   c_1x_1 + \ldots + c_nx_n &          & & \\[2mm]
 \text{s.t. } & &  a_{i1}x_1 + \ldots + a_{in}x_n & = & \ b_i & \quad\quad & & \forall i= 1, \ldots, m \\
@@ -68,7 +72,7 @@ In Matrixform
 \end{alignat*}
 ````
 
-## Standardumformungen
+
 Wie bringt man nun ein *beliebiges* Lineares Programm in Standardform? 
 
 <!-- Wir gehen als Zwischenschritt einen etwas umständlichen Weg, der sich später als praktisch und einfacher zu verstehen erweist. Wir bringen dazu das LP erst in eine Form, bei der ein Minimierungsproblem vorliegt, alle Variablen nicht-negativ sind und nur Nebenbedingungen der Form $\leq$ vorliegen: 
@@ -84,7 +88,7 @@ Danach bringen wir es in Standardform. -->
 Wir starten mit einem beliebigen linearen Problem, das nicht in Standardform vorliegt.
 Es enthält beliebig viele Gleichungen, $\leq$-Ungleichungen und $\geq$-Ungleichungen mit beliebigen Koeffizienten $a_{ij}, i=1,\dots,m, j=1,\dots,n$:
 \begin{alignat*}{5}
-\max_{x_1, \ldots, x_p} &\quad & \sum_{j=1}^{n}c_j x_j \\[2mm]
+\max_{x_1, \ldots, x_n} &\quad & \sum_{j=1}^{n}c_j x_j \\[2mm]
 \text{s.t. } & &\sum_{j=1}^{n} a_{ij} x_j &\leq&  \ b_i & \quad\quad & & \forall i=1,\ldots,m_1 \\
              & &\sum_{j=1}^{n} a_{ij} x_j &\geq&  \ b_i & \quad\quad & & \forall i=m_1+1,\ldots,m_2 \\
              & &\sum_{j=1}^{n} a_{ij} x_j &=&  \ b_i & \quad\quad & & \forall i=m_2+1,\ldots,m \\
@@ -191,7 +195,7 @@ Damit ist das LP in Standardform. In Matrixform schreiben wir
 \begin{alignat}{5}
 \min_{x_1, x_2^+, x_2^-, x_3, x_4} & \quad  &  \bmat -2,&3,&-3,&0,&0 \emat\bmat x_1\\x_2^+\\x_2^-\\x_3\\x_4\emat & & & \\[2mm]
 \text{s.t. } & &  \bmat 3&1&-1&1&0\\ 1&-5&5&0&1\\ 1&1&-1&0&0 \emat\bmat x_1\\x_2^+\\x_2^-\\x_3\\x_4\emat&=\bmat 3\\-7\\1\emat\\
-             & & (x_1,x_2^+,x_2^-,x_3,x_4)&\geq 0
+             & & (x_1,x_2^+,x_2^-,x_3,x_4)&\geq \v 0
 \end{alignat}
 ````
 
@@ -199,7 +203,7 @@ Damit ist das LP in Standardform. In Matrixform schreiben wir
 
 Wir wiederholen nun die Grundbegriffe aus Abschnitt {ref}`sec:grundbegriffe` speziell für den Fall beliebiger linearer Probleme. Streng genommen sind diese natürlich durch die Definitionen im Abschnitt {ref}`sec:grundbegriffe` mit abgedeckt, aber etwas Wiederholung schadet an dieser Stelle nicht.
 
-Wir nennen jedes $x$, das alle Nebenbedingungen erfüllt, eine *zulässige Lösung* des linearen Problems.
+Wir nennen jedes $x$, das alle Nebenbedingungen erfüllt, eine *zulässige Lösung* des linearen Problems. 
 
 ````{prf:definition} Zulässige Lösung eines LP
 Gegeben ist ein Lineares Programm LP: $\min  c^Tx$ unter den Nebenbedingungen $\m A\v x=\v b$ und $\v x\geq \v 0$. 
@@ -209,12 +213,11 @@ P=\{\v x \in \R^n \mid \v A\v x=\v b, \ \v x\geq \v 0\}
 \end{align*}
 die *Menge aller zulässigen Lösungen* von LP.
 ````
-
-Eine zulässige Lösung heißt *optimal*, wenn es keine andere zulässige Lösung mit einem besseren Zielfunktionswert gibt.
+Das ist dasselbe wie ein zulässiger *Punkt* in der allgemeinen Formulierung, aber in der LP-Community hat sich die Bezeichnung *Lösung* statt Punkt etabliert. Man nennt dort eine zulässige Lösung *optimal*, wenn es keine andere zulässige Lösung mit einem besseren Zielfunktionswert gibt.
 
 ````{prf:definition} Optimale Lösung eines LP
 Gegeben ist ein lineares Programm LP: $\min  c^Tx$ unter den Nebenbedingungen $\m A\v x=\v b$ und $\v x\geq \v 0$. 
-Es sei $P$ die Menge der zulässigen Lösungen von LP. Es heißt $x^*\in P$ *optimal* für LP, wenn für alle $\v x' \in P$ gilt, dass $\v c^T\v x^* \leq \v c^T\v x'$.
+Es sei $P$ die Menge der zulässigen Lösungen von LP. Es heißt $x^*\in P$ *optimal* für LP, wenn für alle $\v x \in P$ gilt, dass $\v c^T\v x^* \leq \v c^T\v x$.
 ````
 
 Ein lineares Problem heißt *unbeschränkt*, wenn es für jeden Wert $k$ eine zulässige Lösung mit Zielfunktionswert gibt, der besser als $k$ ist. Man kann also "beliebig gut werden".
@@ -235,7 +238,7 @@ Wir betrachten noch einmal das Produktionsbeispiel {eq}`eq:prodopt`:
 \begin{alignat}{5}
 \max_{x_1, x_2} & \quad  &   2x_1+2x_2 & & & \\[2mm]
 \text{s.t. } & &  5x_1+10x_2&\leq 50\\
-             & &  12x_2+8x_2&\leq 72\\
+             & &  12x_1+8x_2&\leq 72\\
              & &  4x_1+0x_2&\leq 20\\
              & &  x_1+x_2&\leq 30\\
              & & x_1, x_2 &\geq 0
@@ -246,7 +249,7 @@ Im vorigen Kapitel haben wir die Lösung angegeben: $x_1^{\star}=4, x_2^{\star}=
 :name: fig:feasible-set
 :width: 400px
 
-Nebenbedingungen (orange Linien) und die resultierende zulässige Menge (in blau) des Produktionsoptimierungsbeispiel {eq:prodopt}. Die Nebenbedingung $x_1+x_2\leq 30$ ist hier nicht eingezeichnet, da sie auf die zulässige Menge keinen Einfluss hat.
+Nebenbedingungen (orange Linien) und die resultierende zulässige Menge (in blau) des Produktionsoptimierungsbeispiel {eq}`eq:prodopt`. Die Nebenbedingung $x_1+x_2\leq 30$ ist hier nicht eingezeichnet, da sie auf die zulässige Menge keinen Einfluss hat.
 ```
 Doch welcher der zulässigen Punkte ist ein optimaler Punkt? Dazu betrachten wir eine sog. *Höhenlinie* der Zielfunktion. Die Höhenlinie zu einem Wert $\beta\in\R$ ist eine Gerade entlang derer die Zielfunktion den konstanten Wert $\beta$ annimmt. Im Bild ist z.B. die Höhenlinie zum Niveau $\beta=8$ eingezeichnet, was bedeutet, dass alle Punkte auf der Linie den Zielfunktionswert 8 haben. Wenn wir die Höhenlinie parallel in Pfeilrichtung verschieben -- das ist übrigens die Richtung $\v c=\bmat 2\\2\emat$, der Vektor, der die Zielfunktion definiert! -- verbessert sich die Zielfunktion. Dies tun wir nun so lange, bis wir die zulässige Menge gerade so noch berühren. Dieser letzte Berührungspunkt zwischen Höhenlinie und zulässiger Menge ist ein Optimalpunkt des Problems. 
 
@@ -294,7 +297,7 @@ Polyeder und lineare Optimierungsprobleme haben eine enge Verbindung, da die zul
 \end{align*}
 enthalten kann. Nun kann man aber offenbar jede solche Gleichung durch die beiden Ungleichungen
 \begin{align*}
-\sum_{j=1}^{n} a_{ij} x_j  &\leq  b_i
+\sum_{j=1}^{n} a_{ij} x_j  &\leq  b_i\\
 \sum_{j=1}^{n} a_{ij} x_j  &\geq  b_i
 \end{align*}
 ersetzen und erhält damit ein äquivalentes LP, welches ausschließlich Ungleichungen als Nebenbedingung hat. Die Menge der Punkte, die alle Ungleichungen erfüllen, bilden den *Polyeder der zulässigen Lösungen*.
@@ -322,7 +325,7 @@ Beispiele konvexer und nicht konvexer Mengen.
 ```
 
 ````{prf:definition} Konvexität
-Eine Menge $T \subseteq \R^n$ heißt *konvex*, falls aus $\v x^1 \in T$ und $\v x^2 \in T$ folgt, dass $\lambda \v x^1 + (1-\lambda) \v x^2 \in T$ gilt.
+Eine Menge $T \subseteq \R^n$ heißt *konvex*, falls aus $\v x^1 \in T$ und $\v x^2 \in T$ folgt, dass auch $\lambda \v x^1 + (1-\lambda) \v x^2 \in T$ gilt für jede Zahl $\lambda \in [0,1]$.
 ````
 Konvexität ist in der Optimierung eine sehr starke und wünschenswerte Eigenschaft und wird uns im Laufe der Vorlesung noch öfter begegnen.
 
