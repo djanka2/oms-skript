@@ -1461,8 +1461,8 @@ Relaxierung der Konvexe-Hülle Reformulierung.
 </figure>
 <p>Die Reformulierung als MILP ist etwas komplizierter als im <span class="math notranslate nohighlight">\(\min \max\)</span> Fall. Wir führen für jedes <span class="math notranslate nohighlight">\(s_i\)</span> eine binäre Variable <span class="math notranslate nohighlight">\(z_i\)</span> ein, die den Wert <span class="math notranslate nohighlight">\(1\)</span> annimmt, wenn es sich bei <span class="math notranslate nohighlight">\(s_i\)</span> um das Minimum der Menge <span class="math notranslate nohighlight">\(\{s_1,s_2,s_3,s_4\}\)</span> handelt und <span class="math notranslate nohighlight">\(0\)</span> sonst. Des weiteren führen wir ein großes <span class="math notranslate nohighlight">\(M\)</span> ein. Das gibt uns die Möglichkeit, die Konstruktion aus <a class="reference internal" href="02_Lineare_Probleme.html#subsubsec-minmax"><span class="std std-ref">Maximumsfunktion als Teil der Zielfunktion</span></a> so zu erweitern, dass alle Nebenbedingungen bis auf eine (die, für die <span class="math notranslate nohighlight">\(y_i=1\)</span> ist) durch das große <span class="math notranslate nohighlight">\(M\)</span> “abgeschaltet” werden.</p>
 <p>Das folgende MILP ist äquivalent zum obigen <span class="math notranslate nohighlight">\(\min \min\)</span> Problem:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-405fe4f0-95de-4e8a-b538-b8fbb5e68611">
-<span class="eqno">()<a class="headerlink" href="#equation-405fe4f0-95de-4e8a-b538-b8fbb5e68611" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
+<div class="amsmath math notranslate nohighlight" id="equation-d8e56acd-ac29-45c4-a6e8-b4074b3118f6">
+<span class="eqno">()<a class="headerlink" href="#equation-d8e56acd-ac29-45c4-a6e8-b4074b3118f6" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
 \min_{s_1,s_2,s_3,s_4,z_1,z_2,z_3,z_4,y} &amp; \quad  &amp;   y &amp; &amp; &amp; \\[2mm]
 \text{s.t. } &amp; &amp;  s_1&amp;\leq y-M(1-z_1)\\
              &amp; &amp;  s_2&amp;\leq y-M(1-z_2)\\
@@ -1498,8 +1498,8 @@ Relaxierung der Konvexe-Hülle Reformulierung.
 \min_x -|x|
 \end{align*}\]</div>
 <p>ist äquivalent zu</p>
-<div class="amsmath math notranslate nohighlight" id="equation-680a3167-5db5-4d3a-9a7b-ac67073b8e22">
-<span class="eqno">()<a class="headerlink" href="#equation-680a3167-5db5-4d3a-9a7b-ac67073b8e22" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
+<div class="amsmath math notranslate nohighlight" id="equation-f9ce1b8f-b593-431f-9f05-fb036f7f54ad">
+<span class="eqno">()<a class="headerlink" href="#equation-f9ce1b8f-b593-431f-9f05-fb036f7f54ad" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
 \min_{x,x_p,x_n,y}   \quad &amp;   -(x_p+x_n) &amp; &amp; &amp; \\[2mm]
 \text{s.t. }\quad  &amp;   x=x_p-x_n\\
              &amp;   0\leq x_p \leq My\\
@@ -1512,8 +1512,8 @@ Relaxierung der Konvexe-Hülle Reformulierung.
 |x|\geq \alpha
 \end{align*}\]</div>
 <p>äquivalent zu</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f3a08fc1-a46e-446d-97dc-84bf36b8fdf1">
-<span class="eqno">()<a class="headerlink" href="#equation-f3a08fc1-a46e-446d-97dc-84bf36b8fdf1" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
+<div class="amsmath math notranslate nohighlight" id="equation-53c33880-3dea-4b27-aa42-405d135b7fa0">
+<span class="eqno">()<a class="headerlink" href="#equation-53c33880-3dea-4b27-aa42-405d135b7fa0" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
 			 &amp; &amp;  x_p+x_n&amp;\geq \alpha\\
 			 &amp; &amp;  x&amp;=x_p-x_n\\
              &amp; &amp;  0&amp;\leq x_p \leq My\\

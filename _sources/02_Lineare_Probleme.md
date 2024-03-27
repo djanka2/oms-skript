@@ -312,10 +312,10 @@ Ein Polyeder mit fünf Ecken $e_1,e_2,e_3,e_4,e_5$.
 ```
 
 ````{prf:definition} Ecke
-Ein Punkt $\v x \in P$ in einem Polyeder $P$ heißt *Ecke* von $P$, falls es keine zwei Punkte $\v x^1, \v x^2 \in P$ gibt mit $\v x^1\not=\v x^2$, so dass $\v x=\frac{1}{2}\v x^1+\frac{1}{2}\v x^2$ gilt.
+Ein Punkt $\v x \in P$ in einem Polyeder $P$ heißt *Ecke* von $P$, falls es keine zwei Punkte $\v x', \v x'' \in P$ gibt mit $\v x'\not=\v x''$, so dass $\v x=\frac{1}{2}\v x'+\frac{1}{2}\v x''$ gilt.
 ````
 
-Eine Menge $T \subseteq \R^n$ heißt *konvex*, wenn für jedes Punktepaar $\v x^1, \v x^2 \in T$ auch die komplette Verbindungslinie zwischen $\v x^1$ und $\v x^2$ in der Menge $T$ liegt. Polyeder sind konvexe Mengen (Umgekehrt kann eine nichtkonvexe Menge kein Polyeder sein).
+Eine Menge $T \subseteq \R^n$ heißt *konvex*, wenn für jedes Punktepaar $\v x', \v x'' \in T$ auch die komplette Verbindungslinie zwischen $\v x'$ und $\v x''$ in der Menge $T$ liegt. Polyeder sind konvexe Mengen (Umgekehrt kann eine nichtkonvexe Menge kein Polyeder sein).
 
 ```{figure} ./bilder/konvexe_menge.png
 :name: fig:konvexe-mengen
@@ -325,7 +325,7 @@ Beispiele konvexer und nicht konvexer Mengen.
 ```
 
 ````{prf:definition} Konvexität
-Eine Menge $T \subseteq \R^n$ heißt *konvex*, falls aus $\v x^1 \in T$ und $\v x^2 \in T$ folgt, dass auch $\lambda \v x^1 + (1-\lambda) \v x^2 \in T$ gilt für jede Zahl $\lambda \in [0,1]$.
+Eine Menge $T \subseteq \R^n$ heißt *konvex*, falls aus $\v x' \in T$ und $\v x'' \in T$ folgt, dass auch $\lambda \v x' + (1-\lambda) \v x'' \in T$ gilt für jede Zahl $\lambda \in [0,1]$.
 ````
 Konvexität ist in der Optimierung eine sehr starke und wünschenswerte Eigenschaft und wird uns im Laufe der Vorlesung noch öfter begegnen.
 
@@ -351,7 +351,7 @@ Um so erstaunlicher ist es, dass moderne Varianten des Simplex-Verfahrens Proble
 
 Die exakte Laufzeit vorherzusehen, ist allerdings schwierig und in der Tat hat das Simplex-Verfahren im worst-case exponentielle Laufzeit. So wurde in den 1970er Jahren ein Beispiel konstruiert, der sogenannte Klee-Minty-Würfel, bei denen Simplex-Verfahren eben doch alle Ecken besuchen würden. 
 
-Um eine Vorstellung von der Komplexität zu bekommen: Hätte Dantzig 1947 sein Simplex-Verfahren für ein Klee-Minty-Würfel mit 500 Variablen auf einem Rechner gestartet, der pro Sekunde eine Billiarde ($10^15$) Ecken überprüft und bis heute ununterbrochen läuft, so hätte er heute nicht einmal $10^{25}$ Ecken überprüft, also gerade mal etwa $10^{-123}=0.00000\dots001\%$ der Ecken des Polytops.
+Um eine Vorstellung von der Komplexität zu bekommen: Hätte Dantzig 1947 sein Simplex-Verfahren für ein Klee-Minty-Würfel mit 500 Variablen auf einem Rechner gestartet, der pro Sekunde *eine Billiarde* ($10^{15}$) Ecken überprüft und bis heute ununterbrochen läuft, so hätte er heute nicht einmal $10^{25}$ Ecken überprüft, also gerade mal etwa $10^{-123}=0.00000\dots001\%$ der Ecken des Polytops.
 
 In der Praxis treten solche Worst-Case Probleme allerdings eher nicht auf und das Simplex-Verfahren ist ein robustes und schnelles Verfahren für lineare Programme.  
 
@@ -483,7 +483,6 @@ unter den Nebenbedingungen
 Die Ungleichungen in den Nebenbedingungen übernehmen damit die Funktion des Maximums in der originalen Zielfunktion.
 Sie garantieren, dass $z$ größer oder gleich *jeder* der Funktionen $f_i$ ist. Gleichzeitig soll $z$ aber minimiert werden, dadurch wird es auf das Maximum der $f_i$ "gedrückt". Ähnlich können übrigens auch $\max \min$ Probleme reformuliert werden. Bei Problemen der Form $\max \max$ oder $\min \min$ gestaltet sich die Sache schwieriger (mehr dazu im nächsten Kapitel).
 
-%max min als Übung?
   
 ````{prf:example} Min Max (Forsetzung)
 Wir führen eine neue Variable $y$ und 4 Nebenbedingungen ein. Der zur $\min\max$-Formulierung {eq}`eq:minmax` äquivalente Teile eines linearen Programms lautet:
