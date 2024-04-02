@@ -37,9 +37,10 @@ Im Teil "Ableitungsbasierte Optimierung" werden gradientenbasierte Optimierungsv
 ## Literatur
 
 Teil 1:
-- R. Bauer: Skript *Datenbasierte Optimierung in der Unternehmenspraxis*, Hochschule Karlsruhe
+- R. Bauer: Skript *Datenbasierte Optimierung in der Unternehmenspraxis*, Hochschule Karlsruhe 2021.
 - N. Sudermann-Merx: *Einführung in Optimierungsmodelle*, Springer, 2023
 - H. P. Williams: *Model Building in Mathematical Programming, 5th Edition*, Wiley, 2013.
+- [Gurobi Resource Center](https://www.gurobi.com/resource-center/?post_types=jupyter_models)
 
 Teil 2:
 - M. P. Deisenroth, A. A. Faisal, C. S. Ong: *Mathematics for Machine Learning*, Springer, 2021
