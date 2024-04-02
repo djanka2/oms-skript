@@ -133,7 +133,7 @@ Beispiel Rucksackproblem.
 Um das Beispiel aus {numref}`fig:rucksack` zu modellieren, orientieren wir uns an den vier Elementen eines Optimierungsproblems (Problemdaten, Entscheidungen, Zielfunktion, Nebenbedingungen):
 
 Problemdaten
-: 5 Gegenstände mit Gewichten (2kg, 1kg, 4kg, 1kg, 12kg) und Werten ($2, $1, $10, $2, $4).
+: 5 Gegenstände mit Gewichten (2kg, 1kg, 4kg, 1kg, 12kg) und Werten (\$2, \$1, \$10, \$2, \$4).
 : Maximales Rucksackgewicht von 15kg.
 
 Entscheidungen (Optimierungsvariablen)
@@ -157,7 +157,7 @@ Nebenbedingungen
 
 Die allgemeine Definition lautet:
 ````{prf:definition} Rucksackproblem
-Instanz
+Problemdaten
 : Gegeben sind $n$ Objekte mit Werten $v_i$ und Gewichten $w_i$ für $i=1, \ldots, n$ sowie ein maximales Gesamtgewicht $W$.
 
 Aufgabe
@@ -216,11 +216,11 @@ Zielfunktion
 Nebenbedingungen
 : 1. Bei jedem benutzten Behälter muss das zulässige Gesamtgewicht beachtet werden. Wenn der Behälter nicht benutzt wird ($y_j=0$), dann dürfen auch keine Gegenstände darin sein (alle $x_{ij}=0$ für dieses $j$)
 :   \begin{align*}
-		2x_{1,1}+2x_{2,1}+2x_{3,1}+3x_{4,1}+3x_{5,1}&\leq 6\cdot y_1\\
-		2x_{1,2}+2x_{2,2}+2x_{3,2}+3x_{4,2}+3x_{5,2}&\leq 6\cdot y_2\\
-		2x_{1,3}+2x_{2,3}+2x_{3,3}+3x_{4,3}+3x_{5,3}&\leq 6\cdot y_3\\
-		2x_{1,4}+2x_{2,4}+2x_{3,4}+3x_{4,4}+3x_{5,4}&\leq 6\cdot y_4\\
-		2x_{1,5}+2x_{2,5}+2x_{3,5}+3x_{4,5}+3x_{5,5}&\leq 6\cdot y_5
+		2x_{1,1}+2x_{2,1}+2x_{3,1}+3x_{4,1}+3x_{5,1}&\leq 4\cdot y_1\\
+		2x_{1,2}+2x_{2,2}+2x_{3,2}+3x_{4,2}+3x_{5,2}&\leq 4\cdot y_2\\
+		2x_{1,3}+2x_{2,3}+2x_{3,3}+3x_{4,3}+3x_{5,3}&\leq 4\cdot y_3\\
+		2x_{1,4}+2x_{2,4}+2x_{3,4}+3x_{4,4}+3x_{5,4}&\leq 4\cdot y_4\\
+		2x_{1,5}+2x_{2,5}+2x_{3,5}+3x_{4,5}+3x_{5,5}&\leq 4\cdot y_5
 	\end{align*}
 : 2. Jeder Gegenstand muss in genau einem Behälter sein (nicht mehr und nicht weniger):
 :   \begin{align*}
@@ -241,7 +241,7 @@ Kleinere Werte für $k_{max}$ (wir sagen dazu: schärfere obere Schranken) sind 
 
 Die allgemeine mathematische Definition lautet:
 ````{prf:definition} Bin Packing Problem 
-Instanz
+Problemdaten
 : Gegeben ist eine Menge $U=\{1, 2, \ldots, n\}$ mit Gewichten $w_i$ für $i\in U$ sowie eine (Behälter-)Kapazität $B$.
 
 Aufgabe
@@ -283,11 +283,11 @@ Problemdaten
 	\begin{array}{r|cccccc}
 	 & 1 & 2 & 3 & 4 & 5 & 6\\
 	 \hline
-	 v_1 & x & x &   & x &  & \\
-	 v_2 & x &   &   & x & x & \\
-	 v_3 &   & x &   & x & x & x\\
-	 v_4 &   &   & x &   & x & x\\
-	 v_5 & x & x & x &   & x & \\
+	 v_1 & \times & \times &   & \times &  & \\
+	 v_2 & \times &   &   & \times & \times & \\
+	 v_3 &   & \times &   & \times & \times & \times\\
+	 v_4 &   &   & \times &   & \times & \times\\
+	 v_5 & \times & \times & \times &   & \times & \\
 	\end{array}
 	\end{align*}
 : Weiterhin sind die Kosten $w_1,w_2,w_3,w_4,w_5$ für die Errichtung einer Station gegeben.
@@ -349,7 +349,7 @@ $C_1\cup C_2 \cup C_4$ überdeckt $S$ mit Kosten $2+2+1=5$, denn $\{1,2\}\cup\{3
 %Die *Kardinalität* einer Menge ist die Anzahl ihrer Elemente.
 Es ergibt sich folgende formale Definition.
 ````{prf:definition} Gewichtetes Überdeckungsproblem
-Instanz
+Problemdaten
 : Gegeben ist eine endliche Menge $S=\{1, 2, \ldots, |S|\}$, ein Mengensystem $C=\{C_1, C_2, \ldots, C_{|C|}\} \subseteq 2^S$ sowie Gewichte $w_c$ für jedes $c \in C$.
 
 Aufgabe
@@ -421,7 +421,7 @@ Gesucht ist eine Teilmenge $C'=\{C_1, C_2, \ldots, C_l\}$ von paarweise disjunkt
 In der *ungewichteten* Variante besitzen alle Elemente das Gewicht $1$.
 Es ergibt sich folgende formale Definition.
 ````{prf:definition} Packungsproblem
-Instanz
+Problemdaten
 : Gegeben ist eine endliche Menge $S=\{1, 2, \ldots, |S|\}$, ein Mengensystem $C=\{C_1, C_2, \ldots, C_{|C|}\} \subseteq 2^S$ sowie Gewichte $w_c$ für jedes $c \in C$.
 
 Aufgabe
@@ -453,7 +453,7 @@ Die Beispielinstanz besitzt keine zulässige Lösung.
 In der *ungewichteten* Variante besitzen alle Elemente das Gewicht $1$.
 Es ergibt sich folgende formale Definition.
 ````{prf:definition} Zerlegungsproblem
-Instanz
+Problemdaten
 : Gegeben ist eine endliche Menge $S=\{1, 2, \ldots, |S|\}$, ein Mengensystem $C=\{C_1, C_2, \ldots, C_{|C|}\} \subseteq 2^S$ sowie Gewichte $w_c$ für jedes $c \in C$.
 
 Aufgabe
@@ -663,9 +663,9 @@ Wir wandeln das einführende Beispiel aus Abschnitt {ref}`subsubsec:logikBeispie
 Die in der Praxis auftretenden Formeln sind typischerweise einfach genug, dass keine komplizierten Umformungen vorgenommen werden müssen. Als allgemeines Verfahren für sehr komplizierte Ausdrücke kann man folgendes Verfahren nutzen: Schritt 1: Umwandlung der Formel in konjunktive Normalform. Schritt 2: Behandlung der einzelnen Klauseln nach der Methode "mindestens $1$ aus $k$". -->
 
 
-### Logische Bedingungen für Nebenbedingungen
+### Abschalten von Nebenbedingungen
 
-<!-- In manchen Fällen sollen Nebenbedingungen nicht durchgehend gelten, sondern nur, wenn eine logische Variable wahr ist. Wir betrachten dazu ein Beispiel:
+In manchen Fällen sollen Nebenbedingungen nicht durchgehend gelten, sondern nur, wenn eine logische Variable wahr ist. Wir betrachten dazu ein Beispiel:
 
 ````{prf:example}
 Ein Kraftwerk hat eine maximale Kapazität von 570 MW, sowie einen minimalen stabilen Produktionslevel von 290 MW. Ist das Kraftwerk ausgeschaltet, so produziert es 0 MW. Ist das Kraftwerk angeschaltet, so produziert es zwischen 290 und 570 MW.
@@ -676,7 +676,7 @@ Zur Modellierung benutzen wir folgende Entscheidungsvariablen
 z=&\begin{cases}
 	1 & \text{ Kraftwerk ist eingeschaltet}  \\
 	0 & \text{ Kraftwerk ist ausgeschaltet}
-	\end{cases}
+	\end{cases}\\
 p =& \text{Produktionslevel des Kraftwerks}
 \end{align*}
 
@@ -689,11 +689,19 @@ gelten. Falls das Kraftwerk ausgeschaltet ist, soll zusätzlich die Nebenbedingu
 gelten. Wie können wir dies modellieren?
 
 ````{prf:example}
-TO DO
+Durch Hinzufügen von folgenden linearen Nebenbedingungen wird unser Problem gelöst:
+\begin{align*}
+p&\leq 570z=\begin{cases}
+	p\leq 0, \text{ für } z=0\\
+	p\leq 570, \text{ für } z=1
+	\end{cases}\\
+p&\geq 290z=\begin{cases}
+	p\geq 0, \text{ für } z=0\\
+	p\geq 290, \text{ für } z=1
+	\end{cases}
+\end{align*}
 ````
-
-#### Allgemeines Vorgehen zu logischen Bedingungen für Nebenbedingungen
-Wir betrachten nun den allgemeinen Fall, dass eine Nebenbedingung 
+Diesen Spezialfall nennt man *semi-stetige* Variable (dies bezieht sich auf die Variable $p$). Wir betrachten nun den allgemeinen Fall, dass eine Nebenbedingung 
 \begin{align*}a_{1}x_1 + a_{2}x_1 + \ldots + a_{n}x_n  \leq  b \end{align*}
 nur abhängig von dem Wert einer binären Variable $v$ wirklich aktiv sein soll. Wir müssen dazu erst eine 
 %untere Schranke $L$ sowie eine 
@@ -704,6 +712,7 @@ bestimmen. Hierfür gibt es keine allgemeine Vorgehensweise. Die Möglichkeit de
 a_{1}x_1 + a_{2}x_1 + \ldots + a_{n}x_n - b \leq U (1-v)
 \end{align*}
 Für $v=1$ ergibt sich die ursprüngliche Bedingung. Für $v=0$ ist die neue Bedingung immer erfüllt.
+
 Für den Fall 
 \begin{align*}a_{1}x_1 + a_{2}x_1 + \ldots + a_{n}x_n  \geq  b \end{align*}
 bestimmen wir eine untere Schranke $L$ für 
@@ -712,13 +721,38 @@ und erhalten die Bedingung
 \begin{align*}
 a_{1}x_1 + a_{2}x_1 + \ldots + a_{n}x_n - b \geq L (1-v).
 \end{align*}
+
 Nebenbedingung der Form
 \begin{align*}a_{1}x_1 + a_{2}x_1 + \ldots + a_{n}x_n  = b \end{align*}
 ersetzen wir durch eine $\leq-$ und eine $\geq-$Ungleichung und verfahren wie in den ersten beiden Fällen.
 
 ````{prf:example}
-TO DO
-```` -->
+Die Bedingung
+\begin{align*}7x_1 - 5x_2 = 4\end{align*}
+soll abhängig davon gelten, ob die Variable $v$ den Wert $0$ (Nebenbedingung kann ignoriert werden) oder $1$ (Nebenbedingung muss gelten) annimmt. Weiterhin sei für die Variablen $x_1$ und $x_2$ bekannt, dass sie zwischen $0$ und $1$ liegen müssen.
+
+Wir gehen wie folgt vor:
+1. Aufteilen in zwei Ungleichungen:
+   \begin{align*}
+   		7x_1 - 5x_2 - 4 &\leq 0\\
+		7x_1 - 5x_2 - 4 &\geq 0
+	\end{align*}
+2. Bestimmung von $L$:
+	\begin{align*}
+   		7x_1 - 5x_2 - 4 &\geq -9=:L
+	\end{align*}
+	Dies ergibt sich aus den Schranken für $x_1$ und $x_2$ und wird angenommen, wenn $x_2=1$ und $x_1=0$.
+3. Bestimmung von $U$:
+	\begin{align*}
+   		7x_1 - 5x_2 - 4 &\leq 3=:U
+	\end{align*}
+	Dies ergibt sich aus den Schranken für $x_1$ und $x_2$ und wird angenommen, wenn $x_1=1$ und $x_2=0$.
+4. Ergebnis:
+   \begin{align*}
+   		7x_1 - 5x_2 - 4 &\geq -9(1-v)\\
+		7x_1 - 5x_2 - 4 &\leq 3(1-v)
+	\end{align*}
+````
 
 <!-- ### Endliche Wertemenge für Entscheidungsvariablen
 Wir betrachten noch einen interessanten Spezialfall. Wir haben eine Nebenbedingung gegeben, für die nicht nur ein fester $b$-Wert sondern eine Menge von $b$-Werten möglich ist. Es soll also gelten
@@ -740,12 +774,12 @@ Dies löst unsere Aufgabenstellung.
 
 ````{prf:example}
 TO DO
-````
+```` 
 -->
 
 
-%(subsec:disjunctiveProgramming)=
-%### Logische Bedingungen an Nebenbedingungen (Disjunktive Programmierung)
+(subsec:disjunctiveProgramming)=
+### Oder-Verknüpfung für Nebenbedingungen
 
 In manchen Anwendungen liegen mehrere Mengen von Nebenbedingungen vor, die durch eine logische Oder-Verknüpfung miteinander verbunden sind. Man gibt die Menge der zulässigen Lösungen manchmal auch in der Form
 \begin{align*}
@@ -803,9 +837,9 @@ y_1,y_2&\in \{0,1\}
 Nebenbedingungen für $x_1$ und $x_2$:
 \begin{align*}
 -M(1-y_1)+1&\leq x_1 \leq 3+M(1-y_1)\\
--M(1-y_1)+0&\leq x_2 \leq 3+M(1-y_1)\\
--M(1-y_2)+2&\leq x_1 \leq 3+M(1-y_2)\\
--M(1-y_2)+3&\leq x_2 \leq 3+M(1-y_2)\\
+-M(1-y_1)+0&\leq x_2 \leq 2+M(1-y_1)\\
+-M(1-y_2)+2&\leq x_1 \leq 4+M(1-y_2)\\
+-M(1-y_2)+3&\leq x_2 \leq 4+M(1-y_2)\\
 \end{align*}
 Wie groß muss dann $M$ mindestens sein? Es gilt auf jeden Fall
 \begin{align*}
@@ -816,7 +850,7 @@ Damit ist $M=4$ groß genug.
 ````
 
 ````{note}
-Möglichst kleine Werte für $M$ können unter Umständen die Lösungsgeschwindigkeit des Modells verbessern.
+Möglichst kleine Werte für $M$ können unter Umständen die Lösungsgeschwindigkeit des Modells verbessern. Weiterhin kann für jede Ungleichung ein eigenes $M$ bestimmt werden.
 ````
 
 Allgemein ergibt sich als Groß-M Reformulierung
@@ -1008,7 +1042,7 @@ nicht mit den dort vorgestellten Techniken reformulieren. Der Grund dafür ist, 
 \end{align*} 
 Nicht konvexe Menge und $\min \min$ Probleme... dahinter verbirgt sich doch wieder ein großes $M$!
 
-Konkret geht man so vor, dass man $x$ durch die *Different zweier* positiver Variablen $x_p-x_n$ ersetzt, wobei garantiert wird, dass eine von den beiden gleich Null ist. Welche das ist, kommt darauf an, ob $x$ positiv (dann ist $x_n=0$) oder negativ ist (dann ist $x_p=0$). Den Betrag wiederum kann man dan als *Summe* dieser beiden Variablen schreiben, diese ist dann immer positiv. Das Konstrukt wird mit Hilfe einer Binärvariable und einem großen $M$ umgesetzt und sieht wie folgt aus: Das Optimierungsproblem
+Konkret geht man so vor, dass man $x$ durch die *Differenz zweier* positiver Variablen $x_p-x_n$ ersetzt, wobei garantiert wird, dass eine von den beiden gleich Null ist. Welche das ist, kommt darauf an, ob $x$ positiv (dann ist $x_n=0$) oder negativ ist (dann ist $x_p=0$). Den Betrag wiederum kann man dan als *Summe* dieser beiden Variablen schreiben, diese ist dann immer positiv. Das Konstrukt wird mit Hilfe einer Binärvariable und einem großen $M$ umgesetzt und sieht wie folgt aus: Das Optimierungsproblem
 \begin{align*}
 \min_x -|x|
 \end{align*}
@@ -1080,32 +1114,35 @@ Es seien $b_1, b_2, \ldots b_k \in \B$ binäre Variablen. Das Produkt
 \begin{align*}
 y=\prod_{i=1}^kb_i
 \end{align*}
-kann durch folgende Bedingungen an die Variable $y$ linearisiert werden:
+kann durch Einführen einer Variable $y$ und folgende Bedingungen an $y$ linearisiert werden:
 1. \begin{align*}
-  y\leq b_i,\quad i=1,\dots, k
-  \end{align*}
-  Damit ist sichergestellt, dass $y=0$, sobald (mindestens) eines der $b_i=0$.
+   y\leq b_i,\quad i=1,\dots, k
+   \end{align*}
+   Damit ist sichergestellt, dass $y=0$, sobald (mindestens) eines der $b_i=0$.
 2. \begin{align*}
-  y\geq \sum_{i=1}^k b_i-k+1,\quad i=1,\dots, k
-  \end{align*}
-  Damit ist sichergestellt, dass $y=1$, wenn alle $b_i=1$.
+   y\geq \sum_{i=1}^k b_i-k+1,\quad i=1,\dots, k
+   \end{align*}
+   Damit ist sichergestellt, dass $y=1$, wenn alle $b_i=1$.
+
 Danach kann man jedes Auftreten des nichtlinearen Terms $\prod_{i=1}^kb_i$ durch (den linearen Term) $y$ ersetzen.
 
 #### Produkt von einer Binärvariablen und einer kontinuierlichen Variable
 Es sei $x \in \R^+$ eine kontinuierliche und $b\in \B$ eine binäre Variable. Das Produkt 
 \begin{align*}
-y=x\cdot b
+y=x\cdot b\geq0
 \end{align*}
-kann wie folgt linearisiert werden. Wir benötigen zunächst eine obere Schranke $M$ für $x$ (diese sollte sich aus dem Probleme ergeben). Wir fügen dem Problem nun folgende Nebenbedingungen hinzu:
+kann wie folgt linearisiert werden.
+
+Wir fügen zunächst eine Optimierungsvariable $y$ mit $y\geq0$ zum Problem hinzu. Als nächstes benötigen wir eine obere Schranke $M$ für $x$ (diese sollte sich aus dem Problem ergeben). Dann fügen wir dem Problem folgende Nebenbedingungen hinzu:
 1. \begin{align*}
-  y&\leq Mb
-  \end{align*}
-  Damit ist sichergestellt, dass wenn $b=0$ auch $y=0$ ist.
-2.  \begin{align*}
-  y&\leq x
-  y&\geq x-M(1-b)
-  \end{align*}
-  Damit ist sichergestellt, dass wenn $b=1$ ist, sowohl $y\leq x$ als auch $y\geq x$ gilt. Mit anderen Worten $y=x$, wie gewünscht.
+   y&\leq Mb
+   \end{align*} 
+   Damit ist sichergestellt, dass wenn $b=0$ auch $y=0$ ist, da ja auch $y\geq0$.
+2. \begin{align*}
+   y&\leq x\\
+   y&\geq x-M(1-b)
+   \end{align*}
+   Damit ist sichergestellt, dass wenn $b=1$ ist, sowohl $y\leq x$ als auch $y\geq x$ gilt. Mit anderen Worten $y=x$, wie gewünscht.
 
 Danach kann man jedes Auftreten des nichtlinearen Terms $x\cdot b$ durch (den linearen Term) $y$ ersetzen.
 
@@ -1116,7 +1153,7 @@ In diesem Abschnitt möchten wir noch auf einige Punkte eingehen, die besonders 
 
 Konkret empfiehlt es sich, bei der Erstellung eines Modells nach den folgenden fünf Schritten vorzugehen.
 
-**Schritt 1: Indexmengen decklarieren**
+**Schritt 1: Indexmengen deklarieren**
 
 Gerade wenn es mehrere Mengen gibt, über die iteriert wird, ist es hilfreich auch Indexvariablen festzulegen, die durchgängig verwendet werden. Die Indexmengen werden wir in allen folgenden Schritten (2.-5.) benutzt, daher empfiehlt es sich, diese als erstes anzulegen. Die Indexmengen können und sollten dabei möglichst nah an der Problemformulierung gewählt werden.
 
@@ -1243,6 +1280,7 @@ Als allgemeines Modell für diese Problemklasse ergibt sich
 & & x_i & \geq  \ 0 & && \forall i \in A \\
 & & z_{ij} & \in \ \B & && \forall (i,j) \in B
 \end{alignat*}
+
 
 mit den Entscheidungsvariablen
 - $y$: Endzeitpunkt der letzten Aufgabe

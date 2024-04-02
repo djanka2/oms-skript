@@ -374,10 +374,11 @@ document.write(`
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transformation-logischer-zusammenhange-in-arithmetische-ausdrucke">Transformation logischer Zusammenhänge in arithmetische Ausdrücke</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logische-bedingungen-fur-nebenbedingungen">3.5.2. Logische Bedingungen für Nebenbedingungen</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#min-min-probleme">3.5.3. Min min Probleme</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#betrage-revisited">3.5.4. Beträge revisited</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linearisieren-von-nichtlinearitaten">3.5.5. Linearisieren von Nichtlinearitäten</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#abschalten-von-nebenbedingungen">3.5.2. Abschalten von Nebenbedingungen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#oder-verknupfung-fur-nebenbedingungen">3.5.3. Oder-Verknüpfung für Nebenbedingungen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#min-min-probleme">3.5.4. Min min Probleme</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#betrage-revisited">3.5.5. Beträge revisited</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linearisieren-von-nichtlinearitaten">3.5.6. Linearisieren von Nichtlinearitäten</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#produkt-von-binarvariablen">Produkt von Binärvariablen</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#produkt-von-einer-binarvariablen-und-einer-kontinuierlichen-variable">Produkt von einer Binärvariablen und einer kontinuierlichen Variable</a></li>
 </ul>
@@ -517,7 +518,7 @@ Der ursprüngliche zulässige Bereich soll dabei voll rekonstruierbar bleiben.</
 </figure>
 <p>Um das Beispiel aus <a class="reference internal" href="#fig-rucksack"><span class="std std-numref">Abb. 3.2</span></a> zu modellieren, orientieren wir uns an den vier Elementen eines Optimierungsproblems (Problemdaten, Entscheidungen, Zielfunktion, Nebenbedingungen):</p>
 <dl class="simple myst">
-<dt>Problemdaten</dt><dd><p>5 Gegenstände mit Gewichten (2kg, 1kg, 4kg, 1kg, 12kg) und Werten (<span class="math notranslate nohighlight">\(2, \)</span>1, <span class="math notranslate nohighlight">\(10, \)</span>2, $4).</p>
+<dt>Problemdaten</dt><dd><p>5 Gegenstände mit Gewichten (2kg, 1kg, 4kg, 1kg, 12kg) und Werten ($2, $1, $10, $2, $4).</p>
 </dd>
 <dd><p>Maximales Rucksackgewicht von 15kg.</p>
 </dd>
@@ -550,7 +551,7 @@ Der ursprüngliche zulässige Bereich soll dabei voll rekonstruierbar bleiben.</
 <p class="admonition-title"><span class="caption-number">Definition 3.1 </span> (Rucksackproblem)</p>
 <section class="definition-content" id="proof-content">
 <dl class="simple myst">
-<dt>Instanz</dt><dd><p>Gegeben sind <span class="math notranslate nohighlight">\(n\)</span> Objekte mit Werten <span class="math notranslate nohighlight">\(v_i\)</span> und Gewichten <span class="math notranslate nohighlight">\(w_i\)</span> für <span class="math notranslate nohighlight">\(i=1, \ldots, n\)</span> sowie ein maximales Gesamtgewicht <span class="math notranslate nohighlight">\(W\)</span>.</p>
+<dt>Problemdaten</dt><dd><p>Gegeben sind <span class="math notranslate nohighlight">\(n\)</span> Objekte mit Werten <span class="math notranslate nohighlight">\(v_i\)</span> und Gewichten <span class="math notranslate nohighlight">\(w_i\)</span> für <span class="math notranslate nohighlight">\(i=1, \ldots, n\)</span> sowie ein maximales Gesamtgewicht <span class="math notranslate nohighlight">\(W\)</span>.</p>
 </dd>
 <dt>Aufgabe</dt><dd><p>Gesucht ist eine Teilmenge der Objekte mit möglichst großem Gesamtwert, deren Gesamt-gewicht kleiner oder gleich <span class="math notranslate nohighlight">\(W\)</span> ist.</p>
 </dd>
@@ -612,11 +613,11 @@ Der ursprüngliche zulässige Bereich soll dabei voll rekonstruierbar bleiben.</
 </dd>
 <dd><div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
-		2x_{1,1}+2x_{2,1}+2x_{3,1}+3x_{4,1}+3x_{5,1}&amp;\leq 6\cdot y_1\\
-		2x_{1,2}+2x_{2,2}+2x_{3,2}+3x_{4,2}+3x_{5,2}&amp;\leq 6\cdot y_2\\
-		2x_{1,3}+2x_{2,3}+2x_{3,3}+3x_{4,3}+3x_{5,3}&amp;\leq 6\cdot y_3\\
-		2x_{1,4}+2x_{2,4}+2x_{3,4}+3x_{4,4}+3x_{5,4}&amp;\leq 6\cdot y_4\\
-		2x_{1,5}+2x_{2,5}+2x_{3,5}+3x_{4,5}+3x_{5,5}&amp;\leq 6\cdot y_5
+		2x_{1,1}+2x_{2,1}+2x_{3,1}+3x_{4,1}+3x_{5,1}&amp;\leq 4\cdot y_1\\
+		2x_{1,2}+2x_{2,2}+2x_{3,2}+3x_{4,2}+3x_{5,2}&amp;\leq 4\cdot y_2\\
+		2x_{1,3}+2x_{2,3}+2x_{3,3}+3x_{4,3}+3x_{5,3}&amp;\leq 4\cdot y_3\\
+		2x_{1,4}+2x_{2,4}+2x_{3,4}+3x_{4,4}+3x_{5,4}&amp;\leq 4\cdot y_4\\
+		2x_{1,5}+2x_{2,5}+2x_{3,5}+3x_{4,5}+3x_{5,5}&amp;\leq 4\cdot y_5
 	\end{align*}\]</div>
 </dd>
 <dd><ol class="arabic simple" start="2">
@@ -651,7 +652,7 @@ Der ursprüngliche zulässige Bereich soll dabei voll rekonstruierbar bleiben.</
 <p class="admonition-title"><span class="caption-number">Definition 3.2 </span> (Bin Packing Problem)</p>
 <section class="definition-content" id="proof-content">
 <dl class="simple myst">
-<dt>Instanz</dt><dd><p>Gegeben ist eine Menge <span class="math notranslate nohighlight">\(U=\{1, 2, \ldots, n\}\)</span> mit Gewichten <span class="math notranslate nohighlight">\(w_i\)</span> für <span class="math notranslate nohighlight">\(i\in U\)</span> sowie eine (Behälter-)Kapazität <span class="math notranslate nohighlight">\(B\)</span>.</p>
+<dt>Problemdaten</dt><dd><p>Gegeben ist eine Menge <span class="math notranslate nohighlight">\(U=\{1, 2, \ldots, n\}\)</span> mit Gewichten <span class="math notranslate nohighlight">\(w_i\)</span> für <span class="math notranslate nohighlight">\(i\in U\)</span> sowie eine (Behälter-)Kapazität <span class="math notranslate nohighlight">\(B\)</span>.</p>
 </dd>
 <dt>Aufgabe</dt><dd><p>Gesucht ist eine Aufteilung <span class="math notranslate nohighlight">\(U=U_1 \cup U_2 \cup \ldots \cup U_k\)</span> in <span class="math notranslate nohighlight">\(k\)</span> disjunkte Mengen, so dass die Summe der Elemente in jedem <span class="math notranslate nohighlight">\(U_i\)</span> kleiner als <span class="math notranslate nohighlight">\(B\)</span> ist und <span class="math notranslate nohighlight">\(k\)</span> minimal wird.</p>
 </dd>
@@ -695,11 +696,11 @@ Jede Versorgungsstation darf höchstens 200 Meter von den zu versorgenden Häuse
 	\begin{array}{r|cccccc}
 	 &amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5 &amp; 6\\
 	 \hline
-	 v_1 &amp; x &amp; x &amp;   &amp; x &amp;  &amp; \\
-	 v_2 &amp; x &amp;   &amp;   &amp; x &amp; x &amp; \\
-	 v_3 &amp;   &amp; x &amp;   &amp; x &amp; x &amp; x\\
-	 v_4 &amp;   &amp;   &amp; x &amp;   &amp; x &amp; x\\
-	 v_5 &amp; x &amp; x &amp; x &amp;   &amp; x &amp; \\
+	 v_1 &amp; \times &amp; \times &amp;   &amp; \times &amp;  &amp; \\
+	 v_2 &amp; \times &amp;   &amp;   &amp; \times &amp; \times &amp; \\
+	 v_3 &amp;   &amp; \times &amp;   &amp; \times &amp; \times &amp; \times\\
+	 v_4 &amp;   &amp;   &amp; \times &amp;   &amp; \times &amp; \times\\
+	 v_5 &amp; \times &amp; \times &amp; \times &amp;   &amp; \times &amp; \\
 	\end{array}
 	\end{align*}\]</div>
 </dd>
@@ -768,7 +769,7 @@ Jede Versorgungsstation darf höchstens 200 Meter von den zu versorgenden Häuse
 <p class="admonition-title"><span class="caption-number">Definition 3.3 </span> (Gewichtetes Überdeckungsproblem)</p>
 <section class="definition-content" id="proof-content">
 <dl class="simple myst">
-<dt>Instanz</dt><dd><p>Gegeben ist eine endliche Menge <span class="math notranslate nohighlight">\(S=\{1, 2, \ldots, |S|\}\)</span>, ein Mengensystem <span class="math notranslate nohighlight">\(C=\{C_1, C_2, \ldots, C_{|C|}\} \subseteq 2^S\)</span> sowie Gewichte <span class="math notranslate nohighlight">\(w_c\)</span> für jedes <span class="math notranslate nohighlight">\(c \in C\)</span>.</p>
+<dt>Problemdaten</dt><dd><p>Gegeben ist eine endliche Menge <span class="math notranslate nohighlight">\(S=\{1, 2, \ldots, |S|\}\)</span>, ein Mengensystem <span class="math notranslate nohighlight">\(C=\{C_1, C_2, \ldots, C_{|C|}\} \subseteq 2^S\)</span> sowie Gewichte <span class="math notranslate nohighlight">\(w_c\)</span> für jedes <span class="math notranslate nohighlight">\(c \in C\)</span>.</p>
 </dd>
 <dt>Aufgabe</dt><dd><p>Gesucht ist eine Teilmenge <span class="math notranslate nohighlight">\(C'= \{C_1, C_2, \ldots, C_l\} \subseteq C\)</span>, so dass <span class="math notranslate nohighlight">\(S=C_1 \cup C_2 \cup \ldots \cup C_l\)</span> und das  Gesamtgewicht <span class="math notranslate nohighlight">\(\sum_{c \in C'}w_c\)</span> minimal ist.</p>
 </dd>
@@ -845,7 +846,7 @@ Es ergibt sich folgende formale Definition.</p>
 <p class="admonition-title"><span class="caption-number">Definition 3.4 </span> (Packungsproblem)</p>
 <section class="definition-content" id="proof-content">
 <dl class="simple myst">
-<dt>Instanz</dt><dd><p>Gegeben ist eine endliche Menge <span class="math notranslate nohighlight">\(S=\{1, 2, \ldots, |S|\}\)</span>, ein Mengensystem <span class="math notranslate nohighlight">\(C=\{C_1, C_2, \ldots, C_{|C|}\} \subseteq 2^S\)</span> sowie Gewichte <span class="math notranslate nohighlight">\(w_c\)</span> für jedes <span class="math notranslate nohighlight">\(c \in C\)</span>.</p>
+<dt>Problemdaten</dt><dd><p>Gegeben ist eine endliche Menge <span class="math notranslate nohighlight">\(S=\{1, 2, \ldots, |S|\}\)</span>, ein Mengensystem <span class="math notranslate nohighlight">\(C=\{C_1, C_2, \ldots, C_{|C|}\} \subseteq 2^S\)</span> sowie Gewichte <span class="math notranslate nohighlight">\(w_c\)</span> für jedes <span class="math notranslate nohighlight">\(c \in C\)</span>.</p>
 </dd>
 <dt>Aufgabe</dt><dd><p>Gesucht ist eine Teilmenge <span class="math notranslate nohighlight">\(C'= \{C_1, C_2, \ldots, C_l\} \subseteq C\)</span>, so dass <span class="math notranslate nohighlight">\(C_i \cap C_j = \emptyset\)</span> für <span class="math notranslate nohighlight">\(C_i, C_j \in C'\)</span> und <span class="math notranslate nohighlight">\(C_i \not=C_j\)</span> und so dass das  Gesamtgewicht <span class="math notranslate nohighlight">\(\sum_{c \in C'}w_c\)</span> maximal ist.</p>
 </dd>
@@ -882,7 +883,7 @@ Es ergibt sich folgende formale Definition.</p>
 <p class="admonition-title"><span class="caption-number">Definition 3.5 </span> (Zerlegungsproblem)</p>
 <section class="definition-content" id="proof-content">
 <dl class="simple myst">
-<dt>Instanz</dt><dd><p>Gegeben ist eine endliche Menge <span class="math notranslate nohighlight">\(S=\{1, 2, \ldots, |S|\}\)</span>, ein Mengensystem <span class="math notranslate nohighlight">\(C=\{C_1, C_2, \ldots, C_{|C|}\} \subseteq 2^S\)</span> sowie Gewichte <span class="math notranslate nohighlight">\(w_c\)</span> für jedes <span class="math notranslate nohighlight">\(c \in C\)</span>.</p>
+<dt>Problemdaten</dt><dd><p>Gegeben ist eine endliche Menge <span class="math notranslate nohighlight">\(S=\{1, 2, \ldots, |S|\}\)</span>, ein Mengensystem <span class="math notranslate nohighlight">\(C=\{C_1, C_2, \ldots, C_{|C|}\} \subseteq 2^S\)</span> sowie Gewichte <span class="math notranslate nohighlight">\(w_c\)</span> für jedes <span class="math notranslate nohighlight">\(c \in C\)</span>.</p>
 </dd>
 <dt>Aufgabe</dt><dd><p>Gesucht ist eine Teilmenge <span class="math notranslate nohighlight">\(C'= \{C_1, C_2, \ldots, C_l\} \subseteq C\)</span>, so dass <span class="math notranslate nohighlight">\(C_i \cap C_j = \emptyset\)</span> für <span class="math notranslate nohighlight">\(C_i, C_j \in C'\)</span> und <span class="math notranslate nohighlight">\(C_i \not=C_j\)</span>, sowie <span class="math notranslate nohighlight">\(S=C_1 \cup C_2 \cup \ldots \cup C_l\)</span>  und das  Gesamtgewicht <span class="math notranslate nohighlight">\(\sum_{c \in C'}w_c\)</span> maximal ist.</p>
 </dd>
@@ -1138,63 +1139,117 @@ x_V=\left\{\begin{array}{rl}
 Die in der Praxis auftretenden Formeln sind typischerweise einfach genug, dass keine komplizierten Umformungen vorgenommen werden müssen. Als allgemeines Verfahren für sehr komplizierte Ausdrücke kann man folgendes Verfahren nutzen: Schritt 1: Umwandlung der Formel in konjunktive Normalform. Schritt 2: Behandlung der einzelnen Klauseln nach der Methode "mindestens $1$ aus $k$". -->
 </section>
 </section>
-<section id="logische-bedingungen-fur-nebenbedingungen">
-<h3><span class="section-number">3.5.2. </span>Logische Bedingungen für Nebenbedingungen<a class="headerlink" href="#logische-bedingungen-fur-nebenbedingungen" title="Link to this heading">#</a></h3>
-<!-- In manchen Fällen sollen Nebenbedingungen nicht durchgehend gelten, sondern nur, wenn eine logische Variable wahr ist. Wir betrachten dazu ein Beispiel:
-
-````{prf:example}
-Ein Kraftwerk hat eine maximale Kapazität von 570 MW, sowie einen minimalen stabilen Produktionslevel von 290 MW. Ist das Kraftwerk ausgeschaltet, so produziert es 0 MW. Ist das Kraftwerk angeschaltet, so produziert es zwischen 290 und 570 MW.
-````
-
-Zur Modellierung benutzen wir folgende Entscheidungsvariablen
-\begin{align*}
-z=&\begin{cases}
-	1 & \text{ Kraftwerk ist eingeschaltet}  \\
-	0 & \text{ Kraftwerk ist ausgeschaltet}
+<section id="abschalten-von-nebenbedingungen">
+<h3><span class="section-number">3.5.2. </span>Abschalten von Nebenbedingungen<a class="headerlink" href="#abschalten-von-nebenbedingungen" title="Link to this heading">#</a></h3>
+<p>In manchen Fällen sollen Nebenbedingungen nicht durchgehend gelten, sondern nur, wenn eine logische Variable wahr ist. Wir betrachten dazu ein Beispiel:</p>
+<div class="proof example admonition" id="example-17">
+<p class="admonition-title"><span class="caption-number">Example 3.12 </span></p>
+<section class="example-content" id="proof-content">
+<p>Ein Kraftwerk hat eine maximale Kapazität von 570 MW, sowie einen minimalen stabilen Produktionslevel von 290 MW. Ist das Kraftwerk ausgeschaltet, so produziert es 0 MW. Ist das Kraftwerk angeschaltet, so produziert es zwischen 290 und 570 MW.</p>
+</section>
+</div><p>Zur Modellierung benutzen wir folgende Entscheidungsvariablen</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+z=&amp;\begin{cases}
+	1 &amp; \text{ Kraftwerk ist eingeschaltet}  \\
+	0 &amp; \text{ Kraftwerk ist ausgeschaltet}
+	\end{cases}\\
+p =&amp; \text{Produktionslevel des Kraftwerks}
+\end{align*}\]</div>
+<p>Es gelten immer die Nebenbedingungen</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}0 \leq p \leq 570 \end{align*}\]</div>
+<p>Ist das Kraftwerk eingeschaltet, soll zusätzlich die Nebenbedingung</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}290 \geq p \end{align*}\]</div>
+<p>gelten. Falls das Kraftwerk ausgeschaltet ist, soll zusätzlich die Nebenbedingung</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}p \leq 0 \end{align*}\]</div>
+<p>gelten. Wie können wir dies modellieren?</p>
+<div class="proof example admonition" id="example-18">
+<p class="admonition-title"><span class="caption-number">Example 3.13 </span></p>
+<section class="example-content" id="proof-content">
+<p>Durch Hinzufügen von folgenden linearen Nebenbedingungen wird unser Problem gelöst:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+p&amp;\leq 570z=\begin{cases}
+	p\leq 0, \text{ für } z=0\\
+	p\leq 570, \text{ für } z=1
+	\end{cases}\\
+p&amp;\geq 290z=\begin{cases}
+	p\geq 0, \text{ für } z=0\\
+	p\geq 290, \text{ für } z=1
 	\end{cases}
-p =& \text{Produktionslevel des Kraftwerks}
-\end{align*}
-
-Es gelten immer die Nebenbedingungen
-\begin{align*}0 \leq p \leq 570 \end{align*}
-Ist das Kraftwerk eingeschaltet, soll zusätzlich die Nebenbedingung
-\begin{align*}290 \geq p \end{align*}
-gelten. Falls das Kraftwerk ausgeschaltet ist, soll zusätzlich die Nebenbedingung
-\begin{align*}p \leq 0 \end{align*}
-gelten. Wie können wir dies modellieren?
-
-````{prf:example}
-TO DO
-````
-
-#### Allgemeines Vorgehen zu logischen Bedingungen für Nebenbedingungen
-Wir betrachten nun den allgemeinen Fall, dass eine Nebenbedingung 
-\begin{align*}a_{1}x_1 + a_{2}x_1 + \ldots + a_{n}x_n  \leq  b \end{align*}
-nur abhängig von dem Wert einer binären Variable $v$ wirklich aktiv sein soll. Wir müssen dazu erst eine 
-%untere Schranke $L$ sowie eine 
-obere Schranke $U$ für den Wert
-\begin{align*}a_{1}x_1 + a_{2}x_1 + \ldots + a_{n}x_n - b \end{align*}
-bestimmen. Hierfür gibt es keine allgemeine Vorgehensweise. Die Möglichkeit der Berechnung solcher Schranken ist abhängig vom konkreten Modell. Es ergibt sich dann die Nebenbedingung
-\begin{align*}
+\end{align*}\]</div>
+</section>
+</div><p>Diesen Spezialfall nennt man <em>semi-stetige</em> Variable (dies bezieht sich auf die Variable <span class="math notranslate nohighlight">\(p\)</span>). Wir betrachten nun den allgemeinen Fall, dass eine Nebenbedingung</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}a_{1}x_1 + a_{2}x_1 + \ldots + a_{n}x_n  \leq  b \end{align*}\]</div>
+<p>nur abhängig von dem Wert einer binären Variable <span class="math notranslate nohighlight">\(v\)</span> wirklich aktiv sein soll. Wir müssen dazu erst eine</p>
+<p>obere Schranke <span class="math notranslate nohighlight">\(U\)</span> für den Wert</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}a_{1}x_1 + a_{2}x_1 + \ldots + a_{n}x_n - b \end{align*}\]</div>
+<p>bestimmen. Hierfür gibt es keine allgemeine Vorgehensweise. Die Möglichkeit der Berechnung solcher Schranken ist abhängig vom konkreten Modell. Es ergibt sich dann die Nebenbedingung</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
 a_{1}x_1 + a_{2}x_1 + \ldots + a_{n}x_n - b \leq U (1-v)
-\end{align*}
-Für $v=1$ ergibt sich die ursprüngliche Bedingung. Für $v=0$ ist die neue Bedingung immer erfüllt.
-Für den Fall 
-\begin{align*}a_{1}x_1 + a_{2}x_1 + \ldots + a_{n}x_n  \geq  b \end{align*}
-bestimmen wir eine untere Schranke $L$ für 
-\begin{align*}a_{1}x_1 + a_{2}x_1 + \ldots + a_{n}x_n - b \end{align*}
-und erhalten die Bedingung 
-\begin{align*}
+\end{align*}\]</div>
+<p>Für <span class="math notranslate nohighlight">\(v=1\)</span> ergibt sich die ursprüngliche Bedingung. Für <span class="math notranslate nohighlight">\(v=0\)</span> ist die neue Bedingung immer erfüllt.</p>
+<p>Für den Fall</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}a_{1}x_1 + a_{2}x_1 + \ldots + a_{n}x_n  \geq  b \end{align*}\]</div>
+<p>bestimmen wir eine untere Schranke <span class="math notranslate nohighlight">\(L\)</span> für</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}a_{1}x_1 + a_{2}x_1 + \ldots + a_{n}x_n - b \end{align*}\]</div>
+<p>und erhalten die Bedingung</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
 a_{1}x_1 + a_{2}x_1 + \ldots + a_{n}x_n - b \geq L (1-v).
-\end{align*}
-Nebenbedingung der Form
-\begin{align*}a_{1}x_1 + a_{2}x_1 + \ldots + a_{n}x_n  = b \end{align*}
-ersetzen wir durch eine $\leq-$ und eine $\geq-$Ungleichung und verfahren wie in den ersten beiden Fällen.
-
-````{prf:example}
-TO DO
-```` -->
-<!-- ### Endliche Wertemenge für Entscheidungsvariablen
+\end{align*}\]</div>
+<p>Nebenbedingung der Form</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}a_{1}x_1 + a_{2}x_1 + \ldots + a_{n}x_n  = b \end{align*}\]</div>
+<p>ersetzen wir durch eine <span class="math notranslate nohighlight">\(\leq-\)</span> und eine <span class="math notranslate nohighlight">\(\geq-\)</span>Ungleichung und verfahren wie in den ersten beiden Fällen.</p>
+<div class="proof example admonition" id="example-19">
+<p class="admonition-title"><span class="caption-number">Example 3.14 </span></p>
+<section class="example-content" id="proof-content">
+<p>Die Bedingung</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}7x_1 - 5x_2 = 4\end{align*}\]</div>
+<p>soll abhängig davon gelten, ob die Variable <span class="math notranslate nohighlight">\(v\)</span> den Wert <span class="math notranslate nohighlight">\(0\)</span> (Nebenbedingung kann ignoriert werden) oder <span class="math notranslate nohighlight">\(1\)</span> (Nebenbedingung muss gelten) annimmt. Weiterhin sei für die Variablen <span class="math notranslate nohighlight">\(x_1\)</span> und <span class="math notranslate nohighlight">\(x_2\)</span> bekannt, dass sie zwischen <span class="math notranslate nohighlight">\(0\)</span> und <span class="math notranslate nohighlight">\(1\)</span> liegen müssen.</p>
+<p>Wir gehen wie folgt vor:</p>
+<ol class="arabic">
+<li><p>Aufteilen in zwei Ungleichungen:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+   		7x_1 - 5x_2 - 4 &amp;\leq 0\\
+		7x_1 - 5x_2 - 4 &amp;\geq 0
+	\end{align*}\]</div>
+</li>
+<li><p>Bestimmung von <span class="math notranslate nohighlight">\(L\)</span>:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+   		7x_1 - 5x_2 - 4 &amp;\geq -9=:L
+	\end{align*}\]</div>
+<p>Dies ergibt sich aus den Schranken für <span class="math notranslate nohighlight">\(x_1\)</span> und <span class="math notranslate nohighlight">\(x_2\)</span> und wird angenommen, wenn <span class="math notranslate nohighlight">\(x_2=1\)</span> und <span class="math notranslate nohighlight">\(x_1=0\)</span>.</p>
+</li>
+<li><p>Bestimmung von <span class="math notranslate nohighlight">\(U\)</span>:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+   		7x_1 - 5x_2 - 4 &amp;\leq 3=:U
+	\end{align*}\]</div>
+<p>Dies ergibt sich aus den Schranken für <span class="math notranslate nohighlight">\(x_1\)</span> und <span class="math notranslate nohighlight">\(x_2\)</span> und wird angenommen, wenn <span class="math notranslate nohighlight">\(x_1=1\)</span> und <span class="math notranslate nohighlight">\(x_2=0\)</span>.</p>
+</li>
+<li><p>Ergebnis:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+   		7x_1 - 5x_2 - 4 &amp;\geq -9(1-v)\\
+		7x_1 - 5x_2 - 4 &amp;\leq 3(1-v)
+	\end{align*}\]</div>
+</li>
+</ol>
+</section>
+</div><!-- ### Endliche Wertemenge für Entscheidungsvariablen
 Wir betrachten noch einen interessanten Spezialfall. Wir haben eine Nebenbedingung gegeben, für die nicht nur ein fester $b$-Wert sondern eine Menge von $b$-Werten möglich ist. Es soll also gelten
 \begin{eqnarray*}
 	a_{1}x_1 + a_{2}x_1 + \ldots + a_{n}x_n  & =  & b_1 \text{ oder} \\
@@ -1214,8 +1269,11 @@ Dies löst unsere Aufgabenstellung.
 
 ````{prf:example}
 TO DO
-````
+```` 
 -->
+</section>
+<section id="oder-verknupfung-fur-nebenbedingungen">
+<span id="subsec-disjunctiveprogramming"></span><h3><span class="section-number">3.5.3. </span>Oder-Verknüpfung für Nebenbedingungen<a class="headerlink" href="#oder-verknupfung-fur-nebenbedingungen" title="Link to this heading">#</a></h3>
 <p>In manchen Anwendungen liegen mehrere Mengen von Nebenbedingungen vor, die durch eine logische Oder-Verknüpfung miteinander verbunden sind. Man gibt die Menge der zulässigen Lösungen manchmal auch in der Form</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
@@ -1223,8 +1281,8 @@ TO DO
 \end{align*}\]</div>
 <p>an. Diese Darstellung kann sich etwa ergeben, wenn die Menge der zulässigen Lösungen nicht zusammenhängend oder nicht konvex ist. Ein Beispiel dafür haben wir schon in <a class="reference internal" href="02_Lineare_Probleme.html#subsubsec-betraege"><span class="std std-ref">Beträge</span></a> gesehen: Soll z.B. für eine Variable <span class="math notranslate nohighlight">\(x\)</span> die Nebenbedingung <span class="math notranslate nohighlight">\(|x|\geq 2\)</span> gelten, so ist dies gleichbedeutend damit, dass entweder <span class="math notranslate nohighlight">\(x\geq 2\)</span> oder aber <span class="math notranslate nohighlight">\(x\leq -2\)</span> ist.
 Allgemein kann dies auch für eine größere Anzahl von Ungleichungen gelten.</p>
-<div class="proof example admonition" id="example-17">
-<p class="admonition-title"><span class="caption-number">Example 3.12 </span></p>
+<div class="proof example admonition" id="example-20">
+<p class="admonition-title"><span class="caption-number">Example 3.15 </span></p>
 <section class="example-content" id="proof-content">
 <p>Für zwei Variablen <span class="math notranslate nohighlight">\(x_1,x_2\)</span> eines MILP soll entweder gelten</p>
 <div class="amsmath math notranslate nohighlight">
@@ -1244,8 +1302,8 @@ Allgemein kann dies auch für eine größere Anzahl von Ungleichungen gelten.</p
 </figure>
 </section>
 </div><p>Für das weitere Vorgehen benötigen wir den Begriff des “großen <span class="math notranslate nohighlight">\(M\)</span>”: In der Optimierung bezeichnet der Buchstabe <span class="math notranslate nohighlight">\(M\)</span> typischerweise einen sehr großen Wert. Dabei ist nicht von Bedeutung wie groß der Wert von <span class="math notranslate nohighlight">\(M\)</span> genau ist, solange er “groß genug” ist. Das große <span class="math notranslate nohighlight">\(M\)</span> kann im Zusammenspiel mit einer Binärvariable <span class="math notranslate nohighlight">\(y\)</span> dazu verwendet werden, einzelne Ungleichungen an- oder abzuschalten. Das “Abschalten” einer Ungleichung geschieht, indem die Grenzen bei Bedarf auf einen so großen Wert (das große <span class="math notranslate nohighlight">\(M\)</span>) gesetzt werden, dass die Ungleichung für das Problem irrelevant wird.</p>
-<div class="proof example admonition" id="example-18">
-<p class="admonition-title"><span class="caption-number">Example 3.13 </span></p>
+<div class="proof example admonition" id="example-21">
+<p class="admonition-title"><span class="caption-number">Example 3.16 </span></p>
 <section class="example-content" id="proof-content">
 <p>Für ein MILP soll die Ungleichung</p>
 <div class="amsmath math notranslate nohighlight">
@@ -1267,8 +1325,8 @@ y_1=1 \Rightarrow 1\leq x_1\leq 3\\
 <p>Klar ist: Wenn <span class="math notranslate nohighlight">\(M\)</span> groß genug ist, wird die erste Ungleichung immer erfüllt sein und so die Lösung nicht einschränken. Ein passender Wert für <span class="math notranslate nohighlight">\(M\)</span> ist dabei noch zu bestimmen.</p>
 </section>
 </div><p>Wir versuchen unser Beispiel mit Hilfe von zusätzlichen Binärvariablen <span class="math notranslate nohighlight">\(y_1\)</span> und <span class="math notranslate nohighlight">\(y_2\)</span> sowie einem großen <span class="math notranslate nohighlight">\(M\)</span> zu formulieren. <span class="math notranslate nohighlight">\(y_1\)</span> bezeichnet dabei das erste Paar von Ungleichungen, <span class="math notranslate nohighlight">\(y_2\)</span> das zweite.</p>
-<div class="proof example admonition" id="example-19">
-<p class="admonition-title"><span class="caption-number">Example 3.14 </span></p>
+<div class="proof example admonition" id="example-22">
+<p class="admonition-title"><span class="caption-number">Example 3.17 </span></p>
 <section class="example-content" id="proof-content">
 <p>Auswahl der beiden Varianten:</p>
 <div class="amsmath math notranslate nohighlight">
@@ -1280,9 +1338,9 @@ y_1,y_2&amp;\in \{0,1\}
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
 -M(1-y_1)+1&amp;\leq x_1 \leq 3+M(1-y_1)\\
--M(1-y_1)+0&amp;\leq x_2 \leq 3+M(1-y_1)\\
--M(1-y_2)+2&amp;\leq x_1 \leq 3+M(1-y_2)\\
--M(1-y_2)+3&amp;\leq x_2 \leq 3+M(1-y_2)\\
+-M(1-y_1)+0&amp;\leq x_2 \leq 2+M(1-y_1)\\
+-M(1-y_2)+2&amp;\leq x_1 \leq 4+M(1-y_2)\\
+-M(1-y_2)+3&amp;\leq x_2 \leq 4+M(1-y_2)\\
 \end{align*}\]</div>
 <p>Wie groß muss dann <span class="math notranslate nohighlight">\(M\)</span> mindestens sein? Es gilt auf jeden Fall</p>
 <div class="amsmath math notranslate nohighlight">
@@ -1294,10 +1352,10 @@ y_1,y_2&amp;\in \{0,1\}
 </section>
 </div><div class="admonition note">
 <p class="admonition-title">Bemerkung</p>
-<p>Möglichst kleine Werte für <span class="math notranslate nohighlight">\(M\)</span> können unter Umständen die Lösungsgeschwindigkeit des Modells verbessern.</p>
+<p>Möglichst kleine Werte für <span class="math notranslate nohighlight">\(M\)</span> können unter Umständen die Lösungsgeschwindigkeit des Modells verbessern. Weiterhin kann für jede Ungleichung ein eigenes <span class="math notranslate nohighlight">\(M\)</span> bestimmt werden.</p>
 </div>
 <p>Allgemein ergibt sich als Groß-M Reformulierung</p>
-<div class="proof definition admonition" id="definition-20">
+<div class="proof definition admonition" id="definition-23">
 <p class="admonition-title"><span class="caption-number">Definition 3.6 </span> (Groß-M Reformulierung)</p>
 <section class="definition-content" id="proof-content">
 <p>Gegeben sind durch “Oder” verknüpfte Mengen von Nebenbedingungen</p>
@@ -1446,10 +1504,10 @@ Relaxierung der Konvexe-Hülle Reformulierung.
  -->
 </section>
 <section id="min-min-probleme">
-<h3><span class="section-number">3.5.3. </span>Min min Probleme<a class="headerlink" href="#min-min-probleme" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">3.5.4. </span>Min min Probleme<a class="headerlink" href="#min-min-probleme" title="Link to this heading">#</a></h3>
 <p>In <a class="reference internal" href="02_Lineare_Probleme.html#subsubsec-minmax"><span class="std std-ref">Maximumsfunktion als Teil der Zielfunktion</span></a> hatten wir das Problem betrachtet, die maximale Endzeit eines Projektes zu minimieren – ein <span class="math notranslate nohighlight">\(\min \max\)</span> Problem. Wir greifen das Beispiel wieder auf, um das Prinzip eines <span class="math notranslate nohighlight">\(\min \min\)</span> Problems zu illustrieren.</p>
-<div class="proof example admonition" id="example-21">
-<p class="admonition-title"><span class="caption-number">Example 3.15 </span></p>
+<div class="proof example admonition" id="example-24">
+<p class="admonition-title"><span class="caption-number">Example 3.18 </span></p>
 <section class="example-content" id="proof-content">
 <p>Ein Projektplanungsproblem besteht aus vier Arbeitspaketen. Die Startzeiten jedes Arbeitspakets <span class="math notranslate nohighlight">\(s_1,s_2,s_3,s_4\)</span> sind die Entscheidungsvariablen. Ziel des Optimierungsproblems ist es, so früh wie möglich mit dem Projekt zu beginnen. Das Optimierungsproblem lautet also:</p>
 <div class="amsmath math notranslate nohighlight">
@@ -1461,8 +1519,8 @@ Relaxierung der Konvexe-Hülle Reformulierung.
 </figure>
 <p>Die Reformulierung als MILP ist etwas komplizierter als im <span class="math notranslate nohighlight">\(\min \max\)</span> Fall. Wir führen für jedes <span class="math notranslate nohighlight">\(s_i\)</span> eine binäre Variable <span class="math notranslate nohighlight">\(z_i\)</span> ein, die den Wert <span class="math notranslate nohighlight">\(1\)</span> annimmt, wenn es sich bei <span class="math notranslate nohighlight">\(s_i\)</span> um das Minimum der Menge <span class="math notranslate nohighlight">\(\{s_1,s_2,s_3,s_4\}\)</span> handelt und <span class="math notranslate nohighlight">\(0\)</span> sonst. Des weiteren führen wir ein großes <span class="math notranslate nohighlight">\(M\)</span> ein. Das gibt uns die Möglichkeit, die Konstruktion aus <a class="reference internal" href="02_Lineare_Probleme.html#subsubsec-minmax"><span class="std std-ref">Maximumsfunktion als Teil der Zielfunktion</span></a> so zu erweitern, dass alle Nebenbedingungen bis auf eine (die, für die <span class="math notranslate nohighlight">\(y_i=1\)</span> ist) durch das große <span class="math notranslate nohighlight">\(M\)</span> “abgeschaltet” werden.</p>
 <p>Das folgende MILP ist äquivalent zum obigen <span class="math notranslate nohighlight">\(\min \min\)</span> Problem:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d8e56acd-ac29-45c4-a6e8-b4074b3118f6">
-<span class="eqno">()<a class="headerlink" href="#equation-d8e56acd-ac29-45c4-a6e8-b4074b3118f6" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
+<div class="amsmath math notranslate nohighlight" id="equation-ecf46701-f10c-4dec-8527-d19dd636d356">
+<span class="eqno">()<a class="headerlink" href="#equation-ecf46701-f10c-4dec-8527-d19dd636d356" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
 \min_{s_1,s_2,s_3,s_4,z_1,z_2,z_3,z_4,y} &amp; \quad  &amp;   y &amp; &amp; &amp; \\[2mm]
 \text{s.t. } &amp; &amp;  s_1&amp;\leq y-M(1-z_1)\\
              &amp; &amp;  s_2&amp;\leq y-M(1-z_2)\\
@@ -1475,7 +1533,7 @@ Relaxierung der Konvexe-Hülle Reformulierung.
 </section>
 </div></section>
 <section id="betrage-revisited">
-<h3><span class="section-number">3.5.4. </span>Beträge revisited<a class="headerlink" href="#betrage-revisited" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">3.5.5. </span>Beträge revisited<a class="headerlink" href="#betrage-revisited" title="Link to this heading">#</a></h3>
 <p>In <a class="reference internal" href="02_Lineare_Probleme.html#subsubsec-betraege"><span class="std std-ref">Beträge</span></a> haben wir festgestellt, dass Nebenbedingungen der Art</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
@@ -1492,14 +1550,14 @@ Relaxierung der Konvexe-Hülle Reformulierung.
  \min_x -|x| = \min_x (-\max\{x,-x\}) = \min_x \min\{x,-x\}
 \end{align*}\]</div>
 <p>Nicht konvexe Menge und <span class="math notranslate nohighlight">\(\min \min\)</span> Probleme… dahinter verbirgt sich doch wieder ein großes <span class="math notranslate nohighlight">\(M\)</span>!</p>
-<p>Konkret geht man so vor, dass man <span class="math notranslate nohighlight">\(x\)</span> durch die <em>Different zweier</em> positiver Variablen <span class="math notranslate nohighlight">\(x_p-x_n\)</span> ersetzt, wobei garantiert wird, dass eine von den beiden gleich Null ist. Welche das ist, kommt darauf an, ob <span class="math notranslate nohighlight">\(x\)</span> positiv (dann ist <span class="math notranslate nohighlight">\(x_n=0\)</span>) oder negativ ist (dann ist <span class="math notranslate nohighlight">\(x_p=0\)</span>). Den Betrag wiederum kann man dan als <em>Summe</em> dieser beiden Variablen schreiben, diese ist dann immer positiv. Das Konstrukt wird mit Hilfe einer Binärvariable und einem großen <span class="math notranslate nohighlight">\(M\)</span> umgesetzt und sieht wie folgt aus: Das Optimierungsproblem</p>
+<p>Konkret geht man so vor, dass man <span class="math notranslate nohighlight">\(x\)</span> durch die <em>Differenz zweier</em> positiver Variablen <span class="math notranslate nohighlight">\(x_p-x_n\)</span> ersetzt, wobei garantiert wird, dass eine von den beiden gleich Null ist. Welche das ist, kommt darauf an, ob <span class="math notranslate nohighlight">\(x\)</span> positiv (dann ist <span class="math notranslate nohighlight">\(x_n=0\)</span>) oder negativ ist (dann ist <span class="math notranslate nohighlight">\(x_p=0\)</span>). Den Betrag wiederum kann man dan als <em>Summe</em> dieser beiden Variablen schreiben, diese ist dann immer positiv. Das Konstrukt wird mit Hilfe einer Binärvariable und einem großen <span class="math notranslate nohighlight">\(M\)</span> umgesetzt und sieht wie folgt aus: Das Optimierungsproblem</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
 \min_x -|x|
 \end{align*}\]</div>
 <p>ist äquivalent zu</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f9ce1b8f-b593-431f-9f05-fb036f7f54ad">
-<span class="eqno">()<a class="headerlink" href="#equation-f9ce1b8f-b593-431f-9f05-fb036f7f54ad" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
+<div class="amsmath math notranslate nohighlight" id="equation-ffc27555-ff33-418b-8984-3bbf5f7b1438">
+<span class="eqno">()<a class="headerlink" href="#equation-ffc27555-ff33-418b-8984-3bbf5f7b1438" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
 \min_{x,x_p,x_n,y}   \quad &amp;   -(x_p+x_n) &amp; &amp; &amp; \\[2mm]
 \text{s.t. }\quad  &amp;   x=x_p-x_n\\
              &amp;   0\leq x_p \leq My\\
@@ -1512,8 +1570,8 @@ Relaxierung der Konvexe-Hülle Reformulierung.
 |x|\geq \alpha
 \end{align*}\]</div>
 <p>äquivalent zu</p>
-<div class="amsmath math notranslate nohighlight" id="equation-53c33880-3dea-4b27-aa42-405d135b7fa0">
-<span class="eqno">()<a class="headerlink" href="#equation-53c33880-3dea-4b27-aa42-405d135b7fa0" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
+<div class="amsmath math notranslate nohighlight" id="equation-b8d197ec-c41b-4145-9db0-4c69cd350542">
+<span class="eqno">()<a class="headerlink" href="#equation-b8d197ec-c41b-4145-9db0-4c69cd350542" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
 			 &amp; &amp;  x_p+x_n&amp;\geq \alpha\\
 			 &amp; &amp;  x&amp;=x_p-x_n\\
              &amp; &amp;  0&amp;\leq x_p \leq My\\
@@ -1523,13 +1581,13 @@ Relaxierung der Konvexe-Hülle Reformulierung.
 <p>Dieses Vorgehen ist rechentechnisch aufwendiger als das in <a class="reference internal" href="02_Lineare_Probleme.html#subsubsec-betraege"><span class="std std-ref">Beträge</span></a> vorgestellte, da man eine zusätzliche Binärvariable, zwei kontinuierliche Variablen und zwei zusätzliche Ungleichungen einführt. Dafür ist es allgemeiner, da es für beide Richtungen der Ungleichung funktioniert.</p>
 </section>
 <section id="linearisieren-von-nichtlinearitaten">
-<h3><span class="section-number">3.5.5. </span>Linearisieren von Nichtlinearitäten<a class="headerlink" href="#linearisieren-von-nichtlinearitaten" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">3.5.6. </span>Linearisieren von Nichtlinearitäten<a class="headerlink" href="#linearisieren-von-nichtlinearitaten" title="Link to this heading">#</a></h3>
 <p>(Gemischt-ganzzahlige) lineare Programme sind in der Anwendung populär, da sie sich vergleichsweise gut lösen lassen.
 Es ist deswegen wünschenswert, Modelleinschränkungen möglichst als lineare Nebenbedingungen modellieren zu können.
 In manchen Fällen lassen sich nichtlineare Nebenbedingungen durch äquivalente lineare Ausdrücke beschreiben.
 Wir lernen im Folgenden drei solche Beispiele kennen.</p>
-<div class="proof example admonition" id="example-22">
-<p class="admonition-title"><span class="caption-number">Example 3.16 </span></p>
+<div class="proof example admonition" id="example-25">
+<p class="admonition-title"><span class="caption-number">Example 3.19 </span></p>
 <section class="example-content" id="proof-content">
 <p>Wir linearisieren das Problem</p>
 <div class="amsmath math notranslate nohighlight">
@@ -1571,42 +1629,47 @@ b_{12}&amp;\geq b_1+b_2-1
 \[\begin{align*}
 y=\prod_{i=1}^kb_i
 \end{align*}\]</div>
-<p>kann durch folgende Bedingungen an die Variable <span class="math notranslate nohighlight">\(y\)</span> linearisiert werden:</p>
+<p>kann durch Einführen einer Variable <span class="math notranslate nohighlight">\(y\)</span> und folgende Bedingungen an <span class="math notranslate nohighlight">\(y\)</span> linearisiert werden:</p>
 <ol class="arabic">
 <li><div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
-  y\leq b_i,\quad i=1,\dots, k
-  \end{align*}\]</div>
+   y\leq b_i,\quad i=1,\dots, k
+   \end{align*}\]</div>
+<p>Damit ist sichergestellt, dass <span class="math notranslate nohighlight">\(y=0\)</span>, sobald (mindestens) eines der <span class="math notranslate nohighlight">\(b_i=0\)</span>.</p>
+</li>
+<li><div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+   y\geq \sum_{i=1}^k b_i-k+1,\quad i=1,\dots, k
+   \end{align*}\]</div>
+<p>Damit ist sichergestellt, dass <span class="math notranslate nohighlight">\(y=1\)</span>, wenn alle <span class="math notranslate nohighlight">\(b_i=1\)</span>.</p>
 </li>
 </ol>
-<p>Damit ist sichergestellt, dass <span class="math notranslate nohighlight">\(y=0\)</span>, sobald (mindestens) eines der <span class="math notranslate nohighlight">\(b_i=0\)</span>.
-2. \begin{align*}
-y\geq \sum_{i=1}^k b_i-k+1,\quad i=1,\dots, k
-\end{align*}
-Damit ist sichergestellt, dass <span class="math notranslate nohighlight">\(y=1\)</span>, wenn alle <span class="math notranslate nohighlight">\(b_i=1\)</span>.
-Danach kann man jedes Auftreten des nichtlinearen Terms <span class="math notranslate nohighlight">\(\prod_{i=1}^kb_i\)</span> durch (den linearen Term) <span class="math notranslate nohighlight">\(y\)</span> ersetzen.</p>
+<p>Danach kann man jedes Auftreten des nichtlinearen Terms <span class="math notranslate nohighlight">\(\prod_{i=1}^kb_i\)</span> durch (den linearen Term) <span class="math notranslate nohighlight">\(y\)</span> ersetzen.</p>
 </section>
 <section id="produkt-von-einer-binarvariablen-und-einer-kontinuierlichen-variable">
 <h4>Produkt von einer Binärvariablen und einer kontinuierlichen Variable<a class="headerlink" href="#produkt-von-einer-binarvariablen-und-einer-kontinuierlichen-variable" title="Link to this heading">#</a></h4>
 <p>Es sei <span class="math notranslate nohighlight">\(x \in \R^+\)</span> eine kontinuierliche und <span class="math notranslate nohighlight">\(b\in \B\)</span> eine binäre Variable. Das Produkt</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
-y=x\cdot b
+y=x\cdot b\geq0
 \end{align*}\]</div>
-<p>kann wie folgt linearisiert werden. Wir benötigen zunächst eine obere Schranke <span class="math notranslate nohighlight">\(M\)</span> für <span class="math notranslate nohighlight">\(x\)</span> (diese sollte sich aus dem Probleme ergeben). Wir fügen dem Problem nun folgende Nebenbedingungen hinzu:</p>
+<p>kann wie folgt linearisiert werden.</p>
+<p>Wir fügen zunächst eine Optimierungsvariable <span class="math notranslate nohighlight">\(y\)</span> mit <span class="math notranslate nohighlight">\(y\geq0\)</span> zum Problem hinzu. Als nächstes benötigen wir eine obere Schranke <span class="math notranslate nohighlight">\(M\)</span> für <span class="math notranslate nohighlight">\(x\)</span> (diese sollte sich aus dem Problem ergeben). Dann fügen wir dem Problem folgende Nebenbedingungen hinzu:</p>
 <ol class="arabic">
 <li><div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
-  y&amp;\leq Mb
-  \end{align*}\]</div>
+   y&amp;\leq Mb
+   \end{align*}\]</div>
+<p>Damit ist sichergestellt, dass wenn <span class="math notranslate nohighlight">\(b=0\)</span> auch <span class="math notranslate nohighlight">\(y=0\)</span> ist, da ja auch <span class="math notranslate nohighlight">\(y\geq0\)</span>.</p>
+</li>
+<li><div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+   y&amp;\leq x\\
+   y&amp;\geq x-M(1-b)
+   \end{align*}\]</div>
+<p>Damit ist sichergestellt, dass wenn <span class="math notranslate nohighlight">\(b=1\)</span> ist, sowohl <span class="math notranslate nohighlight">\(y\leq x\)</span> als auch <span class="math notranslate nohighlight">\(y\geq x\)</span> gilt. Mit anderen Worten <span class="math notranslate nohighlight">\(y=x\)</span>, wie gewünscht.</p>
 </li>
 </ol>
-<p>Damit ist sichergestellt, dass wenn <span class="math notranslate nohighlight">\(b=0\)</span> auch <span class="math notranslate nohighlight">\(y=0\)</span> ist.
-2.  \begin{align*}
-y&amp;\leq x
-y&amp;\geq x-M(1-b)
-\end{align*}
-Damit ist sichergestellt, dass wenn <span class="math notranslate nohighlight">\(b=1\)</span> ist, sowohl <span class="math notranslate nohighlight">\(y\leq x\)</span> als auch <span class="math notranslate nohighlight">\(y\geq x\)</span> gilt. Mit anderen Worten <span class="math notranslate nohighlight">\(y=x\)</span>, wie gewünscht.</p>
 <p>Danach kann man jedes Auftreten des nichtlinearen Terms <span class="math notranslate nohighlight">\(x\cdot b\)</span> durch (den linearen Term) <span class="math notranslate nohighlight">\(y\)</span> ersetzen.</p>
 </section>
 </section>
@@ -1616,7 +1679,7 @@ Damit ist sichergestellt, dass wenn <span class="math notranslate nohighlight">\
 <p>In <a class="reference internal" href="01_Grundbegriffe.html#sec-intro"><span class="std std-ref">Einführung und Grundbegriffe</span></a> und in den Beispielmodellen in diesem Kapitel haben wir bereits gesehen, dass die Optimierungsmodelle in dieser Vorlesung aus den vier Komponenten Problemdaten, Entscheidungsvariablen, Zielfunktion und Nebenbedingungen bestehen.</p>
 <p>In diesem Abschnitt möchten wir noch auf einige Punkte eingehen, die besonders beim Erstellen von größeren Modellen mit Gurobi oder einem anderen Framework hilfreich, um Modellierungsfehler zu vermeiden und den Code nachvollziehbarer zu machen.</p>
 <p>Konkret empfiehlt es sich, bei der Erstellung eines Modells nach den folgenden fünf Schritten vorzugehen.</p>
-<p><strong>Schritt 1: Indexmengen decklarieren</strong></p>
+<p><strong>Schritt 1: Indexmengen deklarieren</strong></p>
 <p>Gerade wenn es mehrere Mengen gibt, über die iteriert wird, ist es hilfreich auch Indexvariablen festzulegen, die durchgängig verwendet werden. Die Indexmengen werden wir in allen folgenden Schritten (2.-5.) benutzt, daher empfiehlt es sich, diese als erstes anzulegen. Die Indexmengen können und sollten dabei möglichst nah an der Problemformulierung gewählt werden.</p>
 <p>Beispiel: Für ein Standortproblem möchten Sie als mögliche Standorte für ein Warenlager die Städte Karlsruhe, Berlin und Heidelberg modellieren. Statt <span class="math notranslate nohighlight">\(x_1,x_2,x_3\)</span> können Sie die zugehörigen Entscheidungsvariablen auch <span class="math notranslate nohighlight">\(x_{Karlsruhe}, x_{Berlin}, x_{Heidelberg}\)</span> nennen. In Gurobi können Sie die Indexmenge dann direkt beim Erstellen der Variablen übergeben, d.h. anstatt</p>
 <div class="cell tag_remove-output tag_remove-stderr docutils container">
@@ -1661,8 +1724,8 @@ Damit ist sichergestellt, dass wenn <span class="math notranslate nohighlight">\
 Es gibt sehr viele verschiedene Probleme der Ablaufplanung. Eine Übersicht über akademische Arbeiten findet sich etwa in
 <em>Michael L. Pinedo: Scheduling. Theory, Algorithms and Systems, Springer, 2016</em>.</p>
 <p>Allen Problemvarianten gemeinsam ist, dass es um die <em>Zuteilung von Resourcen zu Aufgaben über die Zeit</em> geht, sowie um das <em>Erstellen eines zugehörigen Zeitplans</em>. Wir betrachten zuerst ein Beispiel aus der Produktion:</p>
-<div class="proof example admonition" id="example-23">
-<p class="admonition-title"><span class="caption-number">Example 3.17 </span></p>
+<div class="proof example admonition" id="example-26">
+<p class="admonition-title"><span class="caption-number">Example 3.20 </span></p>
 <section class="example-content" id="proof-content">
 <p>Farbe wird in drei Schritten produziert: Zuerst werden die Rohmaterialien gemahlen, dann wird gemixt und am Ende verpackt. Wir erstellen den Produktionsplan für eine Fabrik, die weiße und blaue Farbe produzieren kann. Der Mixer muss 10 Minuten gesäubert werden, wenn von blauer auf weißer Farbe gewechselt wird. In umgekehrter Reihenfolge muss nicht gesäubert werden. Wir besitzen zwei Mühlen (eine langsame und eine schnelle), einen Mixer sowie eine Packstation. Alle Maschinen können Batches zu je 1000 Litern bewältigen. Unsere Aufgabe ist, 2000 Liter weiße Farbe und 2000 Liter blaue Farbe zu produzieren.</p>
 </section>
@@ -1832,10 +1895,11 @@ d_{max}=\sum_{i \in A}d_i.
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transformation-logischer-zusammenhange-in-arithmetische-ausdrucke">Transformation logischer Zusammenhänge in arithmetische Ausdrücke</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logische-bedingungen-fur-nebenbedingungen">3.5.2. Logische Bedingungen für Nebenbedingungen</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#min-min-probleme">3.5.3. Min min Probleme</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#betrage-revisited">3.5.4. Beträge revisited</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linearisieren-von-nichtlinearitaten">3.5.5. Linearisieren von Nichtlinearitäten</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#abschalten-von-nebenbedingungen">3.5.2. Abschalten von Nebenbedingungen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#oder-verknupfung-fur-nebenbedingungen">3.5.3. Oder-Verknüpfung für Nebenbedingungen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#min-min-probleme">3.5.4. Min min Probleme</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#betrage-revisited">3.5.5. Beträge revisited</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linearisieren-von-nichtlinearitaten">3.5.6. Linearisieren von Nichtlinearitäten</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#produkt-von-binarvariablen">Produkt von Binärvariablen</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#produkt-von-einer-binarvariablen-und-einer-kontinuierlichen-variable">Produkt von einer Binärvariablen und einer kontinuierlichen Variable</a></li>
 </ul>
