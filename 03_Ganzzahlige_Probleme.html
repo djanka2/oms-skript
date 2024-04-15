@@ -65,7 +65,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Stichwortverzeichnis" href="genindex.html" />
     <link rel="search" title="Suche" href="search.html" />
-    <link rel="next" title="4. Zeitabhängige Probleme" href="04_Dynamische_Probleme.html" />
+    <link rel="next" title="3.8. Anwendung: Studierende auf Projekte verteilen" href="03_Zuordnung_AWP.html" />
     <link rel="prev" title="2.9. Anwendung: Transportproblem" href="02_Transportproblem.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="de"/>
@@ -188,7 +188,11 @@
 <li class="toctree-l2"><a class="reference internal" href="02_Transportproblem.html">2.9. Anwendung: Transportproblem</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">3. Ganzzahlige Probleme</a></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">3. Ganzzahlige Probleme</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="03_Zuordnung_AWP.html">3.8. Anwendung: Studierende auf Projekte verteilen</a></li>
+
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="04_Dynamische_Probleme.html">4. Zeitabhängige Probleme</a></li>
 <li class="toctree-l1"><a class="reference internal" href="05_Praxisaspekte.html">5. Praxisaspekte beim Lösen von gemischt-ganzzahligen Programmen</a></li>
 </ul>
@@ -1348,7 +1352,7 @@ y_1,y_2&amp;\in \{0,1\}
 1&amp;\leq x_1\leq 4\\
 0&amp;\leq x_2\leq 4
 \end{align*}\]</div>
-<p>Damit ist <span class="math notranslate nohighlight">\(M=4\)</span> groß genug.</p>
+<p>Damit ist <span class="math notranslate nohighlight">\(M=3\)</span> groß genug.</p>
 </section>
 </div><div class="admonition note">
 <p class="admonition-title">Bemerkung</p>
@@ -1519,8 +1523,8 @@ Relaxierung der Konvexe-Hülle Reformulierung.
 </figure>
 <p>Die Reformulierung als MILP ist etwas komplizierter als im <span class="math notranslate nohighlight">\(\min \max\)</span> Fall. Wir führen für jedes <span class="math notranslate nohighlight">\(s_i\)</span> eine binäre Variable <span class="math notranslate nohighlight">\(z_i\)</span> ein, die den Wert <span class="math notranslate nohighlight">\(1\)</span> annimmt, wenn es sich bei <span class="math notranslate nohighlight">\(s_i\)</span> um das Minimum der Menge <span class="math notranslate nohighlight">\(\{s_1,s_2,s_3,s_4\}\)</span> handelt und <span class="math notranslate nohighlight">\(0\)</span> sonst. Des weiteren führen wir ein großes <span class="math notranslate nohighlight">\(M\)</span> ein. Das gibt uns die Möglichkeit, die Konstruktion aus <a class="reference internal" href="02_Lineare_Probleme.html#subsubsec-minmax"><span class="std std-ref">Maximumsfunktion als Teil der Zielfunktion</span></a> so zu erweitern, dass alle Nebenbedingungen bis auf eine (die, für die <span class="math notranslate nohighlight">\(y_i=1\)</span> ist) durch das große <span class="math notranslate nohighlight">\(M\)</span> “abgeschaltet” werden.</p>
 <p>Das folgende MILP ist äquivalent zum obigen <span class="math notranslate nohighlight">\(\min \min\)</span> Problem:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ecf46701-f10c-4dec-8527-d19dd636d356">
-<span class="eqno">()<a class="headerlink" href="#equation-ecf46701-f10c-4dec-8527-d19dd636d356" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
+<div class="amsmath math notranslate nohighlight" id="equation-7621dd07-3d35-40b8-9857-ca9f3efd5466">
+<span class="eqno">()<a class="headerlink" href="#equation-7621dd07-3d35-40b8-9857-ca9f3efd5466" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
 \min_{s_1,s_2,s_3,s_4,z_1,z_2,z_3,z_4,y} &amp; \quad  &amp;   y &amp; &amp; &amp; \\[2mm]
 \text{s.t. } &amp; &amp;  s_1&amp;\leq y-M(1-z_1)\\
              &amp; &amp;  s_2&amp;\leq y-M(1-z_2)\\
@@ -1556,8 +1560,8 @@ Relaxierung der Konvexe-Hülle Reformulierung.
 \min_x -|x|
 \end{align*}\]</div>
 <p>ist äquivalent zu</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ffc27555-ff33-418b-8984-3bbf5f7b1438">
-<span class="eqno">()<a class="headerlink" href="#equation-ffc27555-ff33-418b-8984-3bbf5f7b1438" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
+<div class="amsmath math notranslate nohighlight" id="equation-aa5e08bb-fcda-4316-aea0-f7ca1d801e9c">
+<span class="eqno">()<a class="headerlink" href="#equation-aa5e08bb-fcda-4316-aea0-f7ca1d801e9c" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
 \min_{x,x_p,x_n,y}   \quad &amp;   -(x_p+x_n) &amp; &amp; &amp; \\[2mm]
 \text{s.t. }\quad  &amp;   x=x_p-x_n\\
              &amp;   0\leq x_p \leq My\\
@@ -1570,8 +1574,8 @@ Relaxierung der Konvexe-Hülle Reformulierung.
 |x|\geq \alpha
 \end{align*}\]</div>
 <p>äquivalent zu</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b8d197ec-c41b-4145-9db0-4c69cd350542">
-<span class="eqno">()<a class="headerlink" href="#equation-b8d197ec-c41b-4145-9db0-4c69cd350542" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
+<div class="amsmath math notranslate nohighlight" id="equation-9681df0b-e595-464d-8898-6c27d0a81b61">
+<span class="eqno">()<a class="headerlink" href="#equation-9681df0b-e595-464d-8898-6c27d0a81b61" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
 			 &amp; &amp;  x_p+x_n&amp;\geq \alpha\\
 			 &amp; &amp;  x&amp;=x_p-x_n\\
              &amp; &amp;  0&amp;\leq x_p \leq My\\
@@ -1639,7 +1643,7 @@ y=\prod_{i=1}^kb_i
 </li>
 <li><div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
-   y\geq \sum_{i=1}^k b_i-k+1,\quad i=1,\dots, k
+   y\geq \sum_{i=1}^k b_i-k+1.
    \end{align*}\]</div>
 <p>Damit ist sichergestellt, dass <span class="math notranslate nohighlight">\(y=1\)</span>, wenn alle <span class="math notranslate nohighlight">\(b_i=1\)</span>.</p>
 </li>
@@ -1805,6 +1809,8 @@ d_{max}=\sum_{i \in A}d_i.
 \end{align*}\]</div>
 </section>
 </section>
+<div class="toctree-wrapper compound">
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1847,11 +1853,11 @@ d_{max}=\sum_{i \in A}d_i.
       </div>
     </a>
     <a class="right-next"
-       href="04_Dynamische_Probleme.html"
+       href="03_Zuordnung_AWP.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">weiter</p>
-        <p class="prev-next-title"><span class="section-number">4. </span>Zeitabhängige Probleme</p>
+        <p class="prev-next-title"><span class="section-number">3.8. </span>Anwendung: Studierende auf Projekte verteilen</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
