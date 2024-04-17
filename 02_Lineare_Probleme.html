@@ -189,7 +189,8 @@
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="03_Ganzzahlige_Probleme.html">3. Ganzzahlige Probleme</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="03_Zuordnung_AWP.html">3.8. Anwendung: Studierende auf Projekte verteilen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_Standortprobleme.html">3.8. Anwendung: Standortprobleme</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_Zuordnung_AWP.html">3.9. Anwendung: Studierende auf Projekte verteilen</a></li>
 
 </ul>
 </li>
@@ -387,8 +388,8 @@ document.write(`
 <section id="grundbegriffe">
 <h2><span class="section-number">2.1. </span>Grundbegriffe<a class="headerlink" href="#grundbegriffe" title="Link to this heading">#</a></h2>
 <p>Ein <em>lineares Programm</em> ist ein Optimierungsproblem, bei dem eine lineare Zielfunktion unter linearen Nebenbedingungen optimiert werden soll. Ein Beispiel für lineares Optimierungsproblem haben wir bereits in Abschnitt <a class="reference internal" href="01_Grundbegriffe.html#sec-production-example"><span class="std std-ref">Beispiel: Ein Produktionsplanungsproblem</span></a> gesehen. Es lautete:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0b98fdf0-de2d-48c0-b97d-ae07d133fd28">
-<span class="eqno">()<a class="headerlink" href="#equation-0b98fdf0-de2d-48c0-b97d-ae07d133fd28" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
+<div class="amsmath math notranslate nohighlight" id="equation-105bc6f6-454b-4482-9b2b-36f80c3f3d80">
+<span class="eqno">()<a class="headerlink" href="#equation-105bc6f6-454b-4482-9b2b-36f80c3f3d80" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
 \max_{x_1, x_2} &amp; \quad  &amp;   2x_1+2x_2 &amp; &amp; &amp; \\[2mm]
 \text{s.t. } &amp; &amp;  5x_1+10x_2&amp;\leq 50\\
              &amp; &amp;  12x_1+8x_2&amp;\leq 72\\
@@ -462,8 +463,8 @@ Es enthält beliebig viele Gleichungen, <span class="math notranslate nohighligh
 <div class="proof example admonition" id="example-2">
 <p class="admonition-title"><span class="caption-number">Example 2.1 </span> (LP, welches nicht in Standardform vorliegt)</p>
 <section class="example-content" id="proof-content">
-<div class="amsmath math notranslate nohighlight" id="equation-af3bfde8-faa4-4464-b8ad-8ce1edb216bf">
-<span class="eqno">()<a class="headerlink" href="#equation-af3bfde8-faa4-4464-b8ad-8ce1edb216bf" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
+<div class="amsmath math notranslate nohighlight" id="equation-d4b582ec-73c9-426a-8da1-fde86f0d1bc2">
+<span class="eqno">()<a class="headerlink" href="#equation-d4b582ec-73c9-426a-8da1-fde86f0d1bc2" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
 \max_{x_1, x_2} &amp; \quad  &amp;  2x_1-3x_2 &amp; &amp; &amp; \\[2mm]
 \text{s.t. } &amp; &amp;  3x_1+x_2&amp;\leq 3\\
              &amp; &amp;  -x_1+5x_2&amp;\geq 7\\
@@ -591,8 +592,8 @@ a_{m1} x_1+\ldots +a_{mp} x_n	&amp;  &amp; &amp;&amp;  \red{+x_{n+m_2}} &amp; =b
 <div class="proof example admonition" id="example-7">
 <p class="admonition-title"><span class="caption-number">Example 2.6 </span></p>
 <section class="example-content" id="proof-content">
-<div class="amsmath math notranslate nohighlight" id="equation-b60a2122-9f00-439a-a39e-9f7c28dda908">
-<span class="eqno">()<a class="headerlink" href="#equation-b60a2122-9f00-439a-a39e-9f7c28dda908" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
+<div class="amsmath math notranslate nohighlight" id="equation-0340f4c4-cb3b-4b40-bb51-1c17e9875c91">
+<span class="eqno">()<a class="headerlink" href="#equation-0340f4c4-cb3b-4b40-bb51-1c17e9875c91" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
 \min_{x_1, x_2^+, x_2^-, x_3, x_4} &amp; \quad  &amp;  \bmat -2,&amp;3,&amp;-3,&amp;0,&amp;0 \emat\bmat x_1\\x_2^+\\x_2^-\\x_3\\x_4\emat &amp; &amp; &amp; \\[2mm]
 \text{s.t. } &amp; &amp;  \bmat 3&amp;1&amp;-1&amp;1&amp;0\\ 1&amp;-5&amp;5&amp;0&amp;1\\ 1&amp;1&amp;-1&amp;0&amp;0 \emat\bmat x_1\\x_2^+\\x_2^-\\x_3\\x_4\emat&amp;=\bmat 3\\-7\\1\emat\\
              &amp; &amp; (x_1,x_2^+,x_2^-,x_3,x_4)&amp;\geq \v 0
@@ -638,8 +639,8 @@ Es sei <span class="math notranslate nohighlight">\(P\)</span> die Menge der zul
 <section id="grafisches-losen">
 <h2><span class="section-number">2.4. </span>Grafisches Lösen<a class="headerlink" href="#grafisches-losen" title="Link to this heading">#</a></h2>
 <p>Wir betrachten noch einmal das Produktionsbeispiel <a class="reference internal" href="01_Grundbegriffe.html#equation-eq-prodopt">(1.1)</a>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-25d5f3cf-7598-4604-ad2f-0bb9e7dcce33">
-<span class="eqno">()<a class="headerlink" href="#equation-25d5f3cf-7598-4604-ad2f-0bb9e7dcce33" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
+<div class="amsmath math notranslate nohighlight" id="equation-05bf40e7-0983-4370-92dc-1c696f9e5a28">
+<span class="eqno">()<a class="headerlink" href="#equation-05bf40e7-0983-4370-92dc-1c696f9e5a28" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
 \max_{x_1, x_2} &amp; \quad  &amp;   2x_1+2x_2 &amp; &amp; &amp; \\[2mm]
 \text{s.t. } &amp; &amp;  5x_1+10x_2&amp;\leq 50\\
              &amp; &amp;  12x_1+8x_2&amp;\leq 72\\
@@ -771,8 +772,8 @@ Um so erstaunlicher ist es, dass moderne Varianten des Simplex-Verfahrens Proble
 </div>
 </div>
 <p>Formulierung in mathematischer Form</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9629dc5e-01f6-4983-9686-4030d046ca95">
-<span class="eqno">()<a class="headerlink" href="#equation-9629dc5e-01f6-4983-9686-4030d046ca95" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
+<div class="amsmath math notranslate nohighlight" id="equation-c0607e2f-d0ba-4fce-bae5-e679a1ae0efd">
+<span class="eqno">()<a class="headerlink" href="#equation-c0607e2f-d0ba-4fce-bae5-e679a1ae0efd" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
 \max_{x_1, x_2} &amp; \quad  &amp;   2x_1+2x_2 &amp; &amp; &amp; \\[2mm]
 \text{s.t. } &amp; &amp;  5x_1+10x_2&amp;\leq 50\\
              &amp; &amp;  12x_1+8x_2&amp;\leq 72\\
@@ -861,7 +862,7 @@ Coefficient statistics:
   Bounds range     [0e+00, 0e+00]
   RHS range        [2e+01, 7e+01]
 Presolve removed 2 rows and 0 columns
-Presolve time: 0.01s
+Presolve time: 0.00s
 Presolved: 2 rows, 2 columns, 4 nonzeros
 
 Iteration    Objective       Primal Inf.    Dual Inf.      Time
@@ -931,8 +932,8 @@ Sie garantieren, dass <span class="math notranslate nohighlight">\(z\)</span> gr
 <p class="admonition-title"><span class="caption-number">Example 2.8 </span> (Min Max (Forsetzung))</p>
 <section class="example-content" id="proof-content">
 <p>Wir führen eine neue Variable <span class="math notranslate nohighlight">\(y\)</span> und 4 Nebenbedingungen ein. Der zur <span class="math notranslate nohighlight">\(\min\max\)</span>-Formulierung <a class="reference internal" href="#equation-eq-minmax">(2.6)</a> äquivalente Teile eines linearen Programms lautet:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-1a7255ea-de43-435b-8609-27771fd9dbc2">
-<span class="eqno">()<a class="headerlink" href="#equation-1a7255ea-de43-435b-8609-27771fd9dbc2" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
+<div class="amsmath math notranslate nohighlight" id="equation-21a182fa-e899-4e24-bf91-0ea0de599f3f">
+<span class="eqno">()<a class="headerlink" href="#equation-21a182fa-e899-4e24-bf91-0ea0de599f3f" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
 \min_{s_1,d_1,s_2,d_2,s_3,d_3,s_4,d_4,y} &amp; \quad  &amp;   y &amp; &amp; &amp; \\[2mm]
 \text{s.t. } &amp; &amp;  s_1+d_1&amp;\leq y\\
              &amp; &amp;  s_2+d_2&amp;\leq y\\

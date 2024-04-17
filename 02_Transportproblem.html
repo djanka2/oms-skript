@@ -189,7 +189,8 @@
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="03_Ganzzahlige_Probleme.html">3. Ganzzahlige Probleme</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="03_Zuordnung_AWP.html">3.8. Anwendung: Studierende auf Projekte verteilen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_Standortprobleme.html">3.8. Anwendung: Standortprobleme</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_Zuordnung_AWP.html">3.9. Anwendung: Studierende auf Projekte verteilen</a></li>
 
 </ul>
 </li>
@@ -380,7 +381,7 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="anwendung-transportproblem">
+  <section id="anwendung-transportproblem">
 <h1><span class="section-number">2.9. </span>Anwendung: Transportproblem<a class="headerlink" href="#anwendung-transportproblem" title="Link to this heading">#</a></h1>
 <p>Dieses Anwendungsproblem finden Sie auch auf der <a class="reference external" href="https://www.gurobi.com/jupyter_models/supply-network-design/">Gurobi Homepage</a> unter dem Namen “Supply Network Design 1”.</p>
 <section id="objective-and-prerequisites">
@@ -600,8 +601,8 @@ You can download the repository containing this and other examples by clicking <
 <ul class="simple">
 <li><p><strong>Cost</strong>: Minimize total shipping costs.</p></li>
 </ul>
-<div class="amsmath math notranslate nohighlight" id="equation-0698fcfb-3da2-4e94-ba15-ac2b0ff5ef9a">
-<span class="eqno">()<a class="headerlink" href="#equation-0698fcfb-3da2-4e94-ba15-ac2b0ff5ef9a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-216adcdc-caaf-40ef-8004-c11fa8ffcba2">
+<span class="eqno">()<a class="headerlink" href="#equation-216adcdc-caaf-40ef-8004-c11fa8ffcba2" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \text{Minimize} \quad Z = \sum_{(s,t) \in \text{Cities} \times \text{Cities}}{\text{cost}_{s,t}*\text{flow}_{s,t}}
 \end{equation}\]</div>
 </section>
@@ -610,22 +611,22 @@ You can download the repository containing this and other examples by clicking <
 <ul class="simple">
 <li><p><strong>Factory output</strong>: Flow of goods from a factory must respect maximum capacity.</p></li>
 </ul>
-<div class="amsmath math notranslate nohighlight" id="equation-ab0b959f-5a85-4f13-98e1-0ea406458d56">
-<span class="eqno">()<a class="headerlink" href="#equation-ab0b959f-5a85-4f13-98e1-0ea406458d56" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-43ebf735-7791-48ca-a982-ad10e07769b8">
+<span class="eqno">()<a class="headerlink" href="#equation-43ebf735-7791-48ca-a982-ad10e07769b8" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \sum_{t \in \text{Cities}}{\text{flow}_{f,t}} \leq \text{supply}_{f} \quad \forall f \in \text{Factories}
 \end{equation}\]</div>
 <ul class="simple">
 <li><p><strong>Customer demand</strong>: Flow of goods must meet customer demand.</p></li>
 </ul>
-<div class="amsmath math notranslate nohighlight" id="equation-23368474-cf9e-4985-8863-9503815df223">
-<span class="eqno">()<a class="headerlink" href="#equation-23368474-cf9e-4985-8863-9503815df223" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a87163b2-4949-4997-8026-88d1cdbf280b">
+<span class="eqno">()<a class="headerlink" href="#equation-a87163b2-4949-4997-8026-88d1cdbf280b" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \sum_{s \in \text{Cities}}{\text{flow}_{s,c}} = \text{demand}_{c} \quad \forall c \in \text{Customers}
 \end{equation}\]</div>
 <ul class="simple">
 <li><p><strong>Depot flow</strong>: Flow into a depot equals flow out of the depot.</p></li>
 </ul>
-<div class="amsmath math notranslate nohighlight" id="equation-d517e341-13c1-4cbc-be29-19b25f6da334">
-<span class="eqno">()<a class="headerlink" href="#equation-d517e341-13c1-4cbc-be29-19b25f6da334" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-b3f332e8-2e5c-4c93-b022-68cf2a29d243">
+<span class="eqno">()<a class="headerlink" href="#equation-b3f332e8-2e5c-4c93-b022-68cf2a29d243" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \sum_{s \in \text{Cities}}{\text{flow}_{s,d}} =
 \sum_{t \in \text{Cities}}{\text{flow}_{d,t}}
 \quad \forall d \in \text{Depots}
@@ -633,8 +634,8 @@ You can download the repository containing this and other examples by clicking <
 <ul class="simple">
 <li><p><strong>Depot capacity</strong>: Flow into a depot must respect depot capacity.</p></li>
 </ul>
-<div class="amsmath math notranslate nohighlight" id="equation-cf1164e5-f19d-4421-92ee-e12c65db0f8e">
-<span class="eqno">()<a class="headerlink" href="#equation-cf1164e5-f19d-4421-92ee-e12c65db0f8e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-73afaefe-410d-4316-8d6a-0ed98ec0cf59">
+<span class="eqno">()<a class="headerlink" href="#equation-73afaefe-410d-4316-8d6a-0ed98ec0cf59" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \sum_{s \in \text{Cities}}{\text{flow}_{s,d}} \leq \text{through}_{d}
 \quad \forall d \in \text{Depots}
 \end{equation}\]</div>
