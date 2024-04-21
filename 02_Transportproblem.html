@@ -32,9 +32,9 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=ca93fcec" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
     <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -191,7 +191,6 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="03_Ganzzahlige_Probleme.html">3. Ganzzahlige Probleme</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="03_Standortprobleme.html">3.8. Anwendung: Standortprobleme</a></li>
 <li class="toctree-l2"><a class="reference internal" href="03_Zuordnung_AWP.html">3.9. Anwendung: Studierende auf Projekte verteilen</a></li>
-
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="04_Dynamische_Probleme.html">4. Zeitabhängige Probleme</a></li>
@@ -601,8 +600,8 @@ You can download the repository containing this and other examples by clicking <
 <ul class="simple">
 <li><p><strong>Cost</strong>: Minimize total shipping costs.</p></li>
 </ul>
-<div class="amsmath math notranslate nohighlight" id="equation-216adcdc-caaf-40ef-8004-c11fa8ffcba2">
-<span class="eqno">()<a class="headerlink" href="#equation-216adcdc-caaf-40ef-8004-c11fa8ffcba2" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-820ec3e3-19aa-4161-956a-162345e08ec9">
+<span class="eqno">(2.8)<a class="headerlink" href="#equation-820ec3e3-19aa-4161-956a-162345e08ec9" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \text{Minimize} \quad Z = \sum_{(s,t) \in \text{Cities} \times \text{Cities}}{\text{cost}_{s,t}*\text{flow}_{s,t}}
 \end{equation}\]</div>
 </section>
@@ -611,22 +610,22 @@ You can download the repository containing this and other examples by clicking <
 <ul class="simple">
 <li><p><strong>Factory output</strong>: Flow of goods from a factory must respect maximum capacity.</p></li>
 </ul>
-<div class="amsmath math notranslate nohighlight" id="equation-43ebf735-7791-48ca-a982-ad10e07769b8">
-<span class="eqno">()<a class="headerlink" href="#equation-43ebf735-7791-48ca-a982-ad10e07769b8" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-399056c5-14dd-4e58-a92f-23b87ee26314">
+<span class="eqno">(2.9)<a class="headerlink" href="#equation-399056c5-14dd-4e58-a92f-23b87ee26314" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \sum_{t \in \text{Cities}}{\text{flow}_{f,t}} \leq \text{supply}_{f} \quad \forall f \in \text{Factories}
 \end{equation}\]</div>
 <ul class="simple">
 <li><p><strong>Customer demand</strong>: Flow of goods must meet customer demand.</p></li>
 </ul>
-<div class="amsmath math notranslate nohighlight" id="equation-a87163b2-4949-4997-8026-88d1cdbf280b">
-<span class="eqno">()<a class="headerlink" href="#equation-a87163b2-4949-4997-8026-88d1cdbf280b" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-b6629a53-f4af-4ad9-b434-4b14469a93a9">
+<span class="eqno">(2.10)<a class="headerlink" href="#equation-b6629a53-f4af-4ad9-b434-4b14469a93a9" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \sum_{s \in \text{Cities}}{\text{flow}_{s,c}} = \text{demand}_{c} \quad \forall c \in \text{Customers}
 \end{equation}\]</div>
 <ul class="simple">
 <li><p><strong>Depot flow</strong>: Flow into a depot equals flow out of the depot.</p></li>
 </ul>
-<div class="amsmath math notranslate nohighlight" id="equation-b3f332e8-2e5c-4c93-b022-68cf2a29d243">
-<span class="eqno">()<a class="headerlink" href="#equation-b3f332e8-2e5c-4c93-b022-68cf2a29d243" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-ecd1e6b9-cccc-4290-8af7-07f10c9587a7">
+<span class="eqno">(2.11)<a class="headerlink" href="#equation-ecd1e6b9-cccc-4290-8af7-07f10c9587a7" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \sum_{s \in \text{Cities}}{\text{flow}_{s,d}} =
 \sum_{t \in \text{Cities}}{\text{flow}_{d,t}}
 \quad \forall d \in \text{Depots}
@@ -634,8 +633,8 @@ You can download the repository containing this and other examples by clicking <
 <ul class="simple">
 <li><p><strong>Depot capacity</strong>: Flow into a depot must respect depot capacity.</p></li>
 </ul>
-<div class="amsmath math notranslate nohighlight" id="equation-73afaefe-410d-4316-8d6a-0ed98ec0cf59">
-<span class="eqno">()<a class="headerlink" href="#equation-73afaefe-410d-4316-8d6a-0ed98ec0cf59" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-0d99a0bc-b06a-427a-8f07-40b6a85f3a2f">
+<span class="eqno">(2.12)<a class="headerlink" href="#equation-0d99a0bc-b06a-427a-8f07-40b6a85f3a2f" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \sum_{s \in \text{Cities}}{\text{flow}_{s,d}} \leq \text{through}_{d}
 \quad \forall d \in \text{Depots}
 \end{equation}\]</div>

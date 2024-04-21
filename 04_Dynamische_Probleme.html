@@ -65,7 +65,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Stichwortverzeichnis" href="genindex.html" />
     <link rel="search" title="Suche" href="search.html" />
-    <link rel="next" title="5. Praxisaspekte beim Lösen von gemischt-ganzzahligen Programmen" href="05_Praxisaspekte.html" />
+    <link rel="next" title="4.4. Anwendung: Laststeuerung in der Stahlproduktion" href="04_Laststeuerung.html" />
     <link rel="prev" title="3.9. Anwendung: Studierende auf Projekte verteilen" href="03_Zuordnung_AWP.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="de"/>
@@ -191,10 +191,12 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="03_Ganzzahlige_Probleme.html">3. Ganzzahlige Probleme</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="03_Standortprobleme.html">3.8. Anwendung: Standortprobleme</a></li>
 <li class="toctree-l2"><a class="reference internal" href="03_Zuordnung_AWP.html">3.9. Anwendung: Studierende auf Projekte verteilen</a></li>
-
 </ul>
 </li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">4. Zeitabhängige Probleme</a></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">4. Zeitabhängige Probleme</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="04_Laststeuerung.html">4.4. Anwendung: Laststeuerung in der Stahlproduktion</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="05_Praxisaspekte.html">5. Praxisaspekte beim Lösen von gemischt-ganzzahligen Programmen</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Ableitungsbasierte Optimierung</span></p>
@@ -355,10 +357,23 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#einfuhrendes-beispiel-energiespeicher">4.1. Einführendes Beispiel: Energiespeicher</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unsicherheiten-in-optimierungsmodellen">4.2. Unsicherheiten in Optimierungsmodellen</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sequenzielle-optimierung-auf-rollierendem-zeitfenster">4.2.1. Sequenzielle Optimierung auf rollierendem Zeitfenster</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-der-losung">4.2.2. Evaluation der Lösung</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ein-energiespeicherproblem">4.1. Ein Energiespeicherproblem</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problemdaten-und-indexmengen">4.1.1. Problemdaten und Indexmengen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entscheidungsvariablen">4.1.2. Entscheidungsvariablen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#zielfunktion">4.1.3. Zielfunktion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nebenbedingungen">4.1.4. Nebenbedingungen</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ein-problem-mit-zeitlich-gekoppelten-bedingungen">4.2. Ein Problem mit zeitlich gekoppelten Bedingungen</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">4.2.1. Problemdaten und Indexmengen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">4.2.2. Entscheidungsvariablen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">4.2.3. Zielfunktion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">4.2.4. Nebenbedingungen</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unsicherheiten-in-optimierungsmodellen">4.3. Unsicherheiten in Optimierungsmodellen</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sequenzielle-optimierung-auf-rollierendem-zeitfenster">4.3.1. Sequenzielle Optimierung auf rollierendem Zeitfenster</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-der-losung">4.3.2. Evaluation der Lösung</a></li>
 </ul>
 </li>
 </ul>
@@ -375,32 +390,53 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="zeitabhangige-probleme">
 <span id="sec-zeitdiskret"></span><h1><span class="section-number">4. </span>Zeitabhängige Probleme<a class="headerlink" href="#zeitabhangige-probleme" title="Link to this heading">#</a></h1>
 <p>Wir betrachten in diesem Kapitel Probleme, bei denen sich die Entscheidungsmöglichkeiten über einen gewissen Zeithorizont erstrecken. Wir betrachten folgendes Beispiel:</p>
-<section id="einfuhrendes-beispiel-energiespeicher">
-<span id="subsec-energiespeicher"></span><h2><span class="section-number">4.1. </span>Einführendes Beispiel: Energiespeicher<a class="headerlink" href="#einfuhrendes-beispiel-energiespeicher" title="Link to this heading">#</a></h2>
+<section id="ein-energiespeicherproblem">
+<span id="subsec-energiespeicher"></span><h2><span class="section-number">4.1. </span>Ein Energiespeicherproblem<a class="headerlink" href="#ein-energiespeicherproblem" title="Link to this heading">#</a></h2>
 <p>Ein Unternehmen kann gut vorhersagen, wann es wieviel Strom benötigt. Das Unternehmen bezieht den Strom durch einen Versorger. Der Strompreis ändert sich über die Zeit, sei vorher aber bekannt. Zusätzlich hat das Unternehmen einen Batteriespeicher installiert. So kann das Unternehmen Strom in die Batterie einspeichern, wenn der Strompreis niedrig ist und den Strom wieder ausspeichern und selbst verbrauchen, wenn der Strom teuer ist. Das Unternehmen möchte den Batteriespeicher optimal nutzen.</p>
 <figure class="align-default" id="fig-batterie1">
 <a class="reference internal image-reference" href="_images/BeispielBatterie1.png"><img alt="_images/BeispielBatterie1.png" src="_images/BeispielBatterie1.png" style="width: 600px;" /></a>
 </figure>
 <p>Ein gängiges Vorgehen bei dieser Problemklasse ist die <em>Zeitdiskretisierung</em>: Die Zeit wird in gleichlange Zeitscheiben eingeteilt. Innerhalb einer Zeitscheibe werden alle Werte als konstant angenommen. Je kürzer die Zeitscheiben sind, desto genauer wird das Problem modelliert. Mit höherer Detailtreue steigt aber auch der Rechenaufwand um das Modell zu lösen.</p>
 <p>Für die Modellierung wählen wir Zeitscheiben von einer Stunde Länge. Die Modellierungsgenauigkeit orientiert sich in diesem Fall am Strompreis. Dieser ändert sich jede Stunde und die zeitabhängige Abrechnung erfolgt in dieser Auflösung.</p>
+<p>Wir nutzen unsere bewährte Vorgehensweise und modellieren nacheinander Problemdaten und Indexmengen, Entscheidungen, Zielfunktion und Nebenbedingungen.</p>
+<section id="problemdaten-und-indexmengen">
+<h3><span class="section-number">4.1.1. </span>Problemdaten und Indexmengen<a class="headerlink" href="#problemdaten-und-indexmengen" title="Link to this heading">#</a></h3>
 <p>Es sind folgende Daten gegeben:</p>
 <ul class="simple">
 <li><p>Ein betrachteter Zeithorizont <span class="math notranslate nohighlight">\(\{1,2, \ldots, 24\}\)</span> von einem Tag.</p></li>
 <li><p>Der Verbrauch <span class="math notranslate nohighlight">\(d_t\)</span> zum Zeitpunkt <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
 <li><p>Der Strompreis <span class="math notranslate nohighlight">\(p_t\)</span> zum Zeitpunkt <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
 <li><p>Die Kapazität <span class="math notranslate nohighlight">\(s_{max}\)</span> des installierten Batteriespeichers.</p></li>
-<li><p>Der initiale Füllstand <span class="math notranslate nohighlight">\(s_0\)</span> des installierten Batteriespeichers.
-Wir nutzen folgende Entscheidungsvariablen</p></li>
+<li><p>Der initiale Füllstand <span class="math notranslate nohighlight">\(s_0\)</span> des installierten Batteriespeichers.</p></li>
+</ul>
+</section>
+<section id="entscheidungsvariablen">
+<h3><span class="section-number">4.1.2. </span>Entscheidungsvariablen<a class="headerlink" href="#entscheidungsvariablen" title="Link to this heading">#</a></h3>
+<p>Wir nutzen folgende Entscheidungsvariablen</p>
+<ul class="simple">
 <li><p>Den Strombezug <span class="math notranslate nohighlight">\(k_t\)</span> vom Netzbetreiber zum Zeitpunkt <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
 <li><p>Die Einspeicherung <span class="math notranslate nohighlight">\(s^+_t\)</span> in den Batteriespeicher zum Zeitpunkt <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
 <li><p>Die Ausspeicherung <span class="math notranslate nohighlight">\(s^-_t\)</span> aus dem Batteriespeicher zum Zeitpunkt <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
-<li><p>Den Speicherstand <span class="math notranslate nohighlight">\(s_t\)</span> zum Zeitpunkt <span class="math notranslate nohighlight">\(t\)</span>.
-Dies führt zu folgender Modellierung:</p></li>
+<li><p>Den Speicherstand <span class="math notranslate nohighlight">\(s_t\)</span> zum Zeitpunkt <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
 </ul>
+<p>Die Variablen müssen für jedes Zeitintervall <span class="math notranslate nohighlight">\(t\)</span> eingeführt werden. In diesem Beispiel sind das insgesamt <span class="math notranslate nohighlight">\(4\cdot24=96\)</span> Variablen.</p>
+</section>
+<section id="zielfunktion">
+<h3><span class="section-number">4.1.3. </span>Zielfunktion<a class="headerlink" href="#zielfunktion" title="Link to this heading">#</a></h3>
+<p>Die Stromkosten sollen minimiert werden. Diese ergeben sich durch den aktuellen Preis multipliziert mit der Menge des gekauften Stroms zu jedem Zeitpunkt:</p>
+<div class="math notranslate nohighlight">
+\[
+\min_{s_t,s_t^-,s_t^+,k_t} \quad    \sum_{t=1}^{24}p_tk_t
+\]</div>
+</section>
+<section id="nebenbedingungen">
+<h3><span class="section-number">4.1.4. </span>Nebenbedingungen<a class="headerlink" href="#nebenbedingungen" title="Link to this heading">#</a></h3>
+<p>Für jeden Zeitschritt müssen neben den vier Variablen (<span class="math notranslate nohighlight">\(s_t,s_t^-,s_t^+,k_t\)</span>) zwei Gleichungen eingeführt werden. Es handelt sich um sog. <em>Bilanzgleichungen</em>, die die zeitliche Veränderung des Speicherstandes sowie die Deckung des Bedarfes zu jedem Zeitpunkt beschreiben. Die Modellierung kann wie folgt zusammengefasst werden:</p>
 <figure class="align-default" id="fig-batterie2">
-<a class="reference internal image-reference" href="_images/BeispielBatterie2.png"><img alt="_images/BeispielBatterie2.png" src="_images/BeispielBatterie2.png" style="width: 600px;" /></a>
+<a class="reference internal image-reference" href="_images/BeispielBatterie2.png"><img alt="_images/BeispielBatterie2.png" src="_images/BeispielBatterie2.png" style="width: 800px;" /></a>
 </figure>
-<p>In kurzer Schreibweise ergibt sich</p>
+<p>Die Beispielinstanz hat also <span class="math notranslate nohighlight">\(2\cdot24=48\)</span> Gleichungsnebenbedingungen.</p>
+<p>Des Weiteren ist der Speicherstand <span class="math notranslate nohighlight">\(s_t\)</span> durch die Obergrenze <span class="math notranslate nohighlight">\(s_{max}\)</span> beschränkt und sowohl Speicherstand als auch eingekaufter Strom können nicht negativ sein. Insgesamt ergibt sich in kurzer Schreibweise:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{alignat*}{5}
 \min_{s_t,s_t^-,s_t^+,k_t} &amp; \quad  &amp;   \sum_{t=1}^{24}p_tk_t &amp;          &amp; &amp; \\[4mm]
@@ -410,7 +446,6 @@ Dies führt zu folgender Modellierung:</p></li>
 &amp; &amp; s_t &amp; \geq &amp; \quad 0 &amp; &amp;&amp; \forall t= 1, \ldots, 24. \\
 &amp; &amp; k_t &amp; \geq &amp; \quad 0 &amp; &amp;&amp; \forall t= 1, \ldots, 24.
 \end{alignat*}\]</div>
-<p>Wir halten fest: Für jeden Zeitschritt müssen vier Variablen (<span class="math notranslate nohighlight">\(s_t,s_t^-,s_t^+,k_t\)</span>) und zwei Gleichungen eingeführt werden (sog. <em>Bilanzgleichungen</em>). Die Beispielinstanz hat also <span class="math notranslate nohighlight">\(4\cdot24=96\)</span> Variablen und <span class="math notranslate nohighlight">\(2\cdot24=48\)</span> Gleichungsnebenbedingungen.</p>
 <p>Das Ergebnis einer Beispielrechnung ist</p>
 <figure class="align-default" id="fig-batterie3">
 <a class="reference internal image-reference" href="_images/BeispielBatterie3.png"><img alt="_images/BeispielBatterie3.png" src="_images/BeispielBatterie3.png" style="width: 500px;" /></a>
@@ -419,9 +454,91 @@ Dies führt zu folgender Modellierung:</p></li>
 </figcaption>
 </figure>
 </section>
+</section>
+<section id="ein-problem-mit-zeitlich-gekoppelten-bedingungen">
+<h2><span class="section-number">4.2. </span>Ein Problem mit zeitlich gekoppelten Bedingungen<a class="headerlink" href="#ein-problem-mit-zeitlich-gekoppelten-bedingungen" title="Link to this heading">#</a></h2>
+<p>Um mit dem Konzept der zeitabhängigen Modellierung vertraut zu werden, betrachten wie ein weiteres Beispiel. Nehmen Sie an, Sie sind der Besitzer einer Eisdiele. Sie möchten festlegen, in welchem Zeitraum Sie nächstes Jahr geöffnet haben. Folgende Informationen sind relevant:
+Sie planen in Tagen. Die Eisdiele kann prinzipiell an allen 365 Tagen im Jahr geöffnet sein.
+Die Eisdiele eröffnet einmal im Jahr, ist dann durchgehend jeden Tag geöffnet, bis sie wieder
+schließt. Die Eisdiele kann kein zweites Mal im gleichen Jahr eröffnen.
+Für jeden Tag <span class="math notranslate nohighlight">\(t\)</span>, den die Eisdiele geöffnet hat, kennen Sie den erwarteten Gewinn <span class="math notranslate nohighlight">\(e_t\)</span> durch
+den Verkauf der Eiskugeln. Für jeden Tag, den die Eisdiele geöffnet hat, entstehen Personalkosten <span class="math notranslate nohighlight">\(k\)</span> unabhängig von
+der Wahl des Tages. Die Eisdiele hat jedes Jahr am 31.12. geschlossen.</p>
+<p>Das Problem kann wie folgt zusammengefasst werden:</p>
+<figure class="align-default" id="fig-eisdiele">
+<a class="reference internal image-reference" href="_images/eisdiele.png"><img alt="_images/eisdiele.png" src="_images/eisdiele.png" style="width: 600px;" /></a>
+</figure>
+<p>Gesucht ist ein ganzzahliges lineares Programm, das die Öffnungstage der Eisdiele finanziell optimal festlegt.</p>
+<section id="id1">
+<h3><span class="section-number">4.2.1. </span>Problemdaten und Indexmengen<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<p>Der Zeithorizont umfasst die Tage eines Jahres, also</p>
+<div class="math notranslate nohighlight">
+\[
+H=\{1,2,\dots,365\}
+\]</div>
+<p>Gegeben sind die folgenden Daten:</p>
+<ul class="simple">
+<li><p>Nachfrage <span class="math notranslate nohighlight">\(e_t, t\in H\)</span></p></li>
+<li><p>Personalkosten <span class="math notranslate nohighlight">\(k\)</span></p></li>
+</ul>
+</section>
+<section id="id2">
+<h3><span class="section-number">4.2.2. </span>Entscheidungsvariablen<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<p>Wir nutzen die Entscheidungsvariablen</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    d_t=\left\{\begin{array}{rl}
+        1 &amp; \text{, Eisdiele ist an Tag }t\text{ geöffnet.} \\
+        0 &amp; \text{, Eisdiele ist an Tag }t\text{ geschlossen.}
+        \end{array}\right.,\quad \forall t \in H
+\end{split}\]</div>
+<p>Um später die Nebenbedingungen formulieren zu können, benötigen wir noch folgende Variablen</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    f_t=\left\{\begin{array}{rl}
+        1 &amp; \text{, Falls  } t\text{ der Eröffnungstag ist.} \\
+        0 &amp; \text{, sonst.}
+        \end{array}\right.,\quad \forall t \in H
+\end{split}\]</div>
+<p>Außerdem benutzen wir den festen Wert</p>
+<div class="math notranslate nohighlight">
+\[
+  d_0=0
+\]</div>
+<p>um die Situation an Silvester des Vorjahres zu beschreiben.</p>
+</section>
+<section id="id3">
+<h3><span class="section-number">4.2.3. </span>Zielfunktion<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<p>Wir möchten den Gewinn maximieren. Der Gewinn für einen Tag <span class="math notranslate nohighlight">\(t\)</span>, an dem die Eisdiele geöffnet ist, ist gegeben durch <span class="math notranslate nohighlight">\(e_t-k\)</span>. Die Zielfunktion, die den Gesamtgewinn beschreibt, ist also gegeben durch</p>
+<div class="math notranslate nohighlight">
+\[
+  \max_{d_t,f_t} \quad    \sum_{t\in H}(e_t-k)d_t
+\]</div>
+</section>
+<section id="id4">
+<h3><span class="section-number">4.2.4. </span>Nebenbedingungen<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<p>Es muss sichergestellt werden, dass die Eisdiele nur einmal im Jahr öffnen bzw. schließen kann. Dies können wir logisch so formulieren:</p>
+<p>“Wenn die Eisdiele an Tag <span class="math notranslate nohighlight">\(t-1\)</span> geschlossen ist (also <span class="math notranslate nohighlight">\(d_{t-1}=0\)</span>), muss sie am Tag <span class="math notranslate nohighlight">\(t\)</span> auch geschlossen sein <span class="math notranslate nohighlight">\(d_t=0\)</span> oder sie muss eröffnen <span class="math notranslate nohighlight">\(f_t=1\)</span>.”</p>
+<p>Übersetzt in Formeln (siehe <a class="reference internal" href="03_Ganzzahlige_Probleme.html#subsec-logikvariablen"><span class="std std-ref">Logische Bedingungen an Variablen</span></a>):</p>
+<div class="math notranslate nohighlight">
+\[
+  1-d_{t-1}\leq 1-d_t + f_t 
+\]</div>
+<p>bzw.
+$<span class="math notranslate nohighlight">\(
+  d_{t}\leq d_{t-1} + f_t 
+\)</span>$</p>
+<p>Weiterhin darf die Eisdiele nur einmal im Jahr öffnen:</p>
+<div class="math notranslate nohighlight">
+\[
+  \sum_{t\in H}f_t=1
+\]</div>
+<p>und an Silvester muss sie geschlossen sein, also <span class="math notranslate nohighlight">\(d_{365}=0\)</span>.</p>
+</section>
+</section>
 <section id="unsicherheiten-in-optimierungsmodellen">
-<h2><span class="section-number">4.2. </span>Unsicherheiten in Optimierungsmodellen<a class="headerlink" href="#unsicherheiten-in-optimierungsmodellen" title="Link to this heading">#</a></h2>
-<p>Zeitabhängige Optimierungsprobleme sind ein guter Anlass, um ein allgemeines Problem von Optimierungsmodellen zu diskutieren. Nehmen wir noch einmal das Beispiel <a class="reference internal" href="#subsec-energiespeicher"><span class="std std-ref">Einführendes Beispiel: Energiespeicher</span></a>. In dem Beispiel gehen wir (bzw. der Löser) davon aus, dass wir den Strombedarf <span class="math notranslate nohighlight">\(d_1,d_2,\dots,d_{24}\)</span> und den Strompreis <span class="math notranslate nohighlight">\(p_1,p_2,\dots,p_{24}\)</span> für die nächsten 24 Stunden <em>genau</em> kennen und berechnen auf Basis dieser Annahme die optimale Lösung. Natürlich ist die Annahme, den Strompreis, den Strombedarf, das Wetter, den Aktienkurs oder die Lottozahlen von nächster Woche im Voraus <em>genau</em> zu kennen, falsch. Der Löser sieht aber die Unsicherheit in den Annahmen nicht; für ihn sind die Problemdaten lediglich feste Zahlen (man spricht auch von <em>deterministischer</em> Optimierung). Obwohl diese Beobachtung beinahe trivial ist, halten wir sie doch an prominenter Stelle fest:</p>
+<h2><span class="section-number">4.3. </span>Unsicherheiten in Optimierungsmodellen<a class="headerlink" href="#unsicherheiten-in-optimierungsmodellen" title="Link to this heading">#</a></h2>
+<p>Zeitabhängige Optimierungsprobleme sind ein guter Anlass, um ein allgemeines Problem von Optimierungsmodellen zu diskutieren. Nehmen wir noch einmal das Beispiel <a class="reference internal" href="#subsec-energiespeicher"><span class="std std-ref">Ein Energiespeicherproblem</span></a>. In dem Beispiel gehen wir (bzw. der Löser) davon aus, dass wir den Strombedarf <span class="math notranslate nohighlight">\(d_1,d_2,\dots,d_{24}\)</span> und den Strompreis <span class="math notranslate nohighlight">\(p_1,p_2,\dots,p_{24}\)</span> für die nächsten 24 Stunden <em>genau</em> kennen und berechnen auf Basis dieser Annahme die optimale Lösung. Natürlich ist die Annahme, den Strompreis, den Strombedarf, das Wetter, den Aktienkurs oder die Lottozahlen von nächster Woche im Voraus <em>genau</em> zu kennen, falsch. Der Löser sieht aber die Unsicherheit in den Annahmen nicht; für ihn sind die Problemdaten lediglich feste Zahlen (man spricht auch von <em>deterministischer</em> Optimierung). Obwohl diese Beobachtung beinahe trivial ist, halten wir sie doch an prominenter Stelle fest:</p>
 <div class="admonition important">
 <p class="admonition-title">Wichtig</p>
 <p>Die optimale Lösung eines <em>mathematischen Modells</em> ist nicht unbedingt die optimale Lösung des modellierten <em>realen Problems</em>. Das liegt daran, dass das Modell die Wirklichkeit nicht perfekt abbildet. Die Güte der Lösung hängt davon ab, wie groß und von welcher Art die Abweichungen von Modell und Wirklichkeit sind.</p>
@@ -432,25 +549,33 @@ Dies führt zu folgender Modellierung:</p></li>
 <li><p>Vereinfachte mathematische Zusammenhänge. Z.B. geht beim Ein- und Ausspeichern in bzw. aus der Batterie elektrische Energie verloren (in Form von Wärme). Die Bilanzgleichung wird also nicht exakt stimmen. Wie viel Energie verloren geht, könnte auch wiederum von der Umgebungstemperatur, dem Alter der Batterie oder ihrem Füllstand abhängen.</p></li>
 <li><p>Bei Schedulingproblemen wird davon ausgegangen, dass man die Länge einer Aufgabe vorher kennt. Wie gut diese Annahme ist, hängt stark vom Anwendungsfall ab: Während die Annahme “Backzeit für Brot: 50 Minuten” bei der Produktionsplanung einer Großbäckerei wohl recht gut zutrifft, sind die Zeiten für bestimmte Arbeitsschritte z.B. im Bergbau sehr schwer abzuschätzen. Wie lange es dauert, eine gewisse Menge Fels abzutragen, hängt extrem von der Beschaffenheit des Felses, der Zuverlässigkeit der Maschinen und der Fähigkeit der Arbeiter:innen ab.</p></li>
 </ul>
-<p>Was also tun? Zunächst einmal: (Gemischt-ganzzahlige) lineare Programmierung ist ein seit Jahrzehnten in der Industrie etabliertes Werkzeug, um praktisch relevante Planungs- und Entscheidungsprobleme zu lösen. In vielen Fällen sind die Modellfehler klein genug, so dass sie ignoriert werden können oder so dass die berechnete optimale Lösung des Modells zwar nicht die optimale Lösung des modellierten Problems ist, aber eben doch ziemlich dicht dran – und in jedem Fall besser als die Lösung, die ein Mensch ganz ohne mathematische Modell hervorgebracht hätte.</p>
+<p>Was also tun? Ist angesichts dieser Unzulänglichkeiten lineare Optimierung nicht komplett nutzlos? Nein. (Gemischt-ganzzahlige) lineare Programmierung ist ein seit Jahrzehnten in der Industrie etabliertes Werkzeug, um praktisch relevante Planungs- und Entscheidungsprobleme zu lösen. In vielen Fällen sind die Modellfehler klein genug, so dass sie ignoriert werden können oder so dass die berechnete optimale Lösung des Modells zwar nicht ganz die optimale Lösung des modellierten Problems ist, aber eben doch ziemlich dicht dran – und in jedem Fall besser als die Lösung, die ein Mensch ganz ohne mathematische Modell hervorgebracht hätte.</p>
 <p>Eine Methode mit Modellfehlern – man sagt auch <em>Unsicherheiten</em> – umzugehen ist, ein MILP nicht nur einmal zu lösen, sondern mehrmals, und zwar zu unterschiedlichen Zeitpunkten. Dabei werden stets die aktuellsten Problemdaten mit einbezogen. Einen systematischen Ansatz, der auf dieser Idee basiert, beschreiben wir im nächsten Abschnitt. Darüber hinaus gibt es auch viele unterschiedliche Ansätze, bei denen man versucht, Unsicherheiten zu quantifizieren und mit Hilfe stochastischer Modelle abzubilden. Diese werden in dieser Vorlesung nicht behandelt.</p>
 <section id="sequenzielle-optimierung-auf-rollierendem-zeitfenster">
-<h3><span class="section-number">4.2.1. </span>Sequenzielle Optimierung auf rollierendem Zeitfenster<a class="headerlink" href="#sequenzielle-optimierung-auf-rollierendem-zeitfenster" title="Link to this heading">#</a></h3>
-<p>Speziell für den Fall von zeitabhängigen Problemen, die man als MILP formulieren kann, bietet sich folgender Ansatz an, der sich relativ einfach umsetzen lässt und im Wesentlichen ohne Stochastik auskommt. Um ihn zu illustrieren, benutzen wir wieder das Energiespeicherproblem. Wir nehmen zunächst an, dass der Strombedarf im Voraus bekannt ist, aber dass für den Preis <span class="math notranslate nohighlight">\(p_t\)</span> nur eine 24-Stunden-Vorhersage<a class="footnote-reference brackets" href="#vorhersageml" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> vorhanden ist. Der Ansatz ist aber auch auf alle anderen zeitabhängigen Probleme und weitere Unsicherheiten anwendbar.</p>
-<p>Als erstens nehmen wir eine Änderung an der Notation des betrachteten Zeitintervalls vor: Oben haben wir das Zeitintervall von 24 Stunden durch die Zeitpunkte <span class="math notranslate nohighlight">\(t=1,2,\dots,24\)</span> beschrieben, d.h. zum Zeitpunkt der Berechnung befinden wir uns am Zeitpunkt <span class="math notranslate nohighlight">\(t=0\)</span>. Allgemeiner: wenn wir die Berechnung zu irgendeinem Zeitpunkt <span class="math notranslate nohighlight">\(t=\tau\)</span> ausführen, wären die Zeitpunkte der 24-Stunden-Vorschauperiode <span class="math notranslate nohighlight">\(t=\tau+1, \tau+2,\dots,\tau+24\)</span>. Wir gehen davon aus, dass wir zu jedem Zeitpunkt <span class="math notranslate nohighlight">\(\tau\)</span> eine aktualisierte 24-Stunden-Vorhersage für den Strompreis erhalten. Das bedeutet insbesondere, dass es für einen Zeitpunkt im Laufe der Zeit unterschiedliche Vorhersagen gibt (nämlich insgesamt 24 Stück).</p>
+<h3><span class="section-number">4.3.1. </span>Sequenzielle Optimierung auf rollierendem Zeitfenster<a class="headerlink" href="#sequenzielle-optimierung-auf-rollierendem-zeitfenster" title="Link to this heading">#</a></h3>
+<p>Speziell für den Fall von zeitabhängigen Problemen, die man als MILP formulieren kann, bietet sich folgender Ansatz an, der sich relativ einfach umsetzen lässt und im Wesentlichen ohne Stochastik auskommt. Um ihn zu illustrieren, benutzen wir das Energiespeicherproblem. Wir nehmen zunächst an, dass der Strombedarf im Voraus bekannt ist, aber dass für den Preis <span class="math notranslate nohighlight">\(p_t\)</span> nur eine 24-Stunden-Vorhersage<a class="footnote-reference brackets" href="#vorhersageml" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> vorhanden ist. Der Ansatz ist aber auch auf alle anderen zeitabhängigen Probleme und weitere Unsicherheiten anwendbar.</p>
+<p>Als erstens nehmen wir eine Änderung an der Notation des betrachteten Zeitintervalls vor: Oben haben wir das Zeitintervall von 24 Stunden durch die Zeitpunkte <span class="math notranslate nohighlight">\(t=1,2,\dots,24\)</span> beschrieben, d.h. zum Zeitpunkt der Berechnung befinden wir uns am Zeitpunkt <span class="math notranslate nohighlight">\(t=0\)</span> (oder davor). Allgemeiner: wenn wir die Berechnung zu irgendeinem Zeitpunkt <span class="math notranslate nohighlight">\(t=\tau\)</span> ausführen, wären die Zeitpunkte der 24-Stunden-Vorschauperiode <span class="math notranslate nohighlight">\(t=\tau+1, \tau+2,\dots,\tau+24\)</span>. Wir machen die (realistische) Annahme, dass wir zu jedem Zeitpunkt <span class="math notranslate nohighlight">\(\tau\)</span> eine aktualisierte 24-Stunden-Vorhersage für den Strompreis erhalten. Das bedeutet insbesondere, dass es für einen Zeitpunkt im Laufe der Zeit unterschiedliche Vorhersagen gibt (nämlich insgesamt 24 Stück).</p>
 <p>BILD mit unterschiedlichen Forecasts mit unterschiedlichen Zeithorizonten</p>
-<p>Um die verschiedenen Vorhersagen zu unterscheiden, führen wir einen zweiten Zeitindex ein. Die Größe <span class="math notranslate nohighlight">\(p_{\tau, \tau+t}\)</span>, wobei <span class="math notranslate nohighlight">\(t=1,\dots,24\)</span> bedeutet: der vorhergesagte Preis für den Zeitpunkt <span class="math notranslate nohighlight">\(\tau+t\)</span> basierend auf der Vorhersage zum Zeitpunkt <span class="math notranslate nohighlight">\(\tau\)</span>. Der Buchstabe <span class="math notranslate nohighlight">\(\tau\)</span> bezeichnet also die real ablaufende Zeit, in der neue Vorhersagen eintreffen und die Berechnungen gestartet werden, während <span class="math notranslate nohighlight">\(t\)</span> weiterhin die vorausschauende, diskretisierte Zeit im MILP bezeichnet (wie zu Anfang des Kapitels eingeführt).</p>
-<p>Die Strategie, die wir nun verfolgen, um das Energiespeicherproblem zu lösen, lässt sich wie folgt beschreiben: Wir befinden uns am Zeitpunkt <span class="math notranslate nohighlight">\(\tau=0\)</span>. Wir benutzen die aktuelle 24-Stunden-Preisvorhersage <span class="math notranslate nohighlight">\(p_{0,0+t}, t=1,\dots,24\)</span>, um damit das erste MILP zu generieren und lösen es. Die optimale Lösung des MILPs bezeichnen wir mit</p>
+<p>Wir müssen diese unterschiedlichen Vorhersagen unterscheiden. Dafür führen wir einen zweiten Zeitindex ein, der beschreibt, an welchem Zeitpunkt die Vorhersage gemacht wurde. Die Größe</p>
+<div class="math notranslate nohighlight">
+\[
+  p_{\tau, \tau+t},\quad $t=1,\dots,24
+\]</div>
+<p>bedeutet: der vorhergesagte Preis für den Zeitpunkt <span class="math notranslate nohighlight">\(\tau+t\)</span> basierend auf der Vorhersage zum Zeitpunkt <span class="math notranslate nohighlight">\(\tau\)</span>. Der Buchstabe <span class="math notranslate nohighlight">\(\tau\)</span> bezeichnet also die real ablaufende Zeit, in der neue Vorhersagen eintreffen und die Berechnungen gestartet werden, während <span class="math notranslate nohighlight">\(t\)</span> weiterhin die vorausschauende, diskretisierte Zeit im MILP bezeichnet (wie zu Anfang des Kapitels eingeführt).</p>
+<p>Die Strategie, die wir nun verfolgen, um das Energiespeicherproblem zu lösen, lässt sich wie folgt skizzieren: Wir befinden uns am Zeitpunkt <span class="math notranslate nohighlight">\(\tau=0\)</span>. Wir benutzen die aktuelle 24-Stunden-Preisvorhersage <span class="math notranslate nohighlight">\(p_{0,0+t}, t=1,\dots,24\)</span>, um damit das erste MILP zu generieren. Wir lösen es das MILP und bezeichnen die optimale Lösung mit</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
     s_{0,t}^{\star},s_{0,t}^{-\star},s_{0,t}^{+\star},k_{0,t}^{\star},\quad t=1,\dots,24 
 \end{align*}\]</div>
-<p>Wir beginnen nun damit, die Lösung umzusetzen, d.h. wir setzen die Entscheidung um, die durch die optimale Lösung des MILPs für den ersten Zeitschritt repräsentiert wird</p>
+<p>Bis hierher haben wir nur die Situation aus Abschnitt <a class="reference internal" href="#subsec-energiespeicher"><span class="std std-ref">Ein Energiespeicherproblem</span></a> beschrieben, nur mit einem zusätzlichen Zeitindex.</p>
+<p>Wenn wir das Problem in der Praxis lösen, würden wir nun damit beginnen, die Lösung umzusetzen, d.h. wir setzen die Entscheidung um, die durch die optimale Lösung des MILPs für den <em>ersten</em> Zeitschritt repräsentiert wird</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
 s_{0,1}^{\star},s_{0,1}^{-\star},s_{0,1}^{+\star},k_{0,1}^{\star}
 \end{align*}\]</div>
-<p>Nun schreitet die Zeit voran, d.h. aus <span class="math notranslate nohighlight">\(\tau=0\)</span> wird <span class="math notranslate nohighlight">\(\tau=1\)</span>. Wir erhalten nun eine neue 24-Stunden-Preisvorhersage <span class="math notranslate nohighlight">\(p_{1,1+t}, t=1,\dots,24\)</span>. Nun stellen wir das zweite MILP auf mit der aktualisierten Vorhersage als Problemdaten und lösen es. Aus der Lösung dieses MILP verwenden wir wieder nur den Teil, der sich auf die nächste Zeitperiode, in dem Fall <span class="math notranslate nohighlight">\(\tau=2\)</span> bezieht, nämlich:</p>
+<p>Nun schreitet die Zeit voran, d.h. aus <span class="math notranslate nohighlight">\(\tau=0\)</span> wird <span class="math notranslate nohighlight">\(\tau=1\)</span>. Von unserer Data Science Abteilung erhalten wir eine neue 24-Stunden-Preisvorhersage <span class="math notranslate nohighlight">\(p_{1,1+t}, t=1,\dots,24\)</span>. Nun stellen wir das zweite MILP auf mit der aktualisierten Vorhersage als Problemdaten und lösen es.</p>
+<p><em>Wichtig</em>: Alle Werte, die sich auf die Vergangenheit beziehen (also z.B. <span class="math notranslate nohighlight">\(p_{1,1}\)</span>), sind jetzt keine Optimierungsvariablen mehr (wir können ja die Vergangenheit nicht mehr ändern), sondern feste Werte.</p>
+<p>Aus der Lösung dieses MILP verwenden wir wieder nur den Teil, der sich auf die nächste Zeitperiode, in dem Fall <span class="math notranslate nohighlight">\(\tau=2\)</span> bezieht, nämlich:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
 s_{1,2}^{\star},s_{1,2}^{-\star},s_{1,2}^{+\star},k_{1,2}^{\star}
@@ -512,11 +637,11 @@ Für <span class="math notranslate nohighlight">\(\tau=0,1,\dots,T-1\)</span>:</
 <li><p>Der allgemeine Begriff für Verfahren, mit denen man sequenzielle Entscheidungsprobleme unter Unsicherheiten löst lautet <em>Policy</em>. <a class="reference internal" href="#alg:mpc">Algorithm 4.1</a> ist ein Beispiel für eine Policy.</p></li>
 <li><p>Da das Zeitfenster immer für eine feste Zeitperiode in die Zukunft geht, reicht es natürlich über den Zeithorizont <span class="math notranslate nohighlight">\(t=1,\dots,T\)</span> im ursprünglichen Problem hinaus. Sollte das nicht funktionieren, da der Prozess z.B. eine feste Endzeit hat, so kann das Zeitfenster auch in jedem Schritt verkleinert werden (das letzte MILP besteht dann nur noch aus einem Zeitschritt).</p></li>
 <li><p>In vielen Anwendungen sind Vorhersagen für die nahe Zukunft sehr gut und werden schlechter, je weiter sie in der Zukunft liegen. Falls die Vorhersage auch für den ersten Zeitschritt <span class="math notranslate nohighlight">\(\tau+1\)</span> falsch ist, kann es passieren, dass die vom Löser berechnete Lösung (physikalisch) unzulässig ist. Am Beispiel des Energiespeicherproblems wäre das der Fall, wenn die Vorhersage für den Strombedarf ungenau ist. Dann wäre die Bilanzgleichung <span class="math notranslate nohighlight">\(k_1^{\star} - s_1^{+\star} + s_1^{-\star}= d_1\)</span> nicht erfüllt, was bedeutet, dass entweder der Bedarf nicht gedeckt würde (Stomausfälle) oder zu mehr als 100% gedeckt wäre (zu viel Strom im Netz, was zu Schäden an der Infrastruktur führen kann). In der Realität müssten dann eine oder mehrere der Variablen <span class="math notranslate nohighlight">\(k_1^{\star}, s_1^{+\star}, s_1^{-\star}\)</span> angepasst werden.</p></li>
-<li><p>Die Lösung <span class="math notranslate nohighlight">\(\bar{\v x}^{\star}_{\tau}\)</span> wird zwar auf Basis von optimalen Lösungen von MILPs konstruiert, sie ist aber selbst <em>keine</em> optimale Lösung des übergeordneten sequenziellen Entscheidungsproblems (eine sog. optimale Policy).</p></li>
+<li><p>Die Lösung <span class="math notranslate nohighlight">\(\bar{\v x}^{\star}_{\tau}\)</span> wird zwar auf Basis von optimalen Lösungen von MILPs konstruiert, sie ist aber selbst <em>keine</em> optimale Lösung des übergeordneten sequenziellen Entscheidungsproblems (eine sog. optimale Policy). In vielen Fällen ist diese “optimale Policy” aber eher theoretischer Natur, d.h. sie lässt sich nicht so ohne weiteres berechnen.</p></li>
 </ul>
 </section>
 <section id="evaluation-der-losung">
-<h3><span class="section-number">4.2.2. </span>Evaluation der Lösung<a class="headerlink" href="#evaluation-der-losung" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">4.3.2. </span>Evaluation der Lösung<a class="headerlink" href="#evaluation-der-losung" title="Link to this heading">#</a></h3>
 <p>Wir haben nun eine konkrete Vorgehensweise beschrieben, wie man mit Unsicherheiten in den Problemdaten umgehen kann, indem man eine Folge von MILPs löst. Wie gut ist dieses Vorgehen? Dies lässt sich nur a posteriori (also im Nachhinein) bewerten. Wir stellen dafür die Zielfunktion des MILP, die aus den tatsächlichen Problemdaten besteht (z.B. den Strompreisen).</p>
 <p>Seien <span class="math notranslate nohighlight">\(\v p_{\tau}, \tau=1,\dots,T\)</span> die tatsächlichen Problemdaten und <span class="math notranslate nohighlight">\(\v c_{\tau}, \tau=1,\dots,T\)</span> der Teil der Problemdaten, der in der Zielfunktion verwendet wird. Dann bewerten wir unsere Lösung <span class="math notranslate nohighlight">\(\bar{\v x}^{\star}_{\tau}\)</span> mit der Funktion</p>
 <div class="amsmath math notranslate nohighlight">
@@ -536,12 +661,14 @@ Für <span class="math notranslate nohighlight">\(\tau=0,1,\dots,T-1\)</span>:</
 <hr class="footnotes docutils" />
 <aside class="footnote-list brackets">
 <aside class="footnote brackets" id="vorhersageml" role="doc-footnote">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">1</a><span class="fn-bracket">]</span></span>
 <p>Die Vorhersagen werden ihrerseits auch mit einem mathematische Modell gemacht, z.B. einem Zeitreihenmodell oder einem Machine Learning Modell. Zeitabhängige Optimierungsprobleme sind schöne Beispiele für das Zusammenspiel zwischen Machine Learning und Optimierung. Das Machine Learning Modell liefert mit seinen Vorhersagen die Problemdaten für das Optimierungsmodell.</p>
 </aside>
 </aside>
 </section>
 </section>
+<div class="toctree-wrapper compound">
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -584,11 +711,11 @@ Für <span class="math notranslate nohighlight">\(\tau=0,1,\dots,T-1\)</span>:</
       </div>
     </a>
     <a class="right-next"
-       href="05_Praxisaspekte.html"
+       href="04_Laststeuerung.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">weiter</p>
-        <p class="prev-next-title"><span class="section-number">5. </span>Praxisaspekte beim Lösen von gemischt-ganzzahligen Programmen</p>
+        <p class="prev-next-title"><span class="section-number">4.4. </span>Anwendung: Laststeuerung in der Stahlproduktion</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -608,10 +735,23 @@ Für <span class="math notranslate nohighlight">\(\tau=0,1,\dots,T-1\)</span>:</
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#einfuhrendes-beispiel-energiespeicher">4.1. Einführendes Beispiel: Energiespeicher</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unsicherheiten-in-optimierungsmodellen">4.2. Unsicherheiten in Optimierungsmodellen</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sequenzielle-optimierung-auf-rollierendem-zeitfenster">4.2.1. Sequenzielle Optimierung auf rollierendem Zeitfenster</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-der-losung">4.2.2. Evaluation der Lösung</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ein-energiespeicherproblem">4.1. Ein Energiespeicherproblem</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problemdaten-und-indexmengen">4.1.1. Problemdaten und Indexmengen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entscheidungsvariablen">4.1.2. Entscheidungsvariablen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#zielfunktion">4.1.3. Zielfunktion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nebenbedingungen">4.1.4. Nebenbedingungen</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ein-problem-mit-zeitlich-gekoppelten-bedingungen">4.2. Ein Problem mit zeitlich gekoppelten Bedingungen</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">4.2.1. Problemdaten und Indexmengen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">4.2.2. Entscheidungsvariablen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">4.2.3. Zielfunktion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">4.2.4. Nebenbedingungen</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unsicherheiten-in-optimierungsmodellen">4.3. Unsicherheiten in Optimierungsmodellen</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sequenzielle-optimierung-auf-rollierendem-zeitfenster">4.3.1. Sequenzielle Optimierung auf rollierendem Zeitfenster</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-der-losung">4.3.2. Evaluation der Lösung</a></li>
 </ul>
 </li>
 </ul>

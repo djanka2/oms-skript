@@ -473,7 +473,7 @@ Viele Echtweltprobleme zeichnen sich durch eine große Anzahl an zu modellierend
 Die Standardprobleme aus dem letzten Kapitel bilden bereits einen kleinen Fundus an Bausteinen für die Modellierung. 
 Im Folgenden werden einige wiederkehrende Aspekte zusammen mit einer möglichen Lösung präsentiert. Dies knüpft an {ref}`subsubsec:tricks1` an mit dem Unterschied, dass für die nächsten Tricks immer ganzzahlige (binäre) Variablen benötigt werden.
 
-
+(subsec:logikVariablen)=
 ### Logische Bedingungen an Variablen
 
 (subsubsec:logikBeispiel)=
@@ -1297,7 +1297,6 @@ d_{max}=\sum_{i \in A}d_i.
 
 
 % Aufgabe dazu: https://colab.research.google.com/github/Gurobi/modeling-examples/blob/master/facility_location/facility_location.ipynb#scrollTo=8RUukodHFOMf
-
 
 %## Anwendung: Payments
 % als Hausaufgabe

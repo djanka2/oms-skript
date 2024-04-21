@@ -4,7 +4,7 @@
 Wir betrachten in diesem Kapitel Probleme, bei denen sich die Entscheidungsmöglichkeiten über einen gewissen Zeithorizont erstrecken. Wir betrachten folgendes Beispiel:
 
 (subsec:energiespeicher)=
-## Einführendes Beispiel: Energiespeicher
+## Ein Energiespeicherproblem
 Ein Unternehmen kann gut vorhersagen, wann es wieviel Strom benötigt. Das Unternehmen bezieht den Strom durch einen Versorger. Der Strompreis ändert sich über die Zeit, sei vorher aber bekannt. Zusätzlich hat das Unternehmen einen Batteriespeicher installiert. So kann das Unternehmen Strom in die Batterie einspeichern, wenn der Strompreis niedrig ist und den Strom wieder ausspeichern und selbst verbrauchen, wenn der Strom teuer ist. Das Unternehmen möchte den Batteriespeicher optimal nutzen.
 
 ```{figure} ./bilder/BeispielBatterie1.png
@@ -16,25 +16,43 @@ Ein gängiges Vorgehen bei dieser Problemklasse ist die *Zeitdiskretisierung*: D
 
 Für die Modellierung wählen wir Zeitscheiben von einer Stunde Länge. Die Modellierungsgenauigkeit orientiert sich in diesem Fall am Strompreis. Dieser ändert sich jede Stunde und die zeitabhängige Abrechnung erfolgt in dieser Auflösung.
 
+Wir nutzen unsere bewährte Vorgehensweise und modellieren nacheinander Problemdaten und Indexmengen, Entscheidungen, Zielfunktion und Nebenbedingungen.
+
+### Problemdaten und Indexmengen
 Es sind folgende Daten gegeben:
 - Ein betrachteter Zeithorizont $\{1,2, \ldots, 24\}$ von einem Tag.
 - Der Verbrauch $d_t$ zum Zeitpunkt $t$. 
 - Der Strompreis $p_t$ zum Zeitpunkt $t$.
 - Die Kapazität $s_{max}$ des installierten Batteriespeichers.  
 - Der initiale Füllstand $s_0$ des installierten Batteriespeichers.
+
+### Entscheidungsvariablen
 Wir nutzen folgende Entscheidungsvariablen
 - Den Strombezug $k_t$ vom Netzbetreiber zum Zeitpunkt $t$.
 - Die Einspeicherung $s^+_t$ in den Batteriespeicher zum Zeitpunkt $t$.
 - Die Ausspeicherung $s^-_t$ aus dem Batteriespeicher zum Zeitpunkt $t$.
 - Den Speicherstand $s_t$ zum Zeitpunkt $t$.
-Dies führt zu folgender Modellierung:
+
+Die Variablen müssen für jedes Zeitintervall $t$ eingeführt werden. In diesem Beispiel sind das insgesamt $4\cdot24=96$ Variablen.
+
+### Zielfunktion
+Die Stromkosten sollen minimiert werden. Diese ergeben sich durch den aktuellen Preis multipliziert mit der Menge des gekauften Stroms zu jedem Zeitpunkt:
+
+$$
+\min_{s_t,s_t^-,s_t^+,k_t} \quad    \sum_{t=1}^{24}p_tk_t
+$$
+
+### Nebenbedingungen
+Für jeden Zeitschritt müssen neben den vier Variablen ($s_t,s_t^-,s_t^+,k_t$) zwei Gleichungen eingeführt werden. Es handelt sich um sog. *Bilanzgleichungen*, die die zeitliche Veränderung des Speicherstandes sowie die Deckung des Bedarfes zu jedem Zeitpunkt beschreiben. Die Modellierung kann wie folgt zusammengefasst werden:
 
 ```{figure} ./bilder/BeispielBatterie2.png
 :name: fig:Batterie2
-:width: 600px
+:width: 800px
 ```
 
-In kurzer Schreibweise ergibt sich
+Die Beispielinstanz hat also $2\cdot24=48$ Gleichungsnebenbedingungen.
+
+Des Weiteren ist der Speicherstand $s_t$ durch die Obergrenze $s_{max}$ beschränkt und sowohl Speicherstand als auch eingekaufter Strom können nicht negativ sein. Insgesamt ergibt sich in kurzer Schreibweise:
 \begin{alignat*}{5}
 \min_{s_t,s_t^-,s_t^+,k_t} & \quad  &   \sum_{t=1}^{24}p_tk_t &          & & \\[4mm]
 \text{s.t. } & & k_t - s_t^+ + s_t^-  & =  & \quad d_t & \quad\quad & & \forall t= 1, \ldots, 24 \\[2mm]
@@ -43,7 +61,6 @@ In kurzer Schreibweise ergibt sich
 & & s_t & \geq & \quad 0 & && \forall t= 1, \ldots, 24. \\
 & & k_t & \geq & \quad 0 & && \forall t= 1, \ldots, 24.
 \end{alignat*}
-Wir halten fest: Für jeden Zeitschritt müssen vier Variablen ($s_t,s_t^-,s_t^+,k_t$) und zwei Gleichungen eingeführt werden (sog. *Bilanzgleichungen*). Die Beispielinstanz hat also $4\cdot24=96$ Variablen und $2\cdot24=48$ Gleichungsnebenbedingungen.
 
 Das Ergebnis einer Beispielrechnung ist
 
@@ -53,6 +70,94 @@ Das Ergebnis einer Beispielrechnung ist
 
 Ergebnis zeitabhängiges lineares Optimierungsproblem.
 ```
+
+## Ein Problem mit zeitlich gekoppelten Bedingungen
+Um mit dem Konzept der zeitabhängigen Modellierung vertraut zu werden, betrachten wie ein weiteres Beispiel. Nehmen Sie an, Sie sind der Besitzer einer Eisdiele. Sie möchten festlegen, in welchem Zeitraum Sie nächstes Jahr geöffnet haben. Folgende Informationen sind relevant:
+Sie planen in Tagen. Die Eisdiele kann prinzipiell an allen 365 Tagen im Jahr geöffnet sein.
+Die Eisdiele eröffnet einmal im Jahr, ist dann durchgehend jeden Tag geöffnet, bis sie wieder
+schließt. Die Eisdiele kann kein zweites Mal im gleichen Jahr eröffnen.
+Für jeden Tag $t$, den die Eisdiele geöffnet hat, kennen Sie den erwarteten Gewinn $e_t$ durch
+den Verkauf der Eiskugeln. Für jeden Tag, den die Eisdiele geöffnet hat, entstehen Personalkosten $k$ unabhängig von
+der Wahl des Tages. Die Eisdiele hat jedes Jahr am 31.12. geschlossen.
+
+Das Problem kann wie folgt zusammengefasst werden:
+
+```{figure} ./bilder/eisdiele.png
+:name: fig:eisdiele
+:width: 600px
+```
+
+Gesucht ist ein ganzzahliges lineares Programm, das die Öffnungstage der Eisdiele finanziell optimal festlegt.
+
+### Problemdaten und Indexmengen
+Der Zeithorizont umfasst die Tage eines Jahres, also 
+
+$$
+H=\{1,2,\dots,365\}
+$$
+
+Gegeben sind die folgenden Daten:
+- Nachfrage $e_t, t\in H$
+- Personalkosten $k$
+
+
+### Entscheidungsvariablen
+Wir nutzen die Entscheidungsvariablen
+
+$$
+    d_t=\left\{\begin{array}{rl}
+        1 & \text{, Eisdiele ist an Tag }t\text{ geöffnet.} \\
+        0 & \text{, Eisdiele ist an Tag }t\text{ geschlossen.}
+        \end{array}\right.,\quad \forall t \in H
+$$
+
+Um später die Nebenbedingungen formulieren zu können, benötigen wir noch folgende Variablen
+
+$$
+    f_t=\left\{\begin{array}{rl}
+        1 & \text{, Falls  } t\text{ der Eröffnungstag ist.} \\
+        0 & \text{, sonst.}
+        \end{array}\right.,\quad \forall t \in H
+$$
+
+Außerdem benutzen wir den festen Wert
+
+$$
+  d_0=0
+$$
+
+um die Situation an Silvester des Vorjahres zu beschreiben.
+
+### Zielfunktion
+Wir möchten den Gewinn maximieren. Der Gewinn für einen Tag $t$, an dem die Eisdiele geöffnet ist, ist gegeben durch $e_t-k$. Die Zielfunktion, die den Gesamtgewinn beschreibt, ist also gegeben durch
+
+$$
+  \max_{d_t,f_t} \quad    \sum_{t\in H}(e_t-k)d_t
+$$
+
+### Nebenbedingungen
+Es muss sichergestellt werden, dass die Eisdiele nur einmal im Jahr öffnen bzw. schließen kann. Dies können wir logisch so formulieren:
+
+"Wenn die Eisdiele an Tag $t-1$ geschlossen ist (also $d_{t-1}=0$), muss sie am Tag $t$ auch geschlossen sein $d_t=0$ oder sie muss eröffnen $f_t=1$."
+
+Übersetzt in Formeln (siehe {ref}`subsec:logikVariablen`):
+
+$$
+  1-d_{t-1}\leq 1-d_t + f_t 
+$$
+bzw.
+$$
+  d_{t}\leq d_{t-1} + f_t 
+$$
+
+Weiterhin darf die Eisdiele nur einmal im Jahr öffnen:
+
+$$
+  \sum_{t\in H}f_t=1
+$$
+
+und an Silvester muss sie geschlossen sein, also $d_{365}=0$.
+
 
 ## Unsicherheiten in Optimierungsmodellen
 Zeitabhängige Optimierungsprobleme sind ein guter Anlass, um ein allgemeines Problem von Optimierungsmodellen zu diskutieren. Nehmen wir noch einmal das Beispiel {ref}`subsec:energiespeicher`. In dem Beispiel gehen wir (bzw. der Löser) davon aus, dass wir den Strombedarf $d_1,d_2,\dots,d_{24}$ und den Strompreis $p_1,p_2,\dots,p_{24}$ für die nächsten 24 Stunden *genau* kennen und berechnen auf Basis dieser Annahme die optimale Lösung. Natürlich ist die Annahme, den Strompreis, den Strombedarf, das Wetter, den Aktienkurs oder die Lottozahlen von nächster Woche im Voraus *genau* zu kennen, falsch. Der Löser sieht aber die Unsicherheit in den Annahmen nicht; für ihn sind die Problemdaten lediglich feste Zahlen (man spricht auch von *deterministischer* Optimierung). Obwohl diese Beobachtung beinahe trivial ist, halten wir sie doch an prominenter Stelle fest:
@@ -66,31 +171,43 @@ Typische Beispiele für deutliche Abweichungen von Modell und Wirklichkeit in Op
 - Vereinfachte mathematische Zusammenhänge. Z.B. geht beim Ein- und Ausspeichern in bzw. aus der Batterie elektrische Energie verloren (in Form von Wärme). Die Bilanzgleichung wird also nicht exakt stimmen. Wie viel Energie verloren geht, könnte auch wiederum von der Umgebungstemperatur, dem Alter der Batterie oder ihrem Füllstand abhängen.
 - Bei Schedulingproblemen wird davon ausgegangen, dass man die Länge einer Aufgabe vorher kennt. Wie gut diese Annahme ist, hängt stark vom Anwendungsfall ab: Während die Annahme "Backzeit für Brot: 50 Minuten" bei der Produktionsplanung einer Großbäckerei wohl recht gut zutrifft, sind die Zeiten für bestimmte Arbeitsschritte z.B. im Bergbau sehr schwer abzuschätzen. Wie lange es dauert, eine gewisse Menge Fels abzutragen, hängt extrem von der Beschaffenheit des Felses, der Zuverlässigkeit der Maschinen und der Fähigkeit der Arbeiter:innen ab.
 
-Was also tun? Zunächst einmal: (Gemischt-ganzzahlige) lineare Programmierung ist ein seit Jahrzehnten in der Industrie etabliertes Werkzeug, um praktisch relevante Planungs- und Entscheidungsprobleme zu lösen. In vielen Fällen sind die Modellfehler klein genug, so dass sie ignoriert werden können oder so dass die berechnete optimale Lösung des Modells zwar nicht die optimale Lösung des modellierten Problems ist, aber eben doch ziemlich dicht dran -- und in jedem Fall besser als die Lösung, die ein Mensch ganz ohne mathematische Modell hervorgebracht hätte.
+Was also tun? Ist angesichts dieser Unzulänglichkeiten lineare Optimierung nicht komplett nutzlos? Nein. (Gemischt-ganzzahlige) lineare Programmierung ist ein seit Jahrzehnten in der Industrie etabliertes Werkzeug, um praktisch relevante Planungs- und Entscheidungsprobleme zu lösen. In vielen Fällen sind die Modellfehler klein genug, so dass sie ignoriert werden können oder so dass die berechnete optimale Lösung des Modells zwar nicht ganz die optimale Lösung des modellierten Problems ist, aber eben doch ziemlich dicht dran -- und in jedem Fall besser als die Lösung, die ein Mensch ganz ohne mathematische Modell hervorgebracht hätte.
 
 Eine Methode mit Modellfehlern -- man sagt auch *Unsicherheiten* -- umzugehen ist, ein MILP nicht nur einmal zu lösen, sondern mehrmals, und zwar zu unterschiedlichen Zeitpunkten. Dabei werden stets die aktuellsten Problemdaten mit einbezogen. Einen systematischen Ansatz, der auf dieser Idee basiert, beschreiben wir im nächsten Abschnitt. Darüber hinaus gibt es auch viele unterschiedliche Ansätze, bei denen man versucht, Unsicherheiten zu quantifizieren und mit Hilfe stochastischer Modelle abzubilden. Diese werden in dieser Vorlesung nicht behandelt.
 
 
 ### Sequenzielle Optimierung auf rollierendem Zeitfenster
-Speziell für den Fall von zeitabhängigen Problemen, die man als MILP formulieren kann, bietet sich folgender Ansatz an, der sich relativ einfach umsetzen lässt und im Wesentlichen ohne Stochastik auskommt. Um ihn zu illustrieren, benutzen wir wieder das Energiespeicherproblem. Wir nehmen zunächst an, dass der Strombedarf im Voraus bekannt ist, aber dass für den Preis $p_t$ nur eine 24-Stunden-Vorhersage[^VorhersageML] vorhanden ist. Der Ansatz ist aber auch auf alle anderen zeitabhängigen Probleme und weitere Unsicherheiten anwendbar.
+Speziell für den Fall von zeitabhängigen Problemen, die man als MILP formulieren kann, bietet sich folgender Ansatz an, der sich relativ einfach umsetzen lässt und im Wesentlichen ohne Stochastik auskommt. Um ihn zu illustrieren, benutzen wir das Energiespeicherproblem. Wir nehmen zunächst an, dass der Strombedarf im Voraus bekannt ist, aber dass für den Preis $p_t$ nur eine 24-Stunden-Vorhersage[^VorhersageML] vorhanden ist. Der Ansatz ist aber auch auf alle anderen zeitabhängigen Probleme und weitere Unsicherheiten anwendbar.
 
-Als erstens nehmen wir eine Änderung an der Notation des betrachteten Zeitintervalls vor: Oben haben wir das Zeitintervall von 24 Stunden durch die Zeitpunkte $t=1,2,\dots,24$ beschrieben, d.h. zum Zeitpunkt der Berechnung befinden wir uns am Zeitpunkt $t=0$. Allgemeiner: wenn wir die Berechnung zu irgendeinem Zeitpunkt $t=\tau$ ausführen, wären die Zeitpunkte der 24-Stunden-Vorschauperiode $t=\tau+1, \tau+2,\dots,\tau+24$. Wir gehen davon aus, dass wir zu jedem Zeitpunkt $\tau$ eine aktualisierte 24-Stunden-Vorhersage für den Strompreis erhalten. Das bedeutet insbesondere, dass es für einen Zeitpunkt im Laufe der Zeit unterschiedliche Vorhersagen gibt (nämlich insgesamt 24 Stück).
+Als erstens nehmen wir eine Änderung an der Notation des betrachteten Zeitintervalls vor: Oben haben wir das Zeitintervall von 24 Stunden durch die Zeitpunkte $t=1,2,\dots,24$ beschrieben, d.h. zum Zeitpunkt der Berechnung befinden wir uns am Zeitpunkt $t=0$ (oder davor). Allgemeiner: wenn wir die Berechnung zu irgendeinem Zeitpunkt $t=\tau$ ausführen, wären die Zeitpunkte der 24-Stunden-Vorschauperiode $t=\tau+1, \tau+2,\dots,\tau+24$. Wir machen die (realistische) Annahme, dass wir zu jedem Zeitpunkt $\tau$ eine aktualisierte 24-Stunden-Vorhersage für den Strompreis erhalten. Das bedeutet insbesondere, dass es für einen Zeitpunkt im Laufe der Zeit unterschiedliche Vorhersagen gibt (nämlich insgesamt 24 Stück).
 
 
 BILD mit unterschiedlichen Forecasts mit unterschiedlichen Zeithorizonten
 
 
-Um die verschiedenen Vorhersagen zu unterscheiden, führen wir einen zweiten Zeitindex ein. Die Größe $p_{\tau, \tau+t}$, wobei $t=1,\dots,24$ bedeutet: der vorhergesagte Preis für den Zeitpunkt $\tau+t$ basierend auf der Vorhersage zum Zeitpunkt $\tau$. Der Buchstabe $\tau$ bezeichnet also die real ablaufende Zeit, in der neue Vorhersagen eintreffen und die Berechnungen gestartet werden, während $t$ weiterhin die vorausschauende, diskretisierte Zeit im MILP bezeichnet (wie zu Anfang des Kapitels eingeführt).
+Wir müssen diese unterschiedlichen Vorhersagen unterscheiden. Dafür führen wir einen zweiten Zeitindex ein, der beschreibt, an welchem Zeitpunkt die Vorhersage gemacht wurde. Die Größe 
 
-Die Strategie, die wir nun verfolgen, um das Energiespeicherproblem zu lösen, lässt sich wie folgt beschreiben: Wir befinden uns am Zeitpunkt $\tau=0$. Wir benutzen die aktuelle 24-Stunden-Preisvorhersage $p_{0,0+t}, t=1,\dots,24$, um damit das erste MILP zu generieren und lösen es. Die optimale Lösung des MILPs bezeichnen wir mit
+$$
+  p_{\tau, \tau+t},\quad $t=1,\dots,24
+$$ 
+
+bedeutet: der vorhergesagte Preis für den Zeitpunkt $\tau+t$ basierend auf der Vorhersage zum Zeitpunkt $\tau$. Der Buchstabe $\tau$ bezeichnet also die real ablaufende Zeit, in der neue Vorhersagen eintreffen und die Berechnungen gestartet werden, während $t$ weiterhin die vorausschauende, diskretisierte Zeit im MILP bezeichnet (wie zu Anfang des Kapitels eingeführt).
+
+Die Strategie, die wir nun verfolgen, um das Energiespeicherproblem zu lösen, lässt sich wie folgt skizzieren: Wir befinden uns am Zeitpunkt $\tau=0$. Wir benutzen die aktuelle 24-Stunden-Preisvorhersage $p_{0,0+t}, t=1,\dots,24$, um damit das erste MILP zu generieren. Wir lösen es das MILP und bezeichnen die optimale Lösung mit
 \begin{align*}
     s_{0,t}^{\star},s_{0,t}^{-\star},s_{0,t}^{+\star},k_{0,t}^{\star},\quad t=1,\dots,24 
 \end{align*}
-Wir beginnen nun damit, die Lösung umzusetzen, d.h. wir setzen die Entscheidung um, die durch die optimale Lösung des MILPs für den ersten Zeitschritt repräsentiert wird
+Bis hierher haben wir nur die Situation aus Abschnitt {ref}`subsec:energiespeicher` beschrieben, nur mit einem zusätzlichen Zeitindex.
+
+Wenn wir das Problem in der Praxis lösen, würden wir nun damit beginnen, die Lösung umzusetzen, d.h. wir setzen die Entscheidung um, die durch die optimale Lösung des MILPs für den *ersten* Zeitschritt repräsentiert wird
 \begin{align*}
 s_{0,1}^{\star},s_{0,1}^{-\star},s_{0,1}^{+\star},k_{0,1}^{\star}
 \end{align*}
-Nun schreitet die Zeit voran, d.h. aus $\tau=0$ wird $\tau=1$. Wir erhalten nun eine neue 24-Stunden-Preisvorhersage $p_{1,1+t}, t=1,\dots,24$. Nun stellen wir das zweite MILP auf mit der aktualisierten Vorhersage als Problemdaten und lösen es. Aus der Lösung dieses MILP verwenden wir wieder nur den Teil, der sich auf die nächste Zeitperiode, in dem Fall $\tau=2$ bezieht, nämlich:
+Nun schreitet die Zeit voran, d.h. aus $\tau=0$ wird $\tau=1$. Von unserer Data Science Abteilung erhalten wir eine neue 24-Stunden-Preisvorhersage $p_{1,1+t}, t=1,\dots,24$. Nun stellen wir das zweite MILP auf mit der aktualisierten Vorhersage als Problemdaten und lösen es. 
+
+*Wichtig*: Alle Werte, die sich auf die Vergangenheit beziehen (also z.B. $p_{1,1}$), sind jetzt keine Optimierungsvariablen mehr (wir können ja die Vergangenheit nicht mehr ändern), sondern feste Werte.
+
+Aus der Lösung dieses MILP verwenden wir wieder nur den Teil, der sich auf die nächste Zeitperiode, in dem Fall $\tau=2$ bezieht, nämlich:
 \begin{align*}
 s_{1,2}^{\star},s_{1,2}^{-\star},s_{1,2}^{+\star},k_{1,2}^{\star}
 \end{align*}
@@ -105,8 +222,6 @@ Wir halten fest:
 - Von jeder Lösung nutzen wir nur den Teil, der sich auf die nächste Zeitperiode bezieht, also $s_{\tau,\tau+1}^{\star},s_{\tau,\tau+1}^{-\star},s_{\tau,\tau+1}^{+\star},k_{\tau,\tau+1}^{\star}$. Der Rest der Lösung wird nicht verwendet!
 - Der Grundgedanke ist, dass so für eine Entscheidung immer die aktuellsten (und damit in der Regel besten) Vorhersagedaten verwendet werden.
 - Ein solches Problem wird auch als *sequenzielles Entscheidungsproblem* bezeichnet, ein Problem der Form "Entscheidung, Information, Entscheidung, Information, ...". 
-
-% Policy, sequentielles Entscheidungsproblem. Keine optimale Lösung!
 
 ````{prf:algorithm} Sequenzielle Optimierung auf rollierendem Zeitfenster
 :label: alg:mpc
@@ -148,7 +263,7 @@ Dieser und ähnliche Ansätze sind in der industriellen Praxis weit verbreitet. 
 - Der allgemeine Begriff für Verfahren, mit denen man sequenzielle Entscheidungsprobleme unter Unsicherheiten löst lautet *Policy*. {prf:ref}`alg:mpc` ist ein Beispiel für eine Policy.
 - Da das Zeitfenster immer für eine feste Zeitperiode in die Zukunft geht, reicht es natürlich über den Zeithorizont $t=1,\dots,T$ im ursprünglichen Problem hinaus. Sollte das nicht funktionieren, da der Prozess z.B. eine feste Endzeit hat, so kann das Zeitfenster auch in jedem Schritt verkleinert werden (das letzte MILP besteht dann nur noch aus einem Zeitschritt).
 - In vielen Anwendungen sind Vorhersagen für die nahe Zukunft sehr gut und werden schlechter, je weiter sie in der Zukunft liegen. Falls die Vorhersage auch für den ersten Zeitschritt $\tau+1$ falsch ist, kann es passieren, dass die vom Löser berechnete Lösung (physikalisch) unzulässig ist. Am Beispiel des Energiespeicherproblems wäre das der Fall, wenn die Vorhersage für den Strombedarf ungenau ist. Dann wäre die Bilanzgleichung $k_1^{\star} - s_1^{+\star} + s_1^{-\star}= d_1$ nicht erfüllt, was bedeutet, dass entweder der Bedarf nicht gedeckt würde (Stomausfälle) oder zu mehr als 100\% gedeckt wäre (zu viel Strom im Netz, was zu Schäden an der Infrastruktur führen kann). In der Realität müssten dann eine oder mehrere der Variablen $k_1^{\star}, s_1^{+\star}, s_1^{-\star}$ angepasst werden. 
-- Die Lösung $\bar{\v x}^{\star}_{\tau}$ wird zwar auf Basis von optimalen Lösungen von MILPs konstruiert, sie ist aber selbst *keine* optimale Lösung des übergeordneten sequenziellen Entscheidungsproblems (eine sog. optimale Policy).
+- Die Lösung $\bar{\v x}^{\star}_{\tau}$ wird zwar auf Basis von optimalen Lösungen von MILPs konstruiert, sie ist aber selbst *keine* optimale Lösung des übergeordneten sequenziellen Entscheidungsproblems (eine sog. optimale Policy). In vielen Fällen ist diese "optimale Policy" aber eher theoretischer Natur, d.h. sie lässt sich nicht so ohne weiteres berechnen. 
 
 
 ### Evaluation der Lösung
