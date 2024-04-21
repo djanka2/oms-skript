@@ -14,7 +14,12 @@ parts:
         sections:
         - file: 02_Transportproblem.ipynb
       - file: 03_Ganzzahlige_Probleme
+        sections:
+        - file: 03_Standortprobleme.ipynb
+        - file: 03_Zuordnung_AWP.ipynb
       - file: 04_Dynamische_Probleme
+        sections:
+          - file: 04_Laststeuerung.ipynb
       - file: 05_Praxisaspekte
   - caption: Ableitungsbasierte Optimierung
     chapters:

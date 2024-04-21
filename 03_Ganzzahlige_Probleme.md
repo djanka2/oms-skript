@@ -473,7 +473,7 @@ Viele Echtweltprobleme zeichnen sich durch eine große Anzahl an zu modellierend
 Die Standardprobleme aus dem letzten Kapitel bilden bereits einen kleinen Fundus an Bausteinen für die Modellierung. 
 Im Folgenden werden einige wiederkehrende Aspekte zusammen mit einer möglichen Lösung präsentiert. Dies knüpft an {ref}`subsubsec:tricks1` an mit dem Unterschied, dass für die nächsten Tricks immer ganzzahlige (binäre) Variablen benötigt werden.
 
-
+(subsec:logikVariablen)=
 ### Logische Bedingungen an Variablen
 
 (subsubsec:logikBeispiel)=
@@ -489,6 +489,8 @@ Es gibt $5$ Maschinen $A,B,C,D, E$, die jeweils ein- oder ausgeschaltet sein kö
 ````
 
 Wir übersetzen dies in einen logischen Ausdruck mit den logischen Variablen $A,B,C,D,E$, die die Werte *wahr* und *falsch* annehmen können.
+
+% TODO Wahrheitstafel für logische Junktoren (und Bezeichner) einfügen
 
 ````{prf:example}
 Variablen $A,B,C,D,E$ mit der Bedeutung
@@ -846,7 +848,7 @@ Wie groß muss dann $M$ mindestens sein? Es gilt auf jeden Fall
 1&\leq x_1\leq 4\\
 0&\leq x_2\leq 4
 \end{align*}
-Damit ist $M=4$ groß genug.
+Damit ist $M=3$ groß genug.
 ````
 
 ````{note}
@@ -1120,7 +1122,7 @@ kann durch Einführen einer Variable $y$ und folgende Bedingungen an $y$ lineari
    \end{align*}
    Damit ist sichergestellt, dass $y=0$, sobald (mindestens) eines der $b_i=0$.
 2. \begin{align*}
-   y\geq \sum_{i=1}^k b_i-k+1,\quad i=1,\dots, k
+   y\geq \sum_{i=1}^k b_i-k+1.
    \end{align*}
    Damit ist sichergestellt, dass $y=1$, wenn alle $b_i=1$.
 
@@ -1293,18 +1295,7 @@ d_{max}=\sum_{i \in A}d_i.
 \end{align*}
 
 
-%## Anwendung: Sudoku
-% TODO
-%In Vorlesung zusammen entwickeln, als Übung coden lassen (Notebook vervollständigen).
 
-%## Anwendung: Studierende auf Projekte verteilen
-% TODO
-%AWP Notebook, enthält BigM
-% Aufgabe dazu: https://colab.research.google.com/github/Gurobi/modeling-examples/blob/master/milp_tutorial/introduction_to_modeling.ipynb
-
-%## Anwendung: EV Charger Placement
-% TODO
-%Musterlösung, enthält BigM
 % Aufgabe dazu: https://colab.research.google.com/github/Gurobi/modeling-examples/blob/master/facility_location/facility_location.ipynb#scrollTo=8RUukodHFOMf
 
 %## Anwendung: Payments
