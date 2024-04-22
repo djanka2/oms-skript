@@ -195,6 +195,7 @@
 </li>
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">4. Zeitabhängige Probleme</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="04_Laststeuerung.html">4.4. Anwendung: Laststeuerung in der Stahlproduktion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_Speicherproblem_rollierend.html">4.5. Anwendung: Energiespeicherproblem mit rollierendem Zeitfenster</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="05_Praxisaspekte.html">5. Praxisaspekte beim Lösen von gemischt-ganzzahligen Programmen</a></li>
@@ -403,9 +404,9 @@ document.write(`
 <h3><span class="section-number">4.1.1. </span>Problemdaten und Indexmengen<a class="headerlink" href="#problemdaten-und-indexmengen" title="Link to this heading">#</a></h3>
 <p>Es sind folgende Daten gegeben:</p>
 <ul class="simple">
-<li><p>Ein betrachteter Zeithorizont <span class="math notranslate nohighlight">\(\{1,2, \ldots, 24\}\)</span> von einem Tag.</p></li>
-<li><p>Der Verbrauch <span class="math notranslate nohighlight">\(d_t\)</span> zum Zeitpunkt <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
-<li><p>Der Strompreis <span class="math notranslate nohighlight">\(p_t\)</span> zum Zeitpunkt <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
+<li><p>Ein betrachteter Zeithorizont von einem Tag, gegeben als 24 einstündige Zeitperioden <span class="math notranslate nohighlight">\(H=\{1,2, \ldots, 24\}\)</span>.</p></li>
+<li><p>Der Verbrauch <span class="math notranslate nohighlight">\(d_t\)</span> im Zeitintervall <span class="math notranslate nohighlight">\(t\in H\)</span>.</p></li>
+<li><p>Der Strompreis <span class="math notranslate nohighlight">\(p_t\)</span> im Zeitintervall <span class="math notranslate nohighlight">\(t\in H\)</span>.</p></li>
 <li><p>Die Kapazität <span class="math notranslate nohighlight">\(s_{max}\)</span> des installierten Batteriespeichers.</p></li>
 <li><p>Der initiale Füllstand <span class="math notranslate nohighlight">\(s_0\)</span> des installierten Batteriespeichers.</p></li>
 </ul>
@@ -414,10 +415,10 @@ document.write(`
 <h3><span class="section-number">4.1.2. </span>Entscheidungsvariablen<a class="headerlink" href="#entscheidungsvariablen" title="Link to this heading">#</a></h3>
 <p>Wir nutzen folgende Entscheidungsvariablen</p>
 <ul class="simple">
-<li><p>Den Strombezug <span class="math notranslate nohighlight">\(k_t\)</span> vom Netzbetreiber zum Zeitpunkt <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
-<li><p>Die Einspeicherung <span class="math notranslate nohighlight">\(s^+_t\)</span> in den Batteriespeicher zum Zeitpunkt <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
-<li><p>Die Ausspeicherung <span class="math notranslate nohighlight">\(s^-_t\)</span> aus dem Batteriespeicher zum Zeitpunkt <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
-<li><p>Den Speicherstand <span class="math notranslate nohighlight">\(s_t\)</span> zum Zeitpunkt <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
+<li><p>Den Strombezug <span class="math notranslate nohighlight">\(k_t\)</span> vom Netzbetreiber im Zeitintervall <span class="math notranslate nohighlight">\(t\in H\)</span>.</p></li>
+<li><p>Die Einspeicherung <span class="math notranslate nohighlight">\(s^+_t\)</span> in den Batteriespeicher im Zeitintervall <span class="math notranslate nohighlight">\(t\in H\)</span>.</p></li>
+<li><p>Die Ausspeicherung <span class="math notranslate nohighlight">\(s^-_t\)</span> aus dem Batteriespeicher im Zeitintervall <span class="math notranslate nohighlight">\(t\in H\)</span>.</p></li>
+<li><p>Den Speicherstand <span class="math notranslate nohighlight">\(s_t\)</span> im Zeitintervall <span class="math notranslate nohighlight">\(t\in H\)</span>.</p></li>
 </ul>
 <p>Die Variablen müssen für jedes Zeitintervall <span class="math notranslate nohighlight">\(t\)</span> eingeführt werden. In diesem Beispiel sind das insgesamt <span class="math notranslate nohighlight">\(4\cdot24=96\)</span> Variablen.</p>
 </section>
@@ -431,7 +432,7 @@ document.write(`
 </section>
 <section id="nebenbedingungen">
 <h3><span class="section-number">4.1.4. </span>Nebenbedingungen<a class="headerlink" href="#nebenbedingungen" title="Link to this heading">#</a></h3>
-<p>Für jeden Zeitschritt müssen neben den vier Variablen (<span class="math notranslate nohighlight">\(s_t,s_t^-,s_t^+,k_t\)</span>) zwei Gleichungen eingeführt werden. Es handelt sich um sog. <em>Bilanzgleichungen</em>, die die zeitliche Veränderung des Speicherstandes sowie die Deckung des Bedarfes zu jedem Zeitpunkt beschreiben. Die Modellierung kann wie folgt zusammengefasst werden:</p>
+<p>Für jede Zeitperiode müssen neben den vier Variablen (<span class="math notranslate nohighlight">\(s_t,s_t^-,s_t^+,k_t\)</span>) zwei Gleichungen eingeführt werden. Es handelt sich um sog. <em>Bilanzgleichungen</em>, die die zeitliche Veränderung des Speicherstandes sowie die Deckung des Bedarfes zu jedem Zeitpunkt beschreiben. Die Modellierung kann wie folgt zusammengefasst werden:</p>
 <figure class="align-default" id="fig-batterie2">
 <a class="reference internal image-reference" href="_images/BeispielBatterie2.png"><img alt="_images/BeispielBatterie2.png" src="_images/BeispielBatterie2.png" style="width: 800px;" /></a>
 </figure>
