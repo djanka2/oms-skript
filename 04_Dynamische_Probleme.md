@@ -20,18 +20,18 @@ Wir nutzen unsere bewährte Vorgehensweise und modellieren nacheinander Problemd
 
 ### Problemdaten und Indexmengen
 Es sind folgende Daten gegeben:
-- Ein betrachteter Zeithorizont $\{1,2, \ldots, 24\}$ von einem Tag.
-- Der Verbrauch $d_t$ zum Zeitpunkt $t$. 
-- Der Strompreis $p_t$ zum Zeitpunkt $t$.
+- Ein betrachteter Zeithorizont von einem Tag, gegeben als 24 einstündige Zeitperioden $H=\{1,2, \ldots, 24\}$.
+- Der Verbrauch $d_t$ im Zeitintervall $t\in H$. 
+- Der Strompreis $p_t$ im Zeitintervall $t\in H$.
 - Die Kapazität $s_{max}$ des installierten Batteriespeichers.  
 - Der initiale Füllstand $s_0$ des installierten Batteriespeichers.
 
 ### Entscheidungsvariablen
 Wir nutzen folgende Entscheidungsvariablen
-- Den Strombezug $k_t$ vom Netzbetreiber zum Zeitpunkt $t$.
-- Die Einspeicherung $s^+_t$ in den Batteriespeicher zum Zeitpunkt $t$.
-- Die Ausspeicherung $s^-_t$ aus dem Batteriespeicher zum Zeitpunkt $t$.
-- Den Speicherstand $s_t$ zum Zeitpunkt $t$.
+- Den Strombezug $k_t$ vom Netzbetreiber im Zeitintervall $t\in H$.
+- Die Einspeicherung $s^+_t$ in den Batteriespeicher im Zeitintervall $t\in H$.
+- Die Ausspeicherung $s^-_t$ aus dem Batteriespeicher im Zeitintervall $t\in H$.
+- Den Speicherstand $s_t$ im Zeitintervall $t\in H$.
 
 Die Variablen müssen für jedes Zeitintervall $t$ eingeführt werden. In diesem Beispiel sind das insgesamt $4\cdot24=96$ Variablen.
 
@@ -43,7 +43,7 @@ $$
 $$
 
 ### Nebenbedingungen
-Für jeden Zeitschritt müssen neben den vier Variablen ($s_t,s_t^-,s_t^+,k_t$) zwei Gleichungen eingeführt werden. Es handelt sich um sog. *Bilanzgleichungen*, die die zeitliche Veränderung des Speicherstandes sowie die Deckung des Bedarfes zu jedem Zeitpunkt beschreiben. Die Modellierung kann wie folgt zusammengefasst werden:
+Für jede Zeitperiode müssen neben den vier Variablen ($s_t,s_t^-,s_t^+,k_t$) zwei Gleichungen eingeführt werden. Es handelt sich um sog. *Bilanzgleichungen*, die die zeitliche Veränderung des Speicherstandes sowie die Deckung des Bedarfes zu jedem Zeitpunkt beschreiben. Die Modellierung kann wie folgt zusammengefasst werden:
 
 ```{figure} ./bilder/BeispielBatterie2.png
 :name: fig:Batterie2

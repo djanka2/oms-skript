@@ -20,6 +20,7 @@ parts:
       - file: 04_Dynamische_Probleme
         sections:
           - file: 04_Laststeuerung.ipynb
+          - file: 04_Speicherproblem_rollierend.ipynb
       - file: 05_Praxisaspekte
   - caption: Ableitungsbasierte Optimierung
     chapters:
