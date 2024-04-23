@@ -97,7 +97,7 @@ H=\{1,2,\dots,365\}
 $$
 
 Gegeben sind die folgenden Daten:
-- Nachfrage $e_t, t\in H$
+- Erwarteter Gewinn $e_t, t\in H$
 - Personalkosten $k$
 
 
@@ -146,6 +146,7 @@ $$
   1-d_{t-1}\leq 1-d_t + f_t 
 $$
 bzw.
+
 $$
   d_{t}\leq d_{t-1} + f_t 
 $$
