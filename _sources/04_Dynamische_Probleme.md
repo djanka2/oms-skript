@@ -183,18 +183,34 @@ Speziell für den Fall von zeitabhängigen Problemen, die man als MILP formulier
 Als erstens nehmen wir eine Änderung an der Notation des betrachteten Zeitintervalls vor: Oben haben wir das Zeitintervall von 24 Stunden durch die Zeitpunkte $t=1,2,\dots,24$ beschrieben, d.h. zum Zeitpunkt der Berechnung befinden wir uns am Zeitpunkt $t=0$ (oder davor). Allgemeiner: wenn wir die Berechnung zu irgendeinem Zeitpunkt $t=\tau$ ausführen, wären die Zeitpunkte der 24-Stunden-Vorschauperiode $t=\tau+1, \tau+2,\dots,\tau+24$. Wir machen die (realistische) Annahme, dass wir zu jedem Zeitpunkt $\tau$ eine aktualisierte 24-Stunden-Vorhersage für den Strompreis erhalten. Das bedeutet insbesondere, dass es für einen Zeitpunkt im Laufe der Zeit unterschiedliche Vorhersagen gibt (nämlich insgesamt 24 Stück).
 
 
-BILD mit unterschiedlichen Forecasts mit unterschiedlichen Zeithorizonten
+```{figure} ./bilder/price_forecasts.png
+:name: fig:forecasts
+:width: 600px
+
+Preis-Forecasts die an unterschiedlichen Zeitpunkten $\tau$ gemacht wurden.
+```
 
 
 Wir müssen diese unterschiedlichen Vorhersagen unterscheiden. Dafür führen wir einen zweiten Zeitindex ein, der beschreibt, an welchem Zeitpunkt die Vorhersage gemacht wurde. Die Größe 
 
 $$
-  p_{\tau, \tau+t},\quad $t=1,\dots,24
+  p_{\tau, \tau+t},\quad t=1,\dots,24
 $$ 
 
 bedeutet: der vorhergesagte Preis für den Zeitpunkt $\tau+t$ basierend auf der Vorhersage zum Zeitpunkt $\tau$. Der Buchstabe $\tau$ bezeichnet also die real ablaufende Zeit, in der neue Vorhersagen eintreffen und die Berechnungen gestartet werden, während $t$ weiterhin die vorausschauende, diskretisierte Zeit im MILP bezeichnet (wie zu Anfang des Kapitels eingeführt).
 
-Die Strategie, die wir nun verfolgen, um das Energiespeicherproblem zu lösen, lässt sich wie folgt skizzieren: Wir befinden uns am Zeitpunkt $\tau=0$. Wir benutzen die aktuelle 24-Stunden-Preisvorhersage $p_{0,0+t}, t=1,\dots,24$, um damit das erste MILP zu generieren. Wir lösen es das MILP und bezeichnen die optimale Lösung mit
+Die Strategie, die wir nun verfolgen, um das Energiespeicherproblem zu lösen, lässt sich wie folgt skizzieren: Wir befinden uns am Zeitpunkt $\tau=0$. Wir benutzen die aktuelle 24-Stunden-Preisvorhersage $p_{0,0+t}, t=1,\dots,24$, um damit das erste MILP zu generieren. Mit zweitem Zeitindex $\tau$ lautet es
+
+\begin{alignat*}{5}
+\min_{s_{0,t},s_{0,t}^-,s_{0,t}^+,k_{0,t}} & \quad  &   \sum_{t=1}^{24}p_{0,t}k_{0,t} &          & & \\[4mm]
+\text{s.t. } & & k_{0,t} - s_{0,t}^+ + s_{0,t}^-  & =  & \quad d_{0,t} & \quad\quad & & \forall t= 1, \ldots, 24 \\[2mm]
+& & s_{0,t-1} + s_{0,t}^+ - s_{0,t}^-  & = & s_{0,t} & & & \forall t= 1, \ldots, 24 \\[3mm]
+& & s_{0,t} & \leq & \quad s_{max} & && \forall t= 1, \ldots, 24. \\
+& & s_{0,t} & \geq & \quad 0 & && \forall t= 1, \ldots, 24. \\
+& & k_{0,t} & \geq & \quad 0 & && \forall t= 1, \ldots, 24.
+\end{alignat*}
+
+ Wir lösen das MILP und bezeichnen die optimale Lösung mit
 \begin{align*}
     s_{0,t}^{\star},s_{0,t}^{-\star},s_{0,t}^{+\star},k_{0,t}^{\star},\quad t=1,\dots,24 
 \end{align*}
@@ -204,23 +220,37 @@ Wenn wir das Problem in der Praxis lösen, würden wir nun damit beginnen, die L
 \begin{align*}
 s_{0,1}^{\star},s_{0,1}^{-\star},s_{0,1}^{+\star},k_{0,1}^{\star}
 \end{align*}
-Nun schreitet die Zeit voran, d.h. aus $\tau=0$ wird $\tau=1$. Von unserer Data Science Abteilung erhalten wir eine neue 24-Stunden-Preisvorhersage $p_{1,1+t}, t=1,\dots,24$. Nun stellen wir das zweite MILP auf mit der aktualisierten Vorhersage als Problemdaten und lösen es. 
+Nun schreitet die Zeit voran, d.h. aus $\tau=0$ wird $\tau=1$. Von unserer Data Science Abteilung erhalten wir eine neue 24-Stunden-Preisvorhersage $p_{1,1+t}, t=1,\dots,24$. Nun stellen wir das zweite MILP auf mit der aktualisierten Vorhersage als Problemdaten und lösen es:
 
-*Wichtig*: Alle Werte, die sich auf die Vergangenheit beziehen (also z.B. $p_{1,1}$), sind jetzt keine Optimierungsvariablen mehr (wir können ja die Vergangenheit nicht mehr ändern), sondern feste Werte.
+\begin{alignat*}{5}
+\min_{s_{1,1+t},s_{1,1+t}^-,s_{1,1+t}^+,k_{1,1+t}} & \quad  &   \sum_{t=1}^{24}p_{1,1+t}k_{1,1+t} &          & & \\[4mm]
+\text{s.t. } & & k_{1,1+t} - s_{1,1+t}^+ + s_{1,1+t}^-  & =  & \quad d_{1,1+t} & \quad\quad & & \forall t= 1, \ldots, 24 \\[2mm]
+& & s_{1,t} + s_{1,1+t}^+ - s_{1,1+t}^-  & = & s_{1,1+t} & & & \forall t= 1, \ldots, 24 \\[3mm]
+& & s_{1,1} & = & \quad s_{0,1}^{\star} & && \forall t= 1, \ldots, 24. \\
+& & s_{1,1+t} & \leq & \quad s_{max} & && \forall t= 1, \ldots, 24. \\
+& & s_{1,1+t} & \geq & \quad 0 & && \forall t= 1, \ldots, 24. \\
+& & k_{1,1+t} & \geq & \quad 0 & && \forall t= 1, \ldots, 24.
+\end{alignat*}
+
+*Wichtig*: Alle Werte, die sich auf die Vergangenheit beziehen (also z.B. $s_{1,1}$), sind jetzt keine Optimierungsvariablen mehr (wir können ja die Vergangenheit nicht mehr ändern), sondern feste Werte. Insbesondere ist der initiale Lagerbestand für das neue MILP $s_{1,1} = s_{0,1}^{\star}$.
 
 Aus der Lösung dieses MILP verwenden wir wieder nur den Teil, der sich auf die nächste Zeitperiode, in dem Fall $\tau=2$ bezieht, nämlich:
 \begin{align*}
 s_{1,2}^{\star},s_{1,2}^{-\star},s_{1,2}^{+\star},k_{1,2}^{\star}
 \end{align*}
-Nun schreitet die Zeit wieder voran, d.h. aus $\tau=1$ wird $\tau=2$, wir erhalten eine neue Vorhersage, stellen das dritte MILP auf, lösen es, implementieren den ersten Zeitschritt der Lösung und so weiter. 
+Nun schreitet die Zeit wieder voran, d.h. aus $\tau=1$ wird $\tau=2$, wir erhalten eine neue Vorhersage, stellen das dritte MILP auf, lösen es, implementieren den ersten Zeitschritt der Lösung und so weiter. Als Lösung erhalten des Optimierungsproblems nehmen wir von jedem gelösten MILP den ersten Zeitschritt:
 
-
-BILD mit MPC Schema
-
+$$
+s_{0,1}^{\star},s_{0,1}^{-\star},s_{0,1}^{+\star},k_{0,1}^{\star},\\
+s_{1,2}^{\star},s_{1,2}^{-\star},s_{1,2}^{+\star},k_{1,2}^{\star},\\
+s_{2,3}^{\star},s_{2,3}^{-\star},s_{2,3}^{+\star},k_{2,3}^{\star},\\
+\vdots\\
+s_{23,24}^{\star},s_{23,24}^{-\star},s_{23,24}^{+\star},k_{23,24}^{\star}.
+$$
 
 Wir halten fest:
 - Um das Energiespeicherproblem zu lösen, lösen wir eine Serie von 24 MILPs, die sich in den Problemdaten (nämlich der jeweils aktuellen 24-Stunden-Preisvorhersage) unterscheiden
-- Von jeder Lösung nutzen wir nur den Teil, der sich auf die nächste Zeitperiode bezieht, also $s_{\tau,\tau+1}^{\star},s_{\tau,\tau+1}^{-\star},s_{\tau,\tau+1}^{+\star},k_{\tau,\tau+1}^{\star}$. Der Rest der Lösung wird nicht verwendet!
+- Von jeder Lösung nutzen wir nur den Teil, der sich auf die nächste Zeitperiode bezieht, also $s_{\tau,\tau+1}^{\star},s_{\tau,\tau+1}^{-\star},s_{\tau,\tau+1}^{+\star},k_{\tau,\tau+1}^{\star}$ für $\tau=1,\dots,24$. Der Rest der Lösung wird nicht verwendet!
 - Der Grundgedanke ist, dass so für eine Entscheidung immer die aktuellsten (und damit in der Regel besten) Vorhersagedaten verwendet werden.
 - Ein solches Problem wird auch als *sequenzielles Entscheidungsproblem* bezeichnet, ein Problem der Form "Entscheidung, Information, Entscheidung, Information, ...". 
 
