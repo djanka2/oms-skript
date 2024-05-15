@@ -32,9 +32,9 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=ca93fcec" />
     <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -193,7 +193,11 @@
 <li class="toctree-l2"><a class="reference internal" href="03_Zuordnung_AWP.html">3.9. Anwendung: Studierende auf Projekte verteilen</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="04_Dynamische_Probleme.html">4. Zeitabhängige Probleme</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="04_Dynamische_Probleme.html">4. Zeitabhängige Probleme</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="04_Laststeuerung.html">4.4. Anwendung: Laststeuerung in der Stahlproduktion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_Speicherproblem_rollierend.html">4.5. Anwendung: Energiespeicherproblem mit rollierendem Zeitfenster</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="05_Praxisaspekte.html">5. Praxisaspekte beim Lösen von gemischt-ganzzahligen Programmen</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Ableitungsbasierte Optimierung</span></p>
@@ -387,8 +391,8 @@ document.write(`
 <section id="grundbegriffe">
 <h2><span class="section-number">2.1. </span>Grundbegriffe<a class="headerlink" href="#grundbegriffe" title="Link to this heading">#</a></h2>
 <p>Ein <em>lineares Programm</em> ist ein Optimierungsproblem, bei dem eine lineare Zielfunktion unter linearen Nebenbedingungen optimiert werden soll. Ein Beispiel für lineares Optimierungsproblem haben wir bereits in Abschnitt <a class="reference internal" href="01_Grundbegriffe.html#sec-production-example"><span class="std std-ref">Beispiel: Ein Produktionsplanungsproblem</span></a> gesehen. Es lautete:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-6930fb86-9d1b-45e1-a3bf-05c05b31752e">
-<span class="eqno">(2.1)<a class="headerlink" href="#equation-6930fb86-9d1b-45e1-a3bf-05c05b31752e" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
+<div class="amsmath math notranslate nohighlight" id="equation-f0d5f371-9c2c-4ae3-84a1-9b07430a0c5e">
+<span class="eqno">(2.1)<a class="headerlink" href="#equation-f0d5f371-9c2c-4ae3-84a1-9b07430a0c5e" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
 \max_{x_1, x_2} &amp; \quad  &amp;   2x_1+2x_2 &amp; &amp; &amp; \\[2mm]
 \text{s.t. } &amp; &amp;  5x_1+10x_2&amp;\leq 50\\
              &amp; &amp;  12x_1+8x_2&amp;\leq 72\\
@@ -462,8 +466,8 @@ Es enthält beliebig viele Gleichungen, <span class="math notranslate nohighligh
 <div class="proof example admonition" id="example-2">
 <p class="admonition-title"><span class="caption-number">Example 2.1 </span> (LP, welches nicht in Standardform vorliegt)</p>
 <section class="example-content" id="proof-content">
-<div class="amsmath math notranslate nohighlight" id="equation-ff827902-ab17-4ae9-8ef1-dd77c0ab374f">
-<span class="eqno">(2.2)<a class="headerlink" href="#equation-ff827902-ab17-4ae9-8ef1-dd77c0ab374f" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
+<div class="amsmath math notranslate nohighlight" id="equation-ac8e737a-cdc2-4567-b969-9efe9a0a2ef3">
+<span class="eqno">(2.2)<a class="headerlink" href="#equation-ac8e737a-cdc2-4567-b969-9efe9a0a2ef3" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
 \max_{x_1, x_2} &amp; \quad  &amp;  2x_1-3x_2 &amp; &amp; &amp; \\[2mm]
 \text{s.t. } &amp; &amp;  3x_1+x_2&amp;\leq 3\\
              &amp; &amp;  -x_1+5x_2&amp;\geq 7\\
@@ -591,8 +595,8 @@ a_{m1} x_1+\ldots +a_{mp} x_n	&amp;  &amp; &amp;&amp;  \red{+x_{n+m_2}} &amp; =b
 <div class="proof example admonition" id="example-7">
 <p class="admonition-title"><span class="caption-number">Example 2.6 </span></p>
 <section class="example-content" id="proof-content">
-<div class="amsmath math notranslate nohighlight" id="equation-cf6e32da-4e27-4c88-8759-63405a6bb50e">
-<span class="eqno">(2.3)<a class="headerlink" href="#equation-cf6e32da-4e27-4c88-8759-63405a6bb50e" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
+<div class="amsmath math notranslate nohighlight" id="equation-ccf2f5ad-23c8-451f-9023-44906577fca4">
+<span class="eqno">(2.3)<a class="headerlink" href="#equation-ccf2f5ad-23c8-451f-9023-44906577fca4" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
 \min_{x_1, x_2^+, x_2^-, x_3, x_4} &amp; \quad  &amp;  \bmat -2,&amp;3,&amp;-3,&amp;0,&amp;0 \emat\bmat x_1\\x_2^+\\x_2^-\\x_3\\x_4\emat &amp; &amp; &amp; \\[2mm]
 \text{s.t. } &amp; &amp;  \bmat 3&amp;1&amp;-1&amp;1&amp;0\\ 1&amp;-5&amp;5&amp;0&amp;1\\ 1&amp;1&amp;-1&amp;0&amp;0 \emat\bmat x_1\\x_2^+\\x_2^-\\x_3\\x_4\emat&amp;=\bmat 3\\-7\\1\emat\\
              &amp; &amp; (x_1,x_2^+,x_2^-,x_3,x_4)&amp;\geq \v 0
@@ -638,8 +642,8 @@ Es sei <span class="math notranslate nohighlight">\(P\)</span> die Menge der zul
 <section id="grafisches-losen">
 <h2><span class="section-number">2.4. </span>Grafisches Lösen<a class="headerlink" href="#grafisches-losen" title="Link to this heading">#</a></h2>
 <p>Wir betrachten noch einmal das Produktionsbeispiel <a class="reference internal" href="01_Grundbegriffe.html#equation-eq-prodopt">(1.1)</a>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7e994912-077f-4869-bae4-7a0713817239">
-<span class="eqno">(2.4)<a class="headerlink" href="#equation-7e994912-077f-4869-bae4-7a0713817239" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
+<div class="amsmath math notranslate nohighlight" id="equation-ce1e6da7-b4c6-4d90-8257-ac6f89e08662">
+<span class="eqno">(2.4)<a class="headerlink" href="#equation-ce1e6da7-b4c6-4d90-8257-ac6f89e08662" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
 \max_{x_1, x_2} &amp; \quad  &amp;   2x_1+2x_2 &amp; &amp; &amp; \\[2mm]
 \text{s.t. } &amp; &amp;  5x_1+10x_2&amp;\leq 50\\
              &amp; &amp;  12x_1+8x_2&amp;\leq 72\\
@@ -771,8 +775,8 @@ Um so erstaunlicher ist es, dass moderne Varianten des Simplex-Verfahrens Proble
 </div>
 </div>
 <p>Formulierung in mathematischer Form</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a4a135f0-3520-41e5-98c3-2d12969070f6">
-<span class="eqno">(2.5)<a class="headerlink" href="#equation-a4a135f0-3520-41e5-98c3-2d12969070f6" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
+<div class="amsmath math notranslate nohighlight" id="equation-e438fb29-9fe7-4c48-a20f-ed5d653cf6ac">
+<span class="eqno">(2.5)<a class="headerlink" href="#equation-e438fb29-9fe7-4c48-a20f-ed5d653cf6ac" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
 \max_{x_1, x_2} &amp; \quad  &amp;   2x_1+2x_2 &amp; &amp; &amp; \\[2mm]
 \text{s.t. } &amp; &amp;  5x_1+10x_2&amp;\leq 50\\
              &amp; &amp;  12x_1+8x_2&amp;\leq 72\\
@@ -861,7 +865,7 @@ Coefficient statistics:
   Bounds range     [0e+00, 0e+00]
   RHS range        [2e+01, 7e+01]
 Presolve removed 2 rows and 0 columns
-Presolve time: 0.00s
+Presolve time: 0.01s
 Presolved: 2 rows, 2 columns, 4 nonzeros
 
 Iteration    Objective       Primal Inf.    Dual Inf.      Time
@@ -931,8 +935,8 @@ Sie garantieren, dass <span class="math notranslate nohighlight">\(z\)</span> gr
 <p class="admonition-title"><span class="caption-number">Example 2.8 </span> (Min Max (Forsetzung))</p>
 <section class="example-content" id="proof-content">
 <p>Wir führen eine neue Variable <span class="math notranslate nohighlight">\(y\)</span> und 4 Nebenbedingungen ein. Der zur <span class="math notranslate nohighlight">\(\min\max\)</span>-Formulierung <a class="reference internal" href="#equation-eq-minmax">(2.6)</a> äquivalente Teile eines linearen Programms lautet:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-4410989f-287d-41f5-b4fc-e8ef929b7430">
-<span class="eqno">(2.7)<a class="headerlink" href="#equation-4410989f-287d-41f5-b4fc-e8ef929b7430" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
+<div class="amsmath math notranslate nohighlight" id="equation-4762c51c-ea8d-49b1-bde6-f39812377290">
+<span class="eqno">(2.7)<a class="headerlink" href="#equation-4762c51c-ea8d-49b1-bde6-f39812377290" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
 \min_{s_1,d_1,s_2,d_2,s_3,d_3,s_4,d_4,y} &amp; \quad  &amp;   y &amp; &amp; &amp; \\[2mm]
 \text{s.t. } &amp; &amp;  s_1+d_1&amp;\leq y\\
              &amp; &amp;  s_2+d_2&amp;\leq y\\
