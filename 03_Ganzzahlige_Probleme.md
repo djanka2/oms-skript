@@ -1019,10 +1019,10 @@ Die Reformulierung als MILP ist etwas komplizierter als im $\min \max$ Fall. Wir
 Das folgende MILP ist äquivalent zum obigen $\min \min$ Problem:
 \begin{alignat}{5}
 \min_{s_1,s_2,s_3,s_4,z_1,z_2,z_3,z_4,y} & \quad  &   y & & & \\[2mm]
-\text{s.t. } & &  s_1&\leq y-M(1-z_1)\\
-             & &  s_2&\leq y-M(1-z_2)\\
-             & &  s_3&\leq y-M(1-z_3)\\
-             & &  s_4&\leq y-M(1-z_4)\\
+\text{s.t. } & &  s_1&\leq y+M(1-z_1)\\
+             & &  s_2&\leq y+M(1-z_2)\\
+             & &  s_3&\leq y+M(1-z_3)\\
+             & &  s_4&\leq y+M(1-z_4)\\
 			 & &  1 & = z_1+z_2+z_3+z_4\\
 			 & & z_i&\in \{0,1\},\quad i=1,\dots,4
 \end{alignat}

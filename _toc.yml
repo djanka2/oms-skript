@@ -25,10 +25,14 @@ parts:
   - caption: Ableitungsbasierte Optimierung
     chapters:
       - file: 06_Multivariate_Analysis
-      - file: 07_Automatische_Differentiation
-      - file: 08_Theoretische_Grundlagen
-      - file: 09_Quadratische_Probleme
+      - file: 07_Theoretische_Grundlagen
+      - file: 08_Quadratische_Probleme
+        sections:
+          - file: 08_Lineare_Regression.ipynb 
+      - file: 09_Automatische_Differentiation
       - file: 10_Gradientenverfahren
+        sections:
+          - file: 10_Logistische_Regression.ipynb
       - file: 11_Verfahren_zweiter_Ordnung
       - file: 12_Stochastischer_Gradientenabstieg
       - file: 13_Training_NN

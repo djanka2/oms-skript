@@ -239,7 +239,7 @@ Die Kettenregel für zusammengesetzte Funktionen lässt sich auch kurz zusammenf
 ## Normen und Abstände von Vektoren
 Wir möchten nun Funktionen betrachten, die nicht nur von einer skalaren Variablen $x\in\R$ abhängen, sondern von mehr als einer Variablen, also von einem Vektor $\v x=(x_1,x_2,\dots,x_n)^T\in\R^n$. 
 
-Ein entscheidender Unterschied zwischen Vektoren und Zahlen ist, dass man zwei Zahlen mittels der $<$ oder $>$ miteinander *vergleichen* kann; sie bilden eine geordnete Menge. Bei Vektoren mit $n\geq 2$ geht das nicht, Aussagen wie $\v x>\v y$ machen keinen Sinn. Man kann aber ihren *Abstand* miteinander vergleichen. Im Falle zweier Zahlen $a$ und $b$ ist ihr Abstand durch ihre Entfernung auf dem Zahlenstrahl gegeben, d.h. durch den Betrag ihrer  Differenz, $|a-b|$. Diesen Abstandsbegriff verallgemeinert man auf Vektoren mit dem Konzept der *Norm*.
+Ein entscheidender Unterschied zwischen Vektoren und Zahlen ist, dass man zwei Zahlen mittels der $<$ oder $>$ miteinander *vergleichen* kann; sie bilden eine geordnete Menge. Bei Vektoren mit $n\geq 2$ geht das nicht, Aussagen wie $\v x>\v y$ machen keinen Sinn. Man kann aber den *Abstand* der Vektoren betrachten. Im Falle zweier Zahlen $a$ und $b$ ist ihr Abstand durch ihre Entfernung auf dem Zahlenstrahl gegeben, d.h. durch den Betrag ihrer  Differenz, $|a-b|$. Diesen Abstandsbegriff verallgemeinert man auf Vektoren mit dem Konzept der *Norm*.
 
 % Anmerkung: wenn man \norm{x} schreibt, werden die Striche || || sehr klein dargestellt. Workaroung \norm{x_{}} ergänz ein leeres Subskript, was dazu führt, dass die Striche verlängert werden. 
 ````{prf:definition} Norm
@@ -508,7 +508,7 @@ ist im Punkt $(0,0)$ partiell differenzierbar (die beiden partiellen Ableitungen
 In {numref}`sec:theo` schauen wir uns noch den Begriff der *totalen Differenzierbarkeit* an, eine alternative Möglichkeit, den Begriff der Differenzierbarkeit einzuführen (und aus dem, im Gegensatz zur partiellen Differenzierbarkeit, auch die Stetigkeit folgt).
 
 
-## Ableitungen von vektorwertigen Funktionen: Jacobi-Matrix
+## Die Jacobi-Matrix
 Bisher haben wir nur Ableitungen von reellwertigen Funktionen $f:\R^n\rightarrow\R$ betrachtet. Wir können aber genausogut Funktionen betrachten die einen Vektor auf einen Vektor abbilden: $\v f:\R^n\rightarrow\R^m$, mit $m,n\geq 1$ (beachte den Unterschied in der Schreibweise: $\v f$: vektorwertige Funktion vs. $f$: reellwertige Funktion). In diesem Fall schreiben wir den *Vektor* der Funktionswerte als
 ```{math}
 :label: eq:fktvektor
@@ -552,6 +552,22 @@ Dann ist die Jacobimatrix $J$:
     \v J=\bmat 
         x_2 & x_1 & 1 \\
         0  & 0  &2x_3
+    \emat  
+\end{align*}
+````
+
+````{prf:example}
+:label: ex:jacobi2
+Sei $\v f:\R\rightarrow \R^3$ eine Funktion gegeben durch
+\begin{align*}
+    \v f(x)=\bmat 
+        1 \\ x \\ x^2 
+    \emat
+\end{align*}
+Dann ist die Jacobimatrix ein Spaltenvektor, d.h. $J\in\R^{3}$:
+\begin{align*}
+    \v J=\bmat 
+        0 \\ 1 \\ 2x
     \emat  
 \end{align*}
 ````
@@ -602,7 +618,26 @@ Für multivariate Funktionen $f:\R^n\rightarrow \R$ gelten die gleichen Regeln w
 ```
 Für vektorwertige Funktionen gelten diese Regeln für jede Komponente des Vektors der Funktionswerte.
 
-Ein wenig schwieriger ist die Kettenregel. Dort werden im univariaten Fall Ableitungen multipliziert ("äußere $\times$ innere Ableitung"). Im multivariaten Fall haben wir es aber mit Ableitungen nach *Vektoren* $\v x\in\R^n$ zu tun, d.h., in den Ableitungen tauchen nun Vektoren und Matrizen auf und deren Multiplikation ist nicht immer definiert und auch nicht kommutativ (d.h. im Allgemeinen ist für zwei Matrizen $\v A$ und $\v B$ das Produkt $\v A\v B\neq \v B\v A$).
+Ein wenig schwieriger ist die Kettenregel. Diese wird angewendet bei verketteten ("verschachtelten") Funktionen, d.h. wenn das Argument einer Funktion selbst der Funktionswert einer anderen Funktion ist. 
+
+Beispiel: Die Funktion $\v f:\R^2\rightarrow \R^2$ mit
+
+\begin{align*}
+    \v f(x_1,x_2)=\bmat 
+        (x_1+x_2^2)^2 \\ (x_1^2+x_2)^2 
+    \emat
+\end{align*}
+
+kann man auffassen als Verkettung der Funktionen $\v g,\v h:\R^2\rightarrow \R^2$, wobei
+\begin{align*}
+	\v g(h_1,h_2)&=\bmat h_1^2 \\ h_2^2\emat\\
+    \v h(x_1,x_2)&=\bmat 
+        (x_1+x_2^2) \\ (x_1^2+x_2) 
+    \emat.
+\end{align*}
+Es gilt dann $\v f(\v x)=\v g(\v h(\v x))$ oder kurz $\v f=\v g\circ \v h$.
+
+Im univariaten Fall werden die Ableitungen der verketteten Funktion multipliziert ("äußere $\times$ innere Ableitung"). Im multivariaten Fall haben wir es aber mit Ableitungen nach *Vektoren* $\v x\in\R^n$ zu tun, d.h., in den Ableitungen tauchen nun Vektoren und Matrizen auf und deren Multiplikation ist nicht immer definiert und auch nicht kommutativ (d.h. im Allgemeinen ist für zwei Matrizen $\v A$ und $\v B$ das Produkt $\v A\v B\neq \v B\v A$).
 
 Wir geben die Kettenregel zunächst formal an. Für zwei differenzierbare Funktionen mit passenden Definitions- und Bildbereichen, d.h. $\v f:\R^n\rightarrow \R^m$, $\v g:\R^m\rightarrow\R^k$ gilt:
 ```{math}
@@ -611,6 +646,8 @@ Wir geben die Kettenregel zunächst formal an. Für zwei differenzierbare Funkti
 		&\derv{}{\v x}\left(\v g\circ \v f\right)(\v x)=\derv{}{\v x}\left(\v g(\v f(\v x))\right)=\derv{\v g}{\v f(\v x)}\derv{\v f}{\v x}
 	\end{align}
 ```
+Hierbei sind $\derv{\v g}{\v f(\v x)}$ und $\derv{\v f}{\v x}$ die Jacobimatrizen, die die partiellen Ableitungen enthalten. Diese werden per Matrix-Multiplikation multipliziert.
+
 Als Denkhilfe kann man sich die Kettenregel wie folgt gut merken: In Gleichung {eq}`eq:chain` ist nach der Ableitung von $\v g$ nach $\v x$ gesucht. Im Term der rechten Seite "kürzt" sich das $\partial \v f$ in dem "Bruch" $\derv{\v g}{\v f}\derv{\v f}{\v x}$ gerade weg, so dass am Ende $\derv{\v g}{\v x}$, also die gesuchte Größe, "übrig bleibt". Das Ganze ist aber wirklich nur eine Denkstütze, denn: $\derv{\v f}{\v x}$ ist *kein* Bruch, sondern lediglich eine Schreibweise (für die partielle Ableitung). 
 
 Im folgenden möchten wir die Kettenregel zunächst an einem (wichtigen) Spezialfall näher betrachten. Nehmen wir an, $g:\R^2\rightarrow\R$ sei eine Funktion in zwei Variablen $f_1, f_2$. Weiterhin seien $f_1(t)$ und $f_2(t)$ selbst Funktionen von $t\in\R$. Wir wenden nun die Kettenregel an, um den Gradienten von $g$ nach $t$ zu berechnen. Das ist eine Abbildung von $\R$ nach $\R$: Ein Skalar $t$ wird zunächst abgebildet auf einen Vektor $\v f(t)=(f_1(t), f_2(t))^T$. Dieser Vektor wird dann abgebildet auf einen skalaren Funktionswert $g(f_1(t),f_2(t))$. Anschaulich bedeutet dies: wie ändert sich $g$ bei kleinen Änderungen von $t$.
@@ -648,7 +685,7 @@ Die Ableitung der Funktion $g\circ \v f$ berechnet sich wie folgt:
 ```{math}
 :label: eq:matmult
 \begin{align}
-    \nabla (g(\v f(\v x))&= \nabla g(\v f(\v x))\cdot \nabla \v f(\v x)\\
+    \nabla g(\v f(\v x))&= \nabla g(\v f(\v x))\cdot \nabla \v f(\v x)\\
     &=\nabla g(f_1(\v x),f_2(\v x))\cdot\nabla \v f(\v x)\\
     &=\bmat 
         \derv{g}{f_1(\v x)}&\derv{g}{f_2(\v x)}
@@ -692,7 +729,7 @@ Man sieht: die Funktion $g\circ \v f$ bildet einen Vektor aus dem $\R^3$ nach $\
 ````
 
 
-## Ableitungen höherer Ordnung
+## Die Hessematrix 
 Auch im multivariaten Fall können wir Ableitungen höherer Ordnung betrachten. Wir tun dies hier nur für reellwertige Funktionen $f:\R^n\rightarrow\R$. Dazu fassen wir den Gradienten von $f$ auch als Funktion auf: 
 ```{math}
 :label: eq:gradfkt
@@ -734,10 +771,11 @@ $f(x_1,\dots,x_n)=\frac{1}{2}\v x^T\v A\v x+\v b^T\v x+c$. Da der Gradient $\nab
 
 
 ````{prf:theorem} Satz von Schwarz
-Sei $f:\R^2\rightarrow\R$, $(x,y)\mapsto f(x,y)$ eine zwei mal stetig differenzierbare Funktion. Dann gilt:
-\begin{align}
-    \derv{}{y}\left(\derv{f}{x}\right) = \derv{}{x}\left(\derv{f}{y}\right).
-\end{align}
+Sei $f:\R^n\rightarrow\R$, $\v x\mapsto f(\v x)$ eine zwei mal stetig differenzierbare Funktion. Dann gilt:
+\begin{align*}
+    \derv{}{x_j}\left(\derv{f}{x_i}\right) = \derv{}{x_i}\left(\derv{f}{x_j}\right)
+\end{align*}
+für zwei beliebige Indizes $i$ und $j$.
 ````
 Der Satz besagt, dass es egal ist in welcher Reihenfolge die partiellen Ableitungen gebildet werden. Das bedeutet, dass die Hessematrix symmetrisch ist.
 
@@ -753,7 +791,8 @@ Leiten wir nun beide Terme erneut ab, erhalten wir:
 \end{align*}
 ````
 
-Analog zur zweiten Ableitung im eindimensionalen beschreibt die Hessematrix die *Krümmung* einer Funktion.
+Analog zur zweiten Ableitung im eindimensionalen beschreibt die Hessematrix die *Krümmung* einer Funktion. Genauer gesagt beschreiben die *Eigenwerte* der Hessematrix die Krümmung in Richtung der *Eigenvektoren*.
+
 ````{prf:example}
 Wir betrachten wieder das Paraboloid gegeben durch $f:\R^2\rightarrow\R$, $f(x,y)=x_1^2+x_2^2$. Als Hessematrix erhalten wir
 \begin{align*}

@@ -265,7 +265,7 @@ Zwei (etwas salopp formulierte) Einsichten aus diesem Satz:
 1. Je näher der Auswertungspunkt $x$ am Entwicklungspunkt $x_0$ liegt, desto besser ist die Approximation, da $h_n(x)$ gegen $0$ geht, wenn $x$ gegen $x_0$ geht.
 2. Die Beiträge höherer Ordnung werden immer (betrags-)kleiner, d.h. immer "unwichtiger". Dafür sorgt zum einen der Term $n!$ im Nenner. Zum anderen ist, wenn $x$ nahe bei $x_0$ ist, der Term $x-x_0$ sehr klein und damit wird der Term $(x-x_0)^n$ umso kleiner, je größer $n$ ist.
 
-Zusammengefasst: eine Funktion ist "in der Nähe von $x_0$" ungefähr gleich ihrem Taylorpolynom: $f(x)\approx T_n(x)$. Im einfachsten Fall kann also mit Hilfe des Taylor-Polynoms erster Ordnung eine grobe Approximation von jeder differenzierbaren Funktion berechnet werden, also $f(x)\approx T_1(x)=f(x_0)+f'(x_0)(x-x_0)$. Die Approximation wird unzuverlässiger, je weiter $x$ von $x_0$ entfernt ist.
+Zusammengefasst: eine Funktion ist "in der Nähe von $x_0$" ungefähr gleich ihrem Taylorpolynom: $f(x)\approx T_n(x)$. Im einfachsten Fall kann also mit Hilfe des Taylor-Polynoms erster Ordnung eine grobe Approximation von jeder differenzierbaren Funktion berechnet werden, also $f(x)\approx T_1(x)=f(x_0)+f'(x_0)(x-x_0)$. Die Approximation wird ungenauer, je weiter $x$ von $x_0$ entfernt ist.
 
 [^fn:Taylor]: Gegenbeispiel: : $f(x)=\begin{cases}
 \exp⁡(−1/x^2),\quad &\text{falls } x\neq 0,\\ 0\quad &\text{falls } x=0\end{cases}$. Die Taylorreihe konvergiert auf keiner Umgebung von $x_0=0$ gegen die Funktion, siehe [hier](https://de.wikipedia.org/wiki/Taylorreihe#Eine_Funktion,_die_in_einer_Entwicklungsstelle_nicht_in_eine_Taylorreihe_entwickelt_werden_kann). 
@@ -275,9 +275,9 @@ Um zu verstehen, warum die hinreichende Bedingung an die zweite Ableitung gilt, 
 
 Mittels Taylorapproximation ist also der Funktionswert in der Umgebung eines kritischen Punktes $x_0$:
 \begin{align*}
-f(x_0+d)\approx f(x_0)+\underbrace{f'(x_0)}_{=0}d+\frac{f''(x_0)}{2}d^2+\frac{f'''(x_0)}{6}d^3
+f(x)=f(x_0+d)\approx f(x_0)+\underbrace{f'(x_0)}_{=0}d+\frac{f''(x_0)}{2}d^2+\frac{f'''(x_0)}{6}d^3
 \end{align*}
-$d$ kann hier positiv oder negativ sein, aber $d^2$ ist immer positiv. Wenn nun $\frac{f''(x_0)}{2}>0$ (hinreichende Bedingung für ein Minimum aus {prf:ref}`thm:OB1`), so ist $f(x_0+d)>f(x_0)$, wenn $d$ klein genug ist, also der Auswertungspunkt $x$ nahe genug bei $x_0$ ist. Warum? Weil für kleine $d$ der nachfolgende Terme mit $d^3$ *noch* kleiner wird. Man kann immer erreichen, dass der Term \frac{f''(x_0)}{2}d^2 größer ist als der nachfolgende Term mit $d^3$. Das gilt erst recht, wenn man weitere Terme höherer Ordnung dazu nimmt, also $d^4$, $d^5$, usw. 
+$d$ kann hier positiv oder negativ sein, aber $d^2$ ist immer positiv. Wenn nun $\frac{f''(x_0)}{2}>0$ (hinreichende Bedingung für ein Minimum aus {prf:ref}`thm:OB1`), so ist $f(x_0+d)>f(x_0)$, wenn $d$ klein genug ist, also der Auswertungspunkt $x$ nahe genug bei $x_0$ ist. Warum? Weil für kleine $d$ der nachfolgende Terme mit $d^3$ *noch* kleiner wird. Wenn $d$ nur klein genug ist (man die Funktion also sehr nahe am Entwicklungspunkt $x_0$ betrachtet), wird irgendwann immer gelten, dass der Term $\frac{f''(x_0)}{2}d^2$ größer ist als der nachfolgende Term mit $d^3$. Das gilt erst recht, wenn man weitere Terme höherer Ordnung dazu nimmt, also $d^4$, $d^5$, usw. 
 
 Die Aussage $f(x_0+d)>f(x_0)$ für alle Punkte in einer Umgebung von $x_0$ (also alle "ausreichend kleinen Werte" von $d$) bedeutet aber gerade, dass $f(x_0)$ ein lokales Minimum ist, nach {prf:ref}`def:minmax`. 
 
@@ -289,7 +289,7 @@ Wenn die zweite Ableitung weder positiv noch negativ ist, also $f''(x_0)=0$, so 
 ## Mehrdimensionale Optimierungsprobleme
 Wir betrachten nun allgemeine, mehrdimensionale Optimierungsprobleme der Form
 \begin{align*}
-\min_{\v x\in D\in\R^n} f(\v x)
+\min_{\v x\in \R^n} f(\v x)
 \end{align*}
 mit einer differenzierbaren Funktion $f:\R^n\rightarrow \R$. Der erste Unterschied zum eindimensionalen Fall, der ins Auge fällt, ist, dass die ersten Ableitungen Vektoren sind, die zweiten Ableitungen (Hesse-)Matrizen. Man muss also genau aufpassen, welche Summen und Produkte überhaupt definiert sind. 
 
@@ -317,7 +317,7 @@ Wenn die Kurve $g$ bei $t=0$ ein Extremum hat, so muss ihre Ableitung hier gleic
 \begin{align}
 	&g'(0) = \derv{f}{\v x}(\v x_0)\cdot \v a=\nabla f(\v x_0)\cdot \v a = \sum_{i=j}^{n}\derv{f}{x_j}(\v x_0)a_j.
 \end{align}
-Wir hatte die Richtung $\v a$ beliebig gewählt, d.h. dieser Ausdruck muss für *alle* $\v a$ gleich null sein. Das ist aber nur der Fall, wenn alle partiellen Ableitungen an der Stelle $\v x_0$ gleich null sind. Mit anderen Worten:
+Wir hatten die Richtung $\v a$ beliebig gewählt, d.h. dieser Ausdruck muss für *alle* $\v a$ gleich null sein. Das kann aber nur der Fall sein, wenn alle partiellen Ableitungen an der Stelle $\v x_0$ gleich null sind. Mit anderen Worten:
 
 
 
@@ -328,7 +328,7 @@ An einem lokalen Minimum oder Maximum $\v x_0$ einer differenzierbaren Funktion 
         \derv{f}{x_1}(\v x_0) & \cdots & \derv{f}{x_n}(\v x_0)
     \emat   = \v 0:=\bmat 0\\\vdots\\0 \emat
 \end{align*}
-Analog zum univariaten Fall nennt man einen Punkt, an dem der Gradient der Nullvektor ist ebenfalls *kritischer Punkt*..
+Analog zum univariaten Fall nennt man einen Punkt, an dem der Gradient der Nullvektor ist ebenfalls *kritischer Punkt*.
 ````
 Wenn wir uns erinnern, dass der Gradient in die Richtung des steilsten Anstiegs zeigt, bedeutet dieser Satz anschaulich: Am Gipfel ist man, wenn es nicht mehr weiter nach oben geht.
 
@@ -336,7 +336,8 @@ Wie im Fall einer Variablen schauen wir uns auch im Falle mehrerer Variablen die
 \begin{align}
 	g''(t)&=\frac{\textup{d}}{\textup{d}t}\left(\derv{f}{\v x}(\v x_0+t\v a)\derv{(\v x_0+t\v a)}{t}\right)\\
 	&=\frac{\textup{d}}{\textup{d}t}\left(\derv{f}{\v x}(\v x_0+t\v a)\cdot \v a\right)=\\
-	&=\left(\dervquad{f}{\v x}(\v x_0+t\v a)\cdot \v a\right)^T\v a
+	&=\left(\dervquad{f}{\v x}(\v x_0+t\v a)\cdot \v a\right)^T\v a\\
+    &=\v a^T\underbrace{\left(\dervquad{f}{\v x}(\v x_0+t\v a)\cdot \right)^T}_{\textup{Hessematrix (symmetrisch)}}\v a
 \end{align}
 Ausgewertet an der Stelle $t=0$ ergibt sich
 \begin{align*}
@@ -350,19 +351,21 @@ Eine quadratische Matrix $\v A\in\R^{n\times n}$ heißt
 - *positiv semidefinit*, falls $\v x^T\v A\v x\geq0$,
 - *negativ definit*, falls $\v x^T\v A\v x<0$,
 - *negativ semidefinit*, falls $\v x^T\v A\v x\leq0$,
-für jeden Vektor $\v x\R^n$ mit $\v x\neq \v 0$.
+
+für jeden Vektor $\v x\in\R^n$ mit $\v x\neq \v 0$. Ist weder $\v A$ positiv noch negativ (semi-)definit, so nennt man $\v A$ *indefinit*.
 ````
-Diese Eigenschaft von Matrizen nennt man \emph{positiv definit}. Analog liegt ein Maximum vor, falls $\v a^T\dervquad{f}{\v x}(\v x_0)\cdot \v a<0$ gilt und die Eigenschaft der Matrix  nennt man *negativ definit*. Definitheit von symmetrischen Matrizen kann man auch über ihre Eigenwerte definieren.
+
+Analog liegt ein Maximum vor, falls $\v a^T\dervquad{f}{\v x}(\v x_0)\cdot \v a<0$ gilt, die Matrix also *negativ definit* ist. Definitheit von symmetrischen Matrizen kann man auch über ihre Eigenwerte definieren.
 ````{prf:theorem}
 Sei $\v A$ eine symmetrische Matrix. $\v A$ ist genau dann positiv bzw. negativ definit, wenn alle Eigenwerte positiv bzw. negativ sind.
 ````
 
-Insgesamt könenn wir die Optimalitätsbedingungen in folgendem Satz zusammenfassen:
+Insgesamt können wir die Optimalitätsbedingungen in folgendem Satz zusammenfassen:
 ````{prf:theorem} Optimalitätsbedingungen für lokale Extrema, mehrdimensionaler Fall
 :label: thm:OBn
 Sei $f:\R^n\rightarrow\R$ eine zweimal stetig differenzierbare Funktion. Dann gilt für einen Punkt $\v x_0\in\R$:
-- Ist $\nabla f(\v x_0)=0$ und $\nabla^2 f(\v x_0)$ ist positiv definit, so hat $f$ bei $\v x_0$ ein lokales Minimum.
-- Ist $\nabla f(\v x_0)=0$ und $\nabla^2 f(\v x_0)$ ist negativ definit, so hat $f$ bei $\v x_0$ ein lokales Maximum.
+- Ist $\nabla f(\v x_0)=0$ und $\nabla^2 f(\v x_0)$ positiv definit, so hat $f$ bei $\v x_0$ ein lokales Minimum.
+- Ist $\nabla f(\v x_0)=0$ und $\nabla^2 f(\v x_0)$ negativ definit, so hat $f$ bei $\v x_0$ ein lokales Maximum.
 ````
 
 Zur Erinnerung: die notwendigen und hinreichenden Bedingungen für lokale Minima bzw. Maxima in *einer* Dimension sind (siehe {prf:ref}`thm:OB1`):
@@ -398,7 +401,7 @@ Nun überprüfen wir die Definitheit der Hessematrix:
 \begin{align*}
 \nabla^2 f(x,y) = \bmat   2 & 1 \\ 1 & 2\emat  
 \end{align*}
-Die Eigenwerte sind $1$ und $3$. Damit ist die Hessematrix positiv definit und hat an der Stelle $(x,y)=(-2,1)$ ein Minimum. 
+Die Eigenwerte sind $1$ und $3$. Damit ist die Hessematrix positiv definit und $f$ hat an der Stelle $(x,y)=(-2,1)$ ein Minimum. 
 ````
 
 
@@ -417,7 +420,7 @@ Um einen kritischen Punkt zu berechnen, müssen das nichtlineare Gleichungssyste
 y-1+3x^2 &=0\\
  x &=0\\
 \end{align*}
-Also ist $(0,1)^T$ kritischer Punkt.
+Man sieht: $(0,1)^T$ ist kritischer Punkt.
 
 Nun überprüfen wir die Definitheit der Hessematrix:
 \begin{align*}
@@ -427,7 +430,7 @@ Diese müssen wir am kritischen Punkt $(0,1)^T$ auswerten:
 \begin{align*}
 \nabla^2 f(x,y) = \bmat   0 & 1 \\ 1 & 0\emat  
 \end{align*}
-Die Eigenwerte sind $1$ und $-1$. Damit ist die Hessematrix weder positiv definit noch negativ definit. Der kritische Punkt ist damit weder ein Minimum noch ein Maximum.
+Die Eigenwerte sind $1$ und $-1$. Damit ist die Hessematrix indefinit (d.h. weder positiv definit noch negativ definit). Der kritische Punkt ist damit weder ein Minimum noch ein Maximum.
 ````
 Zur Veranschauliching hier die Graph der Funktion mit dem kritischen Punkt:
 ```{code-cell} ipython3
@@ -450,7 +453,7 @@ y = np.array([1])
 z = x*(y-1) + x**3
 fig.add_trace(go.Scatter3d(x=x,y=y,z=z, mode="markers", line=dict(width=5)))
 ```
-Den Fall, dass sowohl positive als auch negative Eigenwerte auftreten (die Matrix also *indefinit* ist), gibt es im univariaten Fall nicht (die "Hessematrix" ist dort ja nur eine $1\times 1$ "Matrix", hat also nur einen Eigenwert, nämlich den Wert selbst). Im Mehrdimensionalen Fall bedeutet eine indefinite Hessematrix, dass ein *Sattelpunkt* vorliegt---ein kritischer Punkt, der weder ein Minimum noch ein Maximum ist.
+Den Fall, dass sowohl positive als auch negative Eigenwerte auftreten (die Matrix also indefinit ist), gibt es im univariaten Fall nicht (die "Hessematrix" ist dort ja nur eine $1\times 1$ "Matrix", hat also nur einen Eigenwert, nämlich den Wert selbst). Im Mehrdimensionalen Fall bedeutet eine indefinite Hessematrix, dass ein *Sattelpunkt* vorliegt---ein kritischer Punkt, der weder ein Minimum noch ein Maximum ist.
 
 ````{prf:remark} Sattelpunkt
 Besitzt die Hessematrix einer differenzierbaren Funktion $f:\R^n\rightarrow \R$ an einem kritischen Punkt sowohl positive als auch negative Eigenwerte, so ist dieser Punkt ein *Sattelpunkt*.
@@ -504,6 +507,7 @@ fig.add_trace(go.Scatter3d(x=x,y=y,z=z, mode="lines", line=dict(width=5), name="
 In rot und grün sind die Schnitte durch den Funktionsgraph entlang der Eigenvektoren dargestellt:
 - Entlang des Eigenvektors $\bmat  1\\0\emat  $ ($x$-Achse) zum Eigenwert $+2$ hat die Funktion *positive* Krümmung.
 - Entlang des Eigenvektors $\bmat  0\\1\emat  $ ($y$-Achse) zum Eigenwert $-2$ hat die Funktion *negative* Krümmung.
+
 Die Hessematrix ist indefinit, und da der Graph der Funktion aussieht wie ein Reitsattel, nennt man einen solchen kritischen Punkt Sattelpunkt.
 
 
@@ -511,7 +515,7 @@ Die Hessematrix ist indefinit, und da der Graph der Funktion aussieht wie ein Re
 ### Konvexität
 Weiter oben haben wir den Begriff des lokalen Minimums eingeführt. Ein Nachteil des Gradientenabstiegs ist, dass er (wenn überhaupt) nur zu einem lokalen Minimum konvergiert. Wenn man Glück hat, ist dies auch das globale Minimum, aber dessen kann man sich in der Regel nicht sicher sein. 
 
-Wie gravierend ist das Problem mit Nebenminima in höheren Dimensionen? Um uns der Frage zu nähern, betrachten wir noch einmal die Funktion aus {prf:ref}`ex:kurvendiskussion`:
+Wie gravierend ist das Problem lokaler Minima in höheren Dimensionen? Um uns der Frage zu nähern, betrachten wir noch einmal die Funktion aus {prf:ref}`ex:kurvendiskussion`:
 \begin{align*}
 f(x)=\frac{1}{4}x^4-\frac{1}{3}x^3-x^2+2
 \end{align*}
@@ -546,7 +550,7 @@ Man kann sich leicht überlegen, dass damit jede der neun möglichen Kombination
 
 Würde man nun nicht nur zwei Instanzen von $f$ addieren, sondern mehr, sagen wir $d$, würde man eine Funktion mit $3^d$ kritischen Punkten erhalten. Beispiel: Für $d=10$ hätte man eine Funktion $F:\R^{10}\rightarrow\R$, die 59049 kritische Punkte hat!
 
-Die Anzahl der Nebenminima kann sehr schnell unerwartet groß werden. Im Allgemeinen sind die Anzahl und Struktur lokaler Minima schwer festzustellen. Es gibt allerdings Funktionen, die höchsten *einen* kritischen Punkt besitzen, der dann auch ein Minimum sein muss (man muss ihn allerdings noch finden), nämlich die strikt konvexen Funktionen.
+Die Anzahl der lokalen Minima kann sehr schnell unerwartet groß werden. Im Allgemeinen sind die Anzahl und Struktur lokaler Minima schwer festzustellen. Es gibt allerdings Funktionen, denen man ansieht, dass sie höchstens *einen* kritischen Punkt besitzen. Dieser muss dann auch das globale Minimum sein (man muss ihn allerdings noch finden). Man nennt diese wichtige Klasse von Funktionen die strikt konvexen Funktionen.
 
 ````{prf:definition} Konvexe Menge
 Eine Menge $D\subseteq \R^n$ heißt *konvex*, falls bei zwei Punkten aus $D$ stets auch deren gesamte Verbindungsstrecke zu $D$ gehört. In Formeln: 
@@ -576,16 +580,16 @@ Hier einige Beispiel konvexer und nicht-konvexer Funktionen:
 Was bringt uns das? Folgende beiden Sätze erklären die wichtige Bedeutung des Begriffes der Konvexität in der mathematischen Optimierung.
 ````{prf:theorem}
 :label: thm:konvex_
-Die kritischen Punkte einer differenzierbaren konvexen Funktion $f\R^n\rightarrow\R$ sind genau die Minimalpunkte von $f$.
+Die kritischen Punkte einer differenzierbaren konvexen Funktion $f:\R^n\rightarrow\R$ sind genau die Minima von $f$.
 ````
-Das heißt zwar nicht, dass jede konvexe Funktion einen Minimalpunkt hat. Aber falls es einen kritischen Punkt gibt, so ist dieser auch ein Minimalpunkt von $f$.
+Das heißt zwar nicht, dass jede konvexe Funktion ein Minimum hat. Aber falls es einen kritischen Punkt gibt, so ist dieser auch ein Minimum von $f$.
 ````{prf:theorem}
 :label: thm:konvex
 Wenn eine Funktion *strikt konvex* ist, d.h. es gilt
 \begin{align*}
 f(\lambda \v x+(1-\lambda)\v y) {\color{red}<}\lambda f(\v x)+(1-\lambda)f(\v y)\quad \forall \v x, \v y\in D \text{ und } \lambda\in (0,1),
 \end{align*}
-so besitzt sie nur ein lokales Minimum, welches gleichzeitig das globale Minimum der Funktion ist.
+so besitzt sie nur ein einziges lokales Minimum, welches gleichzeitig das globale Minimum der Funktion ist.
 ````
 
 Es besteht folgende Beziehung zwischen der Konvexität und der Hessematrix einer Funktion:
@@ -596,7 +600,7 @@ Sei $D\subseteq \R^n$ konvex und $f:\R^n\rightarrow \R$ zweimal stetig differenz
 2. Wenn die Hessematrix sogar überall positiv definit ist, also alle ihre Eigenwerte $>0$ sind, so ist $f$ *strikt konvex*.
 ````
 ````{note}
-Die Umkehrung der zweiten Aussage von {prf:ref}`thm:konvex` gilt nicht: So ist z.B. $f(x)=x^4$ zwar strikt konvex, aber ihre Hessematrix ist nur positiv semidefinit.
+Die Umkehrung der zweiten Aussage von {prf:ref}`thm:konvex2` gilt nicht: So ist z.B. $f(x)=x^4$ zwar strikt konvex, aber ihre Hessematrix ist nur positiv semidefinit.
 ````
 {prf:ref}`thm:konvex` und {prf:ref}`thm:konvex2` stellen also folgendes sicher: Wenn man von einer differenzierbaren Funktion nachweisen kann, dass ihre Hessematrix über positiv definit ist, so hat diese Funktion genau ein lokales (und gleichzeitig globales) Minimum.
 
@@ -701,7 +705,7 @@ Das Taylor-Polynom zweiter Ordnung im Punkt $(\pi,1)$ lautet:
 
 %### Lineare Approximation und totale Differenzierbarkeit
 
-Noch mehr als im eindimensionalen wirken die Taylor-Polynome auf den ersten Blick etwas "sperrig" und kompliziert. Ich möchte noch deshalb noch einmal explizit auf ihre Bedeutung und den Zusammenhang mit dem Begriff der Differenzierbarkeit eingehen. 
+Noch mehr als im eindimensionalen wirken die Taylor-Polynome auf den ersten Blick etwas "sperrig" und kompliziert. Ich möchte deshalb noch einmal explizit auf ihre Bedeutung und den Zusammenhang mit dem Begriff der Differenzierbarkeit eingehen. 
 
 Schauen wir uns noch einmal ein allgemeines Taylor-Polynom erster Ordnung an:
 \begin{align*}
@@ -719,7 +723,7 @@ und
 \lim_{\v x\rightarrow \v x_0} h(\v x)=0
 \end{align*}
 ````
-Was sagt dieser Satz nun eigentlich aus? Er sagt aus, dass jede differenzierbare Funktion $f$, so kompliziert sie auch sein mag, sich lokal so verhält wie eine lineare Funktion. Nehmen Sie z.B. an, dass $f$ eine Verlustfunktion für ein Modell im maschinellen Lernen ist, sagen wir ein tiefes neuronales Netz. Die Funktion gibt für einen Eingabevektor von Gewichten den Verlust (Fehler) auf einem gegebenem Datensatz  zurück. Diese Funktion ist immens kompliziert. Sie können Sie weder auf ein Blatt Papier aufschreiben (das wäre viel zu lang) noch können Sie sie sinnvoll visualisieren, d.h. Sie haben keine Ahnung wie sich diese Funktion verhält. Das einzige, was sie tun können, ist, die Funktion -- und ihre Ableitung! -- punktweise auszuwerten, d.h. für einen bestimmten Vektor von Eingabedaten bekommen Sie einen Funktionswert und den Gradientenvektor zurückgegeben. Der Satz von Taylor sagt: Das genügt, um in einer kleinen Umgebung eine beliebig gute Approximation an $f$ zu bekommen! Die Approximation lautet: 
+Was sagt dieser Satz nun eigentlich aus? Er sagt aus, dass jede differenzierbare Funktion $f$, so kompliziert sie auch sein mag, sich lokal so verhält wie eine lineare Funktion. Nehmen Sie z.B. an, dass $f$ eine Verlustfunktion für ein Modell im maschinellen Lernen ist, sagen wir für ein tiefes neuronales Netz. Die Funktion gibt für einen Eingabevektor von Gewichten den Verlust (Fehler) auf einem gegebenem Datensatz  zurück. Diese Funktion ist immens kompliziert. Sie können Sie weder auf ein Blatt Papier aufschreiben (das wäre viel zu lang) noch können Sie ihren Graphen sinnvoll visualisieren, d.h. Sie haben keine Ahnung wie sich diese Funktion verhält. Das einzige, was sie tun können, ist, die Funktion -- und ihre Ableitung! -- punktweise auszuwerten, d.h. für einen bestimmten Vektor von Eingabedaten können Sie den Funktionswert und den Gradientenvektor ausrechnen. Der Satz von Taylor sagt: Das genügt, um in einer kleinen Umgebung eine beliebig gute Approximation an $f$ zu bekommen! Die Approximation lautet: 
 \begin{align*}
 f(\v x)\approx \underbrace{f(\v x_0)}_{\text{Zahl}} + \underbrace{\nabla f(\v x_0)}_{\text{Zeilenvektor}}\overbrace{(\v x - \v x_0)}^{\text{Spaltenvektor}}
 \end{align*}
@@ -748,7 +752,7 @@ Die totale Differenzierbarkeit behebt auch den "Schönheitsfehler" der partielle
 \end{align*}
 
 ````{note}
-Die Komponenten der totalen Ableitungen (wenn sie denn existieren) berechnet man ganz genauso wie die partiellen Ableitungen. Das ist kein fundamental anderer Differenzierbarkeitsbegriff, er ist nur ein wenig strikter und wird anders eingeführt.
+Die Komponenten der totalen Ableitungen (wenn sie denn existieren) berechnet man ganz genauso wie die partiellen Ableitungen. Das ist kein fundamental anderer Differenzierbarkeitsbegriff, er ist nur ein wenig strikter und wird anders motiviert.
 ````
 
 
