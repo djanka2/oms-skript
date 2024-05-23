@@ -59,14 +59,14 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>window.MathJax = {"tex": {"macros": {"N": "\\mathbb{N}", "Z": "\\mathbb{Z}", "R": "\\mathbb{R}", "B": "\\mathbb{B}", "I": "\\mathbb{I}", "norm": ["\\left\\lVert#1 \\right\\rVert", 1], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\begin{pmatrix}"], "emat": ["\\end{pmatrix}"], "bmats": ["\\left(\\begin{smallmatrix}"], "emats": ["\\end{smallmatrix}\\right)"], "scikit": ["\\texttt{scikit-learn}"], "derv": ["\\frac{\\partial #1}{\\partial #2}", 2], "dervquad": ["\\frac{\\partial^2 #1}{\\partial #2^2}", 2], "dervzwei": ["\\frac{\\partial^2 #1}{\\partial {#2} \\partial {#3}}", 3], "v": ["\\mathbf{#1}", 1], "m": ["\\mathbf{#1}", 1], "argmin": ["\\underset{#1}{\\operatorname{arg\\!min}}", 1], "hyper": ["{\\color{Bittersweet}{#1}}", 1], "initial": "\\DeclareMathOperator{\\initial}{initial}", "reduced": "\\DeclareMathOperator{\\reduced}{reduced}", "lazy": "\\DeclareMathOperator{\\lazy}{lazy}", "ILP": "\\DeclareMathOperator{\\ILP}{ILP}", "red": ["{\\color{BrickRed}{#1}}", 1]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script>window.MathJax = {"tex": {"macros": {"N": "\\mathbb{N}", "Z": "\\mathbb{Z}", "R": "\\mathbb{R}", "B": "\\mathbb{B}", "I": "\\mathbb{I}", "E": "\\mathbb{E}", "norm": ["\\left\\lVert#1 \\right\\rVert", 1], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\begin{pmatrix}"], "emat": ["\\end{pmatrix}"], "bmats": ["\\left(\\begin{smallmatrix}"], "emats": ["\\end{smallmatrix}\\right)"], "scikit": ["\\texttt{scikit-learn}"], "derv": ["\\frac{\\partial #1}{\\partial #2}", 2], "dervquad": ["\\frac{\\partial^2 #1}{\\partial #2^2}", 2], "dervzwei": ["\\frac{\\partial^2 #1}{\\partial {#2} \\partial {#3}}", 3], "v": ["\\mathbf{#1}", 1], "m": ["\\mathbf{#1}", 1], "argmin": ["\\underset{#1}{\\operatorname{arg\\!min}}", 1], "hyper": ["{\\color{Bittersweet}{#1}}", 1], "initial": "\\DeclareMathOperator{\\initial}{initial}", "reduced": "\\DeclareMathOperator{\\reduced}{reduced}", "lazy": "\\DeclareMathOperator{\\lazy}{lazy}", "ILP": "\\DeclareMathOperator{\\ILP}{ILP}", "red": ["{\\color{BrickRed}{#1}}", 1]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '11_Verfahren_zweiter_Ordnung';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Stichwortverzeichnis" href="genindex.html" />
     <link rel="search" title="Suche" href="search.html" />
     <link rel="next" title="12. Stochastischer Gradientenabstieg" href="12_Stochastischer_Gradientenabstieg.html" />
-    <link rel="prev" title="10. Verfahren erster Ordnung" href="10_Gradientenverfahren.html" />
+    <link rel="prev" title="10.9. Logistische Regression" href="10_Logistische_Regression.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="de"/>
   </head>
@@ -203,10 +203,16 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Ableitungsbasierte Optimierung</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="06_Multivariate_Analysis.html">6. Funktionen und Ableitungen</a></li>
-<li class="toctree-l1"><a class="reference internal" href="07_Automatische_Differentiation.html">7. Automatische Differentiation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="08_Theoretische_Grundlagen.html">8. Grundlagen der nichtlinearen Optimierung</a></li>
-<li class="toctree-l1"><a class="reference internal" href="09_Quadratische_Probleme.html">9. Quadratische Probleme</a></li>
-<li class="toctree-l1"><a class="reference internal" href="10_Gradientenverfahren.html">10. Verfahren erster Ordnung</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_Theoretische_Grundlagen.html">7. Grundlagen der nichtlinearen Optimierung</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="08_Quadratische_Probleme.html">8. Quadratische Probleme</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="08_Lineare_Regression.html">8.4. Anwendung: Lineare Regressionsprobleme</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="09_Automatische_Differentiation.html">9. Automatische Differentiation</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="10_Gradientenverfahren.html">10. Verfahren erster Ordnung</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="10_Logistische_Regression.html">10.9. Logistische Regression</a></li>
+</ul>
+</li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">11. Verfahren zweiter Ordnung</a></li>
 <li class="toctree-l1"><a class="reference internal" href="12_Stochastischer_Gradientenabstieg.html">12. Stochastischer Gradientenabstieg</a></li>
 <li class="toctree-l1"><a class="reference internal" href="13_Training_NN.html">13. Training von Neuronalen Netzen</a></li>
@@ -464,7 +470,7 @@ Richtung des steilsten Anstiegs:[ 0.84898637 -0.52841475]
 \[
 T(\v x^{[k]} + \v d)=f(\v x^{[k]})+\nabla f(\v x^{[k]})d+\frac{1}{2}\v d^T\v H(\v x^{[k]})\v d
 \]</div>
-<p>Dies ist eine quadratische Funktion in der Variablen <span class="math notranslate nohighlight">\(\v d\)</span>. Wie wir am Ende von <a class="reference internal" href="08_Theoretische_Grundlagen.html#sec-konvex"><span class="std std-ref">Konvexität</span></a> gesehen haben, hat eine quadratische Funktion ein eindeutiges Minimum, wenn die Hessematrix <span class="math notranslate nohighlight">\(H(\v x^{[k]})\)</span> positiv definit ist (dann ist die Funktion strikt konvex). Weiterhin haben wir in <a class="reference internal" href="08_Theoretische_Grundlagen.html#ex:quadratic">Example 8.5</a> gesehen, dass man den kritischen Punkt einer quadratischen Funktion durch Lösung eines linearen Gleichungssystems bestimmen kann.</p>
+<p>Dies ist eine quadratische Funktion in der Variablen <span class="math notranslate nohighlight">\(\v d\)</span>. Wie wir am Ende von <a class="reference internal" href="07_Theoretische_Grundlagen.html#sec-konvex"><span class="std std-ref">Konvexität</span></a> gesehen haben, hat eine quadratische Funktion ein eindeutiges Minimum, wenn die Hessematrix <span class="math notranslate nohighlight">\(H(\v x^{[k]})\)</span> positiv definit ist (dann ist die Funktion strikt konvex). Weiterhin haben wir in <a class="reference internal" href="07_Theoretische_Grundlagen.html#ex:quadratic">Example 7.5</a> gesehen, dass man den kritischen Punkt einer quadratischen Funktion durch Lösung eines linearen Gleichungssystems bestimmen kann.</p>
 <p>Diese Lösung wäre dann der Schritt <span class="math notranslate nohighlight">\(\v d^{[k]}\)</span>, mit dem wir zur nächsten Iterierten <span class="math notranslate nohighlight">\(\v x^{[k+1]}\)</span> kommen.</p>
 <p>Wir berechnen den kritischen Punkt des Taylor Polynoms. Es muss gelten <span class="math notranslate nohighlight">\(\nabla T=0\)</span>, also</p>
 <div class="amsmath math notranslate nohighlight">
@@ -1056,12 +1062,12 @@ Mit der <a class="reference external" href="https://de.wikipedia.org/wiki/Sherma
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="10_Gradientenverfahren.html"
+       href="10_Logistische_Regression.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">zurück</p>
-        <p class="prev-next-title"><span class="section-number">10. </span>Verfahren erster Ordnung</p>
+        <p class="prev-next-title"><span class="section-number">10.9. </span>Logistische Regression</p>
       </div>
     </a>
     <a class="right-next"

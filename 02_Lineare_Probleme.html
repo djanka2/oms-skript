@@ -59,7 +59,7 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>window.MathJax = {"tex": {"macros": {"N": "\\mathbb{N}", "Z": "\\mathbb{Z}", "R": "\\mathbb{R}", "B": "\\mathbb{B}", "I": "\\mathbb{I}", "norm": ["\\left\\lVert#1 \\right\\rVert", 1], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\begin{pmatrix}"], "emat": ["\\end{pmatrix}"], "bmats": ["\\left(\\begin{smallmatrix}"], "emats": ["\\end{smallmatrix}\\right)"], "scikit": ["\\texttt{scikit-learn}"], "derv": ["\\frac{\\partial #1}{\\partial #2}", 2], "dervquad": ["\\frac{\\partial^2 #1}{\\partial #2^2}", 2], "dervzwei": ["\\frac{\\partial^2 #1}{\\partial {#2} \\partial {#3}}", 3], "v": ["\\mathbf{#1}", 1], "m": ["\\mathbf{#1}", 1], "argmin": ["\\underset{#1}{\\operatorname{arg\\!min}}", 1], "hyper": ["{\\color{Bittersweet}{#1}}", 1], "initial": "\\DeclareMathOperator{\\initial}{initial}", "reduced": "\\DeclareMathOperator{\\reduced}{reduced}", "lazy": "\\DeclareMathOperator{\\lazy}{lazy}", "ILP": "\\DeclareMathOperator{\\ILP}{ILP}", "red": ["{\\color{BrickRed}{#1}}", 1]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script>window.MathJax = {"tex": {"macros": {"N": "\\mathbb{N}", "Z": "\\mathbb{Z}", "R": "\\mathbb{R}", "B": "\\mathbb{B}", "I": "\\mathbb{I}", "E": "\\mathbb{E}", "norm": ["\\left\\lVert#1 \\right\\rVert", 1], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\begin{pmatrix}"], "emat": ["\\end{pmatrix}"], "bmats": ["\\left(\\begin{smallmatrix}"], "emats": ["\\end{smallmatrix}\\right)"], "scikit": ["\\texttt{scikit-learn}"], "derv": ["\\frac{\\partial #1}{\\partial #2}", 2], "dervquad": ["\\frac{\\partial^2 #1}{\\partial #2^2}", 2], "dervzwei": ["\\frac{\\partial^2 #1}{\\partial {#2} \\partial {#3}}", 3], "v": ["\\mathbf{#1}", 1], "m": ["\\mathbf{#1}", 1], "argmin": ["\\underset{#1}{\\operatorname{arg\\!min}}", 1], "hyper": ["{\\color{Bittersweet}{#1}}", 1], "initial": "\\DeclareMathOperator{\\initial}{initial}", "reduced": "\\DeclareMathOperator{\\reduced}{reduced}", "lazy": "\\DeclareMathOperator{\\lazy}{lazy}", "ILP": "\\DeclareMathOperator{\\ILP}{ILP}", "red": ["{\\color{BrickRed}{#1}}", 1]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '02_Lineare_Probleme';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -203,10 +203,16 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Ableitungsbasierte Optimierung</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="06_Multivariate_Analysis.html">6. Funktionen und Ableitungen</a></li>
-<li class="toctree-l1"><a class="reference internal" href="07_Automatische_Differentiation.html">7. Automatische Differentiation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="08_Theoretische_Grundlagen.html">8. Grundlagen der nichtlinearen Optimierung</a></li>
-<li class="toctree-l1"><a class="reference internal" href="09_Quadratische_Probleme.html">9. Quadratische Probleme</a></li>
-<li class="toctree-l1"><a class="reference internal" href="10_Gradientenverfahren.html">10. Verfahren erster Ordnung</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_Theoretische_Grundlagen.html">7. Grundlagen der nichtlinearen Optimierung</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="08_Quadratische_Probleme.html">8. Quadratische Probleme</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="08_Lineare_Regression.html">8.4. Anwendung: Lineare Regressionsprobleme</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="09_Automatische_Differentiation.html">9. Automatische Differentiation</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="10_Gradientenverfahren.html">10. Verfahren erster Ordnung</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="10_Logistische_Regression.html">10.9. Logistische Regression</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="11_Verfahren_zweiter_Ordnung.html">11. Verfahren zweiter Ordnung</a></li>
 <li class="toctree-l1"><a class="reference internal" href="12_Stochastischer_Gradientenabstieg.html">12. Stochastischer Gradientenabstieg</a></li>
 <li class="toctree-l1"><a class="reference internal" href="13_Training_NN.html">13. Training von Neuronalen Netzen</a></li>
@@ -391,8 +397,8 @@ document.write(`
 <section id="grundbegriffe">
 <h2><span class="section-number">2.1. </span>Grundbegriffe<a class="headerlink" href="#grundbegriffe" title="Link to this heading">#</a></h2>
 <p>Ein <em>lineares Programm</em> ist ein Optimierungsproblem, bei dem eine lineare Zielfunktion unter linearen Nebenbedingungen optimiert werden soll. Ein Beispiel für lineares Optimierungsproblem haben wir bereits in Abschnitt <a class="reference internal" href="01_Grundbegriffe.html#sec-production-example"><span class="std std-ref">Beispiel: Ein Produktionsplanungsproblem</span></a> gesehen. Es lautete:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f0d5f371-9c2c-4ae3-84a1-9b07430a0c5e">
-<span class="eqno">(2.1)<a class="headerlink" href="#equation-f0d5f371-9c2c-4ae3-84a1-9b07430a0c5e" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
+<div class="amsmath math notranslate nohighlight" id="equation-1d276809-781c-4a01-8875-897f572a5072">
+<span class="eqno">(2.1)<a class="headerlink" href="#equation-1d276809-781c-4a01-8875-897f572a5072" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
 \max_{x_1, x_2} &amp; \quad  &amp;   2x_1+2x_2 &amp; &amp; &amp; \\[2mm]
 \text{s.t. } &amp; &amp;  5x_1+10x_2&amp;\leq 50\\
              &amp; &amp;  12x_1+8x_2&amp;\leq 72\\
@@ -466,8 +472,8 @@ Es enthält beliebig viele Gleichungen, <span class="math notranslate nohighligh
 <div class="proof example admonition" id="example-2">
 <p class="admonition-title"><span class="caption-number">Example 2.1 </span> (LP, welches nicht in Standardform vorliegt)</p>
 <section class="example-content" id="proof-content">
-<div class="amsmath math notranslate nohighlight" id="equation-ac8e737a-cdc2-4567-b969-9efe9a0a2ef3">
-<span class="eqno">(2.2)<a class="headerlink" href="#equation-ac8e737a-cdc2-4567-b969-9efe9a0a2ef3" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
+<div class="amsmath math notranslate nohighlight" id="equation-a082ae62-4f39-4bd1-ba10-f331261e0c84">
+<span class="eqno">(2.2)<a class="headerlink" href="#equation-a082ae62-4f39-4bd1-ba10-f331261e0c84" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
 \max_{x_1, x_2} &amp; \quad  &amp;  2x_1-3x_2 &amp; &amp; &amp; \\[2mm]
 \text{s.t. } &amp; &amp;  3x_1+x_2&amp;\leq 3\\
              &amp; &amp;  -x_1+5x_2&amp;\geq 7\\
@@ -595,8 +601,8 @@ a_{m1} x_1+\ldots +a_{mp} x_n	&amp;  &amp; &amp;&amp;  \red{+x_{n+m_2}} &amp; =b
 <div class="proof example admonition" id="example-7">
 <p class="admonition-title"><span class="caption-number">Example 2.6 </span></p>
 <section class="example-content" id="proof-content">
-<div class="amsmath math notranslate nohighlight" id="equation-ccf2f5ad-23c8-451f-9023-44906577fca4">
-<span class="eqno">(2.3)<a class="headerlink" href="#equation-ccf2f5ad-23c8-451f-9023-44906577fca4" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
+<div class="amsmath math notranslate nohighlight" id="equation-95d173b1-fbde-4f69-9512-892541bdc43c">
+<span class="eqno">(2.3)<a class="headerlink" href="#equation-95d173b1-fbde-4f69-9512-892541bdc43c" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
 \min_{x_1, x_2^+, x_2^-, x_3, x_4} &amp; \quad  &amp;  \bmat -2,&amp;3,&amp;-3,&amp;0,&amp;0 \emat\bmat x_1\\x_2^+\\x_2^-\\x_3\\x_4\emat &amp; &amp; &amp; \\[2mm]
 \text{s.t. } &amp; &amp;  \bmat 3&amp;1&amp;-1&amp;1&amp;0\\ 1&amp;-5&amp;5&amp;0&amp;1\\ 1&amp;1&amp;-1&amp;0&amp;0 \emat\bmat x_1\\x_2^+\\x_2^-\\x_3\\x_4\emat&amp;=\bmat 3\\-7\\1\emat\\
              &amp; &amp; (x_1,x_2^+,x_2^-,x_3,x_4)&amp;\geq \v 0
@@ -642,8 +648,8 @@ Es sei <span class="math notranslate nohighlight">\(P\)</span> die Menge der zul
 <section id="grafisches-losen">
 <h2><span class="section-number">2.4. </span>Grafisches Lösen<a class="headerlink" href="#grafisches-losen" title="Link to this heading">#</a></h2>
 <p>Wir betrachten noch einmal das Produktionsbeispiel <a class="reference internal" href="01_Grundbegriffe.html#equation-eq-prodopt">(1.1)</a>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ce1e6da7-b4c6-4d90-8257-ac6f89e08662">
-<span class="eqno">(2.4)<a class="headerlink" href="#equation-ce1e6da7-b4c6-4d90-8257-ac6f89e08662" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
+<div class="amsmath math notranslate nohighlight" id="equation-6fe953ce-a43a-4884-85f1-5af2d95c222e">
+<span class="eqno">(2.4)<a class="headerlink" href="#equation-6fe953ce-a43a-4884-85f1-5af2d95c222e" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
 \max_{x_1, x_2} &amp; \quad  &amp;   2x_1+2x_2 &amp; &amp; &amp; \\[2mm]
 \text{s.t. } &amp; &amp;  5x_1+10x_2&amp;\leq 50\\
              &amp; &amp;  12x_1+8x_2&amp;\leq 72\\
@@ -775,8 +781,8 @@ Um so erstaunlicher ist es, dass moderne Varianten des Simplex-Verfahrens Proble
 </div>
 </div>
 <p>Formulierung in mathematischer Form</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e438fb29-9fe7-4c48-a20f-ed5d653cf6ac">
-<span class="eqno">(2.5)<a class="headerlink" href="#equation-e438fb29-9fe7-4c48-a20f-ed5d653cf6ac" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
+<div class="amsmath math notranslate nohighlight" id="equation-c7e7c74c-5de3-40b4-8dff-130fa8214969">
+<span class="eqno">(2.5)<a class="headerlink" href="#equation-c7e7c74c-5de3-40b4-8dff-130fa8214969" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
 \max_{x_1, x_2} &amp; \quad  &amp;   2x_1+2x_2 &amp; &amp; &amp; \\[2mm]
 \text{s.t. } &amp; &amp;  5x_1+10x_2&amp;\leq 50\\
              &amp; &amp;  12x_1+8x_2&amp;\leq 72\\
@@ -865,7 +871,7 @@ Coefficient statistics:
   Bounds range     [0e+00, 0e+00]
   RHS range        [2e+01, 7e+01]
 Presolve removed 2 rows and 0 columns
-Presolve time: 0.01s
+Presolve time: 0.00s
 Presolved: 2 rows, 2 columns, 4 nonzeros
 
 Iteration    Objective       Primal Inf.    Dual Inf.      Time
@@ -935,8 +941,8 @@ Sie garantieren, dass <span class="math notranslate nohighlight">\(z\)</span> gr
 <p class="admonition-title"><span class="caption-number">Example 2.8 </span> (Min Max (Forsetzung))</p>
 <section class="example-content" id="proof-content">
 <p>Wir führen eine neue Variable <span class="math notranslate nohighlight">\(y\)</span> und 4 Nebenbedingungen ein. Der zur <span class="math notranslate nohighlight">\(\min\max\)</span>-Formulierung <a class="reference internal" href="#equation-eq-minmax">(2.6)</a> äquivalente Teile eines linearen Programms lautet:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-4762c51c-ea8d-49b1-bde6-f39812377290">
-<span class="eqno">(2.7)<a class="headerlink" href="#equation-4762c51c-ea8d-49b1-bde6-f39812377290" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
+<div class="amsmath math notranslate nohighlight" id="equation-9578204d-a86b-4de6-a580-7ab3adec6260">
+<span class="eqno">(2.7)<a class="headerlink" href="#equation-9578204d-a86b-4de6-a580-7ab3adec6260" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
 \min_{s_1,d_1,s_2,d_2,s_3,d_3,s_4,d_4,y} &amp; \quad  &amp;   y &amp; &amp; &amp; \\[2mm]
 \text{s.t. } &amp; &amp;  s_1+d_1&amp;\leq y\\
              &amp; &amp;  s_2+d_2&amp;\leq y\\

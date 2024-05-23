@@ -207,10 +207,16 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Ableitungsbasierte Optimierung</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="06_Multivariate_Analysis.html">6. Funktionen und Ableitungen</a></li>
-<li class="toctree-l1"><a class="reference internal" href="07_Automatische_Differentiation.html">7. Automatische Differentiation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="08_Theoretische_Grundlagen.html">8. Grundlagen der nichtlinearen Optimierung</a></li>
-<li class="toctree-l1"><a class="reference internal" href="09_Quadratische_Probleme.html">9. Quadratische Probleme</a></li>
-<li class="toctree-l1"><a class="reference internal" href="10_Gradientenverfahren.html">10. Verfahren erster Ordnung</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_Theoretische_Grundlagen.html">7. Grundlagen der nichtlinearen Optimierung</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="08_Quadratische_Probleme.html">8. Quadratische Probleme</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="08_Lineare_Regression.html">8.4. Anwendung: Lineare Regressionsprobleme</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="09_Automatische_Differentiation.html">9. Automatische Differentiation</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="10_Gradientenverfahren.html">10. Verfahren erster Ordnung</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="10_Logistische_Regression.html">10.9. Logistische Regression</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="11_Verfahren_zweiter_Ordnung.html">11. Verfahren zweiter Ordnung</a></li>
 <li class="toctree-l1"><a class="reference internal" href="12_Stochastischer_Gradientenabstieg.html">12. Stochastischer Gradientenabstieg</a></li>
 <li class="toctree-l1"><a class="reference internal" href="13_Training_NN.html">13. Training von Neuronalen Netzen</a></li>
@@ -325,14 +331,17 @@ document.write(`
    <a href="#cap-alg:gd"><strong>alg:gd</strong></a> | 
    <a href="#cap-alg:gd_allgemein"><strong>alg:gd_allgemein</strong></a> | 
    <a href="#cap-alg:lbfgs"><strong>alg:lbfgs</strong></a> | 
+   <a href="#cap-alg:minibatch"><strong>alg:minibatch</strong></a> | 
    <a href="#cap-alg:mpc"><strong>alg:mpc</strong></a> | 
    <a href="#cap-alg:newton"><strong>alg:newton</strong></a> | 
+   <a href="#cap-alg:sgd"><strong>alg:sgd</strong></a> | 
    <a href="#cap-algorithm-0"><strong>algorithm-0</strong></a> | 
    <a href="#cap-algorithm-5"><strong>algorithm-5</strong></a> | 
    <a href="#cap-bsp:linear"><strong>bsp:linear</strong></a> | 
    <a href="#cap-def:LP"><strong>def:LP</strong></a> | 
    <a href="#cap-def:loesung"><strong>def:loesung</strong></a> | 
    <a href="#cap-def:minmax"><strong>def:minmax</strong></a> | 
+   <a href="#cap-def:stochopt"><strong>def:stochopt</strong></a> | 
    <a href="#cap-def:wolfe"><strong>def:wolfe</strong></a> | 
    <a href="#cap-definition-0"><strong>definition-0</strong></a> | 
    <a href="#cap-definition-1"><strong>definition-1</strong></a> | 
@@ -403,7 +412,6 @@ document.write(`
    <a href="#cap-theorem-17"><strong>theorem-17</strong></a> | 
    <a href="#cap-theorem-18"><strong>theorem-18</strong></a> | 
    <a href="#cap-theorem-22"><strong>theorem-22</strong></a> | 
-   <a href="#cap-theorem-3"><strong>theorem-3</strong></a> | 
    <a href="#cap-theorem-32"><strong>theorem-32</strong></a> | 
    <a href="#cap-theorem-8"><strong>theorem-8</strong></a> | 
    <a href="#cap-theorem-9"><strong>theorem-9</strong></a> | 
@@ -413,7 +421,8 @@ document.write(`
    <a href="#cap-thm:kettenregel_pfad"><strong>thm:kettenregel_pfad</strong></a> | 
    <a href="#cap-thm:konvex"><strong>thm:konvex</strong></a> | 
    <a href="#cap-thm:konvex2"><strong>thm:konvex2</strong></a> | 
-   <a href="#cap-thm:konvex_"><strong>thm:konvex_</strong></a>
+   <a href="#cap-thm:konvex_"><strong>thm:konvex_</strong></a> | 
+   <a href="#cap-thm:krit-qp"><strong>thm:krit-qp</strong></a>
    </div>
 
    <table class="indextable modindextable">
@@ -423,7 +432,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="07_Automatische_Differentiation.html#alg:backprop"><code class="xref">alg:backprop</code></a> <em>(07_Automatische_Differentiation)</em></td><td>
+       <a href="09_Automatische_Differentiation.html#alg:backprop"><code class="xref">alg:backprop</code></a> <em>(09_Automatische_Differentiation)</em></td><td>
        <em>algorithm</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-alg:bfgs"><td></td><td>
@@ -458,6 +467,14 @@ document.write(`
        <a href="11_Verfahren_zweiter_Ordnung.html#alg:lbfgs"><code class="xref">alg:lbfgs</code></a> <em>(11_Verfahren_zweiter_Ordnung)</em></td><td>
        <em>algorithm</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-alg:minibatch"><td></td><td>
+       <strong>alg:minibatch</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="12_Stochastischer_Gradientenabstieg.html#alg:minibatch"><code class="xref">alg:minibatch</code></a> <em>(12_Stochastischer_Gradientenabstieg)</em></td><td>
+       <em>algorithm</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-alg:mpc"><td></td><td>
        <strong>alg:mpc</strong></td><td></td></tr>
      <tr>
@@ -472,6 +489,14 @@ document.write(`
        <td></td>
        <td>
        <a href="11_Verfahren_zweiter_Ordnung.html#alg:newton"><code class="xref">alg:newton</code></a> <em>(11_Verfahren_zweiter_Ordnung)</em></td><td>
+       <em>algorithm</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-alg:sgd"><td></td><td>
+       <strong>alg:sgd</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="12_Stochastischer_Gradientenabstieg.html#alg:sgd"><code class="xref">alg:sgd</code></a> <em>(12_Stochastischer_Gradientenabstieg)</em></td><td>
        <em>algorithm</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-algorithm-0"><td></td><td>
@@ -519,7 +544,15 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="08_Theoretische_Grundlagen.html#def:minmax"><code class="xref">def:minmax</code></a> <em>(08_Theoretische_Grundlagen)</em></td><td>
+       <a href="07_Theoretische_Grundlagen.html#def:minmax"><code class="xref">def:minmax</code></a> <em>(07_Theoretische_Grundlagen)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-def:stochopt"><td></td><td>
+       <strong>def:stochopt</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="12_Stochastischer_Gradientenabstieg.html#def:stochopt"><code class="xref">def:stochopt</code></a> <em>(12_Stochastischer_Gradientenabstieg)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-def:wolfe"><td></td><td>
@@ -551,7 +584,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="06_Multivariate_Analysis.html#definition-10"><code class="xref">definition-10</code></a> <em>(06_Multivariate_Analysis)</em></td><td>
+       <a href="07_Theoretische_Grundlagen.html#definition-10"><code class="xref">definition-10</code></a> <em>(07_Theoretische_Grundlagen)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-definition-11"><td></td><td>
@@ -583,7 +616,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="08_Theoretische_Grundlagen.html#definition-16"><code class="xref">definition-16</code></a> <em>(08_Theoretische_Grundlagen)</em></td><td>
+       <a href="07_Theoretische_Grundlagen.html#definition-16"><code class="xref">definition-16</code></a> <em>(07_Theoretische_Grundlagen)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-definition-17"><td></td><td>
@@ -591,7 +624,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="08_Theoretische_Grundlagen.html#definition-17"><code class="xref">definition-17</code></a> <em>(08_Theoretische_Grundlagen)</em></td><td>
+       <a href="07_Theoretische_Grundlagen.html#definition-17"><code class="xref">definition-17</code></a> <em>(07_Theoretische_Grundlagen)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-definition-18"><td></td><td>
@@ -607,7 +640,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="08_Theoretische_Grundlagen.html#definition-2"><code class="xref">definition-2</code></a> <em>(08_Theoretische_Grundlagen)</em></td><td>
+       <a href="07_Theoretische_Grundlagen.html#definition-2"><code class="xref">definition-2</code></a> <em>(07_Theoretische_Grundlagen)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-definition-23"><td></td><td>
@@ -615,7 +648,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="08_Theoretische_Grundlagen.html#definition-23"><code class="xref">definition-23</code></a> <em>(08_Theoretische_Grundlagen)</em></td><td>
+       <a href="07_Theoretische_Grundlagen.html#definition-23"><code class="xref">definition-23</code></a> <em>(07_Theoretische_Grundlagen)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-definition-25"><td></td><td>
@@ -647,7 +680,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="06_Multivariate_Analysis.html#definition-5"><code class="xref">definition-5</code></a> <em>(06_Multivariate_Analysis)</em></td><td>
+       <a href="07_Theoretische_Grundlagen.html#definition-5"><code class="xref">definition-5</code></a> <em>(07_Theoretische_Grundlagen)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-definition-7"><td></td><td>
@@ -703,7 +736,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="08_Theoretische_Grundlagen.html#ex:kurvendiskussion"><code class="xref">ex:kurvendiskussion</code></a> <em>(08_Theoretische_Grundlagen)</em></td><td>
+       <a href="07_Theoretische_Grundlagen.html#ex:kurvendiskussion"><code class="xref">ex:kurvendiskussion</code></a> <em>(07_Theoretische_Grundlagen)</em></td><td>
        <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-ex:partiell-unstetig"><td></td><td>
@@ -719,7 +752,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="08_Theoretische_Grundlagen.html#ex:quadratic"><code class="xref">ex:quadratic</code></a> <em>(08_Theoretische_Grundlagen)</em></td><td>
+       <a href="07_Theoretische_Grundlagen.html#ex:quadratic"><code class="xref">ex:quadratic</code></a> <em>(07_Theoretische_Grundlagen)</em></td><td>
        <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-ex:unstetig"><td></td><td>
@@ -735,7 +768,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="06_Multivariate_Analysis.html#example-0"><code class="xref">example-0</code></a> <em>(06_Multivariate_Analysis)</em></td><td>
+       <a href="08_Quadratische_Probleme.html#example-0"><code class="xref">example-0</code></a> <em>(08_Quadratische_Probleme)</em></td><td>
        <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-example-1"><td></td><td>
@@ -743,7 +776,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="06_Multivariate_Analysis.html#example-1"><code class="xref">example-1</code></a> <em>(06_Multivariate_Analysis)</em></td><td>
+       <a href="09_Automatische_Differentiation.html#example-1"><code class="xref">example-1</code></a> <em>(09_Automatische_Differentiation)</em></td><td>
        <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-example-10"><td></td><td>
@@ -775,7 +808,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="06_Multivariate_Analysis.html#example-14"><code class="xref">example-14</code></a> <em>(06_Multivariate_Analysis)</em></td><td>
+       <a href="07_Theoretische_Grundlagen.html#example-14"><code class="xref">example-14</code></a> <em>(07_Theoretische_Grundlagen)</em></td><td>
        <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-example-15"><td></td><td>
@@ -823,7 +856,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="06_Multivariate_Analysis.html#example-2"><code class="xref">example-2</code></a> <em>(06_Multivariate_Analysis)</em></td><td>
+       <a href="11_Verfahren_zweiter_Ordnung.html#example-2"><code class="xref">example-2</code></a> <em>(11_Verfahren_zweiter_Ordnung)</em></td><td>
        <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-example-20"><td></td><td>
@@ -839,7 +872,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="06_Multivariate_Analysis.html#example-21"><code class="xref">example-21</code></a> <em>(06_Multivariate_Analysis)</em></td><td>
+       <a href="07_Theoretische_Grundlagen.html#example-21"><code class="xref">example-21</code></a> <em>(07_Theoretische_Grundlagen)</em></td><td>
        <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-example-22"><td></td><td>
@@ -935,7 +968,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="09_Quadratische_Probleme.html#example-4"><code class="xref">example-4</code></a> <em>(09_Quadratische_Probleme)</em></td><td>
+       <a href="08_Quadratische_Probleme.html#example-4"><code class="xref">example-4</code></a> <em>(08_Quadratische_Probleme)</em></td><td>
        <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-example-5"><td></td><td>
@@ -943,7 +976,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="09_Quadratische_Probleme.html#example-5"><code class="xref">example-5</code></a> <em>(09_Quadratische_Probleme)</em></td><td>
+       <a href="08_Quadratische_Probleme.html#example-5"><code class="xref">example-5</code></a> <em>(08_Quadratische_Probleme)</em></td><td>
        <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-example-6"><td></td><td>
@@ -951,7 +984,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="06_Multivariate_Analysis.html#example-6"><code class="xref">example-6</code></a> <em>(06_Multivariate_Analysis)</em></td><td>
+       <a href="09_Automatische_Differentiation.html#example-6"><code class="xref">example-6</code></a> <em>(09_Automatische_Differentiation)</em></td><td>
        <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-example-7"><td></td><td>
@@ -959,7 +992,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="08_Theoretische_Grundlagen.html#example-7"><code class="xref">example-7</code></a> <em>(08_Theoretische_Grundlagen)</em></td><td>
+       <a href="07_Theoretische_Grundlagen.html#example-7"><code class="xref">example-7</code></a> <em>(07_Theoretische_Grundlagen)</em></td><td>
        <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-example-8"><td></td><td>
@@ -983,7 +1016,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="07_Automatische_Differentiation.html#obs:pfad"><code class="xref">obs:pfad</code></a> <em>(07_Automatische_Differentiation)</em></td><td>
+       <a href="09_Automatische_Differentiation.html#obs:pfad"><code class="xref">obs:pfad</code></a> <em>(09_Automatische_Differentiation)</em></td><td>
        <em>observation</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-observation-0"><td></td><td>
@@ -991,7 +1024,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="07_Automatische_Differentiation.html#observation-0"><code class="xref">observation-0</code></a> <em>(07_Automatische_Differentiation)</em></td><td>
+       <a href="09_Automatische_Differentiation.html#observation-0"><code class="xref">observation-0</code></a> <em>(09_Automatische_Differentiation)</em></td><td>
        <em>observation</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-observation-2"><td></td><td>
@@ -999,7 +1032,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="07_Automatische_Differentiation.html#observation-2"><code class="xref">observation-2</code></a> <em>(07_Automatische_Differentiation)</em></td><td>
+       <a href="09_Automatische_Differentiation.html#observation-2"><code class="xref">observation-2</code></a> <em>(09_Automatische_Differentiation)</em></td><td>
        <em>observation</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-qpex1"><td></td><td>
@@ -1007,7 +1040,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="09_Quadratische_Probleme.html#qpex1"><code class="xref">qpex1</code></a> <em>(09_Quadratische_Probleme)</em></td><td>
+       <a href="08_Quadratische_Probleme.html#qpex1"><code class="xref">qpex1</code></a> <em>(08_Quadratische_Probleme)</em></td><td>
        <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-qpex2"><td></td><td>
@@ -1015,7 +1048,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="09_Quadratische_Probleme.html#qpex2"><code class="xref">qpex2</code></a> <em>(09_Quadratische_Probleme)</em></td><td>
+       <a href="08_Quadratische_Probleme.html#qpex2"><code class="xref">qpex2</code></a> <em>(08_Quadratische_Probleme)</em></td><td>
        <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-remark-1"><td></td><td>
@@ -1031,7 +1064,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="08_Theoretische_Grundlagen.html#remark-15"><code class="xref">remark-15</code></a> <em>(08_Theoretische_Grundlagen)</em></td><td>
+       <a href="07_Theoretische_Grundlagen.html#remark-15"><code class="xref">remark-15</code></a> <em>(07_Theoretische_Grundlagen)</em></td><td>
        <em>remark</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-remark-17"><td></td><td>
@@ -1047,7 +1080,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="08_Theoretische_Grundlagen.html#theorem-11"><code class="xref">theorem-11</code></a> <em>(08_Theoretische_Grundlagen)</em></td><td>
+       <a href="07_Theoretische_Grundlagen.html#theorem-11"><code class="xref">theorem-11</code></a> <em>(07_Theoretische_Grundlagen)</em></td><td>
        <em>theorem</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-theorem-14"><td></td><td>
@@ -1079,15 +1112,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="08_Theoretische_Grundlagen.html#theorem-22"><code class="xref">theorem-22</code></a> <em>(08_Theoretische_Grundlagen)</em></td><td>
-       <em>theorem</em></td></tr>
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-theorem-3"><td></td><td>
-       <strong>theorem-3</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="09_Quadratische_Probleme.html#theorem-3"><code class="xref">theorem-3</code></a> <em>(09_Quadratische_Probleme)</em></td><td>
+       <a href="07_Theoretische_Grundlagen.html#theorem-22"><code class="xref">theorem-22</code></a> <em>(07_Theoretische_Grundlagen)</em></td><td>
        <em>theorem</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-theorem-32"><td></td><td>
@@ -1103,7 +1128,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="08_Theoretische_Grundlagen.html#theorem-8"><code class="xref">theorem-8</code></a> <em>(08_Theoretische_Grundlagen)</em></td><td>
+       <a href="07_Theoretische_Grundlagen.html#theorem-8"><code class="xref">theorem-8</code></a> <em>(07_Theoretische_Grundlagen)</em></td><td>
        <em>theorem</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-theorem-9"><td></td><td>
@@ -1111,7 +1136,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="08_Theoretische_Grundlagen.html#theorem-9"><code class="xref">theorem-9</code></a> <em>(08_Theoretische_Grundlagen)</em></td><td>
+       <a href="07_Theoretische_Grundlagen.html#theorem-9"><code class="xref">theorem-9</code></a> <em>(07_Theoretische_Grundlagen)</em></td><td>
        <em>theorem</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-thm:OB1"><td></td><td>
@@ -1119,7 +1144,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="08_Theoretische_Grundlagen.html#thm:OB1"><code class="xref">thm:OB1</code></a> <em>(08_Theoretische_Grundlagen)</em></td><td>
+       <a href="07_Theoretische_Grundlagen.html#thm:OB1"><code class="xref">thm:OB1</code></a> <em>(07_Theoretische_Grundlagen)</em></td><td>
        <em>theorem</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-thm:OBn"><td></td><td>
@@ -1127,7 +1152,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="08_Theoretische_Grundlagen.html#thm:OBn"><code class="xref">thm:OBn</code></a> <em>(08_Theoretische_Grundlagen)</em></td><td>
+       <a href="07_Theoretische_Grundlagen.html#thm:OBn"><code class="xref">thm:OBn</code></a> <em>(07_Theoretische_Grundlagen)</em></td><td>
        <em>theorem</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-thm:ecken"><td></td><td>
@@ -1143,7 +1168,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="07_Automatische_Differentiation.html#thm:kettenregel_pfad"><code class="xref">thm:kettenregel_pfad</code></a> <em>(07_Automatische_Differentiation)</em></td><td>
+       <a href="09_Automatische_Differentiation.html#thm:kettenregel_pfad"><code class="xref">thm:kettenregel_pfad</code></a> <em>(09_Automatische_Differentiation)</em></td><td>
        <em>theorem</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-thm:konvex"><td></td><td>
@@ -1151,7 +1176,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="08_Theoretische_Grundlagen.html#thm:konvex"><code class="xref">thm:konvex</code></a> <em>(08_Theoretische_Grundlagen)</em></td><td>
+       <a href="07_Theoretische_Grundlagen.html#thm:konvex"><code class="xref">thm:konvex</code></a> <em>(07_Theoretische_Grundlagen)</em></td><td>
        <em>theorem</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-thm:konvex2"><td></td><td>
@@ -1159,7 +1184,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="08_Theoretische_Grundlagen.html#thm:konvex2"><code class="xref">thm:konvex2</code></a> <em>(08_Theoretische_Grundlagen)</em></td><td>
+       <a href="07_Theoretische_Grundlagen.html#thm:konvex2"><code class="xref">thm:konvex2</code></a> <em>(07_Theoretische_Grundlagen)</em></td><td>
        <em>theorem</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-thm:konvex_"><td></td><td>
@@ -1167,7 +1192,15 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="08_Theoretische_Grundlagen.html#thm:konvex_"><code class="xref">thm:konvex_</code></a> <em>(08_Theoretische_Grundlagen)</em></td><td>
+       <a href="07_Theoretische_Grundlagen.html#thm:konvex_"><code class="xref">thm:konvex_</code></a> <em>(07_Theoretische_Grundlagen)</em></td><td>
+       <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-thm:krit-qp"><td></td><td>
+       <strong>thm:krit-qp</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="08_Quadratische_Probleme.html#thm:krit-qp"><code class="xref">thm:krit-qp</code></a> <em>(08_Quadratische_Probleme)</em></td><td>
        <em>theorem</em></td></tr>
    </table>
 

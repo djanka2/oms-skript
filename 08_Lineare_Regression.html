@@ -1,0 +1,1200 @@
+
+<!DOCTYPE html>
+
+
+<html lang="de" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>8.4. Anwendung: Lineare Regressionsprobleme &#8212; Optimierungsverfahren, Modellierung und Simulation (DSCB410)</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=ca93fcec" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="_static/documentation_options.js?v=91fba89f"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="_static/translations.js?v=70a09b52"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"tex": {"macros": {"N": "\\mathbb{N}", "Z": "\\mathbb{Z}", "R": "\\mathbb{R}", "B": "\\mathbb{B}", "I": "\\mathbb{I}", "E": "\\mathbb{E}", "norm": ["\\left\\lVert#1 \\right\\rVert", 1], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\begin{pmatrix}"], "emat": ["\\end{pmatrix}"], "bmats": ["\\left(\\begin{smallmatrix}"], "emats": ["\\end{smallmatrix}\\right)"], "scikit": ["\\texttt{scikit-learn}"], "derv": ["\\frac{\\partial #1}{\\partial #2}", 2], "dervquad": ["\\frac{\\partial^2 #1}{\\partial #2^2}", 2], "dervzwei": ["\\frac{\\partial^2 #1}{\\partial {#2} \\partial {#3}}", 3], "v": ["\\mathbf{#1}", 1], "m": ["\\mathbf{#1}", 1], "argmin": ["\\underset{#1}{\\operatorname{arg\\!min}}", 1], "hyper": ["{\\color{Bittersweet}{#1}}", 1], "initial": "\\DeclareMathOperator{\\initial}{initial}", "reduced": "\\DeclareMathOperator{\\reduced}{reduced}", "lazy": "\\DeclareMathOperator{\\lazy}{lazy}", "ILP": "\\DeclareMathOperator{\\ILP}{ILP}", "red": ["{\\color{BrickRed}{#1}}", 1]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '08_Lineare_Regression';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Stichwortverzeichnis" href="genindex.html" />
+    <link rel="search" title="Suche" href="search.html" />
+    <link rel="next" title="9. Automatische Differentiation" href="09_Automatische_Differentiation.html" />
+    <link rel="prev" title="8. Quadratische Probleme" href="08_Quadratische_Probleme.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="de"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="00_Ueberblick.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/HKA_IWI_Bildmarke-h_RGB.svg" class="logo__image only-light" alt="Optimierungsverfahren, Modellierung und Simulation (DSCB410) - Home"/>
+    <script>document.write(`<img src="_static/HKA_IWI_Bildmarke-h_RGB.svg" class="logo__image only-dark" alt="Optimierungsverfahren, Modellierung und Simulation (DSCB410) - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Suche" aria-label="Suche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Suche</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="00_Ueberblick.html">
+                    Überblick
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lineare Optimierungsmodelle</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_Grundbegriffe.html">1. Einführung und Grundbegriffe</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="02_Lineare_Probleme.html">2. Lineare Optimierung</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="02_Transportproblem.html">2.9. Anwendung: Transportproblem</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="03_Ganzzahlige_Probleme.html">3. Ganzzahlige Probleme</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="03_Standortprobleme.html">3.8. Anwendung: Standortprobleme</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_Zuordnung_AWP.html">3.9. Anwendung: Studierende auf Projekte verteilen</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="04_Dynamische_Probleme.html">4. Zeitabhängige Probleme</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="04_Laststeuerung.html">4.4. Anwendung: Laststeuerung in der Stahlproduktion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_Speicherproblem_rollierend.html">4.5. Anwendung: Energiespeicherproblem mit rollierendem Zeitfenster</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="05_Praxisaspekte.html">5. Praxisaspekte beim Lösen von gemischt-ganzzahligen Programmen</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Ableitungsbasierte Optimierung</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="06_Multivariate_Analysis.html">6. Funktionen und Ableitungen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_Theoretische_Grundlagen.html">7. Grundlagen der nichtlinearen Optimierung</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="08_Quadratische_Probleme.html">8. Quadratische Probleme</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">8.4. Anwendung: Lineare Regressionsprobleme</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="09_Automatische_Differentiation.html">9. Automatische Differentiation</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="10_Gradientenverfahren.html">10. Verfahren erster Ordnung</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="10_Logistische_Regression.html">10.9. Logistische Regression</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="11_Verfahren_zweiter_Ordnung.html">11. Verfahren zweiter Ordnung</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_Stochastischer_Gradientenabstieg.html">12. Stochastischer Gradientenabstieg</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_Training_NN.html">13. Training von Neuronalen Netzen</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Laden Sie diese Seite herunter">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/08_Lineare_Regression.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Quelldatei herunterladen"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="In PDF drucken"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Vollbildmodus"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Suche" aria-label="Suche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Anwendung: Lineare Regressionsprobleme</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Inhalt </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multivariate-lineare-regression">8.4.1. Multivariate lineare Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uberfuhren-in-qp-standardform">Überführen in QP Standardform</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aufstellen-der-optimalitatsbedingungen">Aufstellen der Optimalitätsbedingungen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#berechnung-der-losung-mit-python">Berechnung der Lösung mit Python</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ridge-regression">8.4.2. Ridge Regression</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <p>=(sec:linreg)</p>
+<section id="anwendung-lineare-regressionsprobleme">
+<h1><span class="section-number">8.4. </span>Anwendung: Lineare Regressionsprobleme<a class="headerlink" href="#anwendung-lineare-regressionsprobleme" title="Link to this heading">#</a></h1>
+<p>Lineare Regressionsprobleme lassen sich auf quadratische Optimierungsprobleme zurückführen. Wir betrachten in diesem Abschnitt folgendes Problem: Es soll die geschmackliche Qualität eines Weines (basierend auf Expertenbewertungen) anhand der folgenden elf Faktoren vorhergesagt werden:</p>
+<ul class="simple">
+<li><p>nicht-flüchtiger Säuregehalt,</p></li>
+<li><p>flüchtiger Säuregehalt,</p></li>
+<li><p>Zitronensäure,</p></li>
+<li><p>Restzucker,</p></li>
+<li><p>Chloride,</p></li>
+<li><p>freies Schwefeldioxid,</p></li>
+<li><p>gesamtes Schwefeldioxid,</p></li>
+<li><p>Dichte,</p></li>
+<li><p>pH-Wert,</p></li>
+<li><p>Sulfate und</p></li>
+<li><p>Alkoholgehalt</p></li>
+</ul>
+<p>Dazu wurden in <span id="id1">[<a class="reference internal" href="08_Quadratische_Probleme.html#id11" title="Paulo Cortez, AntÃ³nio Cerdeira, Fernando Almeida, Telmo Matos, and JosÃ© Reis. Modeling wine preferences by data mining from physicochemical properties. Decision Support Systems, 47(4):547–553, November 2009. doi:10.1016/j.dss.2009.05.016.">CCA+09</a>]</span> Daten für 1599 portugiesische Vinho Verde Rotweinsorten beschrieben.
+Wir werfen einen ersten Blick auf die Daten:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">df_raw</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;Daten/winequality-red.csv&quot;</span><span class="p">,</span> <span class="n">delimiter</span> <span class="o">=</span> <span class="s2">&quot;;&quot;</span> <span class="p">)</span>
+<span class="n">df_raw</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>fixed acidity</th>
+      <th>volatile acidity</th>
+      <th>citric acid</th>
+      <th>residual sugar</th>
+      <th>chlorides</th>
+      <th>free sulfur dioxide</th>
+      <th>total sulfur dioxide</th>
+      <th>density</th>
+      <th>pH</th>
+      <th>sulphates</th>
+      <th>alcohol</th>
+      <th>quality</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>7.4</td>
+      <td>0.700</td>
+      <td>0.00</td>
+      <td>1.9</td>
+      <td>0.076</td>
+      <td>11.0</td>
+      <td>34.0</td>
+      <td>0.99780</td>
+      <td>3.51</td>
+      <td>0.56</td>
+      <td>9.4</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>7.8</td>
+      <td>0.880</td>
+      <td>0.00</td>
+      <td>2.6</td>
+      <td>0.098</td>
+      <td>25.0</td>
+      <td>67.0</td>
+      <td>0.99680</td>
+      <td>3.20</td>
+      <td>0.68</td>
+      <td>9.8</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>7.8</td>
+      <td>0.760</td>
+      <td>0.04</td>
+      <td>2.3</td>
+      <td>0.092</td>
+      <td>15.0</td>
+      <td>54.0</td>
+      <td>0.99700</td>
+      <td>3.26</td>
+      <td>0.65</td>
+      <td>9.8</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>11.2</td>
+      <td>0.280</td>
+      <td>0.56</td>
+      <td>1.9</td>
+      <td>0.075</td>
+      <td>17.0</td>
+      <td>60.0</td>
+      <td>0.99800</td>
+      <td>3.16</td>
+      <td>0.58</td>
+      <td>9.8</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>7.4</td>
+      <td>0.700</td>
+      <td>0.00</td>
+      <td>1.9</td>
+      <td>0.076</td>
+      <td>11.0</td>
+      <td>34.0</td>
+      <td>0.99780</td>
+      <td>3.51</td>
+      <td>0.56</td>
+      <td>9.4</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>1594</th>
+      <td>6.2</td>
+      <td>0.600</td>
+      <td>0.08</td>
+      <td>2.0</td>
+      <td>0.090</td>
+      <td>32.0</td>
+      <td>44.0</td>
+      <td>0.99490</td>
+      <td>3.45</td>
+      <td>0.58</td>
+      <td>10.5</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>1595</th>
+      <td>5.9</td>
+      <td>0.550</td>
+      <td>0.10</td>
+      <td>2.2</td>
+      <td>0.062</td>
+      <td>39.0</td>
+      <td>51.0</td>
+      <td>0.99512</td>
+      <td>3.52</td>
+      <td>0.76</td>
+      <td>11.2</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>1596</th>
+      <td>6.3</td>
+      <td>0.510</td>
+      <td>0.13</td>
+      <td>2.3</td>
+      <td>0.076</td>
+      <td>29.0</td>
+      <td>40.0</td>
+      <td>0.99574</td>
+      <td>3.42</td>
+      <td>0.75</td>
+      <td>11.0</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>1597</th>
+      <td>5.9</td>
+      <td>0.645</td>
+      <td>0.12</td>
+      <td>2.0</td>
+      <td>0.075</td>
+      <td>32.0</td>
+      <td>44.0</td>
+      <td>0.99547</td>
+      <td>3.57</td>
+      <td>0.71</td>
+      <td>10.2</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>1598</th>
+      <td>6.0</td>
+      <td>0.310</td>
+      <td>0.47</td>
+      <td>3.6</td>
+      <td>0.067</td>
+      <td>18.0</td>
+      <td>42.0</td>
+      <td>0.99549</td>
+      <td>3.39</td>
+      <td>0.66</td>
+      <td>11.0</td>
+      <td>6</td>
+    </tr>
+  </tbody>
+</table>
+<p>1599 rows × 12 columns</p>
+</div></div></div>
+</div>
+<p>Wir löschen zunächst doppelte Einträge und skalieren alle Features in vergleichbare Größenordnungen.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df_raw</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># Spaltenweise Standardisierung: Subtraktion von Mittelwert und Division durch Standardabweichung</span>
+<span class="n">df</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span> <span class="o">-</span> <span class="n">df</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span> <span class="o">/</span> <span class="n">df</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>fixed acidity</th>
+      <th>volatile acidity</th>
+      <th>citric acid</th>
+      <th>residual sugar</th>
+      <th>chlorides</th>
+      <th>free sulfur dioxide</th>
+      <th>total sulfur dioxide</th>
+      <th>density</th>
+      <th>pH</th>
+      <th>sulphates</th>
+      <th>alcohol</th>
+      <th>quality</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>-0.524238</td>
+      <td>0.931657</td>
+      <td>-1.392745</td>
+      <td>-0.460987</td>
+      <td>-0.245532</td>
+      <td>-0.468381</td>
+      <td>-0.383908</td>
+      <td>0.583788</td>
+      <td>1.291397</td>
+      <td>-0.578348</td>
+      <td>-0.954023</td>
+      <td>-0.756762</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>-0.293955</td>
+      <td>1.915095</td>
+      <td>-1.392745</td>
+      <td>0.056644</td>
+      <td>0.200020</td>
+      <td>0.871682</td>
+      <td>0.603851</td>
+      <td>0.048719</td>
+      <td>-0.708135</td>
+      <td>0.124776</td>
+      <td>-0.584360</td>
+      <td>-0.756762</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-0.293955</td>
+      <td>1.259470</td>
+      <td>-1.188180</td>
+      <td>-0.165198</td>
+      <td>0.078506</td>
+      <td>-0.085506</td>
+      <td>0.214734</td>
+      <td>0.155733</td>
+      <td>-0.321129</td>
+      <td>-0.051005</td>
+      <td>-0.584360</td>
+      <td>-0.756762</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1.663455</td>
+      <td>-1.363032</td>
+      <td>1.471170</td>
+      <td>-0.460987</td>
+      <td>-0.265785</td>
+      <td>0.105932</td>
+      <td>0.394326</td>
+      <td>0.690802</td>
+      <td>-0.966139</td>
+      <td>-0.461161</td>
+      <td>-0.584360</td>
+      <td>0.457452</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>-0.524238</td>
+      <td>0.713115</td>
+      <td>-1.392745</td>
+      <td>-0.534935</td>
+      <td>-0.265785</td>
+      <td>-0.276944</td>
+      <td>-0.204316</td>
+      <td>0.583788</td>
+      <td>1.291397</td>
+      <td>-0.578348</td>
+      <td>-0.954023</td>
+      <td>-0.756762</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>1354</th>
+      <td>-0.869663</td>
+      <td>0.494574</td>
+      <td>-0.983615</td>
+      <td>-0.460987</td>
+      <td>-0.407552</td>
+      <td>1.158838</td>
+      <td>-0.264180</td>
+      <td>-0.106451</td>
+      <td>0.710888</td>
+      <td>0.945087</td>
+      <td>-0.861607</td>
+      <td>0.457452</td>
+    </tr>
+    <tr>
+      <th>1355</th>
+      <td>-1.215088</td>
+      <td>0.385303</td>
+      <td>-0.983615</td>
+      <td>-0.387040</td>
+      <td>0.038001</td>
+      <td>1.541713</td>
+      <td>-0.084587</td>
+      <td>-0.967912</td>
+      <td>0.904391</td>
+      <td>-0.461161</td>
+      <td>0.062551</td>
+      <td>-0.756762</td>
+    </tr>
+    <tr>
+      <th>1356</th>
+      <td>-1.387801</td>
+      <td>0.112125</td>
+      <td>-0.881332</td>
+      <td>-0.239145</td>
+      <td>-0.529066</td>
+      <td>2.211745</td>
+      <td>0.124937</td>
+      <td>-0.850197</td>
+      <td>1.355898</td>
+      <td>0.593525</td>
+      <td>0.709462</td>
+      <td>0.457452</td>
+    </tr>
+    <tr>
+      <th>1357</th>
+      <td>-1.387801</td>
+      <td>0.631162</td>
+      <td>-0.779049</td>
+      <td>-0.387040</td>
+      <td>-0.265785</td>
+      <td>1.541713</td>
+      <td>-0.084587</td>
+      <td>-0.662923</td>
+      <td>1.678403</td>
+      <td>0.300557</td>
+      <td>-0.214696</td>
+      <td>-0.756762</td>
+    </tr>
+    <tr>
+      <th>1358</th>
+      <td>-1.330230</td>
+      <td>-1.199126</td>
+      <td>1.010897</td>
+      <td>0.796117</td>
+      <td>-0.427804</td>
+      <td>0.201650</td>
+      <td>-0.144452</td>
+      <td>-0.652221</td>
+      <td>0.517385</td>
+      <td>0.007588</td>
+      <td>0.524631</td>
+      <td>0.457452</td>
+    </tr>
+  </tbody>
+</table>
+<p>1359 rows × 12 columns</p>
+</div></div></div>
+</div>
+<section id="multivariate-lineare-regression">
+<h2><span class="section-number">8.4.1. </span>Multivariate lineare Regression<a class="headerlink" href="#multivariate-lineare-regression" title="Link to this heading">#</a></h2>
+<p>Wir möchten nun aus den ersten elf Spalte die Zielvariable <code class="docutils literal notranslate"><span class="pre">quality</span></code> vorhersagen. Unser lineares Regressionsmodell lautet also:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+f(\v x)=w_0 + w_1 x_1 + w_2 x_2 + \cdots +w_{11} x_{11} = w_0+\sum_{j=1}^{11} w_jx_j,
+\end{align*}\]</div>
+<p>wobei <span class="math notranslate nohighlight">\(x_1\)</span> für das Feature <code class="docutils literal notranslate"><span class="pre">fixed</span> <span class="pre">acidity</span></code>, <span class="math notranslate nohighlight">\(x_2\)</span> für das Feature <code class="docutils literal notranslate"><span class="pre">volatile</span> <span class="pre">acidity</span></code>, <span class="math notranslate nohighlight">\(\dots\)</span> und <span class="math notranslate nohighlight">\(x_{11}\)</span> für das Feature <code class="docutils literal notranslate"><span class="pre">alcohol</span></code> steht. Für diese Funktion möchten wir nun die plausibelsten Parameter <span class="math notranslate nohighlight">\(w_0, w_1, \dots, w_{11}\)</span> identifizieren. Dies tun wir mit Hilfe des mittleren quadratischen Fehlers zwischen Vorhersage und tatsächlichem Wert (dem sog. <em>Label</em>), den wir für den gesamten Trainingsdatensatz wie folgt berechnen können:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+L(w_0, w_1, \dots, w_{11}) = \frac{1}{N}\sum_{i=1}^N \left(y_i-\left(w_0 +\sum_{j=1}^{11} w_jx_{i,j}\right) \right)^2,
+\end{align*}\]</div>
+<p>wobei <span class="math notranslate nohighlight">\(x_{i,j}\)</span> für den Wert des <span class="math notranslate nohighlight">\(j\)</span>-ten Features für den <span class="math notranslate nohighlight">\(i\)</span>-ten Wein steht und <span class="math notranslate nohighlight">\(N=1359\)</span> die Anzahl der Datenpunkte (Weine) bezeichnet.</p>
+<p>Die Minimierung von <span class="math notranslate nohighlight">\(L\)</span> wird auch die <em>Methode der kleinsten Quadrate</em> genannt und besteht aus dem quadratischen Optimierungsproblem</p>
+<div class="math notranslate nohighlight" id="equation-eq-least-squares">
+<span class="eqno">(8.3)<a class="headerlink" href="#equation-eq-least-squares" title="Link to this equation">#</a></span>\[\begin{align}
+\min_{w_0, w_1, \dots, w_{11}} \frac{1}{N}\sum_{i=1}^N (y_i-(w_0 +\sum_{j=1}^{11} w_jx_{i,j}) )^2.
+\end{align}\]</div>
+<p>Zugegeben, diese Funktion sieht auf den ersten Blick ganz anders aus als das quadratische Optimierungsproblem in Standardform <a class="reference internal" href="08_Quadratische_Probleme.html#equation-eq-qp-standard">(8.1)</a>. Wir gehen deshalb wie folgt vor:</p>
+<ol class="arabic simple">
+<li><p>Überführen des Regressionsproblems in Standardform.</p></li>
+<li><p>Aufstellen der Optimalitätsbedingungen.</p></li>
+<li><p>Berechnung der Lösung mit Python.</p></li>
+</ol>
+<section id="uberfuhren-in-qp-standardform">
+<h3>Überführen in QP Standardform<a class="headerlink" href="#uberfuhren-in-qp-standardform" title="Link to this heading">#</a></h3>
+<p>Wir ordnen alle Beobachtungen in der <em>Designmatrix</em> an:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\m X=\bmat 
+    1 &amp; x_{1,1} &amp; \dots &amp; x_{1,11} \\
+    \vdots &amp; &amp; &amp; \vdots\\
+    1 &amp; x_{N,1} &amp; \dots &amp; x_{N,11} \emat \in \R^{N\times 12}
+\end{align*}\]</div>
+<p>eine Zeile der Designmatrix enthält die Features für einen Wein. Eine Spalte enthält ein Feature für den gesamten Datensatz. Weiterhin definieren wir die Koeffizientenvektor</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\v w = \bmat w_0 \\ w_1 \\ \vdots \\ w_{11} \emat \in \R^{12}
+\end{align*}\]</div>
+<p>und den Vektor der Vorhersagewerte</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\v y = \bmat y_1 \\ y_2 \\ \vdots \\ y_{N} \emat \in \R^{N}.
+\end{align*}\]</div>
+<p>Wenn wir nun das Matrix-Vektor Produkt <span class="math notranslate nohighlight">\(\m X \v w\)</span> bilden, erhalten wir den Vektor der Vorhersagen (für den gesamten Datensatz):</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\m X \v w = \bmat 
+            w_0 + w_1 x_{1,1} + w_2 x_{1,2} + \cdots + w_{11}x_{11} \\ 
+            \vdots \\ 
+            w_0 + w_1 x_{N,1} + w_2 x_{N,2} + \cdots + w_{11}x_{11} \emat \in \R^{N}
+\end{align*}\]</div>
+<p>Diese können wir von dem Label-Vektor <span class="math notranslate nohighlight">\(\v y\)</span> subtrahieren, um den Vektor der Residuen (=Vorhersagefehler) zu erhalten:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\v y - \m X \v w = \bmat 
+            y_1 - (w_0 + w_1 x_{1,1} + w_2 x_{1,2} + \cdots + w_{11}x_{11}) \\ 
+            \vdots \\ 
+            y_N - (w_0 + w_1 x_{N,1} + w_2 x_{N,2} + \cdots + w_{11}x_{11}) \emat \in \R^{N}
+\end{align*}\]</div>
+<p>Die Zielfunktion ist der mittlere quadratische Fehler. Diese bekommen wir, indem wir die Norm des Vektors <span class="math notranslate nohighlight">\(\v y - \m X \v w\)</span> berechnen:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\frac{1}{N}\norm{\v y - \m X \v w}_2^2  &amp;= (\v y - \m X \v w)^T(\v y - \m X \v w) \\&amp;= (y_1 - (w_0 + w_1 x_{1,1} + w_2 x_{1,2} + \cdots + w_{11}x_{11}))^2 + \cdots + (y_N - (w_0 + w_1 x_{N,1} + w_2 x_{N,2} + \cdots + w_{11}x_{11}))^2
+\end{align*}\]</div>
+<p>Wir halten fest: Das Problem der kleinsten Quadrate <a class="reference internal" href="#equation-eq-least-squares">(8.3)</a> ist äquivalent zu folgendem Problem:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\min_{\v w} \frac{1}{N}(\v y - \m X \v w)^T(\v y - \m X \v w).
+\end{align*}\]</div>
+<p>Um dem Problem in Standardform noch ein wenig näher zu kommen, halten wir fest, dass die Multiplikation der Zielfunktion mit einer positiven Zahl zwar den Zielfunktionswert am Minimalpunkt verändert, nicht aber das Minimum selbst. Wir können deshalb statt dem Faktor <span class="math notranslate nohighlight">\(\frac{1}{N}\)</span> den Faktor <span class="math notranslate nohighlight">\(\frac{1}{2}\)</span> benutzen (warum, sehen wir gleich):</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\min_{\v w} \frac{1}{2}(\v y - \m X \v w)^T(\v y - \m X \v w).
+\end{align*}\]</div>
+<p>Nun multiplizieren wir die Terme aus unter Berücksichtigung der Rechengesetze für die Matrixmultiplikation:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\frac{1}{2}(\v y - \m X \v w)^T(\v y - \m X \v w) &amp;= \frac{1}{2}(\v y^T\v y - \v y^T \m X\v w - \underbrace{(\m X\v w)^T}_{=\v y^T \m X\v w} \v y + (\m X \v w)^T (\m X \v w))\\
+&amp;=\frac{1}{2}\v w^T \m X^T \m X \v w -\v y^T\m X \v w + \frac{1}{2}\v y^T\v y
+\end{align*}\]</div>
+<p>Damit haben wir gezeigt: Training einer multivariaten linearen Regression ist ein quadratisches Optimierungsproblem der Form <span class="math notranslate nohighlight">\(\frac{1}{2}\v x^T\v A\v x+\v b^T\v x+c\)</span> mit den Problemdaten</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\m A &amp;= \m X^T \m X\\
+\v b &amp;= (-\v y^T\m X)^T = - \m X^T \v y\\
+c &amp; = \frac{1}{2}\v y^T\v y
+\end{align*}\]</div>
+</section>
+<section id="aufstellen-der-optimalitatsbedingungen">
+<h3>Aufstellen der Optimalitätsbedingungen<a class="headerlink" href="#aufstellen-der-optimalitatsbedingungen" title="Link to this heading">#</a></h3>
+<p>Nun können wir auf <a class="reference internal" href="08_Quadratische_Probleme.html#thm:krit-qp">Theorem 8.1</a> zurückgreifen, um das Minimum zu bestimmen. Dafür vergewissern wir uns zunächst, dass die Funktion konvex ist, die Hessematrix also positiv semi-definit ist. Für positive semi-Definitheit muss für jeden Vektor <span class="math notranslate nohighlight">\(\v w\neq \v 0\)</span> gelten</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\v w^T \m X^T \m X \v w \geq 0
+\end{align*}\]</div>
+<p>Dies ist der Fall, da</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\v w^T \m X^T \m X \v w = (\m X \v w)^T \m X \v w = \norm{\m X \v w}_2^2 \geq 0.
+\end{align*}\]</div>
+<p>Kritische Punkte sind also in jedem Fall Minima.</p>
+<p>Wir bestimmen nun die kritischen Punkte. Nach <a class="reference internal" href="08_Quadratische_Probleme.html#thm:krit-qp">Theorem 8.1</a> erhält man sie durch Lösen des Gleichungssystems</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\m X^T \m X \v w=\m X^T \v y.
+\end{align*}\]</div>
+<p>Man nennt diese Gleichungen auch <em>Normalengleichungen</em>.</p>
+<p>Weiterhin gilt: Falls <span class="math notranslate nohighlight">\(\m X^T \m X \)</span> invertierbar ist, so ist der einzige kritische Punkt <span class="math notranslate nohighlight">\(\v w^*\)</span></p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\v w^*=(\m X^T \m X)^{-1}\m X^T \v y
+\end{align*}\]</div>
+<p>Wann ist <span class="math notranslate nohighlight">\(\m X^T \m X\)</span> nicht invertierbar? Es gibt zwei typische Fälle:</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(\m X^T \m X\)</span> ist ein Beispiel für eine [Gram’sche Matrix]{<a class="reference external" href="https://en.wikipedia.org/wiki/Gram_matrix">https://en.wikipedia.org/wiki/Gram_matrix</a>}. Diese haben die Eigenschaft, dass sie genau dann invertierbar sind, wenn alle Spalten von <span class="math notranslate nohighlight">\(\m X\)</span> linear unabhängig sind. In der Sprache der linearen Regression ausgedrückt: keines der Features kann durch Linearkombination der anderen Features ausgedrückt werden. In diesem Fall ist die Matrix <span class="math notranslate nohighlight">\(\m X^T \m X\)</span> nicht invertierbar, sondern es gibt unendlich viele Lösungen der Normalengleichungen. Dabei sind alle Lösungen gleichwertig, liefern also den gleichen Zielfunktionswert.</p></li>
+<li><p>Falls es mehr (linear unabhängige) Features als Trainingsdatenpunkte gibt, also <span class="math notranslate nohighlight">\(\m X\)</span> mehr Spalten als Zeilen besitzt, ist <span class="math notranslate nohighlight">\(\m X^T \m X\)</span> nicht invertierbar. In diesem Fall können die Trainingsdatenpunkte perfekt interpoliert werden und der Modellfehler ist <span class="math notranslate nohighlight">\(0\)</span>. Dies bezeichnet man als Overfitting.</p></li>
+</ol>
+</section>
+<section id="berechnung-der-losung-mit-python">
+<h3>Berechnung der Lösung mit Python<a class="headerlink" href="#berechnung-der-losung-mit-python" title="Link to this heading">#</a></h3>
+<p>Wir berechnen nun die Lösung des Regressionsproblems mit Methoden der linearen Algebra, die im Paket <code class="docutils literal notranslate"><span class="pre">numpy</span></code> bzw. im Submodul <code class="docutils literal notranslate"><span class="pre">numpy.linalg</span></code> implementiert sind.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Designmatrix</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;quality&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="c1"># Spalte mit Einsen für w_0 Koeffizienten</span>
+<span class="n">X</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;ones&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Labelvektor</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;quality&quot;</span><span class="p">]</span>
+
+<span class="n">A</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">X</span>
+<span class="n">b</span> <span class="o">=</span> <span class="o">-</span><span class="n">X</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">y</span>
+
+<span class="c1"># Lösen der Normalengleichungen</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="o">-</span><span class="n">b</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Gewichte der Features:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">12</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">w</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2"> .3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gewichte der Features:
+fixed acidity       :  0.027
+volatile acidity    : -0.249
+citric acid         : -0.039
+residual sugar      :  0.012
+chlorides           : -0.116
+free sulfur dioxide :  0.042
+total sulfur dioxide: -0.110
+density             : -0.020
+pH                  : -0.086
+sulphates           :  0.190
+alcohol             :  0.380
+</pre></div>
+</div>
+</div>
+</div>
+<p>Das legt nahe, dass Sulfat- und Alkoholgehalt einen positiven Einfluss auf die Weinqualität haben.</p>
+</section>
+</section>
+<section id="ridge-regression">
+<h2><span class="section-number">8.4.2. </span>Ridge Regression<a class="headerlink" href="#ridge-regression" title="Link to this heading">#</a></h2>
+<p>Wir betrachten als nächstes eine Erweiterung des Modells: Die Ridge Regression. Dies ist eine sog. <em>Regularisierungstechnik</em>. Sie führt zum einen dazu, dass die Koeffizienten betragskleiner werden, die Vorhersagegüte allerdings ein schlechter. Dafür erhält man ein Modell, welches weniger stark von Schwankungen in den Daten abhängt, in der Regel also eine statistisch zuverlässigere Vorhersage liefert.</p>
+<p>Bei der Ridge Regression wird ein Strafterm zur Zielfunktion addiert, der betragsgroße Koeffizienten “bestraft”:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\min_{\v w} L(\v w) = \frac{1}{2}(\v y - \m X \v w)^T(\v y - \m X \v w) + \lambda \sum_{j=0}^{11} w_j.
+\end{align*}\]</div>
+<p>Mit einer vorher fest gewählten Zahl <span class="math notranslate nohighlight">\(\lambda &gt; 0\)</span>.
+Das Ziel der Optimierung ist nun nicht mehr nur den quadratischen Fehler <span class="math notranslate nohighlight">\((\v y - \m X \v w)^T(\v y - \m X \v w)\)</span> zu minimieren, sondern auch die Koeffizienten <span class="math notranslate nohighlight">\(w_j\)</span> möglichst betragsklein zu wählen. Die Wichtigkeit dieser beiden Ziele wird durch den Hyperparameter <span class="math notranslate nohighlight">\(\lambda\)</span> ausbalanciert.</p>
+<p>Als nächstes bringen wir das Optimierungsproblem wieder in Standardform und lösen es danach in Python. Dafür stellen wir zunächst fest, dass wir den Strafterm mit Hilfe der Einheitsmatrix <span class="math notranslate nohighlight">\(\I\)</span> wie folgt schreiben können:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\lambda \sum_{j=0}^{11} w_j &amp;= \lambda \v w^T \v w \\
+                &amp;= \v w^T \bmat \lambda &amp; &amp; \\ &amp; \ddots &amp; \\ &amp;&amp; \lambda\emat  \v w \\
+                &amp;=\v w^T \lambda \I \v w 
+\end{align*}\]</div>
+<p>Wir multiplizieren den Term <span class="math notranslate nohighlight">\(\frac{1}{2}(\v y - \m X \v w)^T(\v y - \m X \v w)\)</span> wieder aus und schreiben die Zielfunktion <span class="math notranslate nohighlight">\(L(\v w)\)</span> als</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+L(\v w) &amp;= \frac{1}{2}\v w^T \m X^T \m X \v w -\v y^T\m X \v w + \frac{1}{2}\v y^T\v y + \v w^T \lambda \I \v w 
+\end{align*}\]</div>
+<p>Zusammenfassen der Terme ergibt</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+L(\v w)= \frac{1}{2}\v w^T (\m X^T \m X + \lambda \I) \v w -\v y^T\m X \v w + \frac{1}{2}\v y^T\v y
+\end{align*}\]</div>
+<p>Damit haben wir die Ridge Regression auf QP-Standardform gebracht, indem wir als Hessematrix <span class="math notranslate nohighlight">\(\m A:=\m X^T \m X +\lambda \I\)</span> gewählt haben.</p>
+<p>Analog zur multivariaten linearen Regression lauten die Normalengleichungen dafür:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+(\m X^T \m X + \lambda \I) \v w=\m X^T \v y
+\end{align*}\]</div>
+<p>und das Minimum <span class="math notranslate nohighlight">\(\v w^*\)</span> ist</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\v w^*=(\m X^T \m X + \lambda \I)^{-1}\m X^T \v y
+\end{align*}\]</div>
+<p>Interessant: Die Hessematrix der Ridge Regression, <span class="math notranslate nohighlight">\(\m X^T \m X +\lambda \I\)</span>, ist immer invertierbar. Der Term <span class="math notranslate nohighlight">\(\lambda \m I\)</span> macht die Matrix <span class="math notranslate nohighlight">\(\m X^T \m X\)</span> <em>regulär</em> (d.h. invertierbar). Daher auch der Name Regularisierung.</p>
+<p>Wir berechnen nun die Koeffizienten der Ridge Regression für das Rotwein Beispiel für <span class="math notranslate nohighlight">\(\lambda=100\)</span>. Achtung: für jeden Wert von <span class="math notranslate nohighlight">\(\lambda\)</span> erhält man leicht unterschiedliche Koeffizienten.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Variablen X, y und b sind unverändert</span>
+
+<span class="c1"># Hessematrix der Ridge Regression</span>
+<span class="n">lam</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">A_ridge</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">X</span> <span class="o">+</span> <span class="n">lam</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+
+<span class="c1"># Lösen der Normalengleichungen für die Ridge Regression</span>
+<span class="n">w_ridge</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A_ridge</span><span class="p">,</span> <span class="o">-</span><span class="n">b</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Gewichte der Features:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">12</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">w_ridge</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2"> .3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gewichte der Features:
+fixed acidity       :  0.053
+volatile acidity    : -0.228
+citric acid         : -0.008
+residual sugar      :  0.022
+chlorides           : -0.109
+free sulfur dioxide :  0.034
+total sulfur dioxide: -0.103
+density             : -0.062
+pH                  : -0.055
+sulphates           :  0.181
+alcohol             :  0.333
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="08_Quadratische_Probleme.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">zurück</p>
+        <p class="prev-next-title"><span class="section-number">8. </span>Quadratische Probleme</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="09_Automatische_Differentiation.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">weiter</p>
+        <p class="prev-next-title"><span class="section-number">9. </span>Automatische Differentiation</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Inhalt
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multivariate-lineare-regression">8.4.1. Multivariate lineare Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uberfuhren-in-qp-standardform">Überführen in QP Standardform</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aufstellen-der-optimalitatsbedingungen">Aufstellen der Optimalitätsbedingungen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#berechnung-der-losung-mit-python">Berechnung der Lösung mit Python</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ridge-regression">8.4.2. Ridge Regression</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Durch Dennis Janka
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

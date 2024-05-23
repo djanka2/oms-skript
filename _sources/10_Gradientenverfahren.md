@@ -56,11 +56,10 @@ Gesucht:
 : Lokales Minimum von $f$.
 
 **Algorithmus**:
-1. Starte mit initialer Schätzung $x^{[0]}$, setze $k=0$.
-2. Für $k=0,1,2,\dots$:
-    - Berechne neue Iterierte $x^{[k+1]}=x^{[k]}-\alpha^{[k]}f'(x^{[k]})$.
-    - Erhöhe $k$ um $1$.
-    - Falls Abbruchbedingung erfüllt, beende Algorithmus mit Lösung $x^{[k]}$.
+- Starte mit initialer Schätzung $x^{[0]}$, setze $k=0$.
+- Für $k=0,1,2,\dots$:
+    1. Falls Abbruchbedingung erfüllt, beende Algorithmus mit Lösung $x^{[k]}$.
+    2. Berechne neue Iterierte $x^{[k+1]}=x^{[k]}-\alpha^{[k]}f'(x^{[k]})$.
 ````
 Hier ergeben sich sofort zwei Fragen:
 1. Wie wählt man die Folge von Schrittweiten $\alpha^{[k]}$?
@@ -270,11 +269,10 @@ Gesucht:
 : Lokales Minimum von $f$.
 
 **Algorithmus**:
-1. Starte mit initialer Schätzung $\v x^{[0]}$, setze $k=0$.
-2. Für $k=0,1,2,\dots$:
-    - Berechne neue Iterierte $\v x^{[k+1]}=x^{[k]}-\alpha^{[k]}\nabla f(\v x^{[k]})$, $\alpha^{[k]}>0$.
-    - Erhöhe $k$ um $1$.
-    - Falls Abbruchbedingung erfüllt, beende Algorithmus mit Lösung $\v x^{[k]}$.
+- Starte mit initialer Schätzung $\v x^{[0]}$, setze $k=0$.
+- Für $k=0,1,2,\dots$:
+    1. Falls Abbruchbedingung erfüllt, beende Algorithmus mit Lösung $\v x^{[k]}$.
+    2. Berechne neue Iterierte $\v x^{[k+1]}=x^{[k]}-\alpha^{[k]}\nabla f(\v x^{[k]})$, $\alpha^{[k]}>0$.
 ````
 Auch die Erklärung, warum das Verfahren funktioniert, kann man aus dem univariaten Fall übernehmen. Man begründet es mit der Taylorreihe. Dazu schauen wir uns eine lineare Approximation der Funktion an der aktuellen Iterierten $\v x^{[k]}$ an und argumentieren, dass der Funktionswert an der nächsten Iterierte $\v x^{[k+1]}$ kleiner sein muss, dass also ein Abstieg erzielt wird. Das Taylor-Polynom erster Ordnung, die sog. *Linearisierung* von $f$ zum Entwicklungspunkt $\v x^{[k]}$ ist
 \begin{align*}
@@ -1036,9 +1034,9 @@ fig.show()
 
 ## Gradientenabstieg mit Momentum
 Im Abschnitt {ref}`sec:zickzack` haben wir ein fundamentales Problem mit der *Richtung* des negativen Gradienten beobachtet: sie kann (je nach der zu minimierenden Funktion) schnell oszillieren, was zu zickzackförmigen Gradientenabstiegsschritten führt, die die
-Optimierung verlangsamen. In diesem Abschnitt beschreiben wir eine beliebte Erweiterung des Standard Gradientenabstiegsschritt, das sogenannte *Momentum*, das speziell darauf ausgelegt ist, dieses Problem zu beheben. 
+Optimierung verlangsamen. In diesem Abschnitt beschreiben wir eine beliebte Erweiterung des Standard Gradientenabstiegsschritt, das sogenannte *Momentum*, das speziell darauf ausgelegt ist, dieses Problem zu beheben. Der Begriff Momentum bezieht sich dabei auf ein physikalisches Analogon: Stellen Sie sich eine Kugel vor, die ein gekrümmtes Tal hinabrollt (etwa eine Regenrinne mit leichtem Gefälle): Wird die Kugel an einer der Seitenwände der Rinne abgesetzt und losgelassen, so wird sie zuerst hauptsächlich in Richtung des Rinnenbodens rollen, da dies die Richtung des lokal steilsten Abstiegs ist. Mit dem Schwung rollt sie auf der gegenüberliegenden Seite wieder ein Stück die Rinnenwand hinauf, um danach wieder zurück in Richtung Rinnenboden zu rollen. Das Gefälle der Rinne steht orthogonal dazu und ist im Vergleich zur Steilheit der Rinnenwand klein. In diese Richtung wird die Kugel zunächst also kaum rollen. Je mehr Schwung (Momentum) die Kugel allerdings aufnimmt, umso weniger werden die Bewegungen in Richtung der steilen Seitenwände und die Abstiegtsrichtung wird hauptsächlich in Richtung des langfristigen Abstiegs, nämlich des Gefälles der Rinne, verlaufen.
 
-Die Grundidee ist, dass man in jedem Schritt nicht mehr nur dem aktuellen negativen Gradienten folgt, sondern auch die Richtung aus dem vorherigen Schritt mit berücksichtigt. Jeder Schritt $\v d^{[k]}$ ist eine Summe aus aktuellem negativen Gradienten und dem vorherigen Schritt. In Formeln:
+Mathematisch lässt sich diese Idee so übersetzen, dass man in jedem Schritt nicht mehr nur dem aktuellen negativen Gradienten folgt, sondern auch die Richtung aus dem vorherigen Schritt mit berücksichtigt. Jeder Schritt $\v d^{[k]}$ ist eine Summe aus aktuellem negativen Gradienten und dem vorherigen Schritt. In Formeln:
 \begin{align*}
 \v d^{[k]} = \hyper{\beta}\v d^{[k-1]}-\nabla f(\v x^{[k]})
 \end{align*}
