@@ -56,11 +56,10 @@ Gesucht:
 : Lokales Minimum von $f$.
 
 **Algorithmus**:
-1. Starte mit initialer Schätzung $x^{[0]}$, setze $k=0$.
-2. Für $k=0,1,2,\dots$:
-    - Berechne neue Iterierte $x^{[k+1]}=x^{[k]}-\alpha^{[k]}f'(x^{[k]})$.
-    - Erhöhe $k$ um $1$.
-    - Falls Abbruchbedingung erfüllt, beende Algorithmus mit Lösung $x^{[k]}$.
+- Starte mit initialer Schätzung $x^{[0]}$, setze $k=0$.
+- Für $k=0,1,2,\dots$:
+    1. Falls Abbruchbedingung erfüllt, beende Algorithmus mit Lösung $x^{[k]}$.
+    2. Berechne neue Iterierte $x^{[k+1]}=x^{[k]}-\alpha^{[k]}f'(x^{[k]})$.
 ````
 Hier ergeben sich sofort zwei Fragen:
 1. Wie wählt man die Folge von Schrittweiten $\alpha^{[k]}$?
@@ -270,11 +269,10 @@ Gesucht:
 : Lokales Minimum von $f$.
 
 **Algorithmus**:
-1. Starte mit initialer Schätzung $\v x^{[0]}$, setze $k=0$.
-2. Für $k=0,1,2,\dots$:
-    - Berechne neue Iterierte $\v x^{[k+1]}=x^{[k]}-\alpha^{[k]}\nabla f(\v x^{[k]})$, $\alpha^{[k]}>0$.
-    - Erhöhe $k$ um $1$.
-    - Falls Abbruchbedingung erfüllt, beende Algorithmus mit Lösung $\v x^{[k]}$.
+- Starte mit initialer Schätzung $\v x^{[0]}$, setze $k=0$.
+- Für $k=0,1,2,\dots$:
+    1. Falls Abbruchbedingung erfüllt, beende Algorithmus mit Lösung $\v x^{[k]}$.
+    2. Berechne neue Iterierte $\v x^{[k+1]}=x^{[k]}-\alpha^{[k]}\nabla f(\v x^{[k]})$, $\alpha^{[k]}>0$.
 ````
 Auch die Erklärung, warum das Verfahren funktioniert, kann man aus dem univariaten Fall übernehmen. Man begründet es mit der Taylorreihe. Dazu schauen wir uns eine lineare Approximation der Funktion an der aktuellen Iterierten $\v x^{[k]}$ an und argumentieren, dass der Funktionswert an der nächsten Iterierte $\v x^{[k+1]}$ kleiner sein muss, dass also ein Abstieg erzielt wird. Das Taylor-Polynom erster Ordnung, die sog. *Linearisierung* von $f$ zum Entwicklungspunkt $\v x^{[k]}$ ist
 \begin{align*}

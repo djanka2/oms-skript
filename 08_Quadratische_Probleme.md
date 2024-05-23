@@ -164,20 +164,20 @@ keine Lösung hat.
 
 Damit haben wir die Optimierung von quadratischen Funktionen auf ein reines Problem der linearen Algebra zurückgeführt. Wenn wir lineare Gleichungssysteme lösen können, können wir auch quadratische Optimierungsprobleme lösen.
 
-
+=(sec:umsatz)
 ## Anwendung: Umsatzmaximierung im Einproduktfall
 Wir betrachten ein einfaches Modell aus der Mikroökonomie. Sie produzieren ein Produkt, von dem Sie $x$ Mengeneinheiten zum Preis $p$ verkaufen möchten. Ihr Ziel ist es, den Umsatz $p\cdot x$ zu maximieren. Allerdings wird die Nachfrage $D(p)$ mit steigendem Preis sinken. Wir nehmen zwischen Nachfrage und Preis $p\geq 0$ folgenden Zusammenhang an:
 
 \begin{align*}
-D(p)=\max(M-k\cdot p, 0)
+D(p)=\max(M-\eta\cdot p, 0)
 \end{align*}
 
-mit positiven Zahlen $M$ und $k$. $M$ ist die maximale Nachfrage (wenn das Produkt $0$ EUR kosten würde). $k$ (bzw. $-k$) nennt man die Preiselastizität: Für jede Erhöhung des Preises um $1$ EUR sinkt die Nachfrage um $k$ Einheiten, wobei die Nachfrage nie negativ wird.
+mit positiven Zahlen $M$ und $\eta$. $M$ ist die maximale Nachfrage (wenn das Produkt $0$ EUR kosten würde). $\eta$ (bzw. $-\eta$) nennt man die Preiselastizität: Für jede Erhöhung des Preises um $1$ EUR sinkt die Nachfrage um $\eta$ Einheiten, wobei die Nachfrage nie negativ wird.
 
 Wenn wir davon ausgehen, dass wir die gesamte Nachfrage bedienen möchten, also $x=D(p)$, lautet das Optimierungsproblem
 
 \begin{align*}
-\max_{p,x} p\cdot x = \max_{p} p\cdot D(p)=p\cdot(M-k\cdot p)
+\max_{p,x} p\cdot x = \max_{p} p\cdot D(p)=p\cdot(M-\eta\cdot p)
 \end{align*}
 
 Der Zusammenhang zwischen Preis, Nachfrage und Umsatz lässt sich wie folgt visualisieren:
@@ -190,23 +190,23 @@ Aus {cite}`sudermann-merx_einfuhrung_2023`.
 ```
 Für einen Preis $p$ (Wert auf der $x$-Achse) erwarten wir einen Umsatz $D(p)$ (Wert auf der $y$-Achse). Der zu maximierende Umsatz $p\cdot D(p)$ ist somit als Flächeninhalt des orangen Rechtecks gegeben.
 
-Wir berechnen nun für gegebene $M$ und $k$ den optimalen Preis. Dazu berechnen wir für die Zielfunktion
+Wir berechnen nun für gegebene $M$ und $\eta$ den optimalen Preis. Dazu berechnen wir für die Zielfunktion
 \begin{align*}
-f(p)=p\cdot(M-k\cdot p)=-kp^2+MP
+f(p)=p\cdot(M-\eta\cdot p)=-\eta p^2+MP
 \end{align*}
 die Nullstelle der ersten Ableitung:
 \begin{align*}
-f'(p)=-2kp+M=0 \Leftrightarrow p=\frac{M}{2k}
+f'(p)=-2\eta p+M=0 \Leftrightarrow p=\frac{M}{2\eta}
 \end{align*}
 Nun untersuchen wir, ob es sich bei diesem Punkt wirklich um ein Maximum handelt, indem wir das Vorzeichen der zweite Ableitung überprüfen:
 \begin{align*}
-f''(p)=-2k<0,
+f''(p)=-2\eta<0,
 \end{align*}
-da $k>0$.
+da $\eta>0$.
 
-Der optimale Preis ist also gegebene durch $p^{\star}=\frac{M}{2k}$ und der optimale Umsatz durch
+Der optimale Preis ist also gegebene durch $p^{\star}=\frac{M}{2\eta}$ und der optimale Umsatz durch
 \begin{align*}
-f(p^{\star})=\frac{M}{2k}(M-k\cdot \frac{M}{2k})=\frac{M^2}{2k}-\frac{M^2}{4k}=\frac{M^2}{4k}.
+f(p^{\star})=\frac{M}{2\eta}(M-\eta\cdot \frac{M}{2\eta})=\frac{M^2}{2\eta}-\frac{M^2}{4\eta}=\frac{M^2}{4\eta}.
 \end{align*}
 
 

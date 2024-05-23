@@ -155,9 +155,16 @@ Die Ableitung der Variable im Output Knoten $f$ nach einer Variable in einem Ein
 
 Wir haben das Problem der Ableitungsberechnung nun also auf ein Problem auf Berechnungsgraphen zurückgeführt. Die Anzahl der möglichen Pfade zwischen Eingangs- und Ausgangsknoten wächst allerdings exponentiell, wie wir anhand des folgenden Beispiels sehen können.
 
-% TODO
+```{figure} ./bilder/berechnungsgraph5.png
+:name: fig:32paths
+:width: 600px
 
-Das Problem der vielen Pfade äußert sich dadurch, dass mehrfach die gleichen Berechnungen durchgeführt werden. In dem Beispiel liegt jeder Zwischenknoten auf 16 Pfaden, es würde also 16 Mal exakt die gleiche Berechnung durchgeführt. 
+Ein Berechnungsgraph, der die Funktion $f(x)=x^{32}$ durch fünfmaliges quadrieren der Eingangsvariablen berechnet. Insgesamt gibt es zwischen dem Eingangs- und Ausgangsknoten $2^5=32$ Pfade entlang deren die Ableitungen berechnet und aufsummiert werden müssen.
+```
+
+Das Beispiel ist natürlich recht konstruiert, es zeigt aber, wie schon bei simplen Beispielen, die Anzahl der Pfade bzw. Ableitungsberechnung schnell wächst. Berechnungsgraphen für Funktionen z.B. im maschinellen Lernen sind um ein Vielfaches größer, wodurch das Problem umso gravierender wird. 
+
+Eine andere Sichtweise auf das Problem der vielen Pfade ist, dass mehrfach die gleichen Berechnungen eines Knotens durchgeführt werden. In dem Beispiel liegt jeder Zwischenknoten auf 16 Pfaden, es würde also 16 Mal exakt die gleiche Berechnung durchgeführt. 
 
 
 ### Rückwärtsmodus der automatischen Differentiation (Backpropagation)
@@ -170,7 +177,7 @@ Das Verfahren ist -- vor allem für den Bereich maschinelles Lernen -- einer der
 Es ist nicht übertrieben zu sagen, dass alle aktuellen Entwicklungen im Bereich KI ohne dieses Verfahren nicht existieren würden. Es wurde im Laufe der Jahre von [verschiedenen Forschern](https://people.maths.ox.ac.uk/~trefethen/inventorstalk.pdf)  (wieder-)entdeckt. Die erste allgemeine Form geht auf den finnischen Mathematiker Seppo Linnainmaa zurück, der das Verfahren 1970 in seiner Masterarbeit entwickelte.
 
 Der Algorithmus arbeitet auf einem Berechnungsgraphen einer Funktion $f:\R^n\rightarrow\R$, dessen Knoten wir mit $x_1,\dots,x_N$ bezeichnen. Dabei seien die ersten $n$ Knoten $x_1,\dots,x_n$ die Eingangsknoten und der letzte Knoten $x_N=f(\v x)$ der Ausgangsknoten. Der Algorithmus arbeitet in zwei Phasen:
-1. Vorwärtsphase: Für einen gegebenen (beliebigen) Wert der Eingangsknoten $\v x'=(x_1',\dots,x_n')$ wird der Wert an allen Knoten $x_{n+1}',\dots,x_N'=f(\v x')$ bestimmt.
+1. Vorwärtsphase: Für einen gegebenen (beliebigen) Wert der Eingangsknoten $\v x'=(x_1',\dots,x_n')$ wird der Wert an allen Knoten $x_{n+1}',\dots,x_N'=f(\v x')$ des Berechnungsgraphen bestimmt.
 2. Rückwärtsphase: Hier wird der Graph rückwärts, d.h. ausgehend vom Ausgangsknoten traversiert. Dabei werden alle partiellen Ableitungen $\derv{f}{x_i}(\v x'), i=1,\dots,N$ bestimmt.
 
 Eigentlich möchten wir ja nur die Ableitung nach den Eingangsknoten, d.h. $\derv{f}{x_i}(\v x'), i=1,\dots,n$, aber durch die Art wie der Algorithmus arbeitet, bekommen wir die anderen Ableitungen gratis dazu. Wir führen für die partiellen Ableitungen die folgenden Bezeichner ein:
@@ -190,7 +197,7 @@ Gegeben:
 
 Gesucht:
 : - Werte an allen Knoten $x_i'$, insbesondere der Wert am Ausgangsknoten $x_N'=f(\v x')$
-: - Alle partiellen Ableitungen $\derv{f}{x_i}(\v x')$, insbesondere die Ableitungen nach den Eingangsknoten $\derv{f}{\v x}(\v x')$
+: - Alle partiellen Ableitungen $\overline{x}_i=\derv{f}{x_i}(\v x')$, insbesondere die Ableitungen nach den Eingangsknoten $\overline{x}=\derv{f}{\v x}(\v x')$
 
 **Algorithmus**:
 1. Start: Initialisiere $\overline{x}_N=\derv{f}{f}=1$.
@@ -203,8 +210,8 @@ Gesucht:
 ```
 Wie Sie sehen, ist der Algorithmus selbst relativ kurz. Die Formel zur Berechnung von $\overline{x}_i$ ist übrigens gerade die Kettenregel: Die Ableitung von $f$ nach $x_i$ ist die Ableitung von $f$ bis zu den Knoten, die unmittelbar nach $x_i$ kommen multipliziert mit der lokalen Ableitung $\derv{x_j}{x_i}$.
 
-Wir führen den Algorithmus noch einmal am Beispiel von weiter oben, $f(x)=\sin x^2 + \cos x^2$ aus. Dabei verwenden wir die Notation der Zwischenknoten mit $x_i$ und notieren auch gleich die Adjungierten $\overline{x}_i$ an jeden Knoten.
-```{figure} ./bilder/berechnungsgraph3.png
+Wir führen den Algorithmus noch einmal am Beispiel von weiter oben, $f(x)=\sin x^2 + \cos x^2$ aus. Dabei verwenden wir die Notation der Zwischenknoten mit $x_i$ und notieren auch gleich die Adjungierten $\overline{x}_i$ an jeden Knoten (diese werden im Verlauf des Algorithmus berechnet).
+```{figure} ./bilder/berechnungsgraph4.png
 :name: fig:example_graph_x
 :width: 600px
 ```
@@ -232,7 +239,7 @@ Damit sind alle Knoten bearbeitet und der Algorithmus terminiert. Der Funktionsw
 Der Backpropagation Algorithmus erlaubt es, Ableitungen beliebig komplizierter Funktion mittels einem einfach Schema effizient zu berechnen. Dafür müssen die Ableitungen der elementaren Operationen, aus denen der Berechnungsgraph aufgebaut ist, einmalig fest hinterlegt werden. Weiterhin muss bei der Vorwärtsphase jeder Wert $x_1,\dots,x_N$ zwischengespeichert werden, damit er bei der Rückwärtsphase zur Verfügung steht. Der dafür benötigte Speicherplatz kann bei großen Funktionen (neuronalen Netzen), wie sie z.B. im Bereich maschinelles Lernen und KI vorkommen, signifikant sein. 
 
 
-%wie in Folien, aber zusätzlich noch zweites Beispiel mit zwei Eingängen anfügen (Motivation: waren alles univariate Funktionen, geht es auch für multivariat -> ja, denn Algo berechnet immer Ableitungen nach ALLEN x_i)
+%TODO wie in Folien, aber zusätzlich noch zweites Beispiel mit zwei Eingängen anfügen (Motivation: waren alles univariate Funktionen, geht es auch für multivariat -> ja, denn Algo berechnet immer Ableitungen nach ALLEN x_i)
 
 
 ### Das `autograd` Paket
@@ -265,6 +272,7 @@ Nun kommt die Ableitungsberechnung. Wir rufen die eben importierte Funktion `gra
 grad_f = grad(f)
 print(grad_f(x_0))
 ```
+Sobald die Funktion ausgewertet wird (hier in der Zeile: `grad_f(x_0)`) wird der Graph zunächst vorwärts (Funktion wird ausgewertet) und anschließend rückwärts durchlaufen (Ableitung nach Eingangsgröße wird ausgewertet). Es wird nur der Wert der Ableitung (in der Sprache des Backpropagation Algorithmus: der Wert der Adjungierten an den Eingangsknoten) ausgegeben. 
 
 Das funktioniert auch mit mehrdimensionalen Funktionen, z.B. $g(x,y,z)=xy^2+z(x-y)$. Der Rückgabewert ist dann ein NumPy Array (Vektor) der Länge 3.
 ```{code-cell} ipython3

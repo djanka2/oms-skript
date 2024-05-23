@@ -55,6 +55,7 @@ sphinx:
           "R": "\\mathbb{R}"
           "B": "\\mathbb{B}"
           "I": "\\mathbb{I}"
+          "E": "\\mathbb{E}"
           "norm": ["\\left\\lVert#1 \\right\\rVert", 1]
           "floor": ["\\lfloor#1\\rfloor", 1]
           "bmat" : ["\\begin{pmatrix}"]
