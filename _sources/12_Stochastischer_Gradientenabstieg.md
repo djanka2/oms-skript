@@ -284,8 +284,8 @@ Dies ist die Formulierung, die sie vermutlich aus Vorlesungen über maschinelles
 
 Diese Betrachtungen liefern die theoretische Begründung, warum der stochastische bzw. Minibatch-Gradientenabstieg dem normalen Gradientenabstieg vorzuziehen ist. 
 
-Auch aus technischer Sicht ist der stochastische Gradientenabstieg günstig. In modernen Anwendungen gilt normalerweise
-- $N$ ist sehr groß (viele Trainingsdaten)
+Auch aus technischer Sicht ist der stochastische Gradientenabstieg günstig. In modernen KI-Anwendungen gilt normalerweise
+- $N$ ist *sehr* groß (viele Trainingsdaten)
 - Dimension von $\v w$ ist sehr groß (viele Modellparameter)
 - Dimension von $\v x$ ist sehr groß (viele Features)
 
