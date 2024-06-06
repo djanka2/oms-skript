@@ -210,7 +210,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="09_Automatische_Differentiation.html">9. Automatische Differentiation</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="10_Gradientenverfahren.html">10. Verfahren erster Ordnung</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="10_Logistische_Regression.html">10.9. Logistische Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="10_Logistische_Regression.html">10.9. Anwendung: Logistische Regression</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="11_Verfahren_zweiter_Ordnung.html">11. Verfahren zweiter Ordnung</a></li>
@@ -382,9 +382,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <p>=(sec:linreg)</p>
-<section id="anwendung-lineare-regressionsprobleme">
-<h1><span class="section-number">8.4. </span>Anwendung: Lineare Regressionsprobleme<a class="headerlink" href="#anwendung-lineare-regressionsprobleme" title="Link to this heading">#</a></h1>
+  <section id="anwendung-lineare-regressionsprobleme">
+<span id="sec-linreg"></span><h1><span class="section-number">8.4. </span>Anwendung: Lineare Regressionsprobleme<a class="headerlink" href="#anwendung-lineare-regressionsprobleme" title="Link to this heading">#</a></h1>
 <p>Lineare Regressionsprobleme lassen sich auf quadratische Optimierungsprobleme zurückführen. Wir betrachten in diesem Abschnitt folgendes Problem: Es soll die geschmackliche Qualität eines Weines (basierend auf Expertenbewertungen) anhand der folgenden elf Faktoren vorhergesagt werden:</p>
 <ul class="simple">
 <li><p>nicht-flüchtiger Säuregehalt,</p></li>
@@ -867,7 +866,7 @@ L(w_0, w_1, \dots, w_{11}) = \frac{1}{N}\sum_{i=1}^N \left(y_i-\left(w_0 +\sum_{
 \[\begin{align*}
 \v w = \bmat w_0 \\ w_1 \\ \vdots \\ w_{11} \emat \in \R^{12}
 \end{align*}\]</div>
-<p>und den Vektor der Vorhersagewerte</p>
+<p>und den Vektor der echten Werte</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
 \v y = \bmat y_1 \\ y_2 \\ \vdots \\ y_{N} \emat \in \R^{N}.
@@ -876,17 +875,17 @@ L(w_0, w_1, \dots, w_{11}) = \frac{1}{N}\sum_{i=1}^N \left(y_i-\left(w_0 +\sum_{
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
 \m X \v w = \bmat 
-            w_0 + w_1 x_{1,1} + w_2 x_{1,2} + \cdots + w_{11}x_{11} \\ 
+            w_0 + w_1 x_{1,1} + w_2 x_{1,2} + \cdots + w_{11}x_{1,11} \\ 
             \vdots \\ 
-            w_0 + w_1 x_{N,1} + w_2 x_{N,2} + \cdots + w_{11}x_{11} \emat \in \R^{N}
+            w_0 + w_1 x_{N,1} + w_2 x_{N,2} + \cdots + w_{11}x_{N,11} \emat \in \R^{N}
 \end{align*}\]</div>
 <p>Diese können wir von dem Label-Vektor <span class="math notranslate nohighlight">\(\v y\)</span> subtrahieren, um den Vektor der Residuen (=Vorhersagefehler) zu erhalten:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
 \v y - \m X \v w = \bmat 
-            y_1 - (w_0 + w_1 x_{1,1} + w_2 x_{1,2} + \cdots + w_{11}x_{11}) \\ 
+            y_1 - (w_0 + w_1 x_{1,1} + w_2 x_{1,2} + \cdots + w_{11}x_{1,11}) \\ 
             \vdots \\ 
-            y_N - (w_0 + w_1 x_{N,1} + w_2 x_{N,2} + \cdots + w_{11}x_{11}) \emat \in \R^{N}
+            y_N - (w_0 + w_1 x_{N,1} + w_2 x_{N,2} + \cdots + w_{11}x_{N,11}) \emat \in \R^{N}
 \end{align*}\]</div>
 <p>Die Zielfunktion ist der mittlere quadratische Fehler. Diese bekommen wir, indem wir die Norm des Vektors <span class="math notranslate nohighlight">\(\v y - \m X \v w\)</span> berechnen:</p>
 <div class="amsmath math notranslate nohighlight">
@@ -941,11 +940,9 @@ c &amp; = \frac{1}{2}\v y^T\v y
 \[\begin{align*}
 \v w^*=(\m X^T \m X)^{-1}\m X^T \v y
 \end{align*}\]</div>
-<p>Wann ist <span class="math notranslate nohighlight">\(\m X^T \m X\)</span> nicht invertierbar? Es gibt zwei typische Fälle:</p>
-<ol class="arabic simple">
-<li><p><span class="math notranslate nohighlight">\(\m X^T \m X\)</span> ist ein Beispiel für eine [Gram’sche Matrix]{<a class="reference external" href="https://en.wikipedia.org/wiki/Gram_matrix">https://en.wikipedia.org/wiki/Gram_matrix</a>}. Diese haben die Eigenschaft, dass sie genau dann invertierbar sind, wenn alle Spalten von <span class="math notranslate nohighlight">\(\m X\)</span> linear unabhängig sind. In der Sprache der linearen Regression ausgedrückt: keines der Features kann durch Linearkombination der anderen Features ausgedrückt werden. In diesem Fall ist die Matrix <span class="math notranslate nohighlight">\(\m X^T \m X\)</span> nicht invertierbar, sondern es gibt unendlich viele Lösungen der Normalengleichungen. Dabei sind alle Lösungen gleichwertig, liefern also den gleichen Zielfunktionswert.</p></li>
-<li><p>Falls es mehr (linear unabhängige) Features als Trainingsdatenpunkte gibt, also <span class="math notranslate nohighlight">\(\m X\)</span> mehr Spalten als Zeilen besitzt, ist <span class="math notranslate nohighlight">\(\m X^T \m X\)</span> nicht invertierbar. In diesem Fall können die Trainingsdatenpunkte perfekt interpoliert werden und der Modellfehler ist <span class="math notranslate nohighlight">\(0\)</span>. Dies bezeichnet man als Overfitting.</p></li>
-</ol>
+<p>Wann ist <span class="math notranslate nohighlight">\(\m X^T \m X\)</span> nicht invertierbar?</p>
+<p><span class="math notranslate nohighlight">\(\m X^T \m X\)</span> ist ein Beispiel für eine <a class="reference external" href="https://en.wikipedia.org/wiki/Gram_matrix">Gram’sche Matrix</a>. Diese haben die Eigenschaft, dass sie genau dann invertierbar sind, wenn alle Spalten von <span class="math notranslate nohighlight">\(\m X\)</span> linear unabhängig sind. In der Sprache der linearen Regression ausgedrückt: keines der Features kann durch Linearkombination der anderen Features ausgedrückt werden. Falls die Features linear abhängig sind, ist die Matrix <span class="math notranslate nohighlight">\(\m X^T \m X\)</span> nicht invertierbar, sondern es gibt unendlich viele Lösungen der Normalengleichungen. Dabei sind alle Lösungen gleichwertig, liefern also den gleichen Zielfunktionswert.</p>
+<p>Eine Folgerung daraus ist, dass <span class="math notranslate nohighlight">\(\m X^T \m X\)</span> nicht invertierbar ist, wenn es mehr Features als Trainingsdatenpunkte gibt, also <span class="math notranslate nohighlight">\(\m X\)</span> mehr Spalten als Zeilen besitzt (dann sind die Spalten nämlich automatisch linear abhängig).</p>
 </section>
 <section id="berechnung-der-losung-mit-python">
 <h3>Berechnung der Lösung mit Python<a class="headerlink" href="#berechnung-der-losung-mit-python" title="Link to this heading">#</a></h3>

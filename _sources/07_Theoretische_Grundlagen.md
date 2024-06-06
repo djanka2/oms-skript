@@ -736,11 +736,11 @@ Das ist das Wesen der Differenzierbarkeit von mehrdimensionalen Funktionen. Wir 
 Eine Funktion $f:\R^n\rightarrow \R$ heißt in einem Punkt $x_0$ *total differenzierbar* (oder einfach nur *differenzierbar*), wenn sie in einer Umgebung des Punktes durch eine lineare Funktion approximiert werden kann.
 
 \begin{align*}
-f(\v x)=f(\v x_0)+\v g^T(\v x-\v x_0)+ h(\v x)(\v x-\v x_0)
+f(\v x)=f(\v x_0)+\v g^T(\v x-\v x_0)+ h(\v x)(\v x-\v x_0),
 \end{align*}
-und
+wobei der "Fehlerterm" $h(\v x)$ schneller gegen 0 geht als $|\v x-\v x_0|$, mathematisch
 \begin{align*}
-\lim_{\v x\rightarrow \v x_0} h(\v x)=0
+\lim_{\v x\rightarrow \v x_0} \frac{|h(\v x)|}{|\v x - \v x_0|}=0
 \end{align*}
 
 Den Vektor $\v g\in\R^n$ nennen wir die *Ableitung* von $f$ im Punkt $x_0$.
