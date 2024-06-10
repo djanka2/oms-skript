@@ -116,7 +116,7 @@ und für {prf:ref}`qpex2`
 \nabla f_2(x,y) = \bmat  2 & 1\\ 1 & 2\emat   \bmat  x\\y\emat  + \bmat  3\\0\emat   
 \end{align*}
 
-Die Hessematrix ist einfach die Matrix $\v A$, was man sieht, wenn man {eq}`eq:grad-qp` nach $\v x$ ableitet.
+Die Hessematrix ist einfach die Matrix $\v A$, also $\nabla^2 f(x_1,x_2,\dots,x_n) = \v A$, was man sieht, wenn man {eq}`eq:grad-qp` nach $\v x$ ableitet.
 Damit können wir unter Verwendung von {prf:ref}`thm:OBn` (erste Ableitung gleich Null setzen und Eigenwerte der zweiten Ableitung untersuchen) die kritischen Punkte quadratischer Funktionen vollständig charakterisieren.
 ```{prf:theorem} Kritische Punkte quadratischer Funktionen
 :label: thm:krit-qp
@@ -164,7 +164,7 @@ keine Lösung hat.
 
 Damit haben wir die Optimierung von quadratischen Funktionen auf ein reines Problem der linearen Algebra zurückgeführt. Wenn wir lineare Gleichungssysteme lösen können, können wir auch quadratische Optimierungsprobleme lösen.
 
-=(sec:umsatz)
+(sec:umsatz)=
 ## Anwendung: Umsatzmaximierung im Einproduktfall
 Wir betrachten ein einfaches Modell aus der Mikroökonomie. Sie produzieren ein Produkt, von dem Sie $x$ Mengeneinheiten zum Preis $p$ verkaufen möchten. Ihr Ziel ist es, den Umsatz $p\cdot x$ zu maximieren. Allerdings wird die Nachfrage $D(p)$ mit steigendem Preis sinken. Wir nehmen zwischen Nachfrage und Preis $p\geq 0$ folgenden Zusammenhang an:
 

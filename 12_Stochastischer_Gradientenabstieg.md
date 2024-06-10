@@ -29,7 +29,7 @@ wobei $M$ die maximale Nachfrage beschreibt und $-\eta$ die Preiselastizität, a
 
 Nehmen wir z.B. an, dass es sich bei dem Produkt um Eiscreme handelt und die Nachfrage bezieht sich auf einen Tag. Dann wird an einem heißen Sommertag $M$ größer als an einem verregneten Tag, d.h. es gibt grundsätzlich mehr Nachfrage nach Eis. Wenn zudem die Konkurrenz-Eisdiele geschlossen hat und es weit und breit keine Alternative zu unserem Eis gibt, werden die Kunden womöglich auch weniger preissensitiv sein (kleineres $\eta$), d.h. die Nachfrage wird also bei einer Preiserhöhung weniger zurückgehen.
 
-Wir modellieren daher $M$ und $\eta$ als *Zufallsvariablen*. Das sind, wie der Name schon sagt, Variablen, die zufällig verschiedene Werte annehmen können. Welche Werte $M$ und $\eta$ mit welcher Wahrscheinlichkeit annehmen, gibt ihre *Wahrscheinlichkeitsverteilung* an. Für Wahrscheinlichkeitsverteilungen gibt es eine ganze Reihe von Verteilungsmodellen, z.B. die [Normalverteilung]{https://de.wikipedia.org/wiki/Normalverteilung}, [Logarithmische Normalverteilung]{https://de.wikipedia.org/wiki/Logarithmische_Normalverteilung}, [Exponentialverteilung]{https://de.wikipedia.org/wiki/Exponentialverteilung} oder [Gamma-Verteilung]{https://de.wikipedia.org/wiki/Gammaverteilung}, um nur einige zu nennen. Jedes Modell hat gewisse Voraussetzungen unter denen es angewendet wird. Zum Beispiel wird die [Binomialverteilung]{https://de.wikipedia.org/wiki/Binomialverteilung} angewendet, wenn die Anzahl der Treffer in einer Serie von gleichartigen und unabhängigen Versuchen, die jeweils genau zwei mögliche Ergebnisse haben, modelliert werden soll. Die Realität ist aber häufig deutlich komplizierter und derartige Modelle sind oft nur grobe Approximationen.
+Wir modellieren daher $M$ und $\eta$ als *Zufallsvariablen*. Das sind, wie der Name schon sagt, Variablen, die zufällig verschiedene Werte annehmen können. Welche Werte $M$ und $\eta$ mit welcher Wahrscheinlichkeit annehmen, gibt ihre *Wahrscheinlichkeitsverteilung* an. Für Wahrscheinlichkeitsverteilungen gibt es eine ganze Reihe von Verteilungsmodellen, z.B. die [Normalverteilung](https://de.wikipedia.org/wiki/Normalverteilung), [Logarithmische Normalverteilung](https://de.wikipedia.org/wiki/Logarithmische_Normalverteilung), [Exponentialverteilung](https://de.wikipedia.org/wiki/Exponentialverteilung) oder [Gamma-Verteilung](https://de.wikipedia.org/wiki/Gammaverteilung), um nur einige zu nennen. Jedes Modell hat gewisse Voraussetzungen unter denen es angewendet wird. Zum Beispiel wird die [Binomialverteilung](https://de.wikipedia.org/wiki/Binomialverteilung) angewendet, wenn die Anzahl der Treffer in einer Serie von gleichartigen und unabhängigen Versuchen, die jeweils genau zwei mögliche Ergebnisse haben, modelliert werden soll. Die Realität ist aber häufig deutlich komplizierter und derartige Modelle sind oft nur grobe Approximationen.
 
 Für unser Umsatzmaximierungsproblem bedeutet die Modellierung als Zufallsvariable, dass wir es jeden Tag - zufällig - mit einer anderen Zielfunktion zu tun haben, bei der natürlich auch die optimalen Preise unterschiedlich sind:
 
@@ -284,9 +284,11 @@ Dies ist die Formulierung, die sie vermutlich aus Vorlesungen über maschinelles
 
 Diese Betrachtungen liefern die theoretische Begründung, warum der stochastische bzw. Minibatch-Gradientenabstieg dem normalen Gradientenabstieg vorzuziehen ist. 
 
-Auch aus technischer Sicht ist der stochastische Gradientenabstieg günstig. In modernen Anwendungen gilt normalerweise
-- $N$ ist sehr groß (viele Trainingsdaten)
+Auch aus technischer Sicht ist der stochastische Gradientenabstieg günstig. In modernen KI-Anwendungen gilt normalerweise
+- $N$ ist *sehr* groß (viele Trainingsdaten)
 - Dimension von $\v w$ ist sehr groß (viele Modellparameter)
 - Dimension von $\v x$ ist sehr groß (viele Features)
 
 Das macht die Auswertung der Verlustfunktion aufwändig, was Rechen- und Speicherbedarf betrifft. Beim Minibatch-Gradientenabstieg benötigt man in der inneren Schleife (über die Minibatches) aber immer nur einen Teil der Trainingsdaten, d.h. der Rechen- und Speicherbedarf einer Iteration (nicht aber einer Epoche) ist unabhängig von der Anzahl $N$ der Trainingsdaten. Man muss diese also nie komplett in den Speicher laden, für den stochastischen Gradientenabstieg genügt es, immer nur ein einziges Trainingsbeispiel im Speicher zu haben. Die Größe der Minibatch $m$ kann somit auf den vorhandenen Speicher und die Problemdimension abgestimmt werden. 
+
+% TODO: Beispiel durchexerzieren ähnlich wie im ML Skript

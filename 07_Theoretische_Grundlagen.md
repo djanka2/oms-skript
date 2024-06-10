@@ -580,17 +580,19 @@ Hier einige Beispiel konvexer und nicht-konvexer Funktionen:
 Was bringt uns das? Folgende beiden Sätze erklären die wichtige Bedeutung des Begriffes der Konvexität in der mathematischen Optimierung.
 ````{prf:theorem}
 :label: thm:konvex_
-Die kritischen Punkte einer differenzierbaren konvexen Funktion $f:\R^n\rightarrow\R$ sind genau die Minima von $f$.
+Besitzt eine differenzierbare konvexe Funktion $f:\R^n\rightarrow\R$ kritische Punkte, so sind diese lokale und gleichzeitig globale Minima von $f$.
 ````
-Das heißt zwar nicht, dass jede konvexe Funktion ein Minimum hat. Aber falls es einen kritischen Punkt gibt, so ist dieser auch ein Minimum von $f$.
+Bei strikter Konvexität ist dieses Minimum, falls es existiert, sogar eindeutig.
+
 ````{prf:theorem}
 :label: thm:konvex
 Wenn eine Funktion *strikt konvex* ist, d.h. es gilt
 \begin{align*}
 f(\lambda \v x+(1-\lambda)\v y) {\color{red}<}\lambda f(\v x)+(1-\lambda)f(\v y)\quad \forall \v x, \v y\in D \text{ und } \lambda\in (0,1),
 \end{align*}
-so besitzt sie nur ein einziges lokales Minimum, welches gleichzeitig das globale Minimum der Funktion ist.
+so besitzt sie höchstens ein lokales Minimum. Falls dieses existiert, ist es gleichzeitig das globale Minimum der Funktion.
 ````
+Das heißt zwar nicht, dass jede konvexe Funktion ein Minimum hat (Beispiel: $e^x$ ist strikt konvex auf $\R$, hat aber kein Minimum). Aber falls es einen kritischen Punkt gibt, so ist dieser auch ein Minimum von $f$.
 
 Es besteht folgende Beziehung zwischen der Konvexität und der Hessematrix einer Funktion:
 ````{prf:theorem}
@@ -602,7 +604,7 @@ Sei $D\subseteq \R^n$ konvex und $f:\R^n\rightarrow \R$ zweimal stetig differenz
 ````{note}
 Die Umkehrung der zweiten Aussage von {prf:ref}`thm:konvex2` gilt nicht: So ist z.B. $f(x)=x^4$ zwar strikt konvex, aber ihre Hessematrix ist nur positiv semidefinit.
 ````
-{prf:ref}`thm:konvex` und {prf:ref}`thm:konvex2` stellen also folgendes sicher: Wenn man von einer differenzierbaren Funktion nachweisen kann, dass ihre Hessematrix über positiv definit ist, so hat diese Funktion genau ein lokales (und gleichzeitig globales) Minimum.
+{prf:ref}`thm:konvex` und {prf:ref}`thm:konvex2` stellen also folgendes sicher: Wenn man von einer differenzierbaren Funktion nachweisen kann, dass ihre Hessematrix über positiv definit ist, so hat diese Funktion höchstens ein lokales (und gleichzeitig globales) Minimum.
 
 Beispiele: 
 1. Lineare Funktionen sind konvex (aber nicht strikt konvex). Sie besitzen kein Minimum sondern sind unbeschränkt.
@@ -734,11 +736,11 @@ Das ist das Wesen der Differenzierbarkeit von mehrdimensionalen Funktionen. Wir 
 Eine Funktion $f:\R^n\rightarrow \R$ heißt in einem Punkt $x_0$ *total differenzierbar* (oder einfach nur *differenzierbar*), wenn sie in einer Umgebung des Punktes durch eine lineare Funktion approximiert werden kann.
 
 \begin{align*}
-f(\v x)=f(\v x_0)+\v g^T(\v x-\v x_0)+ h(\v x)(\v x-\v x_0)
+f(\v x)=f(\v x_0)+\v g^T(\v x-\v x_0)+ h(\v x)(\v x-\v x_0),
 \end{align*}
-und
+wobei der "Fehlerterm" $h(\v x)$ schneller gegen 0 geht als $|\v x-\v x_0|$, mathematisch
 \begin{align*}
-\lim_{\v x\rightarrow \v x_0} h(\v x)=0
+\lim_{\v x\rightarrow \v x_0} \frac{|h(\v x)|}{|\v x - \v x_0|}=0
 \end{align*}
 
 Den Vektor $\v g\in\R^n$ nennen wir die *Ableitung* von $f$ im Punkt $x_0$.

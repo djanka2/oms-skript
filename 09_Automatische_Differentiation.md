@@ -12,7 +12,7 @@ kernelspec:
 
 (sec:ad)=
 ## Automatische Differentiation
-Wie wir im Kapitel {ref}`sec:analysis` gelernt haben, kann man die partiellen Ableitungen zu einer gegebenen Funktion mit einer Handvoll einfacher Regeln bestimmen. Dieses Vorgehen hat allerdings Grenzen: In vielen Anwendungen, z.B. im Bereich maschinelles Lernen, trifft man auf sehr hochdimensionale, verschachtelte Funktionen. So sind beispielsweise neuronale Netze genau das: hochdimensionale, verschachtelte Funktionen. Obwohl es theoretisch mit den herkömmlichen Ableitungsregeln möglich wäre, bestimmt natürlich niemand deren partielle Ableitung mit Papier und Bleistift, da es zum Einen viel zu lange dauern würde und sehr fehleranfällig wäre. 
+Wie wir im Kapitel {ref}`sec:analysis` gelernt haben, kann man die partiellen Ableitungen zu einer gegebenen Funktion mit einer Handvoll einfacher Regeln bestimmen. Dieses Vorgehen hat allerdings Grenzen: In vielen Anwendungen, z.B. im Bereich maschinelles Lernen, trifft man auf sehr hochdimensionale, verschachtelte Funktionen. So sind beispielsweise neuronale Netze genau das: hochdimensionale, verschachtelte Funktionen. Obwohl es theoretisch mit den herkömmlichen Ableitungsregeln möglich wäre, bestimmt natürlich niemand deren partielle Ableitung mit Papier und Bleistift, da es zum Einen viel zu lange dauern würde und zum Anderen sehr fehleranfällig wäre. 
 
 Wir schauen uns in diesem Kapitel an, wie Computer partielle Ableitungen automatisch, exakt und effizient berechnen. Wir tun dies hier teilweise anhand von entsprechenden Python Bibliotheken, weisen aber darauf hin, dass es die Verfahren auch in anderen Programmiersprachen gibt und diese dort nach den gleichen Prinzipien funktionieren.
 
@@ -208,7 +208,7 @@ Gesucht:
      \overline{x}_i=\sum_{j: \textup{Kind von }i} \overline{x}_j\cdot \derv{x_j}{x_i}=\sum_{j: \textup{Kind von }i} \derv{f}{x_j}\cdot  \derv{x_j}{x_i}
      \end{align*}
 ```
-Wie Sie sehen, ist der Algorithmus selbst relativ kurz. Die Formel zur Berechnung von $\overline{x}_i$ ist übrigens gerade die Kettenregel: Die Ableitung von $f$ nach $x_i$ ist die Ableitung von $f$ bis zu den Knoten, die unmittelbar nach $x_i$ kommen multipliziert mit der lokalen Ableitung $\derv{x_j}{x_i}$.
+Wie Sie sehen, ist der Algorithmus selbst relativ kurz. Die Formel zur Berechnung von $\overline{x}_i$ ist übrigens gerade die Kettenregel: Die Ableitung von $f$ nach $x_i$ ist die Ableitung von $f$ bis zu den Knoten, die unmittelbar nach $x_i$ kommen multipliziert mit der lokalen Ableitung $\derv{x_j}{x_i}$. Der gesuchte Gradient $\nabla f(x')$ ist nach Terminierung des Algorithmus in den adjungierten Variablen $\overline{x}_i, i=1,\dots,n$ gespeichert.
 
 Wir führen den Algorithmus noch einmal am Beispiel von weiter oben, $f(x)=\sin x^2 + \cos x^2$ aus. Dabei verwenden wir die Notation der Zwischenknoten mit $x_i$ und notieren auch gleich die Adjungierten $\overline{x}_i$ an jeden Knoten (diese werden im Verlauf des Algorithmus berechnet).
 ```{figure} ./bilder/berechnungsgraph4.png
@@ -236,10 +236,102 @@ Nun können wir $x_2$ wählen. $x_2$ hat zwei Kinder, also müssen auch zwei lok
 Damit sind alle Knoten bearbeitet und der Algorithmus terminiert. Der Funktionswert von $f$ an der Stelle $\sqrt{\pi}$ ist $f(\sqrt{\pi})=-1$, die Ableitung ist $\overline{x}_1=\derv{f}{x}=-2\sqrt{\pi}$.
 ```
 
+Wir betrachten ein weiteres Beispiel, diesmal für eine Funktion in zwei Variablen. Da der Algorithmus ohnehin die Ableitungen nach *allen* Knoten berechnet, funktioniert er genauso. Der einzige Unterschied ist, dass nun mehr als ein Knoten als "Eingangsknoten" ausgezeichnet ist.
+
+```{figure} ./bilder/berechnungsgraph6.png
+:name: fig:example_graph_x2
+:width: 600px
+```
+```{prf:example} Backpropagation für $f(x_1,x_2)=\frac{\exp x_1x_2}{x_2}$ an der Stelle $(x_1,x_2)=(0,2)$
+Vorwärtsphase:
+- $x_1=0$
+- $x_2=2$
+- $x_3=2\cdot 0=0$
+- $x_4=\exp 0=1$
+- $x_5=\frac{1}{2}$
+
+Rückwärtsphase:
+- Schritt 1: Start: Setze $\overline{x}_5=\derv{f}{f}=1$
+Als nächstes müssen wir einen unbearbeiteten Knoten wählen, dessen Kinder bereits berechnet wurden. Das ist nur für $x_4$ der Fall.
+- Schritt 2: Wähle $x_4$. Setze $\overline{x}_4=\overline{x}_5\derv{x_5}{x_4}=1\cdot\frac{1}{x_2}=\frac{1}{2}$.
+Als nächstes müssen wir $x_3$ wählen.
+- Schritt 3: Wähle $x_3$. Setze $\overline{x}_3=\overline{x}_4\derv{x_4}{x_3}=\frac{1}{2}\cdot \exp x_3=\frac{1}{2}$.
+Nun können wir $x_2$ wählen. $x_2$ hat zwei Kinder, also müssen auch zwei lokale Ableitungen aufsummiert werden.
+- Schritt 4: Wähle $x_2$. Setze $\overline{x}_2=\overline{x}_3\derv{x_3}{x_2}+\overline{x}_5\derv{x_5}{x_2}=\frac{1}{2}\cdot x_1+1\cdot \frac{-x_4}{x_2^2}=-\frac{1}{4}$.
+- Schritt 5: Wähle $x_1$. Setze $\overline{x}_1=\overline{x}_3\derv{x_3}{x_1}=\frac{1}{2}\cdot x_2=1$
+
+Damit sind alle Knoten bearbeitet und der Algorithmus terminiert. Der Funktionswert von $f$ an der Stelle $(0,2)$ ist $f(0,2)=\frac{1}{2}$, der Gradient ist $\nabla f(0,2)=(\overline{x}_1,\overline{x}_2)=(1,-\frac{1}{4})$.
+```
+
 Der Backpropagation Algorithmus erlaubt es, Ableitungen beliebig komplizierter Funktion mittels einem einfach Schema effizient zu berechnen. Dafür müssen die Ableitungen der elementaren Operationen, aus denen der Berechnungsgraph aufgebaut ist, einmalig fest hinterlegt werden. Weiterhin muss bei der Vorwärtsphase jeder Wert $x_1,\dots,x_N$ zwischengespeichert werden, damit er bei der Rückwärtsphase zur Verfügung steht. Der dafür benötigte Speicherplatz kann bei großen Funktionen (neuronalen Netzen), wie sie z.B. im Bereich maschinelles Lernen und KI vorkommen, signifikant sein. 
 
 
-%TODO wie in Folien, aber zusätzlich noch zweites Beispiel mit zwei Eingängen anfügen (Motivation: waren alles univariate Funktionen, geht es auch für multivariat -> ja, denn Algo berechnet immer Ableitungen nach ALLEN x_i)
+````{prf:remark} Vorwärtsmodus der automatischen Differentiation
+Falls die abzuleitende Funktion selbst vektorwertig ist, ist es u.U. effizienter den *Vorwärtsmodus* der automatischen Differentiation einzusetzen. Dazu werden Funktionsauswertung und Ableitung in einem einzigen Vorwärtdurchlauf des Graphen berechnet. Der Vorwärtsmodus ist deshalb strukturell sogar einfacher als der Rückwärtsmodus, da keine Werte zwischengespeichert werden müssen. 
+
+Die Frage, welcher der beiden Modi effizienter ist, hängt von der Art der Ableitungen ab, die berechnet werden müssen. Im Kontext von Optimierungsproblemen ist dies immer der Gradient, also eine Jacobimatrix mit einer Zeile und (sehr) vielen Spalten. In diesem Fall ist der Rückwärtsmodus viel effizienter. Soll dagegen z.B. die Jacobimatrix einer Funktion berechnet werden, die mehr Zeilen als Spalten hat, so geht dies schneller mit dem Vorwärtsmodus. Da diese Situation im Kontext der von uns betrachteten Optimierungsprobleme allerdings nicht auftritt, gehen wir hier nicht näher darauf ein und beschränken uns auf den Rückwärtsmodus (Backpropagation).
+```` 
+
+
+### Vektorisierung der Knotenoperationen
+Wir haben eingangs erwähnt, dass Knoten im Berechnungsgraphen "elementare Operationen" symbolisieren. In den Beispielen kamen dafür die univariaten Funktionen $+, -, \cdot, /, \sin, \cos, \exp, \ln$ zum Einsatz. Diese Auswahl ist natürlich recht willkürlich. Tatsächlich besteht -- neben der effizienten Art, den Berechnungsgraphen zu traversieren -- eine weitere Stärke des Ansatzes der automatischen Differentiation darin, beliebige Funktionen als "elementare Operationen" zu definieren. Man muss für diese Operationen lediglich Code für deren Auswertung sowie die Auswertung der partiellen Ableitungen bereitstellen.
+
+Eine wesentliche Stärke von Softwarepaketen wie `autograd`, [PyTorch](https://pytorch.org/) oder [TensorFlow](https://www.tensorflow.org/) besteht darin, vektorwertige Funktionen als elementare Operationen zu definieren, deren Funktionswerte und Ableitungen dann besonders effizient berechnet werden.
+
+Wir schauen uns zwei Beispiele elementarer Operationen an:
+1. Eine lineare Abbildung $f_1:\R^n \rightarrow \R^m$, dargestellt als Multiplikation eines Vektors mit einer (festen) Matrix:
+  \begin{align*}
+    f_1:\R^n &\rightarrow \R^m\\
+    f_1(\v x)&=\m A \v x\\
+    \derv{f_1}{\v x} &= \m A\in \R^{m\times n}
+  \end{align*}
+2. Das Skalarprodukt von zwei Vektoren:
+  \begin{align*}
+    f_2:\R^{2n} &\rightarrow \R\\
+    f_2(\v x, \v y)&=\v x^T \v y\\
+    \derv{f_2}{\v x} &= \v y^T \in R^{1\times n}\\
+    \derv{f_2}{\v y} &= \v x^T \in R^{1\times n}
+  \end{align*}
+
+Damit kann man etwa die Ableitung der Funktion $f:\R^n \rightarrow \R$
+$$
+  f(\v x)=\v x^T \m H \v x,\quad \m A\in \R^{n\times n}
+$$
+berechnen. Der Berechnungsgraph der Funktion lässt sich wie folgt darstellen:
+```{figure} ./bilder/berechnungsgraph7.png
+:name: fig:example_graph_vect
+:width: 600px
+```
+Um den Gradienten $\nabla f(\v x)$ an einer Stelle $\v x'$ zu berechnen, würde die Rückwärtsphase wie folgt ablaufen:
+- Schritt 1: Start: Setze $\overline{x}_3=1$
+- Schritt 2: Wähle $\v x_2$. Setze $\overline{\v x}_2=\overline{x}_3\derv{x_3}{\v x_2}=1\cdot \v x_1^T$.
+- Schritt 3: Wähle $\v x_1$. Setze $\overline{\v x}_3=\overline{\v x}_2\derv{\v x_2}{\v x_1}+\overline{x}_3\derv{x_3}{\v x_1}=\v x_1^T \m H + 1\cdot \v x_2^T = \v x_1^T \m H + \v x_1^T \m H^T$.
+
+Hier ein konkretes Beispiel mit Zahlen: Es soll der Gradient der Funktion
+
+$$
+  f(x_1,x_2,x_3)= \bmat x_1 & x_2 &x_3 \emat \bmat 1 & 2 & 3\\ 4 & 5 & 6 \\ 7 & 8 & 9 \emat \bmat x_1 \\ x_2 \\ x_3 \emat
+$$
+
+an der Stelle $(-1,1,0)$ berechnet werden. Dazu zunächst die Vorwärtsphase:
+
+- $x_1=\bmat -1 \\ 2 \\ 0 \emat$
+- $x_2=\bmat 1 & 2 & 3\\ 4 & 5 & 6 \\ 7 & 8 & 9 \emat \bmat -1 \\ 2 \\ 0 \emat = \bmat 3 \\ 6 \\ 9 \emat$
+- $x_3=\bmat -1 & 2 & 0 \emat \bmat 3 \\ 6 \\ 9 \emat= 9$
+
+Rückwärtsphase:
+- \begin{align*}
+  \overline{x}_3=1
+  \end{align*}
+- \begin{align*}
+  \overline{\v x}_2=\overline{x}_3\derv{x_3}{\v x_2}=\bmat -1 & 2 & 0 \emat
+  \end{align*}
+- \begin{align*}
+  \overline{\v x}_3&=\overline{\v x}_2\derv{\v x_2}{\v x_1}+\overline{x}_3\derv{x_3}{\v x_1}\\
+    &=\bmat -1 & 2 & 0 \emat\bmat 1 & 2 & 3\\ 4 & 5 & 6 \\ 7 & 8 & 9 \emat + \v x_2\\
+    &=\bmat 7 & 8 & 9 \emat + \bmat 3 & 6 & 9 \emat = \bmat 10 & 14 & 18\emat
+  \end{align*}
+
 
 
 ### Das `autograd` Paket
