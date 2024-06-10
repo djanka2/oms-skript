@@ -210,7 +210,7 @@
 </li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">9. Automatische Differentiation</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="10_Gradientenverfahren.html">10. Verfahren erster Ordnung</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="10_Logistische_Regression.html">10.9. Logistische Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="10_Logistische_Regression.html">10.9. Anwendung: Logistische Regression</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="11_Verfahren_zweiter_Ordnung.html">11. Verfahren zweiter Ordnung</a></li>
@@ -368,7 +368,8 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#berechnungsgraphen">9.2. Berechnungsgraphen</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kettenregel-und-berechnunsgraphen">9.3. Kettenregel und Berechnunsgraphen</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ruckwartsmodus-der-automatischen-differentiation-backpropagation">9.4. Rückwärtsmodus der automatischen Differentiation (Backpropagation)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#das-autograd-paket">9.5. Das <code class="docutils literal notranslate"><span class="pre">autograd</span></code> Paket</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vektorisierung-der-knotenoperationen">9.5. Vektorisierung der Knotenoperationen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#das-autograd-paket">9.6. Das <code class="docutils literal notranslate"><span class="pre">autograd</span></code> Paket</a></li>
 </ul>
             </nav>
         </div>
@@ -382,7 +383,7 @@ document.write(`
                   
   <section id="automatische-differentiation">
 <span id="sec-ad"></span><h1><span class="section-number">9. </span>Automatische Differentiation<a class="headerlink" href="#automatische-differentiation" title="Link to this heading">#</a></h1>
-<p>Wie wir im Kapitel <a class="reference internal" href="06_Multivariate_Analysis.html#sec-analysis"><span class="std std-ref">Funktionen und Ableitungen</span></a> gelernt haben, kann man die partiellen Ableitungen zu einer gegebenen Funktion mit einer Handvoll einfacher Regeln bestimmen. Dieses Vorgehen hat allerdings Grenzen: In vielen Anwendungen, z.B. im Bereich maschinelles Lernen, trifft man auf sehr hochdimensionale, verschachtelte Funktionen. So sind beispielsweise neuronale Netze genau das: hochdimensionale, verschachtelte Funktionen. Obwohl es theoretisch mit den herkömmlichen Ableitungsregeln möglich wäre, bestimmt natürlich niemand deren partielle Ableitung mit Papier und Bleistift, da es zum Einen viel zu lange dauern würde und sehr fehleranfällig wäre.</p>
+<p>Wie wir im Kapitel <a class="reference internal" href="06_Multivariate_Analysis.html#sec-analysis"><span class="std std-ref">Funktionen und Ableitungen</span></a> gelernt haben, kann man die partiellen Ableitungen zu einer gegebenen Funktion mit einer Handvoll einfacher Regeln bestimmen. Dieses Vorgehen hat allerdings Grenzen: In vielen Anwendungen, z.B. im Bereich maschinelles Lernen, trifft man auf sehr hochdimensionale, verschachtelte Funktionen. So sind beispielsweise neuronale Netze genau das: hochdimensionale, verschachtelte Funktionen. Obwohl es theoretisch mit den herkömmlichen Ableitungsregeln möglich wäre, bestimmt natürlich niemand deren partielle Ableitung mit Papier und Bleistift, da es zum Einen viel zu lange dauern würde und zum Anderen sehr fehleranfällig wäre.</p>
 <p>Wir schauen uns in diesem Kapitel an, wie Computer partielle Ableitungen automatisch, exakt und effizient berechnen. Wir tun dies hier teilweise anhand von entsprechenden Python Bibliotheken, weisen aber darauf hin, dass es die Verfahren auch in anderen Programmiersprachen gibt und diese dort nach den gleichen Prinzipien funktionieren.</p>
 <section id="vorbetrachtung-mathematische-funktionen-in-python">
 <h2><span class="section-number">9.1. </span>Vorbetrachtung: Mathematische Funktionen in Python<a class="headerlink" href="#vorbetrachtung-mathematische-funktionen-in-python" title="Link to this heading">#</a></h2>
@@ -589,7 +590,7 @@ Die Ableitung der Variable im Output Knoten <span class="math notranslate nohigh
 </li>
 </ol>
 </section>
-</div><p>Wie Sie sehen, ist der Algorithmus selbst relativ kurz. Die Formel zur Berechnung von <span class="math notranslate nohighlight">\(\overline{x}_i\)</span> ist übrigens gerade die Kettenregel: Die Ableitung von <span class="math notranslate nohighlight">\(f\)</span> nach <span class="math notranslate nohighlight">\(x_i\)</span> ist die Ableitung von <span class="math notranslate nohighlight">\(f\)</span> bis zu den Knoten, die unmittelbar nach <span class="math notranslate nohighlight">\(x_i\)</span> kommen multipliziert mit der lokalen Ableitung <span class="math notranslate nohighlight">\(\derv{x_j}{x_i}\)</span>.</p>
+</div><p>Wie Sie sehen, ist der Algorithmus selbst relativ kurz. Die Formel zur Berechnung von <span class="math notranslate nohighlight">\(\overline{x}_i\)</span> ist übrigens gerade die Kettenregel: Die Ableitung von <span class="math notranslate nohighlight">\(f\)</span> nach <span class="math notranslate nohighlight">\(x_i\)</span> ist die Ableitung von <span class="math notranslate nohighlight">\(f\)</span> bis zu den Knoten, die unmittelbar nach <span class="math notranslate nohighlight">\(x_i\)</span> kommen multipliziert mit der lokalen Ableitung <span class="math notranslate nohighlight">\(\derv{x_j}{x_i}\)</span>. Der gesuchte Gradient <span class="math notranslate nohighlight">\(\nabla f(x')\)</span> ist nach Terminierung des Algorithmus in den adjungierten Variablen <span class="math notranslate nohighlight">\(\overline{x}_i, i=1,\dots,n\)</span> gespeichert.</p>
 <p>Wir führen den Algorithmus noch einmal am Beispiel von weiter oben, <span class="math notranslate nohighlight">\(f(x)=\sin x^2 + \cos x^2\)</span> aus. Dabei verwenden wir die Notation der Zwischenknoten mit <span class="math notranslate nohighlight">\(x_i\)</span> und notieren auch gleich die Adjungierten <span class="math notranslate nohighlight">\(\overline{x}_i\)</span> an jeden Knoten (diese werden im Verlauf des Algorithmus berechnet).</p>
 <figure class="align-default" id="fig-example-graph-x">
 <a class="reference internal image-reference" href="_images/berechnungsgraph4.png"><img alt="_images/berechnungsgraph4.png" src="_images/berechnungsgraph4.png" style="width: 600px;" /></a>
@@ -618,10 +619,114 @@ Nun können wir <span class="math notranslate nohighlight">\(x_2\)</span> wähle
 </ul>
 <p>Damit sind alle Knoten bearbeitet und der Algorithmus terminiert. Der Funktionswert von <span class="math notranslate nohighlight">\(f\)</span> an der Stelle <span class="math notranslate nohighlight">\(\sqrt{\pi}\)</span> ist <span class="math notranslate nohighlight">\(f(\sqrt{\pi})=-1\)</span>, die Ableitung ist <span class="math notranslate nohighlight">\(\overline{x}_1=\derv{f}{x}=-2\sqrt{\pi}\)</span>.</p>
 </section>
+</div><p>Wir betrachten ein weiteres Beispiel, diesmal für eine Funktion in zwei Variablen. Da der Algorithmus ohnehin die Ableitungen nach <em>allen</em> Knoten berechnet, funktioniert er genauso. Der einzige Unterschied ist, dass nun mehr als ein Knoten als “Eingangsknoten” ausgezeichnet ist.</p>
+<figure class="align-default" id="fig-example-graph-x2">
+<a class="reference internal image-reference" href="_images/berechnungsgraph6.png"><img alt="_images/berechnungsgraph6.png" src="_images/berechnungsgraph6.png" style="width: 600px;" /></a>
+</figure>
+<div class="proof example admonition" id="example-7">
+<p class="admonition-title"><span class="caption-number">Example 9.3 </span> (Backpropagation für <span class="math notranslate nohighlight">\(f(x_1,x_2)=\frac{\exp x_1x_2}{x_2}\)</span> an der Stelle <span class="math notranslate nohighlight">\((x_1,x_2)=(0,2)\)</span>)</p>
+<section class="example-content" id="proof-content">
+<p>Vorwärtsphase:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x_1=0\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(x_2=2\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(x_3=2\cdot 0=0\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(x_4=\exp 0=1\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(x_5=\frac{1}{2}\)</span></p></li>
+</ul>
+<p>Rückwärtsphase:</p>
+<ul class="simple">
+<li><p>Schritt 1: Start: Setze <span class="math notranslate nohighlight">\(\overline{x}_5=\derv{f}{f}=1\)</span>
+Als nächstes müssen wir einen unbearbeiteten Knoten wählen, dessen Kinder bereits berechnet wurden. Das ist nur für <span class="math notranslate nohighlight">\(x_4\)</span> der Fall.</p></li>
+<li><p>Schritt 2: Wähle <span class="math notranslate nohighlight">\(x_4\)</span>. Setze <span class="math notranslate nohighlight">\(\overline{x}_4=\overline{x}_5\derv{x_5}{x_4}=1\cdot\frac{1}{x_2}=\frac{1}{2}\)</span>.
+Als nächstes müssen wir <span class="math notranslate nohighlight">\(x_3\)</span> wählen.</p></li>
+<li><p>Schritt 3: Wähle <span class="math notranslate nohighlight">\(x_3\)</span>. Setze <span class="math notranslate nohighlight">\(\overline{x}_3=\overline{x}_4\derv{x_4}{x_3}=\frac{1}{2}\cdot \exp x_3=\frac{1}{2}\)</span>.
+Nun können wir <span class="math notranslate nohighlight">\(x_2\)</span> wählen. <span class="math notranslate nohighlight">\(x_2\)</span> hat zwei Kinder, also müssen auch zwei lokale Ableitungen aufsummiert werden.</p></li>
+<li><p>Schritt 4: Wähle <span class="math notranslate nohighlight">\(x_2\)</span>. Setze <span class="math notranslate nohighlight">\(\overline{x}_2=\overline{x}_3\derv{x_3}{x_2}+\overline{x}_5\derv{x_5}{x_2}=\frac{1}{2}\cdot x_1+1\cdot \frac{-x_4}{x_2^2}=-\frac{1}{4}\)</span>.</p></li>
+<li><p>Schritt 5: Wähle <span class="math notranslate nohighlight">\(x_1\)</span>. Setze <span class="math notranslate nohighlight">\(\overline{x}_1=\overline{x}_3\derv{x_3}{x_1}=\frac{1}{2}\cdot x_2=1\)</span></p></li>
+</ul>
+<p>Damit sind alle Knoten bearbeitet und der Algorithmus terminiert. Der Funktionswert von <span class="math notranslate nohighlight">\(f\)</span> an der Stelle <span class="math notranslate nohighlight">\((0,2)\)</span> ist <span class="math notranslate nohighlight">\(f(0,2)=\frac{1}{2}\)</span>, der Gradient ist <span class="math notranslate nohighlight">\(\nabla f(0,2)=(\overline{x}_1,\overline{x}_2)=(1,-\frac{1}{4})\)</span>.</p>
+</section>
 </div><p>Der Backpropagation Algorithmus erlaubt es, Ableitungen beliebig komplizierter Funktion mittels einem einfach Schema effizient zu berechnen. Dafür müssen die Ableitungen der elementaren Operationen, aus denen der Berechnungsgraph aufgebaut ist, einmalig fest hinterlegt werden. Weiterhin muss bei der Vorwärtsphase jeder Wert <span class="math notranslate nohighlight">\(x_1,\dots,x_N\)</span> zwischengespeichert werden, damit er bei der Rückwärtsphase zur Verfügung steht. Der dafür benötigte Speicherplatz kann bei großen Funktionen (neuronalen Netzen), wie sie z.B. im Bereich maschinelles Lernen und KI vorkommen, signifikant sein.</p>
+<div class="proof remark admonition" id="remark-8">
+<p class="admonition-title"><span class="caption-number">Remark 9.1 </span> (Vorwärtsmodus der automatischen Differentiation)</p>
+<section class="remark-content" id="proof-content">
+<p>Falls die abzuleitende Funktion selbst vektorwertig ist, ist es u.U. effizienter den <em>Vorwärtsmodus</em> der automatischen Differentiation einzusetzen. Dazu werden Funktionsauswertung und Ableitung in einem einzigen Vorwärtdurchlauf des Graphen berechnet. Der Vorwärtsmodus ist deshalb strukturell sogar einfacher als der Rückwärtsmodus, da keine Werte zwischengespeichert werden müssen.</p>
+<p>Die Frage, welcher der beiden Modi effizienter ist, hängt von der Art der Ableitungen ab, die berechnet werden müssen. Im Kontext von Optimierungsproblemen ist dies immer der Gradient, also eine Jacobimatrix mit einer Zeile und (sehr) vielen Spalten. In diesem Fall ist der Rückwärtsmodus viel effizienter. Soll dagegen z.B. die Jacobimatrix einer Funktion berechnet werden, die mehr Zeilen als Spalten hat, so geht dies schneller mit dem Vorwärtsmodus. Da diese Situation im Kontext der von uns betrachteten Optimierungsprobleme allerdings nicht auftritt, gehen wir hier nicht näher darauf ein und beschränken uns auf den Rückwärtsmodus (Backpropagation).</p>
+</section>
+</div></section>
+<section id="vektorisierung-der-knotenoperationen">
+<h2><span class="section-number">9.5. </span>Vektorisierung der Knotenoperationen<a class="headerlink" href="#vektorisierung-der-knotenoperationen" title="Link to this heading">#</a></h2>
+<p>Wir haben eingangs erwähnt, dass Knoten im Berechnungsgraphen “elementare Operationen” symbolisieren. In den Beispielen kamen dafür die univariaten Funktionen <span class="math notranslate nohighlight">\(+, -, \cdot, /, \sin, \cos, \exp, \ln\)</span> zu Einsatz. Diese Auswahl ist natürlich recht willkürlich. Tatsächlich besteht – neben der effizienten Art, den Berechnungsgraphen zu traversieren – eine weitere Stärke des Ansatzes der automatischen Differentiation darin, beliebige Funktionen als “elementare Operationen” zu definieren. Man muss für diese Operationen lediglich Code für deren Auswertung sowie die Auswertung der partiellen Ableitungen bereitstellen.</p>
+<p>Eine wesentliche Stärke von Softwarepaketen wie <code class="docutils literal notranslate"><span class="pre">autograd</span></code>, <a class="reference external" href="https://pytorch.org/">PyTorch</a> oder <a class="reference external" href="https://www.tensorflow.org/">TensorFlow</a> besteht darin, vektorwertige Funktionen als elementare Operationen zu definieren, deren Funktionswerte und Ableitungen dann besonders effizient berechnet werden.</p>
+<p>Wir schauen uns zwei Beispiele elementarer Operationen an:</p>
+<ol class="arabic simple">
+<li><p>Eine lineare Abbildung <span class="math notranslate nohighlight">\(f_1:\R^n \rightarrow \R^m\)</span>, dargestellt als Multiplikation eines Vektors mit einer (festen) Matrix:</p></li>
+</ol>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    f_1:\R^n &amp;\rightarrow \R^m\\
+    f_1(\v x)&amp;=\m A \v x\\
+    \derv{f_1}{\v x} &amp;= \m A\in \R^{m\times n}
+  \end{align*}\]</div>
+<ol class="arabic simple" start="2">
+<li><p>Das Skalarprodukt von zwei Vektoren:</p></li>
+</ol>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    f_2:\R^{2n} &amp;\rightarrow \R\\
+    f_2(\v x, \v y)&amp;=\v x^T \v y\\
+    \derv{f_2}{\v x} &amp;= \v y^T \in R^{1\times n}\\
+    \derv{f_2}{\v y} &amp;= \v x^T \in R^{1\times n}
+  \end{align*}\]</div>
+<p>Damit kann man etwa die Ableitung der Funktion <span class="math notranslate nohighlight">\(f:\R^n \rightarrow \R\)</span>
+$<span class="math notranslate nohighlight">\(
+  f(\v x)=\v x^T \m H \v x,\quad \m A\in \R^{n\times n}
+\)</span>$
+berechnen. Der Berechnungsgraph der Funktion lässt sich wie folgt darstellen:</p>
+<figure class="align-default" id="fig-example-graph-vect">
+<a class="reference internal image-reference" href="_images/berechnungsgraph7.png"><img alt="_images/berechnungsgraph7.png" src="_images/berechnungsgraph7.png" style="width: 600px;" /></a>
+</figure>
+<p>Um den Gradienten <span class="math notranslate nohighlight">\(\nabla f(\v x)\)</span> an einer Stelle <span class="math notranslate nohighlight">\(\v x'\)</span> zu berechnen, würde die Rückwärtsphase wie folgt ablaufen:</p>
+<ul class="simple">
+<li><p>Schritt 1: Start: Setze <span class="math notranslate nohighlight">\(\overline{x}_3=1\)</span></p></li>
+<li><p>Schritt 2: Wähle <span class="math notranslate nohighlight">\(\v x_2\)</span>. Setze <span class="math notranslate nohighlight">\(\overline{\v x}_2=\overline{x}_3\derv{x_3}{\v x_2}=1\cdot \v x_1^T\)</span>.</p></li>
+<li><p>Schritt 3: Wähle <span class="math notranslate nohighlight">\(\v x_1\)</span>. Setze <span class="math notranslate nohighlight">\(\overline{\v x}_3=\overline{\v x}_2\derv{\v x_2}{\v x_1}+\overline{x}_3\derv{x_3}{\v x_1}=\v x_1^T \m H + 1\cdot \v x_2^T = \v x_1^T \m H + \v x_1^T \m H^T\)</span>.</p></li>
+</ul>
+<p>Hier ein konkretes Beispiel mit Zahlen: Es soll der Gradient der Funktion</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+  f(x_1,x_2,x_3)= \bmat x_1 &amp; x_2 &amp;x_3 \emat \bmat 1 &amp; 2 &amp; 3\\ 4 &amp; 5 &amp; 6 \\ 7 &amp; 8 &amp; 9 \emat \bmat x_1 \\ x_2 \\ x_3 \emat
+\end{split}\]</div>
+<p>an der Stelle <span class="math notranslate nohighlight">\((-1,1,0)\)</span> berechnet werden. Dazu zunächst die Vorwärtsphase:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x_1=\bmat -1 \\ 2 \\ 0 \emat\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(x_2=\bmat 1 &amp; 2 &amp; 3\\ 4 &amp; 5 &amp; 6 \\ 7 &amp; 8 &amp; 9 \emat \bmat -1 \\ 2 \\ 0 \emat = \bmat 3 \\ 6 \\ 9 \emat\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(x_3=\bmat -1 &amp; 2 &amp; 0 \emat \bmat 3 \\ 6 \\ 9 \emat= 9\)</span></p></li>
+</ul>
+<p>Rückwärtsphase:</p>
+<ul>
+<li><div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+  \overline{x}_3=1
+  \end{align*}\]</div>
+</li>
+<li><div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+  \overline{\v x}_2=\overline{x}_3\derv{x_3}{\v x_2}=\bmat -1 &amp; 2 &amp; 0 \emat
+  \end{align*}\]</div>
+</li>
+<li><div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+  \overline{\v x}_3&amp;=\overline{\v x}_2\derv{\v x_2}{\v x_1}+\overline{x}_3\derv{x_3}{\v x_1}\\
+    &amp;=\bmat -1 &amp; 2 &amp; 0 \emat\bmat 1 &amp; 2 &amp; 3\\ 4 &amp; 5 &amp; 6 \\ 7 &amp; 8 &amp; 9 \emat + \v x_2\\
+    &amp;=\bmat 7 &amp; 8 &amp; 9 \emat + \bmat 3 &amp; 6 &amp; 9 \emat = \bmat 10 &amp; 14 &amp; 18\emat
+  \end{align*}\]</div>
+</li>
+</ul>
 </section>
 <section id="das-autograd-paket">
-<h2><span class="section-number">9.5. </span>Das <code class="docutils literal notranslate"><span class="pre">autograd</span></code> Paket<a class="headerlink" href="#das-autograd-paket" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">9.6. </span>Das <code class="docutils literal notranslate"><span class="pre">autograd</span></code> Paket<a class="headerlink" href="#das-autograd-paket" title="Link to this heading">#</a></h2>
 <p>Im Paket <code class="docutils literal notranslate"><span class="pre">autograd</span></code> ist der Rückwärtsmodus der automatischen Differentiation implementiert. Es ist sehr benutzerfreundlich. Sie können es mittels</p>
 <blockquote>
 <div><p>pip install autograd</p>
@@ -776,7 +881,8 @@ Nun können wir <span class="math notranslate nohighlight">\(x_2\)</span> wähle
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#berechnungsgraphen">9.2. Berechnungsgraphen</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kettenregel-und-berechnunsgraphen">9.3. Kettenregel und Berechnunsgraphen</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ruckwartsmodus-der-automatischen-differentiation-backpropagation">9.4. Rückwärtsmodus der automatischen Differentiation (Backpropagation)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#das-autograd-paket">9.5. Das <code class="docutils literal notranslate"><span class="pre">autograd</span></code> Paket</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vektorisierung-der-knotenoperationen">9.5. Vektorisierung der Knotenoperationen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#das-autograd-paket">9.6. Das <code class="docutils literal notranslate"><span class="pre">autograd</span></code> Paket</a></li>
 </ul>
   </nav></div>
 

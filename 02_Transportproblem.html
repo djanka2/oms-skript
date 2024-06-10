@@ -210,7 +210,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="09_Automatische_Differentiation.html">9. Automatische Differentiation</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="10_Gradientenverfahren.html">10. Verfahren erster Ordnung</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="10_Logistische_Regression.html">10.9. Logistische Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="10_Logistische_Regression.html">10.9. Anwendung: Logistische Regression</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="11_Verfahren_zweiter_Ordnung.html">11. Verfahren zweiter Ordnung</a></li>
@@ -610,8 +610,8 @@ You can download the repository containing this and other examples by clicking <
 <ul class="simple">
 <li><p><strong>Cost</strong>: Minimize total shipping costs.</p></li>
 </ul>
-<div class="amsmath math notranslate nohighlight" id="equation-d7051dea-35d2-4190-b937-6b7725a2cd55">
-<span class="eqno">(2.8)<a class="headerlink" href="#equation-d7051dea-35d2-4190-b937-6b7725a2cd55" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-dfebf751-b2a3-4903-852f-8b80760ddfba">
+<span class="eqno">(2.8)<a class="headerlink" href="#equation-dfebf751-b2a3-4903-852f-8b80760ddfba" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \text{Minimize} \quad Z = \sum_{(s,t) \in \text{Cities} \times \text{Cities}}{\text{cost}_{s,t}*\text{flow}_{s,t}}
 \end{equation}\]</div>
 </section>
@@ -620,22 +620,22 @@ You can download the repository containing this and other examples by clicking <
 <ul class="simple">
 <li><p><strong>Factory output</strong>: Flow of goods from a factory must respect maximum capacity.</p></li>
 </ul>
-<div class="amsmath math notranslate nohighlight" id="equation-e5c47eb6-2e20-495f-bcbd-da23fcbb0fb6">
-<span class="eqno">(2.9)<a class="headerlink" href="#equation-e5c47eb6-2e20-495f-bcbd-da23fcbb0fb6" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-21ba8639-95a2-4755-b0aa-969b80dd93f8">
+<span class="eqno">(2.9)<a class="headerlink" href="#equation-21ba8639-95a2-4755-b0aa-969b80dd93f8" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \sum_{t \in \text{Cities}}{\text{flow}_{f,t}} \leq \text{supply}_{f} \quad \forall f \in \text{Factories}
 \end{equation}\]</div>
 <ul class="simple">
 <li><p><strong>Customer demand</strong>: Flow of goods must meet customer demand.</p></li>
 </ul>
-<div class="amsmath math notranslate nohighlight" id="equation-c8b788f8-1425-4caa-92c8-f6660cd70def">
-<span class="eqno">(2.10)<a class="headerlink" href="#equation-c8b788f8-1425-4caa-92c8-f6660cd70def" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-3cd6c4f6-7ef2-406d-80f1-097891c296d5">
+<span class="eqno">(2.10)<a class="headerlink" href="#equation-3cd6c4f6-7ef2-406d-80f1-097891c296d5" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \sum_{s \in \text{Cities}}{\text{flow}_{s,c}} = \text{demand}_{c} \quad \forall c \in \text{Customers}
 \end{equation}\]</div>
 <ul class="simple">
 <li><p><strong>Depot flow</strong>: Flow into a depot equals flow out of the depot.</p></li>
 </ul>
-<div class="amsmath math notranslate nohighlight" id="equation-a241e383-d158-4275-9e84-8c2c83590335">
-<span class="eqno">(2.11)<a class="headerlink" href="#equation-a241e383-d158-4275-9e84-8c2c83590335" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-20710db2-7884-4ad8-9a14-af1dfcfef74c">
+<span class="eqno">(2.11)<a class="headerlink" href="#equation-20710db2-7884-4ad8-9a14-af1dfcfef74c" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \sum_{s \in \text{Cities}}{\text{flow}_{s,d}} =
 \sum_{t \in \text{Cities}}{\text{flow}_{d,t}}
 \quad \forall d \in \text{Depots}
@@ -643,8 +643,8 @@ You can download the repository containing this and other examples by clicking <
 <ul class="simple">
 <li><p><strong>Depot capacity</strong>: Flow into a depot must respect depot capacity.</p></li>
 </ul>
-<div class="amsmath math notranslate nohighlight" id="equation-25467b87-eb66-4984-ac74-19a4c7a6e723">
-<span class="eqno">(2.12)<a class="headerlink" href="#equation-25467b87-eb66-4984-ac74-19a4c7a6e723" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-89f2e74e-db28-46d3-ab6b-6389c0d90201">
+<span class="eqno">(2.12)<a class="headerlink" href="#equation-89f2e74e-db28-46d3-ab6b-6389c0d90201" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \sum_{s \in \text{Cities}}{\text{flow}_{s,d}} \leq \text{through}_{d}
 \quad \forall d \in \text{Depots}
 \end{equation}\]</div>
@@ -823,7 +823,7 @@ Iteration    Objective       Primal Inf.    Dual Inf.      Time
        0    1.4800000e+05   1.812500e+04   0.000000e+00      0s
        7    1.9850000e+05   0.000000e+00   0.000000e+00      0s
 
-Solved in 7 iterations and 0.01 seconds (0.00 work units)
+Solved in 7 iterations and 0.00 seconds (0.00 work units)
 Optimal objective  1.985000000e+05
 </pre></div>
 </div>
