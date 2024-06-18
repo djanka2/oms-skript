@@ -221,7 +221,7 @@ Vorwärtsphase:
 - $x_2=x_1^2=\pi$
 - $x_3=\sin x_2=0$
 - $x_4=\cos x_2=-1$
-- $x_5=x_3+x_4$
+- $x_5=x_3+x_4=-1$
 
 Rückwärtsphase:
 - Schritt 1: Start: Setze $\overline{x}_5=\derv{f}{f}=1$
@@ -230,7 +230,7 @@ Als nächstes müssen wir einen unbearbeiteten Knoten wählen, dessen Kinder ber
 Der Ausdruck $\derv{x_5}{x_4}$ sieht etwas ungewohnt aus. Stellen sie sich dafür $x_5$ als *Funktion* vor, die abgeleitet wird. Als nächstes müssen wir $x_3$ wählen.
 - Schritt 3: Wähle $x_3$. Setze $\overline{x}_3=\overline{x}_5\derv{x_5}{x_3}=1\cdot1=1$.
 Nun können wir $x_2$ wählen. $x_2$ hat zwei Kinder, also müssen auch zwei lokale Ableitungen aufsummiert werden.
-- Schritt 4: Wähle $x_2$. Setze $\overline{x}_2=\overline{x}_4\derv{x_4}{x_2}+\overline{x}_3\derv{x_3}{x_2}=1\cdot(-sin x_2)+1\cdot\cos x_2=-1$.
+- Schritt 4: Wähle $x_2$. Setze $\overline{x}_2=\overline{x}_4\derv{x_4}{x_2}+\overline{x}_3\derv{x_3}{x_2}=1\cdot(-\sin x_2)+1\cdot\cos x_2=-1$.
 - Schritt 5: Wähle $x_1$. Setze $\overline{x}_1=\overline{x}_2\derv{x_2}{x_1}=-1\cdot2x_1=-2\sqrt{\pi}$
 
 Damit sind alle Knoten bearbeitet und der Algorithmus terminiert. Der Funktionswert von $f$ an der Stelle $\sqrt{\pi}$ ist $f(\sqrt{\pi})=-1$, die Ableitung ist $\overline{x}_1=\derv{f}{x}=-2\sqrt{\pi}$.
@@ -294,9 +294,11 @@ Wir schauen uns zwei Beispiele elementarer Operationen an:
   \end{align*}
 
 Damit kann man etwa die Ableitung der Funktion $f:\R^n \rightarrow \R$
+
 $$
   f(\v x)=\v x^T \m H \v x,\quad \m A\in \R^{n\times n}
 $$
+
 berechnen. Der Berechnungsgraph der Funktion lässt sich wie folgt darstellen:
 ```{figure} ./bilder/berechnungsgraph7.png
 :name: fig:example_graph_vect
@@ -328,7 +330,7 @@ Rückwärtsphase:
   \end{align*}
 - \begin{align*}
   \overline{\v x}_3&=\overline{\v x}_2\derv{\v x_2}{\v x_1}+\overline{x}_3\derv{x_3}{\v x_1}\\
-    &=\bmat -1 & 2 & 0 \emat\bmat 1 & 2 & 3\\ 4 & 5 & 6 \\ 7 & 8 & 9 \emat + \v x_2\\
+    &=\bmat -1 & 2 & 0 \emat\bmat 1 & 2 & 3\\ 4 & 5 & 6 \\ 7 & 8 & 9 \emat + 1\cdot \v x_2^T\\
     &=\bmat 7 & 8 & 9 \emat + \bmat 3 & 6 & 9 \emat = \bmat 10 & 14 & 18\emat
   \end{align*}
 
