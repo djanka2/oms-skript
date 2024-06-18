@@ -604,7 +604,7 @@ Die Ableitung der Variable im Output Knoten <span class="math notranslate nohigh
 <li><p><span class="math notranslate nohighlight">\(x_2=x_1^2=\pi\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(x_3=\sin x_2=0\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(x_4=\cos x_2=-1\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(x_5=x_3+x_4\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(x_5=x_3+x_4=-1\)</span></p></li>
 </ul>
 <p>Rückwärtsphase:</p>
 <ul class="simple">
@@ -614,7 +614,7 @@ Als nächstes müssen wir einen unbearbeiteten Knoten wählen, dessen Kinder ber
 Der Ausdruck <span class="math notranslate nohighlight">\(\derv{x_5}{x_4}\)</span> sieht etwas ungewohnt aus. Stellen sie sich dafür <span class="math notranslate nohighlight">\(x_5\)</span> als <em>Funktion</em> vor, die abgeleitet wird. Als nächstes müssen wir <span class="math notranslate nohighlight">\(x_3\)</span> wählen.</p></li>
 <li><p>Schritt 3: Wähle <span class="math notranslate nohighlight">\(x_3\)</span>. Setze <span class="math notranslate nohighlight">\(\overline{x}_3=\overline{x}_5\derv{x_5}{x_3}=1\cdot1=1\)</span>.
 Nun können wir <span class="math notranslate nohighlight">\(x_2\)</span> wählen. <span class="math notranslate nohighlight">\(x_2\)</span> hat zwei Kinder, also müssen auch zwei lokale Ableitungen aufsummiert werden.</p></li>
-<li><p>Schritt 4: Wähle <span class="math notranslate nohighlight">\(x_2\)</span>. Setze <span class="math notranslate nohighlight">\(\overline{x}_2=\overline{x}_4\derv{x_4}{x_2}+\overline{x}_3\derv{x_3}{x_2}=1\cdot(-sin x_2)+1\cdot\cos x_2=-1\)</span>.</p></li>
+<li><p>Schritt 4: Wähle <span class="math notranslate nohighlight">\(x_2\)</span>. Setze <span class="math notranslate nohighlight">\(\overline{x}_2=\overline{x}_4\derv{x_4}{x_2}+\overline{x}_3\derv{x_3}{x_2}=1\cdot(-\sin x_2)+1\cdot\cos x_2=-1\)</span>.</p></li>
 <li><p>Schritt 5: Wähle <span class="math notranslate nohighlight">\(x_1\)</span>. Setze <span class="math notranslate nohighlight">\(\overline{x}_1=\overline{x}_2\derv{x_2}{x_1}=-1\cdot2x_1=-2\sqrt{\pi}\)</span></p></li>
 </ul>
 <p>Damit sind alle Knoten bearbeitet und der Algorithmus terminiert. Der Funktionswert von <span class="math notranslate nohighlight">\(f\)</span> an der Stelle <span class="math notranslate nohighlight">\(\sqrt{\pi}\)</span> ist <span class="math notranslate nohighlight">\(f(\sqrt{\pi})=-1\)</span>, die Ableitung ist <span class="math notranslate nohighlight">\(\overline{x}_1=\derv{f}{x}=-2\sqrt{\pi}\)</span>.</p>
@@ -657,7 +657,7 @@ Nun können wir <span class="math notranslate nohighlight">\(x_2\)</span> wähle
 </div></section>
 <section id="vektorisierung-der-knotenoperationen">
 <h2><span class="section-number">9.5. </span>Vektorisierung der Knotenoperationen<a class="headerlink" href="#vektorisierung-der-knotenoperationen" title="Link to this heading">#</a></h2>
-<p>Wir haben eingangs erwähnt, dass Knoten im Berechnungsgraphen “elementare Operationen” symbolisieren. In den Beispielen kamen dafür die univariaten Funktionen <span class="math notranslate nohighlight">\(+, -, \cdot, /, \sin, \cos, \exp, \ln\)</span> zu Einsatz. Diese Auswahl ist natürlich recht willkürlich. Tatsächlich besteht – neben der effizienten Art, den Berechnungsgraphen zu traversieren – eine weitere Stärke des Ansatzes der automatischen Differentiation darin, beliebige Funktionen als “elementare Operationen” zu definieren. Man muss für diese Operationen lediglich Code für deren Auswertung sowie die Auswertung der partiellen Ableitungen bereitstellen.</p>
+<p>Wir haben eingangs erwähnt, dass Knoten im Berechnungsgraphen “elementare Operationen” symbolisieren. In den Beispielen kamen dafür die univariaten Funktionen <span class="math notranslate nohighlight">\(+, -, \cdot, /, \sin, \cos, \exp, \ln\)</span> zum Einsatz. Diese Auswahl ist natürlich recht willkürlich. Tatsächlich besteht – neben der effizienten Art, den Berechnungsgraphen zu traversieren – eine weitere Stärke des Ansatzes der automatischen Differentiation darin, beliebige Funktionen als “elementare Operationen” zu definieren. Man muss für diese Operationen lediglich Code für deren Auswertung sowie die Auswertung der partiellen Ableitungen bereitstellen.</p>
 <p>Eine wesentliche Stärke von Softwarepaketen wie <code class="docutils literal notranslate"><span class="pre">autograd</span></code>, <a class="reference external" href="https://pytorch.org/">PyTorch</a> oder <a class="reference external" href="https://www.tensorflow.org/">TensorFlow</a> besteht darin, vektorwertige Funktionen als elementare Operationen zu definieren, deren Funktionswerte und Ableitungen dann besonders effizient berechnet werden.</p>
 <p>Wir schauen uns zwei Beispiele elementarer Operationen an:</p>
 <ol class="arabic simple">
@@ -679,11 +679,12 @@ Nun können wir <span class="math notranslate nohighlight">\(x_2\)</span> wähle
     \derv{f_2}{\v x} &amp;= \v y^T \in R^{1\times n}\\
     \derv{f_2}{\v y} &amp;= \v x^T \in R^{1\times n}
   \end{align*}\]</div>
-<p>Damit kann man etwa die Ableitung der Funktion <span class="math notranslate nohighlight">\(f:\R^n \rightarrow \R\)</span>
-$<span class="math notranslate nohighlight">\(
+<p>Damit kann man etwa die Ableitung der Funktion <span class="math notranslate nohighlight">\(f:\R^n \rightarrow \R\)</span></p>
+<div class="math notranslate nohighlight">
+\[
   f(\v x)=\v x^T \m H \v x,\quad \m A\in \R^{n\times n}
-\)</span>$
-berechnen. Der Berechnungsgraph der Funktion lässt sich wie folgt darstellen:</p>
+\]</div>
+<p>berechnen. Der Berechnungsgraph der Funktion lässt sich wie folgt darstellen:</p>
 <figure class="align-default" id="fig-example-graph-vect">
 <a class="reference internal image-reference" href="_images/berechnungsgraph7.png"><img alt="_images/berechnungsgraph7.png" src="_images/berechnungsgraph7.png" style="width: 600px;" /></a>
 </figure>
@@ -719,7 +720,7 @@ berechnen. Der Berechnungsgraph der Funktion lässt sich wie folgt darstellen:</
 <li><div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
   \overline{\v x}_3&amp;=\overline{\v x}_2\derv{\v x_2}{\v x_1}+\overline{x}_3\derv{x_3}{\v x_1}\\
-    &amp;=\bmat -1 &amp; 2 &amp; 0 \emat\bmat 1 &amp; 2 &amp; 3\\ 4 &amp; 5 &amp; 6 \\ 7 &amp; 8 &amp; 9 \emat + \v x_2\\
+    &amp;=\bmat -1 &amp; 2 &amp; 0 \emat\bmat 1 &amp; 2 &amp; 3\\ 4 &amp; 5 &amp; 6 \\ 7 &amp; 8 &amp; 9 \emat + 1\cdot \v x_2^T\\
     &amp;=\bmat 7 &amp; 8 &amp; 9 \emat + \bmat 3 &amp; 6 &amp; 9 \emat = \bmat 10 &amp; 14 &amp; 18\emat
   \end{align*}\]</div>
 </li>

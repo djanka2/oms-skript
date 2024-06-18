@@ -291,4 +291,4 @@ Auch aus technischer Sicht ist der stochastische Gradientenabstieg günstig. In 
 
 Das macht die Auswertung der Verlustfunktion aufwändig, was Rechen- und Speicherbedarf betrifft. Beim Minibatch-Gradientenabstieg benötigt man in der inneren Schleife (über die Minibatches) aber immer nur einen Teil der Trainingsdaten, d.h. der Rechen- und Speicherbedarf einer Iteration (nicht aber einer Epoche) ist unabhängig von der Anzahl $N$ der Trainingsdaten. Man muss diese also nie komplett in den Speicher laden, für den stochastischen Gradientenabstieg genügt es, immer nur ein einziges Trainingsbeispiel im Speicher zu haben. Die Größe der Minibatch $m$ kann somit auf den vorhandenen Speicher und die Problemdimension abgestimmt werden. 
 
-% TODO: Beispiel durchexerzieren ähnlich wie im ML Skript
+% TODO: Beispiel durchexerzieren ähnlich wie im ML Skript. Außerdem Notebook mit Animationen aus ML.

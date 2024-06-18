@@ -141,7 +141,7 @@ Woher wissen wir, dass wir nahe genug an der Lösung sind und wir das Verfahren 
 3. Die Änderung der Iterierten $|x^{[k+1]}-x^{[k]}|$ ist "klein", z.B. $<10^{-6}$.
 4. Die Änderung der Zielfunktion $|f(x^{[k+1]})-f(x^{[k]})|$ ist "klein", z.B. $<10^{-6}$.
 
-Keine dieser Abbruchbedingungen ist ideal. Wir greifen diese Diskussion in {ref}`sec:gradientenverfahren` auf.
+Keine dieser Abbruchbedingungen ist ideal. Wir greifen diese Diskussion in {ref}`sec:abbruch` auf.
 %:tags: [hide-input]
 
 
@@ -190,7 +190,7 @@ sns.lineplot(x=x_history, y=f(x_history), marker="o", sort=False)
 
 Was ist hier passiert? Die Iterierten $x^{[k]}$ entfernen sich rasend schnell von der Lösung, nach wenigen Iterationen ist der Funktionswert zu groß und kann nicht mehr angezeigt werden.
 
-Dieses Verhalten nennt man *Divergenz*. Verantwortlich dafür normalerweise ein zu große Schrittweite. Wenn wir z.B. $\alpha^{[k]}=0.01$, konvergiert das Verfahren innerhalb weniger Iterationen zur Lösung $x=2$:
+Dieses Verhalten nennt man *Divergenz*. Verantwortlich dafür ist normalerweise eine zu große Schrittweite. Wenn wir z.B. $\alpha^{[k]}=0.01$ wählen, konvergiert das Verfahren innerhalb weniger Iterationen zur Lösung $x=2$:
 ```{code-cell} ipython3
 :tags: [hide-input]
 import numpy as np
@@ -217,7 +217,7 @@ def gd(func, derv, alpha, x0, n_steps):
         print(f"{k+1:2} {x:10.4f}, {func(x):10.4f}, {dx:10.4f}")
         x_history.append(x)
 
-    return x_history
+    return np.array(x_history)
 
 x_history = gd(func=f, derv=df, alpha=0.01, x0=3.0, n_steps=15)
 
@@ -274,13 +274,13 @@ Gesucht:
     1. Falls Abbruchbedingung erfüllt, beende Algorithmus mit Lösung $\v x^{[k]}$.
     2. Berechne neue Iterierte $\v x^{[k+1]}=x^{[k]}-\alpha^{[k]}\nabla f(\v x^{[k]})$, $\alpha^{[k]}>0$.
 ````
-Auch die Erklärung, warum das Verfahren funktioniert, kann man aus dem univariaten Fall übernehmen. Man begründet es mit der Taylorreihe. Dazu schauen wir uns eine lineare Approximation der Funktion an der aktuellen Iterierten $\v x^{[k]}$ an und argumentieren, dass der Funktionswert an der nächsten Iterierte $\v x^{[k+1]}$ kleiner sein muss, dass also ein Abstieg erzielt wird. Das Taylor-Polynom erster Ordnung, die sog. *Linearisierung* von $f$ zum Entwicklungspunkt $\v x^{[k]}$ ist
-\begin{align*}
-f(\v x^{[k+1]})=f(\v x^{[k]}+\v d^{[k]})&\approx f(\v x^{[k]})+\nabla f(\v x^{[k]})\v d^{[k]}\\
-&=f(\v x^{[k]})-\alpha^{[k]}\nabla f(\v x^{[k]})\nabla f(\v x^{[k]})^T\\
-&=f(\v x^{[k]})-\alpha^{[k]}\norm{\nabla f(\v x^{[k]})}^2
-\end{align*}
-Der Term $\alpha^{[k]}\norm{\nabla f(\v x^{[k]})}^2$ ist aber immer positiv, daher ist $f(\v x^{[k+1]})<f(\v x^{[k]})$. Man muss allerdings sicherstellen, dass $\alpha^{[k]}$ klein genug ist, so dass die Linearisierung gültig ist.
+%Auch die Erklärung, warum das Verfahren funktioniert, kann man aus dem univariaten Fall übernehmen. Man begründet es mit der Taylorreihe. Dazu schauen wir uns eine lineare Approximation der Funktion an der aktuellen Iterierten $\v x^{[k]}$ an und argumentieren, dass der Funktionswert an der nächsten Iterierte $\v x^{[k+1]}$ kleiner sein muss, dass also ein Abstieg erzielt wird. Das Taylor-Polynom erster Ordnung, die sog. *Linearisierung* von $f$ zum Entwicklungspunkt $\v x^{[k]}$ ist
+%\begin{align*}
+%f(\v x^{[k+1]})=f(\v x^{[k]}+\v d^{[k]})&\approx f(\v x^{[k]})+\nabla f(\v x^{[k]})\v d^{[k]}\\
+%&=f(\v x^{[k]})-\alpha^{[k]}\nabla f(\v x^{[k]})\nabla f(\v x^{[k]})^T\\
+%&=f(\v x^{[k]})-\alpha^{[k]}\norm{\nabla f(\v x^{[k]})}^2
+%\end{align*}
+%Der Term $\alpha^{[k]}\norm{\nabla f(\v x^{[k]})}^2$ ist aber immer positiv, daher ist $f(\v x^{[k+1]})<f(\v x^{[k]})$. Man muss allerdings sicherstellen, dass $\alpha^{[k]}$ klein genug ist, so dass die Linearisierung gültig ist.
 
 In den nächsten Kapiteln schauen wir uns Details und Modifikationen von Gradientenverfahren an. {prf:ref}`alg:gd` dient dabei als Grundlage. Wir werden einige Varianten dieses Algorithmus in der Vorlesung kennenlernen. 
 
@@ -288,18 +288,18 @@ In den nächsten Kapiteln schauen wir uns Details und Modifikationen von Gradien
 ## Allgemeines Framework
 Der in {ref}`sec:gd-preview` vorgestellte Gradientenabstieg ist ein Vertreter einer ganzen Familie von Gradientenverfahren. Sie folgen alle einem bestimmten Aufbau, unterscheiden sich aber in der Ausgestaltung der einzelnen Schritte. Wie zuvor bezeichnen wir mit $k$ unseren Iterationszähler und wir schreiben $^{[k]}$ an jede Größe, die sich von Iteration zu Iteration ändern kann.
 
-Bevor das allgemeine Verfahren aufschreiben, schauen wir uns zunächst noch einmal die Begründung, warum der Gradientenabstieg funktioniert, an. Wir haben das Taylor-Polynom erster Ordnung am Entwicklungspunkt $\v x^{[k]}$, der aktuellen Iterierten, aufgestellt (man sagt auch: die Funktion $f$ *linearisiert*) und damit den Funktionswert an der neuen Iterierten angenähert.
+Bevor das allgemeine Verfahren aufschreiben, schauen wir uns zunächst die Begründung an, warum der Gradientenabstieg  auch für den multivariaten Fall funktioniert. Wenig überraschend kann man dies wie im univariaten Fall mit dem Taylor-Polynom erster Ordnung begründen, nur dass es sich nun um ein multivariates Taylor-Polynom handelt. Wir stellen dieses am Entwicklungspunkt $\v x^{[k]}$ auf, der aktuellen Iterierten (man sagt auch: wir *linearisieren* die Funktion $f$ in $\v x^{[k]}$). Mit diesem Polynom nähern wir den Funktionswert an der neuen Iterierten an.
 
 \begin{align*}
 f(\v x^{[k+1]})=f(\v x^{[k]}+\v d^{[k]})&\approx f(\v x^{[k]})+\nabla f(\v x^{[k]})\v d^{[k]}\\
 &=f(\v x^{[k]})-\alpha^{[k]}\nabla f(\v x^{[k]})\nabla f(\v x^{[k]})^T\\
 &=f(\v x^{[k]})-\underbrace{\alpha^{[k]}\norm{\nabla f(\v x^{[k]})}^2}_{>0}
 \end{align*}
-In Worten: Der Funktionswert am neuen Punkt $\v x^{[k+1]}$ ist kleiner als am aktuellen Punkt $\v x^{[k]}$, wenn als Schritt $\v d^{[k]}=-\alpha^{[k]}\nabla f(\v x^{[k]})$ gewählt wird (mit einer geeignete Schrittweite $\alpha^{[k]}>0$). Wenn man für $\v d^{[k]}$ den Gradienten wählt, kann auf jeden Fall ein Abstieg erzielt werden.
+In Worten: Der Funktionswert am neuen Punkt $\v x^{[k+1]}$ ist kleiner als am aktuellen Punkt $\v x^{[k]}$, wenn als Schritt $\v d^{[k]}=-\alpha^{[k]}\nabla f(\v x^{[k]})^T$ gewählt wird (mit einer geeignete Schrittweite $\alpha^{[k]}>0$). Wenn man für $\v d^{[k]}$ den Gradienten wählt, kann auf jeden Fall ein Abstieg erzielt werden.
 
 An der ersten Gleichung sieht man aber auch, dass eigentlich nur $\nabla f(\v x^{[k]})\v d^{[k]}<0$ gelten muss, um zu garantieren, dass sich der Funktionswert verringert (Voraussetzung nach wie vor: man bleibt nahe genug bei $\v x^{[k]}$, so dass die Linearisierung eine ausreichend gute Approximation ist). Interessant:  $\nabla f(\v x^{[k]})\v d^{[k]}$ ist die Richtungsableitung in Richtung $\v d^{[k]}$, siehe {ref}`sec:richtung`. Man nennt *jedes* $\v d^{[k]}$, für das gilt $\nabla f(\v x^{[k]})\v d^{[k]}<0$ eine *Abstiegsrichtung*. 
 
-Wenn $\v d^{[k]}=\nabla f(\v x^{[k]})$ gewählt wird, so liefert dies zwar den kleinstmöglichen Wert $\nabla f(\v x^{[k]})\v d^{[k]}$, siehe {ref}`sec:interpretation`, aber die Linearisierung ist evtl. nur in einer sehr kleinen Umgebung von $\v x^{[k]}$ gültig. Oft ist es klüger, nicht den aktuell steilsten Abstieg zu wählen um längerfristig eine bessere Reduktion der Funktion zu finden.
+Wenn $\v d^{[k]}=\nabla f(\v x^{[k]})^T$ gewählt wird, so liefert dies zwar den kleinstmöglichen Wert $\nabla f(\v x^{[k]})\v d^{[k]}$, siehe {ref}`sec:interpretation`, aber die Linearisierung ist evtl. nur in einer sehr kleinen Umgebung von $\v x^{[k]}$ gültig. Oft ist es klüger, nicht den aktuell steilsten Abstieg zu wählen um längerfristig eine bessere Reduktion der Funktion zu finden.
 
 Zur Notation : wir ziehen ab jetzt den skalaren Faktor $\alpha^{[k]}$ aus dem $\v d^{[k]}$ heraus, schreiben also $\v x^{[k+1]}=\v x^{[k]}+\alpha^{[k]}\v d^{[k]}$ statt $\v x^{[k+1]}=\v x^{[k]}+\v d^{[k]}$.
 
@@ -776,7 +776,7 @@ Iteration 3
   Die Bedingung ist erfüllt, die Liniensuche terminiert und gibt als Schrittweite $\alpha=2.5$ zurück.
 ````
 
-
+(sec:abbruch)=
 ## Abbruchbedingungen
 Irgendwie muss man entscheiden, wann die Iterationen eines Gradientenverfahrens abbrechen sollen. Idealerweise würde man dann und nur dann abbrechen, wenn tatsächlich ein lokales Minimum erreicht ist (oder das Verfahren divergiert). Das ist aber aus mehreren Gründen problematisch:
 1. Gradientenverfahren finden ein Minimum nur näherungsweise, selbst wenn mit exakter Arithmetik gerechnet würde.
@@ -1179,11 +1179,11 @@ Da die (verschwindende) Länge des negativen Gradienten die Ursache dafür ist, 
 
 Wir haben in {ref}`sec:gdslow` gesehen, dass die Länge des Standard Gradientenschritt proportional zur Länge des Gradienten ist, algebraisch:
 \begin{align*}
-\alpha^{k}\norm{\nabla f(\v x^{[k]})}_2
+\alpha^{[k]}\norm{\nabla f(\v x^{[k]})}_2
 \end{align*}
 Weil diese Länge daran Schuld ist, dass das Verfahren in der Nähe von kritischen Punkten nur langsam kriecht, dividieren wir den Gradienten einfach durch seine Norm. Der Schritt ist dann:
 \begin{align*}
-\v d^{[k]}=-\alpha^{k}\frac{\nabla f(\v x^{[k]})}{\norm{\nabla f(\v x^{[k]})}_2}
+\v d^{[k]}=-\alpha^{[k]}\frac{\nabla f(\v x^{[k]})}{\norm{\nabla f(\v x^{[k]})}_2}
 \end{align*}
  Der entstehende Vektor hat Länge 1, aber er zeigt immer noch in dieselbe Richtung wie der Gradient. Die Länge des Schrittes wird jetzt nur noch durch die Schrittweite $\alpha^{[k]}$ bestimmt.
 

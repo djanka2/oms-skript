@@ -908,7 +908,7 @@ L(w_0, w_1, \dots, w_{11}) = \frac{1}{N}\sum_{i=1}^N \left(y_i-\left(w_0 +\sum_{
 \frac{1}{2}(\v y - \m X \v w)^T(\v y - \m X \v w) &amp;= \frac{1}{2}(\v y^T\v y - \v y^T \m X\v w - \underbrace{(\m X\v w)^T}_{=\v y^T \m X\v w} \v y + (\m X \v w)^T (\m X \v w))\\
 &amp;=\frac{1}{2}\v w^T \m X^T \m X \v w -\v y^T\m X \v w + \frac{1}{2}\v y^T\v y
 \end{align*}\]</div>
-<p>Damit haben wir gezeigt: Training einer multivariaten linearen Regression ist ein quadratisches Optimierungsproblem der Form <span class="math notranslate nohighlight">\(\frac{1}{2}\v x^T\v A\v x+\v b^T\v x+c\)</span> mit den Problemdaten</p>
+<p>Damit haben wir gezeigt: Training einer multivariaten linearen Regression ist ein quadratisches Optimierungsproblem der Form <span class="math notranslate nohighlight">\(\frac{1}{2}\v w^T\v A\v w+\v b^T\v w+c\)</span> mit den Problemdaten</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
 \m A &amp;= \m X^T \m X\\
