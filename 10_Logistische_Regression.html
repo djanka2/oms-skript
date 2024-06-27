@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>10.9. Anwendung: Logistische Regression &#8212; Optimierungsverfahren, Modellierung und Simulation (DSCB410)</title>
+    <title>11.5. Anwendung: Logistische Regression &#8212; Optimierungsverfahren, Modellierung und Simulation (DSCB410)</title>
   
   
   
@@ -59,12 +59,14 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"tex": {"macros": {"N": "\\mathbb{N}", "Z": "\\mathbb{Z}", "R": "\\mathbb{R}", "B": "\\mathbb{B}", "I": "\\mathbb{I}", "E": "\\mathbb{E}", "norm": ["\\left\\lVert#1 \\right\\rVert", 1], "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\begin{pmatrix}"], "emat": ["\\end{pmatrix}"], "bmats": ["\\left(\\begin{smallmatrix}"], "emats": ["\\end{smallmatrix}\\right)"], "scikit": ["\\texttt{scikit-learn}"], "derv": ["\\frac{\\partial #1}{\\partial #2}", 2], "dervquad": ["\\frac{\\partial^2 #1}{\\partial #2^2}", 2], "dervzwei": ["\\frac{\\partial^2 #1}{\\partial {#2} \\partial {#3}}", 3], "v": ["\\mathbf{#1}", 1], "m": ["\\mathbf{#1}", 1], "argmin": ["\\underset{#1}{\\operatorname{arg\\!min}}", 1], "hyper": ["{\\color{Bittersweet}{#1}}", 1], "initial": "\\DeclareMathOperator{\\initial}{initial}", "reduced": "\\DeclareMathOperator{\\reduced}{reduced}", "lazy": "\\DeclareMathOperator{\\lazy}{lazy}", "ILP": "\\DeclareMathOperator{\\ILP}{ILP}", "red": ["{\\color{BrickRed}{#1}}", 1]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '10_Logistische_Regression';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Stichwortverzeichnis" href="genindex.html" />
     <link rel="search" title="Suche" href="search.html" />
-    <link rel="next" title="11. Verfahren zweiter Ordnung" href="11_Verfahren_zweiter_Ordnung.html" />
-    <link rel="prev" title="10. Verfahren erster Ordnung" href="10_Gradientenverfahren.html" />
+    <link rel="next" title="12. Stochastischer Gradientenabstieg" href="12_Stochastischer_Gradientenabstieg.html" />
+    <link rel="prev" title="11. Verfahren zweiter Ordnung" href="11_Verfahren_zweiter_Ordnung.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="de"/>
   </head>
@@ -207,11 +209,11 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="09_Automatische_Differentiation.html">9. Automatische Differentiation</a></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="10_Gradientenverfahren.html">10. Verfahren erster Ordnung</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">10.9. Anwendung: Logistische Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_Gradientenverfahren.html">10. Verfahren erster Ordnung</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="11_Verfahren_zweiter_Ordnung.html">11. Verfahren zweiter Ordnung</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">11.5. Anwendung: Logistische Regression</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="11_Verfahren_zweiter_Ordnung.html">11. Verfahren zweiter Ordnung</a></li>
 <li class="toctree-l1"><a class="reference internal" href="12_Stochastischer_Gradientenabstieg.html">12. Stochastischer Gradientenabstieg</a></li>
 <li class="toctree-l1"><a class="reference internal" href="13_Training_NN.html">13. Training von Neuronalen Netzen</a></li>
 </ul>
@@ -339,7 +341,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -355,6 +359,16 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Inhalt </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gradientenverfahren">11.5.1. Gradientenverfahren</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#konvexitat-der-logistischen-regression">11.5.2. Konvexität der logistischen Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#newton-verfahren">11.5.3. Newton-Verfahren</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -365,7 +379,350 @@ document.write(`
                 <article class="bd-article">
                   
   <section id="anwendung-logistische-regression">
-<h1><span class="section-number">10.9. </span>Anwendung: Logistische Regression<a class="headerlink" href="#anwendung-logistische-regression" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">11.5. </span>Anwendung: Logistische Regression<a class="headerlink" href="#anwendung-logistische-regression" title="Link to this heading">#</a></h1>
+<p>In diesem Notebook trainieren wir ein Modell, das für den Kunden einer Website vorhersagen soll, ob er oder sie ein Produkt kauft oder nicht. Grundlage für dieses Klassifikationsproblem sind demografische Daten sowie das Verhalten der Kunden. Angenommen, wir erheben für die Kunden folgende Merkmale:</p>
+<ul class="simple">
+<li><p>Age: Alter des Kunden (<span class="math notranslate nohighlight">\(x_1\)</span>)</p></li>
+<li><p>Gender: Geschlecht des Kunden, wobei 0=weiblich, 1=männlich (<span class="math notranslate nohighlight">\(x_2\)</span>)</p></li>
+<li><p>Annual Income: Jahreseinkommen in tausend Euro (<span class="math notranslate nohighlight">\(x_3\)</span>)</p></li>
+<li><p>Browsing Time: Verbrachte Zeit auf der Website in Minuten (<span class="math notranslate nohighlight">\(x_4\)</span>)</p></li>
+<li><p>Previous Purchases: Anzahl vorheriger Käufe des Kunden (<span class="math notranslate nohighlight">\(x_5\)</span>)</p></li>
+</ul>
+<p>Wir haben von 100 Kunden folgende Daten gesammelt:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;Daten/purchase.csv&quot;</span><span class="p">)</span>
+<span class="c1">#df.drop(&quot;Membership Status&quot;, axis=1).to_csv(&quot;Daten/purchase.csv&quot;, index=False)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Age</th>
+      <th>Gender</th>
+      <th>Annual Income</th>
+      <th>Browsing Time</th>
+      <th>Previous Purchases</th>
+      <th>Purchased</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>22</td>
+      <td>0</td>
+      <td>40</td>
+      <td>5</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>35</td>
+      <td>1</td>
+      <td>60</td>
+      <td>10</td>
+      <td>3</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>26</td>
+      <td>1</td>
+      <td>30</td>
+      <td>3</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>29</td>
+      <td>0</td>
+      <td>55</td>
+      <td>8</td>
+      <td>2</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>42</td>
+      <td>1</td>
+      <td>80</td>
+      <td>12</td>
+      <td>4</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>95</th>
+      <td>24</td>
+      <td>1</td>
+      <td>34</td>
+      <td>3</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>96</th>
+      <td>37</td>
+      <td>1</td>
+      <td>81</td>
+      <td>13</td>
+      <td>4</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>97</th>
+      <td>28</td>
+      <td>0</td>
+      <td>40</td>
+      <td>5</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>98</th>
+      <td>33</td>
+      <td>1</td>
+      <td>64</td>
+      <td>9</td>
+      <td>3</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>99</th>
+      <td>30</td>
+      <td>1</td>
+      <td>58</td>
+      <td>8</td>
+      <td>2</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<p>100 rows × 6 columns</p>
+</div></div></div>
+</div>
+<p>Die Spalte <code class="docutils literal notranslate"><span class="pre">Purchased</span></code> gibt an, ob der Kunde das Produkt gekauft hat. Im maschinellen Lernen bezeichnet man dies als Label, welches meist mit <span class="math notranslate nohighlight">\(y_i, i=1,\dots,100\)</span> bezeichnet wird.</p>
+<p>Wir trainieren nun ein logistisches Regressionsmodell, welches die Spalte <code class="docutils literal notranslate"><span class="pre">Purchased</span></code> möglichst gut aus den anderen vorhersagen soll. Dazu machen wir folgenden Ansatz für die Modellfunktion:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    P(`Purchased`) = \sigma(\v w^T\v x) = \frac{1}{1+e^{-\v w^T \v x}} = \frac{1}{1+e^{-(w_1x_1 + w_2x_2 + w_3x_3 + w_4x_4 + w_5x_5)}},
+\end{align*}\]</div>
+<p>Die Funktion</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    \sigma(t) = \frac{1}{1+e^{-t}}
+\end{align*}\]</div>
+<p>ist die <em>logistische Funktion</em>. Diese stellt sicher, dass die Vorhersage zwischen <span class="math notranslate nohighlight">\(0\)</span> und <span class="math notranslate nohighlight">\(1\)</span> liegt und als Wahrscheinlichkeit interpretiert werden kann.</p>
+<p>Aufgabe des Modelltrainings ist es nun, diejenigen Parameter <span class="math notranslate nohighlight">\(w_1,\dots, w_5\)</span> zu identifizieren, so dass die vorhergesagten Wahrscheinlichkeiten <span class="math notranslate nohighlight">\(f(\v x; \v w)\)</span> möglichst gut zu den echten Werten der Spalte <code class="docutils literal notranslate"><span class="pre">Purchased</span></code> passen. Für die lineare Regression misst man dies mit dem mittleren quadratischen Fehler. Dies ist eine quadratische Funktion, für die man (über die Normalengleichungen) ein globales Minimum analytisch bestimmen kann. Für die logistische Regression nimmt man stattdessen die binäre Kreuzentropie:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+ L(\v w)=-\frac{1}{N}\sum_{i=1}^{100} \ln{\left[ y_i \cdot \sigma(\v w^T\v x_i) + (1-y_i) \cdot (1-\sigma(\v w^T\v x_i))\right]}  
+\end{align*}\]</div>
+<p>Diese Funktion gilt es nun zu minimieren. Ihr Minimum kann im Gegensatz zur linearen Regression nicht mehr analytisch bestimmt werden, sondern es werden iterative Verfahren benötigt (Gradientenverfahren bzw. Newtonverfahren).</p>
+<p>Wir definieren dazu zunächst den Labelvektor <span class="math notranslate nohighlight">\(\v y\)</span> sowie die Designmatrix <span class="math notranslate nohighlight">\(\v X\)</span>. Wir casten sowohl <span class="math notranslate nohighlight">\(\v y\)</span> und <span class="math notranslate nohighlight">\(\v X\)</span> explizit als <code class="docutils literal notranslate"><span class="pre">autograd.numpy</span></code> arrays, damit die <code class="docutils literal notranslate"><span class="pre">autograd</span></code> diese beim Differenzieren korrekt verarbeiten kann. Anschließend definieren wir die logistische Funktion sowie die binäre Kreuzentropie als Python Funktionen.</p>
+<section id="gradientenverfahren">
+<h2><span class="section-number">11.5.1. </span>Gradientenverfahren<a class="headerlink" href="#gradientenverfahren" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">autograd.numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Labelvektor</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">Purchased</span><span class="p">)</span>
+
+<span class="c1"># Designmatrix</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;Purchased&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span> <span class="o">-</span> <span class="n">X</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span> <span class="o">/</span> <span class="n">X</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+
+<span class="c1"># Explizit als autograd numpy array casten</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+<span class="c1"># Logistische Funktion</span>
+<span class="k">def</span> <span class="nf">logistic</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">w</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="nd">@w</span><span class="p">))</span>
+
+<span class="c1"># Binäre Kreuzentropie</span>
+<span class="k">def</span> <span class="nf">binary_cross_entropy</span><span class="p">(</span><span class="n">w</span><span class="p">):</span>
+    
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">logistic</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">w</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">y</span><span class="o">*</span><span class="n">y_pred</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">y</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">y_pred</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Wir benutzen ein Gradientenverfahren mit fester Schrittweite um die optimalen Parameter zu berechnen. Dank <code class="docutils literal notranslate"><span class="pre">autograd</span></code> müssen wir uns um die Berechnung der Ableitung keine Gedanken machen. Wir initialisieren alle Gewichte <span class="math notranslate nohighlight">\(w_1,\dots,w_5\)</span> mit <span class="math notranslate nohighlight">\(0\)</span>, d.h. <span class="math notranslate nohighlight">\(\v w^{[0]}=\v 0\)</span>. Das ist gleichbedeutend mit einer Vorhersage von 50% Kaufwahrscheinlichkeit für jeden Kunden.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">autograd</span> <span class="kn">import</span> <span class="n">grad</span>
+
+<span class="k">def</span> <span class="nf">gd</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">w0</span><span class="p">,</span> <span class="n">n_steps</span><span class="o">=</span><span class="mi">10000</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Perform n_steps iterations of gradient descent with steplength alpha and return iterates &quot;&quot;&quot;</span>
+    <span class="n">w_history</span> <span class="o">=</span> <span class="p">[</span><span class="n">w0</span><span class="p">]</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">w0</span>
+    <span class="n">grad_f</span> <span class="o">=</span> <span class="n">grad</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_steps</span><span class="p">):</span>
+        
+        <span class="c1"># Abstiegsrichtung</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="o">-</span><span class="n">grad_f</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+
+        <span class="c1"># Stop sobald die Norm des Gradienten klein ist</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-6</span><span class="p">:</span>
+            <span class="k">break</span>
+
+        <span class="c1"># Nächste Iterierte</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="n">w</span> <span class="o">+</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">d</span>
+        
+        <span class="n">w_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">w_history</span><span class="p">)</span>
+
+<span class="c1"># Initialisierung</span>
+<span class="n">w0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">w_history</span> <span class="o">=</span> <span class="n">gd</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="n">binary_cross_entropy</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">w0</span><span class="o">=</span><span class="n">w0</span><span class="p">)</span>
+
+<span class="c1"># Lösung ist letzte Iterierte</span>
+<span class="n">w_opt</span> <span class="o">=</span> <span class="n">w_history</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Took </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">w_history</span><span class="p">)</span><span class="si">}</span><span class="s2"> iterations. Final objective is </span><span class="si">{</span><span class="n">binary_cross_entropy</span><span class="p">(</span><span class="n">w_opt</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Took 4750 iterations. Final objective is 45.30298215658562
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="konvexitat-der-logistischen-regression">
+<h2><span class="section-number">11.5.2. </span>Konvexität der logistischen Regression<a class="headerlink" href="#konvexitat-der-logistischen-regression" title="Link to this heading">#</a></h2>
+<p>Als nächstes möchten wir überprüfen, ob ein Newton-Verfahren die Lösung schneller erreicht als das Gradientenverfahren. Dazu ist es hilfreich, zunächst zu überprüfen, ob die Hessematrix überall positiv (semi-)definit ist. Wenn dies nicht der Fall ist, so muss man Vorkehrungen treffen, die verhindern, dass das Newton Verfahren ein Maximum oder einen Sattelpunkt ansteuert. Zum Glück ist dies der Fall.</p>
+<p><strong>Satz</strong></p>
+<p>Die Hessematrix der binären Kreuzentropie für ein logistisches Regressionsmodell lautet</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\nabla^2 L(\v w) = \v X^T \v D \v X,
+\end{align*}\]</div>
+<p>wobei <span class="math notranslate nohighlight">\(\v D\)</span> eine Diagonalmatrix mit den Einträgen</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\frac{1}{N}\sigma(\v w^T\v x_i)(1-\sigma(\v w^T\v x_i)),\quad i=1,\dots, N
+\end{align*}\]</div>
+<p>ist. Diese ist positiv semi-definit, daher ist das Minimierungsproblem konvex.</p>
+<hr class="docutils" />
+<p>Dieses Resultat stellt sicher, dass die Newton-Richtung tatsächlich eine Abstiegsrichtung ist. Außerdem ist sichergestellt, dass jedes lokale Minimum auch ein globales Minimum ist. Wir benutzen die Methode <code class="docutils literal notranslate"><span class="pre">hessian</span></code> aus dem <code class="docutils literal notranslate"><span class="pre">autograd</span></code>-Paket zur automatischen Auswertung der Hessematrix. Außerdem benötigen wir die Funktion <code class="docutils literal notranslate"><span class="pre">solve</span></code> aus dem Paket <code class="docutils literal notranslate"><span class="pre">numpy.linalg</span></code>, um in jedem Schritt das Gleichungssystem zu lösen, welches uns die Newton-Richtung gibt. Obwohl das Ergebnis das gleiche ist, ist dies effizienter als die Inverse zu berechnen und die rechte Seite damit zu multiplizieren.</p>
+</section>
+<section id="newton-verfahren">
+<h2><span class="section-number">11.5.3. </span>Newton-Verfahren<a class="headerlink" href="#newton-verfahren" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">autograd</span> <span class="kn">import</span> <span class="n">hessian</span>
+<span class="kn">from</span> <span class="nn">numpy.linalg</span> <span class="kn">import</span> <span class="n">solve</span>
+
+<span class="k">def</span> <span class="nf">newton</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">w0</span><span class="p">,</span> <span class="n">n_steps</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Perform n_steps iterations of Newton&#39;s method with stepsize 1 and return iterates &quot;&quot;&quot;</span>
+    <span class="n">w_history</span> <span class="o">=</span> <span class="p">[</span><span class="n">w0</span><span class="p">]</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">w0</span>
+    <span class="n">grad_f</span> <span class="o">=</span> <span class="n">grad</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+    <span class="n">hess_f</span> <span class="o">=</span> <span class="n">hessian</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_steps</span><span class="p">):</span>
+
+        <span class="c1"># Abstiegsrichtung</span>
+        <span class="n">g</span> <span class="o">=</span> <span class="n">grad_f</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">hess_f</span><span class="p">(</span><span class="n">w</span><span class="p">),</span> <span class="o">-</span><span class="n">g</span><span class="p">)</span>
+        
+        <span class="c1"># Stop if norm (length) of gradient vector is small</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">g</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-6</span><span class="p">:</span>
+            <span class="k">break</span>
+
+        <span class="c1"># Next iterate</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="n">w</span> <span class="o">+</span> <span class="n">d</span>
+        
+        <span class="n">w_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">w_history</span><span class="p">)</span>
+
+<span class="n">w0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">w_history</span> <span class="o">=</span> <span class="n">newton</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="n">binary_cross_entropy</span><span class="p">,</span> <span class="n">w0</span><span class="o">=</span><span class="n">w0</span><span class="p">)</span>
+<span class="n">w_opt</span> <span class="o">=</span> <span class="n">w_history</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Took </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">w_history</span><span class="p">)</span><span class="si">}</span><span class="s2"> iterations. Final objective is </span><span class="si">{</span><span class="n">binary_cross_entropy</span><span class="p">(</span><span class="n">w_opt</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Took 6 iterations. Final objective is 45.30298215658388
+</pre></div>
+</div>
+</div>
+</div>
+<p>Das Minimum ist nach 6 Iterationen erreicht. Wie erwartet stimmen der Zielfunktionswert der Lösung mit dem Gradientenverfahren und der Lösung, die das Newton-Verfahren produziert hat, überein. Die Koeffizienten <span class="math notranslate nohighlight">\(w_1,\dots,w_5\)</span> quantifizieren den Einfluss der Features <span class="math notranslate nohighlight">\(x_1,\dots,x_5\)</span> auf die Vorhersage.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Gewichte der Features:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">w_opt</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2"> .3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gewichte der Features:
+Age                 : -0.292
+Gender              : -0.167
+Annual Income       :  3.500
+Browsing Time       : -1.245
+Previous Purchases  : -0.103
+</pre></div>
+</div>
+</div>
+</div>
+<p>Wir können das trainierte Modell außerdem benutzen um damit Vorhersagen zu machen. Dazu benutzen wir die logistische Funktion.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Purchased Prob&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">logistic</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">w_opt</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;Purchased Pred&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Purchased Prob&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">()</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;Vorhersage korrekt?&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Purchased Pred&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Purchased&quot;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Die Vorhersage ist in </span><span class="si">{</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Vorhersage korrekt?&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s2"> von </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s2"> Fällen korrekt.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Die Vorhersage ist in 75 von 100 Fällen korrekt.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -399,20 +756,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="10_Gradientenverfahren.html"
+       href="11_Verfahren_zweiter_Ordnung.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">zurück</p>
-        <p class="prev-next-title"><span class="section-number">10. </span>Verfahren erster Ordnung</p>
+        <p class="prev-next-title"><span class="section-number">11. </span>Verfahren zweiter Ordnung</p>
       </div>
     </a>
     <a class="right-next"
-       href="11_Verfahren_zweiter_Ordnung.html"
+       href="12_Stochastischer_Gradientenabstieg.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">weiter</p>
-        <p class="prev-next-title"><span class="section-number">11. </span>Verfahren zweiter Ordnung</p>
+        <p class="prev-next-title"><span class="section-number">12. </span>Stochastischer Gradientenabstieg</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -423,7 +780,22 @@ document.write(`
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"></div>
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Inhalt
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gradientenverfahren">11.5.1. Gradientenverfahren</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#konvexitat-der-logistischen-regression">11.5.2. Konvexität der logistischen Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#newton-verfahren">11.5.3. Newton-Verfahren</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
