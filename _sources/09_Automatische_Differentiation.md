@@ -193,7 +193,7 @@ Die Variablen $\overline{x}_i$ nennt man auch *adjungierte Variablen*. Diese wer
 Gegeben:
 : - Gerichteter, azyklischer Berechnungsgraph mit Knoten $x_i, i=1,\dots,N$, wobei $x_N=f$ die Variable im Ausgangsknoten sei (die Funktion, deren Ableitung berechnet werden soll)
 : - $\v x'=(x_1',\dots,x_n')$: Werte an den Eingangsknoten (die Stelle, an denen die Ableitung von $f$ ausgewertet werden soll)
-: - Für jedes Kind $j$ des Knoten $i$ bezeichne $\derv{x_i}{x_j}$ die („lokale“) Ableitung (="wie ändert sich $x_j$, wenn sich $x_i$ ändert, unabhängig davon was vor $i$ und nach $j$ geschieht")
+: - Für jedes Kind $j$ des Knoten $i$ bezeichne $\derv{x_j}{x_i}$ die („lokale“) Ableitung (="wie ändert sich $x_j$, wenn sich $x_i$ ändert, unabhängig davon was vor $i$ und nach $j$ geschieht")
 
 Gesucht:
 : - Werte an allen Knoten $x_i'$, insbesondere der Wert am Ausgangsknoten $x_N'=f(\v x')$

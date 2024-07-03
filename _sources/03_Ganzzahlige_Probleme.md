@@ -685,7 +685,7 @@ p =& \text{Produktionslevel des Kraftwerks}
 Es gelten immer die Nebenbedingungen
 \begin{align*}0 \leq p \leq 570 \end{align*}
 Ist das Kraftwerk eingeschaltet, soll zusätzlich die Nebenbedingung
-\begin{align*}290 \geq p \end{align*}
+\begin{align*}290 \leq p \end{align*}
 gelten. Falls das Kraftwerk ausgeschaltet ist, soll zusätzlich die Nebenbedingung
 \begin{align*}p \leq 0 \end{align*}
 gelten. Wie können wir dies modellieren?

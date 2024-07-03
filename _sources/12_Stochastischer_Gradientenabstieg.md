@@ -56,7 +56,7 @@ ist deshalb gar nicht mehr sinnvoll definiert (wie soll man eine unbekannte Grö
 \max_{p} \E[pM-\eta p^2].
 \end{align*}
 
-Diese Formulierung ist sinnvoll, da der Operator $\E[\cdot]$ die von Zufallsvariablen abhängige Funktion in eine deterministische "verwandelt", für die wir  das heißt unsere Begriffe wie Optimalität sind sinnvoll definiert.
+Diese Formulierung ist sinnvoll, da der Operator $\E[\cdot]$ die von Zufallsvariablen abhängige Funktion in eine deterministische "verwandelt". Das bedeutet, dass unser Begriff von Optimalität wieder sinnvoll definiert ist.
 
 Wir geben eine allgemeine Definition, wie üblich als Minimierungsproblem.
 
@@ -74,20 +74,22 @@ mit einer Zufallsvariable $\v Y\in\R^m$ nennt man ein *stochastisches Optimierun
 
 Stochastische Optimierungsprobleme zeichnen sich dadurch aus, dass durch die Anwesenheit von $\v Y\in\R^m$ die Funktion $f$ nicht deterministisch ist, das heißt wenn $f$ mehrmals an demselben Punkt $\v x$ ausgewertet wird, können verschiedene, zufällige Funktionswerte $f(\v x, \v Y)$ angenommen werden, da die Zufallsvariable $\v Y$ verschiedene Werte annimmt. Man kann sich die Variablen $\v x$ wie bisher als Entscheidungsvariablen vorstellen, während die Zufallsvariable $\v Y$ eine exogene Information darstellt, also etwas, das wir nicht beeinflussen können.
 
-Zurück zum Umsatzmaximierungsproblem. Für die Funktion $pM-\eta p^2$ spielt $p$ die Rolle einer Entscheidungsvariable ($\v x$ in der allgemeinen Definition), während das Paar $(M,\eta)$ der Zufallsvariable $\v Y$ aus der Definition entspricht. Wenn man den Erwartungswert von $M$ und $\eta$ kennt und davon ausgeht, dass beide voneinander stochastisch unabhängig sind, dann kann man den optimalen Preis $p^*$ analog zu {ref}`sec:umsatz` analytisch berechnen. Er lautet in diesem Fall
+Zurück zum Umsatzmaximierungsproblem. Für die Funktion $pM-\eta p^2$ spielt $p$ die Rolle einer Entscheidungsvariable ($\v x$ in der allgemeinen Definition), während das Paar $(M,\eta)$ der Zufallsvariable $\v Y$ aus der Definition entspricht. Wenn man den Erwartungswert von $M$ und $\eta$ kennt und davon ausgeht, dass beide voneinander stochastisch unabhängig sind, dann kann man den optimalen Preis $p^*$ analog zu {ref}`sec:umsatz` analytisch berechnen. Unter Beachtung der Rechenregeln für den Erwartungswert ergibt sich der optimale Preis hier als Nullstelle der ersten Ableitung. Diese ist
 \begin{align*}
 p^*=\frac{\E[M]}{2\E[\eta]}
 \end{align*}
+
+Das bedeutet, man kann den optimalen Preis explizit angeben, sofern man den Erwartungswert der beiden Zufallsvariablen $M$ und $\eta$ kennt. 
 
 %In der Regel kennt man aber die Verteilung von $M$ und $k$ nicht und kann deshalb deren Erwartungswert nicht ausrechnen. Wenn man aber die Möglichkeit hat, Stichproben für $M$ und
 
 
 ## Stochastischer Gradientenabstieg
-Wir schauen uns nun die Situation an, dass man die Lösung nicht analytisch ausrechnen kann. Ähnlich wie bei deterministischen Optimierungsproblemen ist das eigentlich der Normalfall. Neben der Schwierigkeit, die Optimalitätsbedingungen nach der Variablen aufzulösen, kommt hier noch das Problem dazu, dass man den Erwartungswert meist gar nicht berechnen kann, weil man die Wahrscheinlichkeitsverteilung nicht genau kennt.
+Wir schauen uns nun die Situation an, dass man die Lösung nicht analytisch ausrechnen kann. Ähnlich wie bei deterministischen Optimierungsproblemen ist das eigentlich der Normalfall. Neben der Schwierigkeit, die Optimalitätsbedingungen nach der Variablen aufzulösen, kommt bei stochastischen Optimierungsprobleme noch ein weiteres Problem dazu: man kann den Erwartungswert meist gar nicht berechnen, weil man die Wahrscheinlichkeitsverteilung nicht genau kennt.
 
-Wir gehen im Folgenden davon aus, dass wir zwar die Wahrscheinlichkeitsverteilung der Zielfunktion nicht kennen, dass wir aber die Möglichkeit haben, einzelne Stichproben (Beobachtungen) der Zufallsvariablen zu generieren. Für das Umsatzmaximierungsproblem bezeichnen wir diese mit $(M^{[k]}, \eta^{[k]})$ für $k=0,1,2,\dots$
+Wir gehen im Folgenden davon aus, dass wir zwar die Wahrscheinlichkeitsverteilung der Zielfunktion nicht kennen, dass wir aber die Möglichkeit haben, einzelne Stichproben (Beobachtungen) der Zufallsvariablen zu generieren. Für das Umsatzmaximierungsproblem bezeichnen wir diese mit $(M^{[k]}, \eta^{[k]})$ für $k=0,1,2,\dots$. Übertragen auf das Beispiel hieße das, dass man für einen gegebenen Tag $M$ und $\eta$ kennt. Dies bezeichnet man in der Stochastik auch als eine *Realisation* oder eine Stichprobe der Zufallsvariablen. 
 
-Die Idee des stochastischen Gradientenverfahrens ist es nun, nachdem eine Stichprobe -- also ein Vektor mit Zahlen! -- generiert wurde, diese in die Funktion einzusetzen. Für die entstehende Funktion berechnet man dann den Gradienten (nach $p$). Diesen nennt man auch einen *stochastischen Gradienten*, weil er auf einer Realisation der Zufallsvariablen beruht. Damit wird die neue Iterierte erzeugt. Nun wird wieder eine Stichprobe generiert, in die Funktion eingesetzt und der nächste Gradientenschritt gemacht, usw.
+Die Idee des stochastischen Gradientenverfahrens ist es nun, nachdem eine Realisation -- also ein Vektor mit Zahlen! -- generiert wurde, diese in die Funktion einzusetzen. Für die entstehende Funktion berechnet man dann den Gradienten (nach $p$). Diesen nennt man auch einen *stochastischen Gradienten*, weil er auf einer Realisation der Zufallsvariablen beruht. Damit wird die neue Iterierte erzeugt. Nun wird wieder eine Stichprobe generiert, in die Funktion eingesetzt und der nächste Gradientenschritt gemacht, usw.
 
 Formal lässt sich der Algorithmus wie folgt beschreiben:
 
@@ -95,8 +97,6 @@ Formal lässt sich der Algorithmus wie folgt beschreiben:
 :label: alg:sgd
 Gegeben: 
 : Stochastisches Optimierungsproblem $\min_{\v x \in \R^n} \E[f(\v x, \v Y)]$, mit Entscheidungsvariablen $\v x$ und Zufallsvariablen $\v Y$.
-: Folge von Stichproben $\v Y^{[k]}$, für $k=0,1,2,\dots$.
-: Folge von Schrittweiten $\alpha^{[k]}$, für $k=0,1,2,\dots$
 
 Gesucht: 
 : Lokales Minimum von $\E[f(\v x, \v Y)]$.
@@ -105,9 +105,11 @@ Gesucht:
 - Starte mit initialer Schätzung $\v x^{[0]}$, setze $k=0$.
 - Für $k=0,1,2,\dots$:
     1. Falls Abbruchbedingung erfüllt, beende Algorithmus mit Lösung $\v x^{[k]}$.
-    2. Berechne stochastischen Gradienten 
-        \begin{align*}\nabla_x f(\v x^{[k]}, \v Y^{[k]})\end{align*}
-    3. Berechne neue Iterierte 
+    2. Erhalte Stichprobe $\v Y^{[k]}$ der Zufallsvariablen $\v Y$.
+    3. Berechne stochastischen Gradienten 
+        \begin{align*}\nabla_x f(\v x^{[k]}, \v Y^{[k]}).\end{align*}
+    4. Bestimme Schrittweite $\alpha^{[k]}$.
+    5. Berechne neue Iterierte 
         \begin{align*}\v x^{[k+1]}=x^{[k]}-\alpha^{[k]}\nabla f(\v x^{[k]}, \v Y^{[k]}), \alpha^{[k]}>0.\end{align*}
 ````
 
@@ -137,21 +139,20 @@ import autograd.numpy as np
 from autograd import grad
 import plotly.express as px
 
-# Pseudo random number generator
+# Pseudo random number generator: Objekt zum Erzeugen von Zufallszahlen
 prng = np.random.default_rng()
 
-def umsatz_sample(p):
-    # maximum demand: normally distributed around M
-    M = 10
-    M_sample = prng.normal(M, 2)
-    # (negative) price elasticity: normally distributed around eta
-    eta = 2
-    eta_sample = prng.normal(eta, 0.2)
+# Stochastische Zielfunktion: Bei jeder Auswertung wird ein anderer Wert angenommen
+def umsatz(p):
+    # Maximale Nachfrage: normalverteilt mit Erwartungswert 10 und Std-Abw. 2
+    M_sample = prng.normal(10, 2)
+    # (Negative) Preiselastizität: normalverteilt mit Erwartungswert 2 und Std.-Abw. 0.2
+    eta_sample = prng.normal(2, 0.2)
     
     return p*(M_sample - eta_sample*p)
 
-# Gradientenfunktion
-grad_u = grad(umsatz_sample)
+# Funktion für (stochastischen) Gradienten
+grad_u = grad(umsatz)
 
 # Startwert für p
 p = 1.8
@@ -164,7 +165,7 @@ for k in range(150):
     # Harmonische Schrittweitenfolge
     alpha = 1/(k+1) * alpha0
 
-    # Gradientenschritt
+    # Gradientenschritt (steilster Anstieg)
     p = p + alpha * grad_u(p)
 
     all_p.append(p)
@@ -204,7 +205,7 @@ $F(\v x)=\frac{1}{N}\sum_{i=1}^N f(\v x, \v Y_i)$, nur dass statt des Gradienten
 
 Eine beliebte Variante des stochastischen Gradientenabstieg ist der *Minibatch-Gradientenabstieg*. Hier wird der Schritt basierend auf einer *Teilmenge* der Summanden berechnet. Der Minibatch-Gradientenabstieg bewegt sich also zwischen dem normalen Gradientenabstieg (Gradient aller Summanden) und dem stochastischen Gradientenabstieg (Gradient eines Summanden). Wir geben nun stochastischen, Minibatch- und normalen (oder auch "Batch-") Gradientenabstieg in einem Algorithmus an.
 
-Während in {prf:ref}`alg:sgd` die Indizes für die Stichprobe und die Iterationen identisch waren, ist dies beim Minibatch-Gradientenabstieg nicht mehr der Fall. Wir führen einen zweiten Index $i$ ein, der über die Beobachtungen aus den Trainingsdaten läuft. Der Iterationsindex $k$ wird nun erst dann erhöht, wenn einmal über den gesamten Trainingsdatensatz (also alle Minibatches) iteriert wurde. $k$ bezeichnet man als *Epoche*.
+Während in {prf:ref}`alg:sgd` die Indizes für die Stichprobe und die Iterationen identisch waren, ist dies beim Minibatch-Gradientenabstieg nicht mehr der Fall. Wir führen zwei weitere Indizes $i$ und $j$ ein, wobei $i$ über die Beobachtungen aus den Trainingsdaten läuft und $j$ über die Minibatches. Der Iterationsindex $k$ wird nun erst dann erhöht, wenn einmal über den gesamten Trainingsdatensatz (also alle Minibatches) iteriert wurde. $k$ bezeichnet man als *Epoche*.
 
 ````{prf:algorithm} Minibatch-Gradientenabstieg
 :label: alg:minibatch
@@ -212,28 +213,29 @@ Gegeben:
 : Stochastisches Optimierungsproblem $\min_{\v x \in \R^n} \E[f(\v x, \v Y)]$, mit Entscheidungsvariablen $\v x$ und Zufallsvariablen $\v Y$.
 : Trainingsdaten $\v Y_i$, für $i=1,\dots, N$.
 : Minibatch Größe $1\leq m \leq N$
-: Folge von Schrittweiten $\alpha^{[k]}$, für $k=0,1,2,\dots$
 
 Gesucht: 
 : Lokales Minimum von $\E[f(\v x, \v Y)]$.
 
 **Algorithmus**:
 - Starte mit initialer Schätzung $\v x^{[0]}$, setze $k=0$.
-- Für $k=0,1,2,\dots$:
+- Für Epoche $k=0,1,2,\dots$:
     1. Falls Abbruchbedingung erfüllt, beende Algorithmus mit Lösung $\v x^{[k]}$.
     2. Setze $\v x^{[k+1,0]} =\v x^{[k]}$ 
-    3. Für $i=1,\dots, N/m$:
+    3. Bestimme neue Schrittweite $\alpha^{[k]}$
+    4. Für Minibatch $j=0,\dots, N/m-1$:
         - Berechne stochastischen Gradienten 
-            \begin{align*}\v g = \frac{1}{m}\sum_{(i-1)m}^{i\cdot m}\nabla_x f(\v x^{[k]}, \v Y_i)\end{align*}
+            \begin{align*}\v g = \frac{1}{m}\sum_{i=j\cdot m}^{(j+1)\cdot m}\nabla_x f(\v x^{[k+1,j]}, \v Y_i)\end{align*}
         - Berechne neue Iterierte 
-            \begin{align*}\v x^{[k+1,i]}=\v x^{[k+1,i-1]}-\alpha^{[k]}\v g, \alpha^{[k]}>0.\end{align*}
-    4. Setze $\v x^{[k+1]}=\v x^{[k+1,N]}$
+            \begin{align*}\v x^{[k+1,j+1]}=\v x^{[k+1,j]}-\alpha^{[k]}\v g, \alpha^{[k]}>0.\end{align*}
+    5. Setze $\v x^{[k+1]}=\v x^{[k+1,N]}$
 ````
 
 Anmerkungen:
 - Der Einfachheit halber nehmen wir an, dass $N/m$ ganzzahlig ist. Ist dies nicht der Fall, ist die letzte Minibatch kleiner als die vorherigen. Dies stellt aber keine Einschränkung dar.
 - Die Minibatch-Größe $m$ ist ein Hyperparameter. Für $m=1$ erhält man den stochastischen Gradientenabstieg, für $m=N$ erhält man den Batch-Gradientenabstieg.
-- Der Batch-Gradientenabstieg konvergiert gegen ein Minimum von $\frac{1}{N}\sum_{i=1}^N f(\v x, \v Y_i)$. Achtung: Dies ist nicht unbedingt gleichbedeutend mit dem Minimum von $\E[f(\v x, \v Y)]$.
+- Der Batch-Gradientenabstieg (d.h. $m=N$) konvergiert gegen ein Minimum von $\frac{1}{N}\sum_{i=1}^N f(\v x, \v Y_i)$ bei geeigneter Wahl der Schrittweite. Achtung: Dies ist nicht unbedingt gleichbedeutend mit dem Minimum von $\E[f(\v x, \v Y)]$.
+- Für Minibatches der Größe $m<N$ gibt es keine Konvergenzgarantien. Wenn genügend viele und repräsentative Trainingsdaten vorhanden sind, erwartet man, dass der Algorithmus zumindest einen Punkt in der Nähe eines Minimums von $\E[f(\v x, \v Y)]$ findet.
 - Je kleiner $m$ gewählt wird, desto mehr Iterationen besitzt die innere Schleife (Index $i$). Dafür ist die Berechnung einer einzelnen Iteration in der inneren Schleife bei kleinem $m$ schneller, da der Gradient von weniger Summanden ausgewertet werden muss. 
 - Das Verfahren kann auch mit anderen Suchrichtungen kombiniert werden. Bei einem stochastischen Newton-Verfahren werden z.B. auch die Hessematrizen pro Minibatch gebildet. 
 
@@ -257,6 +259,14 @@ Die Paare $(\v x, \v y)$ werden nun als Stichprobe einer Wahrscheinlichkeitsvert
 
 \begin{align*}
 \min_{\v w} \E [\ell (\v y,\v f(\v x, \v w))]
+\end{align*}
+```
+Also für ein Regressionsproblem mit dem mittleren quadratischen Fehler als Verlustfunktion z.B.
+```{math}
+:label: eq:minrisk
+
+\begin{align*}
+\min_{\v w} \E [(y- f(\v x, \v w))^2].
 \end{align*}
 ```
 
