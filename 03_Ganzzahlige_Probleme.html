@@ -827,8 +827,8 @@ C=\{\{1,2\},\{2,3,4\},\{3,4\},\{4,5\}\}
 <div class="amsmath math notranslate nohighlight">
 \[\begin{alignat*}{5}
 \min_{\v x}         &amp; \quad  &amp;   \v w^T\v x &amp;          &amp; &amp; \\[2mm]
-\text{s.t. } &amp; &amp; \m A\v x &amp; \geq &amp;\ \v 1 &amp; \\
-&amp; &amp; \v x &amp; \in &amp; \{0,1\}^n
+\text{s.t. } &amp; &amp; \m A\v x &amp; \geq &amp;&amp;\ \v 1 &amp; \\
+&amp; &amp; \v x &amp; \in &amp;&amp; \{0,1\}^n
 \end{alignat*}\]</div>
 <p>mit dem Gewichtsvektor <span class="math notranslate nohighlight">\(\v w\in\R^{|C|}\)</span> und der Inzidenzmatrix <span class="math notranslate nohighlight">\(\m A\in\R^{|S|\times|C|}\)</span>.</p>
 </section>
@@ -1533,8 +1533,8 @@ Relaxierung der Konvexe-Hülle Reformulierung.
 </figure>
 <p>Die Reformulierung als MILP ist etwas komplizierter als im <span class="math notranslate nohighlight">\(\min \max\)</span> Fall. Wir führen für jedes <span class="math notranslate nohighlight">\(s_i\)</span> eine binäre Variable <span class="math notranslate nohighlight">\(z_i\)</span> ein, die den Wert <span class="math notranslate nohighlight">\(1\)</span> annimmt, wenn es sich bei <span class="math notranslate nohighlight">\(s_i\)</span> um das Minimum der Menge <span class="math notranslate nohighlight">\(\{s_1,s_2,s_3,s_4\}\)</span> handelt und <span class="math notranslate nohighlight">\(0\)</span> sonst. Des weiteren führen wir ein großes <span class="math notranslate nohighlight">\(M\)</span> ein. Das gibt uns die Möglichkeit, die Konstruktion aus <a class="reference internal" href="02_Lineare_Probleme.html#subsubsec-minmax"><span class="std std-ref">Maximumsfunktion als Teil der Zielfunktion</span></a> so zu erweitern, dass alle Nebenbedingungen bis auf eine (die, für die <span class="math notranslate nohighlight">\(y_i=1\)</span> ist) durch das große <span class="math notranslate nohighlight">\(M\)</span> “abgeschaltet” werden.</p>
 <p>Das folgende MILP ist äquivalent zum obigen <span class="math notranslate nohighlight">\(\min \min\)</span> Problem:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ed563ad4-e937-4fae-8f21-f307cfa454a6">
-<span class="eqno">()<a class="headerlink" href="#equation-ed563ad4-e937-4fae-8f21-f307cfa454a6" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
+<div class="amsmath math notranslate nohighlight" id="equation-990f65cb-3e38-468d-b024-cca577124347">
+<span class="eqno">()<a class="headerlink" href="#equation-990f65cb-3e38-468d-b024-cca577124347" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
 \min_{s_1,s_2,s_3,s_4,z_1,z_2,z_3,z_4,y} &amp; \quad  &amp;   y &amp; &amp; &amp; \\[2mm]
 \text{s.t. } &amp; &amp;  s_1&amp;\leq y+M(1-z_1)\\
              &amp; &amp;  s_2&amp;\leq y+M(1-z_2)\\
@@ -1570,8 +1570,8 @@ Relaxierung der Konvexe-Hülle Reformulierung.
 \min_x -|x|
 \end{align*}\]</div>
 <p>ist äquivalent zu</p>
-<div class="amsmath math notranslate nohighlight" id="equation-6b0c2e92-384b-4baf-b5cc-42311f207317">
-<span class="eqno">()<a class="headerlink" href="#equation-6b0c2e92-384b-4baf-b5cc-42311f207317" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
+<div class="amsmath math notranslate nohighlight" id="equation-c95b48dc-f115-4322-a10f-dce557889a6f">
+<span class="eqno">()<a class="headerlink" href="#equation-c95b48dc-f115-4322-a10f-dce557889a6f" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
 \min_{x,x_p,x_n,y}   \quad &amp;   -(x_p+x_n) &amp; &amp; &amp; \\[2mm]
 \text{s.t. }\quad  &amp;   x=x_p-x_n\\
              &amp;   0\leq x_p \leq My\\
@@ -1584,8 +1584,8 @@ Relaxierung der Konvexe-Hülle Reformulierung.
 |x|\geq \alpha
 \end{align*}\]</div>
 <p>äquivalent zu</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a235dfe3-eab9-43ef-b2e3-aa62ef135b32">
-<span class="eqno">()<a class="headerlink" href="#equation-a235dfe3-eab9-43ef-b2e3-aa62ef135b32" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
+<div class="amsmath math notranslate nohighlight" id="equation-9914fea1-8018-4e86-8566-f378ab95febb">
+<span class="eqno">()<a class="headerlink" href="#equation-9914fea1-8018-4e86-8566-f378ab95febb" title="Permalink to this equation">#</a></span>\[\begin{alignat}{5}
 			 &amp; &amp;  x_p+x_n&amp;\geq \alpha\\
 			 &amp; &amp;  x&amp;=x_p-x_n\\
              &amp; &amp;  0&amp;\leq x_p \leq My\\

@@ -395,8 +395,8 @@ Das zugehörige binäre Programm löst unsere Instanz:
 Allgemein ergibt sich für das gewichtete Überdeckungsproblem das binäre Programm
 \begin{alignat*}{5}
 \min_{\v x}         & \quad  &   \v w^T\v x &          & & \\[2mm]
-\text{s.t. } & & \m A\v x & \geq &\ \v 1 & \\
-& & \v x & \in & \{0,1\}^n
+\text{s.t. } & & \m A\v x & \geq &&\ \v 1 & \\
+& & \v x & \in && \{0,1\}^n
 \end{alignat*}
 mit dem Gewichtsvektor $\v w\in\R^{|C|}$ und der Inzidenzmatrix $\m A\in\R^{|S|\times|C|}$.
 
